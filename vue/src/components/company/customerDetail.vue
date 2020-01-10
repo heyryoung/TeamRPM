@@ -501,7 +501,7 @@
         text-align: right;
     }
     .carlist{
-        width: 900px;
+        width: 500px;
         margin-left: 10px;
     }
     .carSearch_cont{
