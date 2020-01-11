@@ -1,7 +1,9 @@
 <template>
+<div>
+  <link rel="stylesheet" href="https://www.kcar.com/resources/css/re_user.css?ver=6.9">
 <div id="contents">
 				<div class="user_content">
-					<h3 class="policy_tit">기본정보 입력</h3>
+					<h3 class="policy_tit"><img src="https://www.kcar.com/resources/images/content/user/userInf_tit.gif" alt="기본정보 입력"></h3>
 					<!-- 20190705회원가입정보입력추가  -->
 					<div class="user_info">
 						<h4></h4>
@@ -79,18 +81,11 @@
 											
 										</select> 
 									</div>
-									<p class="mt5"><input type="checkbox" class="check am" name="tmpEmailCheck" id="tmpEmailCheck" value="Y"> 
-										<label for="tmpEmailCheck">이메일 수신에 동의하시겠습니까? <br>&nbsp;&nbsp;&nbsp;&nbsp;수신에 동의하시면 이벤트, 중고차할인,자동차 시승기등 흥미있는  소식들을 이메일로 전해드립니다.</label>
-									</p>
 								</td>
 							</tr>
 						</tbody></table>
 						
-					</div>
 					
-					
-					<div class="user_info">
-						<h4>추가 정보 입력 (선택)</h4>
 						<table width="100%" class="t_user01">
 							<colgroup>
 								<col width="18%">
@@ -158,25 +153,7 @@
 									</select>
 								</td>
 							</tr>
-							<!-- <tr>
-								<th>가입경로 </th>
-								<td colspan="3">
-									<input type="radio" name="regRootCheck" value="root1" id="root1"> &nbsp;<label for="root1">네이버검색 </label> <span class="pr15"></span>
-									<input type="radio" name="regRootCheck" value="root2" id="root2"> &nbsp;<label for="root2">온라인 배너광고 </label> <span class="pr15"></span>
-									<input type="radio" name="regRootCheck" value="root3" id="root3"> &nbsp;<label for="root3">앱스토어/플레이스토어 </label> <span class="pr15"></span>
-									<input type="radio" name="regRootCheck" value="root4" id="root4"> &nbsp;<label for="root4">TV/라디오 광고 </label> <span class="pr15"></span>
-									<p class="mt10 spot">
-									<input type="radio" name="regRootCheck" value="root5" id="root5"> &nbsp;<label for="root5">디지털 영상광고(유튜브 등) </label> <span class="pr15"></span>
-									<input type="radio" name="regRootCheck" value="root6" id="root6"> &nbsp;<label for="root6">블로그/카페/포스트 </label> <span class="pr15"></span>
-									<input type="radio" name="regRootCheck" value="root7" id="root7"> &nbsp;<label for="root7">페이스북/인스타그램 </label> <span class="pr15"></span>
-									</p><p class="mt10 spot">
-									</p><p class="mt10 spot">
-									<input type="radio" name="regRootCheck" value="root8" id="root8"> &nbsp;<label for="root8">지도검색/옥외광고/지점 홍보물 광고 </label> <span class="pr15"></span>
-									<input type="radio" name="regRootCheck" value="root9" id="root9"> &nbsp;<label for="root9">지인 추천 </label> <span class="pr15"></span>
-									<input type="radio" name="regRootCheck" value="root10" id="root10"> &nbsp;<label for="root10">기타 </label> <span class="pr15"></span>
-									<input type="text" name="" id="rootEtc" style="display:none" maxlength="20" class="user_input02" value=""></p>
-								</td>
-							</tr> -->
+							
 						</tbody></table>
 						
 					</div>
@@ -187,191 +164,20 @@
 					</div>
 				</div>
 			</div>
+</div>
 </template>
 <script></script>
 <style scoped>
-#contents {
-    margin: auto;
-    width: 100%;
-    padding: 0 0 70px 20px;
-    border-left: 1px solid #dfdddc;
-    min-height: 600px;
+#contents{
+	float: none;
+	margin: auto;
 }
-form, ul, ol, dl, table, div, h1, h2, h3, h4, h5, h6 {
-    margin: 0;
-    padding: 0;
+body select{
+	font-size: 15px;
 }
-body {
-    font-family: 'Noto Sans Korean','Dotum','돋음','굴림';
-    font-size: 12px;
-    color: #575757;
-    line-height: 1.3;
-}
-.user_content {
-    padding: 0 0 0 40px;
-}
-.policy_tit {
-    padding: 30px 0 0 0;
-}
-h1, h2, h3, h4, h5, h6 {
-    font-size: 12px;
-    text-decoration: none;
-    font-weight: normal;
-}
-.user_info {
-    position: relative;
-    padding: 0 0 15px 0;
-}
-.btn_formbts {
-    padding: 10px;
-    text-align: center;
-}
-.t_user01 {
-    border-top: 2px solid #bca99d;
-    text-align: left;
-    color: #666;
-}
-table {
-    margin: auto;
-    border-collapse: collapse;
-    border-spacing: 0;
-    empty-cells: show;
-}
-.t_user01 th span.org {
-    color: #ff0040 !important;
-}
-
-.org {
-    color: #f05200!important;
-}
-.t_user01 td {
-    vertical-align: middle;
-    padding: 12px 0;
-    border-bottom: 1px solid #e1e1e1;
-}
-.user_input02 {
-    height: 17px;
-    width: 120px;
-    padding: 2px 5px 0 5px;
-    border: 1px solid #bebebe;
-    font-size: 14px;
-    color: #999;
-    vertical-align: middle;
-}
-.btn_user {
-    display: inline-block;
-    height: 21px;
-    padding: 0px 0 0 0;
-    margin-top: 0px;
-    cursor: pointer;
-}
-
-a {
-    color: #666;
-    text-decoration: none;
-}
-.mt5 {
-    margin-top: 5px;
-}
-body {
-    font-family: 'Noto Sans Korean','Dotum','돋음','굴림';
-    font-size: 12px;
-    color: #575757;
-    line-height: 1.3;
-}
-h4 {
-    display: block;
-    margin-block-start: 1.33em;
-    margin-block-end: 1.33em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
+.b {
     font-weight: bold;
 }
-h3 {
-    display: block;
-    font-size: 1.17em;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    font-weight: bold;
-}
-.btn_formbts {
-    padding: 10px;
-    text-align: center;
-}
-.btn_form_r {
-    display: inline-block;
-    height: 20px;
-    margin-top: 0px;
-    font-size: 13px;
-    cursor: pointer;
-}
-a {
-    color: #666;
-    text-decoration: none;
-}
-.btn_form_g {
-    display: inline-block;
-    height: 20px;
-    margin-top: 0px;
-    font-size: 13px;
-    cursor: pointer;
-}
-.btn_formbts {
-    padding: 10px;
-    text-align: center;
-}
-.btn_form_r b {
-    height: 20px;
-    padding: 4px 16px 1px 17px;
-    background: #da2727;
-    border: 1px solid #bebebe;
-    color: #fff;
-}
-.btn_form_g b {
-    height: 20px;
-    padding: 4px 16px 1px 17px;
-    border: 1px solid #bebebe;
-}
-.t_user01 select {
-    background: url(/resources/images/content/user/select_down_arrow.png) no-repeat right center;
-}
-select {
-    border: 1px solid #e8e8e8;
-    height: 21px;
-    color: #575757;
-    font-family: Arial;
-}
-
-select, input, li, img {
-    vertical-align: top;
-}
-.t_user01 select {
-    appearance: none;
-    -webkit-appearance: none;
-    border-radius: 0px !important;
-    padding: 0 5px;
-    border: 1px #ccc solid !important;
-}
-.user_input02 {
-    height: 17px;
-    width: 120px;
-    padding: 2px 5px 0 5px;
-    border: 1px solid #bebebe;
-    font-size: 14px;
-    color: #999;
-    vertical-align: middle;
-}
-.btn_user b {
-    height: 17px;
-    padding: 3px 10px 0 10px;
-    border: 1px solid #bebebe;
-    font-size: 11px;
-}
-.user_num_check {
-    padding: 1px 0 0 26px;
-    color: #ff0040;
-}
-
+a {color:#666; text-decoration:none;}
+a:hover {color:#333; text-decoration:underline;}
 </style>
