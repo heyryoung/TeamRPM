@@ -256,6 +256,7 @@
                                         <h3><a href="javascript:;">예산이 정해져 있어요</a></h3>
                                     </div>
                                     <!--검색tab2 내용-->
+                                    <!---->
                                     <div id="divTabWant2" class="divTabWantGroup" style="display:none">
                                         <!--20180801 검색셀렉트박스 수정-->
                                         <div class="searchcont1">
