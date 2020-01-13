@@ -4,6 +4,7 @@
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://blackrockdigital.github.io/startbootstrap-agency/css/agency.min.css">
         <link type="application/atom+xml" rel="alternate" href="https://startbootstrap.com/feed.xml" title="startbootstrap">
+
         <div class="mycarInfo">
             <div class="col-md-4 col-sm-6 portfolio-item">
                 <figure class="portfolio-link" data-toggle="modal" href="#">
@@ -19,16 +20,16 @@
         </div>
         <div class="row" >
             <div class="changeInfo">
-                <h2>주행거리</h2>
-                <h2>연비</h2>
-                <h2>마지막 정비일</h2>
+                <h2>주행거리: 50,263km</h2>
+                <h2>내 차 연비: 7.5km/L</h2>
+                <h2>마지막 정비일: 20.01.12</h2>
             </div>
             <div class="col-md-6 col-lg-3">
                 <div class="widget-small primary coloured-icon"><i class="icon fa fa-users fa-3x"></i>
                     <div class="info">
-                        <h4>Users</h4>
+                        <h4>정비알림</h4>
                         <div class="embed-responsive embed-responsive-16by9">
-                            <p><b>25</b></p>
+                            <p><b>그ㅡ래ㅡ프</b></p>
                         </div>
                     </div>
                 </div>
@@ -36,58 +37,58 @@
             <div class="col-md-6 col-lg-3">
                 <div class="widget-small info coloured-icon"><i class="icon fa fa-thumbs-o-up fa-3x"></i>
                     <div class="info">
-                        <h4>Likes</h4>
-                        <p><b>25</b></p>
+                        <h4>타이어교체알림</h4>
+                        <p><b>그-래-프</b></p>
                     </div>
                 </div>
             </div>
             <div class="col-md-6 col-lg-3">
                 <div class="widget-small warning coloured-icon"><i class="icon fa fa-files-o fa-3x"></i>
                     <div class="info">
-                        <h4>Uploades</h4>
-                        <p><b>10</b></p>
+                        <h4>배터리교체알림</h4>
+                        <p><b>그-래-프</b></p>
                     </div>
                 </div>
             </div>
             <div class="col-md-6 col-lg-3">
                 <div class="widget-small danger coloured-icon"><i class="icon fa fa-star fa-3x"></i>
                     <div class="info">
-                        <h4>Stars</h4>
-                        <p><b>500</b></p>
+                        <h4>알림?</h4>
+                        <p><b>뭐가좋을까</b></p>
                     </div>
                 </div>
             </div>
         </div>
         <div class="recordRefuel">
-            <div class="col-md-6">
+            <div class="col-md-6" style="font-size: 25px; padding-top: 100px;">
                 <div class="tile">
                     <table class="table">
                         <thead>
                         <tr>
-                            <th>#</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Username</th>
+                            <th>날짜</th>
+                            <th>주유/정비</th>
+                            <th>내역</th>
+                            <th>금액</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
-                            <td>1</td>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
+                            <td>20.01.12</td>
+                            <td>주유</td>
+                            <td>5L</td>
+                            <td>40,000원</td>
                         </tr>
                         <tr>
-                            <td>2</td>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
+                            <td>20.01.12</td>
+                            <td>정비</td>
+                            <td>타이어교체</td>
+                            <td>120,000원</td>
                         </tr>
                         <tr>
-                            <td>3</td>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>@twitter</td>
+                            <td>19.12.29</td>
+                            <td>주유</td>
+                            <td>5L</td>
+                            <td>40,000원</td>
                         </tr>
                         </tbody>
                     </table>
@@ -109,8 +110,8 @@
 
 <style scoped>
     .mycarpage{
-        margin: auto;
-        width: 1000px;
+        margin: 0 auto;
+        width: 100%;
         height: 100%;
     }
     .mycarInfo{
@@ -133,6 +134,8 @@
     }
     .row{
         height: 100%;
+        width: 700px;
+        margin: initial;
         display: grid;
         grid-template-columns: 50% 50%;
     }
@@ -140,6 +143,7 @@
         grid-column-start: 1;
         grid-column-end: 3;
         text-align: right;
+        margin-bottom: 50px;
     }
     a {
         color: rgba(0, 11, 64, 0.54);
@@ -202,12 +206,13 @@
         background-color: #009688;
     }
     .widget-small {
+        height: 130px;
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
         border-radius: 4px;
-        color: #FFF;
-        margin-bottom: 30px;
+        margin-top: 20px;
+        margin-bottom: 10px;
         -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
         box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
     }
@@ -231,7 +236,7 @@
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
-        min-width: 85px;
+        min-width: 45px;
         -webkit-box-align: center;
         -ms-flex-align: center;
         align-items: center;
@@ -271,7 +276,6 @@
         display: -ms-flexbox;
         display: flex;
         border-radius: 4px;
-        color: #FFF;
         margin-bottom: 30px;
         -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
         box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
@@ -279,20 +283,6 @@
     .widget-small .info p {
         margin: 0;
         font-size: 16px;
-    }
-    .widget-small.primary.coloured-icon {
-        background-color: #fff;
-        color: #2a2a2a;
-    }
-    .widget-small {
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        border-radius: 4px;
-        color: #FFF;
-        margin-bottom: 30px;
-        -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
     }
     .embed-responsive {
         position: relative;
@@ -314,9 +304,7 @@
         position: relative;
         background: #ffffff;
         border-radius: 3px;
-        padding: 20px;
-        -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
-        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+        padding: 100px;
         margin-bottom: 30px;
         -webkit-transition: all 0.3s ease-in-out;
         -o-transition: all 0.3s ease-in-out;
@@ -330,5 +318,15 @@
     table {
         border-collapse: collapse;
     }
-
+    h2 {
+        font-size: 30px;
+        position: relative;
+        color: #181819;
+        line-height: 30px;
+        padding-left: 5px;
+        line-height: 180%;
+    }
+    .info h4{
+        font-size: 16px;
+    }
 </style>

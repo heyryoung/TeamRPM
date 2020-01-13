@@ -44,5 +44,10 @@
 </template>
 <script></script>
 <style scoped>
-
+	input[type=text] {
+		width: 200px;
+		height: 33px;
+		padding: 2px 0 0 4px;
+		border: 1px solid #bebebe;
+	}
 </style>
