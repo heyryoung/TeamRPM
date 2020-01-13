@@ -19,11 +19,12 @@
                                       <h1 class="logo" id="logo"><a href="/index.do" target=""><img src="https://img.kcar.com/FILE_UPLOAD2/IMAGE_UPLOAD/LOGO/201810/logo201810111UOQzCF.jpg" alt="K Car"></a></h1>
                                     </div>
                                     </div> -->
-            <div style="padding-top: 80px;"><img src="@/assets/image/mainhome.png" alt=""></div>
+           <div style="padding-top: 80px;"></div>
             <div id="content">
                 <div class="main_content">
                     <!--검색-->
                     <div class="mc_wide_searchbox">
+                        <img src="@/assets/image/mainhome.png" alt="">
                         <div class="searchbg">
                             <div class="mc_search">
                                 <div class="search3box">
@@ -1665,14 +1666,11 @@
 <style scoped>
     .main_content{
         padding-bottom: 50px;
-
     }
     #searchbg{
-        padding-bottom: 100px;
+        padding-bottom: 300px;
     }
-    /*키비주얼변경 20190924*/
-    .mc_wide_searchbox{width:100%;background:url(/assets/image/mainhome.png) top center no-repeat;height:423px;position:relative;display:inline-block; z-index:1; margin-bottom:57px;}
-    .mc_wide_searchbox .searchbg{width:100%;background:url( https://www.kcar.com/resources/images/index/search_bg.png) center no-repeat; opacity: 0.97;}
-
-
+    .mc_wide_searchbox{width:100%;background:#191b1a /*#F1F2F4 url( /resources/images/index/pc_index_visual_1112.jpg) top center no-repeat*/;opacity: 0.97;height:903px;position:relative;display:inline-block; z-index:1; margin-bottom:57px;}
+    .mc_wide_searchbox .searchbg{width:100%;background:url( https://www.kcar.com/resources/images/index/search_bg.png) center no-repeat; opacity: 0.97; display:inline-block;}
+    .mc_wide_searchbox .searchbg .mc_search{    margin: 0px auto 0 auto;}
 </style>
