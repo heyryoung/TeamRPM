@@ -2289,26 +2289,7 @@
                             <div class="top_field">
                                 <div id="totalCount" class="total">총 <strong>7,976</strong>대</div>
                                 <!-- 검색 결과 카운트 ajax -->
-                                <div class="hit"><span>인기모델</span><a href="javascript:void(0);" class="topSelecter"
-                                                                     style="margin-right: 7px;cursor: pointer;"
-                                                                     data-v_makecd="002" data-v_model_grp_cd="002"
-                                                                     data-v_modelcd="122" data-v_modelnm="올 뉴 K7">올 뉴
-                                    K7</a><a href="javascript:void(0);" class="topSelecter"
-                                             style="margin-right: 7px;cursor: pointer;" data-v_makecd="001"
-                                             data-v_model_grp_cd="004" data-v_modelcd="141" data-v_modelnm="그랜저 IG">그랜저
-                                    IG</a><a href="javascript:void(0);" class="topSelecter"
-                                             style="margin-right: 7px;cursor: pointer;" data-v_makecd="001"
-                                             data-v_model_grp_cd="019" data-v_modelcd="136" data-v_modelnm="아반떼 AD">아반떼
-                                    AD</a><a href="javascript:void(0);" class="topSelecter"
-                                             style="margin-right: 7px;cursor: pointer;" data-v_makecd="002"
-                                             data-v_model_grp_cd="036" data-v_modelcd="113" data-v_modelnm="올 뉴 카니발">올 뉴
-                                    카니발</a><a href="javascript:void(0);" class="topSelecter"
-                                              style="margin-right: 7px;cursor: pointer;" data-v_makecd="007"
-                                              data-v_model_grp_cd="002" data-v_modelcd="002" data-v_modelnm="제네시스 G80">제네시스
-                                    G80</a><a href="javascript:void(0);" class="topSelecter"
-                                              style="margin-right: 7px;cursor: pointer;" data-v_makecd="013"
-                                              data-v_model_grp_cd="004" data-v_modelcd="001" data-v_modelnm="벤츠 E-클래스">벤츠
-                                    E-클래스</a></div> <!-- 인기 검색어 ajax -->
+                                <div class="hit"></div>
                                 <div class="search_area">
                                     <input type="text" placeholder="차량번호/판매담당자">
                                     <button type="button">검색</button>
@@ -2316,8 +2297,6 @@
                             </div>
                             <div class="align_field">
                                 <div class="align">
-                                    <span class="live3d"><a href="javascript:void(0);" class="3dview_flag txt"
-                                                            name="wr_eq_v_3dview_flag"><em class="vr_ordermark"></em> 3D 라이브 뷰 차량</a></span>
                                     <span class="basic"><a href="javascript:void(0);" class="txt default"
                                                            data-bro="order">기본정렬</a></span>
                                     <span><a href="javascript:void(0);" class="txt" data-bro="order">가격순</a><a
@@ -2440,26 +2419,6 @@
                                 <li class="num"><a href="javascript:searchEvent.pagingFn(10);">10</a></li>
                                 <li class="move next"><a href="javascript:searchEvent.pagingFn(2);">다음</a></li>
                             </ul>
-                        </div>
-                        <div id="search_banner_wrapper" class="banner">
-                            <a id="search_banner_link"
-                               href="https://www.kcar.com/group/theme/theme.do?i_sThemeCd=19113 " target=""><img
-                                    id="search_banner_img"
-                                    src="https://img.kcar.com/FILE_UPLOAD2/IMAGE_UPLOAD/BANNER/201911/banner2019112111DdgfaJ.jpg"
-                                    alt="기획전"></a>
-                        </div>
-                        <div id="weekly_container" class="special_carList">
-                            <div class="tit"><h3>지금 특가! 놓치지 마세요.<a href="/car/search/stockcar_list.do"
-                                                                   id="weekly_more_btn">위클리 특가 차량 더보기</a></h3></div>
-                            <div class="tabbox1">
-                                <ul>
-                                    <li><a href="javascript:void(0);" class="on">#위클리특가 </a></li>
-                                    <li><a href="javascript:void(0);" class="">#장기렌트특가 </a></li>
-                                </ul>
-                            </div>
-
-                            <div class="btnb"><a href="javascript:void(0);" id="weekly_reset_btn" data-index="0"><b>위클리특가차량
-                                새로보기</b></a></div>
                         </div>
                     </div>
                 </div>
