@@ -97,12 +97,6 @@
 			</div>
 		</div>
 	</div>
-	<div class="cont100per2">
-		<div class="nation1">
-			<span><img src="/resources/images/homeencar/icon/flag_w.png" width="91" height="28" alt="usa, japan, china flag">&nbsp;&nbsp;For foreigner 02-6011-1804</span>
-			<span class="banner"><a href="/homeservice/service_main.do" target="_blank"><img src="/resources/images/homeencar/contents/homeencarservice_banner_ws.jpg" width="457" height="68" alt="eventbanner"></a></span>
-		</div>
-	</div>
 </div>
 <!-- //content -->
 
@@ -110,10 +104,12 @@
 			
 </div>
 </div>
+
+
 </template>
+<script>
 
-			
-
+</script>
 <style>
 #content {width:100%; margin-bottom:30px;font-family:'ngw','ngw2', 'NanumGothic','나눔고딕', sans-serif, Apple SD Gothic Neo;background-color:#fff;}
 </style>
