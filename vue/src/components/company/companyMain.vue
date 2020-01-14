@@ -1,30 +1,30 @@
 <template>
     <div>
-        <div id="autodanawa_gridC">
+                <div id="autodanawa_gridC">
 
-            <h1>XX 중고차</h1>
+                    <h1>XX 중고차</h1>
 
-            <div class="barChart">
-                <h1 style="text-align:center;">월별 판매량</h1>
-                <bar-example/>
-            </div>
+                    <div class="barChart">
+                        <h1 style="text-align:center;">월별 판매량</h1>
+                        <bar-example/>
+                    </div>
 
-            <div class="Chart">
-                <h1 style="text-align:center;">중고차 신차 판매량 비교</h1>
-                <bubble-example/>
-            </div>
-            <div class="Chart">
-                <h1 style="text-align:center;">직원별 판매량</h1>
-                <doughnut-example/>
-            </div>
+                    <div class="Chart">
+                        <h1 style="text-align:center;">중고차 신차 판매량 비교</h1>
+                        <bubble-example/>
+                    </div>
+                    <div class="Chart">
+                        <h1 style="text-align:center;">직원별 판매량</h1>
+                        <doughnut-example/>
+                    </div>
 
-        </div>
-        <div id="review">
-            <div class="list_area">
-                <div class="title">
-                    <h4>구입 후기 </h4>
-                    <a href="#none" class="plus_more" data-listcd="K">더보기</a>
                 </div>
+                <div id="review">
+                    <div class="list_area">
+                        <div class="title">
+                            <h4>구입 후기 </h4>
+                            <a href="#none" class="plus_more" data-listcd="K">더보기</a>
+                        </div>
                 <div class="carList_Area medium">
                     <ul>
 
