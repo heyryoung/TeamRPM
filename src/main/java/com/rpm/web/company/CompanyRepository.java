@@ -1,4 +1,4 @@
 package com.rpm.web.company;
 
-public class CompanyRepository {
+public interface CompanyRepository {
 }
