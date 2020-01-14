@@ -4,7 +4,6 @@
 <div id="contents">
 				<div class="user_content">
 					<h3 class="policy_tit"><img src="https://www.kcar.com/resources/images/content/user/userInf_tit.gif" alt="기본정보 입력"></h3>
-					<!-- 20190705회원가입정보입력추가  -->
 					<div class="user_info">
 						<h4></h4>
 						<table width="100%" class="t_user01">
@@ -36,56 +35,31 @@
 									<input type="text" name="i_sEmail1" id="i_sEmail1" title="이메일 아이디" class="user_input05 am" value=""> @ <input type="text" name="i_sEmail2" id="i_sEmail2" title="이메일 도메인" class="user_input05 am" value=""> 
 									<div class="select open mr"> 
 										<select name="domain" id="domain" onchange="userEvent.fnChange();">
-											
-												<option value="직접입력">직접입력</option> 
-											
-												<option value="daum.net">daum.net</option> 
-											
-												<option value="naver.com">naver.com</option> 
-											
-												<option value="nate.com">nate.com</option> 
-											
-												<option value="chol.com">chol.com</option> 
-											
-												<option value="dreamwiz.com">dreamwiz.com</option> 
-											
-												<option value="empal.com">empal.com</option> 
-											
-												<option value="freechal.com">freechal.com</option> 
-											
-												<option value="gmail.com">gmail.com</option> 
-											
-												<option value="hanafos.com">hanafos.com</option> 
-											
-												<option value="hanmir.com">hanmir.com</option> 
-											
-												<option value="hitel.net">hitel.net</option> 
-											
-												<option value="hotmail.com">hotmail.com</option> 
-											
-												<option value="korea.com">korea.com</option> 
-											
-												<option value="lycos.co.kr">lycos.co.kr</option> 
-											
-												<option value="netian.com">netian.com</option> 
-											
-												<option value="paran.com">paran.com</option> 
-											
-												<option value="yahoo.co.kr">yahoo.co.kr</option> 
-											
-												<option value="chollian.net">chollian.net</option> 
-											
-												<option value="hanmail.net">hanmail.net</option> 
-											
-												<option value="kebi.com">kebi.com</option> 
-											
-										</select> 
+												<option value="직접입력">직접입력</option>
+												<option value="daum.net">daum.net</option>
+												<option value="naver.com">naver.com</option>
+												<option value="nate.com">nate.com</option>
+												<option value="dreamwiz.com">dreamwiz.com</option>
+												<option value="empal.com">empal.com</option>
+												<option value="freechal.com">freechal.com</option>
+												<option value="gmail.com">gmail.com</option>
+												<option value="hanafos.com">hanafos.com</option>
+												<option value="hanmir.com">hanmir.com</option>
+												<option value="hitel.net">hitel.net</option>
+												<option value="hotmail.com">hotmail.com</option>
+												<option value="korea.com">korea.com</option>
+												<option value="lycos.co.kr">lycos.co.kr</option>
+												<option value="netian.com">netian.com</option>
+												<option value="paran.com">paran.com</option>
+												<option value="yahoo.co.kr">yahoo.co.kr</option>
+												<option value="chollian.net">chollian.net</option>
+												<option value="hanmail.net">hanmail.net</option>
+												<option value="kebi.com">kebi.com</option>
+										</select>
 									</div>
 								</td>
 							</tr>
 						</tbody></table>
-						
-					
 						<table width="100%" class="t_user01">
 							<colgroup>
 								<col width="18%">
@@ -110,54 +84,32 @@
 	
 							</tr>
 							<tr>
-								<!-- ecc_subcode.cf_ct_area_cd 쓸거임 -->
 								<th>지역 </th>
 								<td colspan="3">
 									<select style="width:130px" name="i_sUserRegion" id="i_sUserRegion">
 										<option value="">지역을 선택하세요  </option>
-										
 											<option value="010">서울</option>
-										
 											<option value="020">인천</option>
-										
 											<option value="030">대전</option>
-										
 											<option value="040">대구</option>
-										
 											<option value="050">광주</option>
-										
 											<option value="060">부산</option>
-										
 											<option value="070">울산</option>
-										
 											<option value="080">세종</option>
-										
 											<option value="090">경기</option>
-										
 											<option value="100">강원</option>
-										
 											<option value="110">경남</option>
-										
 											<option value="120">경북</option>
-										
 											<option value="130">전남</option>
-										
 											<option value="140">전북</option>
-										
 											<option value="150">충남</option>
-										
 											<option value="160">충북</option>
-										
 											<option value="170">제주</option>
-										
 									</select>
 								</td>
 							</tr>
-							
 						</tbody></table>
-						
 					</div>
-					<!-- //20190705회원가입정보입력추가  -->
 					<div class="btn_formbts">
 						<a href="javascript:;" onclick="userEvent.fnValidateForm();" class="btn_form_r"><b>회원가입신청</b></a>
 						<a href="/index.do" class="btn_form_g"><b>취소</b></a>
@@ -171,12 +123,6 @@
 #contents{
 	float: none;
 	margin: auto;
-}
-body select{
-	font-size: 15px;
-}
-.b {
-    font-weight: bold;
 }
 a {color:#666; text-decoration:none;}
 a:hover {color:#333; text-decoration:underline;}
