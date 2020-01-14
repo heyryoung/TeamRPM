@@ -94,12 +94,8 @@
                                 <div class="carInfo_area">
                                     <div class="staff_box">
                                         <div class="img">
-
-
                                             <img src="https://img.kcar.com//DATA1/carpicture2/emp/pic/3277.jpg"
                                                  alt="직원사진">
-
-
                                         </div>
                                         <div class="info">
                                             <p class="store">K Car 김포직영점</p>
