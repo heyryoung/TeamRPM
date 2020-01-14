@@ -7,14 +7,19 @@
 
         <div class="mycarInfo">
             <div class="col-md-4 col-sm-6 portfolio-item">
-                <figure class="portfolio-link" data-toggle="modal" href="#">
-                    <img class="img-fluid" src="https://blackrockdigital.github.io/startbootstrap-agency/img/portfolio/01-thumbnail.jpg" alt="">
-                    <figcaption class="portfolio-hover">
-                        <div class="portfolio-hover-content">
-                            <h3>차종: 쉐보레<br/>연식: 2019년 3월</h3>
+                <div class="pic">
+                    <img src="https://blackrockdigital.github.io/startbootstrap-agency/img/portfolio/02-thumbnail.jpg" class="pic-image" alt="">
+                    <span class="pic-caption bottom-to-top">
+                        <div>
+                            <em><h1 class="pic-title">김예지 님의 차량정보 </h1></em>
                         </div>
-                    </figcaption>
-                </figure>
+                        <div>
+                            <p>
+                                차종: 쉐보레 <br/>연식: 2019년 3월
+                            </p>
+                        </div>
+                    </span>
+                </div>
             </div>
 
         </div>
@@ -111,7 +116,7 @@
 <style scoped>
     .mycarpage{
         margin: 0 auto;
-        width: 100%;
+        width: 80%;
         height: 100%;
     }
     .mycarInfo{
@@ -139,6 +144,9 @@
         display: grid;
         grid-template-columns: 50% 50%;
     }
+    .changeInfo {
+        margin-right: 200px;
+    }
     .changeInfo, .recordRefuel{
         grid-column-start: 1;
         grid-column-end: 3;
@@ -155,55 +163,132 @@
         right: 0;
         margin: 0 0 15px;
     }
-    .portfolio-link {
-        position: relative;
-        display: block;
-        max-width: 400px;
-        margin: 0 auto;
-        cursor: pointer;
+    p {
+        line-height: 2.0em
     }
-    .portfolio-link img {
-        position: absolute;
-        height: 500px;
+
+    h1 {
+        font-size: 3.0em;
+        line-height: 40px
+    }
+    a:hover {
+        color: #fff
+    }
+    .pic {
         width: 400px;
+        height: 500px;
+        position: relative;
+        overflow: hidden;
+        margin: 10px;
+        display: inline-block;
+        -webkit-animation: anima 2s;
+        -moz-animation: anima 2s;
+        -o-animation: anima 2s;
+        -ms-animation: anima 2s;
+        animation: anima 2s;
+        -webkit-backface-visibility: hidden;
+        -moz-backface-visibility: hidden;
+        -o-backface-visibility: hidden;
+        -ms-backface-visibility: hidden;
+        backface-visibility: hidden;
     }
-    .portfolio-hover {
+    .pic-caption {
+        cursor: default;
         position: absolute;
-        width: 100%;
-        height: 100%;
-        transition: all ease .5s;
-        background: rgb(198, 223, 255);
-    }
-    .portfolio-hover-content {
-        font-size: 20px;
-        position: absolute;
-        top: 50%;
-        width: 100%;
-        height: 20px;
-        margin-top: -12px;
+        width: 400px;
+        height: 500px;
+        background: #f9f9f994;
         text-align: center;
-        color: #fff;
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=($opacity * 100))";
+        filter: alpha(opacity=0);
+        -moz-opacity: 0;
+        -khtml-opacity: 0;
+        opacity: 0
     }
-    .portfolio-hover-content h3{
-         position: absolute;
-         display: block;
-         max-width: 400px;
-         margin: 0 auto;
-         cursor: pointer;
-     }
+    .pic-image {
+        height: 100%;
+        width: 100%;
+        -webkit-transform: scale(1.1);
+        -moz-transform: scale(1.1);
+        -o-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+        transform: scale(1.1)
+    }
+
+    .pic:hover .pic-image {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -o-transform: scale(1);
+        -ms-transform: scale(1);
+        transform: scale(1)
+    }
+
+    .pic-title {
+        font-size: 1.8em
+    }
+
+    a,
+    a:hover,
+    .pic .pic-image,
+    .pic-caption,
+    .pic:hover .pic-caption,
+    .pic:hover img {
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        -ms-transition: all 0.5s ease;
+        transition: all 0.5s ease
+    }
+
+    .pic:hover .bottom-to-top {
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=($opacity * 100))";
+        filter: alpha(opacity=100);
+        -moz-opacity: 1;
+        -khtml-opacity: 1;
+        opacity: 1;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -o-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-touch-callout: none;
+        -moz-touch-callout: none;
+        -o-touch-callout: none;
+        -ms-touch-callout: none;
+        touch-callout: none;
+        -webkit-tap-highlight-color: transparent;
+        -moz-tap-highlight-color: transparent;
+        -o-tap-highlight-color: transparent;
+        -ms-tap-highlight-color: transparent;
+        tap-highlight-color: transparent
+    }
+    .bottom-to-top {
+        top: 100%;
+        left: 0;
+        text-align: right;
+    }
+    .pic:hover .bottom-to-top {
+        top: 70%;
+        left: 0;
+        color:#fff;
+    }
+    .bottom-to-top h1{
+        margin-top:10px;
+        margin-bottom: 10px;
+        font-size:25px;
+    }
+    .bottom-to-top p{
+        font-size:20px;
+    }
+    .bottom-to-top div{
+        margin-right: 20px;
+    }
 
     .col-lg-3, .col-md-4, .col-md-6, .col-sm-6{
         position: relative;
         width: 100%;
         padding-right: 15px;
         padding-left: 15px;
-    }
-    .widget-small.primary.coloured-icon {
-        background-color: #fff;
-        color: #2a2a2a;
-    }
-    .widget-small.primary {
-        background-color: #009688;
     }
     .widget-small {
         height: 130px;
@@ -302,10 +387,10 @@
     }
     .tile {
         position: relative;
+        width: 1800px;
+        margin: auto;
         background: #ffffff;
         border-radius: 3px;
-        padding: 100px;
-        margin-bottom: 30px;
         -webkit-transition: all 0.3s ease-in-out;
         -o-transition: all 0.3s ease-in-out;
         transition: all 0.3s ease-in-out;
