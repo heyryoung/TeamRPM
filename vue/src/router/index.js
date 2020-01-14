@@ -18,7 +18,6 @@ import StationInfo from '@/components/carbook/StationInfo.vue'
 import MapList from '@/components/carbook/MapList.vue'
 import Condition from "@/components/recommend/condition.vue"
 import RecommendContent from "@/components/recommend/recommendContent.vue"
-import Compare from "@/components/recommend/compare.vue"
 import CarList from "@/components/company/carList.vue"
 import chart from "@/components/company/chartExample.vue"
 import companyHome from "@/components/company/companyHome.vue"
@@ -29,6 +28,7 @@ import Recipt from "@/components/recommend/recipt.vue"
 import recommendHome from "@/components/recommend/recommendHome.vue"
 import SnsPage from "@/components/carbook/SnsPage.vue"
 import SnsDetail from "@/components/carbook/SnsDetail.vue"
+
 
 Vue.use(Router)
 
@@ -65,9 +65,9 @@ export default new Router({
                 ]},
         {path: '/recipt',name: 'Recipt', component:Recipt },
         {path: '/recommendHome',name: 'recommendHome', component:recommendHome, children:[
-                {path: '/compare',name: 'Compare', components: {content:Compare}},
                 {path: '/recommendContent',name: 'RecommendContent', components: {content:RecommendContent}},
-                {path: '/condition',name: 'Condition', components: {content:Condition}}
+                {path: '/condition',name: 'Condition', components: {content:Condition}},
+
             ]}
 
     ]
