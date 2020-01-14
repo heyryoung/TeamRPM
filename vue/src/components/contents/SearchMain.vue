@@ -6,13 +6,6 @@
               href="https://www.kcar.com/resources/images/mobile/common/apple-touch-icon.png">
         <link rel="stylesheet" href="https://www.kcar.com/resources/css/re_import.css?v=20191223103556">
         <link rel="stylesheet" href="https://www.kcar.com/resources/css/plugin/selectric.css?v=20191223103556">
-        <link rel="stylesheet" type="text/css" href="https://www.kcar.com/resources/css/plugin/ion.rangeSlider.css">
-        <link rel="stylesheet" type="text/css"
-              href="https://www.kcar.com/resources/css/plugin/ion.rangeSlider.skinHTML5.css">
-
-
-        <link rel="stylesheet" href="https://www.kcar.com/resources/css/plugin/uniform.css">
-        <link rel="stylesheet" href="https://www.kcar.com/resources/css/plugin/jquery.scrollbar.css">
         <div id="headerNew" class="header_new">
         </div>
         <div id="content">
