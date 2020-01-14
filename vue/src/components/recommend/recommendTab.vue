@@ -22,7 +22,7 @@
                 tabs: [
                     {title: "딜러들이 추천한차", link: "/recommendContent", pink: true,},
                     {title: "차량정보 입력", link: "/condition", pink: false},
-                    {title: "한눈에 비교하기", link: "/compare", pink: false}
+
                 ],
             }
         },

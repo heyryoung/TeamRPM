@@ -129,7 +129,7 @@
                 <a href="javascript:;" class="delete" onclick="fnDelete(); return false;">선택삭제</a>
 
                 <div class="center_btn">
-                    <!-- <a @click="goCompare" href="javascript:;">한눈에 비교하기</a> -->
+                     <a @click="goCompare" href="javascript:;">한눈에 비교하기</a>
 
                 </div>
             </div>
@@ -163,7 +163,7 @@
             axios
             .get(`${this.ctx}/carList`)
             .then(res=>{
-                alert(res.result)
+                alert(res.data.result)
             })
         },
         methods: {}
