@@ -1433,7 +1433,7 @@ a.cmBtnRe { display: inline-block; padding: 10px 30px; border: 1px solid #d42a35
 .carSearch_cont:after { clear: both; }
 .carSearch_cont select { visibility: hidden; }
 .carSearch_cont .selectric-wrapper select { visibility: visible; }
-.carSearch_cont input[type="checkbox"] { visibility: hidden; }
+.carSearch_cont input[type="checkbox"] { visibility: collapse; }
 .carSearch_cont input:-ms-input-placeholder { color: #000; }
 .carSearch_cont .checker input { visibility: visible; }
 .carSearch_cont .detail_box { float: left; width: 280px; }

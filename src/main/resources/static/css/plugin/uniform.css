@@ -22,7 +22,7 @@ div.selector,
 div.selector span,
 div.uploader,
 div.uploader span.action {
-    background: url("/resources/images/content/buy/check_box_img.png") no-repeat;
+    background: url("https://www.kcar.com/resources/images/content/buy/check_box_img.png") no-repeat;
     -webkit-font-smoothing: antialiased;
 }
 div.button,
@@ -70,13 +70,13 @@ input.uniform-input,
 select.uniform-multiselect,
 textarea.uniform {
     padding: 3px;
-    background: url("/resources/images/default/bg-input.png") repeat-x;
+    background: url("https://www.kcar.com/resources/images/default/bg-input.png") repeat-x;
     outline: 0;
 }
 input.uniform-input.active,
 select.uniform-multiselect.active,
 textarea.uniform.active {
-    background: url("/resources/images/default/bg-input-focus.png") repeat-x;
+    background: url("https://www.kcar.com/resources/images/default/bg-input-focus.png") repeat-x;
 }
 div.checker input,
 input[type=search],
