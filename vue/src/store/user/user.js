@@ -3,7 +3,7 @@ const getters = {}
 const actions = {}
 const mutations = {}
 export default {
-    name: 'cs',
+    name: 'user',
     namespaced: true,
     state,
     getters,
