@@ -24,7 +24,6 @@ import companyHome from "@/components/company/companyHome.vue"
 import customerDetail from "@/components/company/customerDetail.vue"
 import companyMain from "@/components/company/companyMain.vue"
 import CustomerList from "@/components/company/customerList.vue"
-import Recipt from "@/components/recommend/recipt.vue"
 import recommendHome from "@/components/recommend/recommendHome.vue"
 import SnsPage from "@/components/carbook/SnsPage.vue"
 import SnsDetail from "@/components/carbook/SnsDetail.vue"
@@ -63,7 +62,6 @@ export default new Router({
                     {path: '/chart',name: 'chart', components:{company: chart}},
                     {path: '/customerDetail',name: 'customerDetail', components:{company: customerDetail}}
                 ]},
-        {path: '/recipt',name: 'Recipt', component:Recipt },
         {path: '/recommendHome',name: 'recommendHome', component:recommendHome, children:[
                 {path: '/recommendContent',name: 'RecommendContent', components: {content:RecommendContent}},
                 {path: '/condition',name: 'Condition', components: {content:Condition}},

@@ -46,7 +46,7 @@
                         <col>
                     </colgroup>
 
-                    <tbody v-for="(car,index) of carList" :key="car.title">
+                    <tbody v-for="(car,index) of List" :key="car.carID">
                     <tr>
                         <td class="check">
                             <div class="checker" id="uniform-interest_list_check1">
@@ -56,12 +56,12 @@
                             </div>
                         </td>
                         <td class="thumb">
-                            <a href="/recipt">
+                            <a href="/product">
                                 <img :src="car.thumb" alt="자동차 썸네일">
                             </a>
                         </td>
                         <td class="car_info">
-                            <a href="/recipt" class="name">{{car.title}}<br> {{car.subTitle}} </a>
+                            <a href="/product" class="name">{{car.title}}<br> {{car.subTitle}} </a>
                             <span class="md_year">{{car.caryear}} &nbsp; {{car.distance}}</span>
                             <span class="price">{{car.price}} </span>
                         </td>
@@ -98,7 +98,7 @@
 
                 <div class="center_btn">
                 <button  href="" @click="doc_del_rendar">한눈에 비교하기</button>
-                    <modals-container/>
+                    <modals-container />
                 </div>
             </div>
 
@@ -119,57 +119,50 @@
 </template>
 <script>
     import comparePop from "./comparePop";
+    import {checkBox} from "../mixins/checkBox";
+
     export default {
         data(){
            return {
                allchecked:false,
-               carList:[
+               List:[
                    {carID:"001",title:"벤츠 GLE-클래스 W166",subTitle:"GLE350 d 4MATIC 프리미엄",checked: false, caryear:"18년 11월식(18년형)", distance:"7,368km", price:"7,990만원", acident:"무사고",
                    color:"갈색", region:"경기/인천", fuel:"디젤",carType:"SUV", people:"5인승",thumb:"https://img.kcar.com/carpicture/carpicture06/pic6026/kcar_60263050_001.jpg"},
 
                    {carID:"002",title:"벤츠 GLE-클래스 W166",subTitle:"GLE350 d 4MATIC 프리미엄",checked: false, caryear:"18년 11월식(18년형)", distance:"7,368km", price:"7,990만원", acident:"무사고",
                        color:"갈색", region:"경기/인천", fuel:"디젤",carType:"SUV", people:"5인승",thumb:"https://img.kcar.com/carpicture/carpicture06/pic6026/kcar_60263050_001.jpg"}
                    ],
+               checkedList:[
+
+               ]
 
            }
         },
         methods: {
-            check(i){
-                this.carList[i].checked=!this.carList[i].checked
-            },
-            allcheck(){
-                this.allchecked=!this.allchecked
-                for(let i=0;i<=this.carList.length;i++){
-                    this.carList[i].checked=this.allchecked
-                }
-            },
-            updateCheckall(){
-                let checknum=0
-                for(let i=0;i<this.carList.length;i++){
-                    if(this.carList[i].checked==true){
-                        checknum+=1
-                    }
-                    if(checknum==this.carList.length){
-                        this.allchecked=true
-                    }else{
-                        this.allchecked=false
-                    }
-                }
-            },
+
             doc_del_rendar(){
+
+                for(let i=0;i<this.List.length;i++) {
+                    if (this.List[i].checked == true) {
+                        this.checkedList.push(this.List[i])
+                    }
+                }
                 this.$modal.show(comparePop,{
-                    a : 'data',
-                    modal : this.$modal },{
+                    checkedList : this.checkedList,
+                    modal : this.$modal},{
                     name: 'dynamic-modal',
                     width : '800px',
                     height : '800px',
                     draggable: true,
-
-                })
+                },{closed:this.checkedList=[]})
             },
 
 
-        }
+
+
+
+        },
+        mixins:[checkBox]
     }
 
 </script>

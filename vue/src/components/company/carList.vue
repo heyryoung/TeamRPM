@@ -61,7 +61,7 @@
                             </div>
                         </td>
                         <td class="thumb">
-                            <a href="/recipt">
+                            <a href="/product">
 
                                 <!-- 20181217 VR차량 -->
 

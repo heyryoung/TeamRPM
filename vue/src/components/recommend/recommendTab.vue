@@ -44,6 +44,8 @@
     }
 </script>
 <style>
-
+.mypageTab{
+    margin-left: 700px;
+}
 
 </style>

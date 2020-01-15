@@ -17,27 +17,6 @@
                             <h2 class="logo_compare">
                                 <a href="/" target="_blank"><span class="screen_behind">모델비교</span></a>
                             </h2>
-                            <!--<div class="tabs" id="tabComp">
-                                <ul>
-                                    <li>
-                                        <button type="button" tab="unitSumy" class="on">요약</button>
-                                    </li>
-                                    <li>
-                                        <button type="button" tab="unitSpec0" class="">제원</button>
-                                    </li>
-                                    <li>
-                                        <button type="button" tab="unitItem0" class="">사양</button>
-                                    </li>
-                                    <li>
-                                        <button type="button" tab="unitOptn0" class="">견적</button>
-                                    </li>
-                                    <li>
-                                        <button type="button" tab="unitMant0">유지</button>
-                                    </li>
-                                </ul>
-                            </div>-->
-
-
 
                         </div>
                     </div>
@@ -67,9 +46,9 @@
                             <table class="tableComp right head" cellspacing="0" id="compRightHead" style="width: 900px;">
                                 <tbody>
                                 <tr id="unitPhoto" cont="index">
-                                    <td id="Photo_1" v-for="row of rows" :key="row">
+                                    <td id="Photo_1" v-for="row of rows" :key="row.rowNum">
                                         <button type="button" id="addBtn" v-if="row.button">추가하기</button>
-                                        <!--<img src="https://img.kcar.com/carpicture/carpicture06/pic6026/kcar_60263050_001.jpg" alt="">-->
+                                        <img class="compare_img" :src="row.imageUrl" alt="" v-if="row.image">
                                     </td>
 
                                 </tr>
@@ -79,7 +58,7 @@
                                 <tbody>
 
                                 <tr id="unitSumy1" type="gapSpec" v-for="col of columns" :key="col">
-                                    <td id="Sumy1_1" v-for="row of rows" :key="row">&nbsp;</td>
+                                    <td id="Sumy1_1" v-for="row of rows" :key="row.rowNum"></td>
 
                                 </tr>
 
@@ -108,19 +87,26 @@
                         '가격','연식','주행거리','연료','차종','연비','1','2','3','4','5','6','7','8'
                     ],
                 rows:[
-                    {rowNum:1,button:true},
-                    {rowNum:2,button:true},
-                    {rowNum:3,button:true},
-                    {rowNum:4,button:true},
-                    {rowNum:5,button:true},
+                    {rowNum:1,button:true,image:false,imageUrl:''},
+                    {rowNum:2,button:true,image:false,imageUrl:''},
+                    {rowNum:3,button:true,image:false,imageUrl:''},
+                    {rowNum:4,button:true,image:false,imageUrl:''},
+                    {rowNum:5,button:true,image:false,imageUrl:''},
                 ]
 
             }
         },props : [
-            'a',
+            'checkedList',
         ],methods : {
 
-        }
+        },
+        created() {
+            for(let i=0; i<this.checkedList.length;i++){
+                this.rows[i].button=false
+                this.rows[i].image=true
+                this.rows[i].imageUrl=this.checkedList[i].thumb
+            }
+        },
     }
 </script>
 <style>
@@ -138,5 +124,9 @@
         text-align: center;
         font-size: 13px;
        font-weight: bold;
+    }
+    .compare_img{
+        width: 140px;
+        height: 100px;
     }
 </style>
