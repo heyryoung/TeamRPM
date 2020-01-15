@@ -163,7 +163,7 @@
             axios
             .get(`${this.ctx}/carList`)
             .then(res=>{
-                alert(res)
+                alert(res.result)
             })
         },
         methods: {}

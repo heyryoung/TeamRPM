@@ -48,7 +48,7 @@
 
     }
   #gnb{
-    padding-left: 250px;
+    //padding-left: 100px;
 
   }
 </style>
