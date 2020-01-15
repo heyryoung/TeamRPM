@@ -121,17 +121,17 @@
 </div>
 </template>
 <script>
-	export default {
-		name:join,
-		data(){
-			userId:''
-		},
-		methods:{
-			fnIdCheck(){
+export default {
+	name: 'join',
+	data(){
+		userId:''
+	},
+	methods:{
+		fnIdCheck(){
 
-			}
 		}
 	}
+}
 
 </script>
 <style scoped>
