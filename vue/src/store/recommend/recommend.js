@@ -1,9 +1,13 @@
-const state = {}
-const getters = {}
+const state = {
+
+}
+const getters = {
+
+}
 const actions = {}
 const mutations = {}
 export default {
-    name: 'cs',
+    name: 'recommend',
     namespaced: true,
     state,
     getters,

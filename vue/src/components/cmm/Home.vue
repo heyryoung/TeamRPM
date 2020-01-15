@@ -1,12 +1,13 @@
 <template>
     <div>
-        <link rel="stylesheet" href="https://www.kcar.com/resources/css/re_import.css?v=20191230094250">
-        <link rel="stylesheet" href="https://www.kcar.com/resources/css/plugin/selectric.css?v=20191230094250">
-        <link rel="stylesheet" type="text/css" href="https://www.kcar.com/resources/css/plugin/ion.rangeSlider.css">
-        <link rel="stylesheet" type="text/css" href="https://www.kcar.com/resources/css/plugin/ion.rangeSlider.skinHTML5.css">
-        <link rel="stylesheet" type="text/css" href="https://www.kcar.com/resources/css/re_layout.css?v=20191230094250">
-        <link rel="stylesheet" href="https://www.kcar.com/resources/css/plugin/uniform.css">
-        <link rel="stylesheet" href="https://www.kcar.com/resources/css/plugin/jquery.scrollbar.css">
+        <link rel="stylesheet" type="text/css"  href="css/re_import.css">
+        <link rel="stylesheet" type="text/css" href="css/plugin/ion.rangeSlider.css">
+        <link rel="stylesheet" type="text/css"
+              href="css/plugin/ion.rangeSlider.skinHTML5.css">
+        <link rel="stylesheet"  type="text/css" href="css/plugin/uniform.css">
+        <link rel="stylesheet"  type="text/css" href="css/plugin/jquery.scrollbar.css">
+        <link rel="stylesheet" type="text/css"  href="css/plugin/selectric.css">
+        <link rel="stylesheet" type="text/css" href="css/re_layout.css">
         <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/common.css?v=200108090126">
         <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/home.css?v=200108090126">
         <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/theme.css?v=200108090126">
@@ -14,11 +15,6 @@
         <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/window.css?v=200108090126">
         <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/compare.css?v=200103163154">
         <div id='app'>
-            <!--                       <div class="primary">
-                                    <div class="inner">
-                                      <h1 class="logo" id="logo"><a href="/index.do" target=""><img src="https://img.kcar.com/FILE_UPLOAD2/IMAGE_UPLOAD/LOGO/201810/logo201810111UOQzCF.jpg" alt="K Car"></a></h1>
-                                    </div>
-                                    </div> -->
            <div style="padding-top: 80px;"></div>
             <div id="content">
                 <div class="main_content">

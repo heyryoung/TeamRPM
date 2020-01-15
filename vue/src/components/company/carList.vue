@@ -61,7 +61,7 @@
                             </div>
                         </td>
                         <td class="thumb">
-                            <a href="/recipt">
+                            <a href="/product">
 
                                 <!-- 20181217 VR차량 -->
 
@@ -129,7 +129,7 @@
                 <a href="javascript:;" class="delete" onclick="fnDelete(); return false;">선택삭제</a>
 
                 <div class="center_btn">
-                    <!-- <a @click="goCompare" href="javascript:;">한눈에 비교하기</a> -->
+                     <a @click="goCompare" href="javascript:;">한눈에 비교하기</a>
 
                 </div>
             </div>
@@ -159,11 +159,11 @@
             }
         },
         created() {
-            alert(this.ctx)
+            console.log(this.ctx)
             axios
             .get(`${this.ctx}/carList`)
             .then(res=>{
-                alert(res.result)
+                console.log(res.data.result)
             })
         },
         methods: {}
