@@ -15,11 +15,6 @@
         <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/window.css?v=200108090126">
         <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/compare.css?v=200103163154">
         <div id='app'>
-            <!--                       <div class="primary">
-                                    <div class="inner">
-                                      <h1 class="logo" id="logo"><a href="/index.do" target=""><img src="https://img.kcar.com/FILE_UPLOAD2/IMAGE_UPLOAD/LOGO/201810/logo201810111UOQzCF.jpg" alt="K Car"></a></h1>
-                                    </div>
-                                    </div> -->
            <div style="padding-top: 80px;"></div>
             <div id="content">
                 <div class="main_content">
