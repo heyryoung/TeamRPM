@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://blackrockdigital.github.io/startbootstrap-agency/vendor/scss/mixins/_grid-framework.scss">
 <link rel="stylesheet" href="https://blackrockdigital.github.io/startbootstrap-agency/vendor/scss/mixins/_image.scss">
 <link type="application/atom+xml" rel="alternate" href="https://startbootstrap.com/feed.xml" title="startbootstrap">
-
+  
 <div class="modal-open" style="padding-right: 16.9962px;">
 <div class="portfolio-modal modal fade show" id="portfolioModal2" tabindex="-1" role="dialog" style="display: block; padding-right: 16.9962px;" aria-modal="true">
     <div class="modal-dialog">
