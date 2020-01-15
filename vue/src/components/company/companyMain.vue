@@ -1,6 +1,11 @@
 <template>
     <div>
+
                 <div id="autodanawa_gridC">
+
+        <img id="mainImg" src="http://junggocha.cafe24.com/img/sub/%EC%A4%91%EA%B3%A0%EC%B0%A8.jpg" alt="">
+        <div id="autodanawa_gridC">
+
 
                     <h1>XX 중고차</h1>
 
@@ -294,6 +299,7 @@ LPG LT
             </div>
         </div>
     </div>
+    </div>
 </template>
 <script>
     import BarExample from './chartEx/BarExample'
@@ -368,8 +374,9 @@ LPG LT
         padding: 20px;
         box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, .4);
         border-radius: 20px;
-        margin: 20px 25px;
-        width: 400px;
+        margin: 20px 0px;
+        margin-left: 35px;
+        width: 425px;
         float: left;
     }
 
@@ -378,7 +385,7 @@ LPG LT
         box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, .4);
         border-radius: 20px;
         margin: 50px 0;
-        width: 900px;
+        width: 1000px;
     }
 
     .wrapper {
@@ -408,5 +415,13 @@ LPG LT
 
     .list_area {
         border: 2px #666666;
+        padding-left: 100px;
+    }
+    #mainImg{
+        margin-left: 260px;
+    }
+    #autodanawa_gridC{
+        padding:0px 0px;
+        width: 1000px;
     }
 </style>

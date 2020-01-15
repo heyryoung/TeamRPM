@@ -1,12 +1,13 @@
 <template>
     <div>
-        <link rel="stylesheet" href="https://www.kcar.com/resources/css/re_import.css?v=20191230094250">
-        <link rel="stylesheet" href="https://www.kcar.com/resources/css/plugin/selectric.css?v=20191230094250">
-        <link rel="stylesheet" type="text/css" href="https://www.kcar.com/resources/css/plugin/ion.rangeSlider.css">
-        <link rel="stylesheet" type="text/css" href="https://www.kcar.com/resources/css/plugin/ion.rangeSlider.skinHTML5.css">
-        <link rel="stylesheet" type="text/css" href="https://www.kcar.com/resources/css/re_layout.css?v=20191230094250">
-        <link rel="stylesheet" href="https://www.kcar.com/resources/css/plugin/uniform.css">
-        <link rel="stylesheet" href="https://www.kcar.com/resources/css/plugin/jquery.scrollbar.css">
+        <link rel="stylesheet" type="text/css"  href="css/re_import.css">
+        <link rel="stylesheet" type="text/css" href="css/plugin/ion.rangeSlider.css">
+        <link rel="stylesheet" type="text/css"
+              href="css/plugin/ion.rangeSlider.skinHTML5.css">
+        <link rel="stylesheet"  type="text/css" href="css/plugin/uniform.css">
+        <link rel="stylesheet"  type="text/css" href="css/plugin/jquery.scrollbar.css">
+        <link rel="stylesheet" type="text/css"  href="css/plugin/selectric.css">
+        <link rel="stylesheet" type="text/css" href="css/re_layout.css">
         <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/common.css?v=200108090126">
         <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/home.css?v=200108090126">
         <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/theme.css?v=200108090126">
@@ -14,16 +15,12 @@
         <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/window.css?v=200108090126">
         <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/compare.css?v=200103163154">
         <div id='app'>
-            <!--                       <div class="primary">
-                                    <div class="inner">
-                                      <h1 class="logo" id="logo"><a href="/index.do" target=""><img src="https://img.kcar.com/FILE_UPLOAD2/IMAGE_UPLOAD/LOGO/201810/logo201810111UOQzCF.jpg" alt="K Car"></a></h1>
-                                    </div>
-                                    </div> -->
-            <div style="padding-top: 80px;"><img src="@/assets/image/mainhome.png" alt=""></div>
+           <div style="padding-top: 80px;"></div>
             <div id="content">
                 <div class="main_content">
                     <!--검색-->
-                    <div>
+                    <div class="mc_wide_searchbox">
+                        <img src="@/assets/image/mainhome.png" alt="">
                         <div class="searchbg">
                             <div class="mc_search">
                                 <div class="search3box">
@@ -35,6 +32,7 @@
                                         <div class="searchcont1">
                                             <ul>
                                                 <li>
+                                                    <span class="tit">RPM에서 판매하는 차 <strong class="all_car_cnt">총 8,328대</strong></span>
                             <span class="searchinput">
                               <input type="text" class="placeho modelSearchInput" name="quickSearch" id="quickSearch"
                                      placeholder=" 모델명을 입력해주세요. 예시)아반떼" maxlength="20" autocomplete="off"><a
@@ -140,7 +138,7 @@
                                                 </li>
                                                 <li>
                             <span id="spanMakeType" class="btnl">
-                              <a href="javascript:;" class="on" data-item="MAKE_TYPE010">국산차</a> 
+                              <a href="javascript:;" class="on" data-item="MAKE_TYPE010">국산차</a>
                               <a href="javascript:;" data-item="MAKE_TYPE020">수입차</a>
                             </span>
                                                 </li>
@@ -266,7 +264,7 @@
                                                 </li>
                                                 <li>
                             <span id="spanMakeType" class="btnl">
-                              <a href="javascript:;" class="on" data-item="MAKE_TYPE010">국산차</a> 
+                              <a href="javascript:;" class="on" data-item="MAKE_TYPE010">국산차</a>
                               <a href="javascript:;" data-item="MAKE_TYPE020">수입차</a>
                             </span>
                                                 </li>
@@ -1662,11 +1660,13 @@
 </template>
 <script></script>
 <style scoped>
-.main_content{
-    padding-bottom: 50px;
-
-}
-#searchbg{
-    padding-bottom: 100px;
-}
+    .main_content{
+        padding-bottom: 50px;
+    }
+    #searchbg{
+        padding-bottom: 300px;
+    }
+    .mc_wide_searchbox{width:100%;background:#191b1a /*#F1F2F4 url( /resources/images/index/pc_index_visual_1112.jpg) top center no-repeat*/;opacity: 0.97;height:903px;position:relative;display:inline-block; z-index:1; margin-bottom:57px;}
+    .mc_wide_searchbox .searchbg{width:100%;background:url( https://www.kcar.com/resources/images/index/search_bg.png) center no-repeat; opacity: 0.97; display:inline-block;}
+    .mc_wide_searchbox .searchbg .mc_search{    margin: 0px auto 0 auto;}
 </style>
