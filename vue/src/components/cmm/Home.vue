@@ -1,6 +1,19 @@
 <template>
     <div>
-
+        <link rel="stylesheet" type="text/css"  href="css/re_import.css">
+        <link rel="stylesheet" type="text/css" href="css/plugin/ion.rangeSlider.css">
+        <link rel="stylesheet" type="text/css"
+              href="css/plugin/ion.rangeSlider.skinHTML5.css">
+        <link rel="stylesheet"  type="text/css" href="css/plugin/uniform.css">
+        <link rel="stylesheet"  type="text/css" href="css/plugin/jquery.scrollbar.css">
+        <link rel="stylesheet" type="text/css"  href="css/plugin/selectric.css">
+        <link rel="stylesheet" type="text/css" href="css/re_layout.css">
+        <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/common.css?v=200108090126">
+        <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/home.css?v=200108090126">
+        <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/theme.css?v=200108090126">
+        <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/auto.css?v=200108090126">
+        <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/window.css?v=200108090126">
+        <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/compare.css?v=200103163154">
         <div id='app'>
            <div style="padding-top: 80px;"></div>
             <div id="content">
