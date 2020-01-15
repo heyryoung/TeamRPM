@@ -159,11 +159,11 @@
             }
         },
         created() {
-            console.log(this.ctx)
+            alert(this.ctx)
             axios
             .get(`${this.ctx}/carList`)
             .then(res=>{
-                console.log(res.data.result)
+                alert(res.data.result)
             })
         },
         methods: {}
