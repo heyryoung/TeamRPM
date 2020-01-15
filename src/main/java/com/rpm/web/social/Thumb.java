@@ -8,31 +8,25 @@ import org.springframework.util.Assert;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Component @Lazy @Entity
-@Data @ToString
+@ToString
 @Getter @Setter(AccessLevel.PUBLIC)
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @Table(name="THUMB")
-public class Thumb {
-    private static final long serialVersionUID = 1L;
+public class Thumb implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "THUMBSEQ") @NotNull private Long thumbSeq;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "BOARDSEQ")
+    @JoinColumn(name = "boardSeq")
     private Social boardSeq;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "USERSEQ")
+    @JoinColumn(name = "userSeq")
     private User userSeq;
 
-    @Builder
-    private Thumb(long thumbSeq){
-        Assert.hasText(String.valueOf(thumbSeq), "thumbSeq must not be empty");
-        this.thumbSeq = thumbSeq;
-    }
 }

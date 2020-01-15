@@ -15,7 +15,9 @@
 							</colgroup>
 							<tbody><tr>
 								<th><span class="org">*</span> <label for="i_sMemberId">아이디</label></th>
-								<td colspan="3"><input type="text" name="i_sMemberId" id="i_sMemberId" class="user_input02" value=""> <a href="javascript:;" onclick="userEvent.fnIdCheck();" class="btn_user" id=""><b>중복확인</b></a> <b class="user_num_check mt5" id="id_result"></b>
+								<td colspan="3"><input type="text" v-model="userId" id="i_sMemberId" class="user_input02" value="">
+									<a href="javascript:;" @click="fnIdCheck;" class="btn_user" id=""><b>중복확인</b></a>
+									<b class="user_num_check mt5" id="id_result"></b>
 								<p class="mt5">* 4~12이내  영문, 숫자 혼합</p>
 								</td>
 							</tr>
@@ -118,7 +120,20 @@
 			</div>
 </div>
 </template>
-<script></script>
+<script>
+	export default {
+		name:join,
+		data(){
+			userId:''
+		},
+		methods:{
+			fnIdCheck(){
+
+			}
+		}
+	}
+
+</script>
 <style scoped>
 #contents{
 	float: none;
