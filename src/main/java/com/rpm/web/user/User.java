@@ -1,4 +1,5 @@
 package com.rpm.web.user;
+import com.rpm.web.carbook.Mycar;
 import com.rpm.web.social.Social;
 import lombok.*;
 import org.springframework.context.annotation.Lazy;
@@ -30,6 +31,13 @@ public class User implements Serializable {
             cascade = CascadeType.ALL,
             orphanRemoval = true)
     private List<Social> socials = new ArrayList<>();
+
+    @OneToMany(mappedBy = "userSeq",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private List<Mycar> mycars = new ArrayList<>();
+
+
     @Builder
     private User(String userid, String passwd, String name, String email,
                  String gender, String birthMonth, String region) {
