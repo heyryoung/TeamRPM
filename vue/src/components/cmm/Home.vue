@@ -10,8 +10,8 @@
                         <div class="searchbg">
                             <div class="mc_search">
                                 <div class="search3box">
-                                    <div class="tab_want1 tab_want_menu" data-item="tab1">
-                                        <h3><a @click="wantModel" class="on">원하는 모델이 있어요</a></h3>
+                                    <div  class="tab_want1 tab_want_menu" data-item="tab1">
+                                        <h3><a id="tab1" @click="wantModel" class="on">원하는 모델이 있어요</a></h3>
                                     </div>
                                     <div id="divTabWant1" class="divTabWantGroup">
                                         <!--검색tab1 내용-->
@@ -100,7 +100,7 @@
                                                             </ul>
                                                         </div>
                                                         <div class="btclose divSearchConHide"><a
-                                                                @click="searchBoxOff"><img
+                                                                @click="searchBoxOff(`searchBox`)"><img
                                                                 src="https://www.kcar.com/resources/images/index/recentclose.jpg" width="44"
                                                                 height="20" alt="닫기" border="0"></a></div>
                                                     </div>
@@ -121,18 +121,19 @@
                                                         <div class="recentl1">
                                                             <ul><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="022|006|006|IMP|DS3(12년~18년)">DS3(12년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="022|009|008|IMP|DS5(11년~18년)">DS5(11년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="022|006|009|IMP|DS3 카브리오(13년~18년)">DS3 카브리오(13년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="022|008|012|IMP|DS4 크로스백(16년~18년)">DS4 크로스백(16년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="022|008|007|IMP|DS4(12년~18년)">DS4(12년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="043|010|010|IMP|DTS(06년~11년)">DTS(06년~11년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="070|002|002|IMP|DB9(04년~18년)">DB9(04년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="070|004|004|IMP|DBS(07년~18년)">DBS(07년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="070|008|075|IMP|DB7(94년~03년)">DB7(94년~03년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="001|017|111|KOR|싼타페 DM(12년~15년)">싼타페 DM(12년~15년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="001|025|124|KOR|제네시스 DH(13년~16년)">제네시스 DH(13년~16년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="001|018|163|KOR|쏘나타 DN8(19년~현재)">쏘나타 DN8(19년~현재)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="054|002|006|IMP|쿠퍼 D 클럽맨(09년~18년)">쿠퍼 D 클럽맨(09년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="054|003|115|IMP|쿠퍼 D 컨트리맨(11년~18년)">쿠퍼 D 컨트리맨(11년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="054|001|117|IMP|쿠퍼 D(07년~18년)">쿠퍼 D(07년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="054|012|133|IMP|쿠퍼 D 페이스맨(13년~18년)">쿠퍼 D 페이스맨(13년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="001|019|037|KOR|아반떼 XD(00년~03년)">아반떼 XD(00년~03년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="001|019|071|KOR|뉴 아반떼 XD(03년~06년)">뉴 아반떼 XD(03년~06년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="001|019|081|KOR|아반떼 HD(06년~10년)">아반떼 HD(06년~10년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="001|019|104|KOR|아반떼 MD(10년~13년)">아반떼 MD(10년~13년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="001|019|136|KOR|아반떼 AD(15년~18년)">아반떼 AD(15년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="001|019|154|KOR|더 뉴 아반떼 AD(18년~현재)">더 뉴 아반떼 AD(18년~현재)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="054|001|118|IMP|쿠퍼 SD(12년~18년)">쿠퍼 SD(12년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="058|001|016|IMP|FX30d(09년~13년)">FX30d(09년~13년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="082|004|004|IMP|xD(07년~14년)">xD(07년~14년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="058|003|014|IMP|M30d(10년~13년)">M30d(10년~13년)</a></li></ul>
                                                         </div>
-                                                        <div class="btclose divSearchConHide"><a @click="searchBoxOff"><img src="https://www.kcar.com/resources/images/index/recentclose.jpg" width="44" height="20" alt="닫기" border="0"></a></div>
+                                                        <div class="btclose divSearchConHide"><a @click="searchBoxOff(`stringMatch`)"><img src="https://www.kcar.com/resources/images/index/recentclose.jpg" width="44" height="20" alt="닫기" border="0"></a></div>
                                                     </div>
                                                 </li>
                                                 <li>
                             <span id="spanMakeType" class="btnl">
-                              <a @click="korCar" id="korCar" class="on" data-item="MAKE_TYPE010">국산차</a>
-                              <a @click="impCar" id="impCar" data-item="MAKE_TYPE020">수입차</a>
+                              <a @click="korCar(`korCar2`,`impCar2`)" id="korCar2" class="on" data-item="MAKE_TYPE010">국산차</a>
+                              <a @click="impCar(`korCar2`,`impCar2`)" id="impCar2" data-item="MAKE_TYPE020">수입차</a>
                             </span>
                                                 </li>
                                                 <li class="spreset">
                                                     <div class="searchr1">
-                                                        <div id="searchKey1" @mouseover="searchKey1MouseOver" @click="SearchKey1Click" class="selectric-wrapper selectric-selectric selectric-below">
+                                                        <div id="searchKey1" @click="searchKeyClick(`searchKey1`)"
+                                                             class="selectric-wrapper selectric-selectric selectric-below selectric-hover">
                                                             <div class="selectric-hide-select"><select id="makeList"
                                                                                                        title="제조사를 선택하세요"
                                                                                                        class="selectric"
@@ -161,7 +162,7 @@
                                                             </select></div>
                                                             <div class="selectric" ><span class="label"
                                                                                          data-beusable-tracking="">제조사를 선택하세요</span></div>
-                                                            <div class="selectric-items" tabindex="-1">
+                                                            <div class="selectric-items" tabindex="-1" >
                                                                 <div class="selectric-scroll">
                                                                     <ul>
                                                                         <li data-index="0" class="selected">제조사를 선택하세요
@@ -184,8 +185,8 @@
                                                             <input class="selectric-input" tabindex="0"></div>
                                                     </div>
                                                     <div class="searchr2">
-                                                        <div id="searchKey2" @mouseover="searchKey2MouseOver" @click="SearchKey2Click"
-                                                             class="selectric-wrapper selectric-selectric">
+                                                        <div id="searchKey2"  @click="searchKeyClick(`searchKey2`)"
+                                                             class="selectric-wrapper selectric-selectric selectric-hover">
                                                             <div class="selectric-hide-select"><select
                                                                     id="modelGroupList" title="모델을 선택하세요"
                                                                     class="selectric" data-beusable-tracking=""
@@ -195,7 +196,7 @@
                                                             </select></div>
                                                             <div class="selectric"><span class="label"
                                                                                          data-beusable-tracking="">모델을 선택하세요</span></div>
-                                                            <div class="selectric-items" tabindex="-1">
+                                                            <div class="selectric-items" tabindex="-1" >
                                                                 <div class="selectric-scroll">
                                                                     <ul>
                                                                         <li data-index="0" class="last selected">모델을
@@ -207,9 +208,9 @@
                                                             <input class="selectric-input" tabindex="0"></div>
                                                     </div>
                                                     <div class="searchr3">
-                                                        <div id="searchKey3" @mouseover="searchKey3MouseOver" @click="SearchKey3Click"
+                                                        <div id="searchKey3" @click="searchKeyClick(`searchKey3`)"
 
-                                                             class="selectric-wrapper selectric-selectric">
+                                                             class="selectric-wrapper selectric-selectric selectric-below selectric-hover">
                                                             <div class="selectric-hide-select"><select id="modelList"
                                                                                                        title="세부모델을 선택하세요"
                                                                                                        class="selectric"
@@ -238,8 +239,8 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <div class="tab_want2 tab_want_menu" data-item="tab2">
-                                        <h3><a @click="haveBudget">예산이 정해져 있어요</a></h3>
+                                    <div  class="tab_want2 tab_want_menu" data-item="tab2">
+                                        <h3><a id="tab2" @click="haveBudget">예산이 정해져 있어요</a></h3>
                                     </div>
                                     <!--검색tab2 내용-->
                                     <!---->
@@ -247,21 +248,24 @@
                                         <!--20180801 검색셀렉트박스 수정-->
                                         <div class="searchcont1">
                                             <ul>
-                                                <li><span class="tit">K Car에서 직접 판매하는 차 <strong class="all_car_cnt">총 7,952대</strong></span>
+                                                <li><span class="tit">RPM에서 판매하는 차 <strong class="all_car_cnt">총 {{allCount}}대</strong></span>
 
                                                 </li>
                                                 <li>
                             <span id="spanMakeType" class="btnl">
-                              <a href="javascript:;" class="on" data-item="MAKE_TYPE010">국산차</a>
-                              <a href="javascript:;" data-item="MAKE_TYPE020">수입차</a>
+                              <a @click="korCar(`korCar`,`impCar`)" id="korCar" class="on" data-item="MAKE_TYPE010">국산차</a>
+                              <a @click="impCar(`korCar`,`impCar`)" id="impCar" data-item="MAKE_TYPE020">수입차</a>
                             </span>
                                                 </li>
                                                 <li class="spreset">
                                                     <div class="searchr1">
-                                                        <div class="selectric-wrapper selectric-selectric selectric-makeList">
-                                                            <div class="selectric-hide-select"><select
-                                                                    id="makeListWithBudget" title="제조사를 선택하세요"
-                                                                    class="selectric makeList" tabindex="-1">
+                                                        <div id="budgetCategory" @click="searchKeyClick(`budgetCategory`)"
+                                                             class="selectric-wrapper selectric-selectric selectric-below selectric-hover">
+                                                            <div class="selectric-hide-select"><select id="makeList"
+                                                                                                       title="제조사를 선택하세요"
+                                                                                                       class="selectric"
+                                                                                                       data-beusable-tracking=""
+                                                                                                       tabindex="-1">
 
                                                                 <option value="" selected="">제조사를 선택하세요</option>
                                                                 <option value="001" data-type="MAKE_TYPE010"
@@ -283,8 +287,8 @@
                                                                         data-cnt="477">쌍용
                                                                 </option>
                                                             </select></div>
-                                                            <div class="selectric"><span class="label">제조사를 선택하세요</span><b
-                                                                    class="button">▾</b></div>
+                                                            <div class="selectric" ><span class="label"
+                                                                                          data-beusable-tracking="">제조사를 선택하세요</span></div>
                                                             <div class="selectric-items" tabindex="-1">
                                                                 <div class="selectric-scroll">
                                                                     <ul>
@@ -308,646 +312,46 @@
                                                             <input class="selectric-input" tabindex="0"></div>
                                                     </div>
                                                     <div class="searchr2">
-                                                        <div class="selectric-wrapper selectric-selectric">
-                                                            <div class="selectric-hide-select"><select id="minCarPrice"
-                                                                                                       title="최저가격을 선택하세요"
-                                                                                                       class="selectric"
-                                                                                                       tabindex="-1">
-                                                                <option value="" selected="">최저가격을 선택하세요</option>
-
-                                                                <option value="100">100만원</option>
-
-                                                                <option value="200">200만원</option>
-
-                                                                <option value="300">300만원</option>
-
-                                                                <option value="400">400만원</option>
-
-                                                                <option value="500">500만원</option>
-
-                                                                <option value="600">600만원</option>
-
-                                                                <option value="700">700만원</option>
-
-                                                                <option value="800">800만원</option>
-
-                                                                <option value="900">900만원</option>
-
-                                                                <option value="1000">1,000만원</option>
-
-                                                                <option value="1100">1,100만원</option>
-
-                                                                <option value="1200">1,200만원</option>
-
-                                                                <option value="1300">1,300만원</option>
-
-                                                                <option value="1400">1,400만원</option>
-
-                                                                <option value="1500">1,500만원</option>
-
-                                                                <option value="1600">1,600만원</option>
-
-                                                                <option value="1700">1,700만원</option>
-
-                                                                <option value="1800">1,800만원</option>
-
-                                                                <option value="1900">1,900만원</option>
-
-                                                                <option value="2000">2,000만원</option>
-
-                                                                <option value="2100">2,100만원</option>
-
-                                                                <option value="2200">2,200만원</option>
-
-                                                                <option value="2300">2,300만원</option>
-
-                                                                <option value="2400">2,400만원</option>
-
-                                                                <option value="2500">2,500만원</option>
-
-                                                                <option value="2600">2,600만원</option>
-
-                                                                <option value="2700">2,700만원</option>
-
-                                                                <option value="2800">2,800만원</option>
-
-                                                                <option value="2900">2,900만원</option>
-
-                                                                <option value="3000">3,000만원</option>
-
-                                                                <option value="3100">3,100만원</option>
-
-                                                                <option value="3200">3,200만원</option>
-
-                                                                <option value="3300">3,300만원</option>
-
-                                                                <option value="3400">3,400만원</option>
-
-                                                                <option value="3500">3,500만원</option>
-
-                                                                <option value="3600">3,600만원</option>
-
-                                                                <option value="3700">3,700만원</option>
-
-                                                                <option value="3800">3,800만원</option>
-
-                                                                <option value="3900">3,900만원</option>
-
-                                                                <option value="4000">4,000만원</option>
-
-                                                                <option value="4100">4,100만원</option>
-
-                                                                <option value="4200">4,200만원</option>
-
-                                                                <option value="4300">4,300만원</option>
-
-                                                                <option value="4400">4,400만원</option>
-
-                                                                <option value="4500">4,500만원</option>
-
-                                                                <option value="4600">4,600만원</option>
-
-                                                                <option value="4700">4,700만원</option>
-
-                                                                <option value="4800">4,800만원</option>
-
-                                                                <option value="4900">4,900만원</option>
-
-                                                                <option value="5000">5,000만원</option>
-
-                                                                <option value="5100">5,100만원</option>
-
-                                                                <option value="5200">5,200만원</option>
-
-                                                                <option value="5300">5,300만원</option>
-
-                                                                <option value="5400">5,400만원</option>
-
-                                                                <option value="5500">5,500만원</option>
-
-                                                                <option value="5600">5,600만원</option>
-
-                                                                <option value="5700">5,700만원</option>
-
-                                                                <option value="5800">5,800만원</option>
-
-                                                                <option value="5900">5,900만원</option>
-
-                                                                <option value="6000">6,000만원</option>
-
-                                                                <option value="6100">6,100만원</option>
-
-                                                                <option value="6200">6,200만원</option>
-
-                                                                <option value="6300">6,300만원</option>
-
-                                                                <option value="6400">6,400만원</option>
-
-                                                                <option value="6500">6,500만원</option>
-
-                                                                <option value="6600">6,600만원</option>
-
-                                                                <option value="6700">6,700만원</option>
-
-                                                                <option value="6800">6,800만원</option>
-
-                                                                <option value="6900">6,900만원</option>
-
-                                                                <option value="7000">7,000만원</option>
-
-                                                                <option value="7100">7,100만원</option>
-
-                                                                <option value="7200">7,200만원</option>
-
-                                                                <option value="7300">7,300만원</option>
-
-                                                                <option value="7400">7,400만원</option>
-
-                                                                <option value="7500">7,500만원</option>
-
-                                                                <option value="7600">7,600만원</option>
-
-                                                                <option value="7700">7,700만원</option>
-
-                                                                <option value="7800">7,800만원</option>
-
-                                                                <option value="7900">7,900만원</option>
-
-                                                                <option value="8000">8,000만원</option>
-
-                                                                <option value="8100">8,100만원</option>
-
-                                                                <option value="8200">8,200만원</option>
-
-                                                                <option value="8300">8,300만원</option>
-
-                                                                <option value="8400">8,400만원</option>
-
-                                                                <option value="8500">8,500만원</option>
-
-                                                                <option value="8600">8,600만원</option>
-
-                                                                <option value="8700">8,700만원</option>
-
-                                                                <option value="8800">8,800만원</option>
-
-                                                                <option value="8900">8,900만원</option>
-
-                                                                <option value="9000">9,000만원</option>
-
-                                                                <option value="9100">9,100만원</option>
-
-                                                                <option value="9200">9,200만원</option>
-
-                                                                <option value="9300">9,300만원</option>
-
-                                                                <option value="9400">9,400만원</option>
-
-                                                                <option value="9500">9,500만원</option>
-
-                                                                <option value="9600">9,600만원</option>
-
-                                                                <option value="9700">9,700만원</option>
-
-                                                                <option value="9800">9,800만원</option>
-
-                                                                <option value="9900">9,900만원</option>
-
-                                                                <option value="10000">10,000만원</option>
-
+                                                        <div id="priceDiv1" @click="searchKeyClick(`priceDiv1`)"
+                                                        class="selectric-wrapper selectric-selectric selectric-below selectric-hover">
+                                                            <div class="selectric-hide-select">
+                                                                <select id="minCarPrice"
+                                                                        title="최저가격을 선택하세요"
+                                                                        class="selectric"
+                                                                        tabindex="-1"
+                                                                        v-for="price of prices"
+                                                                        :key="price.name">
+                                                                    <option value = "price.value">{{price.name}}만원</option>
                                                             </select></div>
                                                             <div class="selectric"><span
-                                                                    class="label">최저가격을 선택하세요</span><b
-                                                                    class="button">▾</b></div>
-                                                            <div class="selectric-items" tabindex="-1">
+                                                                    class="label">최저가격을 선택하세요</span></div>
+                                                            <div class="selectric-items" tabindex="-1" style="width: 220px; height: 300px;">
                                                                 <div class="selectric-scroll">
-                                                                    <ul>
-                                                                        <li data-index="0" class="selected">최저가격을
-                                                                            선택하세요
-                                                                        </li>
-                                                                        <li data-index="1" class="">100만원</li>
-                                                                        <li data-index="2" class="">200만원</li>
-                                                                        <li data-index="3" class="">300만원</li>
-                                                                        <li data-index="4" class="">400만원</li>
-                                                                        <li data-index="5" class="">500만원</li>
-                                                                        <li data-index="6" class="">600만원</li>
-                                                                        <li data-index="7" class="">700만원</li>
-                                                                        <li data-index="8" class="">800만원</li>
-                                                                        <li data-index="9" class="">900만원</li>
-                                                                        <li data-index="10" class="">1,000만원</li>
-                                                                        <li data-index="11" class="">1,100만원</li>
-                                                                        <li data-index="12" class="">1,200만원</li>
-                                                                        <li data-index="13" class="">1,300만원</li>
-                                                                        <li data-index="14" class="">1,400만원</li>
-                                                                        <li data-index="15" class="">1,500만원</li>
-                                                                        <li data-index="16" class="">1,600만원</li>
-                                                                        <li data-index="17" class="">1,700만원</li>
-                                                                        <li data-index="18" class="">1,800만원</li>
-                                                                        <li data-index="19" class="">1,900만원</li>
-                                                                        <li data-index="20" class="">2,000만원</li>
-                                                                        <li data-index="21" class="">2,100만원</li>
-                                                                        <li data-index="22" class="">2,200만원</li>
-                                                                        <li data-index="23" class="">2,300만원</li>
-                                                                        <li data-index="24" class="">2,400만원</li>
-                                                                        <li data-index="25" class="">2,500만원</li>
-                                                                        <li data-index="26" class="">2,600만원</li>
-                                                                        <li data-index="27" class="">2,700만원</li>
-                                                                        <li data-index="28" class="">2,800만원</li>
-                                                                        <li data-index="29" class="">2,900만원</li>
-                                                                        <li data-index="30" class="">3,000만원</li>
-                                                                        <li data-index="31" class="">3,100만원</li>
-                                                                        <li data-index="32" class="">3,200만원</li>
-                                                                        <li data-index="33" class="">3,300만원</li>
-                                                                        <li data-index="34" class="">3,400만원</li>
-                                                                        <li data-index="35" class="">3,500만원</li>
-                                                                        <li data-index="36" class="">3,600만원</li>
-                                                                        <li data-index="37" class="">3,700만원</li>
-                                                                        <li data-index="38" class="">3,800만원</li>
-                                                                        <li data-index="39" class="">3,900만원</li>
-                                                                        <li data-index="40" class="">4,000만원</li>
-                                                                        <li data-index="41" class="">4,100만원</li>
-                                                                        <li data-index="42" class="">4,200만원</li>
-                                                                        <li data-index="43" class="">4,300만원</li>
-                                                                        <li data-index="44" class="">4,400만원</li>
-                                                                        <li data-index="45" class="">4,500만원</li>
-                                                                        <li data-index="46" class="">4,600만원</li>
-                                                                        <li data-index="47" class="">4,700만원</li>
-                                                                        <li data-index="48" class="">4,800만원</li>
-                                                                        <li data-index="49" class="">4,900만원</li>
-                                                                        <li data-index="50" class="">5,000만원</li>
-                                                                        <li data-index="51" class="">5,100만원</li>
-                                                                        <li data-index="52" class="">5,200만원</li>
-                                                                        <li data-index="53" class="">5,300만원</li>
-                                                                        <li data-index="54" class="">5,400만원</li>
-                                                                        <li data-index="55" class="">5,500만원</li>
-                                                                        <li data-index="56" class="">5,600만원</li>
-                                                                        <li data-index="57" class="">5,700만원</li>
-                                                                        <li data-index="58" class="">5,800만원</li>
-                                                                        <li data-index="59" class="">5,900만원</li>
-                                                                        <li data-index="60" class="">6,000만원</li>
-                                                                        <li data-index="61" class="">6,100만원</li>
-                                                                        <li data-index="62" class="">6,200만원</li>
-                                                                        <li data-index="63" class="">6,300만원</li>
-                                                                        <li data-index="64" class="">6,400만원</li>
-                                                                        <li data-index="65" class="">6,500만원</li>
-                                                                        <li data-index="66" class="">6,600만원</li>
-                                                                        <li data-index="67" class="">6,700만원</li>
-                                                                        <li data-index="68" class="">6,800만원</li>
-                                                                        <li data-index="69" class="">6,900만원</li>
-                                                                        <li data-index="70" class="">7,000만원</li>
-                                                                        <li data-index="71" class="">7,100만원</li>
-                                                                        <li data-index="72" class="">7,200만원</li>
-                                                                        <li data-index="73" class="">7,300만원</li>
-                                                                        <li data-index="74" class="">7,400만원</li>
-                                                                        <li data-index="75" class="">7,500만원</li>
-                                                                        <li data-index="76" class="">7,600만원</li>
-                                                                        <li data-index="77" class="">7,700만원</li>
-                                                                        <li data-index="78" class="">7,800만원</li>
-                                                                        <li data-index="79" class="">7,900만원</li>
-                                                                        <li data-index="80" class="">8,000만원</li>
-                                                                        <li data-index="81" class="">8,100만원</li>
-                                                                        <li data-index="82" class="">8,200만원</li>
-                                                                        <li data-index="83" class="">8,300만원</li>
-                                                                        <li data-index="84" class="">8,400만원</li>
-                                                                        <li data-index="85" class="">8,500만원</li>
-                                                                        <li data-index="86" class="">8,600만원</li>
-                                                                        <li data-index="87" class="">8,700만원</li>
-                                                                        <li data-index="88" class="">8,800만원</li>
-                                                                        <li data-index="89" class="">8,900만원</li>
-                                                                        <li data-index="90" class="">9,000만원</li>
-                                                                        <li data-index="91" class="">9,100만원</li>
-                                                                        <li data-index="92" class="">9,200만원</li>
-                                                                        <li data-index="93" class="">9,300만원</li>
-                                                                        <li data-index="94" class="">9,400만원</li>
-                                                                        <li data-index="95" class="">9,500만원</li>
-                                                                        <li data-index="96" class="">9,600만원</li>
-                                                                        <li data-index="97" class="">9,700만원</li>
-                                                                        <li data-index="98" class="">9,800만원</li>
-                                                                        <li data-index="99" class="">9,900만원</li>
-                                                                        <li data-index="100" class="last">10,000만원</li>
+                                                                    <ul v-for="price of prices" :key="price.name">
+                                                                        <li data-index="price.index" class="">{{price.name}}만원</li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
                                                             <input class="selectric-input" tabindex="0"></div>
                                                     </div>
                                                     <div class="searchr3">
-                                                        <div class="selectric-wrapper selectric-selectric">
-                                                            <div class="selectric-hide-select"><select id="maxCarPrice"
-                                                                                                       title="최고가격을 선택하세요"
-                                                                                                       class="selectric"
-                                                                                                       tabindex="-1">
-                                                                <option value="" selected="">최고가격을 선택하세요</option>
-
-                                                                <option value="100">100만원</option>
-
-                                                                <option value="200">200만원</option>
-
-                                                                <option value="300">300만원</option>
-
-                                                                <option value="400">400만원</option>
-
-                                                                <option value="500">500만원</option>
-
-                                                                <option value="600">600만원</option>
-
-                                                                <option value="700">700만원</option>
-
-                                                                <option value="800">800만원</option>
-
-                                                                <option value="900">900만원</option>
-
-                                                                <option value="1000">1,000만원</option>
-
-                                                                <option value="1100">1,100만원</option>
-
-                                                                <option value="1200">1,200만원</option>
-
-                                                                <option value="1300">1,300만원</option>
-
-                                                                <option value="1400">1,400만원</option>
-
-                                                                <option value="1500">1,500만원</option>
-
-                                                                <option value="1600">1,600만원</option>
-
-                                                                <option value="1700">1,700만원</option>
-
-                                                                <option value="1800">1,800만원</option>
-
-                                                                <option value="1900">1,900만원</option>
-
-                                                                <option value="2000">2,000만원</option>
-
-                                                                <option value="2100">2,100만원</option>
-
-                                                                <option value="2200">2,200만원</option>
-
-                                                                <option value="2300">2,300만원</option>
-
-                                                                <option value="2400">2,400만원</option>
-
-                                                                <option value="2500">2,500만원</option>
-
-                                                                <option value="2600">2,600만원</option>
-
-                                                                <option value="2700">2,700만원</option>
-
-                                                                <option value="2800">2,800만원</option>
-
-                                                                <option value="2900">2,900만원</option>
-
-                                                                <option value="3000">3,000만원</option>
-
-                                                                <option value="3100">3,100만원</option>
-
-                                                                <option value="3200">3,200만원</option>
-
-                                                                <option value="3300">3,300만원</option>
-
-                                                                <option value="3400">3,400만원</option>
-
-                                                                <option value="3500">3,500만원</option>
-
-                                                                <option value="3600">3,600만원</option>
-
-                                                                <option value="3700">3,700만원</option>
-
-                                                                <option value="3800">3,800만원</option>
-
-                                                                <option value="3900">3,900만원</option>
-
-                                                                <option value="4000">4,000만원</option>
-
-                                                                <option value="4100">4,100만원</option>
-
-                                                                <option value="4200">4,200만원</option>
-
-                                                                <option value="4300">4,300만원</option>
-
-                                                                <option value="4400">4,400만원</option>
-
-                                                                <option value="4500">4,500만원</option>
-
-                                                                <option value="4600">4,600만원</option>
-
-                                                                <option value="4700">4,700만원</option>
-
-                                                                <option value="4800">4,800만원</option>
-
-                                                                <option value="4900">4,900만원</option>
-
-                                                                <option value="5000">5,000만원</option>
-
-                                                                <option value="5100">5,100만원</option>
-
-                                                                <option value="5200">5,200만원</option>
-
-                                                                <option value="5300">5,300만원</option>
-
-                                                                <option value="5400">5,400만원</option>
-
-                                                                <option value="5500">5,500만원</option>
-
-                                                                <option value="5600">5,600만원</option>
-
-                                                                <option value="5700">5,700만원</option>
-
-                                                                <option value="5800">5,800만원</option>
-
-                                                                <option value="5900">5,900만원</option>
-
-                                                                <option value="6000">6,000만원</option>
-
-                                                                <option value="6100">6,100만원</option>
-
-                                                                <option value="6200">6,200만원</option>
-
-                                                                <option value="6300">6,300만원</option>
-
-                                                                <option value="6400">6,400만원</option>
-
-                                                                <option value="6500">6,500만원</option>
-
-                                                                <option value="6600">6,600만원</option>
-
-                                                                <option value="6700">6,700만원</option>
-
-                                                                <option value="6800">6,800만원</option>
-
-                                                                <option value="6900">6,900만원</option>
-
-                                                                <option value="7000">7,000만원</option>
-
-                                                                <option value="7100">7,100만원</option>
-
-                                                                <option value="7200">7,200만원</option>
-
-                                                                <option value="7300">7,300만원</option>
-
-                                                                <option value="7400">7,400만원</option>
-
-                                                                <option value="7500">7,500만원</option>
-
-                                                                <option value="7600">7,600만원</option>
-
-                                                                <option value="7700">7,700만원</option>
-
-                                                                <option value="7800">7,800만원</option>
-
-                                                                <option value="7900">7,900만원</option>
-
-                                                                <option value="8000">8,000만원</option>
-
-                                                                <option value="8100">8,100만원</option>
-
-                                                                <option value="8200">8,200만원</option>
-
-                                                                <option value="8300">8,300만원</option>
-
-                                                                <option value="8400">8,400만원</option>
-
-                                                                <option value="8500">8,500만원</option>
-
-                                                                <option value="8600">8,600만원</option>
-
-                                                                <option value="8700">8,700만원</option>
-
-                                                                <option value="8800">8,800만원</option>
-
-                                                                <option value="8900">8,900만원</option>
-
-                                                                <option value="9000">9,000만원</option>
-
-                                                                <option value="9100">9,100만원</option>
-
-                                                                <option value="9200">9,200만원</option>
-
-                                                                <option value="9300">9,300만원</option>
-
-                                                                <option value="9400">9,400만원</option>
-
-                                                                <option value="9500">9,500만원</option>
-
-                                                                <option value="9600">9,600만원</option>
-
-                                                                <option value="9700">9,700만원</option>
-
-                                                                <option value="9800">9,800만원</option>
-
-                                                                <option value="9900">9,900만원</option>
-
-                                                                <option value="10000">10,000만원</option>
-
+                                                        <div id="priceDiv2" @click="searchKeyClick(`priceDiv2`)"
+                                                             class="selectric-wrapper selectric-selectric selectric-below selectric-hover">
+                                                            <div class="selectric-hide-select">
+                                                                <select id="maxCarPrice"
+                                                                        title="최고가격을 선택하세요"
+                                                                        class="selectric"
+                                                                        tabindex="-1"
+                                                                        v-for="price of prices"
+                                                                        :key="price.name">
+                                                                    <option value = "price.value">{{price.name}}만원</option>
                                                             </select></div>
                                                             <div class="selectric"><span
-                                                                    class="label">최고가격을 선택하세요</span><b
-                                                                    class="button">▾</b></div>
-                                                            <div class="selectric-items" tabindex="-1">
+                                                                    class="label">최고가격을 선택하세요</span></div>
+                                                            <div class="selectric-items" tabindex="-1" style="width: 220px; height: 300px;">
                                                                 <div class="selectric-scroll">
-                                                                    <ul>
-                                                                        <li data-index="0" class="selected">최고가격을
-                                                                            선택하세요
-                                                                        </li>
-                                                                        <li data-index="1" class="">100만원</li>
-                                                                        <li data-index="2" class="">200만원</li>
-                                                                        <li data-index="3" class="">300만원</li>
-                                                                        <li data-index="4" class="">400만원</li>
-                                                                        <li data-index="5" class="">500만원</li>
-                                                                        <li data-index="6" class="">600만원</li>
-                                                                        <li data-index="7" class="">700만원</li>
-                                                                        <li data-index="8" class="">800만원</li>
-                                                                        <li data-index="9" class="">900만원</li>
-                                                                        <li data-index="10" class="">1,000만원</li>
-                                                                        <li data-index="11" class="">1,100만원</li>
-                                                                        <li data-index="12" class="">1,200만원</li>
-                                                                        <li data-index="13" class="">1,300만원</li>
-                                                                        <li data-index="14" class="">1,400만원</li>
-                                                                        <li data-index="15" class="">1,500만원</li>
-                                                                        <li data-index="16" class="">1,600만원</li>
-                                                                        <li data-index="17" class="">1,700만원</li>
-                                                                        <li data-index="18" class="">1,800만원</li>
-                                                                        <li data-index="19" class="">1,900만원</li>
-                                                                        <li data-index="20" class="">2,000만원</li>
-                                                                        <li data-index="21" class="">2,100만원</li>
-                                                                        <li data-index="22" class="">2,200만원</li>
-                                                                        <li data-index="23" class="">2,300만원</li>
-                                                                        <li data-index="24" class="">2,400만원</li>
-                                                                        <li data-index="25" class="">2,500만원</li>
-                                                                        <li data-index="26" class="">2,600만원</li>
-                                                                        <li data-index="27" class="">2,700만원</li>
-                                                                        <li data-index="28" class="">2,800만원</li>
-                                                                        <li data-index="29" class="">2,900만원</li>
-                                                                        <li data-index="30" class="">3,000만원</li>
-                                                                        <li data-index="31" class="">3,100만원</li>
-                                                                        <li data-index="32" class="">3,200만원</li>
-                                                                        <li data-index="33" class="">3,300만원</li>
-                                                                        <li data-index="34" class="">3,400만원</li>
-                                                                        <li data-index="35" class="">3,500만원</li>
-                                                                        <li data-index="36" class="">3,600만원</li>
-                                                                        <li data-index="37" class="">3,700만원</li>
-                                                                        <li data-index="38" class="">3,800만원</li>
-                                                                        <li data-index="39" class="">3,900만원</li>
-                                                                        <li data-index="40" class="">4,000만원</li>
-                                                                        <li data-index="41" class="">4,100만원</li>
-                                                                        <li data-index="42" class="">4,200만원</li>
-                                                                        <li data-index="43" class="">4,300만원</li>
-                                                                        <li data-index="44" class="">4,400만원</li>
-                                                                        <li data-index="45" class="">4,500만원</li>
-                                                                        <li data-index="46" class="">4,600만원</li>
-                                                                        <li data-index="47" class="">4,700만원</li>
-                                                                        <li data-index="48" class="">4,800만원</li>
-                                                                        <li data-index="49" class="">4,900만원</li>
-                                                                        <li data-index="50" class="">5,000만원</li>
-                                                                        <li data-index="51" class="">5,100만원</li>
-                                                                        <li data-index="52" class="">5,200만원</li>
-                                                                        <li data-index="53" class="">5,300만원</li>
-                                                                        <li data-index="54" class="">5,400만원</li>
-                                                                        <li data-index="55" class="">5,500만원</li>
-                                                                        <li data-index="56" class="">5,600만원</li>
-                                                                        <li data-index="57" class="">5,700만원</li>
-                                                                        <li data-index="58" class="">5,800만원</li>
-                                                                        <li data-index="59" class="">5,900만원</li>
-                                                                        <li data-index="60" class="">6,000만원</li>
-                                                                        <li data-index="61" class="">6,100만원</li>
-                                                                        <li data-index="62" class="">6,200만원</li>
-                                                                        <li data-index="63" class="">6,300만원</li>
-                                                                        <li data-index="64" class="">6,400만원</li>
-                                                                        <li data-index="65" class="">6,500만원</li>
-                                                                        <li data-index="66" class="">6,600만원</li>
-                                                                        <li data-index="67" class="">6,700만원</li>
-                                                                        <li data-index="68" class="">6,800만원</li>
-                                                                        <li data-index="69" class="">6,900만원</li>
-                                                                        <li data-index="70" class="">7,000만원</li>
-                                                                        <li data-index="71" class="">7,100만원</li>
-                                                                        <li data-index="72" class="">7,200만원</li>
-                                                                        <li data-index="73" class="">7,300만원</li>
-                                                                        <li data-index="74" class="">7,400만원</li>
-                                                                        <li data-index="75" class="">7,500만원</li>
-                                                                        <li data-index="76" class="">7,600만원</li>
-                                                                        <li data-index="77" class="">7,700만원</li>
-                                                                        <li data-index="78" class="">7,800만원</li>
-                                                                        <li data-index="79" class="">7,900만원</li>
-                                                                        <li data-index="80" class="">8,000만원</li>
-                                                                        <li data-index="81" class="">8,100만원</li>
-                                                                        <li data-index="82" class="">8,200만원</li>
-                                                                        <li data-index="83" class="">8,300만원</li>
-                                                                        <li data-index="84" class="">8,400만원</li>
-                                                                        <li data-index="85" class="">8,500만원</li>
-                                                                        <li data-index="86" class="">8,600만원</li>
-                                                                        <li data-index="87" class="">8,700만원</li>
-                                                                        <li data-index="88" class="">8,800만원</li>
-                                                                        <li data-index="89" class="">8,900만원</li>
-                                                                        <li data-index="90" class="">9,000만원</li>
-                                                                        <li data-index="91" class="">9,100만원</li>
-                                                                        <li data-index="92" class="">9,200만원</li>
-                                                                        <li data-index="93" class="">9,300만원</li>
-                                                                        <li data-index="94" class="">9,400만원</li>
-                                                                        <li data-index="95" class="">9,500만원</li>
-                                                                        <li data-index="96" class="">9,600만원</li>
-                                                                        <li data-index="97" class="">9,700만원</li>
-                                                                        <li data-index="98" class="">9,800만원</li>
-                                                                        <li data-index="99" class="">9,900만원</li>
-                                                                        <li data-index="100" class="last">10,000만원</li>
+                                                                    <ul v-for="price of prices" :key="price.name">
+                                                                         <li data-index="price.index" class="">{{price.name}}만원</li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -961,21 +365,9 @@
                                         </div>
                                     </div>
                                     <div class="tab_want3 tab_want_menu" data-item="tab3">
-                                        <h3><a href="javascript:;">관심차량등록알림</a></h3>
+                                        <h3><router-link to="/searchMain">정해진게 없어요</router-link></h3>
                                     </div>
-                                    <!--검색tab3 내용-->
-                                    <div id="divTabWant3" class="searchcont3 divTabWantGroup" style="display:none">
-                                        <ul>
-                                            <li><span class="tit">일일이 차량찾기 힘드시죠?</span><br>관심차량등록알림을 신청하면 해당차량 등록시 문자알림을
-                                                드립니다.
-                                            </li>
 
-                                            <li class="search_btn" id="divBtnSearchWithHelp"><a href="javascript:;">관심차량등록알림
-                                                신청하기</a><span class="counsel">최근 신청수 <em
-                                                    id="emRecentHelpCount">총475대</em> <em class="bar">&nbsp;ㅣ&nbsp;</em> 총 신청수 <em
-                                                    id="emTotalHelpCount">총15,249대</em></span></li>
-                                        </ul>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1651,6 +1043,7 @@
         data(){
             return{
                 searchKeyWord : ''
+
             }
         },
         methods : {
@@ -1658,24 +1051,31 @@
             wantModel(){
                 const divTabWant1 = document.getElementById("divTabWant1")
                 const divTabWant2 = document.getElementById("divTabWant2")
+                const tab1 = document.getElementById("tab1")
+                const tab2 = document.getElementById("tab2")
+                tab1.className = "on"
+                tab2.className = ""
                 divTabWant1.style.display = "block"
                 divTabWant2.style.display = "none"
             },
             haveBudget(){
                 const divTabWant1 = document.getElementById("divTabWant1")
                 const divTabWant2 = document.getElementById("divTabWant2")
+                const tab1 = document.getElementById("tab1")
+                const tab2 = document.getElementById("tab2")
+                tab1.className = ""
+                tab2.className = "on"
                 divTabWant1.style.display = "none"
                 divTabWant2.style.display = "block"
+
             },
             searchBoxOn(){
                 const searchBox = document.getElementById("searchBox")
                 searchBox.style.display = "block"
             },
-            searchBoxOff(){
-                const searchBox = document.getElementById("searchBox")
-                const stringMatch = document.getElementById("stringMatch")
+            searchBoxOff(BoxID){
+                const searchBox = document.getElementById(BoxID)
                 searchBox.style.display = "none"
-                stringMatch.style.display = "none"
             },
             stringMatchOn(){
                 const stringMatch = document.getElementById("stringMatch")
@@ -1688,59 +1088,43 @@
                     searchBox.style.display = "block"
                 }
             },
-            korCar(){
-                const korCar = document.getElementById("korCar")
-                const impCar = document.getElementById("impCar")
+            korCar(korCarID, impCarID){
+                const korCar = document.getElementById(korCarID)
+                const impCar = document.getElementById(impCarID)
                 korCar.className = "on"
                 impCar.className = ""
             },
-            impCar(){
-                const korCar = document.getElementById("korCar")
-                const impCar = document.getElementById("impCar")
+            impCar(korCarID, impCarID){
+                const korCar = document.getElementById(korCarID)
+                const impCar = document.getElementById(impCarID)
                 korCar.className = ""
                 impCar.className = "on"
             },
-            searchKey1MouseOver(){
-                const searchKey1 = document.getElementById("searchKey1")
-                searchKey1.className = "selectric-wrapper selectric-selectric selectric-below selectric-hover"
+            searchKeyMouseOver(searchKeyID){
+                const searchKey = document.getElementById(searchKeyID)
+                searchKey.className = "selectric-wrapper selectric-selectric selectric-below selectric-hover"
             },
-            SearchKey1Click(){
-                const searchKey1 = document.getElementById("searchKey1")
-                if(searchKey1.className === "selectric-wrapper selectric-selectric selectric-below selectric-hover"){
-                    searchKey1.className = "selectric-wrapper selectric-selectric selectric-below selectric-hover selectric-open selectric-focus"
+            searchKeyClick(searchKeyID){
+                const searchKey = document.getElementById(searchKeyID)
+                if(searchKey.className === "selectric-wrapper selectric-selectric selectric-below selectric-hover"){
+                    searchKey.className = "selectric-wrapper selectric-selectric selectric-below selectric-hover selectric-open selectric-focus"
                 }else{
-                    searchKey1.className = "selectric-wrapper selectric-selectric selectric-below selectric-hover"
+                    searchKey.className = "selectric-wrapper selectric-selectric selectric-below selectric-hover"
                 }
             },
-            searchKey2MouseOver(){
-                const searchKey2 = document.getElementById("searchKey2")
-                searchKey2.className = "selectric-wrapper selectric-selectric selectric-below selectric-hover"
-            },
-            SearchKey2Click(){
-                const searchKey2 = document.getElementById("searchKey2")
-                if(searchKey2.className === "selectric-wrapper selectric-selectric selectric-below selectric-hover"){
-                    searchKey2.className = "selectric-wrapper selectric-selectric selectric-below selectric-hover selectric-open selectric-focus"
-                }else{
-                    searchKey2.className = "selectric-wrapper selectric-selectric selectric-below selectric-hover"
-                }
-            },
-            searchKey3MouseOver(){
-                const searchKey3 = document.getElementById("searchKey3")
-                searchKey3.className = "selectric-wrapper selectric-selectric selectric-below selectric-hover"
-            },
-            SearchKey3Click(){
-                const searchKey3 = document.getElementById("searchKey3")
-                if(searchKey3.className === "selectric-wrapper selectric-selectric selectric-below selectric-hover"){
-                    searchKey3.className = "selectric-wrapper selectric-selectric selectric-below selectric-hover selectric-open selectric-focus"
-                }else{
-                    searchKey3.className = "selectric-wrapper selectric-selectric selectric-below selectric-hover"
-                }
-            }
+
         },
         computed : {
             allCount : function(){
                 this.$store.dispatch('cmm/welcome')
                 return this.$store.state.cmm.carAllCount
+            },
+            prices : function(){
+                let list = []
+                for(let i=1;i<=100;i++){
+                    list.push({index : i, value : i*100, name : i*100})
+                }
+                return list
             }
         }
     }
@@ -1755,5 +1139,10 @@
     .mc_wide_searchbox{width:100%;background:#191b1a /*#F1F2F4 url( /resources/images/index/pc_index_visual_1112.jpg) top center no-repeat*/;opacity: 0.97;height:903px;position:relative;display:inline-block; z-index:1; margin-bottom:57px;}
     .mc_wide_searchbox .searchbg{width:100%;background:url( https://www.kcar.com/resources/images/index/search_bg.png) center no-repeat; opacity: 0.97; display:inline-block;}
     .mc_wide_searchbox .searchbg .mc_search{    margin: 0px auto 0 auto; }
+    .mc_search .selectric-items .selectric-scroll {
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
 
 </style>
