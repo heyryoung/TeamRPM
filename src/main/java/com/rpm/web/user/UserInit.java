@@ -1,4 +1,11 @@
 package com.rpm.web.user;
 
-public class UserInit {
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
+
+public class UserInit implements ApplicationRunner {
+    @Override
+    public void run(ApplicationArguments args) throws Exception {
+
+    }
 }

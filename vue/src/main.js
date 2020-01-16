@@ -4,13 +4,14 @@ import router from '@/router'
 import axios from 'axios'
 import {store} from '@/store'
 import vuex from 'vuex'
+import VModal from 'vue-js-modal'
 
 Vue.config.productionTip = false
-
+Vue.use(VModal, { dynamic: true })
 new Vue({
   render: h => h(App),
   router,
   axios,
   store,
-  vuex
+  vuex,
 }).$mount('#app')
