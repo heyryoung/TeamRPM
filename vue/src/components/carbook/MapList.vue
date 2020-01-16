@@ -2,7 +2,8 @@
 
 <div id="wrap">
 	<div class="gis_map" style="margin-top:30px; height: 800px; width: 800px; border: 1px solid black">
-				</div>
+
+	</div>
 	<div class="list">
 		<strong>
 			<span _ngcontent-wjl-c76="" class="search_title_text"><button><router-link to="/stationInfo">S-OIL 서울에너지</router-link></button></span>
