@@ -23,10 +23,10 @@ public class CarsInit implements ApplicationRunner {
         long count = carsRepository.count();
         MakeCarDummyList http = new MakeCarDummyList();
         ObjectMapper jsonMapper = new ObjectMapper();
-        System.out.println("POST로 데이터 가져오기");
         String[] json = null;
         Map<String, Map<String, Object>> map = new HashMap<>();
         if(count==0) {
+            System.out.println("POST로 데이터 가져오기");
             for (int i = 1; i <= 8000;i++){
                 Map<String, String> strJson = new HashMap<>();
                  map = jsonMapper.readValue(
@@ -57,8 +57,9 @@ public class CarsInit implements ApplicationRunner {
                         strJson.get("v_mfr_date"),strJson.get("v_model_grp_cd"),strJson.get("v_center_name"),
                         strJson.get("v_model_grp_nm")
                         ));
+
             }
+            System.out.println("데이터 가져오기 종료.");
         }
-        System.out.println("데이터 가져오기 종료.");
     }
 }
