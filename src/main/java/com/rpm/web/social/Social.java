@@ -30,7 +30,6 @@ public class Social implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userSeq")
     private User userSeq;
-
     @OneToMany(mappedBy = "boardSeq", cascade = CascadeType.ALL,
             orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();

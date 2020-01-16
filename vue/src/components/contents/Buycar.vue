@@ -1,19 +1,12 @@
 <template>
 <div id = "wrap">
-<link rel="shortcut icon" href="https://www.kcar.com/resources/images/common/favicon.ico" type="image/x-icon">
-<link rel="icon" href="https://www.kcar.com/resources/images/common/favicon.ico" type="image/x-icon">
-<link rel="apple-touch-icon-precomposed" href="https://www.kcar.com/resources/images/mobile/common/apple-touch-icon.png">
-<link rel="stylesheet" href="https://www.kcar.com/resources/css/re_import.css?v=20191223103556">
-<link rel="stylesheet" href="https://www.kcar.com/resources/css/plugin/selectric.css?v=20191223103556">
-<link rel="stylesheet" type="text/css" href="https://www.kcar.com/resources/css/plugin/ion.rangeSlider.css">
-<link rel="stylesheet" type="text/css" href="https://www.kcar.com/resources/css/plugin/ion.rangeSlider.skinHTML5.css">
 
 
-<link rel="stylesheet" href="https://www.kcar.com/resources/css/plugin/uniform.css">
-<link rel="stylesheet" href="https://www.kcar.com/resources/css/plugin/jquery.scrollbar.css">
+
+
 <div id="headerNew" class="header_new">
 </div>
-<div id="content" class="sub_content"> 
+<div id="" class="sub_content">
 
 <!-- 여기부터 -->
 <!-- content -->
@@ -104,12 +97,6 @@
 			</div>
 		</div>
 	</div>
-	<div class="cont100per2">
-		<div class="nation1">
-			<span><img src="/resources/images/homeencar/icon/flag_w.png" width="91" height="28" alt="usa, japan, china flag">&nbsp;&nbsp;For foreigner 02-6011-1804</span>
-			<span class="banner"><a href="/homeservice/service_main.do" target="_blank"><img src="/resources/images/homeencar/contents/homeencarservice_banner_ws.jpg" width="457" height="68" alt="eventbanner"></a></span>
-		</div>
-	</div>
 </div>
 <!-- //content -->
 
@@ -117,10 +104,12 @@
 			
 </div>
 </div>
+
+
 </template>
+<script>
 
-			
-
+</script>
 <style>
 #content {width:100%; margin-bottom:30px;font-family:'ngw','ngw2', 'NanumGothic','나눔고딕', sans-serif, Apple SD Gothic Neo;background-color:#fff;}
 </style>

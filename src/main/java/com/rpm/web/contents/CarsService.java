@@ -1,4 +1,4 @@
 package com.rpm.web.contents;
 
-public class ContentsInit {
+public interface CarsService {
 }
