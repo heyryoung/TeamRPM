@@ -7,6 +7,7 @@ import org.springframework.util.Assert;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+
 @Component @Lazy @Entity
 @ToString
 @Getter @Setter(AccessLevel.PUBLIC)
@@ -23,4 +24,9 @@ public class Thumb implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userSeq")
     private User userSeq;
+
 }
+
+
+}
+

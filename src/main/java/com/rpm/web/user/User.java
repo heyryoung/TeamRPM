@@ -17,6 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @Table(name="USER")
 public class User implements Serializable {
+ 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "USERSEQ") @NotNull private Long userSeq;
@@ -27,11 +28,13 @@ public class User implements Serializable {
     @Column(name = "GENDER")  private String gender;
     @Column(name = "BIRTHMONTH")  private String birthMonth;
     @Column(name = "REGION")  private String region;
+ 
     @OneToMany(mappedBy = "userSeq",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
     private List<Social> socials = new ArrayList<>();
 
+ 
     @OneToMany(mappedBy = "userSeq",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
@@ -41,6 +44,11 @@ public class User implements Serializable {
     @Builder
     private User(String userid, String passwd, String name, String email,
                  String gender, String birthMonth, String region) {
+ 
+    @Builder
+    private User(String userid, String passwd, String name, String email,
+                   String gender, String birthMonth, String region) {
+ 
         Assert.hasText(userid, "userid must not be empty");
         Assert.hasText(passwd, "passwd must not be empty");
         Assert.hasText(name, "name must not be empty");

@@ -8,4 +8,6 @@ public interface UserRepository extends CrudRepository<User, Long> {
     public User findByUseridAndPasswd(String id, String pw);
 
 
+public interface UserRepository extends CrudRepository<User,Long> {
+
 }

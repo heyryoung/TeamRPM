@@ -13,6 +13,7 @@ import java.io.Serializable;
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @Table(name="COMMENT")
 public class Comment implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "COMMENTSEQ") @NotNull private Long commentSeq;
