@@ -19,6 +19,7 @@ public class UserController {
 
     @PostMapping("/login")
     public HashMap<String, Object> login(@RequestBody User param){
+        printer.accept("in the userCon");
         HashMap<String, Object> map = new HashMap<>();
         user = userRepository.findByUseridAndPasswd(param.getUserid(), param.getPasswd());
         if(user != null){

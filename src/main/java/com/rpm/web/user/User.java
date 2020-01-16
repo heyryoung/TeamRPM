@@ -41,9 +41,7 @@ public class User implements Serializable {
     private List<Mycar> mycars = new ArrayList<>();
 
 
-    @Builder
-    private User(String userid, String passwd, String name, String email,
-                 String gender, String birthMonth, String region) {
+
  
     @Builder
     private User(String userid, String passwd, String name, String email,

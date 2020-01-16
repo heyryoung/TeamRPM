@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const state = {
     member : {},
-    isAuth: '',
+    isAuth: false,
 
 }
 const getters = {
@@ -11,27 +11,37 @@ const getters = {
 
 }
 const actions = {
-    login({commit}, {context, id, pw}){
-        alert(`${context},${id},${pw}` )
-        let url = `${context}/login`
+    login({commit}, {context, userid, passwd}){
+        alert(`${context},${userid},${passwd}` )
+        let url = `${context}login`
         let headers ={  'authorization': 'JWT fefege..',
             'Accept' : 'application/json',
             'Content-Type': 'application/json'}
-        axios.post(url, {id,pw}, headers)
+        axios.post(url, {userid,passwd}, headers)
             .then(({data})=>{
                 alert(data.isAuth.toString())
-                commit('LOGIN' ,data)
+                commit('commitLogin' ,data)
             })
             .catch(()=>{
                 alert('axios fail')
 
             })
+    },
+    logout({commit}){
+        commit('commitLogout')
+
     }
 }
 const mutations = {
-    LOGIN(state, data){
-        state.isAuth = data.isAuth
+    commitLogin(state, data){
+        state.isAuth = true
         state.member = data.member
+
+
+    },
+    commitLogout(state){
+        state.isAuth = false
+        state.member  = null
 
     }
 }

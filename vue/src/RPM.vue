@@ -28,7 +28,7 @@
                             <router-link to="/join">회원가입</router-link>
                             <router-link to="/searchmain">검색창</router-link>
                             <router-link to="/product">제품</router-link>
-                            <router-link to="/mypage">마이페이지</router-link>
+                            <router-link v-if="this.$store.state.isAuth==true" to="/mypage">마이페이지</router-link>
                             <router-link to="/seencar">최근 본 차량(비교함)</router-link>
                             <router-link to="/mapList">주유소 지도</router-link>
                             <router-link to="/buycar">자동차구매 </router-link>
@@ -63,11 +63,19 @@
 
 
 <script>
+
     import {Slide} from 'vue-burger-menu'
     export default {
         name: 'app',
         components: {
             Slide
+
+        },
+        data(){
+            return{
+
+
+            }
         }
     }
 </script>

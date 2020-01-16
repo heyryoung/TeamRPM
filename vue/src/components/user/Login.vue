@@ -13,16 +13,17 @@
 				<h3><img src="https://www.kcar.com/resources/images/common/loginTit.gif" alt="로그인"></h3>
 				<div class="idBox">
 					<label for="input_id" class="loginLabel"><img src="https://www.kcar.com/resources/images/common/login_id.gif" alt="아이디" class="am"></label>
-					<input  v-model="id" type="text" name="i_sMemberId" class="input_id am" id="input_id" value="">&nbsp;&nbsp;
+					<input  v-model="uuid" type="text" name="i_sMemberId" class="input_id am" id="input_id" value="">&nbsp;&nbsp;
 				</div>
 				<div class="paddBox">
 					<label for="input_pass" class="loginLabel"><img src="https://www.kcar.com/resources/images/common/login_pass.gif" alt="패스워드" class="am"></label>
-					<input v-model="pw" type="password" name="i_sPassWord" class="input_pass am" id="input_pass" value="" maxlength="20" onkeydown="fnEnterLogIn(event);">&nbsp;&nbsp;
+					<input v-model="pswd" type="password" name="i_sPassWord" class="input_pass am" id="input_pass" value="" maxlength="20" onkeydown="fnEnterLogIn(event);">&nbsp;&nbsp;
 					<span class="idSave">
 						<input type="checkbox" class="am" id="id_save" name="id_save" value="Y">
+						<h6 v-show="this.redi">가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.</h6>
 						<label for="id_save" class="id_save">아이디 저장</label>
 					</span>
-					<a  @click.prevent="lengthCheck(id, pw)" href=""><img src="https://www.kcar.com/resources/images/common/loginBtn.gif" alt="로그인" class="am"></a>
+					<button  @click.prevent="gologin(uuid, pswd)" href=""><img src="https://www.kcar.com/resources/images/common/loginBtn.gif" alt="로그인" class="am"></button>
 				</div>
 				<div class="findjoin">
 					<a href="/user/idInf.do">아이디 찾기</a> <a href="/user/passInf.do">비밀번호 찾기</a>
@@ -43,37 +44,38 @@
 </div>
 </template>
 <script>
+
 	export default {
 		data(){
 			return {
 				ctx: this.$store.state.cmm.context,
 
+				redi: false
+
+
 			}
 		},
 		methods:{
-			gologin(id, pw){
-
-				this.$store.dispatch('user/login',{id:id, pw:pw, context:this.ctx})
-				.then(()=>{
-					if(this.$store.state.isAuth == 'true'){
-						this.$router.push('/')
-
-					}else{
-						this.$router.push('/login')
-					}
-
-				})
-				.catch()
-			},
-			lengthCheck(i, p){
-				if(i.length <=3 || p.length <=3){
-					alert('다시확인해주세요')
+			gologin(userid, passwd){
+				alert(this.$store.state.login.isAuth)
+				//alert(this.$store.state.isAuth)
+				this.$store.dispatch('user/login',{userid:userid, passwd:passwd, context:this.ctx})
+				if(this.$store.state.getIsAuth()){
+					this.$router.push(`/`)
 
 				}else{
-					this.gologin(i, p)
+					this.redi = true
 
 				}
 
+
+			},
+			lengthCheck(i, p) {
+				if (i.length >= 4 || p.length >= 4) {
+					this.gologin(i, p)
+
+
+				}
 			}
 
 

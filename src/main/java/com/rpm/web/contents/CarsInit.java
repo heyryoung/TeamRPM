@@ -27,7 +27,7 @@ public class CarsInit implements ApplicationRunner {
         String[] json = null;
         Map<String, Map<String, Object>> map = new HashMap<>();
         if(count==0) {
-            for (int i = 1; i <= 8000;i++){
+          /*  for (int i = 1; i <= 8000;i++){
                 Map<String, String> strJson = new HashMap<>();
                  map = jsonMapper.readValue(
                         http.sendPost("https://www.kcar.com/search/api/getCarSearchWithCondition.do", String.valueOf(i))
@@ -41,7 +41,7 @@ public class CarsInit implements ApplicationRunner {
                         strJson.put(json[j].substring(0,json[j].indexOf("=")).trim(),json[j].substring(json[j].indexOf("=")+1));
                     }
                 }
-                carsRepository.save(new Cars(strJson.get("v_carcd"),
+               carsRepository.save(new Cars(strJson.get("v_carcd"),
                         strJson.get("v_optioncd"),strJson.get("v_categorycd"),strJson.get("v_center_code"),
                         strJson.get("v_middle_img"),strJson.get("v_elan_path"),strJson.get("v_exterior_colorcd"),
                         strJson.get("v_center_region"),strJson.get("v_ecc_reg_dtm"),strJson.get("v_begin_year"),
@@ -57,7 +57,7 @@ public class CarsInit implements ApplicationRunner {
                         strJson.get("v_mfr_date"),strJson.get("v_model_grp_cd"),strJson.get("v_center_name"),
                         strJson.get("v_model_grp_nm")
                         ));
-            }
+            }*/
         }
         System.out.println("데이터 가져오기 종료.");
     }
