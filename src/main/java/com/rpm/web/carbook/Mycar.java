@@ -21,15 +21,20 @@ import java.util.List;
 public class Mycar implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "MYCARSEQ")@NotNull
+    @Column(name = "MYCARSEQ")
+    @NotNull
     private long mycarSeq;
-    @Column(name = "CARCODE")@NotNull
+    @Column(name = "CARCODE")
+    @NotNull
     private String carCode;
-    @Column(name = "YEAR")@NotNull
+    @Column(name = "YEAR")
+    @NotNull
     private String year;
-    @Column(name = "FUELTYPE")@NotNull
+    @Column(name = "FUELTYPE")
+    @NotNull
     private String fuelType;
-    @Column(name = "DISTANCE")@NotNull
+    @Column(name = "DISTANCE")
+    @NotNull
     private String distance;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -42,15 +47,6 @@ public class Mycar implements Serializable {
     @OneToOne
     @JoinColumn(name = "serviceSeq")
     private ServiceRecord serviceRecord;
-
-
-
-
-
-
-
-
-
 
 
     @Builder
