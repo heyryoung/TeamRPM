@@ -21,7 +21,7 @@
 				<tr>
 					<th><span class="org">*</span> <label for="i_sMemberId">아이디</label></th>
 					<td colspan="3">
-						<input type="text" v-model="userid" @keyup="IdCheck" maxlength="12" id="i_sMemberId" class="user_input02" value="">
+						<input type="text" v-model="userid" @keyup="idCheck" maxlength="12" id="i_sMemberId" class="user_input02" value="">
 						<b class="user_num_check mt5" id="id_result">{{idCheckmsg}}</b>
 						<p class="mt5" >* 4~12이내  영문, 숫자 혼합</p>
 					</td>
@@ -36,7 +36,7 @@
 				<tr>
 					<th><span class="org">*</span> <label for="i_sPassWord2">비밀번호 확인</label></th>
 					<td colspan="3"><input type="password" v-model="passwd2" id="i_sPassWord2" maxlength="20" class="user_input02" value="">
-						<b class="user_num_check mt5" v-if="1<passwd.length && passwd.length<=8">{{passwdCheck}}</b>
+						<b class="user_num_check mt5" v-if="1<passwd.length && passwd.length<8">{{passwdCheck}}</b>
 						<b class="user_num_check mt5" v-show="passwd!=passwd2">{{passwdCheck2}}</b>
 					</td>
 
@@ -48,7 +48,6 @@
 						<input type="text" v-model="email1" id="i_sEmail1" title="이메일 아이디" class="user_input05 am" value="">
 						@
 						<input type="text" v-model="email2" id="i_sEmail2" title="이메일 도메인" class="user_input05 am" placeholder="직접입력">
-						<div class="select open mr">
 							<select v-model="email2" id="domain">
 									<option value="직접입력">직접입력</option>
 									<option value="daum.net">daum.net</option>
@@ -71,7 +70,6 @@
 									<option value="hanmail.net">hanmail.net</option>
 									<option value="kebi.com">kebi.com</option>
 							</select>
-						</div>
 					</td>
 				</tr>
 			</tbody></table>
@@ -93,41 +91,45 @@
 				<tr>
 					<th>생년월</th>
 					<td colspan="3">
-						<input type="text" v-model="bYear" id="year" maxlength="4" class="user_input02 " value="" placeholder="예시) 1997" onkeyup="userEvent.fnBirth();"> &nbsp;<span>년 </span><span class="pr15"></span>
-						<input type="text" v-model="bMonth" id="month" maxlength="2" class="user_input02 am" value="" placeholder="예시) 12" onkeyup="userEvent.fnBirth();"> &nbsp;<span>월  </span>
-					</td>
+						<input type="text" v-model="bYear" id="year" maxlength="4" class="user_input02 " value="" placeholder="예시) 1997" @keyup="yearCheck"> &nbsp;
+                        <span>년 </span>
+                        <span class="pr15"></span>
+						<input type="text" v-model="bMonth" id="month" maxlength="2" class="user_input02 am" value="" placeholder="예시) 12" @keyup="monthCheck"> &nbsp;
+                        <span>월  </span>
+                        <b class="user_num_check mt5">{{bmsg}} {{bmmsg}}</b>
+                    </td>
 
 				</tr>
 				<tr>
 					<th>지역 </th>
 					<td colspan="3">
 						<select style="width:130px" v-model="region" id="i_sUserRegion">
-							<option value="">지역을 선택하세요  </option>
-								<option value="010">서울</option>
-								<option value="020">인천</option>
-								<option value="030">대전</option>
-								<option value="040">대구</option>
-								<option value="050">광주</option>
-								<option value="060">부산</option>
-								<option value="070">울산</option>
-								<option value="080">세종</option>
-								<option value="090">경기</option>
-								<option value="100">강원</option>
-								<option value="110">경남</option>
-								<option value="120">경북</option>
-								<option value="130">전남</option>
-								<option value="140">전북</option>
-								<option value="150">충남</option>
-								<option value="160">충북</option>
-								<option value="170">제주</option>
-						</select>
+                            <option value="">지역을 선택하세요  </option>
+                            <option value="서울">서울</option>
+                            <option value="인천">인천</option>
+                            <option value="대전">대전</option>
+                            <option value="대구">대구</option>
+                            <option value="광주">광주</option>
+                            <option value="부산">부산</option>
+                            <option value="울산">울산</option>
+                            <option value="세종">세종</option>
+                            <option value="경기">경기</option>
+                            <option value="강원">강원</option>
+                            <option value="경남">경남</option>
+                            <option value="경북">경북</option>
+                            <option value="전남">전남</option>
+                            <option value="전북">전북</option>
+                            <option value="충남">충남</option>
+                            <option value="충북">충북</option>
+                            <option value="제주">제주</option>
+                        </select>
 					</td>
 				</tr>
 			</tbody></table>
 		</div>
 		<div class="btn_formbts">
-			<a href="#" @click="join" class="btn_form_r"><b>회원가입</b></a>
-			<a href="#" @click="modal" class="btn_form_g"><b>취소</b></a>
+			<a @click.prevent="join" class="btn_form_r"><b>회원가입</b></a>
+			<a @click.prevent="modal" class="btn_form_g"><b>취소</b></a>
 			<modals-container />
 		</div>
 
@@ -155,6 +157,10 @@ export default {
 			gender:'',
 			bYear:'',
 			bMonth:'',
+            yearcheck:'',
+            monthcheck:'',
+            bmsg:'',
+            bmmsg:'',
 			birthMonth:'',
 			region:''
         }
@@ -162,10 +168,25 @@ export default {
 	computed : {
 		idChecklength(){
 			return this.userid.length
-		}
+		},
+        yeartrue(){
+            if(this.bYear>1900 && this.bYear<2021){
+                return true
+            }else{
+                return false
+            }
+        },
+        monthtrue(){
+            if(this.bMonth<13 && this.bMonth>0){
+                return true
+            }else{
+                return false
+            }
+        }
+
 	},
 	methods : {
-		IdCheck() {
+        idCheck() {
 			let url = `${this.context}/idCheck`
 			let data = {
 				userid: this.userid,
@@ -175,28 +196,43 @@ export default {
 				'Accept': 'application/json',
 				'Content-Type': 'application/json'
 			}
-			if(this.idChecklength<4){
-				this.idCheckmsg = "아이디가 너무 짧습니다."
+			if(this.idChecklength>0 && this.idChecklength<4) {
+                this.idCheckmsg = "아이디가 너무 짧습니다."
+            }else if(this.idChecklength==0){
+                this.idCheckmsg = ''
 			}else if(this.idChecklength>=4){
 				axios
 				.post(url, data, headers)
 				.then(res => {
 					if (res.data.msg === "SUCCESS") {
 						this.idCheckmsg= "사용가능한 아이디입니다."
-						this.IdCheck()
 					} else {
 						this.idCheckmsg= "중복된 아이디가 있습니다."
-						this.IdCheck()
 					}
-				})
+                })
 				.catch(() => {
 					alert(`IdCheck axios Error`)
 				})
 			}
 		},
+        yearCheck(){
+            if(this.yeartrue){
+                this.bmsg = ''
+            }else{
+                this.bmsg ='생년을 확인해주세요'
+            }
+        },
+        monthCheck(){
+            if(this.monthtrue){
+                this.bmmsg = ''
+            }else{
+                this.bmmsg ='생월을 확인해주세요'
+            }
+        },
 		join(){
 			this.email = this.email1+"@"+this.email2
-			if(this.idCheckmsg=== "사용가능한 아이디입니다." && this.passwd==this.passwd2){
+			if(this.idCheckmsg === "사용가능한 아이디입니다." && this.passwd==this.passwd2 &&
+                this.email1!='' && this.email2!='' && this.name!=''){
 				let url = `${this.context}/join`
 				let data = {
 					userid : this.userid,
@@ -212,22 +248,20 @@ export default {
 					'Accept' : 'application/json',
 					'Content-Type': 'application/json'
 				}
-				if(this.userid ==null || this.passwd ==null || this.email ==null || this.name ==null){
-					alert(`필수 입력값이 없습니다`)
-				}else{
-					axios
-							.post(url, data, headers)
-							.then(res=>{
-								if(res.data.msg=="SUCCESS"){
-									alert(`RPM의 가족이 되신 것을 환영합니다. 로그인해주세요.`)
-									this.$router.push({path : '/login'})
-								}
-							})
-							.catch(()=>{
-								alert(`join axios Error`)
-							})
-				}
-			}
+                axios
+                    .post(url, data, headers)
+                    .then(res=>{
+                        if(res.data.msg=="SUCCESS"){
+                            alert(`RPM의 가족이 되신 것을 환영합니다. 로그인해주세요.`)
+                            return this.$router.push({path : '/login'})
+                        }
+                    })
+                    .catch(()=>{
+                        alert(`join axios Error`)
+                    })
+            }else{
+                alert(`필수 입력값을 확인해주세요.`)
+            }
 		},
 		modal(){
 			this.$modal.show(JoinModal,{
@@ -236,7 +270,6 @@ export default {
 					height: 'auto',
 					draggable: true,
 			})
-//취소 모달창 띄우기
 //store로 구현
 		}
 	}
@@ -256,5 +289,19 @@ a {
 }
 a:hover {
 	color:#333; text-decoration:underline;
+}
+.t_user01 select {
+	padding: 2.5px;
+	padding-right: 15px;
+	width:fit-content;
+}
+.btn_form_r b {
+    display: inline-block;
+    height: 20px;
+    margin-right: 10px;
+    padding: 4px 16px 1px 17px;
+    background: #0d124f;
+    border: 1px solid #bebebe;
+    color: #fff;
 }
 </style>

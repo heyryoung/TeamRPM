@@ -1,34 +1,32 @@
 <template>
 <div class="v--modal-box v--modal" style="width: 600px; height: 300px;">
     <div class="modal-header">
-        <slot name="header">
-            회원가입을 취소하시겠습니까???
-        </slot>
+        <div class="msg">
+            <b style="font-size: 20px">회원가입을 취소하시겠습니까?</b>
+        </div>
     </div>
     <div class="example-modal-content">
         <button class="btn" @click="cancelCheck">취소할래요</button>
-        <button class="btn" @click="$emit('close')">가입할래요</button>
+        <button class="btn" @click="$emit('close')">계속할래요</button>
     </div>
     <div class="vue-modal-resizer"></div>
 </div>
 
 </template>
 <script>
-    import {store} from "../../store"
     export default {
         name: "JoinModal",
-        data(){
-        },
         methods:{
             cancelCheck(){
-                store.state.cancel=true
+                this.$router.push({path : '/'})
             }
         }
     }
 </script>
 <style scoped>
     .modal-header{
-
+        height: 200px;
+        margin: 0 auto;
     }
     .v--modal-box {
         position: relative;
@@ -65,11 +63,10 @@
         outline: none;
         background: #fff;
         border: 0;
-        padding: 10px 18px;
+        padding: 8px 12px;
         cursor: pointer;
         color: #fff;
-        box-shadow: 0 4px 8px rgba(32,160,255,.3);
-        background: #4db3ff;
+        background: rgba(9, 38, 70, 0.92);
         font-weight: 600;
         border-radius: 3px;
         min-width: 90px;
@@ -89,7 +86,11 @@
          background: transparent;
          cursor: se-resize;
      }
-    .midium{
-        height:40px;
+    .msg{
+        padding:70px;
+     }
+    .btn{
+        float: right;
+        font-size: 16px;
     }
 </style>
