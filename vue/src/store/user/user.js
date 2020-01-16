@@ -1,11 +1,9 @@
-const state = {
-    context: 'http://localhost:8080/',
-}
+const state = {}
 const getters = {}
 const actions = {}
 const mutations = {}
 export default {
-    name: 'cmm',
+    name: 'user',
     namespaced: true,
     state,
     getters,

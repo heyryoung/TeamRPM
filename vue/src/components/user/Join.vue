@@ -122,7 +122,7 @@
 </template>
 <script>
 	export default {
-/*		name:join,
+		name:join,
 		data(){
 			userId:''
 		},
@@ -130,7 +130,7 @@
 			fnIdCheck(){
 
 			}
-		}*/
+		}
 	}
 
 </script>

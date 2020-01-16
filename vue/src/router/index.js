@@ -2,8 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import SearchMain from '@/components/contents/SearchMain.vue'
 import Home from '@/components/cmm/Home.vue'
-import Join from '@/components/user/Join.vue'
-import Login from '@/components/user/Login.vue'
+import Join from '@/components/cs/Join.vue'
+import Login from '@/components/cs/Login.vue'
 import Product from '@/components/contents/Product.vue'
 import Sale from '@/components/contents/Sale.vue'
 import Buycar from '@/components/contents/Buycar.vue'
@@ -27,11 +27,6 @@ import CustomerList from "@/components/company/customerList.vue"
 import recommendHome from "@/components/recommend/recommendHome.vue"
 import SnsPage from "@/components/social/SnsPage.vue"
 import SnsDetail from "@/components/social/SnsDetail.vue"
-import MycarModify from "@/components/carbook/MycarModify.vue"
-import KakaoMap from "@/components/carbook/KakaoMap.vue"
-
-
-
 
 
 Vue.use(Router)
@@ -57,8 +52,6 @@ export default new Router({
         {path:'/buycarInsertContractorInfomation2', name:'buycarInsertContractorInfomation2', component : BuycarInsertContractorInfomation2},
         {path:'/sns', name:'snspage', component : SnsPage},
         {path:'/snsdetail', name:'snsdetail', component : SnsDetail},
-        {path:'/mycarModify',name:'mycar', component: MycarModify},
-        {path:'/kakaoMap',name:'kakao', component: KakaoMap},
         // 강성조꺼
 
         {path: '/companyHome',name: 'companyHome', component:companyHome,children:
