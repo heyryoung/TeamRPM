@@ -3755,7 +3755,7 @@ export default {
                         v_model_grp_nm: "아반떼"
                     }*/
                 ]
-            }sbdyr0610
+            }
 
         },
         computed:{
