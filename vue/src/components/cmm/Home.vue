@@ -1,19 +1,5 @@
 <template>
     <div>
-        <link rel="stylesheet" type="text/css"  href="css/re_import.css">
-        <link rel="stylesheet" type="text/css" href="css/plugin/ion.rangeSlider.css">
-        <link rel="stylesheet" type="text/css"
-              href="css/plugin/ion.rangeSlider.skinHTML5.css">
-        <link rel="stylesheet"  type="text/css" href="css/plugin/uniform.css">
-        <link rel="stylesheet"  type="text/css" href="css/plugin/jquery.scrollbar.css">
-        <link rel="stylesheet" type="text/css"  href="css/plugin/selectric.css">
-        <link rel="stylesheet" type="text/css" href="css/re_layout.css">
-        <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/common.css?v=200108090126">
-        <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/home.css?v=200108090126">
-        <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/theme.css?v=200108090126">
-        <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/auto.css?v=200108090126">
-        <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/window.css?v=200108090126">
-        <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/compare.css?v=200103163154">
         <div id='app'>
            <div style="padding-top: 80px;"></div>
             <div id="content">
@@ -25,21 +11,21 @@
                             <div class="mc_search">
                                 <div class="search3box">
                                     <div class="tab_want1 tab_want_menu" data-item="tab1">
-                                        <h3><a href="javascript:;" class="on">원하는 모델이 있어요</a></h3>
+                                        <h3><a @click="wantModel" class="on">원하는 모델이 있어요</a></h3>
                                     </div>
                                     <div id="divTabWant1" class="divTabWantGroup">
                                         <!--검색tab1 내용-->
                                         <div class="searchcont1">
                                             <ul>
                                                 <li>
-                                                    <span class="tit">RPM에서 판매하는 차 <strong class="all_car_cnt">총 8,328대</strong></span>
+                                                    <span class="tit">RPM에서 판매하는 차 <strong class="all_car_cnt">총 {{allCount}}대</strong></span>
                             <span class="searchinput">
-                              <input type="text" class="placeho modelSearchInput" name="quickSearch" id="quickSearch"
-                                     placeholder=" 모델명을 입력해주세요. 예시)아반떼" maxlength="20" autocomplete="off"><a
-                                    href="javascript:;" class="hid">검색</a>
+                              <input type="text" class="placeho modelSearchInput" name="quickSearch" id="quickSearch" @click="searchBoxOn"
+                                     v-model = "searchKeyWord" @keyup="stringMatchOn"
+                                     placeholder=" 모델명을 입력해주세요. 예시)아반떼" maxlength="20" autocomplete="off"><a @click="goSearch" class="hid">검색</a>
                             </span>
                                                     <!--검색기록유-->
-                                                    <div class="recentlist modelSearchDiv1 modelSearchGroup"
+                                                    <div id = "searchBox" class="recentlist modelSearchDiv1 modelSearchGroup"
                                                          style="display:none">
                                                         <h3 class="tit">인기 모델명</h3>
                                                         <div class="recentl">
@@ -99,52 +85,54 @@
                                                         <h3 class="tit1">최근 검색한 모델명<em>전체삭제</em><a href="javascript:;"
                                                                                                    onclick="mainEvent.deleteRecentSearchWordsCookie(-1)"
                                                                                                    class="clb"><img
-                                                                src="/resources/images/index/listclose.jpg" width="20"
+                                                                src="https://www.kcar.com/resources/images/index/listclose.jpg" width="20"
                                                                 height="21" alt="닫기" border="0"></a></h3>
                                                         <div class="recentr">
                                                             <ul>
+                                                                <li class="noresult">최근 검색한 모델이 없습니다</li>
                                                                 <li>
                                                                     <a href="/car/search/car_search_list.do?&amp;i_sMakeCd=002&amp;i_sModelGrpCd=002&amp;i_sModelCd=122&amp;i_sMakeType=MAKE_TYPE010">올
                                                                         뉴 K7</a><span><a href="javascript:;"
                                                                                          onclick="mainEvent.deleteRecentSearchWordsCookie(0);"><img
-                                                                        src="/resources/images/index/listclose.jpg"
+                                                                        src="https://www.kcar.com/resources/images/index/listclose.jpg"
                                                                         width="20" height="21" alt="닫기" border="0"></a></span>
                                                                 </li>
                                                             </ul>
                                                         </div>
                                                         <div class="btclose divSearchConHide"><a
-                                                                href="javascript:;"><img
-                                                                src="/resources/images/index/recentclose.jpg" width="44"
+                                                                @click="searchBoxOff"><img
+                                                                src="https://www.kcar.com/resources/images/index/recentclose.jpg" width="44"
                                                                 height="20" alt="닫기" border="0"></a></div>
                                                     </div>
                                                     <!--키워드 입력중-->
-                                                    <div class="recentlist modelSearchDiv2 modelSearchGroup"
-                                                         style="display:none">
+                                                    <div id = "stringMatch" class="recentlist modelSearchDiv2 modelSearchGroup" style="display: none">
                                                         <h3 class="tit">추천직영차</h3>
                                                         <div class="recentr1">
+                                                            <ul><li><div class="carthumlist "><a href="/car/info/car_info_imported_detail.do?i_sCarCd=EC60309032"><img src="https://img.kcar.com/3dcarpicture/2019/12/010/60309032_1/main/main780.jpg" width="100" height="66" alt="car" target="_blank"><span>시트로엥 DS7 크로스백 2.0 BlueHDi 소 시크<br><em>3,900만원</em></span></a></div></li><li><div class="carthumlist last"><a href="/car/info/car_info_detail.do?i_sCarCd=EC60325171"><img src="https://img.kcar.com/carpicture/carpicture02/pic6032/kcar_60325171_011.jpg" width="100" height="66" alt="car" target="_blank"><span>현대 쏘나타 DN8 2.0 가솔린<br><em>2,130만원</em></span></a></div></li></ul>
+                                                        </div>
+                                                        <!--검색기록무
+                                                        <div class="recentr1" style="display:none">
                                                             <ul>
+                                                                <li class="noresult">추천직영차가 없습니다</li>
                                                             </ul>
                                                         </div>
+                                                        -->
                                                         <h3 class="tit1">연관 모델명</h3>
                                                         <div class="recentl1">
-                                                            <ul>
-                                                            </ul>
+                                                            <ul><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="022|006|006|IMP|DS3(12년~18년)">DS3(12년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="022|009|008|IMP|DS5(11년~18년)">DS5(11년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="022|006|009|IMP|DS3 카브리오(13년~18년)">DS3 카브리오(13년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="022|008|012|IMP|DS4 크로스백(16년~18년)">DS4 크로스백(16년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="022|008|007|IMP|DS4(12년~18년)">DS4(12년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="043|010|010|IMP|DTS(06년~11년)">DTS(06년~11년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="070|002|002|IMP|DB9(04년~18년)">DB9(04년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="070|004|004|IMP|DBS(07년~18년)">DBS(07년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="070|008|075|IMP|DB7(94년~03년)">DB7(94년~03년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="001|017|111|KOR|싼타페 DM(12년~15년)">싼타페 DM(12년~15년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="001|025|124|KOR|제네시스 DH(13년~16년)">제네시스 DH(13년~16년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="001|018|163|KOR|쏘나타 DN8(19년~현재)">쏘나타 DN8(19년~현재)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="054|002|006|IMP|쿠퍼 D 클럽맨(09년~18년)">쿠퍼 D 클럽맨(09년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="054|003|115|IMP|쿠퍼 D 컨트리맨(11년~18년)">쿠퍼 D 컨트리맨(11년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="054|001|117|IMP|쿠퍼 D(07년~18년)">쿠퍼 D(07년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="054|012|133|IMP|쿠퍼 D 페이스맨(13년~18년)">쿠퍼 D 페이스맨(13년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="001|019|037|KOR|아반떼 XD(00년~03년)">아반떼 XD(00년~03년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="001|019|071|KOR|뉴 아반떼 XD(03년~06년)">뉴 아반떼 XD(03년~06년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="001|019|081|KOR|아반떼 HD(06년~10년)">아반떼 HD(06년~10년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="001|019|104|KOR|아반떼 MD(10년~13년)">아반떼 MD(10년~13년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="001|019|136|KOR|아반떼 AD(15년~18년)">아반떼 AD(15년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="001|019|154|KOR|더 뉴 아반떼 AD(18년~현재)">더 뉴 아반떼 AD(18년~현재)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="054|001|118|IMP|쿠퍼 SD(12년~18년)">쿠퍼 SD(12년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="058|001|016|IMP|FX30d(09년~13년)">FX30d(09년~13년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="082|004|004|IMP|xD(07년~14년)">xD(07년~14년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="058|003|014|IMP|M30d(10년~13년)">M30d(10년~13년)</a></li></ul>
                                                         </div>
-                                                        <div class="btclose divSearchConHide"><a
-                                                                href="javascript:;"><img
-                                                                src="/resources/images/index/recentclose.jpg" width="44"
-                                                                height="20" alt="닫기" border="0"></a></div>
+                                                        <div class="btclose divSearchConHide"><a @click="searchBoxOff"><img src="https://www.kcar.com/resources/images/index/recentclose.jpg" width="44" height="20" alt="닫기" border="0"></a></div>
                                                     </div>
                                                 </li>
                                                 <li>
                             <span id="spanMakeType" class="btnl">
-                              <a href="javascript:;" class="on" data-item="MAKE_TYPE010">국산차</a>
-                              <a href="javascript:;" data-item="MAKE_TYPE020">수입차</a>
+                              <a @click="korCar" id="korCar" class="on" data-item="MAKE_TYPE010">국산차</a>
+                              <a @click="impCar" id="impCar" data-item="MAKE_TYPE020">수입차</a>
                             </span>
                                                 </li>
                                                 <li class="spreset">
                                                     <div class="searchr1">
-                                                        <div class="selectric-wrapper selectric-selectric">
+                                                        <div id="searchKey1" @mouseover="searchKey1MouseOver" @click="SearchKey1Click" class="selectric-wrapper selectric-selectric selectric-below">
                                                             <div class="selectric-hide-select"><select id="makeList"
                                                                                                        title="제조사를 선택하세요"
                                                                                                        class="selectric"
@@ -171,9 +159,8 @@
                                                                         data-cnt="477">쌍용
                                                                 </option>
                                                             </select></div>
-                                                            <div class="selectric"><span class="label"
-                                                                                         data-beusable-tracking="">제조사를 선택하세요</span><b
-                                                                    class="button">▾</b></div>
+                                                            <div class="selectric" ><span class="label"
+                                                                                         data-beusable-tracking="">제조사를 선택하세요</span></div>
                                                             <div class="selectric-items" tabindex="-1">
                                                                 <div class="selectric-scroll">
                                                                     <ul>
@@ -197,7 +184,8 @@
                                                             <input class="selectric-input" tabindex="0"></div>
                                                     </div>
                                                     <div class="searchr2">
-                                                        <div class="selectric-wrapper selectric-selectric">
+                                                        <div id="searchKey2" @mouseover="searchKey2MouseOver" @click="SearchKey2Click"
+                                                             class="selectric-wrapper selectric-selectric">
                                                             <div class="selectric-hide-select"><select
                                                                     id="modelGroupList" title="모델을 선택하세요"
                                                                     class="selectric" data-beusable-tracking=""
@@ -206,8 +194,7 @@
                                                                 <option value="" selected="">모델을 선택하세요</option>
                                                             </select></div>
                                                             <div class="selectric"><span class="label"
-                                                                                         data-beusable-tracking="">모델을 선택하세요</span><b
-                                                                    class="button">▾</b></div>
+                                                                                         data-beusable-tracking="">모델을 선택하세요</span></div>
                                                             <div class="selectric-items" tabindex="-1">
                                                                 <div class="selectric-scroll">
                                                                     <ul>
@@ -220,7 +207,9 @@
                                                             <input class="selectric-input" tabindex="0"></div>
                                                     </div>
                                                     <div class="searchr3">
-                                                        <div class="selectric-wrapper selectric-selectric">
+                                                        <div id="searchKey3" @mouseover="searchKey3MouseOver" @click="SearchKey3Click"
+
+                                                             class="selectric-wrapper selectric-selectric">
                                                             <div class="selectric-hide-select"><select id="modelList"
                                                                                                        title="세부모델을 선택하세요"
                                                                                                        class="selectric"
@@ -230,8 +219,7 @@
                                                                 <option value="" selected="">세부모델을 선택하세요</option>
                                                             </select></div>
                                                             <div class="selectric"><span class="label"
-                                                                                         data-beusable-tracking="">세부모델을 선택하세요</span><b
-                                                                    class="button">▾</b></div>
+                                                                                         data-beusable-tracking="">세부모델을 선택하세요</span></div>
                                                             <div class="selectric-items" tabindex="-1">
                                                                 <div class="selectric-scroll">
                                                                     <ul>
@@ -251,7 +239,7 @@
                                         </div>
                                     </div>
                                     <div class="tab_want2 tab_want_menu" data-item="tab2">
-                                        <h3><a href="javascript:;">예산이 정해져 있어요</a></h3>
+                                        <h3><a @click="haveBudget">예산이 정해져 있어요</a></h3>
                                     </div>
                                     <!--검색tab2 내용-->
                                     <!---->
@@ -1658,7 +1646,105 @@
 
     </div>
 </template>
-<script></script>
+<script>
+    export default {
+        data(){
+            return{
+                searchKeyWord : ''
+            }
+        },
+        methods : {
+            goSearch(){},
+            wantModel(){
+                const divTabWant1 = document.getElementById("divTabWant1")
+                const divTabWant2 = document.getElementById("divTabWant2")
+                divTabWant1.style.display = "block"
+                divTabWant2.style.display = "none"
+            },
+            haveBudget(){
+                const divTabWant1 = document.getElementById("divTabWant1")
+                const divTabWant2 = document.getElementById("divTabWant2")
+                divTabWant1.style.display = "none"
+                divTabWant2.style.display = "block"
+            },
+            searchBoxOn(){
+                const searchBox = document.getElementById("searchBox")
+                searchBox.style.display = "block"
+            },
+            searchBoxOff(){
+                const searchBox = document.getElementById("searchBox")
+                const stringMatch = document.getElementById("stringMatch")
+                searchBox.style.display = "none"
+                stringMatch.style.display = "none"
+            },
+            stringMatchOn(){
+                const stringMatch = document.getElementById("stringMatch")
+                const searchBox = document.getElementById("searchBox")
+                if(this.searchKeyWord != "") {
+                    searchBox.style.display = "none"
+                    stringMatch.style.display = "block"
+                }else{
+                    stringMatch.style.display = "none"
+                    searchBox.style.display = "block"
+                }
+            },
+            korCar(){
+                const korCar = document.getElementById("korCar")
+                const impCar = document.getElementById("impCar")
+                korCar.className = "on"
+                impCar.className = ""
+            },
+            impCar(){
+                const korCar = document.getElementById("korCar")
+                const impCar = document.getElementById("impCar")
+                korCar.className = ""
+                impCar.className = "on"
+            },
+            searchKey1MouseOver(){
+                const searchKey1 = document.getElementById("searchKey1")
+                searchKey1.className = "selectric-wrapper selectric-selectric selectric-below selectric-hover"
+            },
+            SearchKey1Click(){
+                const searchKey1 = document.getElementById("searchKey1")
+                if(searchKey1.className === "selectric-wrapper selectric-selectric selectric-below selectric-hover"){
+                    searchKey1.className = "selectric-wrapper selectric-selectric selectric-below selectric-hover selectric-open selectric-focus"
+                }else{
+                    searchKey1.className = "selectric-wrapper selectric-selectric selectric-below selectric-hover"
+                }
+            },
+            searchKey2MouseOver(){
+                const searchKey2 = document.getElementById("searchKey2")
+                searchKey2.className = "selectric-wrapper selectric-selectric selectric-below selectric-hover"
+            },
+            SearchKey2Click(){
+                const searchKey2 = document.getElementById("searchKey2")
+                if(searchKey2.className === "selectric-wrapper selectric-selectric selectric-below selectric-hover"){
+                    searchKey2.className = "selectric-wrapper selectric-selectric selectric-below selectric-hover selectric-open selectric-focus"
+                }else{
+                    searchKey2.className = "selectric-wrapper selectric-selectric selectric-below selectric-hover"
+                }
+            },
+            searchKey3MouseOver(){
+                const searchKey3 = document.getElementById("searchKey3")
+                searchKey3.className = "selectric-wrapper selectric-selectric selectric-below selectric-hover"
+            },
+            SearchKey3Click(){
+                const searchKey3 = document.getElementById("searchKey3")
+                if(searchKey3.className === "selectric-wrapper selectric-selectric selectric-below selectric-hover"){
+                    searchKey3.className = "selectric-wrapper selectric-selectric selectric-below selectric-hover selectric-open selectric-focus"
+                }else{
+                    searchKey3.className = "selectric-wrapper selectric-selectric selectric-below selectric-hover"
+                }
+            }
+        },
+        computed : {
+            allCount : function(){
+                this.$store.dispatch('cmm/welcome')
+                return this.$store.state.cmm.carAllCount
+            }
+        }
+    }
+</script>
 <style scoped>
     .main_content{
         padding-bottom: 50px;
@@ -1668,5 +1754,6 @@
     }
     .mc_wide_searchbox{width:100%;background:#191b1a /*#F1F2F4 url( /resources/images/index/pc_index_visual_1112.jpg) top center no-repeat*/;opacity: 0.97;height:903px;position:relative;display:inline-block; z-index:1; margin-bottom:57px;}
     .mc_wide_searchbox .searchbg{width:100%;background:url( https://www.kcar.com/resources/images/index/search_bg.png) center no-repeat; opacity: 0.97; display:inline-block;}
-    .mc_wide_searchbox .searchbg .mc_search{    margin: 0px auto 0 auto;}
+    .mc_wide_searchbox .searchbg .mc_search{    margin: 0px auto 0 auto; }
+
 </style>

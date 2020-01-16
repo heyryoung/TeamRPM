@@ -122,9 +122,9 @@
 </template>
 <script>
 	export default {
-		name:join,
+		name: 'join',
 		data(){
-			userId:''
+			return{}
 		},
 		methods:{
 			fnIdCheck(){
