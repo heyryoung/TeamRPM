@@ -26,8 +26,8 @@
 .mc_search .search3box .tab_want1{position:absolute;top:0;left:0;}
 .mc_search .search3box .tab_want1 h3{float:left;display:inline-block;font-size:15px;line-height:60px;width:393px;}
 .mc_search .search3box h3 a{display:block;height:60px;background:#fafafa;text-align:center;border-right:1px solid #ddd;border-bottom:1px solid #ddd;font-weight:normal;color:#181819;}
-.mc_search .search3box h3 a:hover{background:#ff0040;color:#fff;border-right:1px solid #ddd;border-bottom:1px solid #ddd;}
-.mc_search .search3box h3 a.on, .mc_search .search3box ul.tab li a.on:hover{color:#fff;background:#ff0040;text-align:center;border-right:1px solid #ddd;border-bottom:1px solid #ddd;}
+.mc_search .search3box h3 a:hover{background:rgb(0, 31, 65);color:#fff;border-right:1px solid #ddd;border-bottom:1px solid #ddd;}
+.mc_search .search3box h3 a.on, .mc_search .search3box ul.tab li a.on:hover{color:#fff;background:rgb(0, 31, 65);text-align:center;border-right:1px solid #ddd;border-bottom:1px solid #ddd;}
 .mc_search .search3box .tab_want2{position:absolute;top:0;left:393px;}
 .mc_search .search3box .tab_want2 h3{float:left;display:inline-block;font-size:15px;color:#181819;line-height:60px;width:393px;}
 .mc_search .search3box .tab_want3{position:absolute;top:0;right:0;}
@@ -36,10 +36,10 @@
 .mc_search .search3box .searchcont1 ul{float:left;width:1040px;}
 .mc_search .search3box .searchcont1 li span{display:inline-block;}
 .mc_search .search3box .searchcont1 li span.tit{font-size:16px;font-weight:bold;color:#181819;}
-.mc_search .search3box .searchcont1 li span.tit strong{color:#ff0040;}
+.mc_search .search3box .searchcont1 li span.tit strong{color:rgb(0, 31, 65);}
 .mc_search .search3box .searchcont1 li span.searchinput{float:right;height:40px;width:300px;background:url(https://www.kcar.com/resources/images/index/inputbg.jpg) 0 5px no-repeat;}
 .mc_search .search3box .searchcont1 li span.searchinput .placeho{border:0;width:250px;height:28px;margin-left:30px;}
-.mc_search .search3box .searchcont1 ul li .recentlist{line-height:2.3;position:absolute;top:118px;right:70px;width:680px;border:1px solid #ff0040;z-index:2;padding:30px 40px 50px 40px;background:url(https://www.kcar.com/resources/images/index/1px_bg.png) #fff center repeat-y;font-size:13px;color:#555;}
+.mc_search .search3box .searchcont1 ul li .recentlist{line-height:2.3;position:absolute;top:118px;right:70px;width:680px;border:1px solid rgb(0, 31, 65);z-index:2;padding:30px 40px 50px 40px;background:url(https://www.kcar.com/resources/images/index/1px_bg.png) #fff center repeat-y;font-size:13px;color:#555;}
 .mc_search .search3box .searchcont1 ul li .btclose{position:absolute;width:760px;height:30px;background:#f5f5f5;bottom:0;left:0px;}
 .mc_search .search3box .searchcont1 ul li .btclose a{text-align:right;display:block;padding:3px 10px 0 0;cursor:pointer}
 .mc_search .search3box .searchcont1 ul li div.recentlist h3{font-weight:bold;color:#181819;padding-bottom:10px;font-size:13px;border-bottom:1px solid #000;}
@@ -84,7 +84,7 @@
 .mc_search .search3box .searchcont1 .selectric .label { width: 100%; height: 40px; line-height: 40px; color: #acacaf;}
 .mc_search .search3box .searchcont1 .selectric .button { width: 48px; height: 30px; line-height: 30px; background-color: transparent; }
 .mc_search .search3box .searchcont1 .selectric .button:after { margin-top:5px;width: 0; height: 0; border-top: 4px #797b80 solid; border-left: 4px transparent solid; border-right: 4px transparent solid; background: none; }
-.mc_search .search3box .searchcont1 li.search_btn{position:absolute;top:131px;right:72px;width:175px;height:45px;background:#ff0040;text-align:center;}
+.mc_search .search3box .searchcont1 li.search_btn{position:absolute;top:131px;right:72px;width:175px;height:45px;background:rgb(0, 31, 65);text-align:center;}
 .mc_search .search3box .searchcont1 li.search_btn a{color:#fff;line-height:45px;display:block;font-size:13px;font-weight:normal}
 .mc_search .search3box .inputr1{position:absolute;top:132px;left:72px; width: 285px;}
 .mc_search .search3box .inputr2{position:absolute;top:132px;left:358px; width: 285px;}
@@ -94,10 +94,10 @@
 .mc_search .search3box .searchcont3 li{float:left;width:1040px;display:inline-block;}
 .mc_search .search3box .searchcont3 li span.tit{font-size:21px;font-weight:bold;color:#181819}
 .mc_search .search3box .searchcont3 li {font-size:13px;line-height:2}
-.mc_search .search3box .searchcont3 li.search_btn{position:absolute;top:132px;right:72px;width:210px;height:45px;background:#ff0040;text-align:center;}
+.mc_search .search3box .searchcont3 li.search_btn{position:absolute;top:132px;right:72px;width:210px;height:45px;background:rgb(0, 31, 65);text-align:center;}
 .mc_search .search3box .searchcont3 li.search_btn a{color:#fff;line-height:45px;display:block;font-size:13px;font-weight:normal}
 .mc_search .search3box .searchcont3 li span.counsel{position:absolute;top:-35px;right:0px;width:300px;text-align:right;}
-.mc_search .search3box .searchcont3 li span.counsel em{color:#ff0040;}
+.mc_search .search3box .searchcont3 li span.counsel em{color:rgb(0, 31, 65);}
 .mc_search .search3box .searchcont3 li span.counsel em.bar{color:#ddd}
 .mc_carlist{width:1180px;margin:60px auto 20px ;text-align: center;position:relative;/*height:460px*/}
 .mc_carlist .tabbox{width:1180px;height:50px;;display:inline-block}
@@ -111,8 +111,8 @@
 .mc_carlist .tabbox .tab_reco4 h3{display:inline-block;margin-right:5px;font-size:13px;font-weight:normal;}
 .mc_carlist a.more{display:inline-block;font-size:12px;text-decoration:underline;color:#555;font-weight:normal;background:url(https://www.kcar.com/resources/images/index/more.jpg) no-repeat 37px 5px;width:50px;text-align:left;}
 .mc_carlist h3 a{display:block;background:#fff;border:1px solid #ccc;width:235px;height:40px;line-height:40px;border-radius: 20px;color:#181819;text-decoration:none;}
-.mc_carlist h3 a.on{color:#fff;background:#ff0040;border:1px solid #ff0040;}
-.mc_carlist h3 a:hover{color:#fff;background:#ff0040;border:1px solid #ff0040;}
+.mc_carlist h3 a.on{color:#fff;background:rgb(0, 31, 65);border:1px solid rgb(0, 31, 65);}
+.mc_carlist h3 a:hover{color:#fff;background:rgb(0, 31, 65);border:1px solid rgb(0, 31, 65);}
 .mc_carlist .listwrap{poistion:relative;width:1180px;}
 .listwrap .banner_box1 .banner_inner_box1{margin-top:20px;}
 .banner_box1 .banner_inner_box1 .mark_spot1{position:absolute;top:0;left:0px}
@@ -125,10 +125,10 @@
 .banner_box1 .banner_inner_box1 ul li span.mov_ico { position: absolute; top:83px; left:50%; margin-left:-20px; background: url(https://www.kcar.com/resources/images/content/buy/pc_play_icon.png);width:40px;height:40px; text-indent: -9999px;}
 .banner_box1 .banner_inner_box1 ul li span.model{ font-size: 16px;color: #181819;letter-spacing: -0.03em;font-weight: 400;display: -webkit-box;height: 44px;text-overflow: ellipsis;-webkit-line-clamp: 2;-webkit-box-orient: vertical;word-wrap: break-word;overflow: hidden;padding:20px 20px 0 20px;}
 .banner_box1 .banner_inner_box1 ul li span.year{font-size:13px;color:#888888; padding:10px 20px 0 20px;overflow:hidden;text-overflow:ellipsis; word-wrap : break-word;white-space:nowrap;width:240px}
-.banner_box1 .banner_inner_box1 ul li span.money{font-size:14px;font-weight:bold;padding:15px 20px 10px 20px;display:block;color:#ff0040}
+.banner_box1 .banner_inner_box1 ul li span.money{font-size:14px;font-weight:bold;padding:15px 20px 10px 20px;display:block;color:rgb(0, 31, 65)}
 .banner_box1 .banner_inner_box1 ul li span.money em{font-size:13px;font-weight:normal;color:#888;text-decoration:line-through;padding-left:5px}
 .banner_box1 .banner_inner_box1 ul li span.monthly{font-size:12px;padding:0px 20px 18px 20px;display:block;color:#095bcb;text-decoration:underline}
-.banner_box1 .banner_inner_box1 ul li span.sp_money{font-size:14px;font-weight:bold;padding:5px 20px 15px 20px;display:block;color:#ff0040}
+.banner_box1 .banner_inner_box1 ul li span.sp_money{font-size:14px;font-weight:bold;padding:5px 20px 15px 20px;display:block;color:rgb(0, 31, 65)}
 .banner_box1 .banner_inner_box1 ul li span.past_m{font-size:14px;font-weight:bold;display:block;color:#181819;padding:15px 20px 0 20px;}
 .banner_box1 .banner_inner_box1 ul li span.remove_m{font-size:14px;text-decoration:line-through;color:#888888;padding:15px 20px 0 20px;}
 .banner_box1 .banner_inner_box1 ul li span.mark{margin:20px;margin-top:0}
@@ -169,17 +169,17 @@
 .mc_carlist1 .bx-controls-auto .bx-controls-auto-item a.bx-stop{position:absolute;top:-48px;left:80px;background:url( https://www.kcar.com/resources/images/index/stopplay.png) no-repeat 0 0;font-size:0px;padding:10px}
 .mc_sellbuy{width:1180px;margin:0 auto ;background:url(https://www.kcar.com/resources/images/index/sellbuy_car_20191125.png) 50% bottom no-repeat;height:250px;position:relative; text-align:center;}
 .mc_sellbuy h2{font-weight:normal;}
-.mc_sellbuy h2 b.sellbuy_col span{color:#ff0040;}
+.mc_sellbuy h2 b.sellbuy_col span{color:rgb(0, 31, 65);}
 .mc_sellbuy ul li{line-height:2;}
 .mc_sellbuy ul li{font-size:13px;line-height:2.0;}
 .mc_sellbuy ul li .tit{font-size:16px;color:#181819;font-weight:bold;}
 .mc_sellbuy ul li .clrb	{color:#2323d5;}
-.mc_sellbuy ul li .clrr	{color:#ff0040;}
+.mc_sellbuy ul li .clrr	{color:rgb(0, 31, 65);}
 .mc_sellbuy ul.fir{position:absolute;top:66px ;left:0px ;}
 .mc_sellbuy ul.fir li{font-size:14px;line-height:1.8}
 .mc_sellbuy ul.fir li .tit{font-size:24px;color:#181819;}
 .mc_sellbuy ul li.sp{padding:2px 0 7px 0}
-.mc_sellbuy ul.sec li.btnbuy a{width:135px;height:40px;line-height:39px;display:block; text-decoration:none;background:#ff0040;text-align:center;color:#fff;margin-top:10px}
+.mc_sellbuy ul.sec li.btnbuy a{width:135px;height:40px;line-height:39px;display:block; text-decoration:none;background:rgb(0, 31, 65);text-align:center;color:#fff;margin-top:10px}
 .mc_sellbuy ul.sec li.btnsell a:hover{}
 .mc_sellbuy ul.sec{position:absolute;top:60px ;left:40px; text-align:left;}
 .mc_sellbuy ul.thir{position:absolute;top:60px ;right:40px;text-align:right;}
@@ -216,7 +216,7 @@
 .mc_store .eachstore .txtarea table th, .mc_store .eachstore .txtarea table td{padding:2px 0 8px 0;vertical-align:top}
 .mc_store .eachstore .txtarea table td{color:#555555;padding-left:5px}
 .mc_store .eachstore .txtarea table td div.store{height:40px;overflow:hidden}
-.mc_store .eachstore .txtarea table td div.time{height:40px;overflow:hidden;color:#ff0040}
+.mc_store .eachstore .txtarea table td div.time{height:40px;overflow:hidden;color:rgb(0, 31, 65)}
 .mc_store .eachstore .btnarea {float:left;font-size:12px;margin:20px 50px 0;}
 .mc_store .eachstore .btnarea li{display:inline-block;text-align: center;margin-right:3px}
 .mc_store .eachstore .btnarea li a{display:inline-block;width:135px;height:35px;border:1px solid #2d2d38;color:#181819;line-height:35px;text-decoration:none;}
@@ -403,7 +403,7 @@
 .mc_ext .extfir{width:300px;float:left;}
 .mc_ext .extfir {padding-top:40px;}
 .mc_ext .extfir span{display:block;}
-.mc_ext .extfir span.num{font-size:32px;font-weight:bold;color:#ff0040;}
+.mc_ext .extfir span.num{font-size:32px;font-weight:bold;color:rgb(0, 31, 65);}
 .mc_ext .extfir h3.tit{font-size:16px;font-weight:bold;color:#181819}
 .mc_ext .extfir em{line-height:1.6;font-size:13px;}
 .mc_ext .extsec{width:380px;float:left;margin-left:60px;}
@@ -432,7 +432,7 @@
 .mc_wide_capital .tabbox1 li:first-child {margin-right:20px;}
 .mc_wide_capital .tabbox1 li {display:inline-block;font-size:16px;font-weight:normal;}
 .mc_wide_capital .tabbox1 a{display:block;background:#fff;border:1px solid #ccc;width:200px;height:40px;line-height:40px;border-radius: 20px;color:#181819;text-decoration:none;text-align:center}
-.mc_wide_capital .tabbox1 a.on, .mc_wide_capital .tabbox1 a:hover{color:#fff;background:#ff0040;border:1px solid #ff0040;}
+.mc_wide_capital .tabbox1 a.on, .mc_wide_capital .tabbox1 a:hover{color:#fff;background:rgb(0, 31, 65);border:1px solid rgb(0, 31, 65);}
 .mc_capital ul li a.pad{display:block; padding:38px 0 18px 133px;text-decoration:none;}
 .mc_capital ul li p b.oneline{display:inline-block; padding-bottom:8px;}
 .mc_capital .rent_sea{background:url(https://www.kcar.com/resources/images/index/icon_rent_search.png) 50px 25px no-repeat;}
@@ -440,7 +440,7 @@
 .mc_capital .rent_pro{background:url(https://www.kcar.com/resources/images/index/icon_rent_product.png)  50px 25px no-repeat;}
 /*//20190625렌트노출강화*/
 /*메인 판매준비차량*/
-.mc_carlist1 h2 span.prepare_hot{color:#ff0040;}
+.mc_carlist1 h2 span.prepare_hot{color:rgb(0, 31, 65);}
 .mc_carlist1 h2 span.prepare_txt{position:absolute; top:25px; right:0; padding:4px 0 2px 24px; background:url(https://www.kcar.com/resources/images/content/prepare/icon_bell_grey.png) left top no-repeat; font-size:13px; color:#888; font-weight:normal;}
 .perpare_inner_box{margin-top:20px; padding-bottom:20px;}
 .perpare_inner_box ul:after{content:""; display:block; clear:both;}

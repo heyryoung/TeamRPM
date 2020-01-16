@@ -124,7 +124,7 @@
 	export default {
 		name:join,
 		data(){
-			userId:''
+			return{}
 		},
 		methods:{
 			fnIdCheck(){
