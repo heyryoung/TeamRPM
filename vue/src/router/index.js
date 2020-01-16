@@ -27,11 +27,6 @@ import CustomerList from "@/components/company/customerList.vue"
 import recommendHome from "@/components/recommend/recommendHome.vue"
 import SnsPage from "@/components/social/SnsPage.vue"
 import SnsDetail from "@/components/social/SnsDetail.vue"
-import MycarModify from "@/components/carbook/MycarModify.vue"
-import KakaoMap from "@/components/carbook/KakaoMap.vue"
-
-
-
 
 
 Vue.use(Router)
@@ -57,8 +52,6 @@ export default new Router({
         {path:'/buycarInsertContractorInfomation2', name:'buycarInsertContractorInfomation2', component : BuycarInsertContractorInfomation2},
         {path:'/sns', name:'snspage', component : SnsPage},
         {path:'/snsdetail', name:'snsdetail', component : SnsDetail},
-        {path:'/mycarModify',name:'mycar', component: MycarModify},
-        {path:'/kakaoMap',name:'kakao', component: KakaoMap},
         // 강성조꺼
 
         {path: '/companyHome',name: 'companyHome', component:companyHome,children:
