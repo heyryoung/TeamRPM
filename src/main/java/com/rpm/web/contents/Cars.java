@@ -119,8 +119,6 @@ public class Cars implements Serializable {
         this.centerName = centerName;
         this.modelGrpCd = modelGrpCd;
         this.carNumber = carNumber;
-
-
     }
 
 

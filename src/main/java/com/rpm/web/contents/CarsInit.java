@@ -1,4 +1,4 @@
-package com.rpm.web.contents;
+﻿package com.rpm.web.contents;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rpm.web.util.MakeCarDummyList;
@@ -23,11 +23,10 @@ public class CarsInit implements ApplicationRunner {
         long count = carsRepository.count();
         MakeCarDummyList http = new MakeCarDummyList();
         ObjectMapper jsonMapper = new ObjectMapper();
-        System.out.println("POST로 데이터 가져오기");
         String[] json = null;
         Map<String, Map<String, Object>> map = new HashMap<>();
         if(count==0) {
-            for (int i = 1; i <= 200;i++){
+            System.out.println("POST로 데이터 가져오기");
                 Map<String, String> strJson = new HashMap<>();
                  map = jsonMapper.readValue(
                         http.sendPost("https://www.kcar.com/search/api/getCarSearchWithCondition.do", String.valueOf(i))
@@ -57,8 +56,9 @@ public class CarsInit implements ApplicationRunner {
                         strJson.get("v_mfr_date"),strJson.get("v_model_grp_cd"),strJson.get("v_center_name"),
                         strJson.get("v_model_grp_nm")
                         ));
+
             }
+            System.out.println("데이터 가져오기 종료.");
         }
-        System.out.println("데이터 가져오기 종료.");
     }
 }

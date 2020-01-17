@@ -14,7 +14,7 @@
                     <div class="detail_box">
                         <div class="box_top">
                             <h3>차량 검색</h3>
-                            <a href="javascript:void(0);" id="resetBtn" class="reset">초기화</a>
+                            <a href="" id="resetBtn" class="reset">초기화</a>
                         </div>
                         <div class="quick_search">
                             <div class="ip_field">
@@ -25,14 +25,14 @@
                             </div>
                         </div>
                         <div class="sel_field">
-                            <a href="javascript:void(0);" class="on" data-init="true">전체</a>
-                            <a href="javascript:void(0);" class="">국산차</a>
-                            <a href="javascript:void(0);" class="">수입차</a>
+                            <a href="" class="on" data-init="true">전체</a>
+                            <a href="" class="">국산차</a>
+                            <a href="" class="">수입차</a>
                             <input id="carTypeInput" type="hidden" name="v_car_type" value="">
                         </div>
                         <ul class="search_list_wrap">
                             <li class="list_h list_h01 ">
-                                <a href="javascript:void(0);" class="type" data-beusable-tracking="">차종 <small></small></a>
+                                <a href="" class="type" data-beusable-tracking="">차종 <small></small></a>
                                 <div class="sub_type_list" style="">
                                     <ul class="row_list">
                                         <li v-for="(categorycd, categorycd_i) of wr_in_v_categorycd"
@@ -49,7 +49,7 @@
                                 </div>
                             </li>
                             <li class="list_h list_h02 on">
-                                <a href="javascript:void(0);" class="type" data-beusable-tracking=""
+                                <a href="" class="type" data-beusable-tracking=""
                                    @click="menu_folding">제조사/모델<small></small></a>
                                 <div class="sub_type_list sub_type_tree" style="display:block" data-init="true">
                                     <div class="scroll-wrapper scrollbar-dynamic" style="position: relative;">
@@ -57,13 +57,13 @@
                                              class="scrollbar-dynamic scroll-content scroll-sscrolly_visible"
                                              style="height: auto; margin-bottom: 0px; margin-right: 0px; max-height: 229px;">
                                             <ul class="tree" style="display: block;">
-                                                <li id="false" data-beusable-tracking=" "
-                                                    v-for="car_company of car_company_list" :key="car_company.value">
+                                                <li id="false"
+                                                    v-for="car_company of makerList" :key="car_company.value">
                                                     <div class="row false">
             <span class="txt"><div class="checker" id="uniform-v_makecd">
-            <span><input type="checkbox" id="v_makecd0" name="v_makecd" class="uniform maker"
-                         value="car_company.company_cd" data-count="2017" data-v_makecd="car_company.company_cd"
-                         data-v_makenm="car_company.company_nm" data-beusable-tracking=""></span></div>
+            <span :class="{checked:car_company.checked}" @click="check(car_company)" >
+                <input type="checkbox" id="v_makecd0" name="v_makecd" class="uniform maker"
+                        ></span></div>
             <label for="v_makecd0">{{car_company.company_nm}}</label></span><span class="count">{{car_company.product_count}}
             </span>
                                                     </div>
@@ -74,7 +74,7 @@
                                 </div>
                             </li>
                             <li class="list_h list_h05 on">
-                                <a href="javascript:void(0);" class="type"
+                                <a href="" class="type"
                                    data-beusable-tracking="">연식<small></small></a>
                                 <div class="sub_type_list" style="display:block" data-init="true">
                                     <div class="selectric-wrapper selectric-selectric">
@@ -277,7 +277,7 @@
                                 </div>
                             </li>
                             <li class="list_h list_h04 on">
-                                <a href="javascript:void(0);" class="type" data-beusable-tracking="">주행거리<small></small></a>
+                                <a href="" class="type" data-beusable-tracking="">주행거리<small></small></a>
                                 <div class="sub_type_list" style="display:block" data-init="true">
                                     <div class="selectric-wrapper selectric-selectric">
                                         <div class="selectric-hide-select"><select name="wr_gt_n_mileage"
@@ -402,7 +402,7 @@
                             </li>
                             <!-- 금융 가격/할부 탭 -->
                             <li class="list_h list_h03 on">
-                                <a href="javascript:void(0);" class="type"
+                                <a href="" class="type"
                                    data-beusable-tracking="">가격/할부<small></small></a>
                                 <div class="sub_type_list" style="display:block" data-init="true">
                                     <div class="list_price_tab">
@@ -535,7 +535,7 @@
                                                 </div>
                                             </div>
                                             <input class="selectric-input" tabindex="0"></div>
-                                        <a href="javascript:void(0);" class="more_btn several" data-popup="price">
+                                        <a href="" class="more_btn several" data-popup="price">
                                             <span class="ico"></span>
                                             <span class="txt">가격 직접입력</span>
                                         </a>
@@ -615,7 +615,7 @@
                             </li>
                             <!-- 금융 가격/할부 탭 -->
                             <li class="list_h list_h06">
-                                <a href="javascript:void(0);" class="type" data-beusable-tracking="">색상 <small></small></a>
+                                <a href="" class="type" data-beusable-tracking="">색상 <small></small></a>
                                 <div class="sub_type_list">
                                     <ul class="row_list">
                                         <li>
@@ -687,7 +687,7 @@
                                 <div class="morePopup color" id="colorPopup" style="margin-top: -212px;">
                                     <div class="pop_head">
                                         <strong>색상</strong>
-                                        <a href="javascript:void(0);" class="close" data-popup="color">닫기</a>
+                                        <a href="" class="close" data-popup="color">닫기</a>
                                     </div>
                                     <div class="body_inner">
                                         <table class="color_list">
@@ -1056,14 +1056,14 @@
                                             </tbody>
                                         </table>
                                         <div class="btn_area">
-                                            <a href="javascript:void(0);" class="ok popupBtn" data-popup="color">확인</a>
-                                            <a href="javascript:void(0);" class="cancel" data-popup="color">취소</a>
+                                            <a href="" class="ok popupBtn" data-popup="color">확인</a>
+                                            <a href="" class="cancel" data-popup="color">취소</a>
                                         </div>
                                     </div>
                                 </div>
                             </li>
                             <li class="list_h list_h07">
-                                <a href="javascript:void(0);" class="type" data-beusable-tracking="">연료 <small></small></a>
+                                <a href="" class="type" data-beusable-tracking="">연료 <small></small></a>
                                 <div class="sub_type_list">
                                     <ul class="row_list">
                                         <li>
@@ -1172,7 +1172,7 @@
                                 </div>
                             </li>
                             <li class="list_h list_h08">
-                                <a href="javascript:void(0);" class="type" data-beusable-tracking="">변속기 <small></small></a>
+                                <a href="" class="type" data-beusable-tracking="">변속기 <small></small></a>
                                 <div class="sub_type_list">
                                     <ul class="row_list">
                                         <li>
@@ -1215,7 +1215,7 @@
                                 </div>
                             </li>
                             <li class="list_h list_h09">
-                                <a href="javascript:void(0);" class="type" data-beusable-tracking="">옵션 <small></small></a>
+                                <a href="" class="type" data-beusable-tracking="">옵션 <small></small></a>
                                 <div class="sub_type_list">
                                     <ul class="row_list">
                                         <li>
@@ -1287,7 +1287,7 @@
                                 <div class="morePopup opt" id="optPopup" style="margin-top: -412.5px;">
                                     <div class="pop_head">
                                         <strong>옵션</strong>
-                                        <a href="javascript:void(0);" class="close" data-popup="option">닫기</a>
+                                        <a href="" class="close" data-popup="option">닫기</a>
                                     </div>
                                     <div class="body_inner">
                                         <table class="opt_tb">
@@ -1712,14 +1712,14 @@
                                             </tbody>
                                         </table>
                                         <div class="btn_area">
-                                            <a href="javascript:void(0);" class="ok popupBtn" data-popup="option">확인</a>
-                                            <a href="javascript:void(0);" class="cancel" data-popup="option">취소</a>
+                                            <a href="" class="ok popupBtn" data-popup="option">확인</a>
+                                            <a href="" class="cancel" data-popup="option">취소</a>
                                         </div>
                                     </div>
                                 </div>
                             </li>
                             <li class="list_h list_h10">
-                                <a href="javascript:void(0);" class="type" data-beusable-tracking="">사고유무
+                                <a href="" class="type" data-beusable-tracking="">사고유무
                                     <small></small></a>
                                 <div class="sub_type_list">
                                     <ul class="row_list">
@@ -1763,7 +1763,7 @@
                                 </div>
                             </li>
                             <li class="list_h list_h11">
-                                <a href="javascript:void(0);" class="type" data-beusable-tracking="">인승 <small></small></a>
+                                <a href="" class="type" data-beusable-tracking="">인승 <small></small></a>
                                 <div class="sub_type_list">
                                     <div>
                                         <ul class="row_list">
@@ -1804,7 +1804,7 @@
                                                 <label for="carSeveral06">15인승</label>
                                             </li>
                                         </ul>
-                                        <a href="javascript:void(0);" class="more_btn several" data-popup="pass">
+                                        <a href="" class="more_btn several" data-popup="pass">
                                             <span class="ico"></span>
                                             <span class="txt">인승 직접입력</span>
                                         </a>
@@ -1820,7 +1820,7 @@
                                 </div>
                             </li>
                             <li class="list_h list_h12">
-                                <a href="javascript:void(0);" class="type" data-beusable-tracking="">지역 <small></small></a>
+                                <a href="" class="type" data-beusable-tracking="">지역 <small></small></a>
                                 <div class="sub_type_list sub_type_tree">
                                     <div class="scroll-wrapper scrollbar-dynamic" style="position: relative;">
                                         <div class="scrollbar-dynamic scroll-content"
@@ -2290,17 +2290,17 @@
                             </div>
                             <div class="align_field">
                                 <div class="align">
-                                    <span class="basic"><a href="javascript:void(0);" class="txt default"
+                                    <span class="basic"><a href="" class="txt default"
                                                            data-bro="order">기본정렬</a></span>
-                                    <span><a href="javascript:void(0);" class="txt" data-bro="order">가격순</a><a
-                                            href="javascript:void(0);" class="down" data-show="order">낮은순</a><a
-                                            href="javascript:void(0);" class="up" data-show="order">높은순</a></span>
-                                    <span><a href="javascript:void(0);" class="txt" data-bro="order">주행거리 순</a><a
-                                            href="javascript:void(0);" class="down" data-show="order">낮은순</a><a
-                                            href="javascript:void(0);" class="up" data-show="order">높은순</a></span>
-                                    <span><a href="javascript:void(0);" class="txt" data-bro="order">연식 순</a><a
-                                            href="javascript:void(0);" class="down" data-show="order">낮은순</a><a
-                                            href="javascript:void(0);" class="up" data-show="order">높은순</a></span>
+                                    <span><a href="" class="txt" data-bro="order">가격순</a><a
+                                            href="" class="down" data-show="order">낮은순</a><a
+                                            href="" class="up" data-show="order">높은순</a></span>
+                                    <span><a href="" class="txt" data-bro="order">주행거리 순</a><a
+                                            href="" class="down" data-show="order">낮은순</a><a
+                                            href="" class="up" data-show="order">높은순</a></span>
+                                    <span><a href="" class="txt" data-bro="order">연식 순</a><a
+                                            href="" class="down" data-show="order">낮은순</a><a
+                                            href="" class="up" data-show="order">높은순</a></span>
                                     <input id="orderInput" class="orderbyInput" type="hidden" name="orderby" value="">
                                     <input id="3dOrderInput" class="3dOrderInput" type="hidden"
                                            name="wr_eq_v_3dview_flag" value="">
@@ -2347,32 +2347,29 @@
                                 </colgroup>
 
                                 <tbody>
-                                <tr v-for="car_search_result of car_search_results" :key="car_search_result.v_carcd">
+                                <tr v-for="car_search_result of car_search_results" :key="car_search_result.carcd">
                                     <td class="thumb">
-                                        <a :href="car_search_result.v_car_url" target="_blank">
+                                        <a :href="car_search_result.car_url" target="_blank">
                                             <div class="mark_area"></div>
-                                            <img :src="car_search_result.v_middle_img" alt="자동차 썸네일">
+                                            <img :src="car_search_result.middle_img" alt="자동차 썸네일">
                                         </a>
                                     </td>
                                     <td class="car_info">
                                         <router-link to="/product">
                                             <!-- <a :href="car_search_result.v_car_url" target="_blank" class="name"></a> -->
-                                            {{car_search_result.v_modelnm}}<br>{{car_search_result.v_class_headnm}}{{car_search_result.v_class_detailnm}}
+                                            {{car_search_result.truck_name}}
                                         </router-link>
-                                        <span class="md_year">{{car_search_result.v_mfr_date}}({{car_search_result.v_begin_year}}년형)  &nbsp;&nbsp; {{car_search_result.n_mileage}}km &nbsp;&nbsp;{{car_search_result.v_fuel_typecd_name}}</span>
-                                        <span class="price">{{car_search_result.n_price}}만원 <em>5,850만원</em></span>
-                                        <a href="javascript:searchEvent.fnWindowPop('keep_pop','630','650','installment','yes', 'i_sCarCd=EC60304753&amp;maketing=car_keep_pop1&amp;i_iInstMonth=36&amp;i_iInstRate=6.5')"><span
-                                                class="monthly">월 {{car_search_result.n_month_price}}만원</span></a>
+                                        <span class="md_year">{{car_search_result.mfr_date}}({{car_search_result.begin_year}}년형)  &nbsp;&nbsp; {{car_search_result.mileage}}km &nbsp;&nbsp;{{car_search_result.fuel_typecd_name}}</span>
+                                        <span class="price">{{car_search_result.price}}만원 <em>5,850만원</em></span>
+                                        <a href=""><span
+                                                class="monthly"></span></a>
                                     </td>
                                     <td class="car_opt">
                                         <div class="mark">
-                                            <span class="tip_list tip_09"><button type="button" class="tip_btn"
-                                                                                  onclick="openHotMarkToolTip(this);">특옵션</button> </span>
-                                            <span class="tip_list tip_10"><button type="button" class="tip_btn"
-                                                                                  onclick="openHotMarkToolTip(this);">1인소유</button> <span
+                                            <span class="tip_list tip_09"><button type="button" class="tip_btn">특옵션</button> </span>
+                                            <span class="tip_list tip_10"><button type="button" class="tip_btn">1인소유</button> <span
                                                     class="tip_hot none"></span></span>
-                                            <span class="tip_list tip_26"><button type="button" class="tip_btn"
-                                                                                  onclick="openHotMarkToolTip(this);">제조사AS</button> <span
+                                            <span class="tip_list tip_26"><button type="button" class="tip_btn">제조사AS</button> <span
                                                     class="tip_hot none"></span></span>
                                         </div>
                                         <ul class="opt_list">
@@ -2386,11 +2383,11 @@
                                                 <span>5인승</span><span>&nbsp;</span>
                                             </li>
                                         </ul>
-                                        <span class="online_buy">{{car_search_resultv_simple_comment}}</span>
+                                        <span class="online_buy">{{car_search_result.simple_comment}}</span>
                                     </td>
                                     <td class="btn_area">
                                         <a id="toastid0"
-                                           href="javascript:searchEvent.fnOnlineBuy('EC60304753', '#toastid0')"
+                                           href=""
                                            class="oline_btn">온라인 구매</a>
                                     </td>
                                 </tr>
@@ -2400,17 +2397,17 @@
                         <div class="cm_pagination"><input id="pagingInput" class="pagingInput" type="hidden"
                                                           name="pageno" value="">
                             <ul class="pagination">
-                                <li class="num on"><a href="javascript:void(0);">1</a></li>
-                                <li class="num"><a href="javascript:searchEvent.pagingFn(2);">2</a></li>
-                                <li class="num"><a href="javascript:searchEvent.pagingFn(3);">3</a></li>
-                                <li class="num"><a href="javascript:searchEvent.pagingFn(4);">4</a></li>
-                                <li class="num"><a href="javascript:searchEvent.pagingFn(5);">5</a></li>
-                                <li class="num"><a href="javascript:searchEvent.pagingFn(6);">6</a></li>
-                                <li class="num"><a href="javascript:searchEvent.pagingFn(7);">7</a></li>
-                                <li class="num"><a href="javascript:searchEvent.pagingFn(8);">8</a></li>
-                                <li class="num"><a href="javascript:searchEvent.pagingFn(9);">9</a></li>
-                                <li class="num"><a href="javascript:searchEvent.pagingFn(10);">10</a></li>
-                                <li class="move next"><a href="javascript:searchEvent.pagingFn(2);">다음</a></li>
+                                <li class="num on"><a href="">1</a></li>
+                                <li class="num"><a href="">2</a></li>
+                                <li class="num"><a href="">3</a></li>
+                                <li class="num"><a href="">4</a></li>
+                                <li class="num"><a href="">5</a></li>
+                                <li class="num"><a href="">6</a></li>
+                                <li class="num"><a href="">7</a></li>
+                                <li class="num"><a href="">8</a></li>
+                                <li class="num"><a href="">9</a></li>
+                                <li class="num"><a href="">10</a></li>
+                                <li class="move next"><a href="">다음</a></li>
                             </ul>
                         </div>
                     </div>
@@ -2420,8 +2417,10 @@
     </div>
 </template>
 <script>
+import {checkBox} from "../mixins/checkBox";
+import axios from 'axios'
 
-    export default {
+export default {
         name: 'searchMain',
         data() {
             return {
@@ -2511,110 +2510,112 @@
                         text: '버스'
                     }
                 ],
-                car_company_list: [
-                    {product_count: 2009, company_cd: "001", company_nm: "현대"}, {
-                        product_count: 160,
+                makerList: [/*
+                    {
+                       checked: false, product_count:2009, company_cd: "001", company_nm: "현대"
+                    }, {
+                       checked: false, product_count:160,
                         company_cd: "007",
                         company_nm: "제네시스"
-                    }, {product_count: 1905, company_cd: "002", company_nm: "기아"}, {
-                        product_count: 907,
+                    }, {checked: false, product_count:1905, company_cd: "002", company_nm: "기아"}, {
+                       checked: false, product_count:907,
                         company_cd: "003",
                         company_nm: "쉐보레(GM대우)"
-                    }, {product_count: 963, company_cd: "005", company_nm: "르노삼성"}, {
-                        product_count: 478,
+                    }, {checked: false, product_count:963, company_cd: "005", company_nm: "르노삼성"}, {
+                        checked: false, product_count:478,
                         company_cd: "004",
                         company_nm: "쌍용"
-                    }, {product_count: 0, company_cd: "088", company_nm: "대우버스"}, {
-                        product_count: 397,
+                    }, {checked: false, product_count:0, company_cd: "088", company_nm: "대우버스"}, {
+                        checked: false, product_count:397,
                         company_cd: "013",
                         company_nm: "벤츠"
-                    }, {product_count: 222, company_cd: "012", company_nm: "BMW"}, {
-                        product_count: 176,
+                    }, {checked: false, product_count:222, company_cd: "012", company_nm: "BMW"}, {
+                        checked: false, product_count:176,
                         company_cd: "011",
                         company_nm: "아우디"
-                    }, {product_count: 145, company_cd: "014", company_nm: "폭스바겐"}, {
-                        product_count: 38,
+                    }, {checked: false, product_count:145, company_cd: "014", company_nm: "폭스바겐"}, {
+                        checked: false, product_count:38,
                         company_cd: "031",
                         company_nm: "도요타"
-                    }, {product_count: 44, company_cd: "035", company_nm: "렉서스"}, {
-                        product_count: 35,
+                    }, {checked: false, product_count:44, company_cd: "035", company_nm: "렉서스"}, {
+                        checked: false, product_count:35,
                         company_cd: "027",
                         company_nm: "혼다"
-                    }, {product_count: 84, company_cd: "054", company_nm: "미니"}, {
-                        product_count: 71,
+                    }, {checked: false, product_count:84, company_cd: "054", company_nm: "미니"}, {
+                        checked: false, product_count:71,
                         company_cd: "024",
                         company_nm: "포드"
-                    }, {product_count: 54, company_cd: "021", company_nm: "푸조"}, {
-                        product_count: 29,
+                    }, {checked: false, product_count:54, company_cd: "021", company_nm: "푸조"}, {
+                        checked: false, product_count:29,
                         company_cd: "017",
                         company_nm: "볼보"
-                    }, {product_count: 7, company_cd: "015", company_nm: "포르쉐"}, {
-                        product_count: 21,
+                    }, {checked: false, product_count:7, company_cd: "015", company_nm: "포르쉐"}, {
+                        checked: false, product_count:21,
                         company_cd: "043",
                         company_nm: "캐딜락"
-                    }, {product_count: 31, company_cd: "083", company_nm: "지프"}, {
-                        product_count: 17,
+                    }, {checked: false, product_count:31, company_cd: "083", company_nm: "지프"}, {
+                        checked: false, product_count:17,
                         company_cd: "044",
                         company_nm: "링컨"
-                    }, {product_count: 2, company_cd: "023", company_nm: "크라이슬러"}, {
-                        product_count: 0,
+                    }, {checked: false, product_count:2, company_cd: "023", company_nm: "크라이슬러"}, {
+                        checked: false, product_count:0,
                         company_cd: "081",
                         company_nm: "스마트"
-                    }, {product_count: 29, company_cd: "033", company_nm: "닛산"}, {
-                        product_count: 31,
+                    }, {checked: false, product_count:29, company_cd: "033", company_nm: "닛산"}, {
+                        checked: false, product_count:31,
                         company_cd: "058",
                         company_nm: "인피니티"
-                    }, {product_count: 24, company_cd: "019", company_nm: "재규어"}, {
-                        product_count: 41,
+                    }, {checked: false, product_count:24, company_cd: "019", company_nm: "재규어"}, {
+                        checked: false, product_count:41,
                         company_cd: "020",
                         company_nm: "랜드로버"
-                    }, {product_count: 0, company_cd: "029", company_nm: "마쯔다"}, {
-                        product_count: 0,
+                    }, {checked: false, product_count:0, company_cd: "029", company_nm: "마쯔다"}, {
+                        checked: false, product_count:0,
                         company_cd: "084",
                         company_nm: "맥라렌"
-                    }, {product_count: 1, company_cd: "030", company_nm: "미쯔비시"}, {
-                        product_count: 1,
+                    }, {checked: false, product_count:1, company_cd: "030", company_nm: "미쯔비시"}, {
+                        checked: false, product_count:1,
                         company_cd: "050",
                         company_nm: "벤틀리"
-                    }, {product_count: 0, company_cd: "086", company_nm: "북기은상"}, {
-                        product_count: 0,
+                    }, {checked: false, product_count:0, company_cd: "086", company_nm: "북기은상"}, {
+                        checked: false, product_count:0,
                         company_cd: "016",
                         company_nm: "사브"
-                    }, {product_count: 0, company_cd: "052", company_nm: "스바루"}, {
-                        product_count: 0,
+                    }, {checked: false, product_count:0, company_cd: "052", company_nm: "스바루"}, {
+                        checked: false, product_count:0,
                         company_cd: "037",
                         company_nm: "스즈키"
-                    }, {product_count: 19, company_cd: "022", company_nm: "시트로엥"}, {
-                        product_count: 0,
+                    }, {checked: false, product_count:19, company_cd: "022", company_nm: "시트로엥"}, {
+                        checked: false, product_count:0,
                         company_cd: "070",
                         company_nm: "애스턴마틴"
-                    }, {product_count: 0, company_cd: "041", company_nm: "페라리"}, {
-                        product_count: 5,
+                    }, {checked: false, product_count:0, company_cd: "041", company_nm: "페라리"}, {
+                        checked: false, product_count:5,
                         company_cd: "018",
                         company_nm: "피아트"
-                    }, {product_count: 0, company_cd: "048", company_nm: "험머"}, {
-                        product_count: 2,
+                    }, {checked: false, product_count:0, company_cd: "048", company_nm: "험머"}, {
+                        checked: false, product_count:2,
                         company_cd: "087",
                         company_nm: "테슬라"
-                    }, {product_count: 0, company_cd: "034", company_nm: "닷지"}, {
-                        product_count: 1,
+                    }, {checked: false, product_count:0, company_cd: "034", company_nm: "닷지"}, {
+                        checked: false, product_count:1,
                         company_cd: "038",
                         company_nm: "쉐보레"
-                    }, {product_count: 0, company_cd: "056", company_nm: "GMC"}, {
-                        product_count: 0,
+                    }, {checked: false, product_count:0, company_cd: "056", company_nm: "GMC"}, {
+                        checked: false, product_count:0,
                         company_cd: "049",
                         company_nm: "람보르기니"
-                    }, {product_count: 0, company_cd: "047", company_nm: "롤스로이스"}, {
-                        product_count: 6,
+                    }, {checked: false, product_count:0, company_cd: "047", company_nm: "롤스로이스"}, {
+                        checked: false, product_count:6,
                         company_cd: "053",
                         company_nm: "마세라티"
-                    }, {product_count: 0, company_cd: "080", company_nm: "마이바흐"}, {
-                        product_count: 0,
+                    }, {checked: false, product_count:0, company_cd: "080", company_nm: "마이바흐"}, {
+                        checked: false, product_count:0,
                         company_cd: "057",
                         company_nm: "어큐라"
                     }
-                ],
-                car_search_results: [
+                */],
+                car_search_results: [/*
                     {
                         v_carcd: "EC60314783",
                         n_real_mile: "0",
@@ -3752,24 +3753,44 @@
                         v_tmp_str_idx2: "",
                         v_ecc_update_dtm: "20191227131543",
                         v_model_grp_nm: "아반떼"
-                    }
+                    }*/
                 ]
             }
+
+        },
+        computed:{
         },
         methods: {
-            menu_folding() {
-
-                //차량검색 메뉴
-                const searchList = document.querySelector('.search_list_wrap .list_h > a');
-                searchList.next().stop().slideToggle(200).parent().toggleClass('on');
-
-                if (searchList.parent().hasClass('on') && searchList.parent().find('.more_btn.several').hasClass('on')) {
-                    searchList.nextAll('.several_area').show();
-                } else {
-                    searchList.nextAll('.several_area').hide();
+        },
+        created() {
+                let url = `http://localhost:8080/sch`
+                let headers = {
+                    'authorization': 'JWT fefege..',
+                    'Accept' : 'application/json',
+                    'Content-Type': 'application/json'
                 }
-            }
-        }
+                axios
+                    .post(url, headers)
+                    .then(res =>
+                    {
+                        alert("들어옴")
+                        alert(res.data.car_search_results[0].categorycd)
+                        this.car_search_results = res.data.car_search_results
+                        alert(this.car_search_results[0].categorycd)
+/*                        for(let i = 0; i < res.date.length ; i++ ) {
+                            this.wr_in_v_categorycd.push({
+                                checked: false,
+                                categorycd: res.data[i].code,
+                                categorynm: res.data[i].name
+                            })
+                        }*/
+                    })
+                    .catch(()=>{
+                        console.log("들어옴 실패")
+                        alert("들어옴 실패")
+                    })
+            },
+    mixins:[checkBox]
     }
 
 </script>
