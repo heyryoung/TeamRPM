@@ -9,9 +9,6 @@ import java.util.Map;
 
 @Repository
 public interface CarsRepository extends CrudRepository<Cars, Long> {
-    public List<Cars> findByMakenm(String makenm);
-    public List<Cars> findByModelGrpNm(String modelGrpNm);
-
     @Query(value="SELECT DISTINCT categorycd ,categorynm FROM car", nativeQuery=true)
     public List<Map<String,String>> findAllCategory();
 
@@ -25,10 +22,10 @@ public interface CarsRepository extends CrudRepository<Cars, Long> {
     public List<Map<String,String>>  findCarWithCenterRegionCode();
 
 
+
     @Query(value="SELECT  * FROM car ", nativeQuery=true)
     public List<Cars> findCarWithPaging();
 
-    public List<Cars> findDistinctBy();
 
 
 }
