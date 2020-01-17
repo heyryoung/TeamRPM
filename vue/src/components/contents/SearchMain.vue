@@ -447,7 +447,7 @@
 </template>
 <script>
 import {checkBox} from "../mixins/checkBox";
-
+import axios from 'axios'
 export default {
         name: 'searchMain',
         data() {
