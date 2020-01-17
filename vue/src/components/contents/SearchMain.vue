@@ -454,11 +454,6 @@ export default {
             return {
                 searchWord : '',
                 carcd: '',
-                carSearchResults: [],
-                categoryList: [],
-                makerList: [],
-                fuelTypeList: [],
-                regionList: [],
                 checkedItem : []
             }
 

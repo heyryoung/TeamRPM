@@ -1,13 +1,24 @@
 import axios from 'axios'
 const state = {
     context: 'http://localhost:8080/',
-    carSearchResults :[]
+    carSearchResults :[],
+    categoryList: [],
+    makerList: [],
+    fuelTypeList: [],
+    regionList: []
 }
 const getters = {
     getContext : state => state.context,
     getCarSearchResults : state => state.carSearchResults
 }
 const actions = {
+
+    async init(){
+
+    }
+
+
+
     async setCarList({commit}){
         axios
             .get(`http://localhost:8080/sch`)
