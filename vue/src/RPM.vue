@@ -1,8 +1,9 @@
 <template>
     <div id="main_grid">
         <link rel="stylesheet" type="text/css"  href="css/re_import.css">
-       <link rel="stylesheet" type="text/css" href="css/plugin/ion.rangeSlider.css">
-        <link rel="stylesheet" type="text/css" href="css/plugin/ion.rangeSlider.skinHTML5.css">
+        <link rel="stylesheet" type="text/css" href="css/plugin/ion.rangeSlider.css">
+        <link rel="stylesheet" type="text/css"
+              href="css/plugin/ion.rangeSlider.skinHTML5.css">
         <link rel="stylesheet" href="css/plugin/uniform.css">
         <link rel="stylesheet" href="css/plugin/jquery.scrollbar.css">
         <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/common.css?v=200108090126">
@@ -12,10 +13,10 @@
         <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/window.css?v=200108090126">
         <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/compare.css?v=200103163154">
         <div id="main_image" style="width: 100%; height: 100px; line-height: 100px; text-align: center">
-            <a href="/"><img style="width: 100%; max-width: 760px; vertical-align: middle" src="@/assets/image/rpmlogoblack.png" alt=""></a>
+            <a @click.prevent="dd" href="/"><img style="width: 100%; max-width: 760px; vertical-align: middle" src="@/assets/image/rpmlogoblack.png" alt=""></a>
         </div>
         <nav>
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button  class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-start" id="navbarSupportedContent">
@@ -23,11 +24,12 @@
                     <li class="nav-item">
                         <Slide noOverlay ableOutsideClick :crossIcon="false">
                             <router-link to="/">HOME</router-link>
-                            <router-link to="/login">로그인</router-link>
+                            <router-link v-if="this.$store.state.logins.isAuth==false" to="/login">로그인</router-link>
+                            <div v-else @click="logout" to="/login">로그아웃</div>
                             <router-link to="/join">회원가입</router-link>
                             <router-link to="/searchmain">검색창</router-link>
                             <router-link to="/product">제품</router-link>
-                            <router-link to="/mypage">마이페이지</router-link>
+                            <router-link v-if="this.$store.state.logins.isAuth==true" to="/mypage">마이페이지</router-link>
                             <router-link to="/seencar">최근 본 차량(비교함)</router-link>
                             <router-link to="/mapList">주유소 지도</router-link>
                             <router-link to="/buycar">자동차구매 </router-link>
@@ -42,6 +44,15 @@
 
                         </Slide >
                     </li>
+                    <!--                             <li class="nav-item">
+                                                    <a class="nav-link" href="#section1">Section 1</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="#section2">Section 2</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="#section3">Section 3</a>
+                                                </li> -->
                 </ul>
             </div>
         </nav>
@@ -53,11 +64,28 @@
 
 
 <script>
+
     import {Slide} from 'vue-burger-menu'
     export default {
         name: 'app',
         components: {
             Slide
+
+        },
+        data(){
+            return{
+
+
+            }
+        },
+        methods:{
+            logout(){
+
+                this.$store.dispatch('logins/logout', "")
+
+
+
+            }
         }
     }
 </script>
