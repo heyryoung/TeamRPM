@@ -30,3 +30,4 @@ public class Thumb implements Serializable {
     private User userSeq;
 
 }
+
