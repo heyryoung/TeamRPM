@@ -34,7 +34,6 @@ public class Social implements Serializable {
             orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
 
-
     @Builder
     private Social(String boardDate, String carCode, String boardContent, String boardImg) {
         Assert.hasText(boardDate, "boardDate must not be empty");
