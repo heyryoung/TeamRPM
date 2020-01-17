@@ -16,8 +16,6 @@
 				<tbody>
 				<tr>
 					<th><span class="org">*</span> <label for="i_sMemberName">이름</label></th>
-					<td colspan="3"><input type="text" v-model="name" id="i_sMemberName" maxlength="20" class="user_input02" value=""></td>
-				</tr>
 					<td colspan="3"><input type="text" v-model="name" id="i_sMemberName" maxlength="20" class="user_input02" value=""></td>				</tr>
 				<tr>
 					<th><span class="org">*</span> <label for="i_sMemberId">아이디</label></th>
