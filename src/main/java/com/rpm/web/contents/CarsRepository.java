@@ -5,10 +5,12 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Map;
 
 @Repository
 public interface CarsRepository extends CrudRepository<Cars, Long> {
+    public List<Cars> findByMakenm(String makenm);
+    public List<Cars> findByModelGrpNm(String modelGrpNm);
+
     @Query(value="SELECT DISTINCT categorycd ,categorynm FROM car", nativeQuery=true)
     public List<Map<String,String>> findAllCategory();
 
