@@ -482,6 +482,43 @@ export default {
                     }else{
                         searchConditionCategory.className = searchConditionCategory.className+" on"
                     }
+            },
+            searchWithCondition(){
+                let checkedCategoryList = []
+                let checkedMakerList = []
+                let checkedFuelTypeList = []
+                let checkedRegionList = []
+
+                this.categoryList.forEach( e =>{ if(e.checked == true) checkedCategoryList.push(e) })
+                this.makerList.forEach( e =>{ if(e.checked == true) checkedMakerList.push(e) })
+                this.fuelTypeList.forEach( e =>{ if(e.checked == true) checkedFuelTypeList.push(e) })
+                this.regionList.forEach( e =>{ if(e.checked == true) checkedRegionList.push(e) })
+                let data = {
+                    categoryList : checkedCategoryList,
+                    makerList : checkedMakerList,
+                    fuelTypeList : checkedFuelTypeList,
+                    regionList :checkedRegionList,
+                    searchWord: this.searchWord,
+                    carcd : this.carcd
+                }
+                let url = `http://localhost:8080/searchWithCondition`
+                let headers = {
+                    'authorization': 'JWT fefege..',
+                    'Accept' : 'application/json',
+                    'Content-Type': 'application/json'
+                }
+                axios
+                    .post(url, data ,headers)
+                    .then(res =>
+                    {
+                        alert(res.data.carSearchResults[0].carcd)
+                        this.carSearchResults = []
+                        this.carSearchResults = res.data.carSearchResults
+                    })
+                    .catch(()=>{
+                        alert("들어옴 실패")
+                    })
+
             }
         },
         created() {
