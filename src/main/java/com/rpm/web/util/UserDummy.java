@@ -8,12 +8,7 @@ import java.util.Random;
 
 import com.rpm.web.user.User;
 
-import org.springframework.context.annotation.Lazy;
-import org.springframework.stereotype.Component;
 
-
-@Lazy
-@Component
 public class UserDummy{
 
     public User makeUser() {
@@ -34,7 +29,7 @@ public class UserDummy{
                 "솜", "공", "면", "탁", "온", "디", "항", "후", "려", "균", "묵", "송", "욱", "휴", "언", "령", "섬", "들", "견", "추", "걸", "삼",
                 "열", "웅", "분", "변", "양", "출", "타", "흥", "겸", "곤", "번", "식", "란", "더", "손", "술", "훔", "반", "빈", "실", "직", "흠",
                 "흔", "악", "람", "뜸", "권", "복", "심", "헌", "엽", "학", "개", "롱", "평", "늘", "늬", "랑", "얀", "향", "울", "련");
-        List<String> genders = Arrays.asList("남", "여");
+        List<String> genders = Arrays.asList("man", "woman");
         List<String> en1 = Arrays.asList("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o",
                 "p", "q", "r", "s", "t", "u", "v", "x", "y", "z");
         List<String> emails = Arrays.asList("daum.net","naver.com","nate.com","dreamwiz.com","empal.com","freechal.com",
@@ -56,7 +51,7 @@ public class UserDummy{
         }
         name = LN.get(0)+FN.get(0)+FN.get(1);
         gender = genders.get(0);
-        email = userId + emails.get(0);
+        email = userId + "@"+emails.get(0);
         region = regions.get(0);
         user.setUserid(userId);
         user.setPasswd(passwd);
@@ -70,16 +65,12 @@ public class UserDummy{
     public String setBirth(){
         Random r = new Random();
         String y,m= "";
-        y=String.valueOf(r.nextInt(80)+1929);
-        m=String.valueOf(r.nextInt(11)+1);
+        y=String.valueOf(r.nextInt(110)+1909);
+        List<String> month= Arrays.asList("01","02","03","04","05","06","07","08","09","10","11","12");
+        Collections.shuffle(month);
+        m= month.get(0);
         return y+m;
     }
-	public ArrayList<User> makeUsers() {
-        ArrayList<User> users = new ArrayList<>();
-        for (int i = 0; i < 1000; i++) {
-            users.add(makeUser());
-        }
-        return users;
-    }
+
 
 }
