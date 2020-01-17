@@ -1,21 +1,25 @@
 package com.rpm.web.contents;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
-@Data
 @Component
-@AllArgsConstructor
+@Entity
 @NoArgsConstructor
+@Setter(AccessLevel.PUBLIC)
+@Getter
+@ToString
+@Table(name = "SCHCONDITION")
 public class SearchCondition {
 
-    public List<SearchConditioinWithDep> maker;
-    public List<SearchConditionNoDep> category;
-    public List<SearchConditionNoDep> fuelType;
-    public List<SearchConditioinWithDep> centerRegion;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @NotNull
+    @Column(name = "CID") private Long cid;
+    @NotNull @Column(name = "CARCD", length = 12) private String carcd;
 
 }
