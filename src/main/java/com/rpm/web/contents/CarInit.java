@@ -6,21 +6,20 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 @Component
-public class CarsInit implements ApplicationRunner {
-    private CarsRepository carsRepository;
+public class CarInit implements ApplicationRunner {
+    private CarRepository carRepository;
 
-    public CarsInit(CarsRepository carsRepository) {
-        this.carsRepository = carsRepository;
+    public CarInit(CarRepository carRepository) {
+        this.carRepository = carRepository;
     }
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        long count = carsRepository.count();
+        long count = carRepository.count();
         MakeCarDummyList http = new MakeCarDummyList();
         ObjectMapper jsonMapper = new ObjectMapper();
         String[] json = null;
@@ -41,7 +40,7 @@ public class CarsInit implements ApplicationRunner {
                         strJson.put(json[j].substring(0,json[j].indexOf("=")).trim(),json[j].substring(json[j].indexOf("=")+1));
                     }
                 }
-                carsRepository.save(new Cars(strJson.get("v_carcd"),
+                carRepository.save(new Car(strJson.get("v_carcd"),
                         strJson.get("v_optioncd"),strJson.get("v_categorycd"),strJson.get("v_center_code"),
                         strJson.get("v_middle_img"),strJson.get("v_elan_path"),strJson.get("v_exterior_colorcd"),
                         strJson.get("v_center_region"),strJson.get("v_ecc_reg_dtm"),strJson.get("v_begin_year"),

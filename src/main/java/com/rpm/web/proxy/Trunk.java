@@ -13,7 +13,7 @@ public class Trunk<T> {
 		for (int i = 0; i < x.size(); i++) {
 			map.put(x.get(i), y.get(i));
 		}
-		map.forEach((k,v)-> System.out.print(String.format("%s : %s", k, v)));
+		map.forEach((k,v)-> System.out.println(String.format("%s : %s", k, v)));
 	}
 	
 	public T get(String k) {
