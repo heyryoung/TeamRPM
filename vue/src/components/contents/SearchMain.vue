@@ -518,7 +518,6 @@ export default {
                         alert("들어옴 실패")
                     })
 
-
             }
         },
         created() {
