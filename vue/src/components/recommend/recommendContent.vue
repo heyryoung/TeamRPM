@@ -105,13 +105,9 @@
 
             <div class="cm_pagination">
                 <ul class="pagination">
-                    <li class="move prev"><a href=""><img
-                            src="/resources/images/content/buy/pagination_arrows.png" border="0" alt="이전10개"
-                            style="cursor:pointer"></a></li>
+                    <li class="move prev"><a href=""></a></li>
                     <li class="num on"><a>1</a></li>
-                    <li class="move next"><a href=""><img
-                            src="/resources/images/content/buy/pagination_arrows.png" border="0" alt="다음10개"
-                            style="cursor:pointer"></a></li>
+                    <li class="move next"><a href=""></a></li>
                 </ul>
             </div>
         </div>

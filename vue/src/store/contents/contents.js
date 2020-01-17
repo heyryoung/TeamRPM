@@ -1,7 +1,31 @@
-const state = {}
-const getters = {}
-const actions = {}
-const mutations = {}
+import axios from 'axios'
+const state = {
+    context: 'http://localhost:8080/',
+    carSearchResults :[]
+}
+const getters = {
+    getContext : state => state.context,
+    getCarSearchResults : state => state.carSearchResults
+}
+const actions = {
+    async setCarList({commit}){
+        axios
+            .get(`http://localhost:8080/sch`)
+            .then(({data})=>{commit('SETCARLIST',data)})
+            .catch(()=>{
+                alert('AXIOS 실패')
+            })
+    }
+
+}
+const mutations = {
+    SETCARLIST (state, data) {
+        state.carSearchResults = data.carSearchResults
+        alert("들어옴")
+        alert(this.carSearchResults[0].categorycd)
+    }
+
+}
 export default {
     name: 'contents',
     namespaced: true,

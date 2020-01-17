@@ -13,31 +13,31 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Service
-public class CarServiceImpl implements CarService {
-    @Autowired private CarRepository carRepository;
+public class CarsServiceImpl implements CarsService {
+    @Autowired private CarsRepository carsRepository;
 
     @Override
-    public Map<String, List<Car>> getCategoryByCarType(Iterable<Car> cars) {
+    public Map<String, List<Cars>> getCategoryByCarType(Iterable<Cars> cars) {
         return StreamSupport.stream(cars.spliterator(), false)
-                .filter(distinctByKey(Car::getMakenm))
-                .collect(Collectors.groupingBy(Car::getCarType));
+                .filter(distinctByKey(Cars::getMakenm))
+                .collect(Collectors.groupingBy(Cars::getCarType));
     }
 
     @Override
-    public Map<String, Map<String, Long>> getCategory1(Iterable<Car> cars) {
+    public Map<String, Map<String, Long>> getCategory1(Iterable<Cars> cars) {
         return StreamSupport.stream(cars.spliterator(), false)
-                .collect(Collectors.groupingBy(Car::getCarType,
-                        Collectors.groupingBy(Car::getMakenm,Collectors.counting())));
+                .collect(Collectors.groupingBy(Cars::getCarType,
+                        Collectors.groupingBy(Cars::getMakenm,Collectors.counting())));
     }
     @Override
     public Map<String, Long> getCategory2(String param) {
-        return StreamSupport.stream(carRepository.findByMakenm(param).spliterator(), false)
-                .collect(Collectors.groupingBy(Car::getModelGrpNm, Collectors.counting()));
+        return StreamSupport.stream(carsRepository.findByMakenm(param).spliterator(), false)
+                .collect(Collectors.groupingBy(Cars::getModelGrpNm, Collectors.counting()));
     }
     @Override
     public Map<String, Long> getCategory3(String param) {
-        return StreamSupport.stream(carRepository.findByModelGrpNm(param).spliterator(), false)
-                .collect(Collectors.groupingBy(Car::getModelnmText, Collectors.counting()));
+        return StreamSupport.stream(carsRepository.findByModelGrpNm(param).spliterator(), false)
+                .collect(Collectors.groupingBy(Cars::getModelnmText, Collectors.counting()));
     }
 
 

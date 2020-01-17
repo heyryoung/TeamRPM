@@ -9,43 +9,43 @@ import java.util.*;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8081")
-public class CarController {
+public class CarsController {
     @Autowired
-    CarRepository carRepository;
+    CarsRepository carsRepository;
     @Autowired
     Box box;
     @Autowired
     Trunk<Object> trunk;
     @Autowired
-    CarService carService;
+    CarsService carsService;
 
 
     @GetMapping("/welcome")
     public Map<String, Object> welcome(){
-        trunk.put(Arrays.asList("allCount"),Arrays.asList(String.valueOf(carRepository.count())));
+        trunk.put(Arrays.asList("allCount"),Arrays.asList(String.valueOf(carsRepository.count())));
         return trunk.get();
     }
 
     @GetMapping("/getcategory/{param}/{column}")
     public Map<String, Object> getCategory(@PathVariable String param, @PathVariable String column){
-        Iterable<Car> cars= carRepository.findAll();
+        Iterable<Cars> cars= carsRepository.findAll();
         System.out.println(param);
         System.out.println(column);
         switch (column){
             case "CAR_TYPE":
                 trunk.put(Arrays.asList("category", "count"),
-                        Arrays.asList(carService.getCategory1(cars).get(param).keySet(),
-                                carService.getCategory1(cars).get(param).values()));
+                        Arrays.asList(carsService.getCategory1(cars).get(param).keySet(),
+                                carsService.getCategory1(cars).get(param).values()));
                 break;
             case "MAKENM" :
                 trunk.put(Arrays.asList("category", "count"),
-                        Arrays.asList(carService.getCategory2(param).keySet(),
-                                carService.getCategory2(param).values()));
+                        Arrays.asList(carsService.getCategory2(param).keySet(),
+                                carsService.getCategory2(param).values()));
                 break;
             case "MODEL_GRP_NM" :
                 trunk.put(Arrays.asList("category", "count"),
-                        Arrays.asList(carService.getCategory3(param).keySet(),
-                                carService.getCategory3(param).values()));
+                        Arrays.asList(carsService.getCategory3(param).keySet(),
+                                carsService.getCategory3(param).values()));
                 break;
         }
         return trunk.get();
