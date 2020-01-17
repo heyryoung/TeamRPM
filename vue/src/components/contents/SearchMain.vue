@@ -464,10 +464,6 @@ export default {
 
         },
         computed:{
-            setCarList : function(){
-                this.$store.dispatch('contents/setCarList')
-                return this.$store.state.contents.carSearchResults
-            }
         },
         methods: {
             searchKeyClick(searchKeyID){
@@ -514,9 +510,9 @@ export default {
                     .post(url, data ,headers)
                     .then(res =>
                     {
-                        alert('dddd')
-                        console.log(res)
-
+                        alert(res.data.result[0].carcd)
+                        this.carSearchResults = []
+                        this.carSearchResults = res.data.result
                     })
                     .catch(()=>{
                         alert("들어옴 실패")

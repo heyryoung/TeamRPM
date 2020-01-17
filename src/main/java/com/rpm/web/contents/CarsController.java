@@ -69,16 +69,12 @@ public class CarsController {
     @RequestMapping("/searchWithCondition")
     public Map<String,Object> searchWithCondition(@RequestBody  SearchCondition searchCondition){
         Map<String, Object> map = new HashMap<String, Object>();
-        List<Cars> carsList = (List<Cars>) carsRepository.findAll();
-        System.out.println(searchCondition.getCategoryList().get(0).getName());
-
+        List<Cars> carsList = (List<Cars>) carsServiceImpl.findAllByDistinct(carsRepository.findAll());
         searchCondition.getCategoryList().stream().forEach( s -> {
             carsList.stream().filter(e-> s.getCode().equals(e.getCategorycd()));
         });
 
-        carsList.forEach( e -> System.out.println(e.getCategorynm()));
-
-        map.put("result" , carsList);
+        map.put("carSearchResults" , carsList.subList(0,15));
         return map;
     }
 }
