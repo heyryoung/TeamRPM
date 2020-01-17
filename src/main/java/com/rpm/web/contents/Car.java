@@ -15,7 +15,7 @@ import java.io.Serializable;
 @Getter
 @ToString
 @Table(name = "CAR")
-public class Cars implements Serializable {
+public class Car implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -64,7 +64,7 @@ public class Cars implements Serializable {
     @Column(name = "MODEL_GRP_NM", length = 100) private String modelGrpNm;
 
     @Builder
-    public Cars(
+    public Car(
             String carcd, String optioncd, String categorycd, String centerCode, String middleImg, String elanPath,
             String exteriorColordcd, String centerRegion, String eccRegDtm, String beginYear, String makecd,
             String smallImg, String modelnm, String optioncdName, String carType, String pnMobile, String usernm,
