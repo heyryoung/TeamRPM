@@ -40,6 +40,12 @@ public class CarsServiceImpl implements CarsService {
                 .collect(Collectors.groupingBy(Cars::getModelnmText, Collectors.counting()));
     }
 
+    @Override
+    public List<Cars>  findAllByDistinct(Iterable<Cars> cars) {
+        return StreamSupport.stream(cars.spliterator(), false)
+                .filter(distinctByKey(Cars::getCarcd))
+                .collect(Collectors.toList());
+    }
 
 
 
