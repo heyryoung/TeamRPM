@@ -510,9 +510,9 @@ export default {
                     .post(url, data ,headers)
                     .then(res =>
                     {
-                        alert(res.data.result[0].carcd)
+                        alert(res.data.carSearchResults[0].carcd)
                         this.carSearchResults = []
-                        this.carSearchResults = res.data.result
+                        this.carSearchResults = res.data.carSearchResults
                     })
                     .catch(()=>{
                         alert("들어옴 실패")
