@@ -42,7 +42,7 @@
                         <col>
                     </colgroup>
 
-                    <tbody v-for="(customer,index) of customerList" :key="customer.customerID">
+                    <tbody v-for="(customer,index) of List" :key="customer.customerID">
                     <tr>
                         <td class="check">
                             <div class="checker" id="uniform-interest_list_check1">
@@ -88,7 +88,7 @@
             </div>
 
             <div class="btn_cont">
-                <a href="javascript:;" class="delete" onclick="fnDelete(); return false;">선택삭제</a>
+                <a href="" class="delete" >선택삭제</a>
             </div>
 
             <div class="cm_pagination">
@@ -106,11 +106,13 @@
     </div>
 </template>
 <script>
+    import {checkBox} from "../mixins/checkBox";
+
     export default {
         data(){
             return {
                 allchecked:false,
-                customerList:[
+                List:[
                     {customerID:"001",comment:"벤츠 suv 최저가 구합니다",checked: false, minCarYear:"2000",maxCarYear:"2010", minDistance:"10000",maxDistance:"150000", minPrice:"7000",maxPrice:"10000", acident:"무사고",
                         color:"갈색", region:"경기/인천", fuel:"디젤",carType:"SUV", people:"5인승",thumb:"https://story-img.kakaocdn.net/dn/qoQx7/hyBwU4vCEL/RswKkc4XSgAQPTF4piHXQ0/img_xl.jpg?width=1096&height=822&face=481_327_571_426&avg=%23c9c6c7"},
 
@@ -121,32 +123,13 @@
             }
         },
         methods: {
-            check(i){
-                this.customerList[i].checked=!this.customerList[i].checked
-            },
-            allcheck(){
-                this.allchecked=!this.allchecked
-                for(let i=0;i<=this.customerList.length;i++){
-                    this.customerList[i].checked=this.allchecked
-                }
-            },
-            updateCheckall(){
-                let checknum=0
-                for(let i=0;i<this.customerList.length;i++){
-                    if(this.customerList[i].checked==true){
-                        checknum+=1
-                    }
-                    if(checknum==this.customerList.length){
-                        this.allchecked=true
-                    }else{
-                        this.allchecked=false
-                    }
-                }
-            },
+
             goCompare(){
                 alert('한눈에 비교하기')
             }
 
-        }
+        },
+        mixins:[checkBox]
+
     }
 </script>

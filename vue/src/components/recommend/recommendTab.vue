@@ -20,15 +20,15 @@
         data() {
             return {
                 tabs: [
-                    {title: "딜러들이 추천한차", link: "/recommendContent", pink: true,},
-                    {title: "차량정보 입력", link: "/condition", pink: false},
+                    {title: "딜러들이 추천한차", link: "/recommendHome", pink: true,},
+                    {title: "차량정보 입력", link: "/recommendHome/condition", pink: false},
 
                 ],
             }
         },
         methods : {
             tabSwitch(i) {
-                this.tabs[i].pink = !this.tabs[i].pink
+                this.tabs[i].pink = true
                 for (let a = 0; a < this.tabs.length; a++) {
                     if (a != i) {
                         this.tabs[a].pink = false

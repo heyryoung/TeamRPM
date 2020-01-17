@@ -1,422 +1,160 @@
 <template>
     <div>
-        <img id="mainImg" src="http://junggocha.cafe24.com/img/sub/%EC%A4%91%EA%B3%A0%EC%B0%A8.jpg" alt="">
-        <div id="autodanawa_gridC">
-
-            <h1>XX 중고차</h1>
-
-            <div class="barChart">
-                <h1 style="text-align:center;">월별 판매량</h1>
-                <bar-example/>
-            </div>
-
-            <div class="Chart">
-                <h1 style="text-align:center;">중고차 신차 판매량 비교</h1>
-                <bubble-example/>
-            </div>
-            <div class="Chart">
-                <h1 style="text-align:center;">직원별 판매량</h1>
-                <doughnut-example/>
-            </div>
-
-        </div>
-        <div id="review">
-            <div class="list_area">
-                <div class="title">
-                    <h4>구입 후기 </h4>
-                    <a href="#none" class="plus_more" data-listcd="K">더보기</a>
-                </div>
-                <div class="carList_Area medium">
-                    <ul>
-
-                        <li>
-                            <a href="/car/info/car_info_detail.do?i_sCarCd=EC60323422">
-<span class="thumb">
-<img src="https://img.kcar.com/carpicture/carpicture02/pic6032/kcar_60323422_001.jpg"
-     alt="차량 썸네일">
-
-    <!-- 20181217 VR차량 -->
-
-    <!-- //20181217 VR차량 -->
-</span>
-                            </a>
-                            <span class="desc_area">
-<a href="/car/info/car_info_detail.do?i_sCarCd=EC60323422">
-<strong class="name">
-쉐보레(GM대우)
-올란도
-2.0 디젤 LTZ
-</strong>
-</a>
-<span class="opt">
-
-
-
-11년07월식
-
-
-
-(12년형)
-
-
-&nbsp;&nbsp; 92,323km
-
-</span>
-
-
-
-<span class="price">780만원</span>
-
-
-<a href="javascript:infoNormal.fnWindowPop('keep_pop','630','650','installment','yes', 'i_sCarCd=EC60323422&amp;maketing=car_keep_pop1');">
-<span class="monthly">월 17만원</span>
-</a>
-                                <!--
-
-
-
-                                <span class="price">780만원</span>
-
-
-                                -->
-<span class="mark" data-mark="10;19;41" data-lease="3"><span
-        class="tip_list tip_10"><button type="button" class="tip_btn"
-                                        onclick="openHotMarkToolTip(this);">1인소유</button> <span
-        class="tip_hot none"><b>1인소유<a href="javascript:closeHotMarkToolTip(this);"
-                                       class="tip_cl">닫기</a></b><i>소유자 변경 이력이 없는 차량(대여 이력 및 법인 명의 차량 제외)</i></span></span><span
-        class="tip_list tip_19"><button type="button" class="tip_btn"
-                                        onclick="openHotMarkToolTip(this);">짧은Km</button> <span
-        class="tip_hot none"><b>짧은Km<a href="javascript:closeHotMarkToolTip(this);"
-                                       class="tip_cl">닫기</a></b><i>연 10,000km 이내 주행 차량</i></span></span><span
-        class="tip_list tip_41"><button type="button" class="tip_btn"
-                                        onclick="openHotMarkToolTip(this);">정비OK</button> <span
-        class="tip_hot none"><b>정비OK<a href="javascript:closeHotMarkToolTip(this);"
-                                       class="tip_cl">닫기</a></b><i>입고 후 지점에서 수리한 내역이 있는 차량</i></span></span></span>
-</span>
-                        </li>
-
-                        <li>
-                            <a href="/car/info/car_info_detail.do?i_sCarCd=EC60317852">
-<span class="thumb">
-<img src="https://img.kcar.com/carpicture/carpicture01/pic6031/kcar_60317852_001.jpg"
-     alt="차량 썸네일">
-
-    <!-- 20181217 VR차량 -->
-
-    <!-- //20181217 VR차량 -->
-</span>
-                            </a>
-                            <span class="desc_area">
-<a href="/car/info/car_info_detail.do?i_sCarCd=EC60317852">
-<strong class="name">
-쉐보레(GM대우)
-올란도
-LPG LS
-</strong>
-</a>
-<span class="opt">
-
-
-
-12년05월식
-
-
-
-
-&nbsp;&nbsp; 60,647km
-
-</span>
-
-
-
-<span class="price">890만원</span>
-
-
-<a href="javascript:infoNormal.fnWindowPop('keep_pop','630','650','installment','yes', 'i_sCarCd=EC60317852&amp;maketing=car_keep_pop1');">
-<span class="monthly">월 19만원</span>
-</a>
-                                <!--
-
-
-
-                                <span class="price">890만원</span>
-
-
-                                -->
-<span class="mark" data-mark="10;19;31" data-lease="3"><span
-        class="tip_list tip_10"><button type="button" class="tip_btn"
-                                        onclick="openHotMarkToolTip(this);">1인소유</button> <span
-        class="tip_hot none"><b>1인소유<a href="javascript:closeHotMarkToolTip(this);"
-                                       class="tip_cl">닫기</a></b><i>소유자 변경 이력이 없는 차량(대여 이력 및 법인 명의 차량 제외)</i></span></span><span
-        class="tip_list tip_19"><button type="button" class="tip_btn"
-                                        onclick="openHotMarkToolTip(this);">짧은Km</button> <span
-        class="tip_hot none"><b>짧은Km<a href="javascript:closeHotMarkToolTip(this);"
-                                       class="tip_cl">닫기</a></b><i>연 10,000km 이내 주행 차량</i></span></span><span
-        class="tip_list tip_31"><button type="button" class="tip_btn"
-                                        onclick="openHotMarkToolTip(this);">7인승</button> <span
-        class="tip_hot none"><b>7인승<a href="javascript:closeHotMarkToolTip(this);"
-                                      class="tip_cl">닫기</a></b><i>7인승 차량</i></span></span></span>
-</span>
-                        </li>
-
-                        <li>
-                            <a href="/car/info/car_info_detail.do?i_sCarCd=EC60321791">
-<span class="thumb">
-<img src="https://img.kcar.com/carpicture/carpicture02/pic6032/kcar_60321791_001.jpg"
-     alt="차량 썸네일">
-
-    <!-- 20181217 VR차량 -->
-
-    <!-- //20181217 VR차량 -->
-</span>
-                            </a>
-                            <span class="desc_area">
-<a href="/car/info/car_info_detail.do?i_sCarCd=EC60321791">
-<strong class="name">
-쉐보레(GM대우)
-올란도
-LPG LT
-</strong>
-</a>
-<span class="opt">
-
-
-
-13년09월식
-
-
-
-
-&nbsp;&nbsp; 108,396km
-
-</span>
-
-
-
-<span class="price">920만원</span>
-
-
-<a href="javascript:infoNormal.fnWindowPop('keep_pop','630','650','installment','yes', 'i_sCarCd=EC60321791&amp;maketing=car_keep_pop1');">
-<span class="monthly">월 20만원</span>
-</a>
-                                <!--
-
-
-
-                                <span class="price">920만원</span>
-
-
-                                -->
-<span class="mark" data-mark="19;31;41" data-lease="3"><span
-        class="tip_list tip_19"><button type="button" class="tip_btn"
-                                        onclick="openHotMarkToolTip(this);">짧은Km</button> <span
-        class="tip_hot none"><b>짧은Km<a href="javascript:closeHotMarkToolTip(this);"
-                                       class="tip_cl">닫기</a></b><i>연 10,000km 이내 주행 차량</i></span></span><span
-        class="tip_list tip_31"><button type="button" class="tip_btn"
-                                        onclick="openHotMarkToolTip(this);">7인승</button> <span
-        class="tip_hot none"><b>7인승<a href="javascript:closeHotMarkToolTip(this);"
-                                      class="tip_cl">닫기</a></b><i>7인승 차량</i></span></span><span
-        class="tip_list tip_41"><button type="button" class="tip_btn"
-                                        onclick="openHotMarkToolTip(this);">정비OK</button> <span
-        class="tip_hot none"><b>정비OK<a href="javascript:closeHotMarkToolTip(this);"
-                                       class="tip_cl">닫기</a></b><i>입고 후 지점에서 수리한 내역이 있는 차량</i></span></span></span>
-</span>
-                        </li>
-
-                        <li>
-                            <a href="/car/info/car_info_detail.do?i_sCarCd=EC60323973">
-<span class="thumb">
-<img src="https://img.kcar.com/carpicture/carpicture02/pic6032/kcar_60323973_001.jpg"
-     alt="차량 썸네일">
-
-    <!-- 20181217 VR차량 -->
-
-    <!-- //20181217 VR차량 -->
-</span>
-                            </a>
-                            <span class="desc_area">
-<a href="/car/info/car_info_detail.do?i_sCarCd=EC60323973">
-<strong class="name">
-쌍용
-코란도 투리스모
-4WD GT 11인승
-</strong>
-</a>
-<span class="opt">
-
-
-
-13년02월식
-
-
-
-(14년형)
-
-
-&nbsp;&nbsp; 129,764km
-
-</span>
-
-
-
-<span class="price">1,030만원</span>
-
-
-<a href="javascript:infoNormal.fnWindowPop('keep_pop','630','650','installment','yes', 'i_sCarCd=EC60323973&amp;maketing=car_keep_pop1');">
-<span class="monthly">월 22만원</span>
-</a>
-                                <!--
-
-
-
-                                <span class="price">1,030만원</span>
-
-
-                                -->
-<span class="mark" data-mark="10;20;37" data-lease="3"><span
-        class="tip_list tip_10"><button type="button" class="tip_btn"
-                                        onclick="openHotMarkToolTip(this);">1인소유</button> <span
-        class="tip_hot none"><b>1인소유<a href="javascript:closeHotMarkToolTip(this);"
-                                       class="tip_cl">닫기</a></b><i>소유자 변경 이력이 없는 차량(대여 이력 및 법인 명의 차량 제외)</i></span></span><span
-        class="tip_list tip_20"><button type="button" class="tip_btn"
-                                        onclick="openHotMarkToolTip(this);">4WD</button> <span
-        class="tip_hot none"><b>4WD<a href="javascript:closeHotMarkToolTip(this);"
-                                      class="tip_cl">닫기</a></b><i>4륜 구동 차량</i></span></span><span
-        class="tip_list tip_37"><button type="button" class="tip_btn"
-                                        onclick="openHotMarkToolTip(this);">속도제한無</button> <span
-        class="tip_hot none"><b>속도제한無<a href="javascript:closeHotMarkToolTip(this);"
-                                        class="tip_cl">닫기</a></b><i>속도 제한장치가 없는 차량</i></span></span></span>
-</span>
-                        </li>
-
+        <div id="asd" :class="fix">
+            <div class="center_head" style="background: url(https://www.pantone.com/images/pages/20758/wallpaper/PANTONE-Color-of-the-Year-2019-living-coral-16-1546-v1-5120x2880.jpg) center top no-repeat;">
+                <div class="head_cont">
+                    <div class="center_tit">
+                        <div class="region_name"></div>
+                        <h3 class="center_name">RPM 1호점</h3>
+                        <div class="car_num01">보유차량 276대</div>
+                    </div>
+                    <ul class="detail_tab">
+                        <li v-for="(tab,index) of tabs" :key="tab.title" :class="{on:tab.switch}" @click="tabSwitch(index)"><a :href="tab.link"> {{tab.title}}</a></li>
 
                     </ul>
+
+                </div>
+            </div>
+            <div id="sale" class="center_detail_cont">
+
+                <div id="centerGuide" >
+                    <div class="center_info">
+                            <month_revenue></month_revenue>
+                    </div>
+
+                </div>
+                <div id="recent_sale" >
+                    <carList></carList>
+
+                </div>
+                <div id="inventory" >
+                    <customerList></customerList>
+
+                </div>
+                <div id="centerEmployee" class="centerEmployee">
+                    <div class="employee_head">
+                        <h4>직원안내</h4>
+                    </div>
+                    <!-- 전체사원 -->
+                    <div class="employee_list" id="empl_all" style="display: block;">
+                        <ul>
+
+
+                            <li v-for="row of em_row" :key="row">
+                                <ul >
+
+                                    <li v-for="col of em_col" :key="col">
+												<span class="img">
+												<img src="https://img.kcar.com//DATA1/carpicture2/emp/pic/1124.jpg" onerror="this.src='/resources/images/content/direct/bg_employee.png'" alt="이학성">
+												</span>
+                                        <span class="employee_txt">
+
+
+															지점장
+
+
+
+												</span>
+                                        <span class="employee_name">이학성</span>
+
+                                    </li>
+
+
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </template>
 <script>
-    import BarExample from './chartEx/BarExample'
-    import BubbleExample from './chartEx/BubbleExample'
-    import DoughnutExample from './chartEx/DoughnutExample'
-
+import month_revenue from "./month_revenue";
+import carList from "./carList";
+import customerList from "./customerList";
     export default {
         components: {
-            BarExample,
-            BubbleExample,
-            DoughnutExample
+            month_revenue,carList,customerList
         },
         data() {
             return {
-                dataPoints: null,
-                height    : 20
+                fix:'direct_center_detail ',
+                em_row:[0,1,2,3,4],
+                em_col:[0,1,2,3,4,5],
+                recent_sale:[0,1,2,3],
+                tabs: [
+                    {title: "매출", link: "#sale", switch: true,},
+                    {title: "보유차량", link: "#recent_sale", switch: false},
+                    {title: "손님 리스트", link: "#inventory", switch: false},
+                    {title: "직원", link: "#centerEmployee", switch: false},
+
+                ],
             }
         },
         mounted() {
-            setInterval(() => {
-                this.fillData()
-            }, 2000)
-        },
+
+
+
+            },
+
         methods   : {
-            increaseHeight() {
-                this.height += 10
-            },
-            getRandomInt() {
-                return Math.floor(Math.random() * (50 - 5 + 1)) + 5
-            },
-            fillData() {
-                this.dataPoints = {
-                    labels  : ['January' + this.getRandomInt(), 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                    datasets: [
-                        {
-                            label          : 'Data One',
-                            backgroundColor: '#f87979',
-                            data           : [this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt()]
-                        }
-                    ]
+            handleScroll: function () {
+                console.log(scrollY)
+
+                if(scrollY<536){
+                    this.fix='direct_center_detail '
+                }else{
+                    this.fix='direct_center_detail is_fixed'
                 }
-            }
+                if(0<scrollY && scrollY<1062){
+                    this.tabSwitch(0)
+                }else if(1062<=scrollY && scrollY<1893){
+                    this.tabSwitch(1)
+                }else if(1893<=scrollY && scrollY<2596){
+                    this.tabSwitch(2)
+                }else if(2596<=scrollY){
+                    this.tabSwitch(3)
+                }
+
+                // your code here
+            },
+            tabSwitch(i) {
+                this.tabs[i].switch = true
+                for (let a = 0; a < this.tabs.length; a++) {
+                    if (a != i) {
+                        this.tabs[a].switch = false
+                    }
+                }
+
+
+            },
+
         },
         computed  : {
-            myStyles() {
-                return {
-                    height: `${this.height}px`,
 
-                    position: 'relative'
-                }
-            }
+        },
+        created() {
+            window.addEventListener('scroll', this.handleScroll);
+        },
+        destroyed () {
+            window.removeEventListener('scroll', this.handleScroll);
         }
     }
 </script>
 <style scoped>
-    .container {
-        max-width: 800px;
-        margin: 0 auto;
-    }
-
-    h1 {
-        font-family: 'Helvetica', Arial;
-        color: #464646;
-        text-transform: uppercase;
-        border-bottom: 1px solid #f1f1f1;
-        padding-bottom: 15px;
-        font-size: 28px;
-        margin-top: 0;
-    }
-
-    .Chart {
-        padding: 20px;
-        box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, .4);
-        border-radius: 20px;
-        margin: 20px 0px;
-        margin-left: 35px;
-        width: 425px;
+    .center_info h4{
         float: left;
+        font-size: 18px;
+        letter-spacing: -1px;
+        font-weight: bold;
+        color: #181819;
+        margin: 10px;
     }
-
-    .barChart {
-        padding: 20px;
-        box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, .4);
-        border-radius: 20px;
-        margin: 50px 0;
-        width: 1000px;
+    #sale,#recent_sale,#centerEmployee,#inventory{
+        padding-top: 140px;
     }
-
-    .wrapper {
-        text-align: left;
-        color: #333;
-        font-size: 12px;
-        font-family: "돋움", Dotum, "굴림", gulim, AppleGothic, Helvetica, Sans-serif;
-        margin: 50px 200px;
-        padding: 0;
-        line-height: 180%;
-    }
-
-    .title h4 {
-        font-family: 'Noto Sans Korean', 'Dotum', '돋음', '굴림';
-        font-size: 20px;
-        color: #575757;
-        line-height: 1.3;
-        margin: 0;
-        padding: 0;
-        margin-bottom: 15px;
-    }
-
-    #review {
-
-        margin: 30px 360px;
-    }
-
-    .list_area {
-        border: 2px #666666;
-        padding-left: 100px;
-    }
-    #mainImg{
-        margin-left: 260px;
-    }
-    #autodanawa_gridC{
-        padding:0px 0px;
-        width: 1000px;
+    #centerEmployee{
+        padding-bottom: 300px;
     }
 </style>
