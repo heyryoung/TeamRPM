@@ -7,6 +7,7 @@ export const checkBox={
     methods:{
         check(checkedItem){
             checkedItem.checked=!checkedItem.checked
+            console.log(`CheckedItem >>>>  ` + checkedItem.name)
         },
         allcheck(checkedItemList){
             this.allchecked=!this.allchecked
