@@ -5,14 +5,11 @@ import axios from 'axios'
 import {store} from '@/store'
 import vuex from 'vuex'
 import VModal from 'vue-js-modal'
+
 Vue.use(VModal, { dynamic: true })
 Vue.config.productionTip = false
 
-
 new Vue({
-  beforeCreate(){
-    this.$store.dispatch("getUserInfo")
-  },
   render: h => h(App),
   router,
   axios,
