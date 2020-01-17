@@ -188,8 +188,14 @@ export default {
 			}
 		},
 		birthMonth(){
+			let bM = ""
+			if(this.bMonth<10){
+				bM="0"+this.bMonth
+			}else{
+				bM=this.bMonth
+			}
 			if(this.yeartrue && this.monthtrue){
-				return this.bYear+this.bMonth
+				return this.bYear+bM
 			}else{
 				return ''
 			}
