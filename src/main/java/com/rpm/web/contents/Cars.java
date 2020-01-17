@@ -99,7 +99,7 @@ public class Cars implements Serializable {
         this.modelnmText = modelnmText;
         this.transmissioncd = transmissioncd;
         this.simpleComment = simpleComment;
-        this.pnMobile = price;
+        this.price = price;
         this.fuleTypedName = fuleTypedName;
         this.carUrl = carUrl;
         this.fuelTyped = fuelTyped;
@@ -119,8 +119,6 @@ public class Cars implements Serializable {
         this.centerName = centerName;
         this.modelGrpCd = modelGrpCd;
         this.carNumber = carNumber;
-
-
     }
 
 

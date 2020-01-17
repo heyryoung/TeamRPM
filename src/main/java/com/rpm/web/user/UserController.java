@@ -1,17 +1,8 @@
 package com.rpm.web.user;
 
-import com.rpm.web.util.Printer;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
-
 @RestController
-@CrossOrigin(origins = "http://localhost:8081")
 public class UserController {
     @Autowired private UserRepository userRepository;
     @Autowired private Printer printer;
@@ -36,9 +27,5 @@ public class UserController {
 
 
     }
-
-
-
-
 
 }

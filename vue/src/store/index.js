@@ -9,8 +9,6 @@ export const store = new Vuex.Store({
     modules: {
         cmm,
         login,
-
-
     },
     strict: true
 

@@ -2,8 +2,7 @@
     <div id="main_grid">
         <link rel="stylesheet" type="text/css"  href="css/re_import.css">
        <link rel="stylesheet" type="text/css" href="css/plugin/ion.rangeSlider.css">
-        <link rel="stylesheet" type="text/css"
-              href="css/plugin/ion.rangeSlider.skinHTML5.css">
+        <link rel="stylesheet" type="text/css" href="css/plugin/ion.rangeSlider.skinHTML5.css">
         <link rel="stylesheet" href="css/plugin/uniform.css">
         <link rel="stylesheet" href="css/plugin/jquery.scrollbar.css">
         <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/common.css?v=200108090126">
@@ -43,15 +42,6 @@
 
                         </Slide >
                     </li>
-                    <!--                             <li class="nav-item">
-                                                    <a class="nav-link" href="#section1">Section 1</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" href="#section2">Section 2</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" href="#section3">Section 3</a>
-                                                </li> -->
                 </ul>
             </div>
         </nav>
