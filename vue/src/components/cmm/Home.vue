@@ -126,31 +126,58 @@
                                                 </li>
                                                 <li>
                             <span id="spanMakeType" class="btnl">
-                              <a @click="korCar(`korCar`,`impCar`)" id="korCar" class="on" data-item="MAKE_TYPE010">국산차</a>
-                              <a @click="impCar(`korCar`,`impCar`,`category1`)" id="impCar" data-item="MAKE_TYPE020">수입차</a>
+                              <a @click="korCar(`korCar2`,`impCar2`)" id="korCar2" class="on" data-item="MAKE_TYPE010">국산차</a>
+                              <a @click="impCar(`korCar2`,`impCar2`)" id="impCar2" data-item="MAKE_TYPE020">수입차</a>
                             </span>
                                                 </li>
                                                 <li class="spreset">
                                                     <div class="searchr1">
                                                         <div id="searchKey1" @click="searchKeyClick(`searchKey1`)"
                                                              class="selectric-wrapper selectric-selectric selectric-below selectric-hover">
-                                                            <div class="selectric-hide-select">
-                                                                <select id="makeList"
-                                                                        title="제조사를 선택하세요"
-                                                                        class="selectric"
-                                                                        data-beusable-tracking=""
-                                                                        tabindex="-1"
-                                                                        v-for="category of this.$store.state.cmm.category1"
-                                                                        :key="category.name">
-                                                                <option data-type="MAKE_TYPE010"
-                                                                        data-cnt="category.count">{{category.name}}</option>
+                                                            <div class="selectric-hide-select"><select id="makeList"
+                                                                                                       title="제조사를 선택하세요"
+                                                                                                       class="selectric"
+                                                                                                       data-beusable-tracking=""
+                                                                                                       tabindex="-1">
+
+                                                                <option value="" selected="">제조사를 선택하세요</option>
+                                                                <option value="001" data-type="MAKE_TYPE010"
+                                                                        data-cnt="2008">현대
+                                                                </option>
+                                                                <option value="007" data-type="MAKE_TYPE010"
+                                                                        data-cnt="160">제네시스
+                                                                </option>
+                                                                <option value="002" data-type="MAKE_TYPE010"
+                                                                        data-cnt="1905">기아
+                                                                </option>
+                                                                <option value="003" data-type="MAKE_TYPE010"
+                                                                        data-cnt="907">쉐보레(GM대우)
+                                                                </option>
+                                                                <option value="005" data-type="MAKE_TYPE010"
+                                                                        data-cnt="962">르노삼성
+                                                                </option>
+                                                                <option value="004" data-type="MAKE_TYPE010"
+                                                                        data-cnt="477">쌍용
+                                                                </option>
                                                             </select></div>
                                                             <div class="selectric" ><span class="label"
-                                                                                         data-beusable-tracking="" >{{keyWord1}}</span></div>
-                                                            <div id = "category1" class="selectric-items" tabindex="-1">
+                                                                                         data-beusable-tracking="">제조사를 선택하세요</span></div>
+                                                            <div class="selectric-items" tabindex="-1" >
                                                                 <div class="selectric-scroll">
-                                                                    <ul v-for="category of this.$store.state.cmm.category1" :key="category.name">
-                                                                        <li data-index="1" @click="setCategory2(category.name)" class="">{{category.name}}<em>{{category.count}}</em>
+                                                                    <ul>
+                                                                        <li data-index="0" class="selected">제조사를 선택하세요
+                                                                        </li>
+                                                                        <li data-index="1" class="">현대<em>2,008</em>
+                                                                        </li>
+                                                                        <li data-index="2" class="">제네시스<em>160</em>
+                                                                        </li>
+                                                                        <li data-index="3" class="">기아<em>1,905</em>
+                                                                        </li>
+                                                                        <li data-index="4" class="">
+                                                                            쉐보레(GM대우)<em>907</em></li>
+                                                                        <li data-index="5" class="">르노삼성<em>962</em>
+                                                                        </li>
+                                                                        <li data-index="6" class="last">쌍용<em>477</em>
                                                                         </li>
                                                                     </ul>
                                                                 </div>
@@ -159,22 +186,21 @@
                                                     </div>
                                                     <div class="searchr2">
                                                         <div id="searchKey2"  @click="searchKeyClick(`searchKey2`)"
-                                                             class="selectric-wrapper selectric-selectric selectric-below selectric-hover">
+                                                             class="selectric-wrapper selectric-selectric selectric-hover">
                                                             <div class="selectric-hide-select"><select
                                                                     id="modelGroupList" title="모델을 선택하세요"
                                                                     class="selectric" data-beusable-tracking=""
-                                                                    tabindex="-1"
-                                                                    v-for="category of this.$store.state.cmm.category2"
-                                                                    :key="category.name">
-                                                                <option data-type="MAKE_TYPE010"
-                                                                        data-cnt="category.count">{{category.name}}</option>
+                                                                    tabindex="-1">
+
+                                                                <option value="" selected="">모델을 선택하세요</option>
                                                             </select></div>
                                                             <div class="selectric"><span class="label"
-                                                                                         data-beusable-tracking="">{{keyWord2}}</span></div>
-                                                            <div id = "category2" class="selectric-items" tabindex="-1" >
+                                                                                         data-beusable-tracking="">모델을 선택하세요</span></div>
+                                                            <div class="selectric-items" tabindex="-1" >
                                                                 <div class="selectric-scroll">
-                                                                    <ul v-for="category of this.$store.state.cmm.category2" :key="category.name">
-                                                                        <li data-index="1" @click="setCategory3(category.name)" class="">{{category.name}}<em>{{category.count}}</em>
+                                                                    <ul>
+                                                                        <li data-index="0" class="last selected">모델을
+                                                                            선택하세요
                                                                         </li>
                                                                     </ul>
                                                                 </div>
@@ -185,24 +211,21 @@
                                                         <div id="searchKey3" @click="searchKeyClick(`searchKey3`)"
 
                                                              class="selectric-wrapper selectric-selectric selectric-below selectric-hover">
-                                                            <div class="selectric-hide-select">
-                                                                <select
-                                                                    id="modelList"
-                                                                   title="세부모델을 선택하세요"
-                                                                   class="selectric"
-                                                                   data-beusable-tracking=""
-                                                                   tabindex="-1"
-                                                                   v-for="category of this.$store.state.cmm.category3"
-                                                                   :key="category.name">
-                                                                <option data-type="MAKE_TYPE010"
-                                                                        data-cnt="category.count">{{category.name}}</option>
-                                                                </select></div>
+                                                            <div class="selectric-hide-select"><select id="modelList"
+                                                                                                       title="세부모델을 선택하세요"
+                                                                                                       class="selectric"
+                                                                                                       data-beusable-tracking=""
+                                                                                                       tabindex="-1">
+
+                                                                <option value="" selected="">세부모델을 선택하세요</option>
+                                                            </select></div>
                                                             <div class="selectric"><span class="label"
-                                                                                         data-beusable-tracking="">{{keyWord3}}</span></div>
+                                                                                         data-beusable-tracking="">세부모델을 선택하세요</span></div>
                                                             <div class="selectric-items" tabindex="-1">
                                                                 <div class="selectric-scroll">
-                                                                    <ul v-for="category of this.$store.state.cmm.category3" :key="category.name">
-                                                                        <li data-index="1" @click="setKeyWord3(category.name)" class="">{{category.name}}<em>{{category.count}}</em>
+                                                                    <ul>
+                                                                        <li data-index="0" class="last selected">세부모델을
+                                                                            선택하세요
                                                                         </li>
                                                                     </ul>
                                                                 </div>
@@ -230,32 +253,58 @@
                                                 </li>
                                                 <li>
                             <span id="spanMakeType" class="btnl">
-                              <a @click="korCar(`korCar2`,`impCar2`)" id="korCar2"  data-item="MAKE_TYPE010">국산차</a>
-                              <a @click="impCar(`korCar2`,`impCar2`,`category4`)" id="impCar2" data-item="MAKE_TYPE020">수입차</a>
+                              <a @click="korCar(`korCar`,`impCar`)" id="korCar" class="on" data-item="MAKE_TYPE010">국산차</a>
+                              <a @click="impCar(`korCar`,`impCar`)" id="impCar" data-item="MAKE_TYPE020">수입차</a>
                             </span>
                                                 </li>
                                                 <li class="spreset">
                                                     <div class="searchr1">
                                                         <div id="budgetCategory" @click="searchKeyClick(`budgetCategory`)"
                                                              class="selectric-wrapper selectric-selectric selectric-below selectric-hover">
-                                                            <div class="selectric-hide-select">
-                                                                <select
-                                                                    id="makeList"
-                                                                    title="제조사를 선택하세요"
-                                                                    lass="selectric"
-                                                                    data-beusable-tracking=""
-                                                                    tabindex="-1"
-                                                                    v-for="category of this.$store.state.cmm.category1"
-                                                                    :key="category.name">
-                                                                    <option data-type="MAKE_TYPE010"
-                                                                        data-cnt="category.count">{{category.name}}</option>
-                                                                </select></div>
+                                                            <div class="selectric-hide-select"><select id="makeList"
+                                                                                                       title="제조사를 선택하세요"
+                                                                                                       class="selectric"
+                                                                                                       data-beusable-tracking=""
+                                                                                                       tabindex="-1">
+
+                                                                <option value="" selected="">제조사를 선택하세요</option>
+                                                                <option value="001" data-type="MAKE_TYPE010"
+                                                                        data-cnt="2008">현대
+                                                                </option>
+                                                                <option value="007" data-type="MAKE_TYPE010"
+                                                                        data-cnt="160">제네시스
+                                                                </option>
+                                                                <option value="002" data-type="MAKE_TYPE010"
+                                                                        data-cnt="1905">기아
+                                                                </option>
+                                                                <option value="003" data-type="MAKE_TYPE010"
+                                                                        data-cnt="907">쉐보레(GM대우)
+                                                                </option>
+                                                                <option value="005" data-type="MAKE_TYPE010"
+                                                                        data-cnt="962">르노삼성
+                                                                </option>
+                                                                <option value="004" data-type="MAKE_TYPE010"
+                                                                        data-cnt="477">쌍용
+                                                                </option>
+                                                            </select></div>
                                                             <div class="selectric" ><span class="label"
-                                                                                          data-beusable-tracking="">{{keyWord1}}</span></div>
-                                                            <div id="category4" class="selectric-items" tabindex="-1">
+                                                                                          data-beusable-tracking="">제조사를 선택하세요</span></div>
+                                                            <div class="selectric-items" tabindex="-1">
                                                                 <div class="selectric-scroll">
-                                                                    <ul v-for="category of this.$store.state.cmm.category1" :key="category.name">
-                                                                        <li data-index="1" @click="setCategory2(category.name)" class="">{{category.name}}<em>{{category.count}}</em>
+                                                                    <ul>
+                                                                        <li data-index="0" class="selected">제조사를 선택하세요
+                                                                        </li>
+                                                                        <li data-index="1" class="">현대<em>2,008</em>
+                                                                        </li>
+                                                                        <li data-index="2" class="">제네시스<em>160</em>
+                                                                        </li>
+                                                                        <li data-index="3" class="">기아<em>1,905</em>
+                                                                        </li>
+                                                                        <li data-index="4" class="">
+                                                                            쉐보레(GM대우)<em>907</em></li>
+                                                                        <li data-index="5" class="">르노삼성<em>962</em>
+                                                                        </li>
+                                                                        <li data-index="6" class="last">쌍용<em>477</em>
                                                                         </li>
                                                                     </ul>
                                                                 </div>
@@ -272,14 +321,14 @@
                                                                         tabindex="-1"
                                                                         v-for="price of prices"
                                                                         :key="price.name">
-                                                                    <option value = "price.value">{{price.name}}</option>
+                                                                    <option value = "price.value">{{price.name}}만원</option>
                                                             </select></div>
                                                             <div class="selectric"><span
-                                                                    class="label">{{minPrice}}</span></div>
+                                                                    class="label">최저가격을 선택하세요</span></div>
                                                             <div class="selectric-items" tabindex="-1" style="width: 220px; height: 300px;">
                                                                 <div class="selectric-scroll">
                                                                     <ul v-for="price of prices" :key="price.name">
-                                                                        <li @click="setMinPrice(price.name)" data-index="price.index" class="">{{price.name}}</li>
+                                                                        <li data-index="price.index" class="">{{price.name}}만원</li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -295,14 +344,14 @@
                                                                         tabindex="-1"
                                                                         v-for="price of prices"
                                                                         :key="price.name">
-                                                                    <option value = "price.value">{{price.name}}</option>
+                                                                    <option value = "price.value">{{price.name}}만원</option>
                                                             </select></div>
                                                             <div class="selectric"><span
-                                                                    class="label">{{maxPrice}}</span></div>
+                                                                    class="label">최고가격을 선택하세요</span></div>
                                                             <div class="selectric-items" tabindex="-1" style="width: 220px; height: 300px;">
                                                                 <div class="selectric-scroll">
                                                                     <ul v-for="price of prices" :key="price.name">
-                                                                         <li @click="setMaxPrice(price.name)" data-index="price.index" class="">{{price.name}}</li>
+                                                                         <li data-index="price.index" class="">{{price.name}}만원</li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -993,12 +1042,8 @@
     export default {
         data(){
             return{
-                searchKeyWord : '',
-                keyWord1 : '제조사를 선택하세요',
-                keyWord2 : '모델을 선택하세요',
-                keyWord3 : '세부모델을 선택하세요',
-                minPrice : '최저가격을 선택하세요',
-                maxPrice : '최고가격을 선택하세요'
+                searchKeyWord : ''
+
             }
         },
         methods : {
@@ -1012,7 +1057,6 @@
                 tab2.className = ""
                 divTabWant1.style.display = "block"
                 divTabWant2.style.display = "none"
-                this.korCar(`korCar`,`impCar`)
             },
             haveBudget(){
                 const divTabWant1 = document.getElementById("divTabWant1")
@@ -1023,7 +1067,7 @@
                 tab2.className = "on"
                 divTabWant1.style.display = "none"
                 divTabWant2.style.display = "block"
-                this.korCar(`korCar2`,`impCar2`)
+
             },
             searchBoxOn(){
                 const searchBox = document.getElementById("searchBox")
@@ -1049,68 +1093,25 @@
                 const impCar = document.getElementById(impCarID)
                 korCar.className = "on"
                 impCar.className = ""
-                this.$store.dispatch('cmm/getCategory1',{'param':'KOR','column':'CAR_TYPE'})
-                this.keyWord1 = '제조사를 선택하세요',
-                this.keyWord2 = '모델을 선택하세요'
-                this.keyWord3 = '세부모델을 선택하세요'
             },
-            impCar(korCarID, impCarID, category1ID){
+            impCar(korCarID, impCarID){
                 const korCar = document.getElementById(korCarID)
                 const impCar = document.getElementById(impCarID)
-                const category1 = document.getElementById(category1ID)
                 korCar.className = ""
                 impCar.className = "on"
-                category1.style.width = "220px"
-                category1.style.height = "300px"
-                this.$store.dispatch('cmm/getCategory1',{'param':'IMP','column':'CAR_TYPE'})
-                this.keyWord1 = '제조사를 선택하세요',
-                this.keyWord2 = '모델을 선택하세요'
-                this.keyWord3 = '세부모델을 선택하세요'
+            },
+            searchKeyMouseOver(searchKeyID){
+                const searchKey = document.getElementById(searchKeyID)
+                searchKey.className = "selectric-wrapper selectric-selectric selectric-below selectric-hover"
             },
             searchKeyClick(searchKeyID){
                 const searchKey = document.getElementById(searchKeyID)
-                const cate2 = document.getElementById('category2')
                 if(searchKey.className === "selectric-wrapper selectric-selectric selectric-below selectric-hover"){
-                    for (let elementsByClassNameElement of document.getElementsByClassName("selectric-wrapper selectric-selectric selectric-below selectric-hover selectric-open selectric-focus")) {
-                        elementsByClassNameElement.className = "selectric-wrapper selectric-selectric selectric-below selectric-hover"
-                    }
                     searchKey.className = "selectric-wrapper selectric-selectric selectric-below selectric-hover selectric-open selectric-focus"
                 }else{
                     searchKey.className = "selectric-wrapper selectric-selectric selectric-below selectric-hover"
                 }
-                if(this.$store.state.cmm.category2.length>=10) {
-                    cate2.style.width = "220px"
-                    cate2.style.height = "300px"
-                }{
-                    cate2.style.width = ""
-                    cate2.style.height = ""
-                }
             },
-            setCategory2(keyWord1){
-                this.keyWord2 = '모델을 선택하세요'
-                this.keyWord3 = '세부모델을 선택하세요'
-                this.keyWord1 = keyWord1
-                this.$store.dispatch('cmm/getCategory2',{'param':this.keyWord1,'column':'MAKENM'})
-            },
-            setCategory3(keyWord2){
-                this.keyWord3 = '세부모델을 선택하세요'
-                this.keyWord2 = keyWord2
-                this.$store.dispatch('cmm/getCategory3',{'param':this.keyWord2,'column':'MODEL_GRP_NM'})
-            },
-            setKeyWord3(keyWord3){
-                this.keyWord3 = keyWord3
-            },
-            setMinPrice(minPrice){
-                this.minPrice = minPrice
-            },
-            setMaxPrice(maxPrice){
-                if(parseInt(this.minPrice)<=parseInt(maxPrice.replace(`만원`,''))){
-                    this.maxPrice = maxPrice
-                }else{
-                    alert(`최저가격보다 높게 선택해주세요.`)
-                }
-
-            }
 
         },
         computed : {
@@ -1121,13 +1122,10 @@
             prices : function(){
                 let list = []
                 for(let i=1;i<=100;i++){
-                    list.push({index : i, name : `${i*100}만원`})
+                    list.push({index : i, value : i*100, name : i*100})
                 }
                 return list
             }
-        },
-        created(){
-            this.$store.dispatch('cmm/getCategory1',{'param':'KOR','column':'CAR_TYPE'})
         }
     }
 </script>
