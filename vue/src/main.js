@@ -10,6 +10,9 @@ Vue.config.productionTip = false
 
 
 new Vue({
+  beforeCreate(){
+    this.$store.dispatch("getUserInfo")
+  },
   render: h => h(App),
   router,
   axios,

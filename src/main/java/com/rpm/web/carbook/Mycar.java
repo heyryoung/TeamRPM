@@ -40,13 +40,7 @@ public class Mycar implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userSeq")
     private User userSeq;
-    @OneToOne
-    @JoinColumn(name = "refuelSeq")
-    private RefuelRecord refuelRecord;
 
-    @OneToOne
-    @JoinColumn(name = "serviceSeq")
-    private ServiceRecord serviceRecord;
 
 
     @Builder
