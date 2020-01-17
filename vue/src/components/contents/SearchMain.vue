@@ -37,7 +37,7 @@
                                     <ul class="row_list">
                                         <li v-for="category of categoryList"
                                             :key="category.code">
-                                            <div class="checker" :id="category.div_id"><span :class="{checked:category.checked}" @click="check(category)">
+                                            <div class="checker" :id="category.code"><span :class="{checked:category.checked}" @click="check(category)">
                                                 <input type="checkbox"
                                                                                                       name="categoryList"
                                                                                                       :id="category.code"
@@ -544,7 +544,6 @@ export default {
                         res.data.regionList.forEach(el => {
                             this.regionList.push({checked : false , code : el.centerRegionCode , name: el.centerRegion})
                         });
-
                     })
                     .catch(()=>{
                         alert("들어옴 실패")
