@@ -18,6 +18,7 @@
 					<th><span class="org">*</span> <label for="i_sMemberName">이름</label></th>
 					<td colspan="3"><input type="text" v-model="name" id="i_sMemberName" maxlength="20" class="user_input02" value=""></td>
 				</tr>
+					<td colspan="3"><input type="text" v-model="name" id="i_sMemberName" maxlength="20" class="user_input02" value=""></td>				</tr>
 				<tr>
 					<th><span class="org">*</span> <label for="i_sMemberId">아이디</label></th>
 					<td colspan="3">
@@ -138,30 +139,28 @@
 </div>
 </template>
 <script>
-import axios from "axios";
-import JoinModal from "./JoinModal.vue";
+import axios from "axios"
+import JoinModal from "./JoinModal.vue"
 export default {
 	name: 'join',
 	data(){
-        return{
-            context : 'http://localhost:8081/',
-			userid : '',
+        return{context: this.$store.state.cmm.context,
+			name: '',
+			userid:'',
 			idCheckmsg:'',
-			passwd : '',
+			passwd:'',
 			passwd2:'',
 			passwdCheck:'비밀번호가 너무 짧습니다',
 			passwdCheck2:'입력한 비밀번호가 다릅니다',
-			name : '',
 			email1:'',
 			email2:'',
 			gender:'',
 			bYear:'',
 			bMonth:'',
-            yearcheck:'',
-            monthcheck:'',
-            bmsg:'',
-            bmmsg:'',
-			birthMonth:'',
+			yearcheck:'',
+			monthcheck:'',
+			bmsg:'',
+			bmmsg:'',
 			region:''
         }
     },
@@ -169,20 +168,34 @@ export default {
 		idChecklength(){
 			return this.userid.length
 		},
-        yeartrue(){
-            if(this.bYear>1900 && this.bYear<2021){
-                return true
-            }else{
-                return false
-            }
-        },
-        monthtrue(){
-            if(this.bMonth<13 && this.bMonth>0){
-                return true
-            }else{
-                return false
-            }
-        }
+		yeartrue(){
+			if(this.bYear>1900 && this.bYear<2021){
+				return true
+			}else{
+				return false
+			}
+		},
+		monthtrue(){
+			if(this.bMonth<13 && this.bMonth>0){
+				return true
+			}else{
+				return false
+			}
+		},
+		email(){
+			if(this.email1!=''&&this.email2!=''){
+				return this.email1+'@'+this.email2
+			}else{
+				return ''
+			}
+		},
+		birthMonth(){
+			if(this.yeartrue && this.monthtrue){
+				return this.bYear+this.bMonth
+			}else{
+				return ''
+			}
+		}
 
 	},
 	methods : {
@@ -202,17 +215,17 @@ export default {
                 this.idCheckmsg = ''
 			}else if(this.idChecklength>=4){
 				axios
-				.post(url, data, headers)
-				.then(res => {
-					if (res.data.msg === "SUCCESS") {
-						this.idCheckmsg= "사용가능한 아이디입니다."
-					} else {
-						this.idCheckmsg= "중복된 아이디가 있습니다."
-					}
-                })
-				.catch(() => {
-					alert(`IdCheck axios Error`)
-				})
+						.post(url, data, headers)
+						.then(res => {
+							if (res.data.msg === "SUCCESS") {
+								this.idCheckmsg= "사용가능한 아이디입니다."
+							} else {
+								this.idCheckmsg= "중복된 아이디가 있습니다."
+							}
+						})
+						.catch(() => {
+							alert(`IdCheck axios Error`)
+						})
 			}
 		},
         yearCheck(){
@@ -230,7 +243,6 @@ export default {
             }
         },
 		join(){
-			this.email = this.email1+"@"+this.email2
 			if(this.idCheckmsg === "사용가능한 아이디입니다." && this.passwd==this.passwd2 &&
                 this.email1!='' && this.email2!='' && this.name!=''){
 				let url = `${this.context}/join`
@@ -240,9 +252,10 @@ export default {
 					name : this.name,
 					email:this.email,
 					gender:this.gender,
-					birthMonth:this.bYear+this.bMonth,
+					birthMonth:this.birthMonth,
 					region:this.region,
 				}
+
 				let headers = {
 					'authorization': 'JWT fefege..',
 					'Accept' : 'application/json',
@@ -253,6 +266,7 @@ export default {
                     .then(res=>{
                         if(res.data.msg=="SUCCESS"){
                             alert(`RPM의 가족이 되신 것을 환영합니다. 로그인해주세요.`)
+							this.$store.commit('addUser', res.data.user)
                             return this.$router.push({path : '/login'})
                         }
                     })
@@ -270,7 +284,6 @@ export default {
 					height: 'auto',
 					draggable: true,
 			})
-//store로 구현
 		}
 	}
 }

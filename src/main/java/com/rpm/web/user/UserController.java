@@ -30,15 +30,7 @@ public class UserController {
     }
     @PostMapping("/join")
     public HashMap<String, Object> join(@RequestBody User param){
-        printer.accept("join컨트롤러 들어옴");
         HashMap<String, Object> map = new HashMap<>();
-        printer.accept(String.format("USERID: %s", param.getUserid()));
-        printer.accept(String.format("PASSWD: %s", param.getPasswd()));
-        printer.accept(String.format("PASSWD: %s", param.getName()));
-        printer.accept(String.format("PASSWD: %s", param.getEmail()));
-        printer.accept(String.format("PASSWD: %s", param.getBirthMonth()));
-        printer.accept(String.format("PASSWD: %s", param.getGender()));
-        printer.accept(String.format("PASSWD: %s", param.getRegion()));
         userRepository.save(param);
         if (user != null) {
             printer.accept("가입 성공");
@@ -48,7 +40,6 @@ public class UserController {
             printer.accept("가입 실패");
             map.put("msg", "FAIL");
         }
-        //map.put("msg", "SUCCESS");
         return map;
     }
 
