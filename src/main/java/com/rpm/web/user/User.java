@@ -45,10 +45,6 @@ public class User implements Serializable {
     private User(String userid, String passwd, String name, String email,
                  String gender, String birthMonth, String region) {
  
-    @Builder
-    private User(String userid, String passwd, String name, String email,
-                   String gender, String birthMonth, String region) {
- 
         Assert.hasText(userid, "userid must not be empty");
         Assert.hasText(passwd, "passwd must not be empty");
         Assert.hasText(name, "name must not be empty");
