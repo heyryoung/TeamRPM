@@ -13,10 +13,10 @@ const getters = {
 
 }
 const actions = {
-    async welcome({commit}){
+    async init({commit}){
         axios
-            .get(`http://localhost:8080/welcome`)
-            .then(({data})=>{commit('ALLCOUNT',data)})
+            .get(`http://localhost:8080/init`)
+            .then(({data})=>{commit('INIT',data)})
             .catch(()=>{
                 alert('잘못된 요청입니다.')
             })
@@ -47,11 +47,21 @@ const actions = {
             .catch(()=>{
                 alert('잘못된 요청입니다.')
             })
+    },
+    async goSearchMainWithCondition({commit}, param){
+        axios
+            .get(`http://localhost:8080/getcategory/`+param.key1+'/'+param.key2+'/'+param.key3)
+            .then(({data})=>{
+                commit('CATEGORY3', data)})
+            .catch(()=>{
+                alert('잘못된 요청입니다.')
+            })
     }
 }
 const mutations = {
-    ALLCOUNT (state, data){
+    INIT (state, data){
         state.carAllCount = data.allCount
+
     },
     CATEGORY1 (state, data){
         state.category1 = []
@@ -74,7 +84,6 @@ const mutations = {
             state.category3.push({name : data.category[i], count : data.count[i]})
         }
     }
-
 }
 export default {
     name: 'cmm',

@@ -18,4 +18,5 @@ public class SearchCondition {
     private List<SearchDetailCondition> regionList;
     private String searchWord;
     private String carcd;
+    private String findKey;
 }
