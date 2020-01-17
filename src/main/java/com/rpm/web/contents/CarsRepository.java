@@ -5,6 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public interface CarsRepository extends CrudRepository<Cars, Long> {
@@ -22,7 +23,6 @@ public interface CarsRepository extends CrudRepository<Cars, Long> {
 
     @Query(value="SELECT DISTINCT center_region_code , center_region  FROM car", nativeQuery=true)
     public List<Map<String,String>>  findCarWithCenterRegionCode();
-
 
 
     @Query(value="SELECT  * FROM car ", nativeQuery=true)

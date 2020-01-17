@@ -49,4 +49,27 @@ public class CarsServiceImpl implements CarsService {
         return t -> seen.add(keyExtractor.apply(t));
     }
 
+    public List<Cars> findByMakecd(List<Cars> carsList) {
+        return carsList.stream()
+                .filter(distinctByKey(Cars::getMakecd))
+                .collect(Collectors.toList());
+    }
+
+    public List<Cars> findCarWithFuleType(List<Cars> carsList) {
+        return carsList.stream()
+                .filter(distinctByKey(Cars::getFuelTyped))
+                .collect(Collectors.toList());
+    }
+
+    public List<Cars> findCarWithCenterRegionCode(List<Cars> carsList) {
+        return carsList.stream()
+                .filter(distinctByKey(Cars::getCenterRegionCode))
+                .collect(Collectors.toList());
+    }
+
+    public List<Cars> findAllCategory(List<Cars> carsList) {
+        return carsList.stream()
+                .filter(distinctByKey(Cars::getCategorycd))
+                .collect(Collectors.toList());
+    }
 }
