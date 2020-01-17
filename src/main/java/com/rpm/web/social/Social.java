@@ -1,9 +1,11 @@
 package com.rpm.web.social;
+
 import com.rpm.web.user.User;
 import lombok.*;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -14,6 +16,7 @@ import java.util.List;
 @Getter @Setter
 @NoArgsConstructor
 @Table(name="SOCIALBOARD")
+
 public class Social implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

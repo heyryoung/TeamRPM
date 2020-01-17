@@ -5,13 +5,13 @@ export const checkBox={
         }
     },
     methods:{
-        check(i){
-            this.List[i].checked=!this.List[i].checked
+        check(checkedItem){
+            checkedItem.checked=!checkedItem.checked
         },
-        allcheck(){
+        allcheck(checkedItemList){
             this.allchecked=!this.allchecked
-            for(let i=0;i<this.List.length;i++){
-                this.List[i].checked=this.allchecked
+            for(let i=0;i<checkedItemList.length;i++){
+                checkedItemList[i].checked= this.allchecked
             }
         },
         updateCheckall(){

@@ -1,13 +1,8 @@
 <template>
 <div>
-<template>
-<component :is="'Tab'"></component>
-</template>
-<template>
+<Tab></Tab>
+<router-view />
 
-<router-view name="content"/>
-
-</template>
 </div>
 </template>
 <script>

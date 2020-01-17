@@ -24,20 +24,20 @@ public class CarInit implements ApplicationRunner {
         ObjectMapper jsonMapper = new ObjectMapper();
         String[] json = null;
         Map<String, Map<String, Object>> map = new HashMap<>();
-        if(count==0) {
+        if (count == 0) {
             System.out.println("POST로 데이터 가져오기");
-            for (int i = 1; i <= 8000;i++){
+            for (int i = 1; i <= 8000; i++) {
                 Map<String, String> strJson = new HashMap<>();
-                 map = jsonMapper.readValue(
+                map = jsonMapper.readValue(
                         http.sendPost("https://www.kcar.com/search/api/getCarSearchWithCondition.do", String.valueOf(i))
                                 .replace("=", ":"), Map.class);
                 json = map.get("result").get("rows").toString()
                         .replace("[{", "").replace("}]", "").split(",");
-                for (int j = 0; j < json.length; j++){
-                    if(json[j].indexOf("=")+1>=1){
-                        System.out.println(json[j].substring(0,json[j].indexOf("=")).trim());
-                        System.out.println(json[j].substring(json[j].indexOf("=")+1));
-                        strJson.put(json[j].substring(0,json[j].indexOf("=")).trim(),json[j].substring(json[j].indexOf("=")+1));
+                for (int j = 0; j < json.length; j++) {
+                    if (json[j].indexOf("=") + 1 >= 1) {
+                        System.out.println(json[j].substring(0, json[j].indexOf("=")).trim());
+                        System.out.println(json[j].substring(json[j].indexOf("=") + 1));
+                        strJson.put(json[j].substring(0, json[j].indexOf("=")).trim(), json[j].substring(json[j].indexOf("=") + 1));
                     }
                 }
                 carRepository.save(new Car(strJson.get("v_carcd"),
@@ -54,8 +54,9 @@ public class CarInit implements ApplicationRunner {
                         strJson.get("v_transmissioncd_name"),strJson.get("n_pass_cnt"),strJson.get("v_modelcd"),
                         strJson.get("v_rec_comment_cd"),strJson.get("v_makenm"),strJson.get("v_pn"),
                         strJson.get("v_mfr_date"),strJson.get("v_model_grp_cd"),strJson.get("v_center_name"),
+
                         strJson.get("v_model_grp_nm")
-                        ));
+                ));
 
             }
             System.out.println("데이터 가져오기 종료.");
