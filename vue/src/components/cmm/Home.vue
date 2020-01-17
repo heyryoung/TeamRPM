@@ -1090,32 +1090,6 @@
                     cate2.style.height = ""
                 }
             },
-            setCategory2(keyWord1){
-                this.keyWord2 = '모델을 선택하세요'
-                this.keyWord3 = '세부모델을 선택하세요'
-                this.keyWord1 = keyWord1
-                this.$store.dispatch('cmm/getCategory2',{'param':this.keyWord1,'column':'MAKENM'})
-            },
-            setCategory3(keyWord2){
-                this.keyWord3 = '세부모델을 선택하세요'
-                this.keyWord2 = keyWord2
-                this.$store.dispatch('cmm/getCategory3',{'param':this.keyWord2,'column':'MODEL_GRP_NM'})
-            },
-            setKeyWord3(keyWord3){
-                this.keyWord3 = keyWord3
-            },
-            setMinPrice(minPrice){
-                this.minPrice = minPrice
-            },
-            setMaxPrice(maxPrice){
-                if(parseInt(this.minPrice)<=parseInt(maxPrice.replace(`만원`,''))){
-                    this.maxPrice = maxPrice
-                }else{
-                    alert(`최저가격보다 높게 선택해주세요.`)
-                }
-
-            }
-
             setCategory2(keyWord1, resultCount){
                 this.keyWord2 = '모델을 선택하세요'
                 this.keyWord3 = '세부모델을 선택하세요'
@@ -1142,7 +1116,6 @@
                 }else{
                     alert(`최저가격보다 높게 선택해주세요.`)
                 }
-
             },
             goSearchWithCondition(){
 
@@ -1161,9 +1134,6 @@
         created(){
             this.$store.dispatch('cmm/getCategory1',{'param':'KOR','column':'CAR_TYPE'})
             this.$store.dispatch('cmm/init')
-        },
-        created(){
-            this.$store.dispatch('cmm/getCategory1',{'param':'KOR','column':'CAR_TYPE'})
         }
     }
 </script>

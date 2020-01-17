@@ -61,6 +61,7 @@ const actions = {
 const mutations = {
     INIT (state, data){
         state.carAllCount = data.allCount
+
     },
     CATEGORY1 (state, data){
         state.category1 = []

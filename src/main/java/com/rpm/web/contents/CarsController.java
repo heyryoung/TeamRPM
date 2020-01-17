@@ -13,13 +13,13 @@ public class CarsController {
     @Autowired
     CarsRepository carsRepository;
     @Autowired
-    CarsServiceImpl carsServiceImpl;
-    @Autowired
     Box box;
     @Autowired
     Trunk<Object> trunk;
     @Autowired
     CarsService carsService;
+    @Autowired
+    List<Cars> cars;
 
 
     @GetMapping("/init")
@@ -59,20 +59,34 @@ public class CarsController {
         List<Cars> carsList = (List<Cars>) carsRepository.findAll();
 
         map.put("carSearchResults",carsList.subList(0,15));
-        map.put("makerList",carsServiceImpl.findByMakecd(carsList));
-        map.put("fuelTypeList",carsServiceImpl.findCarWithFuleType(carsList));
-        map.put("regionList",carsServiceImpl.findCarWithCenterRegionCode(carsList));
-        map.put("categoryList",carsServiceImpl.findAllCategory(carsList));
+        map.put("makerList",carsService.findByMakecd(carsList));
+        map.put("fuelTypeList",carsService.findCarWithFuleType(carsList));
+        map.put("regionList",carsService.findCarWithCenterRegionCode(carsList));
+        map.put("categoryList",carsService.findAllCategory(carsList));
         return map;
     }
     @RequestMapping("/searchWithCondition")
     public Map<String,Object> searchWithCondition(@RequestBody  SearchCondition searchCondition){
         Map<String, Object> map = new HashMap<String, Object>();
-        List<Cars> carsList = (List<Cars>) carsServiceImpl.findAllByDistinct(carsRepository.findAll());
+        List<Cars> carsList = (List<Cars>) carsService.findAllByDistinct(carsRepository.findAll());
         searchCondition.getCategoryList().stream().forEach( s -> {
             carsList.stream().filter(e-> s.getCode().equals(e.getCategorycd()));
         });
         map.put("carSearchResults" , carsList.subList(0,15));
+        return map;
+    }
+    
+    @RequestMapping('/search')
+    public Map<String,Object> searchWithCondition(@RequestBody  SearchCondition searchCondition){
+        Iterable<Cars> cars= carsRepository.findAll();
+        List<Cars> carsList = (List<Cars>) carsService.findAllByDistinct(carsRepository.findAll());
+        Map<String, Object> map = new HashMap<String, Object>();
+        switch (searchCondition.getFindKey()){
+            case "conditionWithxandy" :
+
+        }
+
+
         return map;
     }
 }
