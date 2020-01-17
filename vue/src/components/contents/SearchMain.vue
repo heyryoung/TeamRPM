@@ -18,8 +18,8 @@
                         </div>
                         <div class="quick_search">
                             <div class="ip_field">
-                                <input type="text" name="quickSearch" id="searchWord" v-model="searchWord" placeholder="모델명 입력 예시) 아반떼 MD"
-                                       autocomplete="off" v-on:keyup.enter="searchWithCondition()">
+                                <input type="text" name="quickSearch" id="quickSearch" placeholder="모델명 입력 예시) 아반떼 MD"
+                                       autocomplete="off">
                                 <label for="quickSearch">검색아이콘</label>
                                 <ul class="drop_box"></ul>
                             </div>
@@ -36,16 +36,16 @@
                                 <div class="sub_type_list sub_type_tree" >
                                     <ul class="row_list">
                                         <li v-for="category of categoryList"
-                                            :key="category.code">
+                                            :key="category.categorycd">
                                             <div class="checker" :id="category.div_id"><span :class="{checked:category.checked}" @click="check(category)">
                                                 <input type="checkbox"
                                                                                                       name="categoryList"
-                                                                                                      :id="category.code"
+                                                                                                      :id="category.categorycd"
                                                                                                       class="uniform"
-                                                                                                      :v-bind="category.name"
+                                                                                                      :v-bind="category.categorynm"
                                             ></span>
                                             </div>
-                                            <label :for="category.code">{{category.name}}</label>
+                                            <label :for="category.categorycd">{{category.categorynm}}</label>
                                         </li>
                                     </ul>
                                 </div>
@@ -59,13 +59,13 @@
                                              style="height: auto; margin-bottom: 0px; margin-right: 0px; max-height: 229px;">
                                             <ul class="tree" style="display: block;" >
                                                 <li id="false"
-                                                    v-for="maker of makerList" :key="maker.code">
+                                                    v-for="maker of makerList" :key="maker.makecd">
                                                     <div class="row false">
             <span class="txt"><div class="checker" id="uniform-v_makecd">
             <span :class="{checked:maker.checked}" @click="check(maker)" >
                 <input type="checkbox" id="v_makecd0" name="v_makecd" class="uniform maker"
                         ></span></div>
-            <label for="v_makecd0">{{maker.name}}</label></span><span class="count">
+            <label for="v_makecd0">{{maker.modelnm}}</label></span><span class="count"><!--{{maker.product_count}}-->
             </span>
                                                     </div>
                                                 </li>
@@ -175,15 +175,15 @@
                             <li class="list_h list_h07" id="list_h list_h07">
                                 <a class="type" @click="treeClick(`list_h list_h07`)">연료 <small></small></a>
                                 <div class="sub_type_list">
-                                    <ul class="row_list"  v-for="fuelType of fuelTypeList" :key="fuelType.code">
+                                    <ul class="row_list"  v-for="fuelType of fuelTypeList" :key="fuelType.fuelTyped">
                                         <li>
-                                            <div class="checker" id="uniform-carFuel1"><span :class="{checked:fuelType.checked}" @click="check(fuelType)"><input type="checkbox"
+                                            <div class="checker" id="uniform-carFuel1"><span><input type="checkbox"
                                                                                                     name="fuelTypeList"
                                                                                                     id="fuelTypeList"
                                                                                                     class="uniform"
-                                                                                                    value="fuelType.code"></span>
+                                                                                                    value="fuelType.fuelTyped"></span>
                                             </div>
-                                            <label for="carFuel1">{{fuelType.name}} </label>
+                                            <label for="carFuel1">{{fuelType.fuleTypedName}} </label>
                                         </li>
                                         <li>
                                         </li>
@@ -197,12 +197,12 @@
                                         <div class="sscrollbar-dynamic scroll-content scroll-sscrolly_visible"
                                              style="height: 260px; margin-bottom: 0px; margin-right: 0px; max-height: none;">
                                             <ul class="tree">
-                                                <li class="dep01" v-for=" region of regionList" :key="region.code">
+                                                <li class="dep01" v-for=" region of regionList" :key="region.centerRegionCode">
                                                     <div class="row">
 <span class="txt">
-<div class="checker" id="uniform-areaL1"><span :class="{checked:region.checked}" @click="check(region)"><input type="checkbox" name="wr_in_v_center_region_code" id="areaL1"
-                                                      class="uniform" value="region.code"></span></div>
-<label for="areaL1">{{region.name}}</label>
+<div class="checker" id="uniform-areaL1"><span><input type="checkbox" name="wr_in_v_center_region_code" id="areaL1"
+                                                      class="uniform" value="region.centerRegionCode"></span></div>
+<label for="areaL1">{{region.centerRegion}}</label>
 </span>
 </div>
 <!--                                                    <ul class="tree">
@@ -391,7 +391,7 @@
                                         <span class="md_year">{{carSearchResult.mfrDate}}({{carSearchResult.beginYear}}년형)  &nbsp;&nbsp; {{carSearchResult.mileage}}km &nbsp;&nbsp;{{carSearchResult.fuelTypecdName}}</span>
                                         <span class="price">{{carSearchResult.price}}만원 <em></em></span>
                                         <a href=""><span
-                                                class="monthly"></span></a>
+                                                class="monthly"></span></a>-->
                                     </td>
                                     <td class="car_opt">
                                         <div class="mark">
@@ -452,18 +452,19 @@ export default {
         name: 'searchMain',
         data() {
             return {
-                searchWord : '',
-                carcd: '',
-                carSearchResults: [],
                 categoryList: [],
                 makerList: [],
                 fuelTypeList: [],
                 regionList: [],
-                checkedItem : []
+                carSearchResults: []
             }
 
         },
         computed:{
+            setCarList : function(){
+                this.$store.dispatch('contents/setCarList')
+                return this.$store.state.contents.carSearchResults
+            }
         },
         methods: {
             searchKeyClick(searchKeyID){
@@ -518,7 +519,6 @@ export default {
                         alert("들어옴 실패")
                     })
 
-
             }
         },
         created() {
@@ -532,19 +532,20 @@ export default {
                     .post(url, headers)
                     .then(res =>
                     {
-                        this.carSearchResults = res.data.carSearchResults
-                        res.data.categoryList.forEach(el => {
-                            this.categoryList.push({checked : false , code : el.categorycd , name: el.categorynm})
-                        });
-                        res.data.makerList.forEach(el => {
-                            this.makerList.push({checked : false , code : el.makecd , name: el.makenm})
-                        });
-                        res.data.fuelTypeList.forEach(el => {
-                            this.fuelTypeList.push({checked : false , code : el.fuelTyped , name: el.fuleTypedName})
-                        });
-                        res.data.regionList.forEach(el => {
-                            this.regionList.push({checked : false , code : el.centerRegionCode , name: el.centerRegion})
-                        });
+                        alert(res.data.categoryList.categorynm)
+/*                        /!*this.carSearchResults = res.data.carSearchResults*!/
+                        for (let i = 0; i < res.data.categoryList.length; i++) {
+                            this.categoryList.push({checked : false , categorycd : res.data.categoryList[i].categorycd, categorynm :res.data.categoryList[i].categorynm })
+                        }
+                        for (let i = 0; i < res.data.makerList.length; i++) {
+                            this.makerList.push({checked : false , makecd : res.data.makerList[i].makecd, makenm :res.data.makerList[i].makenm })
+                        }
+                        for (let i = 0; i < res.data.fuelTypeList.length; i++) {
+                            this.fuelTypeList.push({checked : false , fuelTyped : res.data.fuelTypeList[i].fuelTyped, fuleTypedName :res.data.fuelTypeList[i].fuleTypedName })
+                        }
+                        for (let i = 0; i < res.data.regionList.length; i++) {
+                            this.regionList.push({checked : false , centerRegionCode : res.data.regionList[i].centerRegionCode, centerRegion :res.data.regionList[i].centerRegion })
+                        }*/
 
                     })
                     .catch(()=>{

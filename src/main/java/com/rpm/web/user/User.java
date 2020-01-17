@@ -36,9 +36,10 @@ public class User implements Serializable {
             orphanRemoval = true)
     private List<Social> socials = new ArrayList<>();
 
+
     @Builder
     private User(String userid, String passwd, String name, String email,
-                 String gender, String birthMonth, String region) {
+                   String gender, String birthMonth, String region) {
         Assert.hasText(userid, "userid must not be empty");
         Assert.hasText(passwd, "passwd must not be empty");
         Assert.hasText(name, "name must not be empty");
