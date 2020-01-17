@@ -391,7 +391,7 @@
                                         <span class="md_year">{{carSearchResult.mfrDate}}({{carSearchResult.beginYear}}년형)  &nbsp;&nbsp; {{carSearchResult.mileage}}km &nbsp;&nbsp;{{carSearchResult.fuelTypecdName}}</span>
                                         <span class="price">{{carSearchResult.price}}만원 <em></em></span>
                                         <a href=""><span
-                                                class="monthly"></span></a>
+                                                class="monthly"></span></a>-->
                                     </td>
                                     <td class="car_opt">
                                         <div class="mark">
@@ -447,7 +447,6 @@
 </template>
 <script>
 import {checkBox} from "../mixins/checkBox";
-import axios from 'axios'
 
 export default {
         name: 'searchMain',
@@ -462,6 +461,10 @@ export default {
 
         },
         computed:{
+            setCarList : function(){
+                this.$store.dispatch('contents/setCarList')
+                return this.$store.state.contents.carSearchResults
+            }
         },
         methods: {
             searchKeyClick(searchKeyID){

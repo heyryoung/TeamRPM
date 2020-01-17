@@ -36,7 +36,6 @@ public class CarsController {
         Map<String, Object> map = new HashMap<String, Object>();
         List<Cars> carsList = (List<Cars>) carsRepository.findAll();
 
-
         map.put("carSearchResults",carsRepository.findCarWithPaging());
         map.put("makerList",carsRepository.findCarWithMakerCount().get(0));
         map.put("fuelTypeList",carsRepository.findCarWithFuleType().get(0));
