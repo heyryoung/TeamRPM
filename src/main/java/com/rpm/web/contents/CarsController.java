@@ -24,6 +24,8 @@ public class CarsController {
     Box box;
     @Autowired
     Trunk<Object> trunk;
+    @Autowired
+    CarsServiceImpl carsServiceImpl;
 
     @GetMapping("/init")
     public Map<String, Object> init(){

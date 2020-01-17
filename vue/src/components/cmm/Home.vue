@@ -1027,7 +1027,7 @@
                 resultCount : 0,
                 minPrice : '최저가격을 선택하세요',
                 maxPrice : '최고가격을 선택하세요',
-                searchCondition : []
+                searchCondition : [],
                 searchKeyWord : ''
 
             }
