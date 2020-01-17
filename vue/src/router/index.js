@@ -2,8 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import SearchMain from '@/components/contents/SearchMain.vue'
 import Home from '@/components/cmm/Home.vue'
-import Join from '@/components/cs/Join.vue'
-import Login from '@/components/cs/Login.vue'
+import Join from '@/components/user/Join.vue'
+import Login from '@/components/user/Login.vue'
 import Product from '@/components/contents/Product.vue'
 import Sale from '@/components/contents/Sale.vue'
 import Buycar from '@/components/contents/Buycar.vue'
@@ -33,6 +33,7 @@ Vue.use(Router)
 
 export default new Router({
     mode: 'history',
+    base:process.env.BASE_URL,
     routes : [
         {path: '/searchmain', name: 'searchmain', component: SearchMain},
         {path:'/', name:'home', component : Home},
@@ -53,18 +54,17 @@ export default new Router({
         {path:'/sns', name:'snspage', component : SnsPage},
         {path:'/snsdetail', name:'snsdetail', component : SnsDetail},
         // 강성조꺼
-
+        {path: '/customerDetail',name: 'customerDetail', component:customerDetail},
         {path: '/companyHome',name: 'companyHome', component:companyHome,children:
                 [
-                    {path: '/cmain',name: 'companyMain', components:{company:companyMain} },
-                    {path: '/customerList',name: 'CustomerList', components:{company: CustomerList}},
-                    {path: '/carList',name: 'CarList', components:{company: CarList}},
-                    {path: '/chart',name: 'chart', components:{company: chart}},
-                    {path: '/customerDetail',name: 'customerDetail', components:{company: customerDetail}}
+                    {path: '',name: 'companyMain', component:companyMain },
+                    {path: 'customerList',name: 'CustomerList', component: CustomerList},
+                    {path: 'carList',name: 'CarList', component: CarList},
+                    {path: 'chart',name: 'chart', component:chart},
                 ]},
         {path: '/recommendHome',name: 'recommendHome', component:recommendHome, children:[
-                {path: '/recommendContent',name: 'RecommendContent', components: {content:RecommendContent}},
-                {path: '/condition',name: 'Condition', components: {content:Condition}},
+                {path: '',name: 'RecommendContent', component: RecommendContent},
+                {path: 'condition',name: 'Condition', component: Condition},
 
             ]}
 

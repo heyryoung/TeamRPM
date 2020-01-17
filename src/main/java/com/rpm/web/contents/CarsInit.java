@@ -27,7 +27,7 @@ public class CarsInit implements ApplicationRunner {
         String[] json = null;
         Map<String, Map<String, Object>> map = new HashMap<>();
         if(count==0) {
-            for (int i = 1; i <= 8000;i++){
+            for (int i = 1; i <= 200;i++){
                 Map<String, String> strJson = new HashMap<>();
                  map = jsonMapper.readValue(
                         http.sendPost("https://www.kcar.com/search/api/getCarSearchWithCondition.do", String.valueOf(i))
