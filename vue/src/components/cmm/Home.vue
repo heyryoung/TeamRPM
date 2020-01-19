@@ -18,7 +18,7 @@
                                         <div class="searchcont1">
                                             <ul>
                                                 <li>
-                                                    <span class="tit">RPM에서 판매하는 차 <strong class="all_car_cnt">총 {{allCount}}대</strong></span>
+                                                    <span class="tit">RPM에서 판매하는 차 <strong class="all_car_cnt">총 {{this.$store.state.cmm.allCount}}대</strong></span>
                             <span class="searchinput">
                               <input type="text" class="placeho modelSearchInput" name="quickSearch" id="quickSearch" @click="searchBoxOn"
                                      v-model = "searchKeyWord" @keyup="stringMatchOn"
@@ -225,7 +225,7 @@
                                         <!--20180801 검색셀렉트박스 수정-->
                                         <div class="searchcont1">
                                             <ul>
-                                                <li><span class="tit">RPM에서 판매하는 차 <strong class="all_car_cnt">총 {{allCount}}대</strong></span>
+                                                <li><span class="tit">RPM에서 판매하는 차 <strong class="all_car_cnt">총 {{this.$store.state.cmm.allCount}}대</strong></span>
 
                                                 </li>
                                                 <li>
@@ -1114,10 +1114,6 @@
 
         },
         computed : {
-            allCount : function(){
-                this.$store.dispatch('cmm/welcome')
-                return this.$store.state.cmm.carAllCount
-            },
             prices : function(){
                 let list = []
                 for(let i=1;i<=100;i++){
@@ -1127,6 +1123,7 @@
             }
         },
         created(){
+            this.$store.dispatch('cmm/init')
             this.$store.dispatch('cmm/getCategory1',{'param':'KOR','column':'CAR_TYPE'})
         }
     }

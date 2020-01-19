@@ -14,7 +14,7 @@
                     <div class="detail_box">
                         <div class="box_top">
                             <h3>차량 검색</h3>
-                            <a href="" id="resetBtn" class="reset">초기화</a>
+                            <a href="#" id="resetBtn" class="reset" @click="reset()">초기화</a>
                         </div>
                         <div class="quick_search">
                             <div class="ip_field">
@@ -61,13 +61,32 @@
                                                 <li id="false"
                                                     v-for="maker of makerList" :key="maker.code">
                                                     <div class="row false">
-            <span class="txt"><div class="checker" id="uniform-v_makecd">
-            <span :class="{checked:maker.checked}" @click="check(maker)" >
-                <input type="checkbox" id="v_makecd0" name="v_makecd" class="uniform maker"
-                        ></span></div>
-            <label for="v_makecd0">{{maker.name}}</label></span><span class="count">
-            </span>
+                                                    <span class="txt"><div class="checker" id="uniform-v_makecd">
+                                                    <span :class="{checked:maker.checked}" @click="checkMakeTree(maker)" >
+                                                        <input type="checkbox" id="v_makecd0" name="v_makecd" class="uniform maker">
+                                                    </span></div>
+                                                    <label for="v_makecd0">{{maker.name}}</label></span><span class="count">
+                                                    </span><span class="count">{{maker.count}}</span>
                                                     </div>
+<!--                                                        <ul class="tree" style="display: block;" >
+                                                            <li id="false"
+                                                                v-for="maker of makerList" :key="maker.code">
+                   <div class="row false">
+                       <span class="txt">
+                       <div class="checker" id="uniform-v_model_grp_cd0">
+                           <span :class="{checked:maker.checked}" @click="check(maker)">
+                               <input type="checkbox" id="v_model_grp_cd0" name="v_model_grp_cd" class="uniform maker" value="001" data-v_model_grp_cd="001" data-count="59" data-v_makecd="001" data-v_model_grp_nm="i30" data-v_makenm="현대" data-v_car_type="KOR" data-beusable-tracking="">
+                           </span>
+                       </div>
+                       <label for="v_model_grp_cd0">i30</label>
+                       </span>
+                       <span class="count">59</span>
+                   </div>
+
+
+                                                </li>
+                                            </ul>  -->
+
                                                 </li>
                                             </ul>
                                         </div>
@@ -306,15 +325,34 @@
                         </div>
                     </div>
                     <div class="result_box_wrap">
-                        <ul class="choice_area"></ul> <!-- 검색 선택 항목 javascript -->
+                        <ul class="choice_area">
+                            <li v-for="checkedItem of checkedItems" :key="checkedItem.code">{{checkedItem.name}}<span class="close" @click="check(checkedItem)">닫기</span></li>
+                        </ul> <!-- 검색 선택 항목 javascript -->
                         <div class="until_box">
                             <div class="top_field">
                                 <div id="totalCount" class="total">총 <strong>7,976</strong>대</div>
-                                <!-- 검색 결과 카운트 ajax -->
                                 <div class="hit"></div>
-                                <div class="search_area">
-                                    <input type="text" placeholder="차량번호/판매담당자">
-                                    <button type="button">검색</button>
+                                <div id="headerCustom">
+                                    <div class="primary">
+                                    <div class="inner">
+                                    <ul class="util_link">
+                                        <router-link to="/seencar">
+                                        <li class="recent">
+                                            <a >
+                                                <i class="ico"></i>최근본차량
+                                                <span class="badge">{{seenHistoryList.length}}</span>
+                                            </a>
+                                        </li>
+                                        </router-link>
+                                        <li class="favorite">
+                                            <a href="/user/interest_car.do">
+                                                <i class="ico"></i>관심차량
+                                                <span></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                </div>
                                 </div>
                             </div>
                             <div class="align_field">
@@ -376,7 +414,11 @@
                                 </colgroup>
 
                                 <tbody>
-                                <tr v-for="carSearchResult of carSearchResults" :key="carSearchResult.carcd">
+                                <td class="empty_result" colspan="4" v-show="searchResultEmpty"><p><span>찾으시는 조건의 차량이 없으세요?</span>관심차량등록알림을 신청하면<br>해당차량 등록시 문자알림을 드립니다.</p>
+                                    <img src="https://www.kcar.com//resources/images/common/ico_empty.jpg" alt="차량없음 이미지">
+                                    <a href="/help/helpMain.do">관심차량등록알림 신청하기</a>
+                                </td>
+                                <tr v-for="carSearchResult of carSearchResults" :key="carSearchResult.carcd" @click="addHistory(carSearchResult)">
                                     <td class="thumb">
                                         <a :href="carSearchResult.carUrl" target="_blank">
                                             <div class="mark_area"></div>
@@ -384,15 +426,15 @@
                                         </a>
                                     </td>
                                     <td class="car_info">
-                                        <router-link to="/product">
-                                            <a :href="carSearchResult.carUrl" target="_blank" class="name"></a>
-                                            {{carSearchResult.truckName}}
-                                        </router-link>
-                                        <span class="md_year">{{carSearchResult.mfrDate}}({{carSearchResult.beginYear}}년형)  &nbsp;&nbsp; {{carSearchResult.mileage}}km &nbsp;&nbsp;{{carSearchResult.fuelTypecdName}}</span>
-                                        <span class="price">{{carSearchResult.price}}만원 <em></em></span>
-                                        <a href=""><span
-                                                class="monthly"></span></a>
-                                    </td>
+                                    <router-link to="/product">
+                                        <a href="" target="_blank" class="name" ></a>
+                                        {{carSearchResult.truckName}}
+                                    </router-link>
+                                    <span class="md_year">{{carSearchResult.mfrDate}}({{carSearchResult.beginYear}}년형)  &nbsp;&nbsp; {{carSearchResult.mileage}}km &nbsp;&nbsp;{{carSearchResult.fuelTypecdName}}</span>
+                                    <span class="price">{{carSearchResult.price}}만원 <em></em></span>
+                                    <a href=""><span
+                                            class="monthly"></span></a>
+                                </td>
                                     <td class="car_opt">
                                         <div class="mark">
                                             <span class="tip_list tip_09"><button type="button" class="tip_btn">특옵션</button> </span>
@@ -446,109 +488,96 @@
     </div>
 </template>
 <script>
-import {checkBox} from "../mixins/checkBox";
-import axios from 'axios'
+import { mapState , mapGetters } from 'vuex'
 export default {
-        name: 'searchMain',
-        data() {
-            return {
-                searchWord : '',
-                carcd: '',
-                checkedItem : []
+    name: 'searchMain',
+    data() {
+        return {
+            searchWord: '',
+            carcd: '',
+        }
+    },
+    computed: {
+        ...mapState({
+        carSearchResults : state => state.cmm.carSearchResults,
+        categoryList: state => state.cmm.categoryList,
+        makerList: state => state.cmm.makerList,
+        fuelTypeList: state => state.cmm.fuelTypeList,
+        regionList: state => state.cmm.regionList,
+        searchResultEmpty : state => state.cmm.searchResultEmpty,
+        checkedItems : state => state.cmm.checkedItems,
+        category2 : state => state.cmm.category2,
+        seenHistoryList : state => state.cmm.seenHistoryList,
+        }),
+        ...mapGetters('cmm', {
+            initFlag : 'initFlag'
+        })
+    },
+    methods: {
+        check(checkedItem){
+            this.$store.dispatch('cmm/CHECKER', checkedItem , { root: true })
+            this.searchWithCondition()
+        },
+/*        checkMakeTree(treeRoot,'MAKENM'){
+            this.$store.dispatch('cmm/getCategory2',{'param':this.treeRoot,'column':'MAKENM'})
+        },*/
+        searchKeyClick(searchKeyID) {
+            const searchKey = document.getElementById(searchKeyID)
+            if (searchKey.className === "selectric-wrapper selectric-selectric selectric-below") {
+                searchKey.className = "selectric-wrapper selectric-selectric selectric-below selectric-open"
+            } else {
+                searchKey.className = "selectric-wrapper selectric-selectric selectric-below"
             }
-
         },
-        computed:{
+        addHistory(caritem){
+            this.$store.dispatch('cmm/addSeenHistory',caritem)
         },
-        methods: {
-            searchKeyClick(searchKeyID){
-                const searchKey = document.getElementById(searchKeyID)
-                if(searchKey.className === "selectric-wrapper selectric-selectric selectric-below"){
-                    searchKey.className = "selectric-wrapper selectric-selectric selectric-below selectric-open"
-                }else{
-                    searchKey.className = "selectric-wrapper selectric-selectric selectric-below"
-                }
-            },
-            treeClick(categoryType){
-                    const searchConditionCategory = document.getElementById(categoryType)
-                    if(searchConditionCategory.className.substr(-2,2) === 'on'){
-                        searchConditionCategory.className = (searchConditionCategory.className.substring(0, searchConditionCategory.className.length-3));
-                    }else{
-                        searchConditionCategory.className = searchConditionCategory.className+" on"
-                    }
-            },
-            searchWithCondition(){
-                let checkedCategoryList = []
-                let checkedMakerList = []
-                let checkedFuelTypeList = []
-                let checkedRegionList = []
+        treeClick(categoryType) {
+            const searchConditionCategory = document.getElementById(categoryType)
+            if (searchConditionCategory.className.substr(-2, 2) === 'on') {
+                searchConditionCategory.className = (searchConditionCategory.className.substring(0, searchConditionCategory.className.length - 3));
+            } else {
+                searchConditionCategory.className = searchConditionCategory.className + " on"
+            }
+        },
+        searchWithCondition() {
+            let checkedCategoryList = []
+            let checkedMakerList = []
+            let checkedFuelTypeList = []
+            let checkedRegionList = []
 
-                this.categoryList.forEach( e =>{ if(e.checked == true) checkedCategoryList.push(e) })
-                this.makerList.forEach( e =>{ if(e.checked == true) checkedMakerList.push(e) })
-                this.fuelTypeList.forEach( e =>{ if(e.checked == true) checkedFuelTypeList.push(e) })
-                this.regionList.forEach( e =>{ if(e.checked == true) checkedRegionList.push(e) })
-                let data = {
-                    categoryList : checkedCategoryList,
-                    makerList : checkedMakerList,
-                    fuelTypeList : checkedFuelTypeList,
-                    regionList :checkedRegionList,
-                    searchWord: this.searchWord,
-                    carcd : this.carcd
-                }
-                let url = `http://localhost:8080/searchWithCondition`
-                let headers = {
-                    'authorization': 'JWT fefege..',
-                    'Accept' : 'application/json',
-                    'Content-Type': 'application/json'
-                }
-                axios
-                    .post(url, data ,headers)
-                    .then(res =>
-                    {
-                        alert(res.data.carSearchResults[0].carcd)
-                        this.carSearchResults = []
-                        this.carSearchResults = res.data.carSearchResults
-                    })
-                    .catch(()=>{
-                        alert("들어옴 실패")
-                    })
-
+            this.$store.state.cmm.categoryList.forEach(e => {
+                if (e.checked == true) checkedCategoryList.push(e)
+            })
+            this.$store.state.cmm.makerList.forEach(e => {
+                if (e.checked == true) checkedMakerList.push(e)
+            })
+            this.$store.state.cmm.fuelTypeList.forEach(e => {
+                if (e.checked == true) checkedFuelTypeList.push(e)
+            })
+            this.$store.state.cmm.regionList.forEach(e => {
+                if (e.checked == true) checkedRegionList.push(e)
+            })
+            let data = {
+                categoryList: checkedCategoryList,
+                makerList: checkedMakerList,
+                fuelTypeList: checkedFuelTypeList,
+                regionList: checkedRegionList,
+                searchWord: this.searchWord,
+                carcd: this.carcd
+            }
+            this.$store.dispatch('cmm/searchWithCondition', data)
+            },
+            reset () {
+            console.log('ddd')
+                this.$store.dispatch('cmm/checkReset')
             }
         },
         created() {
-               let url = `http://localhost:8080/searchInit`
-                let headers = {
-                    'authorization': 'JWT fefege..',
-                    'Accept' : 'application/json',
-                    'Content-Type': 'application/json'
-                }
-                axios
-                    .post(url, headers)
-                    .then(res =>
-                    {
-                        this.carSearchResults = res.data.carSearchResults
-                        res.data.categoryList.forEach(el => {
-                            this.categoryList.push({checked : false , code : el.categorycd , name: el.categorynm})
-                        });
-                        res.data.makerList.forEach(el => {
-                            this.makerList.push({checked : false , code : el.makecd , name: el.makenm})
-                        });
-                        res.data.fuelTypeList.forEach(el => {
-                            this.fuelTypeList.push({checked : false , code : el.fuelTyped , name: el.fuleTypedName})
-                        });
-                        res.data.regionList.forEach(el => {
-                            this.regionList.push({checked : false , code : el.centerRegionCode , name: el.centerRegion})
-                        });
-                    })
-                    .catch(()=>{
-                        alert("들어옴 실패")
-                    })
-            },
-    mixins:[checkBox]
+        if(!this.$store.state.cmm.initFlag)
+            this.$store.dispatch('cmm/init')
+        }
     }
-
 </script>
 <style scoped>
-
-
 </style>

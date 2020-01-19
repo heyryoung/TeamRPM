@@ -1,17 +1,16 @@
 package com.rpm.web.contents;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.stereotype.Component;
 
 @Component
 @NoArgsConstructor
-@Setter(AccessLevel.PUBLIC)
+@Setter
 @Getter
+@ToString
 public class SearchDetailCondition {
     private boolean checked;
     private String code,name;
+    private int count;
 
 }
