@@ -14,7 +14,7 @@
         <div id="main_image" style="width: 100%; height: 100px; line-height: 100px; text-align: center">
             <a href="/"><img style="width: 100%; max-width: 760px; vertical-align: middle" src="@/assets/image/rpmlogoblack.png" alt=""></a>
         </div>
-        <nav>
+        <nav >
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -38,13 +38,12 @@
                             <router-link to="/companyHome">ADMIN </router-link>
                             <router-link to="/sns">SNS(REVIEW) </router-link>
                             <router-link to="/sns">차계부 </router-link>
-
-
                         </Slide >
                     </li>
                 </ul>
-            </div>
+        </div>
         </nav>
+
         <div id = "main_layout">
             <router-view></router-view>
         </div>

@@ -3,9 +3,7 @@ package com.rpm.web.contents;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -41,13 +39,16 @@ public class CarsServiceImpl implements CarsService {
     }
 
     @Override
-    public List<Cars>  findAllByDistinct(Iterable<Cars> cars) {
-        return StreamSupport.stream(cars.spliterator(), false)
+    public List<Cars>  findAllByDistinct(List<Cars> carsList) {
+        return carsList.stream()
                 .filter(distinctByKey(Cars::getCarcd))
                 .collect(Collectors.toList());
     }
 
-
+    @Override
+    public List<Cars> findAllByDistinct(Iterable<Cars> cars) {
+        return null;
+    }
 
     @Override
     public <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {
@@ -56,12 +57,32 @@ public class CarsServiceImpl implements CarsService {
     }
 
     @Override
-    public List<Cars> findByMakecd(List<Cars> carsList) {
-        return carsList.stream()
-                .filter(distinctByKey(Cars::getMakecd))
-                .collect(Collectors.toList());
+    public List<SearchDetailCondition> findByMakecdWithCount(List<Cars> carsList) {
+        List<SearchDetailCondition> tmpMakecd = findByMakecd(carsList);
+        for (SearchDetailCondition detailCondition : tmpMakecd) {
+            int cnt = 0;
+            for (Cars cars : carsList) {
+                if (detailCondition.getCode().equals(cars.getMakecd())) cnt++;
+            }
+            detailCondition.setCount(cnt);
+        }
+        return tmpMakecd;
     }
 
+    @Override
+    public List<SearchDetailCondition> findByMakecd(List<Cars> carsList) {
+        List<SearchDetailCondition> tmpMakecd = new ArrayList<>();
+        int cnt = 0 ;
+        for (Cars cars : carsList.stream()
+                .filter(distinctByKey(Cars::getMakecd))
+                .collect(Collectors.toList())) {
+            SearchDetailCondition tmpCondition = new SearchDetailCondition();
+            tmpCondition.setCode(cars.getMakecd());
+            tmpCondition.setName(cars.getMakenm());
+            tmpMakecd.add(tmpCondition);
+        }
+        return tmpMakecd;
+    }
     @Override
     public List<Cars> findCarWithFuleType(List<Cars> carsList) {
         return carsList.stream()
@@ -82,4 +103,34 @@ public class CarsServiceImpl implements CarsService {
                 .filter(distinctByKey(Cars::getCategorycd))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<Cars> findCarBySelectedCategory(List<Cars> carsList, String categorycode) {
+        return carsList.stream()
+                .filter(cars -> categorycode.equals(cars.getCategorycd()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Collection<? extends Cars> findCarBySelectedMaker(List<Cars> carsList, String makercode) {
+        return carsList.stream()
+                .filter(cars -> makercode.equals(cars.getCategorycd()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Collection<? extends Cars> findCarBySelectedFuelType(List<Cars> carsList, String fuelTypecode) {
+        return carsList.stream()
+                .filter(cars -> fuelTypecode.equals(cars.getCategorycd()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Collection<? extends Cars> findCarBySelectedRegion(List<Cars> carsList, String regioncode) {
+        return carsList.stream()
+                .filter(cars -> regioncode.equals(cars.getCategorycd()))
+                .collect(Collectors.toList());
+    }
+
+
 }

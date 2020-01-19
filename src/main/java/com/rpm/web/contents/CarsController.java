@@ -5,6 +5,7 @@ import com.rpm.web.proxy.Trunk;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @RestController
@@ -26,9 +27,16 @@ public class CarsController {
     public Map<String, Object> init(){
         Map<String, Object> map = new HashMap<String, Object>();
         List<Cars> carsList = (List<Cars>) carsRepository.findAll();
-        trunk.put(Arrays.asList("allCount","carSearchResults","makerList","fuelTypeList","regionList","categoryList"),Arrays.asList(String.valueOf(carsRepository.count())
-                ,carsList.subList(0,15),carsService.findByMakecd(carsList),carsService.findCarWithFuleType(carsList)
-                ,carsService.findCarWithCenterRegionCode(carsList),carsService.findAllCategory(carsList)));
+
+        trunk.put(Arrays.asList("allCount" ,"carSearchResults","makerList","fuelTypeList", "regionList","categoryList")
+                ,Arrays.asList(String.valueOf(carsRepository.count())
+                        ,carsList.subList(0,15)
+                        ,carsService.findByMakecdWithCount(carsList)
+                        ,carsService.findCarWithFuleType(carsList)
+                        ,carsService.findCarWithCenterRegionCode(carsList)
+                        ,carsService.findAllCategory(carsList)
+                ));
+
 
         return trunk.get();
     }
@@ -61,20 +69,44 @@ public class CarsController {
     @RequestMapping("/searchWithCondition")
     public Map<String,Object> searchWithCondition(@RequestBody  SearchCondition searchCondition){
         Map<String, Object> map = new HashMap<String, Object>();
-        List<Cars> carsList = (List<Cars>) carsService.findAllByDistinct(carsRepository.findAll());
-        searchCondition.getCategoryList().stream().forEach( s -> {
-            carsList.stream().filter(e-> s.getCode().equals(e.getCategorycd()));
-        });
-        map.put("carSearchResults" , carsList.subList(0,15));
+
+        List<Cars> carsList = carsService.findAllByDistinct((List<Cars>) carsRepository.findAll());
+        List<Cars> carsProcessingList = new ArrayList<>();
+        List<SearchDetailCondition> categoryList = searchCondition.getCategoryList();
+        List<SearchDetailCondition> makerList = searchCondition.getMakerList();
+        List<SearchDetailCondition> fuelTypeList = searchCondition.getFuelTypeList();
+        List<SearchDetailCondition> regionList = searchCondition.getRegionList();
+
+        if ( !categoryList.isEmpty()) {
+            for (SearchDetailCondition category : categoryList) {
+                carsProcessingList.addAll(carsService.findCarBySelectedCategory(carsList , category.getCode()));
+            }
+            carsList = carsProcessingList;
+        }
+
+        if ( !makerList.isEmpty() ) {
+            for (SearchDetailCondition maker : makerList) {
+                carsProcessingList.addAll(carsService.findCarBySelectedMaker(carsList , maker.getCode()));
+            }
+            carsList = carsProcessingList;
+        }
+
+        if ( !fuelTypeList.isEmpty() ) {
+            for (SearchDetailCondition fuelType : fuelTypeList) {
+                carsProcessingList.addAll(carsService.findCarBySelectedFuelType(carsList , fuelType.getCode()));
+            }
+            carsList = carsProcessingList;
+        }
+
+        if ( !regionList.isEmpty() ) {
+            for (SearchDetailCondition region : regionList) {
+                carsProcessingList.addAll(carsService.findCarBySelectedRegion(carsList , region.getCode()));
+            }
+            carsList = carsProcessingList;
+        }
+
+        map.put("carSearchResults" , carsList.stream().limit(15));
         return map;
     }
 
-    @RequestMapping("/search")
-    public Map<String,Object> search(@RequestBody  SearchCondition searchCondition){
-        Iterable<Cars> cars= carsRepository.findAll();
-        switch (searchCondition.getFindKey()){
-            case "conditionWithxandy" :
-        }
-        return trunk.get();
-    }
 }

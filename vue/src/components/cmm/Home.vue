@@ -225,6 +225,7 @@
                                         <!--20180801 검색셀렉트박스 수정-->
                                         <div class="searchcont1">
                                             <ul>
+
                                                 <li><span class="tit">RPM에서 판매하는 차 <strong class="all_car_cnt">총 {{this.$store.state.cmm.carAllCount}}대</strong></span>
 
                                                 </li>
@@ -1136,6 +1137,7 @@
             }
         },
         created(){
+            this.$store.dispatch('cmm/init')
             this.$store.dispatch('cmm/getCategory1',{'param':'KOR','column':'CAR_TYPE'})
             this.$store.dispatch('cmm/init')
         },
