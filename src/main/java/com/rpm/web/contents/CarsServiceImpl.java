@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -44,6 +43,11 @@ public class CarsServiceImpl implements CarsService {
         return carsList.stream()
                 .filter(distinctByKey(Cars::getCarcd))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Cars> findAllByDistinct(Iterable<Cars> cars) {
+        return null;
     }
 
     @Override

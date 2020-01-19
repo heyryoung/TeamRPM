@@ -93,7 +93,7 @@ const actions = {
     },
     async checkReset ({commit}) {
         commit('CHECKERRESET');
-
+    },
     async goSearchMainWithCondition({commit}, param){
         axios
             .get(`http://localhost:8080/getcategory/`+param.key1+'/'+param.key2+'/'+param.key3)
