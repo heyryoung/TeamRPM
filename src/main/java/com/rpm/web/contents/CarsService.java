@@ -13,11 +13,19 @@ public interface CarsService {
     public Map<String, List<Cars>> getCategoryByCarType(Iterable<Cars> cars);
     public Map<String, Map<String, Long>> getCategory1(Iterable<Cars> cars);
 
+
     List<Cars>  findAllByDistinct(List<Cars> carsList);
+    List<Cars> findAllByDistinct(Iterable<Cars> cars);
 
     public <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor);
     public Map<String, Long> getCategory2(String param);
     public Map<String, Long> getCategory3(String param);
+    public List<Cars> findByMakecd(List<Cars> carsList);
+
+    List<Cars> findCarWithFuleType(List<Cars> carsList);
+
+    List<Cars> findCarWithCenterRegionCode(List<Cars> carsList);
+
 
     List<SearchDetailCondition> findByMakecdWithCount(List<Cars> carsList);
 
@@ -30,4 +38,4 @@ public interface CarsService {
     Collection<? extends Cars> findCarBySelectedMaker(List<Cars> carsList, String code);
     Collection<? extends Cars> findCarBySelectedFuelType(List<Cars> carsList, String code);
     Collection<? extends Cars> findCarBySelectedRegion(List<Cars> carsList, String code);
-}
+

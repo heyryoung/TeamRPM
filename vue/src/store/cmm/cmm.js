@@ -30,7 +30,6 @@ const getters = {
 const actions = {
     async init({commit}){
         if(!state.initFlag) {
-            console.log('INIT 시작  !state.initFlag >> ' + true)
             axios
                 .get(`http://localhost:8080/init`)
                 .then(({data}) => {
@@ -68,6 +67,7 @@ const actions = {
                 alert('잘못된 요청입니다.')
             })
     },
+
     async  searchWithCondition({commit}, param){
             let url = `http://localhost:8080/searchWithCondition`;
             let headers = {
@@ -93,11 +93,20 @@ const actions = {
     },
     async checkReset ({commit}) {
         commit('CHECKERRESET');
+
+    async goSearchMainWithCondition({commit}, param){
+        axios
+            .get(`http://localhost:8080/getcategory/`+param.key1+'/'+param.key2+'/'+param.key3)
+            .then(({data})=>{
+                commit('CATEGORY3', data)})
+            .catch(()=>{
+                alert('잘못된 요청입니다.')
+            })
+
     }
 };
 const mutations = {
     INIT (state, data){
-
         state.carAllCount = data.allCount;
         state.carSearchResults = data.carSearchResults;
         state.categoryList = [];
@@ -118,6 +127,9 @@ const mutations = {
                    state.regionList.push({checked : false, bigCategory: 'regionList' , code : el.centerRegionCode , name: el.centerRegion})
                })
         state.initFlag = true
+        state.carAllCount = data.allCount
+
+
     },
     CATEGORY1 (state, data){
         state.category1 = [];
@@ -172,7 +184,8 @@ const mutations = {
     CHECKERRESET (state) {
         state.checkedItems = []
     }
-};
+}
+
 export default {
     name: 'cmm',
     namespaced: true,

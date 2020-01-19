@@ -85,6 +85,7 @@ public class CarsServiceImpl implements CarsService {
                 .filter(distinctByKey(Cars::getFuelTyped))
                 .collect(Collectors.toList());
     }
+
     @Override
     public List<Cars> findCarWithCenterRegionCode(List<Cars> carsList) {
         return carsList.stream()

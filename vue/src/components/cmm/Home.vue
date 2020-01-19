@@ -18,7 +18,7 @@
                                         <div class="searchcont1">
                                             <ul>
                                                 <li>
-                                                    <span class="tit">RPM에서 판매하는 차 <strong class="all_car_cnt">총 {{this.$store.state.cmm.allCount}}대</strong></span>
+                                                    <span class="tit">RPM에서 판매하는 차 <strong class="all_car_cnt">총 {{this.$store.state.cmm.carAllCount}}대</strong></span>
                             <span class="searchinput">
                               <input type="text" class="placeho modelSearchInput" name="quickSearch" id="quickSearch" @click="searchBoxOn"
                                      v-model = "searchKeyWord" @keyup="stringMatchOn"
@@ -211,7 +211,7 @@
                                                     </div>
                                                 </li>
                                                 <li class="search_btn" id="divBtnSearch">
-                                                    <a href="javascript:;">검색하기&nbsp;<span></span></a>
+                                                    <a @click="goSearchWithCondition()">검색하기&nbsp;<span v-if="resultCount">({{resultCount}}대)</span></a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -225,7 +225,8 @@
                                         <!--20180801 검색셀렉트박스 수정-->
                                         <div class="searchcont1">
                                             <ul>
-                                                <li><span class="tit">RPM에서 판매하는 차 <strong class="all_car_cnt">총 {{this.$store.state.cmm.allCount}}대</strong></span>
+
+                                                <li><span class="tit">RPM에서 판매하는 차 <strong class="all_car_cnt">총 {{this.$store.state.cmm.carAllCount}}대</strong></span>
 
                                                 </li>
                                                 <li>
@@ -1053,6 +1054,8 @@
                 this.keyWord1 = '제조사를 선택하세요',
                 this.keyWord2 = '모델을 선택하세요'
                 this.keyWord3 = '세부모델을 선택하세요'
+                this.resultCount = 0
+
             },
             impCar(korCarID, impCarID, category1ID){
                 const korCar = document.getElementById(korCarID)
@@ -1066,6 +1069,8 @@
                 this.keyWord1 = '제조사를 선택하세요',
                 this.keyWord2 = '모델을 선택하세요'
                 this.keyWord3 = '세부모델을 선택하세요'
+                this.resultCount = 0
+
             },
             searchKeyClick(searchKeyID){
                 const searchKey = document.getElementById(searchKeyID)
@@ -1086,19 +1091,22 @@
                     cate2.style.height = ""
                 }
             },
-            setCategory2(keyWord1){
+            setCategory2(keyWord1, resultCount){
                 this.keyWord2 = '모델을 선택하세요'
                 this.keyWord3 = '세부모델을 선택하세요'
                 this.keyWord1 = keyWord1
+                this.resultCount = resultCount
                 this.$store.dispatch('cmm/getCategory2',{'param':this.keyWord1,'column':'MAKENM'})
             },
-            setCategory3(keyWord2){
+            setCategory3(keyWord2, resultCount){
                 this.keyWord3 = '세부모델을 선택하세요'
                 this.keyWord2 = keyWord2
+                this.resultCount = resultCount
                 this.$store.dispatch('cmm/getCategory3',{'param':this.keyWord2,'column':'MODEL_GRP_NM'})
             },
-            setKeyWord3(keyWord3){
+            setKeyWord3(keyWord3, resultCount){
                 this.keyWord3 = keyWord3
+                this.resultCount = resultCount
             },
             setMinPrice(minPrice){
                 this.minPrice = minPrice
@@ -1109,9 +1117,11 @@
                 }else{
                     alert(`최저가격보다 높게 선택해주세요.`)
                 }
+            },
+            goSearchWithCondition(){
+
 
             }
-
         },
         computed : {
             prices : function(){
@@ -1125,6 +1135,7 @@
         created(){
             this.$store.dispatch('cmm/init')
             this.$store.dispatch('cmm/getCategory1',{'param':'KOR','column':'CAR_TYPE'})
+            this.$store.dispatch('cmm/init')
         }
     }
 </script>
