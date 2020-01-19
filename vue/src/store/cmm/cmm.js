@@ -12,7 +12,8 @@ const state = {
     fuelTypeList: [],
     regionList: [],
     checkedItems : [],
-    seenHistoryList : []
+    seenHistoryList : [],
+    initFlag : false
 
 };
 const getters = {
@@ -25,10 +26,11 @@ const getters = {
     searchResultEmpty : state => state.searchResultEmpty,
     checkedItems : state => state.checkedItems,
     seenHistoryList : state => state.seenHistoryList,
-    initFlag : state => (state.checkedItems.length > 0)
+    initFlag : state => state.initFlag
 };
 const actions = {
     async init({commit}){
+        console.log('initFla>>>>g' + state.initFlag);
         if(!state.initFlag) {
             axios
                 .get(`http://localhost:8080/init`)
@@ -128,7 +130,6 @@ const mutations = {
                })
         state.initFlag = true
         state.carAllCount = data.allCount
-
 
     },
     CATEGORY1 (state, data){
