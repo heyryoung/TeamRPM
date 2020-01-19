@@ -27,9 +27,6 @@ public class CarsController {
     public Map<String, Object> init(){
         Map<String, Object> map = new HashMap<String, Object>();
         List<Cars> carsList = (List<Cars>) carsRepository.findAll();
-        List<SearchDetailCondition> makecdWithCount = new ArrayList<SearchDetailCondition>();
-        List<SearchDetailCondition> tmpMakecd = new ArrayList<SearchDetailCondition>();
-
 
         trunk.put(Arrays.asList("allCount" ,"carSearchResults","makerList","fuelTypeList", "regionList","categoryList")
                 ,Arrays.asList(String.valueOf(carsRepository.count())
@@ -82,7 +79,6 @@ public class CarsController {
             for (SearchDetailCondition category : categoryList) {
                 carsProcessingList.addAll(carsService.findCarBySelectedCategory(carsList , category.getCode()));
             }
-            System.out.println(carsProcessingList.size());
             carsList = carsProcessingList;
         }
 
@@ -90,7 +86,6 @@ public class CarsController {
             for (SearchDetailCondition maker : makerList) {
                 carsProcessingList.addAll(carsService.findCarBySelectedMaker(carsList , maker.getCode()));
             }
-            System.out.println(carsProcessingList.toString());
             carsList = carsProcessingList;
         }
 
@@ -98,7 +93,6 @@ public class CarsController {
             for (SearchDetailCondition fuelType : fuelTypeList) {
                 carsProcessingList.addAll(carsService.findCarBySelectedFuelType(carsList , fuelType.getCode()));
             }
-            System.out.println(carsProcessingList.toString());
             carsList = carsProcessingList;
         }
 
@@ -106,7 +100,6 @@ public class CarsController {
             for (SearchDetailCondition region : regionList) {
                 carsProcessingList.addAll(carsService.findCarBySelectedRegion(carsList , region.getCode()));
             }
-            System.out.println(carsProcessingList.toString());
             carsList = carsProcessingList;
         }
 
