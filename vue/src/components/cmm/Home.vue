@@ -998,7 +998,8 @@
                 keyWord2 : '모델을 선택하세요',
                 keyWord3 : '세부모델을 선택하세요',
                 minPrice : '최저가격을 선택하세요',
-                maxPrice : '최고가격을 선택하세요'
+                maxPrice : '최고가격을 선택하세요',
+                resultCount : 0
             }
         },
         methods : {
@@ -1090,6 +1091,7 @@
                     cate2.style.height = ""
                 }
             },
+
             setCategory2(keyWord1, resultCount){
                 this.keyWord2 = '모델을 선택하세요'
                 this.keyWord3 = '세부모델을 선택하세요'
@@ -1109,6 +1111,7 @@
             },
             setMinPrice(minPrice){
                 this.minPrice = minPrice
+
             },
             setMaxPrice(maxPrice){
                 if(parseInt(this.minPrice)<=parseInt(maxPrice.replace(`만원`,''))){
@@ -1116,6 +1119,7 @@
                 }else{
                     alert(`최저가격보다 높게 선택해주세요.`)
                 }
+
             },
             goSearchWithCondition(){
 
@@ -1134,7 +1138,8 @@
         created(){
             this.$store.dispatch('cmm/getCategory1',{'param':'KOR','column':'CAR_TYPE'})
             this.$store.dispatch('cmm/init')
-        }
+        },
+
     }
 </script>
 <style scoped>

@@ -24,7 +24,12 @@ public class CarsController {
 
     @GetMapping("/init")
     public Map<String, Object> init(){
-        trunk.put(Arrays.asList("allCount"),Arrays.asList(String.valueOf(carsRepository.count())));
+        Map<String, Object> map = new HashMap<String, Object>();
+        List<Cars> carsList = (List<Cars>) carsRepository.findAll();
+        trunk.put(Arrays.asList("allCount","carSearchResults","makerList","fuelTypeList","regionList","categoryList"),Arrays.asList(String.valueOf(carsRepository.count())
+                ,carsList.subList(0,15),carsService.findByMakecd(carsList),carsService.findCarWithFuleType(carsList)
+                ,carsService.findCarWithCenterRegionCode(carsList),carsService.findAllCategory(carsList)));
+
         return trunk.get();
     }
 
@@ -53,18 +58,6 @@ public class CarsController {
         return trunk.get();
     }
 
-    @RequestMapping("/searchInit")
-    public Map<String,Object> searchConditionInit(){
-        Map<String, Object> map = new HashMap<String, Object>();
-        List<Cars> carsList = (List<Cars>) carsRepository.findAll();
-
-        map.put("carSearchResults",carsList.subList(0,15));
-        map.put("makerList",carsService.findByMakecd(carsList));
-        map.put("fuelTypeList",carsService.findCarWithFuleType(carsList));
-        map.put("regionList",carsService.findCarWithCenterRegionCode(carsList));
-        map.put("categoryList",carsService.findAllCategory(carsList));
-        return map;
-    }
     @RequestMapping("/searchWithCondition")
     public Map<String,Object> searchWithCondition(@RequestBody  SearchCondition searchCondition){
         Map<String, Object> map = new HashMap<String, Object>();
@@ -75,18 +68,13 @@ public class CarsController {
         map.put("carSearchResults" , carsList.subList(0,15));
         return map;
     }
-    
-    @RequestMapping('/search')
-    public Map<String,Object> searchWithCondition(@RequestBody  SearchCondition searchCondition){
+
+    @RequestMapping("/search")
+    public Map<String,Object> search(@RequestBody  SearchCondition searchCondition){
         Iterable<Cars> cars= carsRepository.findAll();
-        List<Cars> carsList = (List<Cars>) carsService.findAllByDistinct(carsRepository.findAll());
-        Map<String, Object> map = new HashMap<String, Object>();
         switch (searchCondition.getFindKey()){
             case "conditionWithxandy" :
-
         }
-
-
-        return map;
+        return trunk.get();
     }
 }

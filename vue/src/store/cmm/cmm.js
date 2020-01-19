@@ -3,7 +3,8 @@ const state = {
     carAllCount : '',
     category1 : [],
     category2 : [],
-    category3 : []
+    category3 : [],
+    searchList : {}
 }
 const getters = {
     getCarAllCount : state => state.carAllCount,
@@ -61,7 +62,6 @@ const actions = {
 const mutations = {
     INIT (state, data){
         state.carAllCount = data.allCount
-
     },
     CATEGORY1 (state, data){
         state.category1 = []
