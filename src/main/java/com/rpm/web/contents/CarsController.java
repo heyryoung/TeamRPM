@@ -113,18 +113,5 @@ public class CarsController {
         map.put("carSearchResults" , carsList.stream().limit(15));
         return map;
     }
-    
-    @RequestMapping('/search')
-    public Map<String,Object> searchWithCondition(@RequestBody  SearchCondition searchCondition){
-        Iterable<Cars> cars= carsRepository.findAll();
-        List<Cars> carsList = (List<Cars>) carsService.findAllByDistinct(carsRepository.findAll());
-        Map<String, Object> map = new HashMap<String, Object>();
-        switch (searchCondition.getFindKey()){
-            case "conditionWithxandy" :
 
-        }
-
-
-        return map;
-    }
 }
