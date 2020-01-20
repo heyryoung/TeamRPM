@@ -29,7 +29,7 @@
                         </div>
                         <ul class="search_list_wrap">
                             <li class="list_h list_h01 " id="list_h list_h01 ">
-                                <a class="type"  @click="treeClick(`list_h list_h01 `)" >차종 <small></small></a>
+                                <a class="type"  @click="bigCategoryIsOpen(`list_h list_h01 `)" >차종 <small></small></a>
                                 <div class="sub_type_list sub_type_tree" >
                                     <ul class="row_list">
                                         <li v-for="category of categoryList"
@@ -48,7 +48,7 @@
                                 </div>
                             </li>
                             <li class="list_h list_h02 on"  id="list_h list_h02 on">
-                                <a class="type" @click="treeClick(`list_h list_h02 on`)">제조사/모델<small></small></a>
+                                <a class="type" @click="bigCategoryIsOpen(`list_h list_h02 on`)">제조사/모델<small></small></a>
                                 <div class="sub_type_list sub_type_tree" >
                                     <div class="scroll-wrapper scrollbar-dynamic" style="position: relative;" >
                                         <div id="makerFrame"
@@ -56,7 +56,7 @@
                                              style="height: auto; margin-bottom: 0px; margin-right: 0px; max-height: 229px;">
                                             <ul class="tree" style="display: block;" >
                                                 <li id="false"
-                                                    v-for="maker of makerList" :key="maker.code" v-show="!(makerTreeChildFlag && maker.checked)">
+                                                    v-for="maker of makerList" :key="maker.code" >
                                                     <div class="row false">
                                                     <span class="txt"><div class="checker" id="uniform-v_makecd">
                                                     <span :class="{checked:maker.checked}" @click="checkMakeTree(maker)" >
@@ -65,13 +65,12 @@
                                                     <label for="v_makecd0">{{maker.name}}</label></span><span class="count">
                                                     </span><span class="count">{{maker.count}}</span>
                                                     </div>
-                                                <ul class="tree" style="display: block;" v-show="modelList.length > 0" >
-                                                            <li id="false"
-                                                                v-for="model of modelList" :key="model.code">
+                                                <ul class="tree" style="display: block;" v-show="modelListIsOpen" >
+                                                            <li v-for="model of modelList" :key="model.code">
                    <div class="row false">
                        <span class="txt">
                        <div class="checker" id="uniform-v_model_grp_cd0">
-                           <span :class="{checked:model.checked}" @click="check(model)">
+                           <span :class="{checked:model.checked}" @click="check(model)" >
                                <input type="checkbox" id="v_model_grp_cd0" name="v_model_grp_cd" class="uniform maker" value="001" data-v_model_grp_cd="001" data-count="59" data-v_makecd="001" data-v_model_grp_nm="i30" data-v_makenm="현대" data-v_car_type="KOR" data-beusable-tracking="">
                            </span>
                        </div>
@@ -91,7 +90,7 @@
                                 </div>
                             </li>
                             <li class="list_h list_h05 on" id="list_h list_h05 on">
-                                <a class="type"   @click="treeClick('list_h list_h05 on')">연식<small></small></a>
+                                <a class="type"   @click="bigCategoryIsOpen('list_h list_h05 on')">연식<small></small></a>
                                 <div class="sub_type_list" data-init="true"  >
                                     <div id="startYear"  class="selectric-wrapper selectric-selectric selectric-below selectric-hover" @click= "searchKeyClick(`startYear`)">
                                         <div class="selectric-hide-select"><select name="wr_gt_v_mfr_date"
@@ -137,7 +136,7 @@
                                 </div>
                             </li>
                             <li class="list_h list_h04 on" id="list_h list_h04 on">
-                                <a class="type"   @click="treeClick(`list_h list_h04 on`)">주행거리<small></small></a>
+                                <a class="type"   @click="bigCategoryIsOpen(`list_h list_h04 on`)">주행거리<small></small></a>
                                 <div class="sub_type_list"  data-init="true"  >
                                     <div id="startMileage" @click="searchKeyClick(`startMileage`)"
                                          class="selectric-wrapper selectric-selectric selectric-below selectric-hover">
@@ -189,7 +188,7 @@
                                 </div>
                             </li>
                             <li class="list_h list_h07" id="list_h list_h07">
-                                <a class="type" @click="treeClick(`list_h list_h07`)">연료 <small></small></a>
+                                <a class="type" @click="bigCategoryIsOpen(`list_h list_h07`)">연료 <small></small></a>
                                 <div class="sub_type_list">
                                     <ul class="row_list"  v-for="fuelType of fuelTypeList" :key="fuelType.code">
                                         <li>
@@ -207,7 +206,7 @@
                     </div>
                             </li>
                             <li class="list_h list_h12" id="list_h list_h12">
-                                <a class="type"   @click="treeClick(`list_h list_h12`)">지역 <small></small></a>
+                                <a class="type"   @click="bigCategoryIsOpen(`list_h list_h12`)">지역 <small></small></a>
                                 <div class="sub_type_list sub_type_tree"  >
                                     <div class="scroll-wrapper scrollbar-dynamic" style="position: relative;">
                                         <div class="sscrollbar-dynamic scroll-content scroll-sscrolly_visible"
@@ -221,18 +220,6 @@
 <label for="areaL1">{{region.name}}</label>
 </span>
 </div>
-<!--                                                    <ul class="tree">
-                                                        <li class="dep02">
-                                                            <div class="row">
-	<span class="txt">
-<div class="checker" id="uniform-areaL1S1"><span><input type="checkbox" name="wr_in_multi_values" id="areaL1S1"
-                                                        class="uniform" value="SEOUL,147"></span></div>
-<label for="areaL1S1">강남직영점</label>
-	</span>
-                                                            </div>
-                                                            </div>
-                                                        </li>
-                                                    </ul>-->
                                                 </li>
                                             </ul>
                                         </div>
@@ -492,6 +479,8 @@ export default {
         return {
             searchWord: '',
             carcd: '',
+            modelListIsOpen: false,
+            maker : ''
         }
     },
     computed: {
@@ -502,6 +491,7 @@ export default {
         modelList: state => state.cmm.modelList,
         fuelTypeList: state => state.cmm.fuelTypeList,
         regionList: state => state.cmm.regionList,
+        centerList: state => state.cmm.centerList,
         searchResultEmpty : state => state.cmm.searchResultEmpty,
         checkedItems : state => state.cmm.checkedItems,
         seenHistoryList : state => state.cmm.seenHistoryList,
@@ -510,6 +500,11 @@ export default {
         ...mapGetters('cmm', {
             initFlag : 'initFlag'
         })
+        ,
+        modelIsList : function () {
+            return this.$store.state.cmm.modelList
+        },
+
     },
     methods: {
         check(checkedItem){
@@ -517,8 +512,13 @@ export default {
             this.searchWithCondition()
         },
         checkMakeTree(param){
-            this.$store.dispatch('cmm/getTreeChild',param)
-            this.$store.dispatch('cmm/CHECKER',param)
+            this.modelListIsOpen = !this.modelListIsOpen;
+
+            if (this.modelListIsOpen) this.$store.dispatch('cmm/getTreeChild',param)
+                else this.$store.dispatch('cmm/makeOriginList' )
+
+            this.$store.dispatch('cmm/CHECKER',param, { root: true })
+            this.searchWithCondition()
         },
         searchKeyClick(searchKeyID) {
             const searchKey = document.getElementById(searchKeyID)
@@ -531,7 +531,7 @@ export default {
         addHistory(caritem){
             this.$store.dispatch('cmm/addSeenHistory',caritem)
         },
-        treeClick(categoryType) {
+        bigCategoryIsOpen(categoryType) {
             const searchConditionCategory = document.getElementById(categoryType)
             if (searchConditionCategory.className.substr(-2, 2) === 'on') {
                 searchConditionCategory.className = (searchConditionCategory.className.substring(0, searchConditionCategory.className.length - 3));
@@ -541,15 +541,19 @@ export default {
         },
         searchWithCondition() {
             let checkedCategoryList = []
-            let checkedMakerList = []
+            let checkedModelList = []
             let checkedFuelTypeList = []
             let checkedRegionList = []
+            let maker = ''
 
             this.$store.state.cmm.categoryList.forEach(e => {
                 if (e.checked == true) checkedCategoryList.push(e)
             })
             this.$store.state.cmm.makerList.forEach(e => {
-                if (e.checked == true) checkedMakerList.push(e)
+                if (e.checked == true) maker = e.code
+            })
+            this.$store.state.cmm.modelList.forEach(e => {
+                if (e.checked == true) checkedModelList.push(e)
             })
             this.$store.state.cmm.fuelTypeList.forEach(e => {
                 if (e.checked == true) checkedFuelTypeList.push(e)
@@ -559,11 +563,12 @@ export default {
             })
             let data = {
                 categoryList: checkedCategoryList,
-                makerList: checkedMakerList,
+                modelList: checkedModelList,
                 fuelTypeList: checkedFuelTypeList,
                 regionList: checkedRegionList,
                 searchWord: this.searchWord,
-                carcd: this.carcd
+                carcd: this.carcd,
+                maker : maker
             }
             this.$store.dispatch('cmm/searchWithCondition', data)
             },

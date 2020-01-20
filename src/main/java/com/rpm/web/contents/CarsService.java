@@ -49,5 +49,5 @@ public interface CarsService {
     Collection<? extends Cars> findCarBySelectedRegion(List<Cars> carsList, String code);
 
 
-
+    Collection<? extends Cars> findCarBySelectedModel(List<Cars> carsList, String code);
 }

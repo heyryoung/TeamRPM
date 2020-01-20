@@ -9,6 +9,7 @@ const state = {
     carSearchResults:[],
     categoryList:[],
     makerList: [],
+    originMakerList: [],
     modelGroupList : [],
     fuelTypeList: [],
     regionList: [],
@@ -33,7 +34,6 @@ const getters = {
 };
 const actions = {
     async init({commit}){
-        console.log('initFla>>>>g' + state.initFlag);
         if(!state.initFlag) {
             axios
                 .get(`http://localhost:8080/init`)
@@ -46,11 +46,12 @@ const actions = {
         }
     },
     async getTreeChild({commit}, param){
-        console.log('http://localhost:8080/getcategory/'+param.code+'/'+param.bigCategory)
+        console.log('getTreeChild')
         axios
             .get(`http://localhost:8080/getcategory/`+param.code+'/'+param.bigCategory)
             .then(({data})=>{
-                commit('MAKETREECHILD', data, param.bigCategory)})
+                commit('MAKETREECHILD', { reault : data , parents : param })
+            })
             .catch(()=>{
                 alert('잘못된 요청입니다.')
             })
@@ -103,11 +104,14 @@ const actions = {
     async CHECKER ({commit}, param) {
         commit('CHECKER',param);
     },
-    addSeenHistory ({commit}, param) {
-        commit('ADDSEENHISTORY',param);
+    addSeenHistory ({commit}, param ) {
+        commit('ADDSEENHISTORY', param );
     },
     async checkReset ({commit}) {
         commit('CHECKERRESET');
+    },
+    async makeOriginList ( {commit} ) {
+        commit('MAKEORIGINLIST');
     }
 };
 const mutations = {
@@ -124,6 +128,7 @@ const mutations = {
                })
               data.makerList.forEach(el => {
                    state.makerList.push({checked : false, bigCategory: 'makerList' , code : el.code , name: el.name, count : el.count})
+
                })
                data.fuelTypeList.forEach(el => {
                    state.fuelTypeList.push({checked : false, bigCategory: 'fuelTypeList' , code : el.fuelTyped , name: el.fuleTypedName})
@@ -131,28 +136,21 @@ const mutations = {
                data.regionList.forEach(el => {
                    state.regionList.push({checked : false, bigCategory: 'regionList' , code : el.centerRegionCode , name: el.centerRegion})
                })
+        state.originMakerList = state.makerList
+        state.originRegionList = state.regionList
         state.initFlag = true
         state.carAllCount = data.allCount
 
     },
-    MAKETREECHILD (state, data, bigCategory) {
-        switch (bigCategory) {
-            case 'makerList' :
+    MAKETREECHILD (state, data) {
+                console.log('parents' + data.parents.name)
+                state.makerList = []
+                state.makerList.push(data.parents)
                 state.modelList = []
-                data.modelList.forEach(el => {
+                data.reault.modelList.forEach(el => {
                     state.modelList.push({checked : false, bigCategory: 'modelList' , code : el.code , name: el.name, count : el.count})
                 })
-                break;
-            case 'regionList' :
-                state.regionList = []
-                data.centerList.forEach(el => {
-                    state.centerList.push({checked : false, bigCategory: 'centerList' , code : el.code , name: el.name, count : el.count})
-                })
-                break;
-        }
-
     },
-
     CATEGORY1 (state, data){
         state.category1 = []
         state.category2 = []
@@ -209,8 +207,11 @@ const mutations = {
     ADDSEENHISTORY (state, data) {
         state.seenHistoryList.push(data)
     },
-    CHECKERRESET (state) {
+    CHECKERRESET ( state ) {
         state.checkedItems = []
+    },
+    MAKEORIGINLIST ( state ) {
+        state.makerList = state.originMakerList
     }
 }
 
