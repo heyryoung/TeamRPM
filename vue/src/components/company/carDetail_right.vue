@@ -42,117 +42,17 @@
             </div>
         </div>
         <div class="mypage_CarList interest">
-
-            <div class="align_field">
-                <div class="all_check">
-                    <div class="checker" id="uniform-allCheck">
-                        <span :class="{checked:allchecked}" @click="allcheck" :key="allchecked"><input type="checkbox" name="allCheck" id="allCheck" class="uniform" title="전체체크"></span>
-                    </div>
-                </div>
-                <div class="align">
-            
-                    <span class="basic"><a href=""
-                                           class="txt">기본정렬</a></span>
-                    <span><a href="" class="txt">가격순</a><a href="" class="down ">낮은순</a>
-												<a href="" class="up ">높은순</a>
-						</span>
-                    <span><a href="" class="txt">주행거리 순</a><a
-                            href="" class="down ">낮은순</a>
-						<a href=""
-                           class="up ">높은순</a>
-						</span>
-                    <span><a href="" class="txt">연식 순</a><a
-                            href="" class="down ">낮은순</a>
-						<a href="" class="up ">높은순</a>
-						</span>
-                </div>
-            </div>
-            <div class="result_list">
-                <table>
-                    <caption>관심차량</caption>
-
-                    <colgroup>
-                        <col style="width: 55px;">
-                        <col style="width: 190px;">
-                        <col style="width: 485px;">
-                        <col style="width: 290px;">
-                        <col>
-                    </colgroup>
-
-                    <tbody v-for="(car,index) of List" :key="car.carID">
-                    <tr>
-                        <td class="check">
-                            <div class="checker" id="uniform-interest_list_check1">
-                                <span :class="{checked:car.checked}" @click="check(index)" @change='updateCheckall()'>
-                                    <input type="checkbox" id="interest_list_check1" class="uniform">
-                                </span>
-                            </div>
-                        </td>
-                        <td class="thumb">
-                            <a href="/product">
-                                <img :src="car.thumb" alt="자동차 썸네일">
-                            </a>
-                        </td>
-                        <td class="car_info">
-                            <a href="/product" class="name">{{car.title}}<br> {{car.subTitle}} </a>
-                            <span class="md_year">{{car.caryear}} &nbsp; {{car.distance}}</span>
-                            <span class="price">{{car.price}} </span>
-                        </td>
-                        <td class="car_opt">
-                            <ul class="opt_list">
-                                <li>
-                                    <span class="pt">{{car.acident}}</span>
-                                    <span>{{car.fuel}}</span>
-                                </li>
-                                <li>
-                                    <span>{{car.color}}</span>
-                                    <span>{{car.carType}}</span>
-                                </li>
-                                <li>
-                                    <span>{{car.region}}</span>
-                                    <span>{{car.people}}</span>
-                                </li>
-                            </ul>
-
-
-                        </td>
-
-                    </tr>
-
-
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="btn_cont">
-                <a href="" class="delete">선택삭제</a>
-
-                <div class="center_btn">
-                    <button href="" @click="popRendor">추천 목록추가 하기</button>
-                    <modals-container/>
-                </div>
-            </div>
-
-
-            <div class="cm_pagination">
-                <ul class="pagination">
-                    <li class="move prev"><a href=""><img
-                            src="/resources/images/content/buy/pagination_arrows.png" border="0" alt="이전10개"
-                            style="cursor:pointer"></a></li>
-                    <li class="num on"><a>1</a></li>
-                    <li class="move next"><a href=""><img
-                            src="/resources/images/content/buy/pagination_arrows.png" border="0" alt="다음10개"
-                            style="cursor:pointer"></a></li>
-                </ul>
-            </div>
+        <carList></carList>
         </div>
     </div>
 </template>
 <script>
     import sendCarPop from "./sendCarPop"
     import {checkBox} from "../mixins/checkBox";
+    import carList from "./carList";
 
     export default {
+        components:{carList},
         data() {
             return {
                 allchecked : false,
