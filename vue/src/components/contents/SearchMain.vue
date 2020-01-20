@@ -56,7 +56,7 @@
                                              style="height: auto; margin-bottom: 0px; margin-right: 0px; max-height: 229px;">
                                             <ul class="tree" style="display: block;" >
                                                 <li id="false"
-                                                    v-for="maker of makerList" :key="maker.code" v-show="!(makerTreeChildFlag && maker.checked)">
+                                                    v-for="maker of makerList" :key="maker.code" >
                                                     <div class="row false">
                                                     <span class="txt"><div class="checker" id="uniform-v_makecd">
                                                     <span :class="{checked:maker.checked}" @click="checkMakeTree(maker)" >
@@ -65,13 +65,12 @@
                                                     <label for="v_makecd0">{{maker.name}}</label></span><span class="count">
                                                     </span><span class="count">{{maker.count}}</span>
                                                     </div>
-                                                <ul class="tree" style="display: block;" v-show="modelList.length > 0" >
-                                                            <li id="false"
-                                                                v-for="model of modelList" :key="model.code">
+                                                <ul class="tree" style="display: block;" v-show="modelListIsOpen" >
+                                                            <li v-for="model of modelList" :key="model.code">
                    <div class="row false">
                        <span class="txt">
                        <div class="checker" id="uniform-v_model_grp_cd0">
-                           <span :class="{checked:model.checked}" @click="check(model)">
+                           <span :class="{checked:model.checked}" @click="check(model)" >
                                <input type="checkbox" id="v_model_grp_cd0" name="v_model_grp_cd" class="uniform maker" value="001" data-v_model_grp_cd="001" data-count="59" data-v_makecd="001" data-v_model_grp_nm="i30" data-v_makenm="현대" data-v_car_type="KOR" data-beusable-tracking="">
                            </span>
                        </div>
@@ -492,6 +491,8 @@ export default {
         return {
             searchWord: '',
             carcd: '',
+            modelListIsOpen: false,
+            centerListIsOpen : false
         }
     },
     computed: {
@@ -502,6 +503,7 @@ export default {
         modelList: state => state.cmm.modelList,
         fuelTypeList: state => state.cmm.fuelTypeList,
         regionList: state => state.cmm.regionList,
+        centerList: state => state.cmm.centerList,
         searchResultEmpty : state => state.cmm.searchResultEmpty,
         checkedItems : state => state.cmm.checkedItems,
         seenHistoryList : state => state.cmm.seenHistoryList,
@@ -510,6 +512,11 @@ export default {
         ...mapGetters('cmm', {
             initFlag : 'initFlag'
         })
+        ,
+        modelIsList : function () {
+            return this.$store.state.cmm.modelList
+        },
+
     },
     methods: {
         check(checkedItem){
@@ -517,7 +524,12 @@ export default {
             this.searchWithCondition()
         },
         checkMakeTree(param){
-            this.$store.dispatch('cmm/getTreeChild',param)
+            if (param.bigCategory === 'makerList') this.modelListIsOpen = !this.modelListIsOpen;
+            else this.centerListIsOpen = !this.centerListIsOpen ;
+
+            if (this.modelListIsOpen) this.$store.dispatch('cmm/getTreeChild',param)
+            else this.$store.dispatch('cmm/makeOriginList', param.bigCategory )
+
             this.$store.dispatch('cmm/CHECKER',param)
         },
         searchKeyClick(searchKeyID) {

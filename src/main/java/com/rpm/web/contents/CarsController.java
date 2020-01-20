@@ -62,11 +62,11 @@ public class CarsController {
                                 carsService.getCategory3(param).values()));
                 break;
             case "makerList" :
-                trunk.put(Arrays.asList("MODELCD"),
+                trunk.put(Arrays.asList("modelList"),
                         Arrays.asList(carsService.findByModelWithCount((List<Cars>) cars ,param)));
                 break;
-            case "REGION" :
-                trunk.put(Arrays.asList("REGION"),
+            case "regionList" :
+                trunk.put(Arrays.asList("centerList"),
                         Arrays.asList(carsService.findByModelWithCount((List<Cars>) cars ,param)));
                 break;
         }
