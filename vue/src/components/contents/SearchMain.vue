@@ -25,7 +25,7 @@
                             </div>
                         </div>
                         <div class="sel_field">
-                            <input id="carTypeInput" type="hidden" name="v_car_type" value="">
+                            <hr/>
                         </div>
                         <ul class="search_list_wrap">
                             <li class="list_h list_h01 " id="list_h list_h01 ">
@@ -56,7 +56,7 @@
                                              style="height: auto; margin-bottom: 0px; margin-right: 0px; max-height: 229px;">
                                             <ul class="tree" style="display: block;" >
                                                 <li id="false"
-                                                    v-for="maker of makerList" :key="maker.code">
+                                                    v-for="maker of makerList" :key="maker.code" v-show="!(makerTreeChildFlag && maker.checked)">
                                                     <div class="row false">
                                                     <span class="txt"><div class="checker" id="uniform-v_makecd">
                                                     <span :class="{checked:maker.checked}" @click="checkMakeTree(maker)" >
@@ -65,24 +65,24 @@
                                                     <label for="v_makecd0">{{maker.name}}</label></span><span class="count">
                                                     </span><span class="count">{{maker.count}}</span>
                                                     </div>
-<!--                                                        <ul class="tree" style="display: block;" >
+                                                <ul class="tree" style="display: block;" v-show="modelList.length > 0" >
                                                             <li id="false"
-                                                                v-for="maker of makerList" :key="maker.code">
+                                                                v-for="model of modelList" :key="model.code">
                    <div class="row false">
                        <span class="txt">
                        <div class="checker" id="uniform-v_model_grp_cd0">
-                           <span :class="{checked:maker.checked}" @click="check(maker)">
+                           <span :class="{checked:model.checked}" @click="check(model)">
                                <input type="checkbox" id="v_model_grp_cd0" name="v_model_grp_cd" class="uniform maker" value="001" data-v_model_grp_cd="001" data-count="59" data-v_makecd="001" data-v_model_grp_nm="i30" data-v_makenm="현대" data-v_car_type="KOR" data-beusable-tracking="">
                            </span>
                        </div>
-                       <label for="v_model_grp_cd0">i30</label>
+                       <label for="v_model_grp_cd0">{{model.name}}</label>
                        </span>
-                       <span class="count">59</span>
+                       <span class="count">{{model.count}}</span>
                    </div>
 
 
                                                 </li>
-                                            </ul>  -->
+                                            </ul>
 
                                                 </li>
                                             </ul>
@@ -499,11 +499,13 @@ export default {
         carSearchResults : state => state.cmm.carSearchResults,
         categoryList: state => state.cmm.categoryList,
         makerList: state => state.cmm.makerList,
+        modelList: state => state.cmm.modelList,
         fuelTypeList: state => state.cmm.fuelTypeList,
         regionList: state => state.cmm.regionList,
         searchResultEmpty : state => state.cmm.searchResultEmpty,
         checkedItems : state => state.cmm.checkedItems,
         seenHistoryList : state => state.cmm.seenHistoryList,
+            makerTreeChildFlag : state => state.cmm.makerTreeChildFlag
         }),
         ...mapGetters('cmm', {
             initFlag : 'initFlag'
@@ -515,7 +517,8 @@ export default {
             this.searchWithCondition()
         },
         checkMakeTree(param){
-            this.$store.dispatch('cmm/getCategory2',{'param':param.name,'column':'MAKENM'})
+            this.$store.dispatch('cmm/getTreeChild',param)
+            this.$store.dispatch('cmm/CHECKER',param)
         },
         searchKeyClick(searchKeyID) {
             const searchKey = document.getElementById(searchKeyID)
