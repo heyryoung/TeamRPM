@@ -88,11 +88,11 @@ public class CarsServiceImpl implements CarsService {
         List<SearchDetailCondition> tmpModelcd = findByModelCategory(carsList , code);
         for (SearchDetailCondition detailCondition : tmpModelcd) {
             int cnt = 0;
-            for (Cars cars : carsList) {
+            for (Cars cars : findCarBySelectedMaker(carsList,code).stream()
+                    .collect(Collectors.toList())) {
                 if (detailCondition.getCode().equals(cars.getModelGrpCd())) cnt++;
             }
             detailCondition.setCount(cnt);
-            System.out.println(detailCondition.getName() + ">>>" + detailCondition.getCount() );
         }
         return tmpModelcd;
     }
@@ -100,8 +100,7 @@ public class CarsServiceImpl implements CarsService {
     @Override
     public List<SearchDetailCondition> findByModelCategory(List<Cars> carsList, String code) {
         List<SearchDetailCondition> tmpModelGrpNm = new ArrayList<>();
-        for (Cars cars : carsList.stream()
-                .filter(cars -> cars.getMakecd().equals(code))
+        for (Cars cars : findCarBySelectedMaker(carsList,code).stream()
                 .filter(distinctByKey(Cars::getModelGrpNm))
                 .collect(Collectors.toList())) {
             SearchDetailCondition tmpCondition = new SearchDetailCondition();

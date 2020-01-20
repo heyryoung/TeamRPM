@@ -21,15 +21,18 @@ public class CarsController {
     CarsService carsService;
     @Autowired
     List<Cars> cars;
+    static private List<Cars> cartatic = null;
 
 
     @GetMapping("/init")
     public Map<String, Object> init(){
         List<Cars> carsList = (List<Cars>) carsRepository.findAll();
+        cartatic = null;
+        cartatic = carsList;
 
         trunk.put(Arrays.asList("allCount" ,"carSearchResults","makerList","fuelTypeList", "regionList","categoryList")
                 ,Arrays.asList(String.valueOf(carsRepository.count())
-                        ,carsList.subList(0,15)
+                        ,cartatic.subList(0,15)
                         ,carsService.findByMakecdWithCount(carsList)
                         ,carsService.findCarWithFuleType(carsList)
                         ,carsService.findCarWithCenterRegionCode(carsList)
@@ -66,6 +69,7 @@ public class CarsController {
                         Arrays.asList(carsService.findByModelWithCount((List<Cars>) cars ,param)));
                 break;
         }
+
         return trunk.get();
     }
 
@@ -83,6 +87,14 @@ public class CarsController {
 
 
 
+
+        if( searchCondition.getMaker() != "") {
+            carsProcessingList.addAll(carsService.findCarBySelectedMaker(carsList , searchCondition.getMaker()));
+            carsList.clear();
+            carsList.addAll(carsProcessingList);
+            carsProcessingList.clear();
+        }
+
         if ( !modelList.isEmpty() ) {
             for (SearchDetailCondition model : modelList) {
                 carsProcessingList.addAll(carsService.findCarBySelectedModel(carsList , model.getCode()));
@@ -91,11 +103,6 @@ public class CarsController {
             carsList.addAll(carsProcessingList);
             carsProcessingList.clear();
 
-        }else if( searchCondition.getMaker() != "") {
-            carsProcessingList.addAll(carsService.findCarBySelectedMaker(carsList , searchCondition.getMaker()));
-            carsList.clear();
-            carsList.addAll(carsProcessingList);
-            carsProcessingList.clear();
         }
 
         if ( !categoryList.isEmpty()) {
@@ -125,8 +132,9 @@ public class CarsController {
             carsList.addAll(carsProcessingList);
             carsProcessingList.clear();
         }
-
-        map.put("carSearchResults" , carsList.stream().limit(15));
+        cartatic = null;
+        cartatic = carsList;
+        map.put("carSearchResults" , cartatic.stream().limit(15));
         return map;
     }
 
