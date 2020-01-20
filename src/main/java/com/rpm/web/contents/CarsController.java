@@ -25,7 +25,6 @@ public class CarsController {
 
     @GetMapping("/init")
     public Map<String, Object> init(){
-        Map<String, Object> map = new HashMap<String, Object>();
         List<Cars> carsList = (List<Cars>) carsRepository.findAll();
 
         trunk.put(Arrays.asList("allCount" ,"carSearchResults","makerList","fuelTypeList", "regionList","categoryList")

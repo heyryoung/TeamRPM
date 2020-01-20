@@ -25,9 +25,6 @@
                             </div>
                         </div>
                         <div class="sel_field">
-                            <a href="" class="on" data-init="true">전체</a>
-                            <a href="" class="">국산차</a>
-                            <a href="" class="">수입차</a>
                             <input id="carTypeInput" type="hidden" name="v_car_type" value="">
                         </div>
                         <ul class="search_list_wrap">
@@ -330,7 +327,7 @@
                         </ul> <!-- 검색 선택 항목 javascript -->
                         <div class="until_box">
                             <div class="top_field">
-                                <div id="totalCount" class="total">총 <strong>7,976</strong>대</div>
+                                <div id="totalCount" class="total">총 <strong>{{this.$store.state.cmm.carAllCount}}</strong>대</div>
                                 <div class="hit"></div>
                                 <div id="headerCustom">
                                     <div class="primary">
@@ -506,7 +503,6 @@ export default {
         regionList: state => state.cmm.regionList,
         searchResultEmpty : state => state.cmm.searchResultEmpty,
         checkedItems : state => state.cmm.checkedItems,
-        category2 : state => state.cmm.category2,
         seenHistoryList : state => state.cmm.seenHistoryList,
         }),
         ...mapGetters('cmm', {
@@ -518,9 +514,9 @@ export default {
             this.$store.dispatch('cmm/CHECKER', checkedItem , { root: true })
             this.searchWithCondition()
         },
-/*        checkMakeTree(treeRoot,'MAKENM'){
-            this.$store.dispatch('cmm/getCategory2',{'param':this.treeRoot,'column':'MAKENM'})
-        },*/
+        checkMakeTree(param){
+            this.$store.dispatch('cmm/getCategory2',{'param':param.name,'column':'MAKENM'})
+        },
         searchKeyClick(searchKeyID) {
             const searchKey = document.getElementById(searchKeyID)
             if (searchKey.className === "selectric-wrapper selectric-selectric selectric-below") {
@@ -568,10 +564,11 @@ export default {
             }
             this.$store.dispatch('cmm/searchWithCondition', data)
             },
-            reset () {
-                this.$store.dispatch('cmm/checkReset')
-            }
-        },
+        reset () {
+            this.$store.dispatch('cmm/checkReset')
+        }
+
+    },
         created() {
         if(!this.$store.state.cmm.initFlag)
             this.$store.dispatch('cmm/init')
