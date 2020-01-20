@@ -9,24 +9,27 @@ const state = {
     carSearchResults:[],
     categoryList:[],
     makerList: [],
+    modelGroupList : [],
     fuelTypeList: [],
     regionList: [],
     checkedItems : [],
     seenHistoryList : [],
-    initFlag : false
+    modelList : [],
+    centerList : [],
+    initFlag : false,
+    makerTreeChildFlag : false
 
 };
 const getters = {
-    getCategory1 : state => state.category1,
-    getCategory2 : state => state.category2,
-    getCategory3 : state => state.category3,
-    getCarAllCount : state => state.carAllCount,
     makerList : state => state.makerList,
+    modelList : state => state.modelList,
     regionList : state => state.regionList,
     searchResultEmpty : state => state.searchResultEmpty,
+    fuelTypeList: state => state.cmm.fuelTypeList,
     checkedItems : state => state.checkedItems,
     seenHistoryList : state => state.seenHistoryList,
-    initFlag : state => state.initFlag
+    initFlag : state => state.initFlag,
+    makerTreeChildFlag : state => state.makerTreeChildFlag
 };
 const actions = {
     async init({commit}){
@@ -41,6 +44,16 @@ const actions = {
                     alert('잘못된 요청입니다.')
                 })
         }
+    },
+    async getTreeChild({commit}, param){
+        console.log('http://localhost:8080/getcategory/'+param.code+'/'+param.bigCategory)
+        axios
+            .get(`http://localhost:8080/getcategory/`+param.code+'/'+param.bigCategory)
+            .then(({data})=>{
+                commit('MAKETREECHILD', data, param.bigCategory)})
+            .catch(()=>{
+                alert('잘못된 요청입니다.')
+            })
     },
     async getCategory1({commit}, param){
         axios
@@ -95,36 +108,26 @@ const actions = {
     },
     async checkReset ({commit}) {
         commit('CHECKERRESET');
-    },
-    async goSearchMainWithCondition({commit}, param){
-        axios
-            .get(`http://localhost:8080/getcategory/`+param.key1+'/'+param.key2+'/'+param.key3)
-            .then(({data})=>{
-                commit('CATEGORY3', data)})
-            .catch(()=>{
-                alert('잘못된 요청입니다.')
-            })
-
     }
 };
 const mutations = {
     INIT (state, data){
-        state.carAllCount = data.allCount;
-        state.carSearchResults = data.carSearchResults;
-        state.categoryList = [];
-        state.fuelTypeList = [];
-        state.makerList = [];
-        state.regionList = [];
+        state.carAllCount = data.allCount
+        state.carSearchResults = data.carSearchResults
+        state.categoryList = []
+        state.fuelTypeList = []
+        state.makerList = []
+        state.regionList = []
 
              data.categoryList.forEach(el => {
                    state.categoryList.push({checked : false , bigCategory: 'categoryList' ,code : el.categorycd , name: el.categorynm})
-               });
+               })
               data.makerList.forEach(el => {
                    state.makerList.push({checked : false, bigCategory: 'makerList' , code : el.code , name: el.name, count : el.count})
-               });
+               })
                data.fuelTypeList.forEach(el => {
                    state.fuelTypeList.push({checked : false, bigCategory: 'fuelTypeList' , code : el.fuelTyped , name: el.fuleTypedName})
-               });
+               })
                data.regionList.forEach(el => {
                    state.regionList.push({checked : false, bigCategory: 'regionList' , code : el.centerRegionCode , name: el.centerRegion})
                })
@@ -132,49 +135,73 @@ const mutations = {
         state.carAllCount = data.allCount
 
     },
+    MAKETREECHILD (state, data, bigCategory) {
+        switch (bigCategory) {
+            case 'makerList' :
+                state.modelList = []
+                data.modelList.forEach(el => {
+                    state.modelList.push({checked : false, bigCategory: 'modelList' , code : el.code , name: el.name, count : el.count})
+                })
+                break;
+            case 'regionList' :
+                state.regionList = []
+                data.centerList.forEach(el => {
+                    state.centerList.push({checked : false, bigCategory: 'centerList' , code : el.code , name: el.name, count : el.count})
+                })
+                break;
+        }
+
+    },
+
     CATEGORY1 (state, data){
-        state.category1 = [];
-        state.category2 = [];
-        state.category3 = [];
+        state.category1 = []
+        state.category2 = []
+        state.category3 = []
         for(let i=0;i<data.category.length;i++){
             state.category1.push({name : data.category[i], count : data.count[i]})
         }
     },
     CATEGORY2 (state, data){
-        state.category2 = [];
-        state.category3 = [];
+        state.category2 = []
+        state.category3 = []
         for(let i=0;i<data.category.length;i++){
             state.category2.push({checked : false , bigCategory: 'modelGroupList' , name: data.category[i], count : data.count[i]})
         }
     },
     CATEGORY3 (state, data){
-        state.category3 = [];
+        state.category3 = []
         for(let i=0;i<data.category.length;i++){
             state.category3.push({name : data.category[i], count : data.count[i]})
         }
     },
     SEARCHWITHCONDITION (state, data) {
-        state.carSearchResults = [];
-        state.carSearchResults = data.carSearchResults;
-        if (state.carSearchResults.length === 0) state.searchResultEmpty = true;
-        else state.searchResultEmpty = false;
+        state.carSearchResults = []
+        state.carSearchResults = data.carSearchResults
+        if (state.carSearchResults.length === 0) state.searchResultEmpty = true
+        else state.searchResultEmpty = false
      },
     CHECKER (state, data) {
         let foundItem ={};
         switch (data.bigCategory) {
             case 'categoryList':
-                foundItem = state.categoryList.find( item => item.code === data.code);
-                break;
+                foundItem = state.categoryList.find( item => item.name === data.name)
+                break
             case 'makerList':
-                foundItem = state.makerList.find( item => item.code === data.code);
-                break;
+                foundItem = state.makerList.find( item => item.name === data.name)
+                break
             case 'fuelTypeList':
-                foundItem = state.fuelTypeList.find( item => item.code === data.code);
-                break;
+                foundItem = state.fuelTypeList.find( item => item.name === data.name)
+                break
             case 'regionList':
-                foundItem = state.regionList.find( item => item.code === data.code);
-                break;
-        }
+                foundItem = state.regionList.find( item => item.name === data.name)
+                break
+            case 'modelList':
+                foundItem = state.modelList.find( item => item.name === data.name)
+                break
+            case 'centerList':
+                foundItem = state.centerList.find( item => item.name === data.name)
+                break
+            }
         foundItem.checked = !foundItem.checked
         if(foundItem.checked) state.checkedItems.push(foundItem)
         else state.checkedItems.splice(state.checkedItems.indexOf(foundItem),1)

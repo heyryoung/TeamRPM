@@ -12,5 +12,6 @@ public class SearchDetailCondition {
     private boolean checked;
     private String code,name;
     private int count;
+    private String bigCategory;
 
 }
