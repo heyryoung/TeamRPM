@@ -26,7 +26,7 @@ public class CompanyController {
         Map<String,List<Cars>> map = new HashMap();
 
 
-        map.put("result",carsRepository.findByCenterCode("114"));
+       /* map.put("result",carsRepository.findByCenterCode("114"));*/
         return map;
     }
 }
