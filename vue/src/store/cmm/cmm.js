@@ -14,17 +14,22 @@ const state = {
     regionList: [],
     checkedItems : [],
     seenHistoryList : [],
-    initFlag : false
+    modelList : [],
+    centerList : [],
+    initFlag : false,
+    makerTreeChildFlag : false
 
 };
 const getters = {
     makerList : state => state.makerList,
+    modelList : state => state.modelList,
     regionList : state => state.regionList,
     searchResultEmpty : state => state.searchResultEmpty,
     fuelTypeList: state => state.cmm.fuelTypeList,
     checkedItems : state => state.checkedItems,
     seenHistoryList : state => state.seenHistoryList,
-    initFlag : state => state.initFlag
+    initFlag : state => state.initFlag,
+    makerTreeChildFlag : state => state.makerTreeChildFlag
 };
 const actions = {
     async init({commit}){
@@ -39,6 +44,16 @@ const actions = {
                     alert('잘못된 요청입니다.')
                 })
         }
+    },
+    async getTreeChild({commit}, param){
+        console.log('http://localhost:8080/getcategory/'+param.code+'/'+param.bigCategory)
+        axios
+            .get(`http://localhost:8080/getcategory/`+param.code+'/'+param.bigCategory)
+            .then(({data})=>{
+                commit('MAKETREECHILD', data, param.bigCategory)})
+            .catch(()=>{
+                alert('잘못된 요청입니다.')
+            })
     },
     async getCategory1({commit}, param){
         axios
@@ -120,6 +135,24 @@ const mutations = {
         state.carAllCount = data.allCount
 
     },
+    MAKETREECHILD (state, data, bigCategory) {
+        switch (bigCategory) {
+            case 'makerList' :
+                state.modelList = []
+                data.modelList.forEach(el => {
+                    state.modelList.push({checked : false, bigCategory: 'modelList' , code : el.code , name: el.name, count : el.count})
+                })
+                break;
+            case 'regionList' :
+                state.regionList = []
+                data.centerList.forEach(el => {
+                    state.centerList.push({checked : false, bigCategory: 'centerList' , code : el.code , name: el.name, count : el.count})
+                })
+                break;
+        }
+
+    },
+
     CATEGORY1 (state, data){
         state.category1 = []
         state.category2 = []
@@ -162,8 +195,11 @@ const mutations = {
             case 'regionList':
                 foundItem = state.regionList.find( item => item.name === data.name)
                 break
-            case 'modelGroupList':
-                foundItem = state.modelGroupList.find( item => item.name === data.name)
+            case 'modelList':
+                foundItem = state.modelList.find( item => item.name === data.name)
+                break
+            case 'centerList':
+                foundItem = state.centerList.find( item => item.name === data.name)
                 break
             }
         foundItem.checked = !foundItem.checked

@@ -61,9 +61,18 @@ public class CarsController {
                         Arrays.asList(carsService.getCategory3(param).keySet(),
                                 carsService.getCategory3(param).values()));
                 break;
+            case "makerList" :
+                trunk.put(Arrays.asList("MODELCD"),
+                        Arrays.asList(carsService.findByModelWithCount((List<Cars>) cars ,param)));
+                break;
+            case "REGION" :
+                trunk.put(Arrays.asList("REGION"),
+                        Arrays.asList(carsService.findByModelWithCount((List<Cars>) cars ,param)));
+                break;
         }
         return trunk.get();
     }
+
 
     @RequestMapping("/searchWithCondition")
     public Map<String,Object> searchWithCondition(@RequestBody  SearchCondition searchCondition){

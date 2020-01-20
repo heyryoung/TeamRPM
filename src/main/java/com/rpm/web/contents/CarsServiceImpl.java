@@ -72,7 +72,6 @@ public class CarsServiceImpl implements CarsService {
     @Override
     public List<SearchDetailCondition> findByMakecd(List<Cars> carsList) {
         List<SearchDetailCondition> tmpMakecd = new ArrayList<>();
-        int cnt = 0 ;
         for (Cars cars : carsList.stream()
                 .filter(distinctByKey(Cars::getMakecd))
                 .collect(Collectors.toList())) {
@@ -83,6 +82,36 @@ public class CarsServiceImpl implements CarsService {
         }
         return tmpMakecd;
     }
+
+    @Override
+    public List<SearchDetailCondition> findByModelWithCount(List<Cars> carsList , String code) {
+        List<SearchDetailCondition> tmpModelcd = findByModelCategory(carsList , code);
+        for (SearchDetailCondition detailCondition : tmpModelcd) {
+            int cnt = 0;
+            for (Cars cars : carsList) {
+                if (detailCondition.getCode().equals(cars.getModelGrpCd())) cnt++;
+            }
+            detailCondition.setCount(cnt);
+        }
+        return tmpModelcd;
+    }
+
+    @Override
+    public List<SearchDetailCondition> findByModelCategory(List<Cars> carsList, String code) {
+        List<SearchDetailCondition> tmpModelGrpNm = new ArrayList<>();
+        for (Cars cars : carsList.stream()
+                .filter(cars -> cars.getMakecd().equals(code))
+                .filter(distinctByKey(Cars::getModelGrpNm))
+                .collect(Collectors.toList())) {
+            SearchDetailCondition tmpCondition = new SearchDetailCondition();
+            tmpCondition.setCode(cars.getModelGrpCd());
+            tmpCondition.setName(cars.getModelGrpNm());
+            tmpCondition.setBigCategory(cars.getMakecd());
+            tmpModelGrpNm.add(tmpCondition);
+        }
+        return tmpModelGrpNm;
+    }
+
     @Override
     public List<Cars> findCarWithFuleType(List<Cars> carsList) {
         return carsList.stream()
@@ -131,6 +160,12 @@ public class CarsServiceImpl implements CarsService {
                 .filter(cars -> regioncode.equals(cars.getCategorycd()))
                 .collect(Collectors.toList());
     }
+
+
+
+
+
+
 
 
 }

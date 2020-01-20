@@ -27,6 +27,11 @@ public interface CarsService {
 
     public List<SearchDetailCondition> findByMakecd(List<Cars> carsList);
 
+
+    List<SearchDetailCondition> findByModelWithCount(List<Cars> carsList, String code);
+
+    public List<SearchDetailCondition> findByModelCategory(List<Cars> carsList, String code);
+
     List<Cars> findCarWithFuleType(List<Cars> carsList);
 
     List<Cars> findCarWithCenterRegionCode(List<Cars> carsList);
@@ -42,4 +47,7 @@ public interface CarsService {
     Collection<? extends Cars> findCarBySelectedFuelType(List<Cars> carsList, String code);
 
     Collection<? extends Cars> findCarBySelectedRegion(List<Cars> carsList, String code);
+
+
+
 }
