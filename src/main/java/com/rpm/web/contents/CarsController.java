@@ -3,25 +3,10 @@ package com.rpm.web.contents;
 import com.rpm.web.proxy.Box;
 import com.rpm.web.proxy.Trunk;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import org.springframework.web.bind.annotation.*;
+import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
-
-import static java.util.stream.Collectors.toList;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8081")
@@ -32,27 +17,95 @@ public class CarsController {
     Box box;
     @Autowired
     Trunk<Object> trunk;
+    @Autowired
+    CarsService carsService;
+    @Autowired
+    List<Cars> cars;
 
-    @GetMapping("/welcome")
-    public Map<String, Object> welcome(){
-        trunk.put(Arrays.asList("allCount"),Arrays.asList(String.valueOf(carsRepository.count())));
+
+    @GetMapping("/init")
+    public Map<String, Object> init(){
+        List<Cars> carsList = (List<Cars>) carsRepository.findAll();
+
+        trunk.put(Arrays.asList("allCount" ,"carSearchResults","makerList","fuelTypeList", "regionList","categoryList")
+                ,Arrays.asList(String.valueOf(carsRepository.count())
+                        ,carsList.subList(0,15)
+                        ,carsService.findByMakecdWithCount(carsList)
+                        ,carsService.findCarWithFuleType(carsList)
+                        ,carsService.findCarWithCenterRegionCode(carsList)
+                        ,carsService.findAllCategory(carsList)
+                ));
+
+
         return trunk.get();
     }
 
-    @RequestMapping("/sch")
-    public Map<String,Object> searchConditionInit(){
+    @GetMapping("/getcategory/{param}/{column}")
+    public Map<String, Object> getCategory(@PathVariable String param, @PathVariable String column){
+        Iterable<Cars> cars= carsRepository.findAll();
+        System.out.println(param);
+        System.out.println(column);
+        switch (column){
+            case "CAR_TYPE":
+                trunk.put(Arrays.asList("category", "count"),
+                        Arrays.asList(carsService.getCategory1(cars).get(param).keySet(),
+                                carsService.getCategory1(cars).get(param).values()));
+                break;
+            case "MAKENM" :
+                trunk.put(Arrays.asList("category", "count"),
+                        Arrays.asList(carsService.getCategory2(param).keySet(),
+                                carsService.getCategory2(param).values()));
+                break;
+            case "MODEL_GRP_NM" :
+                trunk.put(Arrays.asList("category", "count"),
+                        Arrays.asList(carsService.getCategory3(param).keySet(),
+                                carsService.getCategory3(param).values()));
+                break;
+        }
+        return trunk.get();
+    }
+
+    @RequestMapping("/searchWithCondition")
+    public Map<String,Object> searchWithCondition(@RequestBody  SearchCondition searchCondition){
         Map<String, Object> map = new HashMap<String, Object>();
-        List<Cars> pagedCarList = carsRepository.findCarWithPaging().subList(0,15);
-/*        List<Cars> allCarResult = carsRepository.findAllCategory();
-        List<SearchConditionNoDep> categoryList = allCarResult.stream()
-                .map(SearchConditionNoDep::new)
-                .collect(toList());
-        SearchCondition searchCondition = new SearchCondition();*/
 
-        System.out.println(pagedCarList.get(0).getCategorynm());
-        map.put("car_search_results",pagedCarList);
+        List<Cars> carsList = carsService.findAllByDistinct((List<Cars>) carsRepository.findAll());
+        List<Cars> carsProcessingList = new ArrayList<>();
+        List<SearchDetailCondition> categoryList = searchCondition.getCategoryList();
+        List<SearchDetailCondition> makerList = searchCondition.getMakerList();
+        List<SearchDetailCondition> fuelTypeList = searchCondition.getFuelTypeList();
+        List<SearchDetailCondition> regionList = searchCondition.getRegionList();
 
-        //return carsRepository.findAllCategory().stream().collect(Collectors.toMap(s->s.getCategorycd(),p->p.getCategorynm()));
+        if ( !categoryList.isEmpty()) {
+            for (SearchDetailCondition category : categoryList) {
+                carsProcessingList.addAll(carsService.findCarBySelectedCategory(carsList , category.getCode()));
+            }
+            carsList = carsProcessingList;
+        }
+
+        if ( !makerList.isEmpty() ) {
+            for (SearchDetailCondition maker : makerList) {
+                carsProcessingList.addAll(carsService.findCarBySelectedMaker(carsList , maker.getCode()));
+            }
+            carsList = carsProcessingList;
+        }
+
+        if ( !fuelTypeList.isEmpty() ) {
+            for (SearchDetailCondition fuelType : fuelTypeList) {
+                carsProcessingList.addAll(carsService.findCarBySelectedFuelType(carsList , fuelType.getCode()));
+            }
+            carsList = carsProcessingList;
+        }
+
+        if ( !regionList.isEmpty() ) {
+            for (SearchDetailCondition region : regionList) {
+                carsProcessingList.addAll(carsService.findCarBySelectedRegion(carsList , region.getCode()));
+            }
+            carsList = carsProcessingList;
+        }
+
+        map.put("carSearchResults" , carsList.stream().limit(15));
         return map;
     }
+
 }

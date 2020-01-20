@@ -9,5 +9,4 @@ export const store = new Vuex.Store({
         cmm
     },
     strict: true
-
 })
