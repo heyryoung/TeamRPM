@@ -13,5 +13,5 @@ public interface CarsRepository extends CrudRepository<Cars, Long> {
 
     @Query(value="SELECT  * FROM car ", nativeQuery=true)
     public List<Cars> findCarWithPaging();
-
+    public List<Cars> findByCenterCode(String centercode);
 }
