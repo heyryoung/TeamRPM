@@ -54,7 +54,7 @@
         font-size: 12px;
         font-family: "돋움", Dotum, "굴림", gulim, AppleGothic, Helvetica, Sans-serif;
         float: left;
-        margin-top: 50px ;
+        margin-top: 200px ;
         line-height: 180%;
         padding: 50px 80px;
         width: 400px;
