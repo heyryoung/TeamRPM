@@ -65,10 +65,6 @@ public class CarsController {
                 trunk.put(Arrays.asList("modelList"),
                         Arrays.asList(carsService.findByModelWithCount((List<Cars>) cars ,param)));
                 break;
-            case "regionList" :
-                trunk.put(Arrays.asList("centerList"),
-                        Arrays.asList(carsService.findByModelWithCount((List<Cars>) cars ,param)));
-                break;
         }
         return trunk.get();
     }
@@ -81,36 +77,53 @@ public class CarsController {
         List<Cars> carsList = carsService.findAllByDistinct((List<Cars>) carsRepository.findAll());
         List<Cars> carsProcessingList = new ArrayList<>();
         List<SearchDetailCondition> categoryList = searchCondition.getCategoryList();
-        List<SearchDetailCondition> makerList = searchCondition.getMakerList();
+        List<SearchDetailCondition> modelList = searchCondition.getModelList();
         List<SearchDetailCondition> fuelTypeList = searchCondition.getFuelTypeList();
         List<SearchDetailCondition> regionList = searchCondition.getRegionList();
+
+
+
+        if ( !modelList.isEmpty() ) {
+            for (SearchDetailCondition model : modelList) {
+                carsProcessingList.addAll(carsService.findCarBySelectedModel(carsList , model.getCode()));
+            }
+            carsList.clear();
+            carsList.addAll(carsProcessingList);
+            carsProcessingList.clear();
+
+        }else if( searchCondition.getMaker() != "") {
+            carsProcessingList.addAll(carsService.findCarBySelectedMaker(carsList , searchCondition.getMaker()));
+            carsList.clear();
+            carsList.addAll(carsProcessingList);
+            carsProcessingList.clear();
+        }
 
         if ( !categoryList.isEmpty()) {
             for (SearchDetailCondition category : categoryList) {
                 carsProcessingList.addAll(carsService.findCarBySelectedCategory(carsList , category.getCode()));
             }
-            carsList = carsProcessingList;
+            carsList.clear();
+            carsList.addAll(carsProcessingList);
+            carsProcessingList.clear();
         }
 
-        if ( !makerList.isEmpty() ) {
-            for (SearchDetailCondition maker : makerList) {
-                carsProcessingList.addAll(carsService.findCarBySelectedMaker(carsList , maker.getCode()));
-            }
-            carsList = carsProcessingList;
-        }
 
         if ( !fuelTypeList.isEmpty() ) {
             for (SearchDetailCondition fuelType : fuelTypeList) {
                 carsProcessingList.addAll(carsService.findCarBySelectedFuelType(carsList , fuelType.getCode()));
             }
-            carsList = carsProcessingList;
+            carsList.clear();
+            carsList.addAll(carsProcessingList);
+            carsProcessingList.clear();
         }
 
         if ( !regionList.isEmpty() ) {
             for (SearchDetailCondition region : regionList) {
                 carsProcessingList.addAll(carsService.findCarBySelectedRegion(carsList , region.getCode()));
             }
-            carsList = carsProcessingList;
+            carsList.clear();
+            carsList.addAll(carsProcessingList);
+            carsProcessingList.clear();
         }
 
         map.put("carSearchResults" , carsList.stream().limit(15));

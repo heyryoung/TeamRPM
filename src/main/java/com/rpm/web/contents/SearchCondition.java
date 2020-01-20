@@ -13,10 +13,11 @@ import java.util.List;
 public class SearchCondition {
 
     private List<SearchDetailCondition> categoryList;
-    private List<SearchDetailCondition> makerList;
+    private List<SearchDetailCondition> modelList;
     private List<SearchDetailCondition> fuelTypeList;
     private List<SearchDetailCondition> regionList;
     private String searchWord;
     private String carcd;
     private String findKey;
+    private String maker;
 }

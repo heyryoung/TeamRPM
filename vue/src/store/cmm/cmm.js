@@ -13,7 +13,6 @@ const state = {
     modelGroupList : [],
     fuelTypeList: [],
     regionList: [],
-    originRegionList: [],
     checkedItems : [],
     seenHistoryList : [],
     modelList : [],
@@ -111,8 +110,8 @@ const actions = {
     async checkReset ({commit}) {
         commit('CHECKERRESET');
     },
-    async makeOriginList ( {commit} , param) {
-        commit('MAKEORIGINLIST' , param );
+    async makeOriginList ( {commit} ) {
+        commit('MAKEORIGINLIST');
     }
 };
 const mutations = {
@@ -144,8 +143,6 @@ const mutations = {
 
     },
     MAKETREECHILD (state, data) {
-        switch (data.parents.bigCategory) {
-            case 'makerList' :
                 console.log('parents' + data.parents.name)
                 state.makerList = []
                 state.makerList.push(data.parents)
@@ -153,19 +150,7 @@ const mutations = {
                 data.reault.modelList.forEach(el => {
                     state.modelList.push({checked : false, bigCategory: 'modelList' , code : el.code , name: el.name, count : el.count})
                 })
-                break;
-            case 'regionList' :
-                state.regionList = []
-                state.regionList.push(data.parents)
-                state.centerList = []
-                data.centerList.forEach(el => {
-                    state.centerList.push({checked : false, bigCategory: 'centerList' , code : el.code , name: el.name, count : el.count})
-                })
-                break;
-        }
-
     },
-
     CATEGORY1 (state, data){
         state.category1 = []
         state.category2 = []
@@ -225,13 +210,8 @@ const mutations = {
     CHECKERRESET ( state ) {
         state.checkedItems = []
     },
-    MAKEORIGINLIST ( state , target ) {
-        switch ( target ) {
-            case 'makerList' : state.makerList = state.originMakerList
-                break
-            case 'regionList' : state.regionList = state.originRegionList
-                break
-        }
+    MAKEORIGINLIST ( state ) {
+        state.makerList = state.originMakerList
     }
 }
 

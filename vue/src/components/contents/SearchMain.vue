@@ -29,7 +29,7 @@
                         </div>
                         <ul class="search_list_wrap">
                             <li class="list_h list_h01 " id="list_h list_h01 ">
-                                <a class="type"  @click="treeClick(`list_h list_h01 `)" >차종 <small></small></a>
+                                <a class="type"  @click="bigCategoryIsOpen(`list_h list_h01 `)" >차종 <small></small></a>
                                 <div class="sub_type_list sub_type_tree" >
                                     <ul class="row_list">
                                         <li v-for="category of categoryList"
@@ -48,7 +48,7 @@
                                 </div>
                             </li>
                             <li class="list_h list_h02 on"  id="list_h list_h02 on">
-                                <a class="type" @click="treeClick(`list_h list_h02 on`)">제조사/모델<small></small></a>
+                                <a class="type" @click="bigCategoryIsOpen(`list_h list_h02 on`)">제조사/모델<small></small></a>
                                 <div class="sub_type_list sub_type_tree" >
                                     <div class="scroll-wrapper scrollbar-dynamic" style="position: relative;" >
                                         <div id="makerFrame"
@@ -90,7 +90,7 @@
                                 </div>
                             </li>
                             <li class="list_h list_h05 on" id="list_h list_h05 on">
-                                <a class="type"   @click="treeClick('list_h list_h05 on')">연식<small></small></a>
+                                <a class="type"   @click="bigCategoryIsOpen('list_h list_h05 on')">연식<small></small></a>
                                 <div class="sub_type_list" data-init="true"  >
                                     <div id="startYear"  class="selectric-wrapper selectric-selectric selectric-below selectric-hover" @click= "searchKeyClick(`startYear`)">
                                         <div class="selectric-hide-select"><select name="wr_gt_v_mfr_date"
@@ -136,7 +136,7 @@
                                 </div>
                             </li>
                             <li class="list_h list_h04 on" id="list_h list_h04 on">
-                                <a class="type"   @click="treeClick(`list_h list_h04 on`)">주행거리<small></small></a>
+                                <a class="type"   @click="bigCategoryIsOpen(`list_h list_h04 on`)">주행거리<small></small></a>
                                 <div class="sub_type_list"  data-init="true"  >
                                     <div id="startMileage" @click="searchKeyClick(`startMileage`)"
                                          class="selectric-wrapper selectric-selectric selectric-below selectric-hover">
@@ -188,7 +188,7 @@
                                 </div>
                             </li>
                             <li class="list_h list_h07" id="list_h list_h07">
-                                <a class="type" @click="treeClick(`list_h list_h07`)">연료 <small></small></a>
+                                <a class="type" @click="bigCategoryIsOpen(`list_h list_h07`)">연료 <small></small></a>
                                 <div class="sub_type_list">
                                     <ul class="row_list"  v-for="fuelType of fuelTypeList" :key="fuelType.code">
                                         <li>
@@ -206,7 +206,7 @@
                     </div>
                             </li>
                             <li class="list_h list_h12" id="list_h list_h12">
-                                <a class="type"   @click="treeClick(`list_h list_h12`)">지역 <small></small></a>
+                                <a class="type"   @click="bigCategoryIsOpen(`list_h list_h12`)">지역 <small></small></a>
                                 <div class="sub_type_list sub_type_tree"  >
                                     <div class="scroll-wrapper scrollbar-dynamic" style="position: relative;">
                                         <div class="sscrollbar-dynamic scroll-content scroll-sscrolly_visible"
@@ -220,18 +220,6 @@
 <label for="areaL1">{{region.name}}</label>
 </span>
 </div>
-<!--                                                    <ul class="tree">
-                                                        <li class="dep02">
-                                                            <div class="row">
-	<span class="txt">
-<div class="checker" id="uniform-areaL1S1"><span><input type="checkbox" name="wr_in_multi_values" id="areaL1S1"
-                                                        class="uniform" value="SEOUL,147"></span></div>
-<label for="areaL1S1">강남직영점</label>
-	</span>
-                                                            </div>
-                                                            </div>
-                                                        </li>
-                                                    </ul>-->
                                                 </li>
                                             </ul>
                                         </div>
@@ -492,7 +480,7 @@ export default {
             searchWord: '',
             carcd: '',
             modelListIsOpen: false,
-            centerListIsOpen : false
+            maker : ''
         }
     },
     computed: {
@@ -524,13 +512,13 @@ export default {
             this.searchWithCondition()
         },
         checkMakeTree(param){
-            if (param.bigCategory === 'makerList') this.modelListIsOpen = !this.modelListIsOpen;
-            else this.centerListIsOpen = !this.centerListIsOpen ;
+            this.modelListIsOpen = !this.modelListIsOpen;
 
             if (this.modelListIsOpen) this.$store.dispatch('cmm/getTreeChild',param)
-            else this.$store.dispatch('cmm/makeOriginList', param.bigCategory )
+                else this.$store.dispatch('cmm/makeOriginList' )
 
-            this.$store.dispatch('cmm/CHECKER',param)
+            this.$store.dispatch('cmm/CHECKER',param, { root: true })
+            this.searchWithCondition()
         },
         searchKeyClick(searchKeyID) {
             const searchKey = document.getElementById(searchKeyID)
@@ -543,7 +531,7 @@ export default {
         addHistory(caritem){
             this.$store.dispatch('cmm/addSeenHistory',caritem)
         },
-        treeClick(categoryType) {
+        bigCategoryIsOpen(categoryType) {
             const searchConditionCategory = document.getElementById(categoryType)
             if (searchConditionCategory.className.substr(-2, 2) === 'on') {
                 searchConditionCategory.className = (searchConditionCategory.className.substring(0, searchConditionCategory.className.length - 3));
@@ -553,15 +541,19 @@ export default {
         },
         searchWithCondition() {
             let checkedCategoryList = []
-            let checkedMakerList = []
+            let checkedModelList = []
             let checkedFuelTypeList = []
             let checkedRegionList = []
+            let maker = ''
 
             this.$store.state.cmm.categoryList.forEach(e => {
                 if (e.checked == true) checkedCategoryList.push(e)
             })
             this.$store.state.cmm.makerList.forEach(e => {
-                if (e.checked == true) checkedMakerList.push(e)
+                if (e.checked == true) maker = e.code
+            })
+            this.$store.state.cmm.modelList.forEach(e => {
+                if (e.checked == true) checkedModelList.push(e)
             })
             this.$store.state.cmm.fuelTypeList.forEach(e => {
                 if (e.checked == true) checkedFuelTypeList.push(e)
@@ -571,11 +563,12 @@ export default {
             })
             let data = {
                 categoryList: checkedCategoryList,
-                makerList: checkedMakerList,
+                modelList: checkedModelList,
                 fuelTypeList: checkedFuelTypeList,
                 regionList: checkedRegionList,
                 searchWord: this.searchWord,
-                carcd: this.carcd
+                carcd: this.carcd,
+                maker : maker
             }
             this.$store.dispatch('cmm/searchWithCondition', data)
             },
