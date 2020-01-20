@@ -25,7 +25,6 @@ public class CarsController {
 
     @GetMapping("/init")
     public Map<String, Object> init(){
-        Map<String, Object> map = new HashMap<String, Object>();
         List<Cars> carsList = (List<Cars>) carsRepository.findAll();
 
         trunk.put(Arrays.asList("allCount" ,"carSearchResults","makerList","fuelTypeList", "regionList","categoryList")
@@ -36,6 +35,7 @@ public class CarsController {
                         ,carsService.findCarWithCenterRegionCode(carsList)
                         ,carsService.findAllCategory(carsList)
                 ));
+
 
         return trunk.get();
     }
@@ -68,6 +68,7 @@ public class CarsController {
     @RequestMapping("/searchWithCondition")
     public Map<String,Object> searchWithCondition(@RequestBody  SearchCondition searchCondition){
         Map<String, Object> map = new HashMap<String, Object>();
+
         List<Cars> carsList = carsService.findAllByDistinct((List<Cars>) carsRepository.findAll());
         List<Cars> carsProcessingList = new ArrayList<>();
         List<SearchDetailCondition> categoryList = searchCondition.getCategoryList();
