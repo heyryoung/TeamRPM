@@ -1,12 +1,9 @@
-package com.rpm.web.company;
+package com.rpm.web.employee;
 
 import lombok.*;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
@@ -17,16 +14,19 @@ import java.io.Serializable;
 @Getter
 @ToString
 @Table(name = "employee")
-public class Company implements Serializable {
+public class Employee implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @NotNull @Column(name = "EM_ID") private Long emId;
     @NotNull @Column(name = "EM_CODE") private int emCode;
     @Column(name = "MONTH_REVENUE") private int monthRevenue;
     @Column(name = "CENTER_NAME", length = 20) private String centerName;
+    @Column(name = "EM_NAME", length = 20) private String emName;
     @Column(name = "CENTER_CODE", length = 3) private String centerCode;
     @Column(name = "EM_POSITION", length = 3) private String emPosition;
-    @Column(name = "EM_ROLE", length = 3) private String emRole;
     @Column(name = "CARCD", length = 12) private String carcd;
+    @Column(name = "EM_IMG", length = 100) private String emImg;
 
 }

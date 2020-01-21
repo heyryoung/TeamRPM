@@ -61,18 +61,44 @@ public class CarsController {
                         Arrays.asList(carsService.getCategory3(param).keySet(),
                                 carsService.getCategory3(param).values()));
                 break;
+            case "makerList" :
+                trunk.put(Arrays.asList("modelList"),
+                        Arrays.asList(carsService.findByModelWithCount((List<Cars>) cars ,param)));
+                break;
         }
+
         return trunk.get();
     }
+
 
     @RequestMapping("/searchWithCondition")
     public Map<String,Object> searchWithCondition(@RequestBody  SearchCondition searchCondition){
         cars = carsService.findAllByDistinct((List<Cars>) carsRepository.findAll());
         List<Cars> carsProcessingList = new ArrayList<>();
         List<SearchDetailCondition> categoryList = searchCondition.getCategoryList();
-        List<SearchDetailCondition> makerList = searchCondition.getMakerList();
+        List<SearchDetailCondition> modelList = searchCondition.getModelList();
         List<SearchDetailCondition> fuelTypeList = searchCondition.getFuelTypeList();
         List<SearchDetailCondition> regionList = searchCondition.getRegionList();
+
+
+
+
+        if( searchCondition.getMaker() != "") {
+            carsProcessingList.addAll(carsService.findCarBySelectedMaker(carsList , searchCondition.getMaker()));
+            carsList.clear();
+            carsList.addAll(carsProcessingList);
+            carsProcessingList.clear();
+        }
+
+        if ( !modelList.isEmpty() ) {
+            for (SearchDetailCondition model : modelList) {
+                carsProcessingList.addAll(carsService.findCarBySelectedModel(carsList , model.getCode()));
+            }
+            carsList.clear();
+            carsList.addAll(carsProcessingList);
+            carsProcessingList.clear();
+
+        }
 
         if ( !categoryList.isEmpty()) {
             for (SearchDetailCondition category : categoryList) {
@@ -85,30 +111,38 @@ public class CarsController {
             for (SearchDetailCondition maker : makerList) {
                 carsProcessingList.addAll(carsService.findCarBySelectedMaker(cars , maker.getCode()));
             }
-            cars = carsProcessingList;
+            cars.clear();
+            cars.addAll(carsProcessingList);
+            carsProcessingList.clear();
         }
+
 
         if ( !fuelTypeList.isEmpty() ) {
             for (SearchDetailCondition fuelType : fuelTypeList) {
                 carsProcessingList.addAll(carsService.findCarBySelectedFuelType(cars , fuelType.getCode()));
             }
-            cars = carsProcessingList;
+            cars.clear();
+            cars.addAll(carsProcessingList);
+            carsProcessingList.clear();
         }
 
         if ( !regionList.isEmpty() ) {
             for (SearchDetailCondition region : regionList) {
                 carsProcessingList.addAll(carsService.findCarBySelectedRegion(cars , region.getCode()));
             }
+
             cars = carsProcessingList;
         }
         trunk.put(Arrays.asList("resultLength", "showCarList") , Arrays.asList(cars.size(), cars.subList(0,15)));
         return trunk.get();
     }
+  
     @GetMapping("/getshowcarlist/{startrow}/{endrow}")
-    public Object getShowCarList(@PathVariable String startrow, @PathVariable String endrow, Model model){
+    public Object getShowCarList(@PathVariable String startrow, @PathVariable String endrow){
         return (cars.subList(Integer.parseInt(startrow),Integer.parseInt(endrow))!=null)
                 ?cars.subList(Integer.parseInt(startrow),Integer.parseInt(endrow))
                 :false;
+
     }
 
 }

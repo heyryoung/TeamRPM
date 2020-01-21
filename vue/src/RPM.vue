@@ -23,7 +23,8 @@
                     <li class="nav-item">
                         <Slide noOverlay ableOutsideClick :crossIcon="false">
                             <router-link to="/">HOME</router-link>
-                            <router-link to="/login">로그인</router-link>
+                            <router-link v-if="this.$store.state.user.auth==false" to="/login">로그인</router-link>
+                            <div v-else @click="logout">로그아웃</div>
                             <router-link to="/join">회원가입</router-link>
                             <router-link to="/searchmain">검색창</router-link>
                             <router-link to="/product">제품</router-link>
@@ -57,6 +58,13 @@
         name: 'app',
         components: {
             Slide
+        },
+        methods:{
+            logout(){
+                this.$store.dispatch('user/logout')
+
+
+            }
         }
     }
 </script>

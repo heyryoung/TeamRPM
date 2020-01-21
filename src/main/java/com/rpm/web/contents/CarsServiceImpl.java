@@ -72,7 +72,6 @@ public class CarsServiceImpl implements CarsService {
     @Override
     public List<SearchDetailCondition> findByMakecd(List<Cars> carsList) {
         List<SearchDetailCondition> tmpMakecd = new ArrayList<>();
-        int cnt = 0 ;
         for (Cars cars : carsList.stream()
                 .filter(distinctByKey(Cars::getMakecd))
                 .collect(Collectors.toList())) {
@@ -83,6 +82,36 @@ public class CarsServiceImpl implements CarsService {
         }
         return tmpMakecd;
     }
+
+    @Override
+    public List<SearchDetailCondition> findByModelWithCount(List<Cars> carsList , String code) {
+        List<SearchDetailCondition> tmpModelcd = findByModelCategory(carsList , code);
+        for (SearchDetailCondition detailCondition : tmpModelcd) {
+            int cnt = 0;
+            for (Cars cars : findCarBySelectedMaker(carsList,code).stream()
+                    .collect(Collectors.toList())) {
+                if (detailCondition.getCode().equals(cars.getModelGrpCd())) cnt++;
+            }
+            detailCondition.setCount(cnt);
+        }
+        return tmpModelcd;
+    }
+
+    @Override
+    public List<SearchDetailCondition> findByModelCategory(List<Cars> carsList, String code) {
+        List<SearchDetailCondition> tmpModelGrpNm = new ArrayList<>();
+        for (Cars cars : findCarBySelectedMaker(carsList,code).stream()
+                .filter(distinctByKey(Cars::getModelGrpNm))
+                .collect(Collectors.toList())) {
+            SearchDetailCondition tmpCondition = new SearchDetailCondition();
+            tmpCondition.setCode(cars.getModelGrpCd());
+            tmpCondition.setName(cars.getModelGrpNm());
+            tmpCondition.setBigCategory(cars.getMakecd());
+            tmpModelGrpNm.add(tmpCondition);
+        }
+        return tmpModelGrpNm;
+    }
+
     @Override
     public List<Cars> findCarWithFuleType(List<Cars> carsList) {
         return carsList.stream()
@@ -112,23 +141,30 @@ public class CarsServiceImpl implements CarsService {
     }
 
     @Override
-    public Collection<? extends Cars> findCarBySelectedMaker(List<Cars> carsList, String makercode) {
+    public Collection<? extends Cars> findCarBySelectedModel(List<Cars> carsList, String modelCode) {
         return carsList.stream()
-                .filter(cars -> makercode.equals(cars.getCategorycd()))
+                .filter(cars -> modelCode.equals(cars.getModelGrpCd()))
                 .collect(Collectors.toList());
     }
 
     @Override
     public Collection<? extends Cars> findCarBySelectedFuelType(List<Cars> carsList, String fuelTypecode) {
         return carsList.stream()
-                .filter(cars -> fuelTypecode.equals(cars.getCategorycd()))
+                .filter(cars -> fuelTypecode.equals(cars.getFuelTyped()))
                 .collect(Collectors.toList());
     }
 
     @Override
     public Collection<? extends Cars> findCarBySelectedRegion(List<Cars> carsList, String regioncode) {
         return carsList.stream()
-                .filter(cars -> regioncode.equals(cars.getCategorycd()))
+                .filter(cars -> regioncode.equals(cars.getCenterRegionCode()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Collection<? extends Cars> findCarBySelectedMaker(List<Cars> carsList, String code) {
+        return carsList.stream()
+                .filter(cars -> code.equals(cars.getMakecd()))
                 .collect(Collectors.toList());
     }
 

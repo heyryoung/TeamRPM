@@ -9,6 +9,7 @@ const state = {
     categoryList:[],
     showCarList : [],
     makerList: [],
+    originMakerList: [],
     modelGroupList : [],
     fuelTypeList: [],
     regionList: [],
@@ -17,23 +18,24 @@ const state = {
     pageLimit : 15,
     pageNum : 1,
     resultLength : 0,
-    initFlag : false
-
-
+    modelList : [],
+    initFlag : false,
+    makerTreeChildFlag : false
 };
 const getters = {
     makerList : state => state.makerList,
+    modelList : state => state.modelList,
     regionList : state => state.regionList,
     searchResultEmpty : state => state.searchResultEmpty,
     showCarList : state => state.showCarList,
     fuelTypeList: state => state.cmm.fuelTypeList,
     checkedItems : state => state.checkedItems,
     seenHistoryList : state => state.seenHistoryList,
-    initFlag : state => state.initFlag
+    initFlag : state => state.initFlag,
+    makerTreeChildFlag : state => state.makerTreeChildFlag
 };
 const actions = {
     async init({commit}){
-        console.log('initFla>>>>g' + state.initFlag);
         if(!state.initFlag) {
             axios
                 .get(`http://localhost:8080/init`)
@@ -44,6 +46,17 @@ const actions = {
                     alert('잘못된 요청입니다!')
                 })
         }
+    },
+    async getTreeChild({commit}, param){
+        console.log('getTreeChild')
+        axios
+            .get(`http://localhost:8080/getcategory/`+param.code+'/'+param.bigCategory)
+            .then(({data})=>{
+                commit('MAKETREECHILD', { reault : data , parents : param })
+            })
+            .catch(()=>{
+                alert('잘못된 요청입니다.')
+            })
     },
     async getCategory1({commit}, param){
         axios
@@ -93,12 +106,13 @@ const actions = {
     async CHECKER ({commit}, param) {
         commit('CHECKER',param);
     },
-    addSeenHistory ({commit}, param) {
-        commit('ADDSEENHISTORY',param);
+    addSeenHistory ({commit}, param ) {
+        commit('ADDSEENHISTORY', param );
     },
     async checkReset ({commit}) {
         commit('CHECKERRESET');
     },
+
     async setPageLimit({commit}, limit){
         commit('PAGELIMIT', limit)
     },
@@ -113,6 +127,9 @@ const actions = {
     },
     async pageNumSetting({commit}, data){
         commit('PAGENUMSETTING', data)
+    },
+    async makeOriginList ( {commit} ) {
+        commit('MAKEORIGINLIST');
     }
 };
 const mutations = {
@@ -124,25 +141,36 @@ const mutations = {
         state.makerList = []
         state.regionList = []
         state.showCarList = []
-        state.showCarList=[]
+     
+             data.categoryList.forEach(el => {
+                   state.categoryList.push({checked : false , bigCategory: 'categoryList' ,code : el.categorycd , name: el.categorynm})
+               })
+              data.makerList.forEach(el => {
+                   state.makerList.push({checked : false, bigCategory: 'makerList' , code : el.code , name: el.name, count : el.count})
+
+               })
+               data.fuelTypeList.forEach(el => {
+                   state.fuelTypeList.push({checked : false, bigCategory: 'fuelTypeList' , code : el.fuelTyped , name: el.fuleTypedName})
+               })
+               data.regionList.forEach(el => {
+                   state.regionList.push({checked : false, bigCategory: 'regionList' , code : el.centerRegionCode , name: el.centerRegion})
+               })
+        state.originMakerList = state.makerList
+        state.originRegionList = state.regionList
+
         state.initFlag = true
         for(let list of data.carInitList){
             state.showCarList.push(list)
         }
-
-         data.categoryList.forEach(el => {
-               state.categoryList.push({checked : false , bigCategory: 'categoryList' ,code : el.categorycd , name: el.categorynm})
-           })
-          data.makerList.forEach(el => {
-               state.makerList.push({checked : false, bigCategory: 'makerList' , code : el.code , name: el.name, count : el.count})
-           })
-           data.fuelTypeList.forEach(el => {
-               state.fuelTypeList.push({checked : false, bigCategory: 'fuelTypeList' , code : el.fuelTyped , name: el.fuleTypedName})
-           })
-           data.regionList.forEach(el => {
-               state.regionList.push({checked : false, bigCategory: 'regionList' , code : el.centerRegionCode , name: el.centerRegion})
-           })
-
+    },
+    MAKETREECHILD (state, data) {
+                console.log('parents' + data.parents.name)
+                state.makerList = []
+                state.makerList.push(data.parents)
+                state.modelList = []
+                data.reault.modelList.forEach(el => {
+                    state.modelList.push({checked : false, bigCategory: 'modelList' , code : el.code , name: el.name, count : el.count})
+                })
     },
     CATEGORY1 (state, data){
         state.category1 = []
@@ -192,8 +220,11 @@ const mutations = {
             case 'regionList':
                 foundItem = state.regionList.find( item => item.name === data.name)
                 break
-            case 'modelGroupList':
-                foundItem = state.modelGroupList.find( item => item.name === data.name)
+            case 'modelList':
+                foundItem = state.modelList.find( item => item.name === data.name)
+                break
+            case 'centerList':
+                foundItem = state.centerList.find( item => item.name === data.name)
                 break
             }
         foundItem.checked = !foundItem.checked
@@ -203,9 +234,10 @@ const mutations = {
     ADDSEENHISTORY (state, data) {
         state.seenHistoryList.push(data)
     },
-    CHECKERRESET (state) {
+    CHECKERRESET ( state ) {
         state.checkedItems = []
     },
+
     PAGELIMIT(state, data){
         state.pageLimit = data
     },
@@ -221,6 +253,9 @@ const mutations = {
     },
     PAGENUMSETTING(state, data){
         state.pageNum = data
+    },
+    MAKEORIGINLIST ( state ) {
+        state.makerList = state.originMakerList
     }
 
 }

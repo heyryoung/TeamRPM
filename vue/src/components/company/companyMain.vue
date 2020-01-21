@@ -21,50 +21,23 @@
                     <div class="center_info">
                             <month_revenue></month_revenue>
                     </div>
-
                 </div>
-                <div id="recent_sale" >
-                    <carList></carList>
 
+                <div id="recent_sale" class="mypage_CarList interest">
+                    <div class="tit_area">
+                        <h3>보유 차량</h3>
+                        <p>판매완료시  자동 삭제됩니다.</p>
+
+                    </div>
+                    <carList></carList>
                 </div>
                 <div id="inventory" >
                     <customerList></customerList>
 
                 </div>
-                <div id="centerEmployee" class="centerEmployee">
-                    <div class="employee_head">
-                        <h4>직원안내</h4>
-                    </div>
-                    <!-- 전체사원 -->
-                    <div class="employee_list" id="empl_all" style="display: block;">
-                        <ul>
-
-
-                            <li v-for="row of em_row" :key="row">
-                                <ul >
-
-                                    <li v-for="col of em_col" :key="col">
-												<span class="img">
-												<img src="https://img.kcar.com//DATA1/carpicture2/emp/pic/1124.jpg" onerror="this.src='/resources/images/content/direct/bg_employee.png'" alt="이학성">
-												</span>
-                                        <span class="employee_txt">
-
-
-															지점장
-
-
-
-												</span>
-                                        <span class="employee_name">이학성</span>
-
-                                    </li>
-
-
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+            <div  id="centerEmployee" class="centerEmployee">
+                <employee></employee>
+            </div>
             </div>
         </div>
     </div>
@@ -73,16 +46,14 @@
 import month_revenue from "./month_revenue";
 import carList from "./carList";
 import customerList from "./customerList";
+import employee from "./employee";
     export default {
         components: {
-            month_revenue,carList,customerList
+            month_revenue,carList,customerList,employee
         },
         data() {
             return {
                 fix:'direct_center_detail ',
-                em_row:[0,1,2,3,4],
-                em_col:[0,1,2,3,4,5],
-                recent_sale:[0,1,2,3],
                 tabs: [
                     {title: "매출", link: "#sale", switch: true,},
                     {title: "보유차량", link: "#recent_sale", switch: false},
@@ -109,11 +80,11 @@ import customerList from "./customerList";
                 }
                 if(0<scrollY && scrollY<1062){
                     this.tabSwitch(0)
-                }else if(1062<=scrollY && scrollY<1893){
+                }else if(1062<=scrollY && scrollY<2951){
                     this.tabSwitch(1)
-                }else if(1893<=scrollY && scrollY<2596){
+                }else if(2951<=scrollY && scrollY<3654){
                     this.tabSwitch(2)
-                }else if(2596<=scrollY){
+                }else if(3654<=scrollY){
                     this.tabSwitch(3)
                 }
 
@@ -156,5 +127,7 @@ import customerList from "./customerList";
     }
     #centerEmployee{
         padding-bottom: 300px;
+        height: 580px;
+
     }
 </style>

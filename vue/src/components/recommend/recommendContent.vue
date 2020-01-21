@@ -11,7 +11,7 @@
             <div class="align_field">
                 <div class="all_check">
                     <div class="checker" id="uniform-allCheck">
-                        <span :class="{checked:allchecked}" @click="allcheck" :key="allchecked"><input type="checkbox" name="allCheck" id="allCheck" class="uniform" title="전체체크"></span>
+                        <span :class="{checked:allchecked}" @click="allcheck(List)" :key="allchecked"><input type="checkbox" name="allCheck" id="allCheck" class="uniform" title="전체체크"></span>
                     </div>
                 </div>
                 <div class="align">
@@ -46,11 +46,11 @@
                         <col>
                     </colgroup>
 
-                    <tbody v-for="(car,index) of List" :key="car.carID">
+                    <tbody v-for="car of List" :key="car.carID">
                     <tr>
                         <td class="check">
                             <div class="checker" id="uniform-interest_list_check1">
-                                <span  :class="{checked:car.checked}" @click="check(index)" @change='updateCheckall()' >
+                                <span  :class="{checked:car.checked}" @click="check(car)" @change='updateCheckall()' >
                                     <input type="checkbox" id="interest_list_check1" class="uniform"  >
                                 </span>
                             </div>
