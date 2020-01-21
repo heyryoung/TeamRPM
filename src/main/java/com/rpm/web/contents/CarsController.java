@@ -65,8 +65,12 @@ public class CarsController {
                                 carsService.getCategory3(param).values()));
                 break;
             case "makerList" :
+                trunk.put(Arrays.asList("makerList"),
+                        Arrays.asList(carsService.findByMakecdWithCount((List<Cars>) cars)));
+                break;
+            case "modelList" :
                 trunk.put(Arrays.asList("modelList"),
-                        Arrays.asList(carsService.findByModelWithCount((List<Cars>) cars ,param)));
+                        Arrays.asList(carsService.findByModelWithCount((List<Cars>) cars , param )));
                 break;
         }
 
@@ -86,24 +90,6 @@ public class CarsController {
         List<SearchDetailCondition> regionList = searchCondition.getRegionList();
 
 
-
-
-        if( searchCondition.getMaker() != "") {
-            carsProcessingList.addAll(carsService.findCarBySelectedMaker(carsList , searchCondition.getMaker()));
-            carsList.clear();
-            carsList.addAll(carsProcessingList);
-            carsProcessingList.clear();
-        }
-
-        if ( !modelList.isEmpty() ) {
-            for (SearchDetailCondition model : modelList) {
-                carsProcessingList.addAll(carsService.findCarBySelectedModel(carsList , model.getCode()));
-            }
-            carsList.clear();
-            carsList.addAll(carsProcessingList);
-            carsProcessingList.clear();
-
-        }
 
         if ( !categoryList.isEmpty()) {
             for (SearchDetailCondition category : categoryList) {
@@ -132,9 +118,32 @@ public class CarsController {
             carsList.addAll(carsProcessingList);
             carsProcessingList.clear();
         }
+
+
+
+        if( searchCondition.getMaker() != "") {
+            carsProcessingList.addAll(carsService.findCarBySelectedMaker(carsList , searchCondition.getMaker()));
+            carsList.clear();
+            carsList.addAll(carsProcessingList);
+            carsProcessingList.clear();
+            map.put("modelList",carsService.findByModelWithCount((List<Cars>) carsList ,searchCondition.getMaker()));
+        }
+        map.put("makerList",carsService.findByMakecdWithCount(carsList));
+
+
+        if ( !modelList.isEmpty() ) {
+            for (SearchDetailCondition model : modelList) {
+                carsProcessingList.addAll(carsService.findCarBySelectedModel(carsList , model.getCode()));
+            }
+            carsList.clear();
+            carsList.addAll(carsProcessingList);
+            carsProcessingList.clear();
+        }
+
         cartatic = null;
         cartatic = carsList;
         map.put("carSearchResults" , cartatic.stream().limit(15));
+        map.put("makerList",carsService.findByMakecdWithCount(cartatic));
         return map;
     }
 

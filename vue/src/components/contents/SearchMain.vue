@@ -479,7 +479,6 @@ export default {
         return {
             searchWord: '',
             carcd: '',
-            modelListIsOpen: false,
             maker : ''
         }
     },
@@ -495,7 +494,7 @@ export default {
         searchResultEmpty : state => state.cmm.searchResultEmpty,
         checkedItems : state => state.cmm.checkedItems,
         seenHistoryList : state => state.cmm.seenHistoryList,
-            makerTreeChildFlag : state => state.cmm.makerTreeChildFlag
+            modelListIsOpen : state => state.cmm.modelListIsOpen
         }),
         ...mapGetters('cmm', {
             initFlag : 'initFlag'
@@ -512,13 +511,10 @@ export default {
             this.searchWithCondition()
         },
         checkMakeTree(param){
-            this.modelListIsOpen = !this.modelListIsOpen;
-
-            if (this.modelListIsOpen) this.$store.dispatch('cmm/getTreeChild',param)
-                else this.$store.dispatch('cmm/makeOriginList' )
-
             this.$store.dispatch('cmm/CHECKER',param, { root: true })
+            this.$store.dispatch('cmm/getTreeChild',param)
             this.searchWithCondition()
+            this.$store.dispatch('cmm/SYNCCHECKER')
         },
         searchKeyClick(searchKeyID) {
             const searchKey = document.getElementById(searchKeyID)

@@ -18,7 +18,7 @@ const state = {
     modelList : [],
     centerList : [],
     initFlag : false,
-    makerTreeChildFlag : false
+    modelListIsOpen : false
 
 };
 const getters = {
@@ -30,7 +30,7 @@ const getters = {
     checkedItems : state => state.checkedItems,
     seenHistoryList : state => state.seenHistoryList,
     initFlag : state => state.initFlag,
-    makerTreeChildFlag : state => state.makerTreeChildFlag
+    modelListIsOpen : state => state.modelListIsOpen
 };
 const actions = {
     async init({commit}){
@@ -46,15 +46,16 @@ const actions = {
         }
     },
     async getTreeChild({commit}, param){
-        console.log('getTreeChild')
-        axios
-            .get(`http://localhost:8080/getcategory/`+param.code+'/'+param.bigCategory)
+        //let bigCategory = (param.checked === true ) ? 'makerList' : 'modelList'
+        commit('GETTREECHILD', param)
+/*        axios
+            .get(`http://localhost:8080/getcategory/`+param.code+'/'+bigCategory)
             .then(({data})=>{
-                commit('MAKETREECHILD', { reault : data , parents : param })
+
             })
             .catch(()=>{
                 alert('잘못된 요청입니다.')
-            })
+            })*/
     },
     async getCategory1({commit}, param){
         axios
@@ -112,7 +113,11 @@ const actions = {
     },
     async makeOriginList ( {commit} ) {
         commit('MAKEORIGINLIST');
+    },
+    async SYNCCHECKER ({commit}) {
+        commit('SYNCCHECKER');
     }
+
 };
 const mutations = {
     INIT (state, data){
@@ -128,7 +133,6 @@ const mutations = {
                })
               data.makerList.forEach(el => {
                    state.makerList.push({checked : false, bigCategory: 'makerList' , code : el.code , name: el.name, count : el.count})
-
                })
                data.fuelTypeList.forEach(el => {
                    state.fuelTypeList.push({checked : false, bigCategory: 'fuelTypeList' , code : el.fuelTyped , name: el.fuleTypedName})
@@ -137,19 +141,17 @@ const mutations = {
                    state.regionList.push({checked : false, bigCategory: 'regionList' , code : el.centerRegionCode , name: el.centerRegion})
                })
         state.originMakerList = state.makerList
-        state.originRegionList = state.regionList
+        state.carAllCount = state.carSearchResults.length
         state.initFlag = true
-        state.carAllCount = data.allCount
 
     },
-    MAKETREECHILD (state, data) {
-                console.log('parents' + data.parents.name)
-                state.makerList = []
-                state.makerList.push(data.parents)
-                state.modelList = []
-                data.reault.modelList.forEach(el => {
-                    state.modelList.push({checked : false, bigCategory: 'modelList' , code : el.code , name: el.name, count : el.count})
-                })
+    GETTREECHILD (state, param) {
+        state.modelListIsOpen = !state.modelListIsOpen
+        if (state.modelListIsOpen)  {
+            param.checked = true
+            state.makerList = []
+            state.makerList.push(param)
+        }
     },
     CATEGORY1 (state, data){
         state.category1 = []
@@ -157,6 +159,7 @@ const mutations = {
         state.category3 = []
         for(let i=0;i<data.category.length;i++){
             state.category1.push({name : data.category[i], count : data.count[i]})
+
         }
     },
     CATEGORY2 (state, data){
@@ -173,10 +176,46 @@ const mutations = {
         }
     },
     SEARCHWITHCONDITION (state, data) {
+       // let processingMakerList = state.modelList
         state.carSearchResults = []
+/*        state.modelList = []
+        state.makerList = []*/
         state.carSearchResults = data.carSearchResults
-        if (state.carSearchResults.length === 0) state.searchResultEmpty = true
-        else state.searchResultEmpty = false
+        console.log(state.modelListIsOpen)
+
+/*
+
+        for (let i = 0; i < processingMakerList.length; i++) {
+            data.makerList.forEach(item => {
+                if (item.code === processingMakerList[i].code) {
+                    state.makerList.push(item)
+                }
+            })
+        }
+
+*/
+
+        if (!state.modelListIsOpen) {
+            state.makerList = []
+            data.makerList.forEach(el => {
+                state.makerList.push({checked : false, bigCategory: 'makerList' , code : el.code , name: el.name, count : el.count})
+            })
+        }
+
+        if (data.modelList.length > 0) {
+            data.modelList.forEach(el => {
+                state.modelList.push({
+                    checked: false,
+                    bigCategory: 'modelList',
+                    code: el.code,
+                    name: el.name,
+                    count: el.count
+                })
+            })
+
+            if (state.carSearchResults.length === 0) state.searchResultEmpty = true
+            else state.searchResultEmpty = false
+        }
      },
     CHECKER (state, data) {
         let foundItem ={};
@@ -196,15 +235,31 @@ const mutations = {
             case 'modelList':
                 foundItem = state.modelList.find( item => item.name === data.name)
                 break
-            case 'centerList':
-                foundItem = state.centerList.find( item => item.name === data.name)
-                break
             }
         foundItem.checked = !foundItem.checked
+        console.log("CHECKER" + foundItem.checked + foundItem.name)
         if(foundItem.checked) state.checkedItems.push(foundItem)
         else state.checkedItems.splice(state.checkedItems.indexOf(foundItem),1)
+
     },
-    ADDSEENHISTORY (state, data) {
+
+    SYNCCHECKER ( state ) {
+        let foundItem ={};
+        state.checkedItems.forEach( checkedItem => {
+            switch (checkedItem.bigCategory) {
+                case 'makerList':
+                    foundItem = state.makerList.find( item => item.name === checkedItem.name)
+                    break
+                case 'modelList':
+                    foundItem = state.modelList.find( item => item.name === checkedItem.name)
+                    break
+            }
+            foundItem.checked = true
+        })
+    },
+
+
+    ADDSEENHISTORY ( state, data) {
         state.seenHistoryList.push(data)
     },
     CHECKERRESET ( state ) {
