@@ -124,26 +124,29 @@ public class CarsController {
         if ( !modelList.isEmpty() ) {
             for (SearchDetailCondition model : modelList) {
                 carsProcessingList.addAll(carsService.findCarBySelectedModel(cars , model.getCode()));
-
             }
             cars.clear();
             cars.addAll(carsProcessingList);
             carsProcessingList.clear();
         }
 
-        trunk.put(Arrays.asList("resultLength", "showCarList", "makerList" ) ,
-                Arrays.asList(cars.size(), cars.subList(0,15)
+
+        cars.stream().toArray();
+
+        trunk.put(Arrays.asList("resultLength", "showCarList", "makerList","pageLimit" ) ,
+                Arrays.asList(cars.size()
+                        ,(cars.size()>0&&cars.subList(0, searchCondition.getPageLimit()).size()<=searchCondition.getPageLimit())
+                                ? cars.subList(0, searchCondition.getPageLimit())
+                                : false
                         ,carsService.findByMakecdWithCount(cars)
+                        ,(searchCondition.getPageLimit()!=0)?searchCondition.getPageLimit():15
                         ));
         return trunk.get();
     }
   
     @GetMapping("/getshowcarlist/{startrow}/{endrow}")
     public Object getShowCarList(@PathVariable String startrow, @PathVariable String endrow){
-        return (cars.subList(Integer.parseInt(startrow),Integer.parseInt(endrow))!=null)
-                ?cars.subList(Integer.parseInt(startrow),Integer.parseInt(endrow))
-                :false;
-
+        return cars.subList(Integer.parseInt(startrow),Integer.parseInt(endrow));
         }
 
 }

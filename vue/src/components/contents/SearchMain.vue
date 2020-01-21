@@ -19,7 +19,7 @@
                         <div class="quick_search">
                             <div class="ip_field">
                                 <input type="text" name="quickSearch" id="searchWord" v-model="searchWord" placeholder="모델명 입력 예시) 아반떼 MD"
-                                       autocomplete="off" v-on:keyup.enter="searchWithCondition()">
+                                       autocomplete="off" v-on:keyup.enter="searchWithCondition(this.$store.state.cmm.pageLimit)">
                                 <label for="quickSearch">검색아이콘</label>
                                 <ul class="drop_box"></ul>
                             </div>
@@ -343,23 +343,20 @@
                                 <div class="align">
                                     <span class="basic"><a href="" class="txt default"
                                                            data-bro="order">기본정렬</a></span>
-                                    <span><a href="" class="txt" data-bro="order">가격순</a><a
-                                            href="" class="down" data-show="order">낮은순</a><a
-                                            href="" class="up" data-show="order">높은순</a></span>
-                                    <span><a href="" class="txt" data-bro="order">주행거리 순</a><a
-                                            href="" class="down" data-show="order">낮은순</a><a
-                                            href="" class="up" data-show="order">높은순</a></span>
-                                    <span><a href="" class="txt" data-bro="order">연식 순</a><a
-                                            href="" class="down" data-show="order">낮은순</a><a
-                                            href="" class="up" data-show="order">높은순</a></span>
-                                    <input id="orderInput" class="orderbyInput" type="hidden" name="orderby" value="">
-                                    <input id="3dOrderInput" class="3dOrderInput" type="hidden"
-                                           name="wr_eq_v_3dview_flag" value="">
+                                    <span><a href="" class="txt" data-bro="order">가격순</a>
+                                        <a href="" class="down" data-show="order">낮은순</a>
+                                        <a href="" class="up" data-show="order">높은순</a></span>
+                                    <span><a href="" class="txt" data-bro="order">주행거리 순</a>
+                                        <a href="" class="down" data-show="order">낮은순</a>
+                                        <a href="" class="up" data-show="order">높은순</a></span>
+                                    <span><a href="" class="txt" data-bro="order">연식 순</a>
+                                        <a href="" class="down" data-show="order">낮은순</a>
+                                        <a href="" class="up" data-show="order">높은순</a></span>
                                 </div>
                                 <div class="detail_check">
                                     <div class="count_sel">
                                         <div id="carCnt" @click="searchKeyClick(`carCnt`)"
-                                             class="selectric-wrapper selectric-selectric selectric-below selectric-hover">
+                                             class="selectric-wrapper selectric-selectric selectric-below">
                                             <div class="selectric-hide-select"><select name="limit" id="listCount"
                                                                                        class="selectric"
                                                                                        data-beusable-tracking=""
@@ -372,7 +369,7 @@
                                             <div class="selectric-items" tabindex="-1" style="width: 78px;">
                                                 <div class="selectric-scroll">
                                                     <ul  v-for="limit of limits" :key="limit.name">
-                                                        <li data-index="0" @click="setPageLimit(limit)">{{limit}}개</li>
+                                                        <li data-index="0" @click="searchWithCondition(limit)">{{limit}}개</li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -461,7 +458,7 @@ export default {
         return {
             searchWord: '',
             carcd: '',
-            limits : [15,30,45,60]
+            limits : [15,30,45,60],
             modelListIsOpen: false,
             maker : ''
         }
@@ -491,7 +488,7 @@ export default {
     methods: {
         check(checkedItem){
             this.$store.dispatch('cmm/CHECKER', checkedItem , { root: true })
-            this.searchWithCondition()
+            this.searchWithCondition(this.$store.state.cmm.pageLimit)
         },
         checkMakeTree(param){
             this.modelListIsOpen = !this.modelListIsOpen;
@@ -500,7 +497,7 @@ export default {
                 else this.$store.dispatch('cmm/makeOriginList' )
 
             this.$store.dispatch('cmm/CHECKER',param, { root: true })
-            this.searchWithCondition()
+            this.searchWithCondition(this.$store.state.cmm.pageLimit)
         },
         searchKeyClick(searchKeyID) {
             const searchKey = document.getElementById(searchKeyID)
@@ -521,7 +518,7 @@ export default {
                 searchConditionCategory.className = searchConditionCategory.className + " on"
             }
         },
-        searchWithCondition() {
+        searchWithCondition(pageLimit) {
             let checkedCategoryList = []
             let checkedModelList = []
             let checkedFuelTypeList = []
@@ -550,15 +547,14 @@ export default {
                 regionList: checkedRegionList,
                 searchWord: this.searchWord,
                 carcd: this.carcd,
-                maker : maker
+                maker : maker,
+                pageLimit : pageLimit
             }
+            this.$store.dispatch('cmm/pageLimitSetting', pageLimit)
             this.$store.dispatch('cmm/searchWithCondition', data)
             },
         reset () {
             this.$store.dispatch('cmm/checkReset')
-        },
-        setPageLimit(limit){
-            this.$store.dispatch('cmm/setPageLimit', limit)
         }
 
     },

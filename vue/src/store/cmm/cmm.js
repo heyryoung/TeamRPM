@@ -86,6 +86,7 @@ const actions = {
     },
 
     async  searchWithCondition({commit}, param){
+
             let url = `http://localhost:8080/searchWithCondition`;
             let headers = {
                 'authorization': 'JWT fefege..',
@@ -130,6 +131,9 @@ const actions = {
     },
     async makeOriginList ( {commit} ) {
         commit('MAKEORIGINLIST');
+    },
+    async pageLimitSetting({commit}, data){
+        commit('PAGELIMITSETTING', data)
     }
 };
 const mutations = {
@@ -197,9 +201,8 @@ const mutations = {
         state.resultLength = data.resultLength
         state.pageNum = 1
         state.showCarList = []
-        for(let list of data.showCarList){
-            state.showCarList.push(list)
-        }
+        if(data.showCarList)
+            for(let list of data.showCarList){state.showCarList.push(list)}
         if (state.resultLength === 0)
             state.searchResultEmpty = true
         else
@@ -243,19 +246,16 @@ const mutations = {
     },
     SHOWCARLIST(state, data){
         state.showCarList=[]
-        if(data){
-            for(let i = 0; i<data.length;i++){
-                state.showCarList.push(data[i])
-            }
-        }else{
-            state.searchResultEmpty = true
-        }
+        for(let list of data){state.showCarList.push(list)}
     },
     PAGENUMSETTING(state, data){
         state.pageNum = data
     },
     MAKEORIGINLIST ( state ) {
         state.makerList = state.originMakerList
+    },
+    PAGELIMITSETTING(state, data){
+        state.pageLimit = data
     }
 
 }
