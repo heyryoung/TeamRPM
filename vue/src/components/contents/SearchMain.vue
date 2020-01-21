@@ -550,7 +550,7 @@ export default {
                 regionList: checkedRegionList,
                 searchWord: this.searchWord,
                 carcd: this.carcd,
-                maker : maker.code
+                maker : maker.code,
                 pageLimit : pageLimit
             }
             this.$store.dispatch('cmm/pageLimitSetting', pageLimit)
