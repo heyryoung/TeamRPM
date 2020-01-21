@@ -14,44 +14,41 @@
                     <div class="detail_box">
                         <div class="box_top">
                             <h3>차량 검색</h3>
-                            <a href="" id="resetBtn" class="reset">초기화</a>
+                            <a href="#" id="resetBtn" class="reset" @click="reset()">초기화</a>
                         </div>
                         <div class="quick_search">
                             <div class="ip_field">
-                                <input type="text" name="quickSearch" id="quickSearch" placeholder="모델명 입력 예시) 아반떼 MD"
-                                       autocomplete="off">
+                                <input type="text" name="quickSearch" id="searchWord" v-model="searchWord" placeholder="모델명 입력 예시) 아반떼 MD"
+                                       autocomplete="off" v-on:keyup.enter="searchWithCondition()">
                                 <label for="quickSearch">검색아이콘</label>
                                 <ul class="drop_box"></ul>
                             </div>
                         </div>
                         <div class="sel_field">
-                            <a href="" class="on" data-init="true">전체</a>
-                            <a href="" class="">국산차</a>
-                            <a href="" class="">수입차</a>
-                            <input id="carTypeInput" type="hidden" name="v_car_type" value="">
+                            <hr/>
                         </div>
                         <ul class="search_list_wrap">
                             <li class="list_h list_h01 " id="list_h list_h01 ">
-                                <a class="type"  @click="treeClick(`list_h list_h01 `)" >차종 <small></small></a>
+                                <a class="type"  @click="bigCategoryIsOpen(`list_h list_h01 `)" >차종 <small></small></a>
                                 <div class="sub_type_list sub_type_tree" >
                                     <ul class="row_list">
                                         <li v-for="category of categoryList"
-                                            :key="category.categorycd">
-                                            <div class="checker" :id="category.div_id"><span :class="{checked:category.checked}" @click="check(category)">
+                                            :key="category.code">
+                                            <div class="checker" :id="category.code"><span :class="{checked:category.checked}" @click="check(category)">
                                                 <input type="checkbox"
                                                                                                       name="categoryList"
-                                                                                                      :id="category.categorycd"
+                                                                                                      :id="category.code"
                                                                                                       class="uniform"
-                                                                                                      :v-bind="category.categorynm"
+                                                                                                      :v-bind="category.name"
                                             ></span>
                                             </div>
-                                            <label :for="category.categorycd">{{category.categorynm}}</label>
+                                            <label :for="category.code">{{category.name}}</label>
                                         </li>
                                     </ul>
                                 </div>
                             </li>
                             <li class="list_h list_h02 on"  id="list_h list_h02 on">
-                                <a class="type" @click="treeClick(`list_h list_h02 on`)">제조사/모델<small></small></a>
+                                <a class="type" @click="bigCategoryIsOpen(`list_h list_h02 on`)">제조사/모델<small></small></a>
                                 <div class="sub_type_list sub_type_tree" >
                                     <div class="scroll-wrapper scrollbar-dynamic" style="position: relative;" >
                                         <div id="makerFrame"
@@ -59,15 +56,33 @@
                                              style="height: auto; margin-bottom: 0px; margin-right: 0px; max-height: 229px;">
                                             <ul class="tree" style="display: block;" >
                                                 <li id="false"
-                                                    v-for="maker of makerList" :key="maker.makecd">
+                                                    v-for="maker of makerList" :key="maker.code" >
                                                     <div class="row false">
-            <span class="txt"><div class="checker" id="uniform-v_makecd">
-            <span :class="{checked:maker.checked}" @click="check(maker)" >
-                <input type="checkbox" id="v_makecd0" name="v_makecd" class="uniform maker"
-                        ></span></div>
-            <label for="v_makecd0">{{maker.modelnm}}</label></span><span class="count"><!--{{maker.product_count}}-->
-            </span>
+                                                    <span class="txt"><div class="checker" id="uniform-v_makecd">
+                                                    <span :class="{checked:maker.checked}" @click="checkMakeTree(maker)" >
+                                                        <input type="checkbox" id="v_makecd0" name="v_makecd" class="uniform maker">
+                                                    </span></div>
+                                                    <label for="v_makecd0">{{maker.name}}</label></span><span class="count">
+                                                    </span><span class="count">{{maker.count}}</span>
                                                     </div>
+                                                <ul class="tree" style="display: block;" v-show="modelListIsOpen" >
+                                                            <li v-for="model of modelList" :key="model.code">
+                   <div class="row false">
+                       <span class="txt">
+                       <div class="checker" id="uniform-v_model_grp_cd0">
+                           <span :class="{checked:model.checked}" @click="check(model)" >
+                               <input type="checkbox" id="v_model_grp_cd0" name="v_model_grp_cd" class="uniform maker" value="001" data-v_model_grp_cd="001" data-count="59" data-v_makecd="001" data-v_model_grp_nm="i30" data-v_makenm="현대" data-v_car_type="KOR" data-beusable-tracking="">
+                           </span>
+                       </div>
+                       <label for="v_model_grp_cd0">{{model.name}}</label>
+                       </span>
+                       <span class="count">{{model.count}}</span>
+                   </div>
+
+
+                                                </li>
+                                            </ul>
+
                                                 </li>
                                             </ul>
                                         </div>
@@ -75,7 +90,7 @@
                                 </div>
                             </li>
                             <li class="list_h list_h05 on" id="list_h list_h05 on">
-                                <a class="type"   @click="treeClick('list_h list_h05 on')">연식<small></small></a>
+                                <a class="type"   @click="bigCategoryIsOpen('list_h list_h05 on')">연식<small></small></a>
                                 <div class="sub_type_list" data-init="true"  >
                                     <div id="startYear"  class="selectric-wrapper selectric-selectric selectric-below selectric-hover" @click= "searchKeyClick(`startYear`)">
                                         <div class="selectric-hide-select"><select name="wr_gt_v_mfr_date"
@@ -121,7 +136,7 @@
                                 </div>
                             </li>
                             <li class="list_h list_h04 on" id="list_h list_h04 on">
-                                <a class="type"   @click="treeClick(`list_h list_h04 on`)">주행거리<small></small></a>
+                                <a class="type"   @click="bigCategoryIsOpen(`list_h list_h04 on`)">주행거리<small></small></a>
                                 <div class="sub_type_list"  data-init="true"  >
                                     <div id="startMileage" @click="searchKeyClick(`startMileage`)"
                                          class="selectric-wrapper selectric-selectric selectric-below selectric-hover">
@@ -173,17 +188,17 @@
                                 </div>
                             </li>
                             <li class="list_h list_h07" id="list_h list_h07">
-                                <a class="type" @click="treeClick(`list_h list_h07`)">연료 <small></small></a>
+                                <a class="type" @click="bigCategoryIsOpen(`list_h list_h07`)">연료 <small></small></a>
                                 <div class="sub_type_list">
-                                    <ul class="row_list"  v-for="fuelType of fuelTypeList" :key="fuelType.fuelTyped">
+                                    <ul class="row_list"  v-for="fuelType of fuelTypeList" :key="fuelType.code">
                                         <li>
-                                            <div class="checker" id="uniform-carFuel1"><span><input type="checkbox"
+                                            <div class="checker" id="uniform-carFuel1"><span :class="{checked:fuelType.checked}" @click="check(fuelType)"><input type="checkbox"
                                                                                                     name="fuelTypeList"
                                                                                                     id="fuelTypeList"
                                                                                                     class="uniform"
-                                                                                                    value="fuelType.fuelTyped"></span>
+                                                                                                    value="fuelType.code"></span>
                                             </div>
-                                            <label for="carFuel1">{{fuelType.fuleTypedName}} </label>
+                                            <label for="carFuel1">{{fuelType.name}} </label>
                                         </li>
                                         <li>
                                         </li>
@@ -191,32 +206,20 @@
                     </div>
                             </li>
                             <li class="list_h list_h12" id="list_h list_h12">
-                                <a class="type"   @click="treeClick(`list_h list_h12`)">지역 <small></small></a>
+                                <a class="type"   @click="bigCategoryIsOpen(`list_h list_h12`)">지역 <small></small></a>
                                 <div class="sub_type_list sub_type_tree"  >
                                     <div class="scroll-wrapper scrollbar-dynamic" style="position: relative;">
                                         <div class="sscrollbar-dynamic scroll-content scroll-sscrolly_visible"
                                              style="height: 260px; margin-bottom: 0px; margin-right: 0px; max-height: none;">
                                             <ul class="tree">
-                                                <li class="dep01" v-for=" region of regionList" :key="region.centerRegionCode">
+                                                <li class="dep01" v-for=" region of regionList" :key="region.code">
                                                     <div class="row">
 <span class="txt">
-<div class="checker" id="uniform-areaL1"><span><input type="checkbox" name="wr_in_v_center_region_code" id="areaL1"
-                                                      class="uniform" value="region.centerRegionCode"></span></div>
-<label for="areaL1">{{region.centerRegion}}</label>
+<div class="checker" id="uniform-areaL1"><span :class="{checked:region.checked}" @click="check(region)"><input type="checkbox" name="wr_in_v_center_region_code" id="areaL1"
+                                                      class="uniform" value="region.code"></span></div>
+<label for="areaL1">{{region.name}}</label>
 </span>
 </div>
-<!--                                                    <ul class="tree">
-                                                        <li class="dep02">
-                                                            <div class="row">
-	<span class="txt">
-<div class="checker" id="uniform-areaL1S1"><span><input type="checkbox" name="wr_in_multi_values" id="areaL1S1"
-                                                        class="uniform" value="SEOUL,147"></span></div>
-<label for="areaL1S1">강남직영점</label>
-	</span>
-                                                            </div>
-                                                            </div>
-                                                        </li>
-                                                    </ul>-->
                                                 </li>
                                             </ul>
                                         </div>
@@ -306,56 +309,67 @@
                         </div>
                     </div>
                     <div class="result_box_wrap">
-                        <ul class="choice_area"></ul> <!-- 검색 선택 항목 javascript -->
+                        <ul class="choice_area">
+                            <li v-for="checkedItem of checkedItems" :key="checkedItem.code">{{checkedItem.name}}<span class="close" @click="check(checkedItem)">닫기</span></li>
+                        </ul> <!-- 검색 선택 항목 javascript -->
                         <div class="until_box">
                             <div class="top_field">
-                                <div id="totalCount" class="total">총 <strong>7,976</strong>대</div>
-                                <!-- 검색 결과 카운트 ajax -->
+                                <div id="totalCount" class="total">총 <strong>{{this.$store.state.cmm.carAllCount}}</strong>대</div>
                                 <div class="hit"></div>
-                                <div class="search_area">
-                                    <input type="text" placeholder="차량번호/판매담당자">
-                                    <button type="button">검색</button>
+                                <div id="headerCustom">
+                                    <div class="primary">
+                                    <div class="inner">
+                                    <ul class="util_link">
+                                        <router-link to="/seencar">
+                                        <li class="recent">
+                                            <a >
+                                                <i class="ico"></i>최근본차량
+                                                <span class="badge">{{seenHistoryList.length}}</span>
+                                            </a>
+                                        </li>
+                                        </router-link>
+                                        <li class="favorite">
+                                            <a href="/user/interest_car.do">
+                                                <i class="ico"></i>관심차량
+                                                <span></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                </div>
                                 </div>
                             </div>
                             <div class="align_field">
                                 <div class="align">
                                     <span class="basic"><a href="" class="txt default"
                                                            data-bro="order">기본정렬</a></span>
-                                    <span><a href="" class="txt" data-bro="order">가격순</a><a
-                                            href="" class="down" data-show="order">낮은순</a><a
-                                            href="" class="up" data-show="order">높은순</a></span>
-                                    <span><a href="" class="txt" data-bro="order">주행거리 순</a><a
-                                            href="" class="down" data-show="order">낮은순</a><a
-                                            href="" class="up" data-show="order">높은순</a></span>
-                                    <span><a href="" class="txt" data-bro="order">연식 순</a><a
-                                            href="" class="down" data-show="order">낮은순</a><a
-                                            href="" class="up" data-show="order">높은순</a></span>
-                                    <input id="orderInput" class="orderbyInput" type="hidden" name="orderby" value="">
-                                    <input id="3dOrderInput" class="3dOrderInput" type="hidden"
-                                           name="wr_eq_v_3dview_flag" value="">
+                                    <span><a href="" class="txt" data-bro="order">가격순</a>
+                                        <a href="" class="down" data-show="order">낮은순</a>
+                                        <a href="" class="up" data-show="order">높은순</a></span>
+                                    <span><a href="" class="txt" data-bro="order">주행거리 순</a>
+                                        <a href="" class="down" data-show="order">낮은순</a>
+                                        <a href="" class="up" data-show="order">높은순</a></span>
+                                    <span><a href="" class="txt" data-bro="order">연식 순</a>
+                                        <a href="" class="down" data-show="order">낮은순</a>
+                                        <a href="" class="up" data-show="order">높은순</a></span>
                                 </div>
                                 <div class="detail_check">
                                     <div class="count_sel">
                                         <div id="carCnt" @click="searchKeyClick(`carCnt`)"
-                                             class="selectric-wrapper selectric-selectric selectric-below selectric-hover">
+                                             class="selectric-wrapper selectric-selectric selectric-below">
                                             <div class="selectric-hide-select"><select name="limit" id="listCount"
                                                                                        class="selectric"
                                                                                        data-beusable-tracking=""
-                                                                                       tabindex="-1">
-                                                <option value="15">15개</option>
-                                                <option value="30">30개</option>
-                                                <option value="45">45개</option>
-                                                <option value="60">60개</option>
+                                                                                       tabindex="-1"
+                                            v-for="limit of limits" :key="limit.name">
+                                                <option value="limit">{{limit}}개</option>
                                             </select></div>
                                             <div class="selectric"><span class="label"
-                                                                         data-beusable-tracking="">15개 </span></div>
-                                            <div class="selectric-items" tabindex="-1">
+                                                                         data-beusable-tracking="">{{this.$store.state.cmm.pageLimit}}개 </span></div>
+                                            <div class="selectric-items" tabindex="-1" style="width: 78px;">
                                                 <div class="selectric-scroll">
-                                                    <ul>
-                                                        <li data-index="0" class="selected">15개</li>
-                                                        <li data-index="1" class="">30개</li>
-                                                        <li data-index="2" class="">45개</li>
-                                                        <li data-index="3" class="last">60개</li>
+                                                    <ul  v-for="limit of limits" :key="limit.name">
+                                                        <li data-index="0" @click="clickPageLimit(limit)">{{limit}}개</li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -376,23 +390,27 @@
                                 </colgroup>
 
                                 <tbody>
-                                <tr v-for="carSearchResult of carSearchResults" :key="carSearchResult.carcd">
+                                <td class="empty_result" colspan="4" v-show="searchResultEmpty"><p><span>찾으시는 조건의 차량이 없으세요?</span>관심차량등록알림을 신청하면<br>해당차량 등록시 문자알림을 드립니다.</p>
+                                    <img src="https://www.kcar.com//resources/images/common/ico_empty.jpg" alt="차량없음 이미지">
+                                    <a href="/help/helpMain.do">관심차량등록알림 신청하기</a>
+                                </td>
+                                <tr v-for="showCar of showCarList" :key="showCar.carcd" @click="addHistory(carSearchResult)">
                                     <td class="thumb">
-                                        <a :href="carSearchResult.carUrl" target="_blank">
+                                        <a :href="showCar.carUrl" target="_blank">
                                             <div class="mark_area"></div>
-                                            <img :src="carSearchResult.middleImg" alt="자동차 썸네일">
+                                            <img :src="showCar.middleImg" alt="자동차 썸네일">
                                         </a>
                                     </td>
                                     <td class="car_info">
-                                        <router-link to="/product">
-                                            <a :href="carSearchResult.carUrl" target="_blank" class="name"></a>
-                                            {{carSearchResult.truckName}}
-                                        </router-link>
-                                        <span class="md_year">{{carSearchResult.mfrDate}}({{carSearchResult.beginYear}}년형)  &nbsp;&nbsp; {{carSearchResult.mileage}}km &nbsp;&nbsp;{{carSearchResult.fuelTypecdName}}</span>
-                                        <span class="price">{{carSearchResult.price}}만원 <em></em></span>
-                                        <a href=""><span
-                                                class="monthly"></span></a>-->
-                                    </td>
+                                    <router-link to="/product">
+                                        <a href="" target="_blank" class="name" ></a>
+                                        {{showCar.truckName}}
+                                    </router-link>
+                                    <span class="md_year">{{showCar.mfrDate}}({{showCar.beginYear}}년형)  &nbsp;&nbsp; {{showCar.mileage}}km &nbsp;&nbsp;{{showCar.fuelTypecdName}}</span>
+                                    <span class="price">{{showCar.price}}만원 <em></em></span>
+                                    <a href=""><span
+                                            class="monthly"></span></a>
+                                </td>
                                     <td class="car_opt">
                                         <div class="mark">
                                             <span class="tip_list tip_09"><button type="button" class="tip_btn">특옵션</button> </span>
@@ -403,16 +421,16 @@
                                         </div>
                                         <ul class="opt_list">
                                             <li>
-                                                <span>단순교환</span><span>SUV</span>
+                                                <span>{{showCar.categorynm}}</span><span>&nbsp;</span>
                                             </li>
                                             <li>
-                                                <span>성동</span><span></span>
+                                                <span>{{showCar.centerRegion}}</span><span>&nbsp;</span>
                                             </li>
                                             <li>
-                                                <span>5인승</span><span>&nbsp;</span>
+                                                <span>{{showCar.passCnt}}  인승</span><span>&nbsp;</span>
                                             </li>
                                         </ul>
-                                        <span class="online_buy">{{carSearchResult.simpleComment}}</span>
+                                        <span class="online_buy">{{showCar.simpleComment}}</span>
                                     </td>
                                     <td class="btn_area">
                                         <a id="toastid0"
@@ -423,22 +441,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="cm_pagination"><input id="pagingInput" class="pagingInput" type="hidden"
-                                                          name="pageno" value="">
-                            <ul class="pagination">
-                                <li class="num on"><a href="">1</a></li>
-                                <li class="num"><a href="">2</a></li>
-                                <li class="num"><a href="">3</a></li>
-                                <li class="num"><a href="">4</a></li>
-                                <li class="num"><a href="">5</a></li>
-                                <li class="num"><a href="">6</a></li>
-                                <li class="num"><a href="">7</a></li>
-                                <li class="num"><a href="">8</a></li>
-                                <li class="num"><a href="">9</a></li>
-                                <li class="num"><a href="">10</a></li>
-                                <li class="move next"><a href="">다음</a></li>
-                            </ul>
-                        </div>
+                        <pager v-if="isAny"/>
                     </div>
                 </div>
             </div>
@@ -446,80 +449,128 @@
     </div>
 </template>
 <script>
-import {checkBox} from "../mixins/checkBox";
-import axios from 'axios'
+import { mapState , mapGetters } from 'vuex'
+import Pager from '@/components/cmm/Pagination'
 export default {
-        name: 'searchMain',
-        data() {
-            return {
-                categoryList: [],
-                makerList: [],
-                fuelTypeList: [],
-                regionList: [],
-                carSearchResults: []
+    name: 'searchMain',
+    components : {Pager},
+    data() {
+        return {
+            searchWord: '',
+            carcd: '',
+            limits : [15,30,45,60],
+            maker : ''
+        }
+    },
+    computed: {
+        ...mapState({
+            carSearchResults : state => state.cmm.carSearchResults,
+            showCarList : state => state.cmm.showCarList,
+            categoryList: state => state.cmm.categoryList,
+            makerList: state => state.cmm.makerList,
+            fuelTypeList: state => state.cmm.fuelTypeList,
+            regionList: state => state.cmm.regionList,
+            searchResultEmpty : state => state.cmm.searchResultEmpty,
+            checkedItems : state => state.cmm.checkedItems,
+            seenHistoryList : state => state.cmm.seenHistoryList,
+            modelListIsOpen : state => state.cmm.modelListIsOpen,
+            modelList : state => state.cmm.modelList
+        }),
+        ...mapGetters('cmm', {
+            initFlag : 'initFlag'
+        }),
+        modelIsList : function () {
+            return this.$store.state.cmm.modelList
+        },        
+        isAny : function(){
+            return (this.$store.state.cmm.showCarList.length>0)
+        }
+    },
+    methods: {
+        check(checkedItem){
+            this.$store.dispatch('cmm/CHECKER', checkedItem , { root: true })
+            this.searchWithCondition()
+        },
+        checkMakeTree(param){
+            this.$store.dispatch('cmm/CHECKER',param, { root: true })
+            this.$store.dispatch('cmm/getTreeChild',param)
+            this.searchWithCondition()
+        },
+        searchKeyClick(searchKeyID) {
+            const searchKey = document.getElementById(searchKeyID)
+            if (searchKey.className === "selectric-wrapper selectric-selectric selectric-below") {
+                searchKey.className = "selectric-wrapper selectric-selectric selectric-below selectric-open"
+            } else {
+                searchKey.className = "selectric-wrapper selectric-selectric selectric-below"
             }
+        },
+        addHistory(caritem){
+            this.$store.dispatch('cmm/addSeenHistory',caritem)
+        },
+        bigCategoryIsOpen(categoryType) {
+            const searchConditionCategory = document.getElementById(categoryType)
+            if (searchConditionCategory.className.substr(-2, 2) === 'on') {
+                searchConditionCategory.className = (searchConditionCategory.className.substring(0, searchConditionCategory.className.length - 3));
+            } else {
+                searchConditionCategory.className = searchConditionCategory.className + " on"
+            }
+        },
+        searchWithCondition() {
+            let checkedCategoryList = []
+            let checkedModelList = []
+            let checkedFuelTypeList = []
+            let checkedRegionList = []
+            let maker = ''
 
-        },
-        computed:{
-            setCarList : function(){
-                this.$store.dispatch('contents/setCarList')
-                return this.$store.state.contents.carSearchResults
-            }
-        },
-        methods: {
-            searchKeyClick(searchKeyID){
-                const searchKey = document.getElementById(searchKeyID)
-                if(searchKey.className === "selectric-wrapper selectric-selectric selectric-below"){
-                    searchKey.className = "selectric-wrapper selectric-selectric selectric-below selectric-open"
-                }else{
-                    searchKey.className = "selectric-wrapper selectric-selectric selectric-below"
+            this.$store.state.cmm.checkedItems.forEach( item => {
+                switch (item.bigCategory) {
+                    case 'categoryList':
+                        checkedCategoryList.push(item)
+                        break
+                    case 'makerList':
+                        maker = item
+                        break
+                    case 'fuelTypeList':
+                        checkedFuelTypeList.push(item)
+                        break
+                    case 'regionList':
+                        checkedRegionList.push(item)
+                        break
+                    case 'modelList':
+                        checkedModelList.push(item)
+                        break
                 }
-            },
-            treeClick(categoryType){
-                    const searchConditionCategory = document.getElementById(categoryType)
-                    if(searchConditionCategory.className.substr(-2,2) === 'on'){
-                        searchConditionCategory.className = (searchConditionCategory.className.substring(0, searchConditionCategory.className.length-3));
-                    }else{
-                        searchConditionCategory.className = searchConditionCategory.className+" on"
-                    }
+            })
+
+            let data = {
+                categoryList: checkedCategoryList,
+                modelList: checkedModelList,
+                fuelTypeList: checkedFuelTypeList,
+                regionList: checkedRegionList,
+                searchWord: this.searchWord,
+                carcd: this.carcd,
+                pageLimit : this.$store.state.cmm.pageLimit
+                maker : maker.code,
+                pageLimit : pageLimit
             }
+            this.$store.dispatch('cmm/searchWithCondition', data)
+
+            },
+
+        reset () {
+            this.$store.dispatch('cmm/checkReset')
         },
+
+        clickPageLimit(pageLimit){
+            this.$store.dispatch('cmm/pageLimitSetting', pageLimit)
+            this.searchWithCondition()
+        }
+    },
         created() {
-               let url = `http://localhost:8080/searchInit`
-                let headers = {
-                    'authorization': 'JWT fefege..',
-                    'Accept' : 'application/json',
-                    'Content-Type': 'application/json'
-                }
-                axios
-                    .post(url, headers)
-                    .then(res =>
-                    {
-                        alert(res.data.categoryList.categorynm)
-/*                        /!*this.carSearchResults = res.data.carSearchResults*!/
-                        for (let i = 0; i < res.data.categoryList.length; i++) {
-                            this.categoryList.push({checked : false , categorycd : res.data.categoryList[i].categorycd, categorynm :res.data.categoryList[i].categorynm })
-                        }
-                        for (let i = 0; i < res.data.makerList.length; i++) {
-                            this.makerList.push({checked : false , makecd : res.data.makerList[i].makecd, makenm :res.data.makerList[i].makenm })
-                        }
-                        for (let i = 0; i < res.data.fuelTypeList.length; i++) {
-                            this.fuelTypeList.push({checked : false , fuelTyped : res.data.fuelTypeList[i].fuelTyped, fuleTypedName :res.data.fuelTypeList[i].fuleTypedName })
-                        }
-                        for (let i = 0; i < res.data.regionList.length; i++) {
-                            this.regionList.push({checked : false , centerRegionCode : res.data.regionList[i].centerRegionCode, centerRegion :res.data.regionList[i].centerRegion })
-                        }*/
-
-                    })
-                    .catch(()=>{
-                        alert("들어옴 실패")
-                    })
-            },
-    mixins:[checkBox]
+        if(!this.$store.state.cmm.initFlag)
+            this.$store.dispatch('cmm/init')
+        }
     }
-
 </script>
 <style scoped>
-
-
 </style>

@@ -14,7 +14,7 @@
         <div id="main_image" style="width: 100%; height: 100px; line-height: 100px; text-align: center">
             <a href="/"><img style="width: 100%; max-width: 760px; vertical-align: middle" src="@/assets/image/rpmlogoblack.png" alt=""></a>
         </div>
-        <nav>
+        <nav >
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -23,7 +23,8 @@
                     <li class="nav-item">
                         <Slide noOverlay ableOutsideClick :crossIcon="false">
                             <router-link to="/">HOME</router-link>
-                            <router-link to="/login">로그인</router-link>
+                            <router-link v-if="this.$store.state.user.auth==false" to="/login">로그인</router-link>
+                            <div v-else @click="logout">로그아웃</div>
                             <router-link to="/join">회원가입</router-link>
                             <router-link to="/searchmain">검색창</router-link>
                             <router-link to="/product">제품</router-link>
@@ -38,13 +39,12 @@
                             <router-link to="/companyHome">ADMIN </router-link>
                             <router-link to="/sns">SNS(REVIEW) </router-link>
                             <router-link to="/sns">차계부 </router-link>
-
-
                         </Slide >
                     </li>
                 </ul>
-            </div>
+        </div>
         </nav>
+
         <div id = "main_layout">
             <router-view></router-view>
         </div>
@@ -58,6 +58,13 @@
         name: 'app',
         components: {
             Slide
+        },
+        methods:{
+            logout(){
+                this.$store.dispatch('user/logout')
+
+
+            }
         }
     }
 </script>

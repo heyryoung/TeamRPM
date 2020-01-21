@@ -28,6 +28,7 @@ import recommendHome from "@/components/recommend/recommendHome.vue"
 import SnsPage from "@/components/social/SnsPage.vue"
 import SnsDetail from "@/components/social/SnsDetail.vue"
 import SnsModify from "@/components/social/SnsModify.vue"
+import MycarModify from '@/components/carbook/MycarModify.vue'
 
 
 Vue.use(Router)
@@ -43,6 +44,7 @@ export default new Router({
         {path:'/product', name:'product', component : Product},
         {path:'/mypage', name:'mypage', component : Mypage},
         {path:'/mypageModify', name:'mypageModify', component : MypageModify},
+        {path:'/mycarModify', name:'mycarModify', component : MycarModify},
         {path:'/mypageModifyCheck', name:'mypageModifyCheck', component : MypageModifyCheck},
         {path:'/seencar', name:'seencar', component : SeenCar},
         {path:'/stationInfo', name:'stationInfo', component : StationInfo},
