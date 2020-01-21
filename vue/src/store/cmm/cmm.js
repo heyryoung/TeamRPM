@@ -21,6 +21,7 @@ const state = {
     modelList : [],
     initFlag : false,
     modelListIsOpen : false
+
 };
 const getters = {
     makerList : state => state.makerList,
@@ -32,7 +33,8 @@ const getters = {
     checkedItems : state => state.checkedItems,
     seenHistoryList : state => state.seenHistoryList,
     initFlag : state => state.initFlag,
-    modelListIsOpen : state => state.modelListIsOpen
+    modelListIsOpen : state => state.modelListIsOpen,
+    resultLength : state => state.resultLength
 };
 const actions = {
     async init({commit}){
@@ -78,7 +80,7 @@ const actions = {
             })
     },
 
-    async  searchWithCondition({commit}, param){
+    async searchWithCondition({commit}, param){
 
             let url = `http://localhost:8080/searchWithCondition`;
             let headers = {
@@ -200,6 +202,19 @@ const mutations = {
             state.searchResultEmpty = true
         else
             state.searchResultEmpty = false
+
+        let processingMakerList = state.modelList
+        state.modelList = []
+        state.makerList = []
+
+
+        for (let i = 0; i < processingMakerList.length; i++) {
+            data.makerList.forEach(item => {
+                if (item.code === processingMakerList[i].code) {
+                    state.makerList.push(item)
+                }
+            })
+        }
 
 
         if (!state.modelListIsOpen) {

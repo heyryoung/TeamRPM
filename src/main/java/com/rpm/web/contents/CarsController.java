@@ -131,15 +131,12 @@ public class CarsController {
         }
 
 
-        cars.stream().toArray();
-
-        trunk.put(Arrays.asList("resultLength", "showCarList", "makerList","pageLimit" ) ,
+        trunk.put(Arrays.asList("resultLength", "showCarList", "makerList") ,
                 Arrays.asList(cars.size()
-                        ,(cars.size()>0&&cars.subList(0, searchCondition.getPageLimit()).size()<=searchCondition.getPageLimit())
-                                ? cars.subList(0, searchCondition.getPageLimit())
+                        ,(cars.stream().limit(searchCondition.getPageLimit()).toArray().length>0&&cars.stream().limit(searchCondition.getPageLimit()).toArray().length<=searchCondition.getPageLimit())
+                                ? cars.stream().limit(searchCondition.getPageLimit()).toArray()
                                 : false
                         ,carsService.findByMakecdWithCount(cars)
-                        ,(searchCondition.getPageLimit()!=0)?searchCondition.getPageLimit():15
                         ));
         return trunk.get();
     }

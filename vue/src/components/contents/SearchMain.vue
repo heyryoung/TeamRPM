@@ -19,7 +19,7 @@
                         <div class="quick_search">
                             <div class="ip_field">
                                 <input type="text" name="quickSearch" id="searchWord" v-model="searchWord" placeholder="모델명 입력 예시) 아반떼 MD"
-                                       autocomplete="off" v-on:keyup.enter="searchWithCondition(this.$store.state.cmm.pageLimit)">
+                                       autocomplete="off" v-on:keyup.enter="searchWithCondition()">
                                 <label for="quickSearch">검색아이콘</label>
                                 <ul class="drop_box"></ul>
                             </div>
@@ -333,19 +333,19 @@
                                 </div>
                             </div>
                             <div class="align_field">
-                                <div class="align">
-                                    <span class="basic"><a href="" class="txt default"
-                                                           data-bro="order">기본정렬</a></span>
-                                    <span><a href="" class="txt" data-bro="order">가격순</a>
-                                        <a href="" class="down" data-show="order">낮은순</a>
-                                        <a href="" class="up" data-show="order">높은순</a></span>
-                                    <span><a href="" class="txt" data-bro="order">주행거리 순</a>
-                                        <a href="" class="down" data-show="order">낮은순</a>
-                                        <a href="" class="up" data-show="order">높은순</a></span>
+                                <!--<div class="align" v-for="list of orderByList" :key="orderByList">
+                                    <span class="list.class" v-for="aList of list.a">
+                                        <a @click="orderBy" class="aList.class" ></a></span>
+                                    <span><a @click="orderBy" href="" class="txt" data-bro="order">가격순</a>
+                                        <a @click="orderBy" href="" class="down" data-show="order">낮은순</a>
+                                        <a @click="orderBy" href="" class="up" data-show="order">높은순</a></span>
+                                    <span><a @click="orderBy" href="" class="txt" data-bro="order">주행거리 순</a>
+                                        <a @click="orderBy" href="" class="down" data-show="order">낮은순</a>
+                                        <a @click="orderBy" href="" class="up" data-show="order">높은순</a></span>
                                     <span><a href="" class="txt" data-bro="order">연식 순</a>
-                                        <a href="" class="down" data-show="order">낮은순</a>
-                                        <a href="" class="up" data-show="order">높은순</a></span>
-                                </div>
+                                        <a @click="orderBy" href="" class="down" data-show="order">낮은순</a>
+                                        <a @click="orderBy" href="" class="up" data-show="order">높은순</a></span>
+                                </div>-->
                                 <div class="detail_check">
                                     <div class="count_sel">
                                         <div id="carCnt" @click="searchKeyClick(`carCnt`)"
@@ -362,7 +362,7 @@
                                             <div class="selectric-items" tabindex="-1" style="width: 78px;">
                                                 <div class="selectric-scroll">
                                                     <ul  v-for="limit of limits" :key="limit.name">
-                                                        <li data-index="0" @click="searchWithCondition(limit)">{{limit}}개</li>
+                                                        <li data-index="0" @click="clickPageLimit(limit)">{{limit}}개</li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -434,7 +434,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <pager v-if="isAny"/>
+                        <pager v-if="isAny" />
                     </div>
                 </div>
             </div>
@@ -477,6 +477,7 @@ export default {
         },        
         isAny : function(){
             return (this.$store.state.cmm.showCarList.length>0)
+
         },
         startYears : function(){
             let list = []
@@ -506,15 +507,43 @@ export default {
             }
             return list
         }
+
+        }/*,
+        orderByList : function(){
+            let orderByList = ['기본정렬', '가격순', '주행거리 순', '연식 순']
+            let orderBy = []
+            for(let i = 1; i<orderByList.length; i++){
+                switch (i) {
+                    case '기본정렬' : orderBy.push({class : 'basic'
+                        , a : [{ value : 'default',class : 'txt default'}]})
+                        break
+                    case '가격순' : orderBy.push({class : ''
+                        , a : [{value : 'priceController', class : 'txt', name : '가격순'}
+                        ,{value : 'priceDESC', class : 'down', name : '낮은순'}
+                        ,{value : 'priceASC', class : 'up', name : '높은순'} ]})
+                        break
+                    case '주행거리 순' : orderBy.push({class : ''
+                        , a : [{value : 'mileageController', class : 'txt', name : '주행거리 순'},
+                            {value : 'mileageDESC', class : 'down', name : '낮은순'},
+                            {value : 'mileageASC', class : 'up', name : '높은순'}]})
+                        break
+                    case '연식 순' : orderBy.push({class : '', a : [{
+                            value : 'beginyearController', class : 'txt', name : '연식 순'},
+                            {value : 'beginyearDESC', class : 'down', name : '낮은순'},
+                            {value : 'beginyearASC', class : 'up', name : '높은순'}]})
+                }
+            }
+            return orderBy
+        }*/
+
     },
     methods: {
         check(checkedItem){
             this.$store.dispatch('cmm/CHECKER', checkedItem , { root: true })
-            this.searchWithCondition(this.$store.state.cmm.pageLimit)
+            this.searchWithCondition()
         },
         checkMakeTree(param){
             this.$store.dispatch('cmm/CHECKER',param, { root: true })
-            this.searchWithCondition(this.$store.state.cmm.pageLimit)
             this.$store.dispatch('cmm/getTreeChild',param)
             //this.searchWithCondition()
         },
@@ -537,7 +566,7 @@ export default {
                 searchConditionCategory.className = searchConditionCategory.className + " on"
             }
         },
-        searchWithCondition(pageLimit) {
+        searchWithCondition() {
             let checkedCategoryList = []
             let checkedModelList = []
             let checkedFuelTypeList = []
@@ -571,14 +600,23 @@ export default {
                 regionList: checkedRegionList,
                 searchWord: this.searchWord,
                 carcd: this.carcd,
-                maker : maker.code,
-                pageLimit : pageLimit
+                pageLimit : this.$store.state.cmm.pageLimit,
+                maker : maker.code
             }
-            this.$store.dispatch('cmm/pageLimitSetting', pageLimit)
             this.$store.dispatch('cmm/searchWithCondition', data)
+
             },
+
         reset () {
             this.$store.dispatch('cmm/checkReset')
+        },
+
+        clickPageLimit(pageLimit){
+            this.$store.dispatch('cmm/pageLimitSetting', pageLimit)
+            this.searchWithCondition()
+        },
+        orderBy(){
+
         }
     },
         created() {
