@@ -506,7 +506,6 @@ export default {
                 list.push({index : i, code: i ,name : `${i}년`  , bigCategory : 'mileage' })
             }
             return list
-        }
 
         }/*,
         orderByList : function(){
