@@ -6,20 +6,24 @@ const state = {
     category1 : [],
     category2 : [],
     category3 : [],
-    carSearchResults:[],
     categoryList:[],
+    showCarList : [],
     makerList: [],
     modelGroupList : [],
     fuelTypeList: [],
     regionList: [],
     checkedItems : [],
-    seenHistoryList : []
+    seenHistoryList : [],
+    pageLimit : 15,
+    pageNum : 1,
+    resultLength : 0
 
 };
 const getters = {
     makerList : state => state.makerList,
     regionList : state => state.regionList,
     searchResultEmpty : state => state.searchResultEmpty,
+    showCarList : state => state.showCarList,
     fuelTypeList: state => state.cmm.fuelTypeList,
     checkedItems : state => state.checkedItems,
     seenHistoryList : state => state.seenHistoryList,
@@ -34,7 +38,7 @@ const actions = {
                     commit('INIT', data)
                 })
                 .catch(() => {
-                    alert('잘못된 요청입니다.')
+                    alert('잘못된 요청입니다!')
                 })
         }
     },
@@ -79,7 +83,7 @@ const actions = {
                 {
                     commit('SEARCHWITHCONDITION',data)
                 })
-                .catch(()=>{
+                .catch(()=>
                     alert("들어옴 실패")
                 })
         },
@@ -91,31 +95,50 @@ const actions = {
     },
     async checkReset ({commit}) {
         commit('CHECKERRESET');
+    },
+    async setPageLimit({commit}, limit){
+        commit('PAGELIMIT', limit)
+    },
+    async pageClick({commit}, data){
+        axios
+            .get(`http://localhost:8080/getshowcarlist/`+data.start+'/'+data.end)
+            .then(({data})=>{
+                commit('SHOWCARLIST', data)})
+            .catch(()=>{
+                alert('잘못된 요청입니다.')
+            })
+    },
+    async pageNumSetting({commit}, data){
+        commit('PAGENUMSETTING', data)
     }
 };
 const mutations = {
     INIT (state, data){
         state.carAllCount = data.allCount
-        state.carSearchResults = data.carSearchResults
+        state.resultLength = data.allCount
         state.categoryList = []
         state.fuelTypeList = []
         state.makerList = []
         state.regionList = []
-
-             data.categoryList.forEach(el => {
-                   state.categoryList.push({checked : false , bigCategory: 'categoryList' ,code : el.categorycd , name: el.categorynm})
-               })
-              data.makerList.forEach(el => {
-                   state.makerList.push({checked : false, bigCategory: 'makerList' , code : el.code , name: el.name, count : el.count})
-               })
-               data.fuelTypeList.forEach(el => {
-                   state.fuelTypeList.push({checked : false, bigCategory: 'fuelTypeList' , code : el.fuelTyped , name: el.fuleTypedName})
-               })
-               data.regionList.forEach(el => {
-                   state.regionList.push({checked : false, bigCategory: 'regionList' , code : el.centerRegionCode , name: el.centerRegion})
-               })
+        state.showCarList = []
+        state.showCarList=[]
         state.initFlag = true
-        state.carAllCount = data.allCount
+        for(let list of data.carInitList){
+            state.showCarList.push(list)
+        }
+
+         data.categoryList.forEach(el => {
+               state.categoryList.push({checked : false , bigCategory: 'categoryList' ,code : el.categorycd , name: el.categorynm})
+           })
+          data.makerList.forEach(el => {
+               state.makerList.push({checked : false, bigCategory: 'makerList' , code : el.code , name: el.name, count : el.count})
+           })
+           data.fuelTypeList.forEach(el => {
+               state.fuelTypeList.push({checked : false, bigCategory: 'fuelTypeList' , code : el.fuelTyped , name: el.fuleTypedName})
+           })
+           data.regionList.forEach(el => {
+               state.regionList.push({checked : false, bigCategory: 'regionList' , code : el.centerRegionCode , name: el.centerRegion})
+           })
     },
     CATEGORY1 (state, data){
         state.category1 = []
@@ -139,10 +162,16 @@ const mutations = {
         }
     },
     SEARCHWITHCONDITION (state, data) {
-        state.carSearchResults = []
-        state.carSearchResults = data.carSearchResults
-        if (state.carSearchResults.length === 0) state.searchResultEmpty = true
-        else state.searchResultEmpty = false
+        state.resultLength = data.resultLength
+        state.pageNum = 1
+        state.showCarList = []
+        for(let list of data.showCarList){
+            state.showCarList.push(list)
+        }
+        if (state.resultLength === 0)
+            state.searchResultEmpty = true
+        else
+            state.searchResultEmpty = false
      },
     CHECKER (state, data) {
         let foundItem ={};
@@ -172,8 +201,27 @@ const mutations = {
     },
     CHECKERRESET (state) {
         state.checkedItems = []
+    },
+    PAGELIMIT(state, data){
+        state.pageLimit = data
+    },
+    SHOWCARLIST(state, data){
+        state.showCarList=[]
+        if(data){
+            for(let i = 0; i<data.length;i++){
+                state.showCarList.push(data[i])
+            }
+        }else{
+            state.searchResultEmpty = true
+        }
+    },
+    PAGENUMSETTING(state, data){
+        state.pageNum = data
     }
+
 }
+
+
 
 export default {
     name: 'cmm',
