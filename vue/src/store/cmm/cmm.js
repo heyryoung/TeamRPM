@@ -203,10 +203,10 @@ const mutations = {
         else
             state.searchResultEmpty = false
 
-       // let processingMakerList = state.modelList
-/*        state.modelList = []
-        state.makerList = []*/
-/*
+        let processingMakerList = state.modelList
+        state.modelList = []
+        state.makerList = []
+
 
         for (let i = 0; i < processingMakerList.length; i++) {
             data.makerList.forEach(item => {
@@ -280,7 +280,7 @@ const mutations = {
     },
 
     PAGELIMIT(state, data){
-        state.pageLimit = dat
+        state.pageLimit = data
     },
     SHOWCARLIST(state, data){
         state.showCarList=[]
