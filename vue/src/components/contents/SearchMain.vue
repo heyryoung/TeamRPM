@@ -19,7 +19,7 @@
                         <div class="quick_search">
                             <div class="ip_field">
                                 <input type="text" name="quickSearch" id="searchWord" v-model="searchWord" placeholder="모델명 입력 예시) 아반떼 MD"
-                                       autocomplete="off" v-on:keyup.enter="searchWithCondition(this.$store.state.cmm.pageLimit)">
+                                       autocomplete="off" v-on:keyup.enter="searchWithCondition()">
                                 <label for="quickSearch">검색아이콘</label>
                                 <ul class="drop_box"></ul>
                             </div>
@@ -369,7 +369,7 @@
                                             <div class="selectric-items" tabindex="-1" style="width: 78px;">
                                                 <div class="selectric-scroll">
                                                     <ul  v-for="limit of limits" :key="limit.name">
-                                                        <li data-index="0" @click="searchWithCondition(limit)">{{limit}}개</li>
+                                                        <li data-index="0" @click="clickPageLimit(limit)">{{limit}}개</li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -488,7 +488,7 @@ export default {
     methods: {
         check(checkedItem){
             this.$store.dispatch('cmm/CHECKER', checkedItem , { root: true })
-            this.searchWithCondition(this.$store.state.cmm.pageLimit)
+            this.searchWithCondition()
         },
         checkMakeTree(param){
             this.modelListIsOpen = !this.modelListIsOpen;
@@ -497,7 +497,7 @@ export default {
                 else this.$store.dispatch('cmm/makeOriginList' )
 
             this.$store.dispatch('cmm/CHECKER',param, { root: true })
-            this.searchWithCondition(this.$store.state.cmm.pageLimit)
+            this.searchWithCondition()
         },
         searchKeyClick(searchKeyID) {
             const searchKey = document.getElementById(searchKeyID)
@@ -518,7 +518,7 @@ export default {
                 searchConditionCategory.className = searchConditionCategory.className + " on"
             }
         },
-        searchWithCondition(pageLimit) {
+        searchWithCondition() {
             let checkedCategoryList = []
             let checkedModelList = []
             let checkedFuelTypeList = []
@@ -548,13 +548,19 @@ export default {
                 searchWord: this.searchWord,
                 carcd: this.carcd,
                 maker : maker,
-                pageLimit : pageLimit
+                pageLimit : this.$store.state.cmm.pageLimit
             }
-            this.$store.dispatch('cmm/pageLimitSetting', pageLimit)
             this.$store.dispatch('cmm/searchWithCondition', data)
+
             },
+
         reset () {
             this.$store.dispatch('cmm/checkReset')
+        },
+
+        clickPageLimit(pageLimit){
+            this.$store.dispatch('cmm/pageLimitSetting', pageLimit)
+            this.searchWithCondition()
         }
 
     },
