@@ -265,7 +265,7 @@ const mutations = {
     },
 
     PAGELIMIT(state, data){
-        state.pageLimit = dat
+        state.pageLimit = data
     },
     SHOWCARLIST(state, data){
         state.showCarList=[]
