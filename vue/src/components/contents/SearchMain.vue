@@ -363,21 +363,16 @@
                                             <div class="selectric-hide-select"><select name="limit" id="listCount"
                                                                                        class="selectric"
                                                                                        data-beusable-tracking=""
-                                                                                       tabindex="-1">
-                                                <option value="15">15개</option>
-                                                <option value="30">30개</option>
-                                                <option value="45">45개</option>
-                                                <option value="60">60개</option>
+                                                                                       tabindex="-1"
+                                            v-for="limit of limits" :key="limit.name">
+                                                <option value="limit">{{limit}}개</option>
                                             </select></div>
                                             <div class="selectric"><span class="label"
-                                                                         data-beusable-tracking="">15개 </span></div>
-                                            <div class="selectric-items" tabindex="-1">
+                                                                         data-beusable-tracking="">{{this.$store.state.cmm.pageLimit}}개 </span></div>
+                                            <div class="selectric-items" tabindex="-1" style="width: 78px;">
                                                 <div class="selectric-scroll">
-                                                    <ul>
-                                                        <li data-index="0" class="selected">15개</li>
-                                                        <li data-index="1" class="">30개</li>
-                                                        <li data-index="2" class="">45개</li>
-                                                        <li data-index="3" class="last">60개</li>
+                                                    <ul  v-for="limit of limits" :key="limit.name">
+                                                        <li data-index="0" @click="setPageLimit(limit)">{{limit}}개</li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -402,7 +397,7 @@
                                     <img src="https://www.kcar.com//resources/images/common/ico_empty.jpg" alt="차량없음 이미지">
                                     <a href="/help/helpMain.do">관심차량등록알림 신청하기</a>
                                 </td>
-                                <tr v-for="carSearchResult of carSearchResults" :key="carSearchResult.carcd" @click="addHistory(carSearchResult)">
+                                <tr v-for="carSearchResult of showCarList" :key="carSearchResult.carcd" @click="addHistory(carSearchResult)">
                                     <td class="thumb">
                                         <a :href="carSearchResult.carUrl" target="_blank">
                                             <div class="mark_area"></div>
@@ -449,22 +444,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="cm_pagination"><input id="pagingInput" class="pagingInput" type="hidden"
-                                                          name="pageno" value="">
-                            <ul class="pagination">
-                                <li class="num on"><a href="">1</a></li>
-                                <li class="num"><a href="">2</a></li>
-                                <li class="num"><a href="">3</a></li>
-                                <li class="num"><a href="">4</a></li>
-                                <li class="num"><a href="">5</a></li>
-                                <li class="num"><a href="">6</a></li>
-                                <li class="num"><a href="">7</a></li>
-                                <li class="num"><a href="">8</a></li>
-                                <li class="num"><a href="">9</a></li>
-                                <li class="num"><a href="">10</a></li>
-                                <li class="move next"><a href="">다음</a></li>
-                            </ul>
-                        </div>
+                        <pager v-if="isAny"/>
                     </div>
                 </div>
             </div>
@@ -473,38 +453,40 @@
 </template>
 <script>
 import { mapState , mapGetters } from 'vuex'
+import Pager from '@/components/cmm/Pagination'
 export default {
     name: 'searchMain',
+    components : {Pager},
     data() {
         return {
             searchWord: '',
             carcd: '',
+            limits : [15,30,45,60]
             modelListIsOpen: false,
             maker : ''
         }
     },
     computed: {
         ...mapState({
-        carSearchResults : state => state.cmm.carSearchResults,
-        categoryList: state => state.cmm.categoryList,
-        makerList: state => state.cmm.makerList,
-        modelList: state => state.cmm.modelList,
-        fuelTypeList: state => state.cmm.fuelTypeList,
-        regionList: state => state.cmm.regionList,
-        centerList: state => state.cmm.centerList,
-        searchResultEmpty : state => state.cmm.searchResultEmpty,
-        checkedItems : state => state.cmm.checkedItems,
-        seenHistoryList : state => state.cmm.seenHistoryList,
+            showCarList : state => state.cmm.showCarList,
+            categoryList: state => state.cmm.categoryList,
+            makerList: state => state.cmm.makerList,
+            fuelTypeList: state => state.cmm.fuelTypeList,
+            regionList: state => state.cmm.regionList,
+            searchResultEmpty : state => state.cmm.searchResultEmpty,
+            checkedItems : state => state.cmm.checkedItems,
+            seenHistoryList : state => state.cmm.seenHistoryList,
             makerTreeChildFlag : state => state.cmm.makerTreeChildFlag
         }),
         ...mapGetters('cmm', {
             initFlag : 'initFlag'
-        })
-        ,
+        }),
         modelIsList : function () {
             return this.$store.state.cmm.modelList
-        },
-
+        },        
+        isAny : function(){
+            return (this.$store.state.cmm.showCarList.length>0)
+        }
     },
     methods: {
         check(checkedItem){
@@ -574,6 +556,9 @@ export default {
             },
         reset () {
             this.$store.dispatch('cmm/checkReset')
+        },
+        setPageLimit(limit){
+            this.$store.dispatch('cmm/setPageLimit', limit)
         }
 
     },
