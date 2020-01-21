@@ -1,5 +1,14 @@
-const state = {}
-const getters = {}
+const state = {
+    mycar : {},
+    record: [],
+    markerList: []
+
+}
+const getters = {
+    getMycar : state=>state.mycar,
+    getRecord: state=>state.record
+
+}
 const actions = {}
 const mutations = {}
 export default {

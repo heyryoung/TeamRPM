@@ -1,17 +1,13 @@
 <template>
     <div>
 
-        <div class="mypage_CarList interest">
-            <div class="tit_area">
-                <h3>보유 차량</h3>
-                <p>판매완료시  자동 삭제됩니다.</p>
+        <div>
 
-            </div>
 
             <div class="align_field">
                 <div class="all_check">
                     <div class="checker" id="uniform-allCheck">
-                        <span :class="{checked:allchecked}" @click="allcheck" :key="allchecked"><input type="checkbox" name="allCheck" id="allCheck" class="uniform" title="전체체크"></span>
+                        <span :class="{checked:allchecked}" @click="allcheck(List)" :key="allchecked"><input type="checkbox" name="allCheck" id="allCheck" class="uniform" title="전체체크"></span>
                     </div>
                 </div>
                 <div class="align">
@@ -46,38 +42,38 @@
                         <col>
                     </colgroup>
 
-                    <tbody v-for="(car,index) of List" :key="car.carID">
+                    <tbody  v-for="car of List" :key="car.cid">
                     <tr>
                         <td class="check">
                             <div class="checker" id="uniform-interest_list_check1">
-                                <span  :class="{checked:car.checked}" @click="check(index)" @change='updateCheckall()' >
+                                <span  :class="{checked:car.checked}" @click="check(car)" @change='updateCheckall()' >
                                     <input type="checkbox" id="interest_list_check1" class="uniform"  >
                                 </span>
                             </div>
                         </td>
                         <td class="thumb">
                             <a href="/product">
-                                <img :src="car.thumb" alt="자동차 썸네일">
+                                <img :src="car.middleImg" alt="자동차 썸네일">
                             </a>
                         </td>
                         <td class="car_info">
-                            <a href="/product" class="name">{{car.title}}<br> {{car.subTitle}} </a>
-                            <span class="md_year">{{car.caryear}} &nbsp; {{car.distance}}</span>
-                            <span class="price">{{car.price}} </span>
+                            <a href="/product" class="name">모델명:{{car.modelnm}} </a>
+                            <span class="md_year">연식:{{car.beginYear}}년 &nbsp;<br>주행거리:{{car.milage}}km</span>
+                            <span class="price">가격{{car.price}}만원 </span>
                         </td>
                         <td class="car_opt">
                             <ul class="opt_list">
                                 <li>
-                                    <span class="pt">{{car.acident}}</span>
-                                    <span>{{car.fuel}}</span>
+                                    <span class="pt">사고 : {{car.recCommentCd}}</span>
+                                    <span>{{car.fuleTypedName}}</span>
                                 </li>
                                 <li>
-                                    <span>{{car.color}}</span>
-                                    <span>{{car.carType}}</span>
+                                    <span>{{car.exteriorColornm}}</span>
+                                    <span>{{car.categorynm}}</span>
                                 </li>
                                 <li>
-                                    <span>{{car.region}}</span>
-                                    <span>{{car.people}}</span>
+                                    <span>{{car.centerRegion}}</span>
+                                    <span>{{car.passCnt}}인승</span>
                                 </li>
                             </ul>
 
@@ -125,11 +121,7 @@
                 context:'http://localhost:8080/',
                 allchecked:false,
                 List:[
-                    {carID:"001",title:"벤츠 GLE-클래스 W166",subTitle:"GLE350 d 4MATIC 프리미엄",checked: false, caryear:"18년 11월식(18년형)", distance:"7,368km", price:"7,990만원", acident:"무사고",
-                        color:"갈색", region:"경기/인천", fuel:"디젤",carType:"SUV", people:"5인승",thumb:"https://img.kcar.com/carpicture/carpicture06/pic6026/kcar_60263050_001.jpg"},
 
-                    {carID:"002",title:"벤츠 GLE-클래스 W166",subTitle:"GLE350 d 4MATIC 프리미엄",checked: false, caryear:"18년 11월식(18년형)", distance:"7,368km", price:"7,990만원", acident:"무사고",
-                        color:"갈색", region:"경기/인천", fuel:"디젤",carType:"SUV", people:"5인승",thumb:"https://img.kcar.com/carpicture/carpicture06/pic6026/kcar_60263050_001.jpg"}
                 ],
                 checkedList:[
 
@@ -145,7 +137,12 @@
                 axios
                 .get(`${this.context}/company/carList`)
                     .then(res=>{
-                        alert(res.data.result)
+                        res.data.result.forEach(el=>{
+                           el.checked=false
+                            this.List.push(el)
+                        })
+
+
                     })
         .catch(e=>{
             alert(`axios fail${e}`)
