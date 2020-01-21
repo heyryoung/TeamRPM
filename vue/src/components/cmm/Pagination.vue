@@ -54,8 +54,8 @@
                 this.pageNum = this.$store.state.cmm.pageNum
                 this.startRow = (this.pageNum-1)*this.pageSize
                 this.endRow = (this.pageNum==this.pageCount)
-                    ? this.totalCount-1
-                    : this.startRow+this.pageSize-1
+                    ? this.totalCount
+                    : this.startRow+this.pageSize
                 this.pageCount = (this.totalCount % this.pageSize == 0)
                     ? parseInt(this.totalCount / this.pageSize)
                     : parseInt(this.totalCount / this.pageSize)+1
@@ -69,7 +69,7 @@
                     : this.startPage + this.blockSize-1
                 this.existPrev = (this.blockNum != 1)
                 this.existNext = !(this.blockNum == this.blockCount)
-/*                alert(`총 수 : `+this.$store.state.cmm.resultLength)
+                alert(`총 수 : `+this.$store.state.cmm.resultLength)
                 alert(`페이지 카운트 : ` + this.pageCount)
                 alert(`현재 페이지 : ` + this.$store.state.cmm.pageNum)
                 alert(`start : `+this.startRow)
@@ -78,7 +78,7 @@
                 alert(`endPage : ` + this.endPage)
                 alert(`blockNum : ` + this.blockNum)
                 alert(`blockCount : ` + this.blockCount)
-                alert(this.$store.state.cmm.pageNum / this.blockSize)*/
+                alert(this.$store.state.cmm.pageNum / this.blockSize)
             },
             previous(){
                 this.$store.dispatch('cmm/pageNumSetting', this.startPage-1)
