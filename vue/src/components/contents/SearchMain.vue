@@ -459,12 +459,12 @@ export default {
             searchWord: '',
             carcd: '',
             limits : [15,30,45,60],
-            modelListIsOpen: false,
             maker : ''
         }
     },
     computed: {
         ...mapState({
+            carSearchResults : state => state.cmm.carSearchResults,
             showCarList : state => state.cmm.showCarList,
             categoryList: state => state.cmm.categoryList,
             makerList: state => state.cmm.makerList,
@@ -473,7 +473,8 @@ export default {
             searchResultEmpty : state => state.cmm.searchResultEmpty,
             checkedItems : state => state.cmm.checkedItems,
             seenHistoryList : state => state.cmm.seenHistoryList,
-            makerTreeChildFlag : state => state.cmm.makerTreeChildFlag
+            modelListIsOpen : state => state.cmm.modelListIsOpen,
+            modelList : state => state.cmm.modelList
         }),
         ...mapGetters('cmm', {
             initFlag : 'initFlag'
@@ -491,13 +492,10 @@ export default {
             this.searchWithCondition(this.$store.state.cmm.pageLimit)
         },
         checkMakeTree(param){
-            this.modelListIsOpen = !this.modelListIsOpen;
-
-            if (this.modelListIsOpen) this.$store.dispatch('cmm/getTreeChild',param)
-                else this.$store.dispatch('cmm/makeOriginList' )
-
             this.$store.dispatch('cmm/CHECKER',param, { root: true })
             this.searchWithCondition(this.$store.state.cmm.pageLimit)
+            this.$store.dispatch('cmm/getTreeChild',param)
+            this.searchWithCondition()
         },
         searchKeyClick(searchKeyID) {
             const searchKey = document.getElementById(searchKeyID)
@@ -556,7 +554,6 @@ export default {
         reset () {
             this.$store.dispatch('cmm/checkReset')
         }
-
     },
         created() {
         if(!this.$store.state.cmm.initFlag)
