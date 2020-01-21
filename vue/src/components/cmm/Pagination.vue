@@ -69,16 +69,16 @@
                     : this.startPage + this.blockSize-1
                 this.existPrev = (this.blockNum != 1)
                 this.existNext = !(this.blockNum == this.blockCount)
-   /*             alert(`총 수 : `+this.$store.state.cmm.resultLength)
-                alert(`페이지 카운트 : ` + this.pageCount)
-                alert(`현재 페이지 : ` + this.$store.state.cmm.pageNum)
-                alert(`start : `+this.startRow)
-                alert(`end : `+this.endRow)
-                alert(`startPage : ` + this.startPage)
-                alert(`endPage : ` + this.endPage)
-                alert(`blockNum : ` + this.blockNum)
-                alert(`blockCount : ` + this.blockCount)
-                alert(this.$store.state.cmm.pageNum / this.blockSize)*/
+                console.log(`총 수 : `+this.$store.state.cmm.resultLength)
+                console.log(`페이지 카운트 : ` + this.pageCount)
+                console.log(`현재 페이지 : ` + this.$store.state.cmm.pageNum)
+                console.log(`start : `+this.startRow)
+                console.log(`end : `+this.endRow)
+                console.log(`startPage : ` + this.startPage)
+                console.log(`endPage : ` + this.endPage)
+                console.log(`blockNum : ` + this.blockNum)
+                console.log(`blockCount : ` + this.blockCount)
+                console.log(this.$store.state.cmm.pageNum / this.blockSize)
             },
             previous(){
                 this.$store.dispatch('cmm/pageNumSetting', this.startPage-1)

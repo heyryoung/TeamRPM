@@ -112,7 +112,7 @@ public class CarsController {
             cars = carsProcessingList;
         }
 
-        if ( !searchCondition.getMaker().equals("") ) {
+        if ( searchCondition.getMaker() != null ) {
             carsProcessingList.addAll(carsService.findCarBySelectedMaker(cars , searchCondition.getMaker()));
             cars.clear();
             cars.addAll(carsProcessingList);
