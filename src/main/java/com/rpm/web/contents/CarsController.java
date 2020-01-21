@@ -2,13 +2,9 @@ package com.rpm.web.contents;
 
 import com.rpm.web.proxy.Box;
 import com.rpm.web.proxy.Trunk;
-import com.sun.org.apache.bcel.internal.generic.ARRAYLENGTH;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8081")
@@ -28,6 +24,7 @@ public class CarsController {
 
     @GetMapping("/init")
     public Map<String, Object> init(){
+        trunk.clear();
         cars = (List<Cars>) carsRepository.findAll();
         trunk.put(Arrays.asList("allCount" ,"carInitList","makerList","fuelTypeList", "regionList","categoryList")
                 ,Arrays.asList(String.valueOf(carsRepository.count())
@@ -78,10 +75,12 @@ public class CarsController {
 
     @RequestMapping("/searchWithCondition")
     public Map<String,Object> searchWithCondition(@RequestBody  SearchCondition searchCondition){
+        trunk.clear();
         cars = carsService.findAllByDistinct((List<Cars>) carsRepository.findAll());
         List<Cars> carsProcessingList = new ArrayList<>();
         List<SearchDetailCondition> categoryList = searchCondition.getCategoryList();
         List<SearchDetailCondition> modelList = searchCondition.getModelList();
+        List<SearchDetailCondition> resultModelList = null;
         List<SearchDetailCondition> fuelTypeList = searchCondition.getFuelTypeList();
         List<SearchDetailCondition> regionList = searchCondition.getRegionList();
 
@@ -113,12 +112,13 @@ public class CarsController {
             cars = carsProcessingList;
         }
 
-        if ( searchCondition.getMaker() != "" ) {
-                carsProcessingList.addAll(carsService.findCarBySelectedMaker(cars , searchCondition.getMaker()));
+        if ( !searchCondition.getMaker().equals("") ) {
+            carsProcessingList.addAll(carsService.findCarBySelectedMaker(cars , searchCondition.getMaker()));
             cars.clear();
             cars.addAll(carsProcessingList);
             carsProcessingList.clear();
-            trunk.put(Arrays.asList("modelList"),Arrays.asList(carsService.findByModelWithCount(cars,searchCondition.getMaker())));;
+            trunk.put(Arrays.asList("modelList"),Arrays.asList(carsService.findByModelWithCount(cars,searchCondition.getMaker())));
+            //resultModelList = carsService.findByModelWithCount(cars,searchCondition.getMaker());
         }
 
         if ( !modelList.isEmpty() ) {
@@ -133,7 +133,8 @@ public class CarsController {
 
         trunk.put(Arrays.asList("resultLength", "showCarList", "makerList" ) ,
                 Arrays.asList(cars.size(), cars.subList(0,15)
-                        ,carsService.findByMakecdWithCount(cars)));
+                        ,carsService.findByMakecdWithCount(cars)
+                        ));
         return trunk.get();
     }
   

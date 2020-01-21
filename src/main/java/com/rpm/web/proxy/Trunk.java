@@ -8,8 +8,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class Trunk<T> {
 	private HashMap<String, T> map;
-	public void put(List<String> x, List<T> y) {
+	public Trunk(){
 		map = new HashMap<>();
+	}
+	public void put(List<String> x, List<T> y) {
 		for (int i = 0; i < x.size(); i++) {
 			map.put(x.get(i), y.get(i));
 		}
@@ -22,4 +24,7 @@ public class Trunk<T> {
 	}
 	public HashMap<String, T> get() {return map;}
 	public int size() {return map.size();}
+	public void clear(){
+		map.clear();
+	}
 }

@@ -197,13 +197,21 @@ const mutations = {
         }
     },
     SEARCHWITHCONDITION (state, data) {
+        state.resultLength = data.resultLength
+        state.pageNum = 1
+        state.showCarList = []
+        for(let list of data.showCarList){
+            state.showCarList.push(list)
+        }
+        if (state.resultLength === 0)
+            state.searchResultEmpty = true
+        else
+            state.searchResultEmpty = false
+
        // let processingMakerList = state.modelList
-        state.carSearchResults = []
 /*        state.modelList = []
         state.makerList = []*/
-        state.carSearchResults = data.carSearchResults
         console.log(state.modelListIsOpen)
-
 /*
 
         for (let i = 0; i < processingMakerList.length; i++) {
@@ -215,13 +223,12 @@ const mutations = {
         }
 
 */
-
-        if (!state.modelListIsOpen) {
+/*        if (!state.modelListIsOpen) {
             state.makerList = []
             data.makerList.forEach(el => {
                 state.makerList.push({checked : false, bigCategory: 'makerList' , code : el.code , name: el.name, count : el.count})
             })
-        }
+        }*/
 
         if (data.modelList.length > 0) {
             data.modelList.forEach(el => {
@@ -233,20 +240,7 @@ const mutations = {
                     count: el.count
                 })
             })
-
-            if (state.carSearchResults.length === 0) state.searchResultEmpty = true
-            else state.searchResultEmpty = false
         }
-        state.resultLength = data.resultLength
-        state.pageNum = 1
-        state.showCarList = []
-        for(let list of data.showCarList){
-            state.showCarList.push(list)
-        }
-        if (state.resultLength === 0)
-            state.searchResultEmpty = true
-        else
-            state.searchResultEmpty = false
      },
     CHECKER (state, data) {
         let foundItem ={};
@@ -316,10 +310,7 @@ const mutations = {
     MAKEORIGINLIST ( state ) {
         state.makerList = state.originMakerList
     }
-
 }
-
-
 
 export default {
     name: 'cmm',

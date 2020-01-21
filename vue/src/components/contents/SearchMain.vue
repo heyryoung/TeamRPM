@@ -461,8 +461,7 @@ export default {
         return {
             searchWord: '',
             carcd: '',
-            limits : [15,30,45,60]
-            modelListIsOpen: false,
+            limits : [15,30,45,60],
             maker : ''
         }
     },
@@ -477,7 +476,8 @@ export default {
             searchResultEmpty : state => state.cmm.searchResultEmpty,
             checkedItems : state => state.cmm.checkedItems,
             seenHistoryList : state => state.cmm.seenHistoryList,
-            modelListIsOpen : state => state.cmm.modelListIsOpen
+            modelListIsOpen : state => state.cmm.modelListIsOpen,
+            modelList : state => state.cmm.modelList
         }),
         ...mapGetters('cmm', {
             initFlag : 'initFlag'
