@@ -97,7 +97,7 @@
 }
 .list{
 	user-select: none;
-font-family: notosanskr,'Malgun Gothic','맑은 고딕',Dotum,'돋움',sans-serif;
+font-family: state,'Malgun Gothic','맑은 고딕',Dotum,'돋움',sans-serif;
 cursor: pointer;
 line-height: 19px;
 color: #333;
