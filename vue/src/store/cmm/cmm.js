@@ -48,16 +48,7 @@ const actions = {
         }
     },
     async getTreeChild({commit}, param){
-        //let bigCategory = (param.checked === true ) ? 'makerList' : 'modelList'
         commit('GETTREECHILD', param)
-/*        axios
-            .get(`http://localhost:8080/getcategory/`+param.code+'/'+bigCategory)
-            .then(({data})=>{
-
-            })
-            .catch(()=>{
-                alert('잘못된 요청입니다.')
-            })*/
     },
     async getCategory1({commit}, param){
         axios
@@ -88,6 +79,7 @@ const actions = {
     },
 
     async  searchWithCondition({commit}, param){
+
             let url = `http://localhost:8080/searchWithCondition`;
             let headers = {
                 'authorization': 'JWT fefege..',
@@ -104,6 +96,7 @@ const actions = {
                     alert("들어옴 실패")
                 )
         },
+
     async CHECKER ({commit}, param) {
         commit('CHECKER',param);
     },
@@ -132,8 +125,8 @@ const actions = {
     async makeOriginList ( {commit} ) {
         commit('MAKEORIGINLIST');
     },
-    async SYNCCHECKER ({commit}) {
-        commit('SYNCCHECKER');
+    async pageLimitSetting({commit}, data){
+        commit('PAGELIMITSETTING', data)
     }
 
 };
@@ -200,9 +193,8 @@ const mutations = {
         state.resultLength = data.resultLength
         state.pageNum = 1
         state.showCarList = []
-        for(let list of data.showCarList){
-            state.showCarList.push(list)
-        }
+        if(data.showCarList)
+            for(let list of data.showCarList){state.showCarList.push(list)}
         if (state.resultLength === 0)
             state.searchResultEmpty = true
         else
@@ -296,19 +288,16 @@ const mutations = {
     },
     SHOWCARLIST(state, data){
         state.showCarList=[]
-        if(data){
-            for(let i = 0; i<data.length;i++){
-                state.showCarList.push(data[i])
-            }
-        }else{
-            state.searchResultEmpty = true
-        }
+        for(let list of data){state.showCarList.push(list)}
     },
     PAGENUMSETTING(state, data){
         state.pageNum = data
     },
     MAKEORIGINLIST ( state ) {
         state.makerList = state.originMakerList
+    },
+    PAGELIMITSETTING(state, data){
+        state.pageLimit = data
     }
 }
 
