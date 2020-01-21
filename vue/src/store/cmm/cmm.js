@@ -108,7 +108,6 @@ const actions = {
     async checkReset ({commit}) {
         commit('CHECKERRESET');
     },
-
     async setPageLimit({commit}, limit){
         commit('PAGELIMIT', limit)
     },
@@ -124,12 +123,14 @@ const actions = {
     async pageNumSetting({commit}, data){
         commit('PAGENUMSETTING', data)
     },
+
     async makeOriginList ( {commit} ) {
         commit('MAKEORIGINLIST');
     },
     async pageLimitSetting({commit}, data){
         commit('PAGELIMITSETTING', data)
     }
+
 
 };
 const mutations = {
@@ -215,15 +216,17 @@ const mutations = {
             })
         }
 
-*/
-/*        if (!state.modelListIsOpen) {
+
+        if (!state.modelListIsOpen) {
             state.makerList = []
             data.makerList.forEach(el => {
                 state.makerList.push({checked : false, bigCategory: 'makerList' , code : el.code , name: el.name, count : el.count})
             })
-        }*/
+        }
 
-        if (data.modelList.length > 0) {
+
+        if (state.modelListIsOpen) {
+            state.modelList = []
             data.modelList.forEach(el => {
                 state.modelList.push({
                     checked: false,
@@ -233,25 +236,34 @@ const mutations = {
                     count: el.count
                 })
             })
+            let foundItem= '';
+            state.checkedItems.forEach( checkedItem => {
+                foundItem = state.modelList.find(item => item.code === checkedItem.code)
+            })
+            foundItem.checked = true
         }
      },
+
+
     CHECKER (state, data) {
-        let foundItem ={};
+        let foundItem ='';
+        console.log(data.name)
+
         switch (data.bigCategory) {
             case 'categoryList':
-                foundItem = state.categoryList.find( item => item.name === data.name)
+                foundItem = state.categoryList.find( item => item.code === data.code)
                 break
             case 'makerList':
-                foundItem = state.makerList.find( item => item.name === data.name)
+                foundItem = state.makerList.find( item => item.code === data.code)
                 break
             case 'fuelTypeList':
-                foundItem = state.fuelTypeList.find( item => item.name === data.name)
+                foundItem = state.fuelTypeList.find( item => item.code === data.code)
                 break
             case 'regionList':
-                foundItem = state.regionList.find( item => item.name === data.name)
+                foundItem = state.regionList.find( item => item.code === data.code)
                 break
             case 'modelList':
-                foundItem = state.modelList.find( item => item.name === data.name)
+                foundItem = state.modelList.find( item => item.code === data.code)
                 break
             }
         foundItem.checked = !foundItem.checked
@@ -260,23 +272,6 @@ const mutations = {
         else state.checkedItems.splice(state.checkedItems.indexOf(foundItem),1)
 
     },
-
-    SYNCCHECKER ( state ) {
-        let foundItem ={};
-        state.checkedItems.forEach( checkedItem => {
-            switch (checkedItem.bigCategory) {
-                case 'makerList':
-                    foundItem = state.makerList.find( item => item.name === checkedItem.name)
-                    break
-                case 'modelList':
-                    foundItem = state.modelList.find( item => item.name === checkedItem.name)
-                    break
-            }
-            foundItem.checked = true
-        })
-    },
-
-
     ADDSEENHISTORY ( state, data) {
         state.seenHistoryList.push(data)
     },
@@ -285,7 +280,7 @@ const mutations = {
     },
 
     PAGELIMIT(state, data){
-        state.pageLimit = data
+        state.pageLimit = dat
     },
     SHOWCARLIST(state, data){
         state.showCarList=[]

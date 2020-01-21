@@ -394,20 +394,20 @@
                                     <img src="https://www.kcar.com//resources/images/common/ico_empty.jpg" alt="차량없음 이미지">
                                     <a href="/help/helpMain.do">관심차량등록알림 신청하기</a>
                                 </td>
-                                <tr v-for="carSearchResult of showCarList" :key="carSearchResult.carcd" @click="addHistory(carSearchResult)">
+                                <tr v-for="showCar of showCarList" :key="showCar.carcd" @click="addHistory(carSearchResult)">
                                     <td class="thumb">
-                                        <a :href="carSearchResult.carUrl" target="_blank">
+                                        <a :href="showCar.carUrl" target="_blank">
                                             <div class="mark_area"></div>
-                                            <img :src="carSearchResult.middleImg" alt="자동차 썸네일">
+                                            <img :src="showCar.middleImg" alt="자동차 썸네일">
                                         </a>
                                     </td>
                                     <td class="car_info">
                                     <router-link to="/product">
                                         <a href="" target="_blank" class="name" ></a>
-                                        {{carSearchResult.truckName}}
+                                        {{showCar.truckName}}
                                     </router-link>
-                                    <span class="md_year">{{carSearchResult.mfrDate}}({{carSearchResult.beginYear}}년형)  &nbsp;&nbsp; {{carSearchResult.mileage}}km &nbsp;&nbsp;{{carSearchResult.fuelTypecdName}}</span>
-                                    <span class="price">{{carSearchResult.price}}만원 <em></em></span>
+                                    <span class="md_year">{{showCar.mfrDate}}({{showCar.beginYear}}년형)  &nbsp;&nbsp; {{showCar.mileage}}km &nbsp;&nbsp;{{showCar.fuelTypecdName}}</span>
+                                    <span class="price">{{showCar.price}}만원 <em></em></span>
                                     <a href=""><span
                                             class="monthly"></span></a>
                                 </td>
@@ -421,16 +421,16 @@
                                         </div>
                                         <ul class="opt_list">
                                             <li>
-                                                <span>단순교환</span><span>SUV</span>
+                                                <span>{{showCar.categorynm}}</span><span>&nbsp;</span>
                                             </li>
                                             <li>
-                                                <span>성동</span><span></span>
+                                                <span>{{showCar.centerRegion}}</span><span>&nbsp;</span>
                                             </li>
                                             <li>
-                                                <span>5인승</span><span>&nbsp;</span>
+                                                <span>{{showCar.passCnt}}  인승</span><span>&nbsp;</span>
                                             </li>
                                         </ul>
-                                        <span class="online_buy">{{carSearchResult.simpleComment}}</span>
+                                        <span class="online_buy">{{showCar.simpleComment}}</span>
                                     </td>
                                     <td class="btn_area">
                                         <a id="toastid0"
@@ -549,21 +549,26 @@ export default {
             let checkedRegionList = []
             let maker = ''
 
-            this.$store.state.cmm.categoryList.forEach(e => {
-                if (e.checked == true) checkedCategoryList.push(e)
+            this.$store.state.cmm.checkedItems.forEach( item => {
+                switch (item.bigCategory) {
+                    case 'categoryList':
+                        checkedCategoryList.push(item)
+                        break
+                    case 'makerList':
+                        maker = item
+                        break
+                    case 'fuelTypeList':
+                        checkedFuelTypeList.push(item)
+                        break
+                    case 'regionList':
+                        checkedRegionList.push(item)
+                        break
+                    case 'modelList':
+                        checkedModelList.push(item)
+                        break
+                }
             })
-            this.$store.state.cmm.makerList.forEach(e => {
-                if (e.checked == true) maker = e.code
-            })
-            this.$store.state.cmm.modelList.forEach(e => {
-                if (e.checked == true) checkedModelList.push(e)
-            })
-            this.$store.state.cmm.fuelTypeList.forEach(e => {
-                if (e.checked == true) checkedFuelTypeList.push(e)
-            })
-            this.$store.state.cmm.regionList.forEach(e => {
-                if (e.checked == true) checkedRegionList.push(e)
-            })
+
             let data = {
                 categoryList: checkedCategoryList,
                 modelList: checkedModelList,
@@ -571,8 +576,9 @@ export default {
                 regionList: checkedRegionList,
                 searchWord: this.searchWord,
                 carcd: this.carcd,
-                maker : maker,
                 pageLimit : this.$store.state.cmm.pageLimit
+                maker : maker.code,
+                pageLimit : pageLimit
             }
             this.$store.dispatch('cmm/searchWithCondition', data)
 
