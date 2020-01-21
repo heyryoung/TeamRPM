@@ -93,20 +93,19 @@
                                 <a class="type"   @click="bigCategoryIsOpen('list_h list_h05 on')">연식<small></small></a>
                                 <div class="sub_type_list" data-init="true"  >
                                     <div id="startYear"  class="selectric-wrapper selectric-selectric selectric-below selectric-hover" @click= "searchKeyClick(`startYear`)">
-                                        <div class="selectric-hide-select"><select name="wr_gt_v_mfr_date"
-                                                                                   id="modelYear01" class="selectric"
-                                                                                   data-unit="년">
-                                            <option value="">최소</option>
-                                            <option value="2019">2019년</option>
-                                            <option value="2018">2018년</option>
+                                        <div class="selectric-hide-select" >
+                                            <select name="wr_gt_v_mfr_date"
+                                                    v-for="startYear of startYears" :key="startYear.code"
+                                                    id="modelYear01" class="selectric" ata-unit="년">
+                                            <option :value="startYear.code"> {{startYear.name}}</option>
                                         </select></div>
                                         <div class="selectric"><span class="label" >최소</span></div>
-                                        <div class="selectric-items" tabindex="-1">
+                                        <div class="selectric-items" tabindex="-1"  style="width: 120px; height: 300px;">
                                             <div class="selectric-scroll">
-                                                <ul>
-                                                    <li data-index="0" class="selected">최소</li>
-                                                    <li data-index="1" class="">2019년</li>
-                                                    <li data-index="2" class="">2018년</li>
+                                                <ul v-for="startYear of startYears" :key="startYear.code">
+                                                    <li>
+                                                    <option :value="startYear.code">{{startYear.name}}</option>
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -116,18 +115,17 @@
                                         <div class="selectric-hide-select"><select name="wr_lt_v_mfr_date"
                                                                                    id="modelYear02" class="selectric"
                                                                                    data-unit="년"
-                                                                                   tabindex="-1">
-                                            <option value="">최대</option>
-                                            <option value="2019">2019년</option>
-                                            <option value="2018">2018년</option>
+                                                                                   tabindex="-1"
+                                                                                   v-for="endYear of endYears" :key="endYear.code">
+                                            <option :value="endYear.code"> {{endYear.name}}</option>
                                         </select></div>
                                         <div class="selectric"><span class="label" data-beusable-tracking="">최대</span></div>
-                                        <div class="selectric-items" tabindex="-1">
+                                        <div class="selectric-items" tabindex="-1"   style="width: 120px; height: 300px;">
                                             <div class="selectric-scroll">
-                                                <ul>
-                                                    <li data-index="0" class="selected">최대</li>
-                                                    <li data-index="1" class="">2019년</li>
-                                                    <li data-index="2" class="">2018년</li>
+                                                <ul  v-for="endYear of endYears" :key="endYear.code">
+                                                    <li>
+                                                    <option :value="endYear.code"> {{endYear.name}}</option>
+                                                    </li>
                                                 </ul>
                                             </div>
 
@@ -135,30 +133,27 @@
                                         <input class="selectric-input" tabindex="0"></div>
                                 </div>
                             </li>
-                            <li class="list_h list_h04 on" id="list_h list_h04 on">
+<!--                           <li class="list_h list_h04 on" id="list_h list_h04 on">
                                 <a class="type"   @click="bigCategoryIsOpen(`list_h list_h04 on`)">주행거리<small></small></a>
                                 <div class="sub_type_list"  data-init="true"  >
-                                    <div id="startMileage" @click="searchKeyClick(`startMileage`)"
+                                    <div id="startMileage1" @click="searchKeyClick(`startMileage1`)"
                                          class="selectric-wrapper selectric-selectric selectric-below selectric-hover">
                                         <div class="selectric-hide-select"><select name="wr_gt_n_mileage"
                                                                                    id="distance01" class="selectric"
                                                                                    data-unit="km" data-bro="mileage"
-                                                                                   data-comma="comma"
-                                                                                   data-beusable-tracking=""
-                                                                                   tabindex="-1">
+                                                                                   v-for="startMileage of startMileages"
+                                                                                   :key="startMileage.code"
+                                                                                   tabindex="-1"
+                                                                                   >
                                             <option value="">최소</option>
-                                            <option value="10000">10,000km</option>
-                                            <option value="20000">20,000km</option>
-                                            <option value="30000">30,000km</option>
+                                            <option :value="startMileage.code"> {{startMileage.name}} </option>
                                         </select></div>
                                         <div class="selectric"><span class="label">최소</span></div>
                                         <div class="selectric-items" tabindex="-1">
                                             <div class="selectric-scroll">
                                                 <ul>
                                                     <li data-index="0" class="selected">최소</li>
-                                                    <li data-index="1" class="">10,000km</li>
-                                                    <li data-index="2" class="">20,000km</li>
-                                                    <li data-index="3" class="">30,000km</li>
+                                                    <option :value="startMileage.code"> {{startMileage.name}} </option>
                                                 </ul>
                                             </div>
                                         </div>
@@ -168,25 +163,23 @@
                                           class="selectric-wrapper selectric-selectric selectric-below selectric-hover">
                                         <div class="selectric-hide-select"><select name="wr_lt_n_mileage"
                                                                                    id="distance02" class="selectric"
-                                                                                   data-unit="km" data-bro="mileage"
-                                                                                   data-comma="comma"
-                                                                                   data-beusable-tracking=""
-                                                                                   tabindex="-1">
-                                            <option value="">최대</option>
-                                            <option value="10000">10,000km</option>
+                                                                                   v-for="endMileage of endMileages"
+                                                                                   :key="endMileage.code"
+                                                                                   tabindex="-1"
+                                                                                   >
+                                            <option :value="endMileage.code">{{endMileage.name}}</option>
                                         </select></div>
                                         <div class="selectric"><span class="label">최대</span></div>
                                         <div class="selectric-items" tabindex="-1">
                                             <div class="selectric-scroll">
-                                                <ul>
-                                                    <li data-index="0" class="selected">최대</li>
-                                                    <li data-index="1" class="">10,000km</li>
+                                                <ul v-for="endMileage of endMileages" :key="endMileage.code">
+                                                    <option :value="endMileage.code">{{endMileage.name}}</option>
                                                 </ul>
                                             </div>
                                         </div>
                                         <input class="selectric-input" tabindex="0"></div>
                                 </div>
-                            </li>
+                            </li>-->
                             <li class="list_h list_h07" id="list_h list_h07">
                                 <a class="type" @click="bigCategoryIsOpen(`list_h list_h07`)">연료 <small></small></a>
                                 <div class="sub_type_list">
@@ -484,6 +477,36 @@ export default {
         },        
         isAny : function(){
             return (this.$store.state.cmm.showCarList.length>0)
+
+        },
+        startYears : function(){
+            let list = []
+            for(let i=1;i<=20;i++){
+                list.push({index : i, code : `${i*10000}` ,name : `${i}0,000만원`, bigCategory : 'begin_year'})
+            }
+            return list
+        },
+        endYears : function(){
+            let list = []
+            for(let i=1;i<=20;i++){
+                list.push({index : i, code : `${i*10000}` ,name : `${i}0,000만원`, bigCategory : 'begin_year'})
+            }
+            return list
+        },
+        startMileages : function(){
+            let list = []
+            for(let i=2020;i>=1980;i--){
+                list.push({index : i, code: i ,name : `${i}년` , bigCategory : 'mileage'})
+            }
+            return list
+        },
+        endMileages : function(){
+            let list = []
+            for(let i=2020; i>=1980 ;i--){
+                list.push({index : i, code: i ,name : `${i}년`  , bigCategory : 'mileage' })
+            }
+            return list
+
         }/*,
         orderByList : function(){
             let orderByList = ['기본정렬', '가격순', '주행거리 순', '연식 순']
@@ -521,7 +544,7 @@ export default {
         checkMakeTree(param){
             this.$store.dispatch('cmm/CHECKER',param, { root: true })
             this.$store.dispatch('cmm/getTreeChild',param)
-            this.searchWithCondition()
+            //this.searchWithCondition()
         },
         searchKeyClick(searchKeyID) {
             const searchKey = document.getElementById(searchKeyID)
@@ -602,4 +625,18 @@ export default {
     }
 </script>
 <style scoped>
+    .main_content{
+        padding-bottom: 50px;
+    }
+    #searchbg{
+        padding-bottom: 300px;
+    }
+    .mc_wide_searchbox{width:100%;background:#191b1a /*#F1F2F4 url( /resources/images/index/pc_index_visual_1112.jpg) top center no-repeat*/;opacity: 0.97;height:903px;position:relative;display:inline-block; z-index:1; margin-bottom:57px;}
+    .mc_wide_searchbox .searchbg{width:100%;background:url( https://www.kcar.com/resources/images/index/search_bg.png) center no-repeat; opacity: 0.97; display:inline-block;}
+    .mc_wide_searchbox .searchbg .mc_search{    margin: 0px auto 0 auto; }
+    .mc_search .selectric-items .selectric-scroll {
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
 </style>
