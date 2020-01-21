@@ -2,7 +2,9 @@ package com.rpm.web.contents;
 
 import com.rpm.web.proxy.Box;
 import com.rpm.web.proxy.Trunk;
+import com.sun.org.apache.bcel.internal.generic.ARRAYLENGTH;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
 import java.util.function.Predicate;
@@ -21,24 +23,20 @@ public class CarsController {
     CarsService carsService;
     @Autowired
     List<Cars> cars;
-    static private List<Cars> cartatic = null;
+
 
 
     @GetMapping("/init")
     public Map<String, Object> init(){
-        List<Cars> carsList = (List<Cars>) carsRepository.findAll();
-        cartatic = null;
-        cartatic = carsList;
-
-        trunk.put(Arrays.asList("allCount" ,"carSearchResults","makerList","fuelTypeList", "regionList","categoryList")
+        cars = (List<Cars>) carsRepository.findAll();
+        trunk.put(Arrays.asList("allCount" ,"carInitList","makerList","fuelTypeList", "regionList","categoryList")
                 ,Arrays.asList(String.valueOf(carsRepository.count())
-                        ,cartatic.subList(0,15)
-                        ,carsService.findByMakecdWithCount(carsList)
-                        ,carsService.findCarWithFuleType(carsList)
-                        ,carsService.findCarWithCenterRegionCode(carsList)
-                        ,carsService.findAllCategory(carsList)
+                        ,cars.subList(0,15)
+                        ,carsService.findByMakecdWithCount(cars)
+                        ,carsService.findCarWithFuleType(cars)
+                        ,carsService.findCarWithCenterRegionCode(cars)
+                        ,carsService.findAllCategory(cars)
                 ));
-
 
         return trunk.get();
     }
@@ -80,9 +78,7 @@ public class CarsController {
 
     @RequestMapping("/searchWithCondition")
     public Map<String,Object> searchWithCondition(@RequestBody  SearchCondition searchCondition){
-        Map<String, Object> map = new HashMap<String, Object>();
-
-        List<Cars> carsList = carsService.findAllByDistinct((List<Cars>) carsRepository.findAll());
+        cars = carsService.findAllByDistinct((List<Cars>) carsRepository.findAll());
         List<Cars> carsProcessingList = new ArrayList<>();
         List<SearchDetailCondition> categoryList = searchCondition.getCategoryList();
         List<SearchDetailCondition> modelList = searchCondition.getModelList();
@@ -93,58 +89,60 @@ public class CarsController {
 
         if ( !categoryList.isEmpty()) {
             for (SearchDetailCondition category : categoryList) {
-                carsProcessingList.addAll(carsService.findCarBySelectedCategory(carsList , category.getCode()));
+                carsProcessingList.addAll(carsService.findCarBySelectedCategory(cars , category.getCode()));
             }
-            carsList.clear();
-            carsList.addAll(carsProcessingList);
+            cars.clear();
+            cars.addAll(carsProcessingList);
             carsProcessingList.clear();
         }
 
 
         if ( !fuelTypeList.isEmpty() ) {
             for (SearchDetailCondition fuelType : fuelTypeList) {
-                carsProcessingList.addAll(carsService.findCarBySelectedFuelType(carsList , fuelType.getCode()));
+                carsProcessingList.addAll(carsService.findCarBySelectedFuelType(cars , fuelType.getCode()));
             }
-            carsList.clear();
-            carsList.addAll(carsProcessingList);
+            cars.clear();
+            cars.addAll(carsProcessingList);
             carsProcessingList.clear();
         }
 
         if ( !regionList.isEmpty() ) {
             for (SearchDetailCondition region : regionList) {
-                carsProcessingList.addAll(carsService.findCarBySelectedRegion(carsList , region.getCode()));
+                carsProcessingList.addAll(carsService.findCarBySelectedRegion(cars , region.getCode()));
             }
-            carsList.clear();
-            carsList.addAll(carsProcessingList);
-            carsProcessingList.clear();
+            cars = carsProcessingList;
         }
 
-
-
-        if( searchCondition.getMaker() != "") {
-            carsProcessingList.addAll(carsService.findCarBySelectedMaker(carsList , searchCondition.getMaker()));
-            carsList.clear();
-            carsList.addAll(carsProcessingList);
+        if ( searchCondition.getMaker() != "" ) {
+                carsProcessingList.addAll(carsService.findCarBySelectedMaker(cars , searchCondition.getMaker()));
+            cars.clear();
+            cars.addAll(carsProcessingList);
             carsProcessingList.clear();
-            map.put("modelList",carsService.findByModelWithCount((List<Cars>) carsList ,searchCondition.getMaker()));
+            trunk.put(Arrays.asList("modelList"),Arrays.asList(carsService.findByModelWithCount(cars,searchCondition.getMaker())));;
         }
-        map.put("makerList",carsService.findByMakecdWithCount(carsList));
-
 
         if ( !modelList.isEmpty() ) {
             for (SearchDetailCondition model : modelList) {
-                carsProcessingList.addAll(carsService.findCarBySelectedModel(carsList , model.getCode()));
+                carsProcessingList.addAll(carsService.findCarBySelectedModel(cars , model.getCode()));
+
             }
-            carsList.clear();
-            carsList.addAll(carsProcessingList);
+            cars.clear();
+            cars.addAll(carsProcessingList);
             carsProcessingList.clear();
         }
 
-        cartatic = null;
-        cartatic = carsList;
-        map.put("carSearchResults" , cartatic.stream().limit(15));
-        map.put("makerList",carsService.findByMakecdWithCount(cartatic));
-        return map;
+        trunk.put(Arrays.asList("resultLength", "showCarList", "makerList" ) ,
+                Arrays.asList(cars.size(), cars.subList(0,15)
+                        ,carsService.findByMakecdWithCount(cars)));
+        return trunk.get();
     }
+  
+    @GetMapping("/getshowcarlist/{startrow}/{endrow}")
+    public Object getShowCarList(@PathVariable String startrow, @PathVariable String endrow){
+        return (cars.subList(Integer.parseInt(startrow),Integer.parseInt(endrow))!=null)
+                ?cars.subList(Integer.parseInt(startrow),Integer.parseInt(endrow))
+                :false;
+
+        }
 
 }
