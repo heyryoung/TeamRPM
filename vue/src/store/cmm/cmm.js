@@ -16,7 +16,9 @@ const state = {
     seenHistoryList : [],
     pageLimit : 15,
     pageNum : 1,
-    resultLength : 0
+    resultLength : 0,
+    initFlag : false
+
 
 };
 const getters = {
@@ -27,10 +29,11 @@ const getters = {
     fuelTypeList: state => state.cmm.fuelTypeList,
     checkedItems : state => state.checkedItems,
     seenHistoryList : state => state.seenHistoryList,
-    initFlag : state => (state.checkedItems.length > 0)
+    initFlag : state => state.initFlag
 };
 const actions = {
     async init({commit}){
+        console.log('initFla>>>>g' + state.initFlag);
         if(!state.initFlag) {
             axios
                 .get(`http://localhost:8080/init`)
@@ -139,6 +142,7 @@ const mutations = {
            data.regionList.forEach(el => {
                state.regionList.push({checked : false, bigCategory: 'regionList' , code : el.centerRegionCode , name: el.centerRegion})
            })
+
     },
     CATEGORY1 (state, data){
         state.category1 = []
