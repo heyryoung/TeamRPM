@@ -1,5 +1,5 @@
 <template>
-<div class= "snsDetail">
+<div class= "snsPage">
 <link rel="stylesheet" href="https://blackrockdigital.github.io/startbootstrap-agency/css/agency.min.css">
 <link rel="stylesheet" href="https://blackrockdigital.github.io/startbootstrap-agency/vendor/scss/_reboot.scss">
 <link rel="stylesheet" href="https://blackrockdigital.github.io/startbootstrap-agency/vendor/fontawesome-free/css/all.min.css">
@@ -11,18 +11,22 @@
 <link type="application/atom+xml" rel="alternate" href="https://startbootstrap.com/feed.xml" title="startbootstrap">
 
 <section class="bg-light page-section" id="portfolio">
+  <modals-container />
     <div class="container">
       <div class="row">
         <div class="col-lg-12 text-center">
-          <h2 class="section-heading text-uppercase">INSTARPM</h2>
+          <h2 class="section-heading text- uppercase">INSTARPM</h2>
           <h3 class="section-subheading text-muted">내 차 자랑하기</h3>
         </div>
         <div class="btn-edit">
-        <button class="btn btn-primary" data-dismiss="modal" type="button">
+        <button class="btn btn-primary" @click="write" type="button">
                   <i class="fas fa-edit"></i> 글쓰기</button>
         </div>
       </div>
-      <div class="row">
+      <div class="row"
+           v-infinite-scroll="loadMore"
+           infinite-scroll-disabled="busy"
+           infinite-scroll-distance="10">
         <div class="col-md-4 col-sm-6 portfolio-item">
           <a class="portfolio-link" data-toggle="modal" href="/snsdetail">
             <div class="portfolio-hover">
@@ -121,6 +125,188 @@
             <a class="btn-comment"><i class="far fa-comment"></i>109</a>
           </div>
         </div>
+        <div class="col-md-4 col-sm-6 portfolio-item">
+          <a class="portfolio-link" data-toggle="modal" href="/snsdetail">
+            <div class="portfolio-hover">
+              <div class="portfolio-hover-content">
+                <i class="fas fa-plus fa-3x"></i>
+              </div>
+            </div>
+            <img class="img-fluid" src="https://blackrockdigital.github.io/startbootstrap-agency/img/portfolio/01-thumbnail.jpg" alt="">
+          </a>
+          <div class="portfolio-caption">
+            <h4>쉐보레(GM대우) 더 넥스트 스파크</h4>
+            <p class="text-muted">강성조</p>
+            <div>
+              <a class="btn-like"><i class="far fa-heart"></i> 2</a>
+              <a class="btn-comment"><i class="far fa-comment"></i> 7</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6 portfolio-item">
+          <a class="portfolio-link" data-toggle="modal" href="/snsdetail">
+            <div class="portfolio-hover">
+              <div class="portfolio-hover-content">
+                <i class="fas fa-plus fa-3x"></i>
+              </div>
+            </div>
+            <img class="img-fluid" src="https://blackrockdigital.github.io/startbootstrap-agency/img/portfolio/01-thumbnail.jpg" alt="">
+          </a>
+          <div class="portfolio-caption">
+            <h4>쉐보레(GM대우) 더 넥스트 스파크</h4>
+            <p class="text-muted">강성조</p>
+            <div>
+              <a class="btn-like"><i class="far fa-heart"></i> 2</a>
+              <a class="btn-comment"><i class="far fa-comment"></i> 7</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6 portfolio-item">
+          <a class="portfolio-link" data-toggle="modal" href="/snsdetail">
+            <div class="portfolio-hover">
+              <div class="portfolio-hover-content">
+                <i class="fas fa-plus fa-3x"></i>
+              </div>
+            </div>
+            <img class="img-fluid" src="https://blackrockdigital.github.io/startbootstrap-agency/img/portfolio/01-thumbnail.jpg" alt="">
+          </a>
+          <div class="portfolio-caption">
+            <h4>쉐보레(GM대우) 더 넥스트 스파크</h4>
+            <p class="text-muted">강성조</p>
+            <div>
+              <a class="btn-like"><i class="far fa-heart"></i> 2</a>
+              <a class="btn-comment"><i class="far fa-comment"></i> 7</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6 portfolio-item">
+          <a class="portfolio-link" data-toggle="modal" href="/snsdetail">
+            <div class="portfolio-hover">
+              <div class="portfolio-hover-content">
+                <i class="fas fa-plus fa-3x"></i>
+              </div>
+            </div>
+            <img class="img-fluid" src="https://blackrockdigital.github.io/startbootstrap-agency/img/portfolio/01-thumbnail.jpg" alt="">
+          </a>
+          <div class="portfolio-caption">
+            <h4>쉐보레(GM대우) 더 넥스트 스파크</h4>
+            <p class="text-muted">강성조</p>
+            <div>
+              <a class="btn-like"><i class="far fa-heart"></i> 2</a>
+              <a class="btn-comment"><i class="far fa-comment"></i> 7</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6 portfolio-item">
+          <a class="portfolio-link" data-toggle="modal" href="/snsdetail">
+            <div class="portfolio-hover">
+              <div class="portfolio-hover-content">
+                <i class="fas fa-plus fa-3x"></i>
+              </div>
+            </div>
+            <img class="img-fluid" src="https://blackrockdigital.github.io/startbootstrap-agency/img/portfolio/01-thumbnail.jpg" alt="">
+          </a>
+          <div class="portfolio-caption">
+            <h4>쉐보레(GM대우) 더 넥스트 스파크</h4>
+            <p class="text-muted">강성조</p>
+            <div>
+              <a class="btn-like"><i class="far fa-heart"></i> 2</a>
+              <a class="btn-comment"><i class="far fa-comment"></i> 7</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6 portfolio-item">
+          <a class="portfolio-link" data-toggle="modal" href="/snsdetail">
+            <div class="portfolio-hover">
+              <div class="portfolio-hover-content">
+                <i class="fas fa-plus fa-3x"></i>
+              </div>
+            </div>
+            <img class="img-fluid" src="https://blackrockdigital.github.io/startbootstrap-agency/img/portfolio/01-thumbnail.jpg" alt="">
+          </a>
+          <div class="portfolio-caption">
+            <h4>쉐보레(GM대우) 더 넥스트 스파크</h4>
+            <p class="text-muted">강성조</p>
+            <div>
+              <a class="btn-like"><i class="far fa-heart"></i> 2</a>
+              <a class="btn-comment"><i class="far fa-comment"></i> 7</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6 portfolio-item">
+          <a class="portfolio-link" data-toggle="modal" href="/snsdetail">
+            <div class="portfolio-hover">
+              <div class="portfolio-hover-content">
+                <i class="fas fa-plus fa-3x"></i>
+              </div>
+            </div>
+            <img class="img-fluid" src="https://blackrockdigital.github.io/startbootstrap-agency/img/portfolio/01-thumbnail.jpg" alt="">
+          </a>
+          <div class="portfolio-caption">
+            <h4>쉐보레(GM대우) 더 넥스트 스파크</h4>
+            <p class="text-muted">강성조</p>
+            <div>
+              <a class="btn-like"><i class="far fa-heart"></i> 2</a>
+              <a class="btn-comment"><i class="far fa-comment"></i> 7</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6 portfolio-item">
+          <a class="portfolio-link" data-toggle="modal" href="/snsdetail">
+            <div class="portfolio-hover">
+              <div class="portfolio-hover-content">
+                <i class="fas fa-plus fa-3x"></i>
+              </div>
+            </div>
+            <img class="img-fluid" src="https://blackrockdigital.github.io/startbootstrap-agency/img/portfolio/01-thumbnail.jpg" alt="">
+          </a>
+          <div class="portfolio-caption">
+            <h4>쉐보레(GM대우) 더 넥스트 스파크</h4>
+            <p class="text-muted">강성조</p>
+            <div>
+              <a class="btn-like"><i class="far fa-heart"></i> 2</a>
+              <a class="btn-comment"><i class="far fa-comment"></i> 7</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6 portfolio-item">
+          <a class="portfolio-link" data-toggle="modal" href="/snsdetail">
+            <div class="portfolio-hover">
+              <div class="portfolio-hover-content">
+                <i class="fas fa-plus fa-3x"></i>
+              </div>
+            </div>
+            <img class="img-fluid" src="https://blackrockdigital.github.io/startbootstrap-agency/img/portfolio/01-thumbnail.jpg" alt="">
+          </a>
+          <div class="portfolio-caption">
+            <h4>쉐보레(GM대우) 더 넥스트 스파크</h4>
+            <p class="text-muted">강성조</p>
+            <div>
+              <a class="btn-like"><i class="far fa-heart"></i> 2</a>
+              <a class="btn-comment"><i class="far fa-comment"></i> 7</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 col-sm-6 portfolio-item">
+          <a class="portfolio-link" data-toggle="modal" href="/snsdetail">
+            <div class="portfolio-hover">
+              <div class="portfolio-hover-content">
+                <i class="fas fa-plus fa-3x"></i>
+              </div>
+            </div>
+            <img class="img-fluid" src="https://blackrockdigital.github.io/startbootstrap-agency/img/portfolio/01-thumbnail.jpg" alt="">
+          </a>
+          <div class="portfolio-caption">
+            <h4>쉐보레(GM대우) 더 넥스트 스파크</h4>
+            <p class="text-muted">강성조</p>
+            <div>
+              <a class="btn-like"><i class="far fa-heart"></i> 2</a>
+              <a class="btn-comment"><i class="far fa-comment"></i> 7</a>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -128,6 +314,25 @@
 </template>
 <script>
 
+export default {
+  name: 'snsPage',
+  data(){
+    return{
+      discussions: [],
+      busy: false
+    }
+  },
+  methods:{
+    write(){
+      this.$router.push({path : '/snsModify'})
+    },
+    loadMore: function () {
+      this.busy = true // 무한 스크롤 기능 비활성화
+      this.getDiscussions()
+    },
+
+  }
+}
 </script>
 <style scoped>
   /*!
@@ -748,906 +953,21 @@
     padding-right: 15px;
     padding-left: 15px;
   }
-
-  .col {
-    -ms-flex-preferred-size: 0;
-    flex-basis: 0;
-    -ms-flex-positive: 1;
-    flex-grow: 1;
-    max-width: 100%;
-  }
-
-  .col-auto {
-    -ms-flex: 0 0 auto;
-    flex: 0 0 auto;
-    width: auto;
-    max-width: 100%;
-  }
-
-  .col-1 {
-    -ms-flex: 0 0 8.333333%;
-    flex: 0 0 8.333333%;
-    max-width: 8.333333%;
-  }
-
-  .col-2 {
-    -ms-flex: 0 0 16.666667%;
-    flex: 0 0 16.666667%;
-    max-width: 16.666667%;
-  }
-
-  .col-3 {
-    -ms-flex: 0 0 25%;
-    flex: 0 0 25%;
-    max-width: 25%;
-  }
-
-  .col-4 {
-    -ms-flex: 0 0 33.333333%;
-    flex: 0 0 33.333333%;
-    max-width: 33.333333%;
-  }
-
-  .col-5 {
-    -ms-flex: 0 0 41.666667%;
-    flex: 0 0 41.666667%;
-    max-width: 41.666667%;
-  }
-
-  .col-6 {
-    -ms-flex: 0 0 50%;
-    flex: 0 0 50%;
-    max-width: 50%;
-  }
-
-  .col-7 {
-    -ms-flex: 0 0 58.333333%;
-    flex: 0 0 58.333333%;
-    max-width: 58.333333%;
-  }
-
-  .col-8 {
-    -ms-flex: 0 0 66.666667%;
-    flex: 0 0 66.666667%;
-    max-width: 66.666667%;
-  }
-
-  .col-9 {
-    -ms-flex: 0 0 75%;
-    flex: 0 0 75%;
-    max-width: 75%;
-  }
-
-  .col-10 {
-    -ms-flex: 0 0 83.333333%;
-    flex: 0 0 83.333333%;
-    max-width: 83.333333%;
-  }
-
-  .col-11 {
-    -ms-flex: 0 0 91.666667%;
-    flex: 0 0 91.666667%;
-    max-width: 91.666667%;
-  }
-
-  .col-12 {
-    -ms-flex: 0 0 100%;
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
-
-  .order-first {
-    -ms-flex-order: -1;
-    order: -1;
-  }
-
-  .order-last {
-    -ms-flex-order: 13;
-    order: 13;
-  }
-
-  .order-0 {
-    -ms-flex-order: 0;
-    order: 0;
-  }
-
-  .order-1 {
-    -ms-flex-order: 1;
-    order: 1;
-  }
-
-  .order-2 {
-    -ms-flex-order: 2;
-    order: 2;
-  }
-
-  .order-3 {
-    -ms-flex-order: 3;
-    order: 3;
-  }
-
-  .order-4 {
-    -ms-flex-order: 4;
-    order: 4;
-  }
-
-  .order-5 {
-    -ms-flex-order: 5;
-    order: 5;
-  }
-
-  .order-6 {
-    -ms-flex-order: 6;
-    order: 6;
-  }
-
-  .order-7 {
-    -ms-flex-order: 7;
-    order: 7;
-  }
-
-  .order-8 {
-    -ms-flex-order: 8;
-    order: 8;
-  }
-
-  .order-9 {
-    -ms-flex-order: 9;
-    order: 9;
-  }
-
-  .order-10 {
-    -ms-flex-order: 10;
-    order: 10;
-  }
-
-  .order-11 {
-    -ms-flex-order: 11;
-    order: 11;
-  }
-
-  .order-12 {
-    -ms-flex-order: 12;
-    order: 12;
-  }
-
-  .offset-1 {
-    margin-left: 8.333333%;
-  }
-
-  .offset-2 {
-    margin-left: 16.666667%;
-  }
-
-  .offset-3 {
-    margin-left: 25%;
-  }
-
-  .offset-4 {
-    margin-left: 33.333333%;
-  }
-
-  .offset-5 {
-    margin-left: 41.666667%;
-  }
-
-  .offset-6 {
-    margin-left: 50%;
-  }
-
-  .offset-7 {
-    margin-left: 58.333333%;
-  }
-
-  .offset-8 {
-    margin-left: 66.666667%;
-  }
-
-  .offset-9 {
-    margin-left: 75%;
-  }
-
-  .offset-10 {
-    margin-left: 83.333333%;
-  }
-
-  .offset-11 {
-    margin-left: 91.666667%;
-  }
-
-  @media (min-width: 576px) {
-    .col-sm {
-      -ms-flex-preferred-size: 0;
-      flex-basis: 0;
-      -ms-flex-positive: 1;
-      flex-grow: 1;
-      max-width: 100%;
-    }
-    .col-sm-auto {
-      -ms-flex: 0 0 auto;
-      flex: 0 0 auto;
-      width: auto;
-      max-width: 100%;
-    }
-    .col-sm-1 {
-      -ms-flex: 0 0 8.333333%;
-      flex: 0 0 8.333333%;
-      max-width: 8.333333%;
-    }
-    .col-sm-2 {
-      -ms-flex: 0 0 16.666667%;
-      flex: 0 0 16.666667%;
-      max-width: 16.666667%;
-    }
-    .col-sm-3 {
-      -ms-flex: 0 0 25%;
-      flex: 0 0 25%;
-      max-width: 25%;
-    }
-    .col-sm-4 {
-      -ms-flex: 0 0 33.333333%;
-      flex: 0 0 33.333333%;
-      max-width: 33.333333%;
-    }
-    .col-sm-5 {
-      -ms-flex: 0 0 41.666667%;
-      flex: 0 0 41.666667%;
-      max-width: 41.666667%;
-    }
     .col-sm-6 {
       -ms-flex: 0 0 50%;
       flex: 0 0 50%;
       max-width: 50%;
-    }
-    .col-sm-7 {
-      -ms-flex: 0 0 58.333333%;
-      flex: 0 0 58.333333%;
-      max-width: 58.333333%;
-    }
-    .col-sm-8 {
-      -ms-flex: 0 0 66.666667%;
-      flex: 0 0 66.666667%;
-      max-width: 66.666667%;
-    }
-    .col-sm-9 {
-      -ms-flex: 0 0 75%;
-      flex: 0 0 75%;
-      max-width: 75%;
-    }
-    .col-sm-10 {
-      -ms-flex: 0 0 83.333333%;
-      flex: 0 0 83.333333%;
-      max-width: 83.333333%;
-    }
-    .col-sm-11 {
-      -ms-flex: 0 0 91.666667%;
-      flex: 0 0 91.666667%;
-      max-width: 91.666667%;
-    }
-    .col-sm-12 {
-      -ms-flex: 0 0 100%;
-      flex: 0 0 100%;
-      max-width: 100%;
-    }
-    .order-sm-first {
-      -ms-flex-order: -1;
-      order: -1;
-    }
-    .order-sm-last {
-      -ms-flex-order: 13;
-      order: 13;
-    }
-    .order-sm-0 {
-      -ms-flex-order: 0;
-      order: 0;
-    }
-    .order-sm-1 {
-      -ms-flex-order: 1;
-      order: 1;
-    }
-    .order-sm-2 {
-      -ms-flex-order: 2;
-      order: 2;
-    }
-    .order-sm-3 {
-      -ms-flex-order: 3;
-      order: 3;
-    }
-    .order-sm-4 {
-      -ms-flex-order: 4;
-      order: 4;
-    }
-    .order-sm-5 {
-      -ms-flex-order: 5;
-      order: 5;
-    }
-    .order-sm-6 {
-      -ms-flex-order: 6;
-      order: 6;
-    }
-    .order-sm-7 {
-      -ms-flex-order: 7;
-      order: 7;
-    }
-    .order-sm-8 {
-      -ms-flex-order: 8;
-      order: 8;
-    }
-    .order-sm-9 {
-      -ms-flex-order: 9;
-      order: 9;
-    }
-    .order-sm-10 {
-      -ms-flex-order: 10;
-      order: 10;
-    }
-    .order-sm-11 {
-      -ms-flex-order: 11;
-      order: 11;
-    }
-    .order-sm-12 {
-      -ms-flex-order: 12;
-      order: 12;
-    }
-    .offset-sm-0 {
-      margin-left: 0;
-    }
-    .offset-sm-1 {
-      margin-left: 8.333333%;
-    }
-    .offset-sm-2 {
-      margin-left: 16.666667%;
-    }
-    .offset-sm-3 {
-      margin-left: 25%;
-    }
-    .offset-sm-4 {
-      margin-left: 33.333333%;
-    }
-    .offset-sm-5 {
-      margin-left: 41.666667%;
-    }
-    .offset-sm-6 {
-      margin-left: 50%;
-    }
-    .offset-sm-7 {
-      margin-left: 58.333333%;
-    }
-    .offset-sm-8 {
-      margin-left: 66.666667%;
-    }
-    .offset-sm-9 {
-      margin-left: 75%;
-    }
-    .offset-sm-10 {
-      margin-left: 83.333333%;
-    }
-    .offset-sm-11 {
-      margin-left: 91.666667%;
-    }
-  }
-
-  @media (min-width: 768px) {
-    .col-md {
-      -ms-flex-preferred-size: 0;
-      flex-basis: 0;
-      -ms-flex-positive: 1;
-      flex-grow: 1;
-      max-width: 100%;
-    }
-    .col-md-auto {
-      -ms-flex: 0 0 auto;
-      flex: 0 0 auto;
-      width: auto;
-      max-width: 100%;
-    }
-    .col-md-1 {
-      -ms-flex: 0 0 8.333333%;
-      flex: 0 0 8.333333%;
-      max-width: 8.333333%;
-    }
-    .col-md-2 {
-      -ms-flex: 0 0 16.666667%;
-      flex: 0 0 16.666667%;
-      max-width: 16.666667%;
-    }
-    .col-md-3 {
-      -ms-flex: 0 0 25%;
-      flex: 0 0 25%;
-      max-width: 25%;
     }
     .col-md-4 {
       -ms-flex: 0 0 33.333333%;
       flex: 0 0 33.333333%;
       max-width: 33.333333%;
     }
-    .col-md-5 {
-      -ms-flex: 0 0 41.666667%;
-      flex: 0 0 41.666667%;
-      max-width: 41.666667%;
-    }
-    .col-md-6 {
-      -ms-flex: 0 0 50%;
-      flex: 0 0 50%;
-      max-width: 50%;
-    }
-    .col-md-7 {
-      -ms-flex: 0 0 58.333333%;
-      flex: 0 0 58.333333%;
-      max-width: 58.333333%;
-    }
-    .col-md-8 {
-      -ms-flex: 0 0 66.666667%;
-      flex: 0 0 66.666667%;
-      max-width: 66.666667%;
-    }
-    .col-md-9 {
-      -ms-flex: 0 0 75%;
-      flex: 0 0 75%;
-      max-width: 75%;
-    }
-    .col-md-10 {
-      -ms-flex: 0 0 83.333333%;
-      flex: 0 0 83.333333%;
-      max-width: 83.333333%;
-    }
-    .col-md-11 {
-      -ms-flex: 0 0 91.666667%;
-      flex: 0 0 91.666667%;
-      max-width: 91.666667%;
-    }
-    .col-md-12 {
-      -ms-flex: 0 0 100%;
-      flex: 0 0 100%;
-      max-width: 100%;
-    }
-    .order-md-first {
-      -ms-flex-order: -1;
-      order: -1;
-    }
-    .order-md-last {
-      -ms-flex-order: 13;
-      order: 13;
-    }
-    .order-md-0 {
-      -ms-flex-order: 0;
-      order: 0;
-    }
-    .order-md-1 {
-      -ms-flex-order: 1;
-      order: 1;
-    }
-    .order-md-2 {
-      -ms-flex-order: 2;
-      order: 2;
-    }
-    .order-md-3 {
-      -ms-flex-order: 3;
-      order: 3;
-    }
-    .order-md-4 {
-      -ms-flex-order: 4;
-      order: 4;
-    }
-    .order-md-5 {
-      -ms-flex-order: 5;
-      order: 5;
-    }
-    .order-md-6 {
-      -ms-flex-order: 6;
-      order: 6;
-    }
-    .order-md-7 {
-      -ms-flex-order: 7;
-      order: 7;
-    }
-    .order-md-8 {
-      -ms-flex-order: 8;
-      order: 8;
-    }
-    .order-md-9 {
-      -ms-flex-order: 9;
-      order: 9;
-    }
-    .order-md-10 {
-      -ms-flex-order: 10;
-      order: 10;
-    }
-    .order-md-11 {
-      -ms-flex-order: 11;
-      order: 11;
-    }
-    .order-md-12 {
-      -ms-flex-order: 12;
-      order: 12;
-    }
-    .offset-md-0 {
-      margin-left: 0;
-    }
-    .offset-md-1 {
-      margin-left: 8.333333%;
-    }
-    .offset-md-2 {
-      margin-left: 16.666667%;
-    }
-    .offset-md-3 {
-      margin-left: 25%;
-    }
-    .offset-md-4 {
-      margin-left: 33.333333%;
-    }
-    .offset-md-5 {
-      margin-left: 41.666667%;
-    }
-    .offset-md-6 {
-      margin-left: 50%;
-    }
-    .offset-md-7 {
-      margin-left: 58.333333%;
-    }
-    .offset-md-8 {
-      margin-left: 66.666667%;
-    }
-    .offset-md-9 {
-      margin-left: 75%;
-    }
-    .offset-md-10 {
-      margin-left: 83.333333%;
-    }
-    .offset-md-11 {
-      margin-left: 91.666667%;
-    }
-  }
-
-  @media (min-width: 992px) {
-    .col-lg {
-      -ms-flex-preferred-size: 0;
-      flex-basis: 0;
-      -ms-flex-positive: 1;
-      flex-grow: 1;
-      max-width: 100%;
-    }
-    .col-lg-auto {
-      -ms-flex: 0 0 auto;
-      flex: 0 0 auto;
-      width: auto;
-      max-width: 100%;
-    }
-    .col-lg-1 {
-      -ms-flex: 0 0 8.333333%;
-      flex: 0 0 8.333333%;
-      max-width: 8.333333%;
-    }
-    .col-lg-2 {
-      -ms-flex: 0 0 16.666667%;
-      flex: 0 0 16.666667%;
-      max-width: 16.666667%;
-    }
-    .col-lg-3 {
-      -ms-flex: 0 0 25%;
-      flex: 0 0 25%;
-      max-width: 25%;
-    }
-    .col-lg-4 {
-      -ms-flex: 0 0 33.333333%;
-      flex: 0 0 33.333333%;
-      max-width: 33.333333%;
-    }
-    .col-lg-5 {
-      -ms-flex: 0 0 41.666667%;
-      flex: 0 0 41.666667%;
-      max-width: 41.666667%;
-    }
-    .col-lg-6 {
-      -ms-flex: 0 0 50%;
-      flex: 0 0 50%;
-      max-width: 50%;
-    }
-    .col-lg-7 {
-      -ms-flex: 0 0 58.333333%;
-      flex: 0 0 58.333333%;
-      max-width: 58.333333%;
-    }
-    .col-lg-8 {
-      -ms-flex: 0 0 66.666667%;
-      flex: 0 0 66.666667%;
-      max-width: 66.666667%;
-    }
-    .col-lg-9 {
-      -ms-flex: 0 0 75%;
-      flex: 0 0 75%;
-      max-width: 75%;
-    }
-    .col-lg-10 {
-      -ms-flex: 0 0 83.333333%;
-      flex: 0 0 83.333333%;
-      max-width: 83.333333%;
-    }
-    .col-lg-11 {
-      -ms-flex: 0 0 91.666667%;
-      flex: 0 0 91.666667%;
-      max-width: 91.666667%;
-    }
     .col-lg-12 {
       -ms-flex: 0 0 100%;
       flex: 0 0 100%;
       max-width: 100%;
     }
-    .order-lg-first {
-      -ms-flex-order: -1;
-      order: -1;
-    }
-    .order-lg-last {
-      -ms-flex-order: 13;
-      order: 13;
-    }
-    .order-lg-0 {
-      -ms-flex-order: 0;
-      order: 0;
-    }
-    .order-lg-1 {
-      -ms-flex-order: 1;
-      order: 1;
-    }
-    .order-lg-2 {
-      -ms-flex-order: 2;
-      order: 2;
-    }
-    .order-lg-3 {
-      -ms-flex-order: 3;
-      order: 3;
-    }
-    .order-lg-4 {
-      -ms-flex-order: 4;
-      order: 4;
-    }
-    .order-lg-5 {
-      -ms-flex-order: 5;
-      order: 5;
-    }
-    .order-lg-6 {
-      -ms-flex-order: 6;
-      order: 6;
-    }
-    .order-lg-7 {
-      -ms-flex-order: 7;
-      order: 7;
-    }
-    .order-lg-8 {
-      -ms-flex-order: 8;
-      order: 8;
-    }
-    .order-lg-9 {
-      -ms-flex-order: 9;
-      order: 9;
-    }
-    .order-lg-10 {
-      -ms-flex-order: 10;
-      order: 10;
-    }
-    .order-lg-11 {
-      -ms-flex-order: 11;
-      order: 11;
-    }
-    .order-lg-12 {
-      -ms-flex-order: 12;
-      order: 12;
-    }
-    .offset-lg-0 {
-      margin-left: 0;
-    }
-    .offset-lg-1 {
-      margin-left: 8.333333%;
-    }
-    .offset-lg-2 {
-      margin-left: 16.666667%;
-    }
-    .offset-lg-3 {
-      margin-left: 25%;
-    }
-    .offset-lg-4 {
-      margin-left: 33.333333%;
-    }
-    .offset-lg-5 {
-      margin-left: 41.666667%;
-    }
-    .offset-lg-6 {
-      margin-left: 50%;
-    }
-    .offset-lg-7 {
-      margin-left: 58.333333%;
-    }
-    .offset-lg-8 {
-      margin-left: 66.666667%;
-    }
-    .offset-lg-9 {
-      margin-left: 75%;
-    }
-    .offset-lg-10 {
-      margin-left: 83.333333%;
-    }
-    .offset-lg-11 {
-      margin-left: 91.666667%;
-    }
-  }
-
-  @media (min-width: 1200px) {
-    .col-xl {
-      -ms-flex-preferred-size: 0;
-      flex-basis: 0;
-      -ms-flex-positive: 1;
-      flex-grow: 1;
-      max-width: 100%;
-    }
-    .col-xl-auto {
-      -ms-flex: 0 0 auto;
-      flex: 0 0 auto;
-      width: auto;
-      max-width: 100%;
-    }
-    .col-xl-1 {
-      -ms-flex: 0 0 8.333333%;
-      flex: 0 0 8.333333%;
-      max-width: 8.333333%;
-    }
-    .col-xl-2 {
-      -ms-flex: 0 0 16.666667%;
-      flex: 0 0 16.666667%;
-      max-width: 16.666667%;
-    }
-    .col-xl-3 {
-      -ms-flex: 0 0 25%;
-      flex: 0 0 25%;
-      max-width: 25%;
-    }
-    .col-xl-4 {
-      -ms-flex: 0 0 33.333333%;
-      flex: 0 0 33.333333%;
-      max-width: 33.333333%;
-    }
-    .col-xl-5 {
-      -ms-flex: 0 0 41.666667%;
-      flex: 0 0 41.666667%;
-      max-width: 41.666667%;
-    }
-    .col-xl-6 {
-      -ms-flex: 0 0 50%;
-      flex: 0 0 50%;
-      max-width: 50%;
-    }
-    .col-xl-7 {
-      -ms-flex: 0 0 58.333333%;
-      flex: 0 0 58.333333%;
-      max-width: 58.333333%;
-    }
-    .col-xl-8 {
-      -ms-flex: 0 0 66.666667%;
-      flex: 0 0 66.666667%;
-      max-width: 66.666667%;
-    }
-    .col-xl-9 {
-      -ms-flex: 0 0 75%;
-      flex: 0 0 75%;
-      max-width: 75%;
-    }
-    .col-xl-10 {
-      -ms-flex: 0 0 83.333333%;
-      flex: 0 0 83.333333%;
-      max-width: 83.333333%;
-    }
-    .col-xl-11 {
-      -ms-flex: 0 0 91.666667%;
-      flex: 0 0 91.666667%;
-      max-width: 91.666667%;
-    }
-    .col-xl-12 {
-      -ms-flex: 0 0 100%;
-      flex: 0 0 100%;
-      max-width: 100%;
-    }
-    .order-xl-first {
-      -ms-flex-order: -1;
-      order: -1;
-    }
-    .order-xl-last {
-      -ms-flex-order: 13;
-      order: 13;
-    }
-    .order-xl-0 {
-      -ms-flex-order: 0;
-      order: 0;
-    }
-    .order-xl-1 {
-      -ms-flex-order: 1;
-      order: 1;
-    }
-    .order-xl-2 {
-      -ms-flex-order: 2;
-      order: 2;
-    }
-    .order-xl-3 {
-      -ms-flex-order: 3;
-      order: 3;
-    }
-    .order-xl-4 {
-      -ms-flex-order: 4;
-      order: 4;
-    }
-    .order-xl-5 {
-      -ms-flex-order: 5;
-      order: 5;
-    }
-    .order-xl-6 {
-      -ms-flex-order: 6;
-      order: 6;
-    }
-    .order-xl-7 {
-      -ms-flex-order: 7;
-      order: 7;
-    }
-    .order-xl-8 {
-      -ms-flex-order: 8;
-      order: 8;
-    }
-    .order-xl-9 {
-      -ms-flex-order: 9;
-      order: 9;
-    }
-    .order-xl-10 {
-      -ms-flex-order: 10;
-      order: 10;
-    }
-    .order-xl-11 {
-      -ms-flex-order: 11;
-      order: 11;
-    }
-    .order-xl-12 {
-      -ms-flex-order: 12;
-      order: 12;
-    }
-    .offset-xl-0 {
-      margin-left: 0;
-    }
-    .offset-xl-1 {
-      margin-left: 8.333333%;
-    }
-    .offset-xl-2 {
-      margin-left: 16.666667%;
-    }
-    .offset-xl-3 {
-      margin-left: 25%;
-    }
-    .offset-xl-4 {
-      margin-left: 33.333333%;
-    }
-    .offset-xl-5 {
-      margin-left: 41.666667%;
-    }
-    .offset-xl-6 {
-      margin-left: 50%;
-    }
-    .offset-xl-7 {
-      margin-left: 58.333333%;
-    }
-    .offset-xl-8 {
-      margin-left: 66.666667%;
-    }
-    .offset-xl-9 {
-      margin-left: 75%;
-    }
-    .offset-xl-10 {
-      margin-left: 83.333333%;
-    }
-    .offset-xl-11 {
-      margin-left: 91.666667%;
-    }
-  }
-
-  .table {
-    width: 100%;
-    margin-bottom: 1rem;
-    color: #212529;
-  }
 
   .table th,
   .table td {
@@ -1670,9 +990,6 @@
     padding: 0.3rem;
   }
 
-  .table-bordered {
-    border: 1px solid #dee2e6;
-  }
 
   .table-bordered th,
   .table-bordered td {
@@ -1722,7 +1039,6 @@
     background-color: #9fcdff;
   }
 
-  .table-secondary,
   .table-secondary > th,
   .table-secondary > td {
     background-color: #d6d8db;
@@ -1744,7 +1060,6 @@
     background-color: #c8cbcf;
   }
 
-  .table-success,
   .table-success > th,
   .table-success > td {
     background-color: #c3e6cb;
@@ -1766,7 +1081,6 @@
     background-color: #b1dfbb;
   }
 
-  .table-info,
   .table-info > th,
   .table-info > td {
     background-color: #bee5eb;
@@ -1788,7 +1102,6 @@
     background-color: #abdde5;
   }
 
-  .table-warning,
   .table-warning > th,
   .table-warning > td {
     background-color: #ffeeba;
@@ -1810,7 +1123,6 @@
     background-color: #ffe8a1;
   }
 
-  .table-danger,
   .table-danger > th,
   .table-danger > td {
     background-color: #f5c6cb;
@@ -1832,7 +1144,6 @@
     background-color: #f1b0b7;
   }
 
-  .table-light,
   .table-light > th,
   .table-light > td {
     background-color: #fdfdfe;
@@ -1854,7 +1165,6 @@
     background-color: #ececf6;
   }
 
-  .table-dark,
   .table-dark > th,
   .table-dark > td {
     background-color: #c6c8ca;
@@ -1876,7 +1186,6 @@
     background-color: #b9bbbe;
   }
 
-  .table-active,
   .table-active > th,
   .table-active > td {
     background-color: rgba(0, 0, 0, 0.075);
@@ -1903,19 +1212,10 @@
     border-color: #dee2e6;
   }
 
-  .table-dark {
-    color: #fff;
-    background-color: #343a40;
-  }
-
   .table-dark th,
   .table-dark td,
   .table-dark thead th {
     border-color: #454d55;
-  }
-
-  .table-dark.table-bordered {
-    border: 0;
   }
 
   .table-dark.table-striped tbody tr:nth-of-type(odd) {
@@ -1927,286 +1227,23 @@
     background-color: rgba(255, 255, 255, 0.075);
   }
 
-  @media (max-width: 575.98px) {
-    .table-responsive-sm {
-      display: block;
-      width: 100%;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-    .table-responsive-sm > .table-bordered {
-      border: 0;
-    }
-  }
-
-  @media (max-width: 767.98px) {
-    .table-responsive-md {
-      display: block;
-      width: 100%;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-    .table-responsive-md > .table-bordered {
-      border: 0;
-    }
-  }
-
-  @media (max-width: 991.98px) {
-    .table-responsive-lg {
-      display: block;
-      width: 100%;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-    .table-responsive-lg > .table-bordered {
-      border: 0;
-    }
-  }
-
-  @media (max-width: 1199.98px) {
-    .table-responsive-xl {
-      display: block;
-      width: 100%;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-    .table-responsive-xl > .table-bordered {
-      border: 0;
-    }
-  }
-
-  .table-responsive {
-    display: block;
-    width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .table-responsive > .table-bordered {
-    border: 0;
-  }
-
-  .form-control {
-    display: block;
-    width: 100%;
-    height: calc(1.5em + 0.75rem + 2px);
-    padding: 0.375rem 0.75rem;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #495057;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: 0.25rem;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .form-control {
-      transition: none;
-    }
-  }
-
-  .form-control::-ms-expand {
-    background-color: transparent;
-    border: 0;
-  }
-
-  .form-control:focus {
-    color: #495057;
-    background-color: #fff;
-    border-color: #80bdff;
-    outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-  }
-
-  .form-control::-webkit-input-placeholder {
-    color: #6c757d;
-    opacity: 1;
-  }
-
-  .form-control::-moz-placeholder {
-    color: #6c757d;
-    opacity: 1;
-  }
-
-  .form-control:-ms-input-placeholder {
-    color: #6c757d;
-    opacity: 1;
-  }
-
-  .form-control::-ms-input-placeholder {
-    color: #6c757d;
-    opacity: 1;
-  }
-
-  .form-control::placeholder {
-    color: #6c757d;
-    opacity: 1;
-  }
-
-  .form-control:disabled, .form-control[readonly] {
-    background-color: #e9ecef;
-    opacity: 1;
-  }
-
-  select.form-control:focus::-ms-value {
-    color: #495057;
-    background-color: #fff;
-  }
-
-  .form-control-file,
-  .form-control-range {
-    display: block;
-    width: 100%;
-  }
-
-  .col-form-label {
-    padding-top: calc(0.375rem + 1px);
-    padding-bottom: calc(0.375rem + 1px);
-    margin-bottom: 0;
-    font-size: inherit;
-    line-height: 1.5;
-  }
-
-  .col-form-label-lg {
-    padding-top: calc(0.5rem + 1px);
-    padding-bottom: calc(0.5rem + 1px);
-    font-size: 1.25rem;
-    line-height: 1.5;
-  }
-
-  .col-form-label-sm {
-    padding-top: calc(0.25rem + 1px);
-    padding-bottom: calc(0.25rem + 1px);
-    font-size: 0.875rem;
-    line-height: 1.5;
-  }
-
-  .form-control-plaintext {
-    display: block;
-    width: 100%;
-    padding-top: 0.375rem;
-    padding-bottom: 0.375rem;
-    margin-bottom: 0;
-    line-height: 1.5;
-    color: #212529;
-    background-color: transparent;
-    border: solid transparent;
-    border-width: 1px 0;
-  }
-
-  .form-control-plaintext.form-control-sm, .form-control-plaintext.form-control-lg {
-    padding-right: 0;
-    padding-left: 0;
-  }
-
-  .form-control-sm {
-    height: calc(1.5em + 0.5rem + 2px);
-    padding: 0.25rem 0.5rem;
-    font-size: 0.875rem;
-    line-height: 1.5;
-    border-radius: 0.2rem;
-  }
-
-  .form-control-lg {
-    height: calc(1.5em + 1rem + 2px);
-    padding: 0.5rem 1rem;
-    font-size: 1.25rem;
-    line-height: 1.5;
-    border-radius: 0.3rem;
-  }
-
-  select.form-control[size], select.form-control[multiple] {
-    height: auto;
-  }
-
-  textarea.form-control {
-    height: auto;
-  }
-
-  .form-group {
-    margin-bottom: 1rem;
-  }
-
-  .form-text {
-    display: block;
-    margin-top: 0.25rem;
-  }
-
-  .form-row {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    margin-right: -5px;
-    margin-left: -5px;
-  }
-
   .form-row > .col,
   .form-row > [class*="col-"] {
     padding-right: 5px;
     padding-left: 5px;
   }
 
-  .form-check {
-    position: relative;
-    display: block;
-    padding-left: 1.25rem;
-  }
-
-  .form-check-input {
-    position: absolute;
-    margin-top: 0.3rem;
-    margin-left: -1.25rem;
-  }
 
   .form-check-input:disabled ~ .form-check-label {
     color: #6c757d;
   }
 
-  .form-check-label {
-    margin-bottom: 0;
-  }
-
-  .form-check-inline {
-    display: -ms-inline-flexbox;
-    display: inline-flex;
-    -ms-flex-align: center;
-    align-items: center;
-    padding-left: 0;
-    margin-right: 0.75rem;
-  }
 
   .form-check-inline .form-check-input {
     position: static;
     margin-top: 0;
     margin-right: 0.3125rem;
     margin-left: 0;
-  }
-
-  .valid-feedback {
-    display: none;
-    width: 100%;
-    margin-top: 0.25rem;
-    font-size: 80%;
-    color: #28a745;
-  }
-
-  .valid-tooltip {
-    position: absolute;
-    top: 100%;
-    z-index: 5;
-    display: none;
-    max-width: 100%;
-    padding: 0.25rem 0.5rem;
-    margin-top: .1rem;
-    font-size: 0.875rem;
-    line-height: 1.5;
-    color: #fff;
-    background-color: rgba(40, 167, 69, 0.9);
-    border-radius: 0.25rem;
   }
 
   .was-validated .form-control:valid, .form-control.is-valid {
@@ -2309,29 +1346,6 @@
     box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
   }
 
-  .invalid-feedback {
-    display: none;
-    width: 100%;
-    margin-top: 0.25rem;
-    font-size: 80%;
-    color: #dc3545;
-  }
-
-  .invalid-tooltip {
-    position: absolute;
-    top: 100%;
-    z-index: 5;
-    display: none;
-    max-width: 100%;
-    padding: 0.25rem 0.5rem;
-    margin-top: .1rem;
-    font-size: 0.875rem;
-    line-height: 1.5;
-    color: #fff;
-    background-color: rgba(220, 53, 69, 0.9);
-    border-radius: 0.25rem;
-  }
-
   .was-validated .form-control:invalid, .form-control.is-invalid {
     border-color: #dc3545;
     padding-right: calc(1.5em + 0.75rem);
@@ -2430,15 +1444,6 @@
   .was-validated .custom-file-input:invalid:focus ~ .custom-file-label, .custom-file-input.is-invalid:focus ~ .custom-file-label {
     border-color: #dc3545;
     box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
-  }
-
-  .form-inline {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-flow: row wrap;
-    flex-flow: row wrap;
-    -ms-flex-align: center;
-    align-items: center;
   }
 
   .form-inline .form-check {

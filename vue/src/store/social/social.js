@@ -1,4 +1,14 @@
-const state = {}
+const state = {
+    boardSeq: '',
+    boardDate: '',
+    carCode: '',//title
+    boardContent: '',
+    boardImg: '',
+    commentSeq: '',
+    commentDate: '',
+    commentDetail: '',
+    thumb : false
+}
 const getters = {}
 const actions = {}
 const mutations = {}

@@ -1,22 +1,14 @@
 <template>
 <div class= "snsDetail">
-<link rel="stylesheet" href="https://startbootstrap.com/assets/style-theme.css">
-<link rel="stylesheet" href="https://blackrockdigital.github.io/startbootstrap-agency/css/agency.min.css">
-<link rel="stylesheet" href="https://blackrockdigital.github.io/startbootstrap-agency/vendor/scss/_reboot.scss">
-<link rel="stylesheet" href="https://blackrockdigital.github.io/startbootstrap-agency/vendor/fontawesome-free/css/all.min.css">
-<link rel="stylesheet" href="https://blackrockdigital.github.io/startbootstrap-agency/vendor/scss/_modal.scss">
-<link rel="stylesheet" href="https://blackrockdigital.github.io/startbootstrap-agency/vendor/scss/utilities/_spacing.scss">
-<link rel="stylesheet" href="https://blackrockdigital.github.io/startbootstrap-agency/vendor/scss/mixins/_transition.scss">
-<link rel="stylesheet" href="https://blackrockdigital.github.io/startbootstrap-agency/vendor/scss/mixins/_grid.scss">
-<link rel="stylesheet" href="https://blackrockdigital.github.io/startbootstrap-agency/vendor/scss/mixins/_grid-framework.scss">
-<link rel="stylesheet" href="https://blackrockdigital.github.io/startbootstrap-agency/vendor/scss/mixins/_image.scss">
-<link type="application/atom+xml" rel="alternate" href="https://startbootstrap.com/feed.xml" title="startbootstrap">
+  <link rel="stylesheet" href="https://startbootstrap.com/assets/style-theme.css">
+  <link rel="stylesheet" href="https://blackrockdigital.github.io/startbootstrap-agency/css/agency.min.css">
+  <link rel="stylesheet" href="https://blackrockdigital.github.io/startbootstrap-agency/vendor/fontawesome-free/css/all.min.css">
 
 <div class="modal-open" style="padding-right: 16.9962px;">
-<div class="portfolio-modal modal fade show" id="portfolioModal2" tabindex="-1" role="dialog" style="display: block; padding-right: 16.9962px;" aria-modal="true">
+<div class="portfolio-modal modal fade show" id="portfolioModal2" tabindex="-1" style="display: block; padding-right: 16.9962px;">
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="close-modal" data-dismiss="modal">
+        <div class="close-modal" @click="close" data-dismiss="modal">
           <div class="lr">
             <div class="rl"></div>
           </div>
@@ -34,10 +26,21 @@
                   <li>작성시간: 2020.01.09 19:02</li>
                   <li>작성자: @hyeryeongee_</li>
                 </ul>
-                <button class="btn btn-primary" data-dismiss="modal" type="button">
+                <!--나믜글일때-->
+                <div>
+                  <a class="btn-like" @click="thumbup" ><i class="far fa-heart fa-2x"></i>{{thumb}}</a>
+                  <a class="btn-like" @click="thumbdown" ><i class="fas fa-heart fa-2x"></i>{{thumb}}</a>
+                </div>
+
+                <!--내 글일 때-->
+                <!--<button class="btn btn-primary" data-dismiss="modal" type="button">
                   <i class="fas fa-pen"></i> 글 수정하기</button>
                 <button class="btn btn-primary" data-dismiss="modal" type="button">
-                  <i class="far fa-trash-alt"></i> 글 삭제하기</button>
+                  <i class="far fa-trash-alt"></i> 글 삭제하기</button>-->
+
+                <div>
+                  <!--댓글창-->
+                </div>
               </div>
             </div>
           </div>
@@ -48,12 +51,38 @@
 </div>
 </div>
 </template>
-<script></script>
+<script>
+  export default {
+    data(){
+      return{
+        thumb:0 //엑시오스로 이 글에 참조된 thumb 테이블 갯수 알아오기.
+      }
+    },
+    methods:{
+      close(){
+
+      },
+      thumbup(){
+        //+1
+      },
+      thumbdown(){
+        //-1
+      }
+    }
+  }
+
+</script>
 <style scoped>
 .snsDetail {
-	overflow:auto;
 }
 .btn-primary {
 	margin: auto 10px;
+}
+  .btn-like{
+    text-decoration-color : red;
+  }
+.modal-open .modal {
+  overflow-x: hidden;
+  overflow-y: -moz-scrollbars-none;
 }
 </style>

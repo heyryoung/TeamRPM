@@ -27,6 +27,7 @@ import CustomerList from "@/components/company/customerList.vue"
 import recommendHome from "@/components/recommend/recommendHome.vue"
 import SnsPage from "@/components/social/SnsPage.vue"
 import SnsDetail from "@/components/social/SnsDetail.vue"
+import SnsModify from "@/components/social/SnsModify.vue"
 
 
 Vue.use(Router)
@@ -53,6 +54,7 @@ export default new Router({
         {path:'/buycarInsertContractorInfomation2', name:'buycarInsertContractorInfomation2', component : BuycarInsertContractorInfomation2},
         {path:'/sns', name:'snspage', component : SnsPage},
         {path:'/snsdetail', name:'snsdetail', component : SnsDetail},
+        {path:'/snsmodify', name:'snsmodify', component : SnsModify},
         // 강성조꺼
         {path: '/customerDetail',name: 'customerDetail', component:customerDetail},
         {path: '/companyHome',name: 'companyHome', component:companyHome,children:

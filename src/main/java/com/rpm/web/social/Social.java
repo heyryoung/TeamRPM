@@ -23,7 +23,7 @@ public class Social implements Serializable {
     @Column(name = "BOARDSEQ") @NotNull private long boardSeq;
     @Column(name = "BOARDDATE") @NotNull private String boardDate;
     @Column(name = "CARCODE") @NotNull private String carCode;
-    @Column(name = "BOARDCONTENT") @NotNull private String boardContent;
+    @Column(name = "BOARDCONTENT", length = 5000) @NotNull private String boardContent;
     @Column(name = "BOARDIMG") @NotNull private String boardImg;
 
 
