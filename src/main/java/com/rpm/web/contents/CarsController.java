@@ -101,7 +101,7 @@ public class CarsController {
             }
             cars = carsProcessingList;
         }
-        trunk.put(Arrays.asList("resultLength", "showCarList") , Arrays.asList(cars.size(), cars.subList(0,15)));
+        trunk.put(Arrays.asList("resultLength", "showCarList") , Arrays.asList(cars.size()));
         return trunk.get();
     }
     @GetMapping("/getshowcarlist/{startrow}/{endrow}")

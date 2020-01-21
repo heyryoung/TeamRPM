@@ -88,32 +88,33 @@ const actions = {
                 })
                 .catch(()=>
                     alert("들어옴 실패")
+                )
+        },
+    async  CHECKER({commit}, param){
+            commit('CHECKER',param);
+        },
+        addSeenHistory ({commit}, param) {
+            commit('ADDSEENHISTORY',param);
+        },
+        async checkReset ({commit}) {
+            commit('CHECKERRESET');
+        },
+        async setPageLimit({commit}, limit){
+            commit('PAGELIMIT', limit)
+        },
+        async pageClick({commit}, data){
+            axios
+                .get(`http://localhost:8080/getshowcarlist/`+data.start+'/'+data.end)
+                .then(({data})=>{
+                    commit('SHOWCARLIST', data)})
+                .catch(()=>{
+                    alert('잘못된 요청입니다.')
                 })
         },
-    async CHECKER ({commit}, param) {
-        commit('CHECKER',param);
-    },
-    addSeenHistory ({commit}, param) {
-        commit('ADDSEENHISTORY',param);
-    },
-    async checkReset ({commit}) {
-        commit('CHECKERRESET');
-    },
-    async setPageLimit({commit}, limit){
-        commit('PAGELIMIT', limit)
-    },
-    async pageClick({commit}, data){
-        axios
-            .get(`http://localhost:8080/getshowcarlist/`+data.start+'/'+data.end)
-            .then(({data})=>{
-                commit('SHOWCARLIST', data)})
-            .catch(()=>{
-                alert('잘못된 요청입니다.')
-            })
-    },
-    async pageNumSetting({commit}, data){
-        commit('PAGENUMSETTING', data)
-    }
+        async pageNumSetting({commit}, data){
+            commit('PAGENUMSETTING', data)
+        }
+
 };
 const mutations = {
     INIT (state, data){
