@@ -20,7 +20,8 @@ const state = {
     resultLength : 0,
     modelList : [],
     initFlag : false,
-    modelListIsOpen : false
+    modelListIsOpen : false,
+    orderBySub : 'default'
 
 };
 const getters = {
@@ -129,6 +130,9 @@ const actions = {
     },
     async pageLimitSetting({commit}, data){
         commit('PAGELIMITSETTING', data)
+    },
+    async orderBySubSetting({commit}, data){
+        commit('ORDERBYSUBSETTING', data)
     }
 
 
@@ -291,6 +295,9 @@ const mutations = {
     },
     PAGELIMITSETTING(state, data){
         state.pageLimit = data
+    },
+    ORDERBYSUBSETTING(state, data){
+        state.orderBySub = data
     }
 }
 

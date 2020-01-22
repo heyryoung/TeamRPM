@@ -333,19 +333,29 @@
                                 </div>
                             </div>
                             <div class="align_field">
-                                <!--<div class="align" v-for="list of orderByList" :key="orderByList">
-                                    <span class="list.class" v-for="aList of list.a">
-                                        <a @click="orderBy" class="aList.class" ></a></span>
-                                    <span><a @click="orderBy" href="" class="txt" data-bro="order">가격순</a>
-                                        <a @click="orderBy" href="" class="down" data-show="order">낮은순</a>
-                                        <a @click="orderBy" href="" class="up" data-show="order">높은순</a></span>
-                                    <span><a @click="orderBy" href="" class="txt" data-bro="order">주행거리 순</a>
-                                        <a @click="orderBy" href="" class="down" data-show="order">낮은순</a>
-                                        <a @click="orderBy" href="" class="up" data-show="order">높은순</a></span>
-                                    <span><a href="" class="txt" data-bro="order">연식 순</a>
-                                        <a @click="orderBy" href="" class="down" data-show="order">낮은순</a>
-                                        <a @click="orderBy" href="" class="up" data-show="order">높은순</a></span>
-                                </div>-->
+                                <div class="detail_check">
+                                    <div class="count_sel">
+                                        <div id="sorting" @click="searchKeyClick(`sorting`)"
+                                             class="selectric-wrapper selectric-selectric selectric-below">
+                                            <div class="selectric-hide-select"><select name="sortinf" id="sortingList"
+                                                                                       class="selectric"
+                                                                                       data-beusable-tracking=""
+                                                                                       tabindex="-1"
+                                                                                       v-for="orderBysub of orderBySubs" :key="orderBysub.sub">
+                                                <option value="limit">{{orderBysub.name}}</option>
+                                            </select></div>
+                                            <div class="selectric" style="width: 100px;"><span class="label"
+                                                                         data-beusable-tracking="" >{{orderByName}}</span></div>
+                                            <div class="selectric-items" tabindex="-1" style="width: 100px;">
+                                                <div class="selectric-scroll">
+                                                    <ul  v-for="orderBysub of orderBySubs" :key="orderBysub.sub">
+                                                        <li data-index="0" @click="orderBy(orderBysub)">{{orderBysub.name}}</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <input class="selectric-input" tabindex="0"></div>
+                                    </div>
+                                </div>
                                 <div class="detail_check">
                                     <div class="count_sel">
                                         <div id="carCnt" @click="searchKeyClick(`carCnt`)"
@@ -357,12 +367,12 @@
                                             v-for="limit of limits" :key="limit.name">
                                                 <option value="limit">{{limit}}개</option>
                                             </select></div>
-                                            <div class="selectric"><span class="label"
-                                                                         data-beusable-tracking="">{{this.$store.state.cmm.pageLimit}}개 </span></div>
-                                            <div class="selectric-items" tabindex="-1" style="width: 78px;">
+                                            <div class="selectric" style="width: 100px;"><span class="label"
+                                                                         data-beusable-tracking="" >{{this.$store.state.cmm.pageLimit}}개씩보기</span></div>
+                                            <div class="selectric-items" tabindex="-1" style="width: 100px;">
                                                 <div class="selectric-scroll">
                                                     <ul  v-for="limit of limits" :key="limit.name">
-                                                        <li data-index="0" @click="clickPageLimit(limit)">{{limit}}개</li>
+                                                        <li data-index="0" @click="clickPageLimit(limit)">{{limit}}개씩보기</li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -387,7 +397,7 @@
                                     <img src="https://www.kcar.com//resources/images/common/ico_empty.jpg" alt="차량없음 이미지">
                                     <a href="/help/helpMain.do">관심차량등록알림 신청하기</a>
                                 </td>
-                                <tr v-for="showCar of showCarList" :key="showCar.carcd" @click="addHistory(carSearchResult)">
+                                <tr v-for="showCar of showCarList" :key="showCar.carcd" @click="addHistory()">
                                     <td class="thumb">
                                         <a :href="showCar.carUrl" target="_blank">
                                             <div class="mark_area"></div>
@@ -452,11 +462,18 @@ export default {
             searchWord: '',
             carcd: '',
             limits : [15,30,45,60],
+            orderBySubs : [{name : "기본정렬", sub : 'default'},
+                {name : "가격▲", sub : 'priceASC'},
+                {name : "가격▼", sub : 'priceDESC'},
+                {name : "주행거리▲", sub : 'mileageASC'},
+                {name : "주행거리▼", sub : 'mileageDESC'},
+                {name : "연식▲", sub : 'beginyearASC'},
+                {name : "연식▲", sub : 'beginyearDESC'}],
+            orderByName : '기본정렬'
         }
     },
     computed: {
         ...mapState({
-            carSearchResults : state => state.cmm.carSearchResults,
             showCarList : state => state.cmm.showCarList,
             categoryList: state => state.cmm.categoryList,
             makerList: state => state.cmm.makerList,
@@ -503,33 +520,7 @@ export default {
             }
             return list
 
-        }/*,
-        orderByList : function(){
-            let orderByList = ['기본정렬', '가격순', '주행거리 순', '연식 순']
-            let orderBy = []
-            for(let i = 1; i<orderByList.length; i++){
-                switch (i) {
-                    case '기본정렬' : orderBy.push({class : 'basic'
-                        , a : [{ value : 'default',class : 'txt default'}]})
-                        break
-                    case '가격순' : orderBy.push({class : ''
-                        , a : [{value : 'priceController', class : 'txt', name : '가격순'}
-                        ,{value : 'priceDESC', class : 'down', name : '낮은순'}
-                        ,{value : 'priceASC', class : 'up', name : '높은순'} ]})
-                        break
-                    case '주행거리 순' : orderBy.push({class : ''
-                        , a : [{value : 'mileageController', class : 'txt', name : '주행거리 순'},
-                            {value : 'mileageDESC', class : 'down', name : '낮은순'},
-                            {value : 'mileageASC', class : 'up', name : '높은순'}]})
-                        break
-                    case '연식 순' : orderBy.push({class : '', a : [{
-                            value : 'beginyearController', class : 'txt', name : '연식 순'},
-                            {value : 'beginyearDESC', class : 'down', name : '낮은순'},
-                            {value : 'beginyearASC', class : 'up', name : '높은순'}]})
-                }
-            }
-            return orderBy
-        }*/
+        }
 
     },
     methods: {
@@ -596,7 +587,8 @@ export default {
                 searchWord: this.searchWord,
                 carcd: this.carcd,
                 pageLimit : this.$store.state.cmm.pageLimit,
-                maker : maker.code
+                maker : maker.code,
+                orderBySub : this.$store.state.cmm.orderBySub
             }
             this.$store.dispatch('cmm/searchWithCondition', data)
 
@@ -610,13 +602,16 @@ export default {
             this.$store.dispatch('cmm/pageLimitSetting', pageLimit)
             this.searchWithCondition()
         },
-        orderBy(){
-
+        orderBy(orderByValue){
+            this.$store.dispatch('cmm/orderBySubSetting', orderByValue.sub)
+            this.orderByName = orderByValue.name
+            this.searchWithCondition()
         }
     },
         created() {
         if(!this.$store.state.cmm.initFlag)
             this.$store.dispatch('cmm/init')
+            this.searchWithCondition()
         }
     }
 </script>

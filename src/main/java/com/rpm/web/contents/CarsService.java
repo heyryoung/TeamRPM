@@ -1,5 +1,6 @@
 package com.rpm.web.contents;
 
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
@@ -9,6 +10,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 @Component
+@Lazy
 public interface CarsService {
     public Map<String, List<Cars>> getCategoryByCarType(Iterable<Cars> cars);
 
