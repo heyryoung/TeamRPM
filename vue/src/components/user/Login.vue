@@ -1,7 +1,7 @@
 <template>
 	<div>
-		<link rel="stylesheet" href="https://www.kcar.com/resources/css/re_user.css?ver=6.9">
-		<link rel="stylesheet" href="https://www.kcar.com/resources/css/re_default.css?ver=6.9">
+		<link rel="stylesheet" type="text/css"   href="css/re_user.css">
+		<link rel="stylesheet" type="text/css"   href="css/re_default.css">
 
 		<div class="loginPage">
 			<div class="loginBox">
