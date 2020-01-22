@@ -109,9 +109,6 @@ const actions = {
     async addSeenHistory ({ commit }, param ) {
         commit('ADDSEENHISTORY', param );
     },
-    async checkReset ({ commit }) {
-        commit('CHECKERRESET');
-    },
     async setPageLimit({ commit }, limit){
         commit('PAGELIMIT', limit)
     },
@@ -126,10 +123,6 @@ const actions = {
     },
     async pageNumSetting({commit}, data){
         commit('PAGENUMSETTING', data)
-    },
-
-    async makeOriginList ( {commit} ) {
-        commit('MAKEORIGINLIST');
     },
     async pageLimitSetting({commit}, data){
         commit('PAGELIMITSETTING', data)
@@ -220,11 +213,7 @@ const mutations = {
         state.showCarList = []
         if(data.showCarList)
             for(let list of data.showCarList){state.showCarList.push(list)}
-        if (state.resultLength === 0)
-            state.searchResultEmpty = true
-        else
-            state.searchResultEmpty = false
-
+        state.searchResultEmpty = (state.resultLength === 0)
 
         state.makerList = []
         if (!state.modelListIsOpen) {
@@ -247,10 +236,9 @@ const mutations = {
                 })
         }
 
-        if (data.modelList.length > 0) {
+        if (state.modelListIsOpen) {
             state.modelList = []
                 data.modelList.forEach(el => {
-
                     state.modelList.push({
                         checked: !!(state.checkedItems.find(checkedItem => el.name === checkedItem.name)),
                         bigCategory: 'modelList',
@@ -258,9 +246,7 @@ const mutations = {
                         name: el.name,
                         count: el.count
                     })
-
             })
-
         }
      },
 
@@ -285,10 +271,22 @@ const mutations = {
                 foundItem = state.modelList.find( item => item.code === data.code)
                 break
             }
-            console.log( foundItem.bigCategory + "<<<CHECKER>>>>>" + foundItem.name )
+
         foundItem.checked = !foundItem.checked
-        if(foundItem.checked) state.checkedItems.push(foundItem)
-        else state.checkedItems.splice(state.checkedItems.indexOf(foundItem),1)
+
+        if( !foundItem.checked && foundItem.bigCategory === 'makerList' ){
+            let processingList = state.checkedItems
+            state.checkedItems = []
+            state.modelList = []
+            processingList.forEach( item => {
+                console.log(item.bigCategory + "   " + item.name)
+                if ( item.bigCategory != 'moldelList')  state.checkedItems.push(item)
+            })
+        }else {
+            if(foundItem.checked) state.checkedItems.push(foundItem)
+                else state.checkedItems.splice(state.checkedItems.indexOf(foundItem),1)
+        }
+
 
     },
     ADDSEENHISTORY ( state, param) {
@@ -313,10 +311,6 @@ const mutations = {
             return param
         }
     },
-    CHECKERRESET ( state ) {
-        state.checkedItems = []
-    },
-
     PAGELIMIT(state, data){
         state.pageLimit = data
     },
@@ -326,9 +320,6 @@ const mutations = {
     },
     PAGENUMSETTING(state, data){
         state.pageNum = data
-    },
-    MAKEORIGINLIST ( state ) {
-        state.makerList = state.originMakerList
     },
     PAGELIMITSETTING(state, data){
         state.pageLimit = data
