@@ -192,6 +192,7 @@ const mutations = {
             state.category3.push({name : data.category[i], count : data.count[i]})
         }
     },
+
     SEARCHWITHCONDITION (state, data) {
         state.resultLength = data.resultLength
         state.pageNum = 1
@@ -203,51 +204,48 @@ const mutations = {
         else
             state.searchResultEmpty = false
 
-        let processingMakerList = state.modelList
-        state.modelList = []
+
         state.makerList = []
-
-
-        for (let i = 0; i < processingMakerList.length; i++) {
-            data.makerList.forEach(item => {
-                if (item.code === processingMakerList[i].code) {
-                    state.makerList.push(item)
-                }
-            })
-        }
-
-
         if (!state.modelListIsOpen) {
-            state.makerList = []
-            data.makerList.forEach(el => {
-                state.makerList.push({checked : false, bigCategory: 'makerList' , code : el.code , name: el.name, count : el.count})
-            })
-        }
-
-
-        if (state.modelListIsOpen) {
-            state.modelList = []
-            data.modelList.forEach(el => {
-                state.modelList.push({
+            data.makerList.forEach(item => {
+                state.makerList.push({
                     checked: false,
-                    bigCategory: 'modelList',
-                    code: el.code,
-                    name: el.name,
-                    count: el.count
+                    bigCategory: 'makerList',
+                    code: item.code,
+                    name: item.name,
+                    count: item.count
                 })
             })
-            let foundItem= '';
-            state.checkedItems.forEach( checkedItem => {
-                foundItem = state.modelList.find(item => item.code === checkedItem.code)
+        }else {
+            state.makerList.push({
+                    checked: true,
+                    bigCategory: 'makerList',
+                    code: data.makerList[0].code,
+                    name: data.makerList[0].name,
+                    count: data.makerList[0].count
+                })
+        }
+
+        if (data.modelList.length > 0) {
+            state.modelList = []
+                data.modelList.forEach(el => {
+
+                    state.modelList.push({
+                        checked: !!(state.checkedItems.find(checkedItem => el.name === checkedItem.name)),
+                        bigCategory: 'modelList',
+                        code: el.code,
+                        name: el.name,
+                        count: el.count
+                    })
+
             })
-            foundItem.checked = true
+
         }
      },
 
 
     CHECKER (state, data) {
         let foundItem ='';
-        console.log(data.name)
 
         switch (data.bigCategory) {
             case 'categoryList':
@@ -267,7 +265,6 @@ const mutations = {
                 break
             }
         foundItem.checked = !foundItem.checked
-        console.log("CHECKER" + foundItem.checked + foundItem.name)
         if(foundItem.checked) state.checkedItems.push(foundItem)
         else state.checkedItems.splice(state.checkedItems.indexOf(foundItem),1)
 

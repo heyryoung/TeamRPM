@@ -56,7 +56,7 @@ public class UserController {
             map.put("result", "fail");
         }
          printer.accept(map.get("result"));
-        printer.accept(map.get("user").toString());
+        printer.accept(param.toString());
         return map;
 
     }

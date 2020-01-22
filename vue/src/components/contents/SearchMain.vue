@@ -452,7 +452,6 @@ export default {
             searchWord: '',
             carcd: '',
             limits : [15,30,45,60],
-            maker : ''
         }
     },
     computed: {
@@ -472,9 +471,6 @@ export default {
         ...mapGetters('cmm', {
             initFlag : 'initFlag'
         }),
-        modelIsList : function () {
-            return this.$store.state.cmm.modelList
-        },        
         isAny : function(){
             return (this.$store.state.cmm.showCarList.length>0)
 
@@ -544,7 +540,7 @@ export default {
         checkMakeTree(param){
             this.$store.dispatch('cmm/CHECKER',param, { root: true })
             this.$store.dispatch('cmm/getTreeChild',param)
-            //this.searchWithCondition()
+            this.searchWithCondition()
         },
         searchKeyClick(searchKeyID) {
             const searchKey = document.getElementById(searchKeyID)
