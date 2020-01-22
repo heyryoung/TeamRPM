@@ -23,4 +23,8 @@ public class SearchCondition {
     private int pageLimit;
     private String orderByWith;
     private String oderBy;
+    private SearchDetailCondition minPrice;
+    private SearchDetailCondition maxPrice;
+    private SearchDetailCondition minMilage;
+    private SearchDetailCondition maxMilage;
 }
