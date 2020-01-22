@@ -22,4 +22,8 @@ public class SearchCondition {
     private String maker;
     private int pageLimit;
     private String orderBySub;
+    private SearchDetailCondition minPrice;
+    private SearchDetailCondition maxPrice;
+    private SearchDetailCondition minMilage;
+    private SearchDetailCondition maxMilage;
 }

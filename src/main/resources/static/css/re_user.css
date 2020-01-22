@@ -47,7 +47,7 @@
 .login_user .login_bt { padding: 0 0 25px 160px; }
 .login_user .colse { position: absolute; top: 10px; right: 10px; }
 .login_user .form_find { *zoom: 1; overflow: hidden; font-size: 11px; padding: 0 0 10px 160px; width: 300px; color: #999; }
-.login_user .form_find li { float: left; padding: 0 5px; background: url(/resources/images/common/line_v03.gif) right 0 no-repeat; font-weight: bold; }
+.login_user .form_find li { float: left; padding: 0 5px; background: url(https://www.kcar.com/resources/images/common/line_v03.gif) right 0 no-repeat; font-weight: bold; }
 .login_user .form_find li.last { background: none; width: 170px; }
 .login_user .form_find li a { color: #999; }
 .login_user .form_find li a:hover { color: #666; text-decoration: underline; }
@@ -66,7 +66,7 @@
 .loginForm .skjoin a { font-weight: bold; color: #da2727; text-decoration: underline; }
 .loginBanner { width: 340px; float: right; }
 .findjoin { padding: 5px 0 20px 65px; }
-.findjoin a { display: inline-block; padding: 2px 10px 4px 20px; background: url(/resources/images/common/loginDot.gif) left 2px no-repeat; color: #999; }
+.findjoin a { display: inline-block; padding: 2px 10px 4px 20px; background: url(https://www.kcar.com/resources/images/common/loginDot.gif) left 2px no-repeat; color: #999; }
 .snsjoin {padding:10px 0 10px 0; text-align:center;}
 .loginFooter { padding-top: 15px; text-align: center; font-size: 11px; }
 /*findidpw*/
@@ -117,9 +117,9 @@
 .myPageTable td.info ul li.carTit { font-size: 12px; }
 .myPageTable td.info ul li.money strong { display: block; padding-bottom: 2px; color: #e25b04; }
 .myPageTable td.info ul li.carReLink { padding: 5px 0 0 0; font-size: 11px; }
-.myPageTable td.info ul li.carReLink .carReView { padding: 0 0 0 11px; margin-right: 8px; background: url(/resources/images/common/icon_carReView.gif) left top no-repeat; border-bottom: 1px solid #666; }
-.myPageTable td.info ul li.carReLink .carReBlank { padding: 0 0 0 11px; margin-right: 8px; background: url(/resources/images/common/icon_carReBlank.gif) left top no-repeat; border-bottom: 1px solid #666; }
-.myPageTable td.info ul li.carReLink .carReJjim { padding: 0 0 0 9px; margin-right: 8px; background: url(/resources/images/common/icon_carReJjim.gif) left top no-repeat; border-bottom: 1px solid #666; }
+.myPageTable td.info ul li.carReLink .carReView { padding: 0 0 0 11px; margin-right: 8px; background: url(https://www.kcar.com/resources/images/common/icon_carReView.gif) left top no-repeat; border-bottom: 1px solid #666; }
+.myPageTable td.info ul li.carReLink .carReBlank { padding: 0 0 0 11px; margin-right: 8px; background: url(https://www.kcar.com/resources/images/common/icon_carReBlank.gif) left top no-repeat; border-bottom: 1px solid #666; }
+.myPageTable td.info ul li.carReLink .carReJjim { padding: 0 0 0 9px; margin-right: 8px; background: url(https://www.kcar.com/resources/images/common/icon_carReJjim.gif) left top no-repeat; border-bottom: 1px solid #666; }
 .myPageTable td.sec { font-size: 12px; }
 .myPageTable td.nodate { padding: 40px 0; color: #f05200; text-align: center; font-weight: bold; }
 .leave_textarea { width: 97%; height: 50px; padding: 5px; border: 1px solid #bebebe; }
@@ -149,7 +149,7 @@
 .policy_tit { padding: 30px 0 0 0; }
 .user_agree { position: relative; padding: 0 0 15px 0; border-bottom: 1px solid #d8cfc8; }
 .user_agree h4 { padding: 15px 0 5px 0; font-weight: bold; }
-.user_agree .bigview { position: absolute; top: 14px; right: 0; padding: 0 0 0 6px; background: url(/resources/images/common/dot04.gif) 0 3px no-repeat; }
+.user_agree .bigview { position: absolute; top: 14px; right: 0; padding: 0 0 0 6px; background: url(https://www.kcar.com/resources/images/common/dot04.gif) 0 3px no-repeat; }
 .user_agree .user_policy { padding: 10px; height: 140px; border: 1px solid #d8cfc8; overflow-y: scroll; text-align: justify; }
 .user_agree .user_policypopup { padding: 10px; height: 100px; border: 1px solid #d8cfc8; overflow-y: scroll; text-align: justify; }
 .user_agree p { padding-top: 8px; color: #666; }
@@ -205,7 +205,7 @@
 /* .t_user01 td p .aps{position:absolute;top:-3px;left:250px} */
 .t_user01 select{appearance:none;-webkit-appearance:none;border-radius:0px !important;padding:0 5px;border:1px #ccc solid !important}
 .t_user01 select::-ms-expand{display:none;border-radius:0px !important;border:1px #bebebe solid !important}
-.t_user01 select {background:url(/resources/images/content/user/select_down_arrow.png) no-repeat right center;}
+.t_user01 select {background:url(https://www.kcar.com/resources/images/content/user/select_down_arrow.png) no-repeat right center;}
 .t_user01 input:-ms-input-placeholder { font-size:12px;}
 .t_user01 input::-webkit-input-placeholder { font-size:12px;}
 .t_user01 input::-moz-placeholder { font-size:12px;}
@@ -229,18 +229,18 @@
 .user_input04 { height: 17px; width: 330px; padding: 2px 5px 0 5px; border: 1px solid #bebebe; font-size: 14px; color: #999; vertical-align: middle; }
 .user_input05 { height: 17px; width: 90px; padding: 2px 5px 0 5px; border: 1px solid #bebebe; font-size: 14px; color: #999; vertical-align: middle; }
 .btn_user { display: inline-block; height: 21px; padding: 0px 0 0 0; margin-top: 0px; /* .margin-top:1px; */ cursor: pointer; }
-.btn_user b { display: inline-block; height: 17px; padding: 3px 10px 0 10px; background: url(/resources/images/common/btn_user.gif) left top repeat-x; border: 1px solid #bebebe; font-size: 11px; }
+.btn_user b { display: inline-block; height: 17px; padding: 3px 10px 0 10px; background: url(https://www.kcar.com/resources/images/common/btn_user.gif) left top repeat-x; border: 1px solid #bebebe; font-size: 11px; }
 .all_agree_box { text-align: center; padding: 10px; }
-.checkbox_wrap { display: inline-block; height: 24px; line-height: 24px; padding: 0 16px 0 17px; background: url(/resources/images/common/btn_user.gif) left top repeat-x; border: 1px solid #CCC; cursor: pointer; }
+.checkbox_wrap { display: inline-block; height: 24px; line-height: 24px; padding: 0 16px 0 17px; background: url(https://www.kcar.com/resources/images/common/btn_user.gif) left top repeat-x; border: 1px solid #CCC; cursor: pointer; }
 .checkbox_wrap input.check { vertical-align: middle; }
 .btn_formbts { padding: 10px; text-align: center; }
 .question { margin-bottom: 10px; color: #D94200; font-weight: bold; }
 .btn_form_r { display: inline-block; height: 20px; margin-top: 0px; /* .margin-top:1px; */ font-size: 13px; cursor: pointer; }
 .btn_form_r b { display: inline-block; height: 20px; padding: 4px 16px 1px 17px; background: #da2727; border: 1px solid #bebebe; color: #fff; }
 .btn_form_g { display: inline-block; height: 20px; margin-top: 0px; /* .margin-top:1px; */ font-size: 13px; cursor: pointer; }
-.btn_form_g b { display: inline-block; height: 20px; padding: 4px 16px 1px 17px; background: url(/resources/images/common/btn_user.gif) left top repeat-x; border: 1px solid #bebebe; }
+.btn_form_g b { display: inline-block; height: 20px; padding: 4px 16px 1px 17px; background: url(https://www.kcar.com/resources/images/common/btn_user.gif) left top repeat-x; border: 1px solid #bebebe; }
 .btn_userF { display: inline-block; height: 20px; padding: 0px 0 0 0; margin-top: 0px; /* .margin-top:1px; */ cursor: pointer; }
-.btn_userF span { display: inline-block; height: 20px; padding: 5px 10px 0 10px; background: url(/resources/images/common/btn_user.gif) left top repeat-x; border: 1px solid #bebebe; font-size: 12px; }
+.btn_userF span { display: inline-block; height: 20px; padding: 5px 10px 0 10px; background: url(https://www.kcar.com/resources/images/common/btn_user.gif) left top repeat-x; border: 1px solid #bebebe; font-size: 12px; }
 /* 20190705회원가입정보수정 */
 .user_point { padding: 40px 0 8px 0; font-weight: bold; color: #ff0040; }
 /*//20190705회원가입정보수정 */
@@ -282,8 +282,8 @@
 .snsadmin_btnbx .snsadmin_kabtn b { display: inline-block; height: 50px; padding: 4px 0px 1px 0px; background: #ffd300; border: 1px solid #bebebe; color: #fff; line-height: 50px; width: 250px; }
 .snsadmin_btnbx b.off { background: #999; }
 .user_welcome { padding: 25px 0; text-align: center; border-bottom: 1px solid #dfdddc; }
-.user_tab { *zoom: 1; overflow: hidden; height: 32px; margin-top: 40px; background: url(/resources/images/common/view_tab.bg.gif) right 31px repeat-x; }
-.user_tab a { float: left; display: inline-block; padding: 9px 40px 0 40px; height: 21px; margin-right: 3px; border-top: 1px solid #dfd9d5; border-left: 1px solid #dfd9d5; border-right: 1px solid #dfd9d5; background: url(/resources/images/content/user/user_tabbg.gif) left top repeat-x; color: #8d8580; }
+.user_tab { *zoom: 1; overflow: hidden; height: 32px; margin-top: 40px; background: url(https://www.kcar.com/resources/images/common/view_tab.bg.gif) right 31px repeat-x; }
+.user_tab a { float: left; display: inline-block; padding: 9px 40px 0 40px; height: 21px; margin-right: 3px; border-top: 1px solid #dfd9d5; border-left: 1px solid #dfd9d5; border-right: 1px solid #dfd9d5; background: url(https://www.kcar.com/resources/images/content/user/user_tabbg.gif) left top repeat-x; color: #8d8580; }
 .user_tab a:hover { height: 21px; border-top: 1px solid #79695e; height: 130px; border-left: 1px solid #79695e; border-right: 1px solid #79695e; border-bottom: 1px solid white; font-weight: bold; background: #fff; color: #79695e; letter-spacing: -1px; text-decoration: none; }
 .user_tab a.on { height: 21px; border-top: 1px solid #79695e; border-left: 1px solid #79695e; border-right: 1px solid #79695e; border-bottom: 1px solid white; font-weight: bold; background: #fff; color: #79695e; letter-spacing: -1px; }
 .user_bx { padding: 0 55px 0 40px; }
@@ -296,7 +296,7 @@
 .user_myCheck dd { float: left; width: 470px; padding: 4px 0; }
 .user_myCheck dd.user_num_txt { padding: 8px 0 0 95px; color: #666; line-height: 1.5; }
 /* 20190705회원가입정보추가 */
-.user_num_check { display: inline-block; padding: 1px 0 0 26px; background: url(/resources/images/content/user/select_idcheck.png) 10px 1px no-repeat; color: #ff0040; }
+.user_num_check { display: inline-block; padding: 1px 0 0 26px; background: url(https://www.kcar.com/resources/images/content/user/select_idcheck.png) 10px 1px no-repeat; color: #ff0040; }
 /* //20190705회원가입정보추가 */
 /*2sns로긴*/
 #content .snsloginjoin { font-size: 28px; padding: 50px 50px 30px; text-align: center; }
@@ -306,11 +306,11 @@
 .sns_btnbx .sns_btn b { display: inline-block; height: 30px; padding: 4px 16px 1px 17px; background: #da2727; border: 1px solid #bebebe; color: #fff; line-height: 30px; }
 .sns_btnbx .sns_blbtn { display: inline-block; height: 30px; margin-top: 0px; /* .margin-top:1px; */ font-size: 13px; cursor: pointer; }
 .sns_btnbx .sns_blbtn b { display: inline-block; height: 30px; padding: 4px 16px 1px 17px; background: #000; border: 1px solid #bebebe; color: #fff; line-height: 30px; }
-.ag #wrapper { background: url(/resources/images/common/agree_bg.gif) left top repeat-x; }
+.ag #wrapper { background: url(https://www.kcar.com/resources/images/common/agree_bg.gif) left top repeat-x; }
 .ag #header { position: relative; height: 95px; width: 1180px; margin: 20px auto 0; background: none; }
 .ag #header h1 { position: absolute;margin-top: 10px; }
 .ag .agTop { height: 20px;  text-align: right;line-height:20px}
-.ag .agTop a { padding: 0 5px 0 8px ; background: url(/resources/images/common/line02.gif) left 4px no-repeat;  }
+.ag .agTop a { padding: 0 5px 0 8px ; background: url(https://www.kcar.com/resources/images/common/line02.gif) left 4px no-repeat;  }
 .ag .agTop a:first-child { background: none; }
 .ag .agNav { padding-top: 72px; height: 28px; }
 .ag .agNav a { display: block; float: left; height: 20px; padding: 6px 30px 0 30px; vertical-align: middle; color: #fff; border-right: 1px solid #a61821; }
@@ -347,13 +347,13 @@
 .mypage_CarList .align_field .align span { display: inline-block; vertical-align: middle; margin-left: 15px; line-height: 46px; }
 .mypage_CarList .align_field .align span:first-child { margin-left: 0; }
 .mypage_CarList .align_field .align span a.txt { font-size: 12px; color: #000; letter-spacing: -0.07em; }
-.mypage_CarList .align_field .align span a.up, .mypage_CarList .align_field .align span a.down { display: inline-block; width: 15px; height: 15px; text-indent: -9999px; vertical-align: middle; background-image: url("/resources/images/content/buy/up_down_arrow.png"); background-repeat: no-repeat; }
+.mypage_CarList .align_field .align span a.up, .mypage_CarList .align_field .align span a.down { display: inline-block; width: 15px; height: 15px; text-indent: -9999px; vertical-align: middle; background-image: url("https://www.kcar.com/resources/images/content/buy/up_down_arrow.png"); background-repeat: no-repeat; }
 .mypage_CarList .align_field .align span a.up { background-position: 0 0; }
 .mypage_CarList .align_field .align span a.up.on { background-position: 0 -15px; }
 .mypage_CarList .align_field .align span a.down { background-position: -15px 0; margin-left: 8px; }
 .mypage_CarList .align_field .align span a.down.on { background-position: -15px -15px; }
 /* vr차량 */
-.mypage_CarList .align_field .align span a em.vr_ordermark{ background:url( /resources/images/content/buy/vr_ordermark.png) no-repeat;display: inline-block; width: 30px; height: 20px; text-indent: -9999px; vertical-align: middle; background-position: 10px 0;}
+.mypage_CarList .align_field .align span a em.vr_ordermark{ background:url( https://www.kcar.com/resources/images/content/buy/vr_ordermark.png) no-repeat;display: inline-block; width: 30px; height: 20px; text-indent: -9999px; vertical-align: middle; background-position: 10px 0;}
 .mypage_CarList .align_field .detail_check { float: right; }
 .mypage_CarList .align_field .detail_check:before, .mypage_CarList .align_field .detail_check:after { content: ""; display: table; }
 .mypage_CarList .align_field .detail_check:after { clear: both; }
@@ -373,7 +373,7 @@
 .mypage_CarList .result_list table td.thumb a .mark_area span { display: block; width: 40px; height: 20px; line-height: 20px; text-align: center; font-size: 13px; color: #fff; }
 .mypage_CarList .result_list table td.thumb a .mark_area span.mark01 { background-color: #ff0040; }
 .mypage_CarList .result_list table td.thumb a .mark_area span.mark02 { background-color: #b48d70; }
-.mypage_CarList .result_list table td.thumb a span.mov_ico{ position: absolute; top:43px; left:50%; margin-left:-20px; background: url(/resources/images/content/buy/pc_play_icon.png);width:40px;height:40px; text-indent: -9999px;}
+.mypage_CarList .result_list table td.thumb a span.mov_ico{ position: absolute; top:43px; left:50%; margin-left:-20px; background: url(https://www.kcar.com/resources/images/content/buy/pc_play_icon.png);width:40px;height:40px; text-indent: -9999px;}
 .mypage_CarList .result_list table td.thumb a img { width: 190px; height: 127px; }
 .mypage_CarList .result_list table td.car_info { position: relative; padding: 13px 20px; vertical-align: top; }
 .mypage_CarList .result_list table td.car_info .name { display: block; font-size: 14px; font-weight: 500; letter-spacing: -0.07em; color: #000; }
@@ -385,8 +385,8 @@
 .mypage_CarList .result_list table td.car_info .sale { letter-spacing: -0.07em; font-weight: 600; font-size: 13px; color: #ff0040; }
 .mypage_CarList .result_list table td.car_info .mark { display: block; position: absolute; bottom: 15px; left: 20px; width: 200px;}
 /* vr차량 */
-.mypage_CarList .result_list table td.thumb a span.markvr {position: absolute; top:35px; left:50%; margin-left:-28px; background-image: url(/resources/images/content/buy/pc_3d_icon_20190318.png); display: block; width: 56px; height: 56px; overflow: hidden; text-indent: -9999px; font-size: 0.01em; color: transparent; -webkit-background-size: 56px 56px; background-size: 56px 56px; background-position: center center; background-repeat: no-repeat; white-space: nowrap;}
-.mypage_CarList .result_list table td.thumb a span.markwater {position: absolute; top: 2px; right:2px; background-image: url(/resources/images/content/buy/vr_watermark.png); display: block; width: 22px; height: 24px; overflow: hidden; text-indent: -9999px; font-size: 0.01em; color: transparent; -webkit-background-size: 22px 24px; background-size: 22px 24px; background-position: center center; background-repeat: no-repeat; white-space: nowrap;}
+.mypage_CarList .result_list table td.thumb a span.markvr {position: absolute; top:35px; left:50%; margin-left:-28px; background-image: url(https://www.kcar.com/resources/images/content/buy/pc_3d_icon_20190318.png); display: block; width: 56px; height: 56px; overflow: hidden; text-indent: -9999px; font-size: 0.01em; color: transparent; -webkit-background-size: 56px 56px; background-size: 56px 56px; background-position: center center; background-repeat: no-repeat; white-space: nowrap;}
+.mypage_CarList .result_list table td.thumb a span.markwater {position: absolute; top: 2px; right:2px; background-image: url(https://www.kcar.com/resources/images/content/buy/vr_watermark.png); display: block; width: 22px; height: 24px; overflow: hidden; text-indent: -9999px; font-size: 0.01em; color: transparent; -webkit-background-size: 22px 24px; background-size: 22px 24px; background-position: center center; background-repeat: no-repeat; white-space: nowrap;}
 .mypage_CarList .result_list table td.car_opt { position: relative; }
 .mypage_CarList .result_list table td.car_opt .opt_list:before, .mypage_CarList .result_list table td.car_opt .opt_list:after { content: ""; display: table; }
 .mypage_CarList .result_list table td.car_opt .opt_list:after { clear: both; }
@@ -398,7 +398,7 @@
 .mypage_CarList .result_list table td.btn_area a:hover { text-decoration: none; color: #fff; background-color: #ff0040; }
 .mypage_CarList .result_list table td.btn_area a.off_btn { position: relative; display: block; width: 127px; height: 35px; margin: 4px 0; line-height: 33px; background-color: #e1e1e1; border: 1px solid #e1e1e1; text-align: center; font-size: 12px; color: #fff; letter-spacing: -0.07em; }
 .mypage_CarList .result_list table td.btn_area a.off_btn:hover { text-decoration: none; background-color: #e1e1e1; color: #fff; }
-.mypage_CarList .result_list table td.btn_area a .toast_popup {position: absolute; display: block; padding: 16px 20px 16px 56px; top: 40px; right: 0; color: #000; line-height: 1.5em; border: 1px #000 solid; background-color: #fff; background: rgba(255,255,255,0.95) url('/resources/images/common/ico_toast_warning.png') 18px center no-repeat; white-space: nowrap; }
+.mypage_CarList .result_list table td.btn_area a .toast_popup {position: absolute; display: block; padding: 16px 20px 16px 56px; top: 40px; right: 0; color: #000; line-height: 1.5em; border: 1px #000 solid; background-color: #fff; background: rgba(255,255,255,0.95) url('https://www.kcar.com/resources/images/common/ico_toast_warning.png') 18px center no-repeat; white-space: nowrap; }
 .mypage_CarList .result_list table td.empty_result { padding: 40px 0 30px; font-size: 17px; color: #ff0040; text-align: center; }
 .mypage_CarList .btn_cont { position: relative; margin-top: 25px; border-top: 1px solid #000; }
 .mypage_CarList .btn_cont .delete { width: 86px; height: 35px; line-height: 33px; position: absolute; top: 30px; left: 0; border: 1px solid #ddd; text-align: center; font-size: 12px; }

@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 const state = {
+    context : 'http://localhost:8081',
     carAllCount : '',
     searchResultEmpty : false,
     category1 : [],
@@ -49,6 +50,9 @@ const actions = {
                     alert('잘못된 요청입니다!')
                 })
         }
+    },
+    async reset ({commit}) {
+        commit('RESETTING')
     },
     async getTreeChild({commit}, param){
         commit('GETTREECHILD', param)
@@ -100,19 +104,19 @@ const actions = {
                 )
         },
 
-    async CHECKER ({commit}, param) {
+    async CHECKER ({ commit }, param ) {
         commit('CHECKER',param);
     },
-    addSeenHistory ({commit}, param ) {
+    async addSeenHistory ({ commit }, param ) {
         commit('ADDSEENHISTORY', param );
     },
-    async checkReset ({commit}) {
+    async checkReset ({ commit }) {
         commit('CHECKERRESET');
     },
-    async setPageLimit({commit}, limit){
+    async setPageLimit({ commit }, limit){
         commit('PAGELIMIT', limit)
     },
-    async pageClick({commit}, data){
+    async pageClick({ commit }, data){
         axios
             .get(`http://localhost:8080/getshowcarlist/`+data.start+'/'+data.end)
             .then(({data})=>{
@@ -146,7 +150,7 @@ const mutations = {
         state.makerList = []
         state.regionList = []
         state.showCarList = []
-     
+
              data.categoryList.forEach(el => {
                    state.categoryList.push({checked : false , bigCategory: 'categoryList' ,code : el.categorycd , name: el.categorynm})
                })
@@ -165,6 +169,23 @@ const mutations = {
         for(let list of data.carInitList){
             state.showCarList.push(list)
         }
+    },
+    RESETTING ( state ) {
+            state.carAllCount = '',
+            state.searchResultEmpty = false,
+            state.categoryList = [],
+            state.showCarList = [],
+            state.makerList = [],
+            state.originMakerList = [],
+            state.modelGroupList = [],
+            state.fuelTypeList = [],
+            state.regionList = [],
+            state.checkedItems = [],
+            state.pageLimit = 15,
+            state.pageNum = 1,
+            state.resultLength = 0,
+            state.modelList = [],
+            state.modelListIsOpen = false
     },
     GETTREECHILD (state, param) {
         state.modelListIsOpen = !state.modelListIsOpen
@@ -268,13 +289,33 @@ const mutations = {
                 foundItem = state.modelList.find( item => item.code === data.code)
                 break
             }
+            console.log( foundItem.bigCategory + "<<<CHECKER>>>>>" + foundItem.name )
         foundItem.checked = !foundItem.checked
         if(foundItem.checked) state.checkedItems.push(foundItem)
         else state.checkedItems.splice(state.checkedItems.indexOf(foundItem),1)
 
     },
-    ADDSEENHISTORY ( state, data) {
-        state.seenHistoryList.push(data)
+    ADDSEENHISTORY ( state, param) {
+        if ( state.seenHistoryList.length === 0 ) {
+            state.seenHistoryList.push( makeSeenCar(param) )
+        }
+        else {
+            let existFlag = state.seenHistoryList.find(item => item.carcd === param.carcd)
+            switch (existFlag != undefined ) {
+                case true : existFlag.count++
+                    break
+                case false :
+                    state.seenHistoryList.push(makeSeenCar(param))
+                    break
+            }
+        }
+        function makeSeenCar (param) {
+            const date = new Date();
+            param.count = 1;
+            param.seenTime = date
+            console.log('makeSeenCar>>> ' + date)
+            return param
+        }
     },
     CHECKERRESET ( state ) {
         state.checkedItems = []

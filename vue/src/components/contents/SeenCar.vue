@@ -3,21 +3,14 @@
 <link rel="shortcut icon" href="https://www.kcar.com/resources/images/common/favicon.ico" type="image/x-icon">
 <link rel="icon" href="https://www.kcar.com/resources/images/common/favicon.ico" type="image/x-icon">
 <link rel="apple-touch-icon-precomposed" href="https://www.kcar.com/resources/images/mobile/common/apple-touch-icon.png">
-<link rel="stylesheet" href="https://www.kcar.com/resources/css/re_import.css?v=20191230094250">
-<link rel="stylesheet" href="https://www.kcar.com/resources/css/plugin/selectric.css?v=20191230094250">
-<link rel="stylesheet" type="text/css" href="https://www.kcar.com/resources/css/plugin/ion.rangeSlider.css">
-<link rel="stylesheet" type="text/css" href="https://www.kcar.com/resources/css/plugin/ion.rangeSlider.skinHTML5.css">
-<link rel="stylesheet" href="https://www.kcar.com/resources/css/plugin/uniform.css">
-<link rel="stylesheet" href="https://www.kcar.com/resources/css/plugin/jquery.scrollbar.css">
+<link rel="stylesheet" type="text/css"  href="css/re_import.css">
+<link rel="stylesheet" type="text/css"  href="css/plugin/selectric.css">
+<link rel="stylesheet" type="text/css" href="css/plugin/ion.rangeSlider.css">
+<link rel="stylesheet" type="text/css"  href="css/plugin/ion.rangeSlider.skinHTML5.css">
+<link rel="stylesheet" type="text/css"  href="css/plugin/uniform.css">
+<link rel="stylesheet" type="text/css"  href="css/plugin/jquery.scrollbar.css">
 	
 		<div id="content" class="content_1180"> 
-		
-			
-
-
-
-
-
 
 <!-- [s] view 화면으로 이동용 -->
 <form name="movefrm" method="post" action="">
@@ -92,8 +85,7 @@
 						</router-link>
 						<span class="md_year">{{seenHistory.mfrDate}}({{seenHistory.beginYear}}년형)  &nbsp;&nbsp; {{seenHistory.mileage}}km &nbsp;&nbsp;{{seenHistory.fuelTypecdName}}</span>
 						<span class="price">{{seenHistory.price}}만원 <em></em></span>
-						<a href=""><span
-								class="monthly"></span></a>
+						<a href=""><span class="monthly"></span></a>
 					</td>
 					<td class="car_opt">
 						<div class="mark">
@@ -105,16 +97,17 @@
 						</div>
 						<ul class="opt_list">
 							<li>
-								<span>단순교환</span><span>SUV</span>
+								<span></span><span>SUV</span>
 							</li>
 							<li>
-								<span>성동</span><span></span>
+								<span>{{ seenHistory.count }}</span><span></span>
 							</li>
 							<li>
 								<span>5인승</span><span>&nbsp;</span>
 							</li>
 						</ul>
-						<span class="online_buy">{{seenHistory.simpleComment}}</span>
+						<!--<span class="online_buy">{{seenHistory.simpleComment}}</span>-->
+						<span class="online_buy">{{seenHistory.seenTime}}</span>
 					</td>
 					<td class="btn_area">
 						<a id="toastid0"  href="#" class="oline_btn">온라인 구매</a>
