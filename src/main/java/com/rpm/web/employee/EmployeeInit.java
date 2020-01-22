@@ -10,7 +10,10 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+
 @Component
 public class EmployeeInit implements ApplicationRunner {
     private EmployeeRepository employeeRepository;
@@ -22,8 +25,7 @@ public class EmployeeInit implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         long count = employeeRepository.count();
-
-
+        String[] code={"010",""};
         if (count == 0) {
             // Jsoup를 이용해서 http://www.cgv.co.kr/movies/ 크롤링
             String url = "https://www.kcar.com/directcenter/directcenter_detail.do?i_sCenterCode=114"; //크롤링할 url지정

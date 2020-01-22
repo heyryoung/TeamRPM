@@ -42,7 +42,7 @@
                         <col>
                     </colgroup>
 
-                    <tbody v-for="(customer,index) of List" :key="customer.customerID">
+                    <tbody v-for="(customer,index) of customers" :key="customer.customerID">
                     <tr>
                         <td class="check">
                             <div class="checker" id="uniform-interest_list_check1">
@@ -91,45 +91,55 @@
                 <a href="" class="delete" >선택삭제</a>
             </div>
 
-            <div class="cm_pagination">
-                <ul class="pagination">
-                    <li class="move prev"><a href=""><img
-                            src="https://resources/images/content/buy/pagination_arrows.png" border="0" alt="이전10개"
-                            style="cursor:pointer"></a></li>
-                    <li class="num on"><a>1</a></li>
-                    <li class="move next"><a href=""><img
-                            src="https://resources/images/content/buy/pagination_arrows.png" border="0" alt="다음10개"
-                            style="cursor:pointer"></a></li>
-                </ul>
-            </div>
+            <pagination :pagination="List" @movePage="movePageBlock" ref="pagination"></pagination>
         </div>
     </div>
 </template>
 <script>
     import {checkBox} from "../mixins/checkBox";
-
+    import pagination from "../cmm/pagination";
     export default {
+        components:{
+          pagination
+        },
         data(){
             return {
                 allchecked:false,
-                List:[
-                    {customerID:"001",comment:"벤츠 suv 최저가 구합니다",checked: false, minCarYear:"2000",maxCarYear:"2010", minDistance:"10000",maxDistance:"150000", minPrice:"7000",maxPrice:"10000", acident:"무사고",
-                        color:"갈색", region:"경기/인천", fuel:"디젤",carType:"SUV", people:"5인승",thumb:"https://story-img.kakaocdn.net/dn/qoQx7/hyBwU4vCEL/RswKkc4XSgAQPTF4piHXQ0/img_xl.jpg?width=1096&height=822&face=481_327_571_426&avg=%23c9c6c7"},
-
-                    {customerID:"002",comment:"벤츠 sub 최저가 구합니다",checked: false, minCarYear:"2000",maxCarYear:"2010", minDistance:"10000",maxDistance:"150000", minPrice:"7000",maxPrice:"10000", acident:"무사고",
-                        color:"갈색", region:"경기/인천", fuel:"디젤",carType:"SUV", people:"5인승",thumb:"https://story-img.kakaocdn.net/dn/qoQx7/hyBwU4vCEL/RswKkc4XSgAQPTF4piHXQ0/img_xl.jpg?width=1096&height=822&face=481_327_571_426&avg=%23c9c6c7"}
-                ],
+                List:[],
+                customers:[]
 
             }
         },
         methods: {
-
-            goCompare(){
-                alert('한눈에 비교하기')
+            movePageBlock(){
+                this.customers=pagination
             }
 
         },
-        mixins:[checkBox]
+        mixins:[checkBox],
+        created() {
+            for(let i=0;i<10;i++) {
+                this.List.push({
+                    customerID: "001",
+                    comment: "벤츠 suv 최저가 구합니다",
+                    checked: false,
+                    minCarYear: "2000",
+                    maxCarYear: "2010",
+                    minDistance: "10000",
+                    maxDistance: "150000",
+                    minPrice: "7000",
+                    maxPrice: "10000",
+                    acident: "무사고",
+                    color: "갈색",
+                    region: "경기/인천",
+                    fuel: "디젤",
+                    carType: "SUV",
+                    people: "5인승",
+                    thumb: "https://story-img.kakaocdn.net/dn/qoQx7/hyBwU4vCEL/RswKkc4XSgAQPTF4piHXQ0/img_xl.jpg?width=1096&height=822&face=481_327_571_426&avg=%23c9c6c7"
+                })
+            }
+            this.$refs.pagination.first()
+        }
 
     }
 </script>
