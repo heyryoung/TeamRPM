@@ -610,7 +610,7 @@ export default {
                 carcd: this.carcd,
                 pageLimit : this.$store.state.cmm.pageLimit,
                 maker : maker.code,
-                orderBySub : this.$store.state.cmm.orderBySub
+                orderBySub : this.$store.state.cmm.orderBySub,
                 minPrice : this.selectedMinPrice,
                 maxPrice : this.selectedMaxPrice,
                 minMilage : this.selectedMinMilage,

@@ -91,8 +91,8 @@ public class CarsController {
 
         if ( "minPrice".equals(searchCondition.getMinPrice().getBigCategory())) {
                 carsProcessingList.addAll(
-                        cars.stream().filter(car ->  Integer.parseInt(car.getPrice())
-                                                    >= Integer.parseInt(searchCondition.getMinPrice().getCode()))
+                        cars.stream().filter(car -> car.getPrice()
+                                <= Integer.parseInt(searchCondition.getMinPrice().getCode()))
                                 .collect(Collectors.toList()));
                 cars.clear();
                 cars.addAll(carsProcessingList);
@@ -100,7 +100,7 @@ public class CarsController {
         }
         if ( "maxPrice".equals(String.valueOf(searchCondition.getMaxPrice()))) {
                 carsProcessingList.addAll(
-                        cars.stream().filter( car ->  Integer.parseInt(car.getPrice())
+                        cars.stream().filter( car ->  car.getPrice()
                                                         <= Integer.parseInt(searchCondition.getMaxPrice().getCode()))
                                 .collect(Collectors.toList()));
                 cars.clear();
@@ -109,7 +109,7 @@ public class CarsController {
         }
         if ( "minMilage".equals(String.valueOf(searchCondition.getMinMilage()))) {
                 carsProcessingList.addAll(
-                        cars.stream().filter( car ->  Integer.parseInt(car.getMilage())
+                        cars.stream().filter( car ->  car.getMilage()
                                                         >= Integer.parseInt(searchCondition.getMinMilage().getCode()))
                                 .collect(Collectors.toList()));
                 cars.clear();
@@ -118,7 +118,7 @@ public class CarsController {
         }
         if ( "maxMilage".equals(String.valueOf(searchCondition.getMaxMilage()))) {
                 carsProcessingList.addAll(
-                        cars.stream().filter( car ->  Integer.parseInt(car.getMilage())
+                        cars.stream().filter( car ->  car.getMilage()
                                                 <= Integer.parseInt(searchCondition.getMaxMilage().getCode()))
                                 .collect(Collectors.toList()));
                 cars.clear();
