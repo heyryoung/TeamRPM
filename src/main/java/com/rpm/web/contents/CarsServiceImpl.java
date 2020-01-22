@@ -141,28 +141,28 @@ public class CarsServiceImpl implements CarsService {
     }
 
     @Override
-    public Collection<? extends Cars> findCarBySelectedModel(List<Cars> carsList, String modelCode) {
+    public List<Cars> findCarBySelectedModel(List<Cars> carsList, String modelCode) {
         return carsList.stream()
                 .filter(cars -> modelCode.equals(cars.getModelGrpCd()))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public Collection<? extends Cars> findCarBySelectedFuelType(List<Cars> carsList, String fuelTypecode) {
+    public List<Cars> findCarBySelectedFuelType(List<Cars> carsList, String fuelTypecode) {
         return carsList.stream()
                 .filter(cars -> fuelTypecode.equals(cars.getFuelTyped()))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public Collection<? extends Cars> findCarBySelectedRegion(List<Cars> carsList, String regioncode) {
+    public List<Cars> findCarBySelectedRegion(List<Cars> carsList, String regioncode) {
         return carsList.stream()
                 .filter(cars -> regioncode.equals(cars.getCenterRegionCode()))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public Collection<? extends Cars> findCarBySelectedMaker(List<Cars> carsList, String code) {
+    public List<Cars> findCarBySelectedMaker(List<Cars> carsList, String code) {
         return carsList.stream()
                 .filter(cars -> code.equals(cars.getMakecd()))
                 .collect(Collectors.toList());

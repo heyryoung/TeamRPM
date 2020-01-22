@@ -4,8 +4,9 @@
         <link rel="icon" href="https://www.kcar.com/resources/images/common/favicon.ico" type="image/x-icon">
         <link rel="apple-touch-icon-precomposed"
               href="https://www.kcar.com/resources/images/mobile/common/apple-touch-icon.png">
-        <link rel="stylesheet" href="https://www.kcar.com/resources/css/re_import.css?v=20191223103556">
-        <link rel="stylesheet" href="https://www.kcar.com/resources/css/plugin/selectric.css?v=20191223103556">
+        <link rel="stylesheet" type="text/css"  href="css/re_import.css">
+        <link rel="stylesheet" type="text/css"   href="css/re_trade.css">
+        <link rel="stylesheet" type="text/css"   href="css/plugin/selectric.css">
         <div id="headerNew" class="header_new">
         </div>
         <div id="content">
@@ -19,7 +20,7 @@
                         <div class="quick_search">
                             <div class="ip_field">
                                 <input type="text" name="quickSearch" id="searchWord" v-model="searchWord" placeholder="모델명 입력 예시) 아반떼 MD"
-                                       autocomplete="off" v-on:keyup.enter="searchWithCondition()">
+                                       autocomplete="off" v-on:keyup.enter="searchWithCondition()" >
                                 <label for="quickSearch">검색아이콘</label>
                                 <ul class="drop_box"></ul>
                             </div>
@@ -90,97 +91,94 @@
                                 </div>
                             </li>
                             <li class="list_h list_h05 on" id="list_h list_h05 on">
-                                <a class="type"   @click="bigCategoryIsOpen('list_h list_h05 on')">연식<small></small></a>
-                                <div class="sub_type_list" data-init="true"  >
-                                    <div id="startYear"  class="selectric-wrapper selectric-selectric selectric-below selectric-hover" @click= "searchKeyClick(`startYear`)">
+                                <a class="type"   @click="bigCategoryIsOpen('list_h list_h05 on')">가격<small></small></a>
+                                <div class="sub_type_list" data-init="true" >
+                                    <div class="selectric-wrapper selectric-selectric selectric-below selectric-hover"
+                                         id="selectMinPrice"   @click="selectBoxChanger(`selectMinPrice`)" >
                                         <div class="selectric-hide-select" >
                                             <select name="wr_gt_v_mfr_date"
-                                                    v-for="startYear of startYears" :key="startYear.code"
+                                                    v-for="minPrice of minPriceList" :key="minPrice.code"
                                                     id="modelYear01" class="selectric" ata-unit="년">
-                                            <option :value="startYear.code"> {{startYear.name}}</option>
+                                            <option value="startYear.code"> {{minPrice.name}}</option>
                                         </select></div>
-                                        <div class="selectric"><span class="label" >최소</span></div>
-                                        <div class="selectric-items" tabindex="-1"  style="width: 120px; height: 300px;">
+                                        <div class="selectric"><span class="label" >{{selectedMinPrice.name}}</span></div>
+                                        <div class="selectric-items" tabindex="-1"  id = "minPrice" style="width: 120px; height: 300px;">
                                             <div class="selectric-scroll">
-                                                <ul v-for="startYear of startYears" :key="startYear.code">
-                                                    <li>
-                                                    <option :value="startYear.code">{{startYear.name}}</option>
+                                                <ul v-for="minPrice of minPriceList" :key="minPrice.code">
+                                                    <li @click="setStartOrmaxPrice(minPrice)">{{minPrice.name}}
                                                     </li>
                                                 </ul>
                                             </div>
                                         </div>
                                         <input class="selectric-input" tabindex="0"></div>
                                     <span class="wave">~</span>
-                                    <div class="selectric-wrapper selectric-selectric selectric-hover" id="endYear"  @click= "searchKeyClick(`endYear`)">
+                                    <div class="selectric-wrapper selectric-selectric selectric-hover" id="selectMaxPrice"   @click="selectBoxChanger(`selectMaxPrice`)"  >
                                         <div class="selectric-hide-select"><select name="wr_lt_v_mfr_date"
                                                                                    id="modelYear02" class="selectric"
                                                                                    data-unit="년"
                                                                                    tabindex="-1"
-                                                                                   v-for="endYear of endYears" :key="endYear.code">
-                                            <option :value="endYear.code"> {{endYear.name}}</option>
+                                                                                   v-for="maxPrice of maxPriceList" :key="maxPrice.code">
+                                            <option value="endYear.code"> {{maxPrice.name}}</option>
                                         </select></div>
-                                        <div class="selectric"><span class="label" data-beusable-tracking="">최대</span></div>
-                                        <div class="selectric-items" tabindex="-1"   style="width: 120px; height: 300px;">
+                                        <div class="selectric"><span class="label" data-beusable-tracking="">{{selectedMaxPrice.name}}</span></div>
+                                        <div class="selectric-items" tabindex="-1" id = "maxPrice"  style="width: 120px; height: 300px;">
                                             <div class="selectric-scroll">
-                                                <ul  v-for="endYear of endYears" :key="endYear.code">
-                                                    <li>
-                                                    <option :value="endYear.code"> {{endYear.name}}</option>
+                                                <ul  v-for="maxPrice of maxPriceList" :key="maxPrice.code">
+                                                    <li @click="setStartOrmaxPrice(maxPrice)">{{maxPrice.name}}
                                                     </li>
                                                 </ul>
                                             </div>
-
                                         </div>
                                         <input class="selectric-input" tabindex="0"></div>
                                 </div>
                             </li>
-<!--                           <li class="list_h list_h04 on" id="list_h list_h04 on">
+                           <li class="list_h list_h04 on" id="list_h list_h04 on">
                                 <a class="type"   @click="bigCategoryIsOpen(`list_h list_h04 on`)">주행거리<small></small></a>
                                 <div class="sub_type_list"  data-init="true"  >
-                                    <div id="startMileage1" @click="searchKeyClick(`startMileage1`)"
-                                         class="selectric-wrapper selectric-selectric selectric-below selectric-hover">
-                                        <div class="selectric-hide-select"><select name="wr_gt_n_mileage"
+                                    <div class="selectric-wrapper selectric-selectric selectric-below selectric-hover"
+                                        id="selectMinMileage"   @click="selectBoxChanger(`selectMinMileage`)">
+                                        <div class="selectric-hide-select"><select name="wr_gt_n_Milage"
                                                                                    id="distance01" class="selectric"
-                                                                                   data-unit="km" data-bro="mileage"
-                                                                                   v-for="startMileage of startMileages"
-                                                                                   :key="startMileage.code"
+                                                                                   data-unit="km" data-bro="Milage"
+                                                                                   v-for="minMilage of minMilages"
+                                                                                   :key="minMilage.code"
                                                                                    tabindex="-1"
                                                                                    >
-                                            <option value="">최소</option>
-                                            <option :value="startMileage.code"> {{startMileage.name}} </option>
+                                            <option :value="minMilage.code"> {{minMilage.name}} </option>
                                         </select></div>
-                                        <div class="selectric"><span class="label">최소</span></div>
-                                        <div class="selectric-items" tabindex="-1">
-                                            <div class="selectric-scroll">
-                                                <ul>
-                                                    <li data-index="0" class="selected">최소</li>
-                                                    <option :value="startMileage.code"> {{startMileage.name}} </option>
+                                        <div class="selectric"><span class="label">{{selectedMinMilage.name}}</span></div>
+                                        <div class="selectric-items" tabindex="-1" id = "minMilage">
+                                            <div class="selectric-scroll" style="width: 120px; height: 300px;">
+                                                <ul v-for="minMilage of minMilages" :key="minMilage.code">
+                                                    <li @click="setStartOrmaxMilage(minMilage)">{{minMilage.name}}</li>
                                                 </ul>
                                             </div>
                                         </div>
                                         <input class="selectric-input" tabindex="0"></div>
                                     <span class="wave">~</span>
-                                    <div  id="endMileage" @click="searchKeyClick(`endMileage`)"
-                                          class="selectric-wrapper selectric-selectric selectric-below selectric-hover">
-                                        <div class="selectric-hide-select"><select name="wr_lt_n_mileage"
+                                    <div class="selectric-wrapper selectric-selectric selectric-below selectric-hover"
+                                          id="selectMaxMileage"   @click="selectBoxChanger(`selectMaxMileage`)">
+                                        <div class="selectric-hide-select"><select name="wr_lt_n_Milage"
                                                                                    id="distance02" class="selectric"
-                                                                                   v-for="endMileage of endMileages"
-                                                                                   :key="endMileage.code"
+                                                                                   v-for="maxMilage of maxMilages"
+                                                                                   :key="maxMilage.code"
                                                                                    tabindex="-1"
                                                                                    >
-                                            <option :value="endMileage.code">{{endMileage.name}}</option>
+                                            <option :value="maxMilage.code">{{maxMilage.name}}</option>
                                         </select></div>
-                                        <div class="selectric"><span class="label">최대</span></div>
-                                        <div class="selectric-items" tabindex="-1">
+                                        <div class="selectric"><span class="label">{{selectedMaxMilage.name}}</span></div>
+                                        <div class="selectric-items" tabindex="-1"  id="maxMilage" style="width: 120px; height: 300px;">
                                             <div class="selectric-scroll">
-                                                <ul v-for="endMileage of endMileages" :key="endMileage.code">
-                                                    <option :value="endMileage.code">{{endMileage.name}}</option>
+                                                <ul v-for="maxMilage of maxMilages" :key="maxMilage.code">
+                                                    <li @click="setStartOrmaxMilage(maxMilage)"> {{maxMilage.name}}
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>
                                         <input class="selectric-input" tabindex="0"></div>
                                 </div>
-                            </li>-->
-                            <li class="list_h list_h07" id="list_h list_h07">
+                            </li>
+                            <li class="list_h list_h07" id="list_h list_h07" >
                                 <a class="type" @click="bigCategoryIsOpen(`list_h list_h07`)">연료 <small></small></a>
                                 <div class="sub_type_list">
                                     <ul class="row_list"  v-for="fuelType of fuelTypeList" :key="fuelType.code">
@@ -387,20 +385,21 @@
                                     <img src="https://www.kcar.com//resources/images/common/ico_empty.jpg" alt="차량없음 이미지">
                                     <a href="/help/helpMain.do">관심차량등록알림 신청하기</a>
                                 </td>
-                                <tr v-for="showCar of showCarList" :key="showCar.carcd" @click="addHistory(carSearchResult)">
+                                <tr v-for="showCar of showCarList" :key="showCar.carcd" >
                                     <td class="thumb">
-                                        <a :href="showCar.carUrl" target="_blank">
+                                        <a href="#" >
                                             <div class="mark_area"></div>
                                             <img :src="showCar.middleImg" alt="자동차 썸네일">
                                         </a>
                                     </td>
                                     <td class="car_info">
-                                    <router-link to="/product">
-                                        <a href="" target="_blank" class="name" ></a>
+                                    <router-link to="/product" target="_blank"  >
+                                        <a class="name" @click="addHistory(showCar)">
                                         {{showCar.truckName}}
+                                        </a>
                                     </router-link>
-                                    <span class="md_year">{{showCar.mfrDate}}({{showCar.beginYear}}년형)  &nbsp;&nbsp; {{showCar.mileage}}km &nbsp;&nbsp;{{showCar.fuelTypecdName}}</span>
-                                    <span class="price">{{showCar.price}}만원 <em></em></span>
+                                        <span class="md_year">{{ showCar.mfrDate | mfrDateFormatter }} &nbsp; ({{ showCar.beginYear | beginYearFormatter }}년형)&nbsp;{{ showCar.milage | thousandFormatter }}km &nbsp;&nbsp;{{showCar.fuelTypecdName}}</span>
+                                    <span class="price">{{ showCar.price | thousandFormatter }}만원 <em></em></span>
                                     <a href=""><span
                                             class="monthly"></span></a>
                                 </td>
@@ -452,11 +451,16 @@ export default {
             searchWord: '',
             carcd: '',
             limits : [15,30,45,60],
+            minDefault : { code: '' ,name : ` 최 소 ` , bigcategory : 'minDefault' },
+            maxDefault : { code: '' ,name : ` 최 대 `, bigcategory : 'maxDefault'  },
+            selectedMinPrice : { code: '' , name : ` 최 소 ` , bigcategory : 'minPrice' },
+            selectedMaxPrice : { code: '' , name : ` 최 대 ` , bigcategory : 'maxPrice' },
+            selectedMinMilage : { code: '' , name : ` 최 소 ` , bigcategory : 'minMilage' },
+            selectedMaxMilage : { code: '' , name : ` 최 대 ` , bigcategory : 'maxMilage' }
         }
     },
     computed: {
         ...mapState({
-            carSearchResults : state => state.cmm.carSearchResults,
             showCarList : state => state.cmm.showCarList,
             categoryList: state => state.cmm.categoryList,
             makerList: state => state.cmm.makerList,
@@ -475,35 +479,40 @@ export default {
             return (this.$store.state.cmm.showCarList.length>0)
 
         },
-        startYears : function(){
-            let list = []
+        minPriceList : function(){
+            let list = [this.minDefault]
             for(let i=1;i<=20;i++){
-                list.push({index : i, code : `${i*10000}` ,name : `${i}0,000만원`, bigCategory : 'begin_year'})
+                list.push({ code : `${i*1000}` ,name : `${i},000만원`, bigCategory : 'minPrice' })
             }
             return list
         },
-        endYears : function(){
-            let list = []
+        maxPriceList : function(){
+            let list = [this.maxDefault]
             for(let i=1;i<=20;i++){
-                list.push({index : i, code : `${i*10000}` ,name : `${i}0,000만원`, bigCategory : 'begin_year'})
+                list.push({ code : `${i*1000}` ,name : `${i},000만원`, bigCategory : 'maxPrice'})
             }
             return list
         },
-        startMileages : function(){
-            let list = []
-            for(let i=2020;i>=1980;i--){
-                list.push({index : i, code: i ,name : `${i}년` , bigCategory : 'mileage'})
+        minMilages : function(){
+            let list = [this.minDefault]
+            for(let i=1;i<=20;i++){
+                list.push({ code : `${i*1000}` ,name : `${i}0,000km`, bigCategory : 'minMilage'})
             }
             return list
         },
-        endMileages : function(){
-            let list = []
-            for(let i=2020; i>=1980 ;i--){
-                list.push({index : i, code: i ,name : `${i}년`  , bigCategory : 'mileage' })
+        maxMilages : function(){
+            let list = [this.maxDefault]
+            for(let i=1;i<=20;i++){
+                list.push({ code : `${i*1000}` ,name : `${i}0,000km`, bigCategory : 'maxMilage'})
             }
             return list
 
-        }/*,
+        },
+        beginYearCalc : function () {
+            return true
+        }
+
+        /*,
         orderByList : function(){
             let orderByList = ['기본정렬', '가격순', '주행거리 순', '연식 순']
             let orderBy = []
@@ -518,9 +527,9 @@ export default {
                         ,{value : 'priceASC', class : 'up', name : '높은순'} ]})
                         break
                     case '주행거리 순' : orderBy.push({class : ''
-                        , a : [{value : 'mileageController', class : 'txt', name : '주행거리 순'},
-                            {value : 'mileageDESC', class : 'down', name : '낮은순'},
-                            {value : 'mileageASC', class : 'up', name : '높은순'}]})
+                        , a : [{value : 'MilageController', class : 'txt', name : '주행거리 순'},
+                            {value : 'MilageDESC', class : 'down', name : '낮은순'},
+                            {value : 'MilageASC', class : 'up', name : '높은순'}]})
                         break
                     case '연식 순' : orderBy.push({class : '', a : [{
                             value : 'beginyearController', class : 'txt', name : '연식 순'},
@@ -550,8 +559,22 @@ export default {
                 searchKey.className = "selectric-wrapper selectric-selectric selectric-below"
             }
         },
-        addHistory(caritem){
-            this.$store.dispatch('cmm/addSeenHistory',caritem)
+        selectBoxChanger(targetItem){
+            const searchKey = document.getElementById(targetItem)
+            const cate2 = document.getElementById("m"+targetItem.substr(7))
+            if(searchKey.className === "selectric-wrapper selectric-selectric selectric-below selectric-hover"){
+                for (let elementsByClassNameElement of document.getElementsByClassName("selectric-wrapper selectric-selectric selectric-below selectric-hover selectric-open selectric-focus")) {
+                    elementsByClassNameElement.className = "selectric-wrapper selectric-selectric selectric-below selectric-hover"
+                }
+                searchKey.className = "selectric-wrapper selectric-selectric selectric-below selectric-hover selectric-open selectric-focus"
+            }else{
+                searchKey.className = "selectric-wrapper selectric-selectric selectric-below selectric-hover"
+            }
+                cate2.style.width = "120px"
+                cate2.style.height = "300px"
+        },
+        addHistory(carItem){
+            this.$store.dispatch('cmm/addSeenHistory',carItem)
         },
         bigCategoryIsOpen(categoryType) {
             const searchConditionCategory = document.getElementById(categoryType)
@@ -588,7 +611,7 @@ export default {
                 }
             })
 
-            let data = {
+            let selectedConditionData = {
                 categoryList: checkedCategoryList,
                 modelList: checkedModelList,
                 fuelTypeList: checkedFuelTypeList,
@@ -596,15 +619,15 @@ export default {
                 searchWord: this.searchWord,
                 carcd: this.carcd,
                 pageLimit : this.$store.state.cmm.pageLimit,
-                maker : maker.code
+                maker : maker.code,
+                minPrice : this.selectedMinPrice,
+                maxPrice : this.selectedMaxPrice,
+                minMilage : this.selectedMinMilage,
+                maxMilage : this.selectedMaxMilage
             }
-            this.$store.dispatch('cmm/searchWithCondition', data)
-
+            //console( foundItem.bigCategory + "<<<CHECKER>>>>>" + foundItem.name )
+            this.$store.dispatch('cmm/searchWithCondition', selectedConditionData)
             },
-
-        reset () {
-            this.$store.dispatch('cmm/checkReset')
-        },
 
         clickPageLimit(pageLimit){
             this.$store.dispatch('cmm/pageLimitSetting', pageLimit)
@@ -612,13 +635,68 @@ export default {
         },
         orderBy(){
 
+        },
+        setStartOrmaxPrice ( param ) {
+            switch ( param.bigCategory ) {
+                case 'minPrice' :
+                    this.selectedMinPrice = param
+                    break
+                case 'maxPrice' :
+                    this.selectedMaxPrice = param
+                    break
+            }
+            this.searchWithCondition()
+        },
+        setStartOrmaxMilage ( param ) {
+            switch ( param.bigCategory ) {
+                case 'minMilage' :
+                    this.selectedMinMilage = param
+                    break
+                case 'maxMilage' :
+                    this.selectedMaxMilage = param
+                    break
+            }
+            this.searchWithCondition()
+        },
+        reset () {
+            this.resettingSelectBox()
+            this.$store.dispatch('cmm/reset')
+            this.$store.dispatch('cmm/init')
+        },
+        resettingSelectBox () {
+            this.selectedMinPrice.code = this.minDefault.code
+            this.selectedMinPrice.name = this.minDefault.name
+            this.selectedMaxPrice.code = this.maxDefault.code
+            this.selectedMaxPrice.name = this.maxDefault.name
+            this.selectedMinMilage.code = this.minDefault.code
+            this.selectedMinMilage.name = this.minDefault.name
+            this.selectedMaxMilage.code = this.maxDefault.code
+            this.selectedMaxMilage.name = this.maxDefault.name
         }
     },
-        created() {
-        if(!this.$store.state.cmm.initFlag)
-            this.$store.dispatch('cmm/init')
-        }
+    filters: {
+        mfrDateFormatter: function (value) {
+            if (!value) return ''
+            value = value.toString()
+            return value.slice(2,4)+`년` + value.slice(4,6)+`월식`
+        },
+        beginYearFormatter: function (value) {
+            if (!value) return ''
+            value = value.toString()
+            return value.slice(2,4)+``
+        },
+        thousandFormatter: function (value) {
+            if (!value) return ''
+            if(value.length === 3) return value
+            value = value.toString()
+            return value.slice( 0 , value.length-3)+`,`+ value.slice(-3,value.length)
+        },
+    },
+    created() {
+    if(!this.$store.state.cmm.initFlag)
+        this.$store.dispatch('cmm/init')
     }
+}
 </script>
 <style scoped>
     .main_content{

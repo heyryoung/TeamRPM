@@ -5,6 +5,7 @@ import com.rpm.web.proxy.Trunk;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8081")
@@ -86,6 +87,43 @@ public class CarsController {
 
 
 
+        if ( "minPrice".equals(searchCondition.getMinPrice().getBigCategory())) {
+                carsProcessingList.addAll(
+                        cars.stream().filter(car ->  Integer.parseInt(car.getPrice())
+                                                    >= Integer.parseInt(searchCondition.getMinPrice().getCode()))
+                                .collect(Collectors.toList()));
+                cars.clear();
+                cars.addAll(carsProcessingList);
+                carsProcessingList.clear();
+        }
+        if ( "maxPrice".equals(String.valueOf(searchCondition.getMaxPrice()))) {
+                carsProcessingList.addAll(
+                        cars.stream().filter( car ->  Integer.parseInt(car.getPrice())
+                                                        <= Integer.parseInt(searchCondition.getMaxPrice().getCode()))
+                                .collect(Collectors.toList()));
+                cars.clear();
+                cars.addAll(carsProcessingList);
+                carsProcessingList.clear();
+        }
+        if ( "minMilage".equals(String.valueOf(searchCondition.getMinMilage()))) {
+                carsProcessingList.addAll(
+                        cars.stream().filter( car ->  Integer.parseInt(car.getMilage())
+                                                        >= Integer.parseInt(searchCondition.getMinMilage().getCode()))
+                                .collect(Collectors.toList()));
+                cars.clear();
+                cars.addAll(carsProcessingList);
+                carsProcessingList.clear();
+        }
+        if ( "maxMilage".equals(String.valueOf(searchCondition.getMaxMilage()))) {
+                carsProcessingList.addAll(
+                        cars.stream().filter( car ->  Integer.parseInt(car.getMilage())
+                                                <= Integer.parseInt(searchCondition.getMaxMilage().getCode()))
+                                .collect(Collectors.toList()));
+                cars.clear();
+                cars.addAll(carsProcessingList);
+                carsProcessingList.clear();
+        }
+
         if ( !categoryList.isEmpty()) {
             for (SearchDetailCondition category : categoryList) {
                 carsProcessingList.addAll(carsService.findCarBySelectedCategory(cars , category.getCode()));
@@ -95,7 +133,6 @@ public class CarsController {
             carsProcessingList.clear();
         }
 
-
         if ( !fuelTypeList.isEmpty() ) {
             for (SearchDetailCondition fuelType : fuelTypeList) {
                 carsProcessingList.addAll(carsService.findCarBySelectedFuelType(cars , fuelType.getCode()));
@@ -104,14 +141,12 @@ public class CarsController {
             cars.addAll(carsProcessingList);
             carsProcessingList.clear();
         }
-
         if ( !regionList.isEmpty() ) {
             for (SearchDetailCondition region : regionList) {
                 carsProcessingList.addAll(carsService.findCarBySelectedRegion(cars , region.getCode()));
             }
             cars = carsProcessingList;
         }
-
         if ( searchCondition.getMaker() != null ) {
             carsProcessingList.addAll(carsService.findCarBySelectedMaker(cars , searchCondition.getMaker()));
             cars.clear();
@@ -120,7 +155,6 @@ public class CarsController {
             trunk.put(Arrays.asList("modelList"),Arrays.asList(carsService.findByModelWithCount(cars,searchCondition.getMaker())));
             //resultModelList = carsService.findByModelWithCount(cars,searchCondition.getMaker());
         }
-
         if ( !modelList.isEmpty() ) {
             for (SearchDetailCondition model : modelList) {
                 carsProcessingList.addAll(carsService.findCarBySelectedModel(cars , model.getCode()));
@@ -129,7 +163,6 @@ public class CarsController {
             cars.addAll(carsProcessingList);
             carsProcessingList.clear();
         }
-
 
         trunk.put(Arrays.asList("resultLength", "showCarList", "makerList") ,
                 Arrays.asList(cars.size()

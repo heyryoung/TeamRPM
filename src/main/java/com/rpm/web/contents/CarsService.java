@@ -42,12 +42,11 @@ public interface CarsService {
 
     List<Cars> findCarBySelectedCategory(List<Cars> carsList, String category);
 
-    Collection<? extends Cars> findCarBySelectedMaker(List<Cars> carsList, String code);
+    List<Cars> findCarBySelectedMaker(List<Cars> carsList, String code);
 
-    Collection<? extends Cars> findCarBySelectedFuelType(List<Cars> carsList, String code);
+    List<Cars> findCarBySelectedFuelType(List<Cars> carsList, String code);
 
-    Collection<? extends Cars> findCarBySelectedRegion(List<Cars> carsList, String code);
+    List<Cars> findCarBySelectedRegion(List<Cars> carsList, String code);
 
-
-    Collection<? extends Cars> findCarBySelectedModel(List<Cars> carsList, String code);
+    List<Cars> findCarBySelectedModel(List<Cars> carsList, String code);
 }
