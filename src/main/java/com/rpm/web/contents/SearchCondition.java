@@ -21,6 +21,9 @@ public class SearchCondition {
     private String findKey;
     private String maker;
     private int pageLimit;
-    private String orderByWith;
-    private String oderBy;
+    private String orderBySub;
+    private SearchDetailCondition minPrice;
+    private SearchDetailCondition maxPrice;
+    private SearchDetailCondition minMilage;
+    private SearchDetailCondition maxMilage;
 }

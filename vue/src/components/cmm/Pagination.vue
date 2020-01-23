@@ -30,6 +30,7 @@
         },
         computed : {
             pageList : function(){
+                this.init()
                 let pageList = []
                 for(let i = this.startPage; i<= this.endPage; i++){
                     if (i == this.$store.state.cmm.pageNum)
@@ -69,16 +70,6 @@
                     : this.startPage + this.blockSize-1
                 this.existPrev = (this.blockNum != 1)
                 this.existNext = !(this.blockNum == this.blockCount)
-                console.log(`총 수 : `+this.$store.state.cmm.resultLength)
-                console.log(`페이지 카운트 : ` + this.pageCount)
-                console.log(`현재 페이지 : ` + this.$store.state.cmm.pageNum)
-                console.log(`start : `+this.startRow)
-                console.log(`end : `+this.endRow)
-                console.log(`startPage : ` + this.startPage)
-                console.log(`endPage : ` + this.endPage)
-                console.log(`blockNum : ` + this.blockNum)
-                console.log(`blockCount : ` + this.blockCount)
-                console.log(this.$store.state.cmm.pageNum / this.blockSize)
             },
             previous(){
                 this.$store.dispatch('cmm/pageNumSetting', this.startPage-1)
@@ -94,6 +85,7 @@
         created() {
             this.init()
         }
+
 
     }
 </script>

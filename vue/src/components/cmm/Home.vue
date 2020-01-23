@@ -1123,7 +1123,12 @@
 
             },
             goSearchWithCondition(){
-
+                if(this.keyWord1 === '제조사를 선택하세요'){
+                    alert('제조사를 선택해주세요.')
+                }else{
+                    this.$store.dispatch('cmm/mainSearch',{'maker':this.keyWord1,'model':this.keyWord2,'modelText' : this.keyWord3, 'minPrice' : this.minPrice, 'maxPrice' : this.maxPrice})
+                    this.$router.push('/searchMain')
+                }
             }
         },
         computed : {
