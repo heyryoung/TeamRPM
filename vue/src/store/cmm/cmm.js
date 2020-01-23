@@ -22,7 +22,13 @@ const state = {
     modelList : [],
     initFlag : false,
     modelListIsOpen : false,
-    orderBySub : 'default'
+    orderBySub : 'default',
+    makerFromMain : '',
+    modelFromMain : '',
+    modelTextFromMain : '',
+    minPriceFromMain : '',
+    maxPriceFromMain : '',
+    carItem : ''
 
 };
 const getters = {
@@ -158,6 +164,12 @@ const actions = {
     },
     async orderBySubSetting({commit}, data){
         commit('ORDERBYSUBSETTING', data)
+    },
+    async mainSearch({commit}, data){
+        commit('MAINSEARCH', data)
+    },
+    async setProduct({commit}, data){
+        commit('SETPRODUCT', data)
     }
 };
 const mutations = {
@@ -370,6 +382,19 @@ const mutations = {
     PAGELIMITSETTING(state, data) {
         state.pageLimit = data
     },
+    ORDERBYSUBSETTING(state, data){
+        state.orderBySub = data
+    },
+    MAINSEARCH(state, data){
+        state.makerFromMain = data.maker
+        state.modelFromMain = data.model
+        state.modelTextFromMain = data.modelText
+        state.minPriceFromMain = data.minPrice
+        state.maxPriceFromMain = data.maxPrice
+    },
+    SETPRODUCT(state, data){
+        state.carItem = data
+    },
 
     REMOVEHASHTAG(state, foundItem) {
         foundItem.checked = !foundItem.checked
@@ -393,6 +418,7 @@ const mutations = {
 
         }
     }
+
 
 export default {
     name: 'cmm',
