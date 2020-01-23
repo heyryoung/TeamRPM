@@ -147,8 +147,8 @@
                                             <option :value="minMilage.code"> {{minMilage.name}} </option>
                                         </select></div>
                                         <div class="selectric"><span class="label">{{selectedMinMilage.name}}</span></div>
-                                        <div class="selectric-items" tabindex="-1" id = "minMilage">
-                                            <div class="selectric-scroll" style="width: 120px; height: 300px;">
+                                        <div class="selectric-items" tabindex="-1" id = "minMilage" style="width: 120px; height: 300px;">
+                                            <div class="selectric-scroll" >
                                                 <ul v-for="minMilage of minMilages" :key="minMilage.code">
                                                     <li @click="setStartOrmaxMilage(minMilage)">{{minMilage.name}}</li>
                                                 </ul>
@@ -475,6 +475,12 @@ export default {
             selectedMaxPrice : { code: '' , name : ` 최 대 ` , bigcategory : 'maxPrice' },
             selectedMinMilage : { code: '' , name : ` 최 소 ` , bigcategory : 'minMilage' },
             selectedMaxMilage : { code: '' , name : ` 최 대 ` , bigcategory : 'maxMilage' }
+            minDefault : { code: 'minDefault' ,name : ` 최 소 ` , bigcategory : 'minDefault' },
+            maxDefault : { code: 'maxDefault' ,name : ` 최 대 `, bigcategory : 'maxDefault'  },
+            selectedMinPrice : { code: 'selectedMinPrice' , name : ` 최 소 ` , bigcategory : 'minPrice' },
+            selectedMaxPrice : { code: 'selectedMaxPrice' , name : ` 최 대 ` , bigcategory : 'maxPrice' },
+            selectedMinMilage : { code: 'selectedMinMilage' , name : ` 최 소 ` , bigcategory : 'minMilage' },
+            selectedMaxMilage : { code: 'selectedMaxMilage' , name : ` 최 대 ` , bigcategory : 'maxMilage' }
         }
     },
     computed: {
@@ -543,15 +549,13 @@ export default {
         },
         searchKeyClick(searchKeyID) {
             const searchKey = document.getElementById(searchKeyID)
-            if (searchKey.className === "selectric-wrapper selectric-selectric selectric-below") {
-                searchKey.className = "selectric-wrapper selectric-selectric selectric-below selectric-open"
-            } else {
-                searchKey.className = "selectric-wrapper selectric-selectric selectric-below"
-            }
+            searchKey.className = (searchKey.className === "selectric-wrapper selectric-selectric selectric-below")
+                        ? "selectric-wrapper selectric-selectric selectric-below selectric-open"
+                        : "selectric-wrapper selectric-selectric selectric-below"
         },
         selectBoxChanger(targetItem){
             const searchKey = document.getElementById(targetItem)
-            const cate2 = document.getElementById("m"+targetItem.substr(7))
+            //const cate2 = document.getElementById("m"+targetItem.substr(7))
             if(searchKey.className === "selectric-wrapper selectric-selectric selectric-below selectric-hover"){
                 for (let elementsByClassNameElement of document.getElementsByClassName("selectric-wrapper selectric-selectric selectric-below selectric-hover selectric-open selectric-focus")) {
                     elementsByClassNameElement.className = "selectric-wrapper selectric-selectric selectric-below selectric-hover"
@@ -560,19 +564,15 @@ export default {
             }else{
                 searchKey.className = "selectric-wrapper selectric-selectric selectric-below selectric-hover"
             }
-                cate2.style.width = "120px"
-                cate2.style.height = "300px"
         },
         addHistory(carItem){
             this.$store.dispatch('cmm/addSeenHistory',carItem)
         },
         bigCategoryIsOpen(categoryType) {
             const searchConditionCategory = document.getElementById(categoryType)
-            if (searchConditionCategory.className.substr(-2, 2) === 'on') {
-                searchConditionCategory.className = (searchConditionCategory.className.substring(0, searchConditionCategory.className.length - 3));
-            } else {
-                searchConditionCategory.className = searchConditionCategory.className + " on"
-            }
+            searchConditionCategory.className = (searchConditionCategory.className.substr(-2, 2) === 'on')
+                        ? (searchConditionCategory.className.substring(0, searchConditionCategory.className.length - 3))
+                        : searchConditionCategory.className = searchConditionCategory.className + " on"
         },
         searchWithCondition() {
             let checkedCategoryList = []
@@ -602,23 +602,25 @@ export default {
             })
 
             let selectedConditionData = {
-                categoryList: checkedCategoryList,
-                modelList: checkedModelList,
-                fuelTypeList: checkedFuelTypeList,
-                regionList: checkedRegionList,
-                searchWord: this.searchWord,
-                carcd: this.carcd,
-                pageLimit : this.$store.state.cmm.pageLimit,
-                maker : maker.code,
-                orderBySub : this.$store.state.cmm.orderBySub,
-                minPrice : this.selectedMinPrice,
-                maxPrice : this.selectedMaxPrice,
-                minMilage : this.selectedMinMilage,
-                maxMilage : this.selectedMaxMilage
+
+                    categoryList: checkedCategoryList,
+                    modelList: checkedModelList,
+                    fuelTypeList: checkedFuelTypeList,
+                    regionList: checkedRegionList,
+                    searchWord: this.searchWord,
+                    carcd: this.carcd,
+                    pageLimit : this.$store.state.cmm.pageLimit,
+                    maker : maker.code,
+                    minPrice : this.selectedMinPrice,
+                    orderBySub : this.$store.state.cmm.orderBySub,
+                    maxPrice : this.selectedMaxPrice,
+                    minMilage : this.selectedMinMilage,
+                    maxMilage : this.selectedMaxMilage
+
             }
             //console( foundItem.bigCategory + "<<<CHECKER>>>>>" + foundItem.name )
             this.$store.dispatch('cmm/searchWithCondition', selectedConditionData)
-            },
+        },
 
         clickPageLimit(pageLimit){
             this.$store.dispatch('cmm/pageLimitSetting', pageLimit)
