@@ -111,7 +111,35 @@ const actions = {
         },
 
     async CHECKER ({ commit }, param ) {
-        commit('CHECKER',param);
+        console.log( "actionCHECKER>>>>>>" + param.targetItem.name)
+        switch ( param.act ) {
+            case "checked": commit( 'CHECKER' , foundWhichListIsItemOn(param.targetItem ));
+                break
+            case "remove":  commit ( 'REMOVEHASHTAG' , foundWhichListIsItemOn(param.targetItem ) );
+                break
+        }
+
+        function foundWhichListIsItemOn ( data ) {
+            let foundItem ='';
+            switch (data.bigCategory) {
+                case 'categoryList':
+                    foundItem = state.categoryList.find( item => item.code === data.code)
+                    break
+                case 'makerList':
+                    foundItem = state.makerList.find( item => item.code === data.code)
+                    break
+                case 'fuelTypeList':
+                    foundItem = state.fuelTypeList.find( item => item.code === data.code)
+                    break
+                case 'regionList':
+                    foundItem = state.regionList.find( item => item.code === data.code)
+                    break
+                case 'modelList':
+                    foundItem = state.modelList.find( item => item.code === data.code)
+                    break
+            }
+            return foundItem
+        }
     },
     async addSeenHistory ({ commit }, param ) {
         commit('ADDSEENHISTORY', param );
@@ -123,13 +151,13 @@ const actions = {
         axios
             .get(`http://localhost:8080/getshowcarlist/`+data.start+'/'+data.end)
             .then(({data})=>{
-                commit('SHOWCARLIST', data)})
+                commit('SHOWCARLIST', data )})
             .catch(()=>{
                 alert('잘못된 요청입니다.')
             })
     },
     async pageNumSetting({commit}, data){
-        commit('PAGENUMSETTING', data)
+        commit('PAGENUMSETTING', data )
     },
     async pageLimitSetting({commit}, data){
         commit('PAGELIMITSETTING', data)
@@ -143,11 +171,9 @@ const actions = {
     async setProduct({commit}, data){
         commit('SETPRODUCT', data)
     }
-
-
 };
 const mutations = {
-    INIT (state, data){
+    INIT(state, data) {
         state.carAllCount = data.allCount
         state.resultLength = data.allCount
         state.categoryList = []
@@ -156,27 +182,48 @@ const mutations = {
         state.regionList = []
         state.showCarList = []
 
-             data.categoryList.forEach(el => {
-                   state.categoryList.push({checked : false , bigCategory: 'categoryList' ,code : el.categorycd , name: el.categorynm})
-               })
-              data.makerList.forEach(el => {
-                   state.makerList.push({checked : false, bigCategory: 'makerList' , code : el.code , name: el.name, count : el.count})
-               })
-               data.fuelTypeList.forEach(el => {
-                   state.fuelTypeList.push({checked : false, bigCategory: 'fuelTypeList' , code : el.fuelTyped , name: el.fuleTypedName})
-               })
-               data.regionList.forEach(el => {
-                   state.regionList.push({checked : false, bigCategory: 'regionList' , code : el.centerRegionCode , name: el.centerRegion})
-               })
+        data.categoryList.forEach(el => {
+            state.categoryList.push({
+                checked: false,
+                bigCategory: 'categoryList',
+                code: el.categorycd,
+                name: el.categorynm
+            })
+        })
+        data.makerList.forEach(el => {
+            state.makerList.push({
+                checked: false,
+                bigCategory: 'makerList',
+                code: el.code,
+                name: el.name,
+                count: el.count
+            })
+        })
+        data.fuelTypeList.forEach(el => {
+            state.fuelTypeList.push({
+                checked: false,
+                bigCategory: 'fuelTypeList',
+                code: el.fuelTyped,
+                name: el.fuleTypedName
+            })
+        })
+        data.regionList.forEach(el => {
+            state.regionList.push({
+                checked: false,
+                bigCategory: 'regionList',
+                code: el.centerRegionCode,
+                name: el.centerRegion
+            })
+        })
         state.originMakerList = state.makerList
         state.originRegionList = state.regionList
         state.initFlag = true
-        for(let list of data.carInitList){
+        for (let list of data.carInitList) {
             state.showCarList.push(list)
         }
     },
-    RESETTING ( state ) {
-            state.carAllCount = '',
+    RESETTING(state) {
+        state.carAllCount = '',
             state.searchResultEmpty = false,
             state.categoryList = [],
             state.showCarList = [],
@@ -191,44 +238,52 @@ const mutations = {
             state.resultLength = 0,
             state.modelList = [],
             state.modelListIsOpen = false
+            state.initFlag = false
     },
-    GETTREECHILD (state, param) {
+    GETTREECHILD(state, param) {
         state.modelListIsOpen = !state.modelListIsOpen
-        if (state.modelListIsOpen)  {
+        if (state.modelListIsOpen) {
             param.checked = true
             state.makerList = []
             state.makerList.push(param)
         }
     },
-    CATEGORY1 (state, data){
+    CATEGORY1(state, data) {
         state.category1 = []
         state.category2 = []
         state.category3 = []
-        for(let i=0;i<data.category.length;i++){
-            state.category1.push({name : data.category[i], count : data.count[i]})
+        for (let i = 0; i < data.category.length; i++) {
+            state.category1.push({name: data.category[i], count: data.count[i]})
 
         }
     },
-    CATEGORY2 (state, data){
+    CATEGORY2(state, data) {
         state.category2 = []
         state.category3 = []
-        for(let i=0;i<data.category.length;i++){
-            state.category2.push({checked : false , bigCategory: 'modelGroupList' , name: data.category[i], count : data.count[i]})
+        for (let i = 0; i < data.category.length; i++) {
+            state.category2.push({
+                checked: false,
+                bigCategory: 'modelGroupList',
+                name: data.category[i],
+                count: data.count[i]
+            })
         }
     },
-    CATEGORY3 (state, data){
+    CATEGORY3(state, data) {
         state.category3 = []
-        for(let i=0;i<data.category.length;i++){
-            state.category3.push({name : data.category[i], count : data.count[i]})
+        for (let i = 0; i < data.category.length; i++) {
+            state.category3.push({name: data.category[i], count: data.count[i]})
         }
     },
 
-    SEARCHWITHCONDITION (state, data) {
+    SEARCHWITHCONDITION(state, data) {
         state.resultLength = data.resultLength
         state.pageNum = 1
         state.showCarList = []
-        if(data.showCarList)
-            for(let list of data.showCarList){state.showCarList.push(list)}
+        if (data.showCarList)
+            for (let list of data.showCarList) {
+                state.showCarList.push(list)
+            }
         state.searchResultEmpty = (state.resultLength === 0)
 
         state.makerList = []
@@ -242,84 +297,69 @@ const mutations = {
                     count: item.count
                 })
             })
-        }else {
+        } else {
             state.makerList.push({
-                    checked: true,
-                    bigCategory: 'makerList',
-                    code: data.makerList[0].code,
-                    name: data.makerList[0].name,
-                    count: data.makerList[0].count
-                })
+                checked: true,
+                bigCategory: 'makerList',
+                code: data.makerList[0].code,
+                name: data.makerList[0].name,
+                count: data.makerList[0].count
+            })
         }
 
         if (state.modelListIsOpen) {
             state.modelList = []
-                data.modelList.forEach(el => {
-                    state.modelList.push({
-                        checked: !!(state.checkedItems.find(checkedItem => el.name === checkedItem.name)),
-                        bigCategory: 'modelList',
-                        code: el.code,
-                        name: el.name,
-                        count: el.count
-                    })
+            data.modelList.forEach(el => {
+                state.modelList.push({
+                    checked: !!(state.checkedItems.find(checkedItem => el.name === checkedItem.name)),
+                    bigCategory: 'modelList',
+                    code: el.code,
+                    name: el.name,
+                    count: el.count
+                })
             })
         }
-     },
+    },
 
 
-    CHECKER (state, data) {
-        let foundItem ='';
-
-        switch (data.bigCategory) {
-            case 'categoryList':
-                foundItem = state.categoryList.find( item => item.code === data.code)
-                break
-            case 'makerList':
-                foundItem = state.makerList.find( item => item.code === data.code)
-                break
-            case 'fuelTypeList':
-                foundItem = state.fuelTypeList.find( item => item.code === data.code)
-                break
-            case 'regionList':
-                foundItem = state.regionList.find( item => item.code === data.code)
-                break
-            case 'modelList':
-                foundItem = state.modelList.find( item => item.code === data.code)
-                break
-            }
-
+    CHECKER(state, foundItem) {
         foundItem.checked = !foundItem.checked
 
-        if( !foundItem.checked && foundItem.bigCategory === 'makerList' ){
-            let processingList = state.checkedItems
+        if (foundItem.checked === false && foundItem.bigCategory === 'makerList') {
+            let processingList = state.checkedItems.filter(item => !(item.code === foundItem.code && item.bigCategory === foundItem.bigCategory))
             state.checkedItems = []
             state.modelList = []
-            processingList.forEach( item => {
-                console.log(item.bigCategory + "   " + item.name)
-                if ( item.bigCategory != 'moldelList')  state.checkedItems.push(item)
+            processingList.forEach(item => {
+                if (item.bigCategory != 'modelList') state.checkedItems.push(item)
             })
-        }else {
-            if(foundItem.checked) state.checkedItems.push(foundItem)
-                else state.checkedItems.splice(state.checkedItems.indexOf(foundItem),1)
+
+        } else {
+            if (foundItem.checked) state.checkedItems.push(foundItem)
+            else {
+                let processingList = state.checkedItems.filter(item => !(item.code === foundItem.code && item.bigCategory === foundItem.bigCategory))
+                state.checkedItems = []
+                state.checkedItems = processingList
+            }
         }
 
 
     },
-    ADDSEENHISTORY ( state, param) {
-        if ( state.seenHistoryList.length === 0 ) {
-            state.seenHistoryList.push( makeSeenCar(param) )
-        }
-        else {
+    ADDSEENHISTORY(state, param) {
+        if (state.seenHistoryList.length === 0) {
+            state.seenHistoryList.push(makeSeenCar(param))
+        } else {
             let existFlag = state.seenHistoryList.find(item => item.carcd === param.carcd)
-            switch (existFlag != undefined ) {
-                case true : existFlag.count++
+            switch (existFlag != undefined) {
+                case true :
+                    existFlag.count++
                     break
                 case false :
                     state.seenHistoryList.push(makeSeenCar(param))
                     break
             }
         }
-        function makeSeenCar (param) {
+
+        function makeSeenCar(param) {
             const date = new Date();
             param.count = 1;
             param.seenTime = date
@@ -327,17 +367,19 @@ const mutations = {
             return param
         }
     },
-    PAGELIMIT(state, data){
+    PAGELIMIT(state, data) {
         state.pageLimit = data
     },
-    SHOWCARLIST(state, data){
-        state.showCarList=[]
-        for(let list of data){state.showCarList.push(list)}
+    SHOWCARLIST(state, data) {
+        state.showCarList = []
+        for (let list of data) {
+            state.showCarList.push(list)
+        }
     },
-    PAGENUMSETTING(state, data){
+    PAGENUMSETTING(state, data) {
         state.pageNum = data
     },
-    PAGELIMITSETTING(state, data){
+    PAGELIMITSETTING(state, data) {
         state.pageLimit = data
     },
     ORDERBYSUBSETTING(state, data){
@@ -352,9 +394,31 @@ const mutations = {
     },
     SETPRODUCT(state, data){
         state.carItem = data
+    },
+
+    REMOVEHASHTAG(state, foundItem) {
+        foundItem.checked = !foundItem.checked
+        if (foundItem.checked === false && foundItem.bigCategory === 'makerList') {
+            state.modelListIsOpen = false
+            let processingList = state.checkedItems.filter(item => !(item.code === foundItem.code && item.bigCategory === foundItem.bigCategory))
+            state.checkedItems = []
+            state.modelList = []
+            processingList.forEach(item => {
+                if (item.bigCategory != 'modelList') state.checkedItems.push(item)
+            })
+        } else {
+            let processingList = state.checkedItems.filter(item => !(item.code === foundItem.code && item.bigCategory === foundItem.bigCategory))
+            state.checkedItems = []
+            state.checkedItems = processingList
+        }
+    },
+        ORDERBYSUBSETTING(state, data)
+        {
+            state.orderBySub = data
+
+        }
     }
 
-}
 
 export default {
     name: 'cmm',

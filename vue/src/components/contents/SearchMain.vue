@@ -79,8 +79,6 @@
                        </span>
                        <span class="count">{{model.count}}</span>
                    </div>
-
-
                                                 </li>
                                             </ul>
 
@@ -301,7 +299,7 @@
                     </div>
                     <div class="result_box_wrap">
                         <ul class="choice_area">
-                            <li v-for="checkedItem of checkedItems" :key="checkedItem.code">{{checkedItem.name}}<span class="close" @click="check(checkedItem)">닫기</span></li>
+                            <li v-for="checkedItem of checkedItems" :key="checkedItem.code">{{checkedItem.name}}<span class="close" @click="removeHashTag(checkedItem)">닫기</span></li>
                         </ul> <!-- 검색 선택 항목 javascript -->
                         <div class="until_box">
                             <div class="top_field">
@@ -530,13 +528,17 @@ export default {
 
     },
     methods: {
-        check(checkedItem){
-            this.$store.dispatch('cmm/CHECKER', checkedItem , { root: true })
+        check(targetItem){
+            this.$store.dispatch('cmm/CHECKER', { targetItem : targetItem , act : 'checked' }, { root: true })
             this.searchWithCondition()
         },
-        checkMakeTree(param){
-            this.$store.dispatch('cmm/CHECKER',param, { root: true })
-            this.$store.dispatch('cmm/getTreeChild',param)
+        removeHashTag (targetItem) {
+            this.$store.dispatch('cmm/CHECKER',{ targetItem : targetItem , act : 'remove' })
+            this.searchWithCondition()
+        },
+        checkMakeTree(targetItem){
+            this.$store.dispatch('cmm/CHECKER', { targetItem : targetItem , act : 'checked' }, { root: true })
+            this.$store.dispatch('cmm/getTreeChild',targetItem )
             this.searchWithCondition()
         },
         searchKeyClick(searchKeyID) {
@@ -678,9 +680,8 @@ export default {
             return value.slice(2,4)+``
         },
         thousandFormatter: function (value) {
-            console.log(value.length)
             if (!value) return ''
-            if(value.length === 3) return value
+            if(value.toString().length === 3) return value
             value = value.toString()
             return value.slice( 0 , value.length-3)+`,`+ value.slice(-3,value.length)
         }
