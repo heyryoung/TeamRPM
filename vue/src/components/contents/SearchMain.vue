@@ -399,15 +399,13 @@
                                     <td class="thumb">
                                         <a href="#" >
                                             <div class="mark_area"></div>
-                                            <img :src="showCar.middleImg" alt="자동차 썸네일">
+                                            <img @click="productClick(showCar)" :src="showCar.middleImg" alt="자동차 썸네일">
                                         </a>
                                     </td>
                                     <td class="car_info">
-                                    <router-link to="/product" target="_blank"  >
-                                        <a class="name" @click="addHistory(showCar)">
+                                        <a class="name" @click="productClick(showCar)">
                                         {{showCar.truckName}}
                                         </a>
-                                    </router-link>
                                         <span class="md_year">{{ showCar.mfrDate | mfrDateFormatter }} &nbsp; ({{ showCar.beginYear | beginYearFormatter }}년형)&nbsp;{{ showCar.milage | thousandFormatter }}km &nbsp;&nbsp;{{showCar.fuelTypecdName}}</span>
                                     <span class="price">{{ showCar.price | thousandFormatter }}만원 <em></em></span>
                                     <a href=""><span
@@ -562,6 +560,11 @@ export default {
         addHistory(carItem){
             this.$store.dispatch('cmm/addSeenHistory',carItem)
         },
+        productClick(carItem){
+            this.addHistory(carItem)
+            this.$store.dispatch('cmm/setProduct',carItem)
+            this.$router.push('/product')
+        },
         bigCategoryIsOpen(categoryType) {
             const searchConditionCategory = document.getElementById(categoryType)
             searchConditionCategory.className = (searchConditionCategory.className.substr(-2, 2) === 'on')
@@ -685,6 +688,9 @@ export default {
     created() {
     if(!this.$store.state.cmm.initFlag)
         this.$store.dispatch('cmm/init')
+/*        if(this.$store.state.cmm.makerFromMain!=''){
+
+        }*/
     }
 }
 </script>
