@@ -104,7 +104,35 @@ const actions = {
         },
 
     async CHECKER ({ commit }, param ) {
-        commit('CHECKER',param);
+        console.log( "actionCHECKER>>>>>>" + param.targetItem.name)
+        switch ( param.act ) {
+            case "checked": commit( 'CHECKER' , foundWhichListIsItemOn(param.targetItem ));
+                break
+            case "remove":  commit ( 'REMOVEHASHTAG' , foundWhichListIsItemOn(param.targetItem ) );
+                break
+        }
+
+        function foundWhichListIsItemOn ( data ) {
+            let foundItem ='';
+            switch (data.bigCategory) {
+                case 'categoryList':
+                    foundItem = state.categoryList.find( item => item.code === data.code)
+                    break
+                case 'makerList':
+                    foundItem = state.makerList.find( item => item.code === data.code)
+                    break
+                case 'fuelTypeList':
+                    foundItem = state.fuelTypeList.find( item => item.code === data.code)
+                    break
+                case 'regionList':
+                    foundItem = state.regionList.find( item => item.code === data.code)
+                    break
+                case 'modelList':
+                    foundItem = state.modelList.find( item => item.code === data.code)
+                    break
+            }
+            return foundItem
+        }
     },
     async addSeenHistory ({ commit }, param ) {
         commit('ADDSEENHISTORY', param );
@@ -116,19 +144,17 @@ const actions = {
         axios
             .get(`http://localhost:8080/getshowcarlist/`+data.start+'/'+data.end)
             .then(({data})=>{
-                commit('SHOWCARLIST', data)})
+                commit('SHOWCARLIST', data )})
             .catch(()=>{
                 alert('잘못된 요청입니다.')
             })
     },
     async pageNumSetting({commit}, data){
-        commit('PAGENUMSETTING', data)
+        commit('PAGENUMSETTING', data )
     },
     async pageLimitSetting({commit}, data){
-        commit('PAGELIMITSETTING', data)
+        commit('PAGELIMITSETTING', data )
     }
-
-
 };
 const mutations = {
     INIT (state, data){
@@ -251,40 +277,24 @@ const mutations = {
      },
 
 
-    CHECKER (state, data) {
-        let foundItem ='';
-
-        switch (data.bigCategory) {
-            case 'categoryList':
-                foundItem = state.categoryList.find( item => item.code === data.code)
-                break
-            case 'makerList':
-                foundItem = state.makerList.find( item => item.code === data.code)
-                break
-            case 'fuelTypeList':
-                foundItem = state.fuelTypeList.find( item => item.code === data.code)
-                break
-            case 'regionList':
-                foundItem = state.regionList.find( item => item.code === data.code)
-                break
-            case 'modelList':
-                foundItem = state.modelList.find( item => item.code === data.code)
-                break
-            }
-
+    CHECKER (state, foundItem) {
         foundItem.checked = !foundItem.checked
 
-        if( !foundItem.checked && foundItem.bigCategory === 'makerList' ){
-            let processingList = state.checkedItems
+        if( foundItem.checked === false && foundItem.bigCategory === 'makerList' ){
+            let processingList = state.checkedItems.filter(item => !(item.code === foundItem.code && item.bigCategory === foundItem.bigCategory ))
             state.checkedItems = []
             state.modelList = []
             processingList.forEach( item => {
-                console.log(item.bigCategory + "   " + item.name)
-                if ( item.bigCategory != 'moldelList')  state.checkedItems.push(item)
+                if ( item.bigCategory != 'modelList')  state.checkedItems.push(item)
             })
+
         }else {
             if(foundItem.checked) state.checkedItems.push(foundItem)
-                else state.checkedItems.splice(state.checkedItems.indexOf(foundItem),1)
+                else {
+                    let processingList = state.checkedItems.filter(item => !(item.code === foundItem.code && item.bigCategory === foundItem.bigCategory ))
+                    state.checkedItems = []
+                    state.checkedItems = processingList
+                }
         }
 
 
@@ -323,6 +333,22 @@ const mutations = {
     },
     PAGELIMITSETTING(state, data){
         state.pageLimit = data
+    },
+    REMOVEHASHTAG ( state , foundItem ) {
+        foundItem.checked = !foundItem.checked
+        if( foundItem.checked === false && foundItem.bigCategory === 'makerList' ){
+            state.modelListIsOpen = false
+            let processingList = state.checkedItems.filter(item => !(item.code === foundItem.code && item.bigCategory === foundItem.bigCategory ))
+            state.checkedItems = []
+            state.modelList = []
+            processingList.forEach( item => {
+                if ( item.bigCategory != 'modelList')  state.checkedItems.push(item)
+            })
+        }else{
+            let processingList = state.checkedItems.filter(item => !(item.code === foundItem.code && item.bigCategory === foundItem.bigCategory ))
+            state.checkedItems = []
+            state.checkedItems = processingList
+        }
     }
 }
 
