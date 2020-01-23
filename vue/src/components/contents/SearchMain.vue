@@ -469,12 +469,6 @@ export default {
                 {name : "연식▲", sub : 'beginyearASC'},
                 {name : "연식▲", sub : 'beginyearDESC'}],
             orderByName : '기본정렬',
-            minDefault : { code: '' ,name : ` 최 소 ` , bigcategory : 'minDefault' },
-            maxDefault : { code: '' ,name : ` 최 대 `, bigcategory : 'maxDefault'  },
-            selectedMinPrice : { code: '' , name : ` 최 소 ` , bigcategory : 'minPrice' },
-            selectedMaxPrice : { code: '' , name : ` 최 대 ` , bigcategory : 'maxPrice' },
-            selectedMinMilage : { code: '' , name : ` 최 소 ` , bigcategory : 'minMilage' },
-            selectedMaxMilage : { code: '' , name : ` 최 대 ` , bigcategory : 'maxMilage' }
             minDefault : { code: 'minDefault' ,name : ` 최 소 ` , bigcategory : 'minDefault' },
             maxDefault : { code: 'maxDefault' ,name : ` 최 대 `, bigcategory : 'maxDefault'  },
             selectedMinPrice : { code: 'selectedMinPrice' , name : ` 최 소 ` , bigcategory : 'minPrice' },
@@ -681,11 +675,12 @@ export default {
             return value.slice(2,4)+``
         },
         thousandFormatter: function (value) {
+            console.log(value.length)
             if (!value) return ''
             if(value.length === 3) return value
             value = value.toString()
             return value.slice( 0 , value.length-3)+`,`+ value.slice(-3,value.length)
-        },
+        }
     },
     created() {
     if(!this.$store.state.cmm.initFlag)
