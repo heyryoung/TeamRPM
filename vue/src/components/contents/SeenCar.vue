@@ -171,7 +171,7 @@
 			},
 			thousandFormatter: function (value) {
 				if (!value) return ''
-				if(value.length === 3) return value
+				if(value.toString().length === 3) return value
 				value = value.toString()
 				return value.slice( 0 , value.length-3)+`,`+ value.slice(-3,value.length)
 			},
