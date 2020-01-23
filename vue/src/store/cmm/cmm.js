@@ -21,7 +21,8 @@ const state = {
     resultLength : 0,
     modelList : [],
     initFlag : false,
-    modelListIsOpen : false
+    modelListIsOpen : false,
+    orderBySub : 'default'
 
 };
 const getters = {
@@ -153,7 +154,10 @@ const actions = {
         commit('PAGENUMSETTING', data )
     },
     async pageLimitSetting({commit}, data){
-        commit('PAGELIMITSETTING', data )
+        commit('PAGELIMITSETTING', data)
+    },
+    async orderBySubSetting({commit}, data){
+        commit('ORDERBYSUBSETTING', data)
     }
 };
 const mutations = {
@@ -334,6 +338,7 @@ const mutations = {
     PAGELIMITSETTING(state, data){
         state.pageLimit = data
     },
+
     REMOVEHASHTAG ( state , foundItem ) {
         foundItem.checked = !foundItem.checked
         if( foundItem.checked === false && foundItem.bigCategory === 'makerList' ){
@@ -348,7 +353,10 @@ const mutations = {
             let processingList = state.checkedItems.filter(item => !(item.code === foundItem.code && item.bigCategory === foundItem.bigCategory ))
             state.checkedItems = []
             state.checkedItems = processingList
-        }
+        },
+    ORDERBYSUBSETTING(state, data){
+        state.orderBySub = data
+
     }
 }
 

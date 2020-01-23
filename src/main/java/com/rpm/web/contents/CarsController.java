@@ -3,6 +3,7 @@ package com.rpm.web.contents;
 import com.rpm.web.proxy.Box;
 import com.rpm.web.proxy.Trunk;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -27,6 +28,8 @@ public class CarsController {
     public Map<String, Object> init(){
         trunk.clear();
         cars = (List<Cars>) carsRepository.findAll();
+        cars.sort((a,b) -> a.getCid().compareTo(b.getCid()));
+        cars.subList(0,15).stream().forEach(s-> System.out.println(s.getCid()));
         trunk.put(Arrays.asList("allCount" ,"carInitList","makerList","fuelTypeList", "regionList","categoryList")
                 ,Arrays.asList(String.valueOf(carsRepository.count())
                         ,cars.subList(0,15)
@@ -41,14 +44,12 @@ public class CarsController {
 
     @GetMapping("/getcategory/{param}/{column}")
     public Map<String, Object> getCategory(@PathVariable String param, @PathVariable String column){
-        Iterable<Cars> cars= carsRepository.findAll();
-        System.out.println(param);
-        System.out.println(column);
+        trunk.clear();
         switch (column){
             case "CAR_TYPE":
                 trunk.put(Arrays.asList("category", "count"),
-                        Arrays.asList(carsService.getCategory1(cars).get(param).keySet(),
-                                carsService.getCategory1(cars).get(param).values()));
+                        Arrays.asList(carsService.getCategory1(carsRepository.findAll()).get(param).keySet(),
+                                carsService.getCategory1(carsRepository.findAll()).get(param).values()));
                 break;
             case "MAKENM" :
                 trunk.put(Arrays.asList("category", "count"),
@@ -77,6 +78,7 @@ public class CarsController {
     @RequestMapping("/searchWithCondition")
     public Map<String,Object> searchWithCondition(@RequestBody  SearchCondition searchCondition){
         trunk.clear();
+        System.out.println(searchCondition.getOrderBySub());
         cars = carsService.findAllByDistinct((List<Cars>) carsRepository.findAll());
         List<Cars> carsProcessingList = new ArrayList<>();
         List<SearchDetailCondition> categoryList = searchCondition.getCategoryList();
@@ -89,8 +91,8 @@ public class CarsController {
 
         if ( "minPrice".equals(searchCondition.getMinPrice().getBigCategory())) {
                 carsProcessingList.addAll(
-                        cars.stream().filter(car ->  Integer.parseInt(car.getPrice())
-                                                    >= Integer.parseInt(searchCondition.getMinPrice().getCode()))
+                        cars.stream().filter(car -> car.getPrice()
+                                <= Integer.parseInt(searchCondition.getMinPrice().getCode()))
                                 .collect(Collectors.toList()));
                 cars.clear();
                 cars.addAll(carsProcessingList);
@@ -98,7 +100,7 @@ public class CarsController {
         }
         if ( "maxPrice".equals(String.valueOf(searchCondition.getMaxPrice()))) {
                 carsProcessingList.addAll(
-                        cars.stream().filter( car ->  Integer.parseInt(car.getPrice())
+                        cars.stream().filter( car ->  car.getPrice()
                                                         <= Integer.parseInt(searchCondition.getMaxPrice().getCode()))
                                 .collect(Collectors.toList()));
                 cars.clear();
@@ -107,7 +109,7 @@ public class CarsController {
         }
         if ( "minMilage".equals(String.valueOf(searchCondition.getMinMilage()))) {
                 carsProcessingList.addAll(
-                        cars.stream().filter( car ->  Integer.parseInt(car.getMilage())
+                        cars.stream().filter( car ->  car.getMilage()
                                                         >= Integer.parseInt(searchCondition.getMinMilage().getCode()))
                                 .collect(Collectors.toList()));
                 cars.clear();
@@ -116,7 +118,7 @@ public class CarsController {
         }
         if ( "maxMilage".equals(String.valueOf(searchCondition.getMaxMilage()))) {
                 carsProcessingList.addAll(
-                        cars.stream().filter( car ->  Integer.parseInt(car.getMilage())
+                        cars.stream().filter( car ->  car.getMilage()
                                                 <= Integer.parseInt(searchCondition.getMaxMilage().getCode()))
                                 .collect(Collectors.toList()));
                 cars.clear();
@@ -163,6 +165,33 @@ public class CarsController {
             cars.addAll(carsProcessingList);
             carsProcessingList.clear();
         }
+
+        if(searchCondition.getOrderBySub()=="default"){
+            cars.sort((a,b) -> a.getCid().compareTo(b.getCid()));
+        } else {
+            switch (searchCondition.getOrderBySub()) {
+                case "priceASC":
+                    cars.sort((a,b) -> (a.getPrice()).compareTo(b.getPrice()));
+                    break;
+                case "priceDESC":
+                    cars.sort((a,b) -> b.getPrice().compareTo(a.getPrice()));
+                    break;
+                case "mileageASC":
+                    cars.sort((a,b) -> a.getMilage().compareTo(b.getMilage()));
+                    break;
+                case "mileageDESC":
+                    cars.sort((a,b) -> b.getMilage().compareTo(a.getMilage()));
+                    break;
+                case "beginyearASC":
+                    cars.sort((a,b) -> a.getBeginYear().compareTo(b.getBeginYear()));
+                    break;
+                case "beginyearDESC":
+                    cars.sort((a,b) -> b.getBeginYear().compareTo(a.getBeginYear()));
+                    break;
+            }
+        }
+
+
 
         trunk.put(Arrays.asList("resultLength", "showCarList", "makerList") ,
                 Arrays.asList(cars.size()

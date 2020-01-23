@@ -45,6 +45,7 @@
         methods : {
             pageClick(number){
                 this.$store.dispatch('cmm/pageNumSetting', number)
+                this.init()
                 this.$store.dispatch('cmm/pageClick', {start : this.startRow,end : this.endRow})
 
             },
@@ -72,10 +73,12 @@
             },
             previous(){
                 this.$store.dispatch('cmm/pageNumSetting', this.startPage-1)
+                this.init()
                 this.$store.dispatch('cmm/pageClick', {start : this.startRow,end : this.endRow})
             },
             next(){
                 this.$store.dispatch('cmm/pageNumSetting', this.startPage+this.blockSize)
+                this.init()
                 this.$store.dispatch('cmm/pageClick', {start : this.startRow,end : this.endRow})
             }
         },
