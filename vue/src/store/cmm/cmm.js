@@ -226,6 +226,7 @@ const mutations = {
             state.resultLength = 0,
             state.modelList = [],
             state.modelListIsOpen = false
+            state.initFlag = false
     },
     GETTREECHILD(state, param) {
         state.modelListIsOpen = !state.modelListIsOpen
