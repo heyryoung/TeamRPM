@@ -28,7 +28,7 @@ const state = {
     modelTextFromMain : '',
     minPriceFromMain : '',
     maxPriceFromMain : '',
-    carItem : ''
+    carItem : {}
 
 };
 const getters = {
@@ -382,9 +382,7 @@ const mutations = {
     PAGELIMITSETTING(state, data) {
         state.pageLimit = data
     },
-    ORDERBYSUBSETTING(state, data){
-        state.orderBySub = data
-    },
+
     MAINSEARCH(state, data){
         state.makerFromMain = data.maker
         state.modelFromMain = data.model
