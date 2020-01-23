@@ -1,5 +1,6 @@
 package com.rpm.web.social;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.rpm.web.user.User;
 import lombok.*;
 import org.springframework.context.annotation.Lazy;
@@ -23,12 +24,14 @@ public class Comment implements Serializable {
     @Column(name = "COMMENTDATE") @NotNull private String commentDate;
     @Column(name = "COMMENTDETAIL") @NotNull private String commentDetail;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "boardSeq")
+    @JoinColumn(name = "BOARDSEQ")
     private Social boardSeq;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userSeq")
+    @JoinColumn(name = "USERSEQ")
     private User userSeq;
 
     @Builder

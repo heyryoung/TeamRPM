@@ -1,6 +1,6 @@
 <template>
 <div>
-  <link rel="stylesheet" href="https://www.kcar.com/resources/css/re_user.css?ver=6.9">
+  <link rel="stylesheet" href="/css/re_user.css?ver=6.9">
 <div id="contents">
 	<div class="user_content">
 		<h3 class="policy_tit"><img src="https://www.kcar.com/resources/images/content/user/userInf_tit.gif" alt="기본정보 입력"></h3>
@@ -142,7 +142,7 @@ import JoinModal from "./JoinModal.vue"
 export default {
 	name: 'join',
 	data(){
-        return{context: this.$store.state.cmm.context,
+        return{context: 'http://localhost:8080',
 			name: '',
 			userid:'',
 			idCheckmsg:'',

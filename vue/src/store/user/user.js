@@ -10,7 +10,7 @@ const state = {
 
 }
 const getters = {
-    getMember : state=>state.member,
+    getUSer : state=>state.user,
     getIsAuth : state=>state.auth,
 
 
@@ -60,7 +60,7 @@ const actions = {
 const mutations = {
     LOGIN_COMMIT(state, data){
         state.auth = true
-        state.member = data.user
+        state.user = data.user
 
 
     },

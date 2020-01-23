@@ -24,21 +24,19 @@
             <div class="col-lg-8 mx-auto">
               <div class="modal-body">
                 <!-- Project Details Go Here -->
-                <h2 class="text-uppercase">포르쉐 박스터 718 gts</h2>
-                <p class="item-intro text-muted">권혜령</p>
+                <h2 class="text-uppercase">{{contentTitle}}</h2>
+                <p class="item-intro text-muted">{{userName}}</p>
                 <div class="dropbox">
                   <input type="file" ref="photoimage" class="img-fluid d-block mx-auto" @change="upload($event.target.name, $event.target.files)" @drop="upload($event.target.name, $event.target.files)"  alt="">
                   <h3>파일을 드래그 해주세요.</h3>
                 </div>
-                <p>나 이차 넘나 죠하요 헤헤헤헿 Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                <input type="text" class="img-fluid d-block mx-auto" v-model="content">
+                <p>{{this.content}}</p>
                 <ul class="list-inline">
-                  <li>작성시간: 2020.01.09 19:02</li>
-                  <li>작성자: @hyeryeongee_</li>
+                  <li>작성시간: {{this.contentDate}}</li>
+                  <li>작성자: @{{this.contentUserid}}</li>
                 </ul>
-                <button class="btn btn-primary" data-dismiss="modal" type="button">
-                  <i class="fas fa-pen"></i> 글 수정하기</button>
-                <button class="btn btn-primary" data-dismiss="modal" type="button">
-                  <i class="far fa-trash-alt"></i> 글 삭제하기</button>
+
               </div>
             </div>
           </div>
@@ -49,8 +47,29 @@
 </div>
 </template>
 <script>
+ // import axios from "axios"
   export default{
     name: "SnsModify",
+    data(){
+      return{
+        contentTitle:"",
+        userName:"",
+        content:"",
+        contentDate:"",
+        contentUserid:"",
+      }
+    },
+    methods:{
+      upload(/*name, files*/) {
+        /*const formData = new FormData();
+        formData.append(name, files[0], files[0].name);
+        const url = "http://127.0.0.1:12010/upload/1";
+        axios.post(url, formData).then(response => {
+          console.log(response);
+        })*/
+      },
+
+    }
 
   }
 </script>

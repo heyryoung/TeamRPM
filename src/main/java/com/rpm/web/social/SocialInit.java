@@ -4,7 +4,6 @@ import com.rpm.web.contents.Cars;
 import com.rpm.web.contents.CarsRepository;
 import com.rpm.web.user.User;
 import com.rpm.web.user.UserRepository;
-import com.rpm.web.util.BoardDescend;
 import com.rpm.web.util.SocialDummy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -15,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class SocialInit implements ApplicationRunner {
@@ -29,7 +29,8 @@ public class SocialInit implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
 
         //socialBoard 테이블을 지운 후 social더미만 먼저 실행
-        /*
+        //index관련 에러날 수 있음.
+
         SocialDummy socialDummy = new SocialDummy();
         Iterable<User> users = userRepository.findAll();
         List<User> seq = new ArrayList<>();
@@ -42,56 +43,57 @@ public class SocialInit implements ApplicationRunner {
             carCd.add(c.getCarcd());
         }
         long count= socialRepository.count();
-        ArrayList<Social> socialsDummy = socialDummy.crawlingBoard(seq, carCd);
-
         if(count == 0){
-            for(int i=0; i<350; i++) {
-                for (Social s : socialsDummy) {
+            System.out.println("socialboard 등록 시작");
+            for(int i=0; i<300; i++) {
+                for (Social s : socialDummy.crawlingBoard(seq, carCd)) {
                     socialRepository.save(s);
                 }
             }
-        }*/
+            System.out.println("socialboard 등록 완료");
+        }
 
 
 
 
 
-        //comment 더미데이터 (socialBoard 더미 들어가고 나서 실행)
+        //comment 더미데이터
 
-        /*Iterable<Social> socials = socialRepository.findAll();
+        Iterable<Social> socials = socialRepository.findAll();
         List<Social> socialList = new ArrayList<>();
         for(Social s : socials){
             socialList.add(s);
         }
-        BoardDescend boardDescend = new BoardDescend();
-        Collections.sort(socialList, boardDescend);
+        socialList.stream().sorted(Comparator.comparing(Social::getBoardSeq)
+        .reversed()).collect(Collectors.toList());
         List<Social> commentedSocialList = new ArrayList<>();
+        commentedSocialList.clear();
         for(int i=0; i<20; i++){
             commentedSocialList.add(socialList.get(i));
         }
         long commentCount = commentRepository.count();
-        ArrayList<Comment> commentDummy = socialDummy.crawlingComment(seq, commentedSocialList);
         if(commentCount==0){
+            System.out.println("comment 등록 시작");
             for(int i=0; i<6; i++){
-                for(Comment c : commentDummy){
+                for(Comment c : socialDummy.crawlingComment(seq, commentedSocialList)){
                     commentRepository.save(c);
                 }
             }
+            System.out.println("comment 등록 완료");
         }
-*/
 
 
 
-        //Thumb 더미데이터(comment 들어간 후에 실행)
-        
-        /*long thumbCount = thumbRepository.count();
-        ArrayList<Thumb> thumbDummy = socialDummy.makeThumbList(seq, commentedSocialList);
+
+        //Thumb 더미데이터
+
+        long thumbCount = thumbRepository.count();
         if(thumbCount==0){
+            System.out.println("thumb 등록 시작");
             for(int i = 0; i<1000; i++){
-                for(Thumb t: thumbDummy) {
-                    thumbRepository.save(t);
-                }
+                thumbRepository.save(socialDummy.makeThumbList(seq, commentedSocialList));
             }
-        }*/
+            System.out.println("thumb 등록 완료");
+        }
     }
 }

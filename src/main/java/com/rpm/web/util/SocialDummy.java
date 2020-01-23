@@ -33,7 +33,7 @@ public class SocialDummy {
         dates.clear();
         try {
             Document rawData = Jsoup.connect("http://www.ppomppu.co.kr/zboard/zboard.php?id=car&category=6").timeout(10 * 1000).get();
-            Elements aTag = rawData.select("a[href^=view.php?id=car&page=]");
+            Elements aTag = rawData.select("a[href^=view.php?id=car&page=1]");
             Elements date = rawData.select("td[class=eng list_vspace]");
             for (Element e : aTag) {
                 list.add("http://www.ppomppu.co.kr/zboard/" + e.attr("href"));
@@ -46,8 +46,10 @@ public class SocialDummy {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         map.put("url", list);
         map.put("dates", dates);
+
         return map;
     }
 
@@ -56,13 +58,12 @@ public class SocialDummy {
         list.clear();
         List<String> urls = crawlingUrl().get("url");
         List<String> dates = crawlingUrl().get("dates");
-
         for (int i = 0; i < urls.size(); i++) {
             try {
                 Collections.shuffle(seq);
                 Collections.shuffle(carCd);
                 Social social = new Social();
-                social.setUserSeq(seq.get(0));
+                //social.setUserSeq(seq.get(0));
                 social.setCarCode(carCd.get(0));
                 social.setBoardDate(dates.get(i));
                 Document rawData = Jsoup.connect(urls.get(i)).timeout(10 * 1000).get();
@@ -89,8 +90,9 @@ public class SocialDummy {
             try {
                 Comment comment = new Comment();
                 Collections.shuffle(seq);
-                comment.setUserSeq(seq.get(0));
-                comment.setBoardSeq(socialList.get(i));
+                Collections.shuffle(socialList);
+                //comment.setUserSeq(seq.get(0));
+               // comment.setBoardSeq(socialList.get(0));
                 Document rawData = Jsoup.connect(urls.get(i)).timeout(10 * 1000).get();
                 Elements commentContents = rawData.select("div#newbbs")
                         .select("div").select("div").select("div")
@@ -117,17 +119,13 @@ public class SocialDummy {
 
     }
 
-    public ArrayList<Thumb> makeThumbList(List<User>seq, List<Social> socialList){
-        ArrayList<Thumb> list = new ArrayList<>();
-        for(int i = 0; i<1000; i++) {
-            Thumb thumb = new Thumb();
-            Collections.shuffle(seq);
-            Collections.shuffle(socialList);
-            thumb.setUserSeq(seq.get(0));
-            thumb.setBoardSeq(socialList.get(0));
-            list.add(thumb);
-        }
-        return list;
+    public Thumb makeThumbList(List<User>seq, List<Social> socialList){
+        Thumb thumb = new Thumb();
+        Collections.shuffle(seq);
+        Collections.shuffle(socialList);
+       // thumb.setUserSeq(seq.get(0));
+      //  thumb.setBoardSeq(socialList.get(0));
+        return thumb;
     }
 
 }

@@ -1,5 +1,6 @@
 package com.rpm.web.social;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.rpm.web.user.User;
 import lombok.*;
 import org.springframework.context.annotation.Lazy;
@@ -21,12 +22,14 @@ public class Thumb implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "THUMBSEQ") @NotNull private Long thumbSeq;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "boardSeq")
+    @JoinColumn(name = "BOARDSEQ")
     private Social boardSeq;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userSeq")
+    @JoinColumn(name = "USERSEQ")
     private User userSeq;
 
 }

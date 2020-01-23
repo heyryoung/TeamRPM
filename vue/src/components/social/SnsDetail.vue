@@ -18,25 +18,25 @@
             <div class="col-lg-8 mx-auto">
               <div class="modal-body">
                 <!-- Project Details Go Here -->
-                <h2 class="text-uppercase">포르쉐 박스터 718 gts</h2>
-                <p class="item-intro text-muted">권혜령</p>
+                <h2 class="text-uppercase">{{contentTitle}}</h2>
+                <p class="item-intro text-muted">{{userName}}</p>
                 <img class="img-fluid d-block mx-auto" src="http://global-autonews.com/data/file/ct_097/2038852047_Q8TCdrg7_1.JPG" alt="">
-                <p>나 이차 넘나 죠하요 헤헤헤헿 Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                <p>{{content}}</p>
                 <ul class="list-inline">
-                  <li>작성시간: 2020.01.09 19:02</li>
-                  <li>작성자: @hyeryeongee_</li>
+                  <li>작성시간: {{contentDate}}</li>
+                  <li>작성자: @{{contentUserid}}</li>
                 </ul>
-                <!--나믜글일때-->
                 <div>
-                  <a class="btn-like" @click="thumbup" ><i class="far fa-heart fa-2x"></i>{{thumb}}</a>
-                  <a class="btn-like" @click="thumbdown" ><i class="fas fa-heart fa-2x"></i>{{thumb}}</a>
+                  <a class="btn-like" @click="thumbup" v-if="empty"><i class="far fa-heart fa-2x"></i> {{thumb}}</a>
+                  <a class="btn-like" @click="thumbdown" v-if="full"><i class="fas fa-heart fa-2x"></i>{{thumb}}</a>
                 </div>
 
-                <!--내 글일 때-->
-                <!--<button class="btn btn-primary" data-dismiss="modal" type="button">
+                <div v-if="myContent">
+                <button class="btn btn-primary" @click="goModify" data-dismiss="modal" type="button">
                   <i class="fas fa-pen"></i> 글 수정하기</button>
-                <button class="btn btn-primary" data-dismiss="modal" type="button">
-                  <i class="far fa-trash-alt"></i> 글 삭제하기</button>-->
+                <button class="btn btn-primary" @click="deleteBoard" data-dismiss="modal" type="button">
+                  <i class="far fa-trash-alt"></i> 글 삭제하기</button>
+                  </div>
 
                 <div>
                   <!--댓글창-->
@@ -55,7 +55,16 @@
   export default {
     data(){
       return{
-        thumb:0 //엑시오스로 이 글에 참조된 thumb 테이블 갯수 알아오기.
+        board:{},
+        thumb: "  "+0, //엑시오스로 이 글에 참조된 thumb 테이블 갯수 알아오기.
+        empty:true,
+        full:false,
+        contentTitle:"포르쉐 박스터 718 gts",
+        userName:"권혜령",
+        content:"나 이차 넘나 죠하요 헤헤헤헿 Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!",
+        contentDate:"2020.01.09 19:02",
+        contentUserid:"hyeryeongee_",
+        myContent:false,
       }
     },
     methods:{
@@ -67,6 +76,12 @@
       },
       thumbdown(){
         //-1
+      },
+      goModify:{
+
+      },
+      deleteBoard:{
+
       }
     }
   }
@@ -78,11 +93,14 @@
 .btn-primary {
 	margin: auto 10px;
 }
-  .btn-like{
-    text-decoration-color : red;
-  }
+.fa-heart:before{
+  color : rgba(232, 25, 25, 0.94);
+}
 .modal-open .modal {
   overflow-x: hidden;
   overflow-y: -moz-scrollbars-none;
+}
+h2 {
+  color: #0d124f;
 }
 </style>

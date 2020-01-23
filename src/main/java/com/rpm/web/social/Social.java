@@ -1,5 +1,6 @@
 package com.rpm.web.social;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.rpm.web.user.User;
 import lombok.*;
 import org.springframework.context.annotation.Lazy;
@@ -12,11 +13,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component @Lazy @Entity @ToString
+@Component @Lazy @Entity
 @Getter @Setter
 @NoArgsConstructor
 @Table(name="SOCIALBOARD")
-
 public class Social implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,14 +26,29 @@ public class Social implements Serializable {
     @Column(name = "BOARDCONTENT", length = 5000) @NotNull private String boardContent;
     @Column(name = "BOARDIMG") @NotNull private String boardImg;
 
-
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userSeq")
-    private User userSeq;
+    @JoinColumn(name = "USERSEQ")
+    public User userSeq;
+
     @OneToMany(mappedBy = "boardSeq", cascade = CascadeType.ALL,
             orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
 
+    @OneToMany(mappedBy = "boardSeq", cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private List<Thumb> thumbs = new ArrayList<>();
+
+     /*@OneToMany(fetch = FetchType.EAGER,
+             cascade = CascadeType.ALL)
+     @JoinColumn(name = "BOARDSEQ")
+     private List<Comment> comments = new ArrayList<>();
+
+     @OneToMany(fetch = FetchType.EAGER,
+             cascade = CascadeType.ALL)
+     @JoinColumn(name = "BOARDSEQ")
+     private List<Thumb> thumbs = new ArrayList<>();
+*/
     @Builder
     private Social(String boardDate, String carCode, String boardContent, String boardImg) {
         Assert.hasText(boardDate, "boardDate must not be empty");
