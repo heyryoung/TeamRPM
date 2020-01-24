@@ -29,7 +29,6 @@ public class CarsController {
         trunk.clear();
         cars = (List<Cars>) carsRepository.findAll();
         cars.sort((a,b) -> a.getCid().compareTo(b.getCid()));
-        cars.subList(0,15).stream().forEach(s-> System.out.println(s.getCid()));
         trunk.put(Arrays.asList("allCount" ,"carInitList","makerList","fuelTypeList", "regionList","categoryList")
                 ,Arrays.asList(String.valueOf(carsRepository.count())
                         ,cars.subList(0,15)

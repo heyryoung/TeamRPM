@@ -276,11 +276,11 @@
                                                                     <option value = "price.value">{{price.name}}</option>
                                                             </select></div>
                                                             <div class="selectric"><span
-                                                                    class="label">{{minPrice}}</span></div>
+                                                                    class="label">{{minPrice | thousandFormatter}}</span></div>
                                                             <div class="selectric-items" tabindex="-1" style="width: 220px; height: 300px;">
                                                                 <div class="selectric-scroll">
                                                                     <ul v-for="price of prices" :key="price.name">
-                                                                        <li @click="setMinPrice(price.name)" data-index="price.index" class="">{{price.name}}</li>
+                                                                        <li @click="setMinPrice(price.name)" data-index="price.index" class="">{{price.name | thousandFormatter}}</li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -299,11 +299,11 @@
                                                                     <option value = "price.value">{{price.name}}</option>
                                                             </select></div>
                                                             <div class="selectric"><span
-                                                                    class="label">{{maxPrice}}</span></div>
+                                                                    class="label">{{maxPrice | thousandFormatter}}</span></div>
                                                             <div class="selectric-items" tabindex="-1" style="width: 220px; height: 300px;">
                                                                 <div class="selectric-scroll">
                                                                     <ul v-for="price of prices" :key="price.name">
-                                                                         <li @click="setMaxPrice(price.name)" data-index="price.index" class="">{{price.name}}</li>
+                                                                         <li @click="setMaxPrice(price.name)" data-index="price.index" class="">{{price.name | thousandFormatter}}</li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -1138,6 +1138,11 @@
                     list.push({index : i, name : `${i*100}만원`})
                 }
                 return list
+            }
+        },
+        filters : {
+            thousandFormatter: function (value) {
+                return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             }
         },
         created(){
