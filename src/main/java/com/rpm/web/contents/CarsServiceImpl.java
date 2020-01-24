@@ -90,7 +90,7 @@ public class CarsServiceImpl implements CarsService {
         List<SearchDetailCondition> tmpModelcd = findByModelCategory(carsList , code);
         for (SearchDetailCondition detailCondition : tmpModelcd) {
             int cnt = 0;
-            for (Cars cars : findCarBySelectedMaker(carsList,code).stream()
+            for (Cars cars : findCarBySelectedMaker( carsList , code ).stream()
                     .collect(Collectors.toList())) {
                 if (detailCondition.getCode().equals(cars.getModelGrpCd())) cnt++;
             }
@@ -104,6 +104,21 @@ public class CarsServiceImpl implements CarsService {
         List<SearchDetailCondition> tmpModelGrpNm = new ArrayList<>();
         for (Cars cars : findCarBySelectedMaker(carsList,code).stream()
                 .filter(distinctByKey(Cars::getModelGrpNm))
+                .collect(Collectors.toList())) {
+            SearchDetailCondition tmpCondition = new SearchDetailCondition();
+            tmpCondition.setCode(cars.getModelGrpCd());
+            tmpCondition.setName(cars.getModelGrpNm());
+            tmpCondition.setBigCategory(cars.getMakecd());
+            tmpModelGrpNm.add(tmpCondition);
+        }
+        return tmpModelGrpNm;
+    }
+
+    @Override
+    public List<SearchDetailCondition> findByModelNMCategory(List<Cars> carsList, String name) {
+        List<SearchDetailCondition> tmpModelGrpNm = new ArrayList<>();
+        for (Cars cars : findCarBySelectedMakerNM( carsList , name ).stream()
+                .filter(distinctByKey(Cars::getModelGrpCd))
                 .collect(Collectors.toList())) {
             SearchDetailCondition tmpCondition = new SearchDetailCondition();
             tmpCondition.setCode(cars.getModelGrpCd());
@@ -167,6 +182,12 @@ public class CarsServiceImpl implements CarsService {
     public List<Cars> findCarBySelectedMaker(List<Cars> carsList, String code) {
         return carsList.stream()
                 .filter(cars -> code.equals(cars.getMakecd()))
+                .collect(Collectors.toList());
+    }
+    @Override
+    public List<Cars> findCarBySelectedMakerNM(List<Cars> carsList, String name) {
+        return carsList.stream()
+                .filter(cars -> name.equals(cars.getMakenm()))
                 .collect(Collectors.toList());
     }
 

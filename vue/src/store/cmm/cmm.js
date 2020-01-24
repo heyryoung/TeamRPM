@@ -28,6 +28,7 @@ const state = {
     modelTextFromMain : '',
     minPriceFromMain : '',
     maxPriceFromMain : '',
+    mainConditionSettingFlag : false,
     carItem : {}
 
 };
@@ -111,7 +112,6 @@ const actions = {
         },
 
     async CHECKER ({ commit }, param ) {
-        console.log( "actionCHECKER>>>>>>" + param.targetItem.name)
         switch ( param.act ) {
             case "checked": commit( 'CHECKER' , foundWhichListIsItemOn(param.targetItem ));
                 break
@@ -135,7 +135,8 @@ const actions = {
                     foundItem = state.regionList.find( item => item.code === data.code)
                     break
                 case 'modelList':
-                    foundItem = state.modelList.find( item => item.code === data.code)
+                    foundItem = state.modelList.find( item => item.name === data.name)
+                    console.log(foundItem.name)
                     break
             }
             return foundItem
@@ -165,8 +166,8 @@ const actions = {
     async orderBySubSetting({commit}, data){
         commit('ORDERBYSUBSETTING', data)
     },
-    async mainSearch({commit}, data){
-        commit('MAINSEARCH', data)
+    async mainSearch({commit}, conditionList){
+        commit('MAINSEARCH', conditionList)
     },
     async setProduct({commit}, data){
         commit('SETPRODUCT', data)
@@ -267,7 +268,19 @@ const mutations = {
                 name: data.category[i],
                 count: data.count[i]
             })
+
         }
+
+        data.modelList.forEach( item => {
+            state.modelList.push({
+                checked: false,
+                bigCategory: 'modelList',
+                name: item.name,
+                count: item.count,
+                code : item.code
+            })
+        })
+
     },
     CATEGORY3(state, data) {
         state.category3 = []
@@ -277,6 +290,7 @@ const mutations = {
     },
 
     SEARCHWITHCONDITION(state, data) {
+        state.showCarList = []
         state.resultLength = data.resultLength
         state.pageNum = 1
         state.showCarList = []
@@ -311,7 +325,7 @@ const mutations = {
             state.modelList = []
             data.modelList.forEach(el => {
                 state.modelList.push({
-                    checked: !!(state.checkedItems.find(checkedItem => el.name === checkedItem.name)),
+                    checked: (state.checkedItems.find(checkedItem => el.name === checkedItem.name)) ? true : false,
                     bigCategory: 'modelList',
                     code: el.code,
                     name: el.name,
@@ -363,7 +377,6 @@ const mutations = {
             const date = new Date();
             param.count = 1;
             param.seenTime = date
-            console.log('makeSeenCar>>> ' + date)
             return param
         }
     },
@@ -384,37 +397,47 @@ const mutations = {
     },
 
     MAINSEARCH(state, data){
-        state.makerFromMain = data.maker
-        state.modelFromMain = data.model
-        state.modelTextFromMain = data.modelText
-        state.minPriceFromMain = data.minPrice
-        state.maxPriceFromMain = data.maxPrice
+        state.mainConditionSettingFlag = true;
+        let foundMaker = state.makerList.find(item => item.name === data.maker)
+        if (foundMaker != undefined){
+            foundMaker.checked = true;
+            state.checkedItems.push(foundMaker)
+            state.modelListIsOpen = true
+        }
+        const model = state.modelList.find( item => item.name === data.model)
+        state.modelList = []
+
+        if ( model != undefined ) state.checkedItems.push(model)
+        state.modelTextFromMain = (data.modelText  === false) ? '' : data.modelText
+        state.minPriceFromMain = (data.minPrice  === false)
+                                    ? {checked : false, code: 'minDefault' ,name : ` 최 소 ` , bigcategory : 'minDefault' }
+                                    : { code: data.minPrice , name : ` 최 소 ` , bigcategory : 'minPrice' }
+        state.maxPriceFromMain = (data.maxPrice  === false)
+                                    ? {checked: false, code: 'maxDefault' ,name : ` 최 대 `, bigcategory : 'maxDefault'  }
+                                    :  { code: data.maxPrice , name : ` 최 소 ` , bigcategory : 'minPrice' }
+
     },
     SETPRODUCT(state, data){
         state.carItem = data
     },
 
     REMOVEHASHTAG(state, foundItem) {
-        foundItem.checked = !foundItem.checked
-        if (foundItem.checked === false && foundItem.bigCategory === 'makerList') {
+        foundItem.checked = false
+        if (foundItem.bigCategory === 'makerList') {
             state.modelListIsOpen = false
-            let processingList = state.checkedItems.filter(item => !(item.code === foundItem.code && item.bigCategory === foundItem.bigCategory))
+            let processingList = state.checkedItems.filter(item => !(item.name === foundItem.name))
             state.checkedItems = []
             state.modelList = []
             processingList.forEach(item => {
+                console.log('processingList>>>' + item.bigCategory)
                 if (item.bigCategory != 'modelList') state.checkedItems.push(item)
             })
         } else {
-            let processingList = state.checkedItems.filter(item => !(item.code === foundItem.code && item.bigCategory === foundItem.bigCategory))
+            let processingList = state.checkedItems.filter(item => !(item.name === foundItem.name && item.bigCategory === foundItem.bigCategory))
             state.checkedItems = []
             state.checkedItems = processingList
         }
-    },
-        ORDERBYSUBSETTING(state, data)
-        {
-            state.orderBySub = data
-
-        }
+    }
     }
 
 
