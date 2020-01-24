@@ -29,7 +29,7 @@ const state = {
     minPriceFromMain : '',
     maxPriceFromMain : '',
     mainConditionSettingFlag : false,
-    carItem : ''
+    carItem : {}
 
 };
 const getters = {
@@ -395,9 +395,7 @@ const mutations = {
     PAGELIMITSETTING(state, data) {
         state.pageLimit = data
     },
-    ORDERBYSUBSETTING(state, data){
-        state.orderBySub = data
-    },
+
     MAINSEARCH(state, data){
         state.mainConditionSettingFlag = true;
         let foundMaker = state.makerList.find(item => item.name === data.maker)
