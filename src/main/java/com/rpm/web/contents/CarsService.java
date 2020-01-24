@@ -34,6 +34,8 @@ public interface CarsService {
 
     public List<SearchDetailCondition> findByModelCategory(List<Cars> carsList, String code);
 
+    List<SearchDetailCondition> findByModelNMCategory(List<Cars> carsList, String name);
+
     List<Cars> findCarWithFuleType(List<Cars> carsList);
 
     List<Cars> findCarWithCenterRegionCode(List<Cars> carsList);
@@ -51,4 +53,6 @@ public interface CarsService {
     List<Cars> findCarBySelectedRegion(List<Cars> carsList, String code);
 
     List<Cars> findCarBySelectedModel(List<Cars> carsList, String code);
+
+    List<Cars> findCarBySelectedMakerNM(List<Cars> carsList, String name);
 }
