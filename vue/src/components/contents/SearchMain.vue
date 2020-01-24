@@ -103,7 +103,7 @@
                                         <div class="selectric-items" tabindex="-1"  id = "minPrice" style="width: 120px; height: 300px;">
                                             <div class="selectric-scroll">
                                                 <ul v-for="minPrice of minPriceList" :key="minPrice.code">
-                                                    <li @click="setStartOrmaxPrice(minPrice)">{{minPrice.name}}
+                                                    <li @click="setStartOrmaxPrice(minPrice)" >{{minPrice.name}}
                                                     </li>
                                                 </ul>
                                             </div>
@@ -601,7 +601,6 @@ export default {
             })
 
             let selectedConditionData = {
-
                     categoryList: checkedCategoryList,
                     modelList: checkedModelList,
                     fuelTypeList: checkedFuelTypeList,
@@ -615,9 +614,7 @@ export default {
                     maxPrice : this.selectedMaxPrice,
                     minMilage : this.selectedMinMilage,
                     maxMilage : this.selectedMaxMilage
-
             }
-            //console( foundItem.bigCategory + "<<<CHECKER>>>>>" + foundItem.name )
             this.$store.dispatch('cmm/searchWithCondition', selectedConditionData)
         },
 
@@ -687,12 +684,17 @@ export default {
         }
     },
     created() {
-    if(!this.$store.state.cmm.initFlag)
-        this.$store.dispatch('cmm/init')
-/*        if(this.$store.state.cmm.makerFromMain!=''){
-
-        }*/
-    }
+        if (!this.$store.state.cmm.initFlag)
+            this.$store.dispatch('cmm/init')
+        if (this.$store.state.cmm.mainConditionSettingFlag) {
+            this.selectedMinPrice = this.$store.state.cmm.minPriceFromMain
+            this.selectedMaxPrice = this.$store.state.cmm.maxPriceFromMain
+            this.searchWord = this.$store.state.cmm.modelTextFromMain
+            this.searchWithCondition()
+            if ( this.selectedMinPrice.code != 'minDefault' ) this.selectBoxChanger(`selectMinPrice`)
+            if ( this.selectedMinPrice.code != 'maxDefault' ) this.selectBoxChanger(`selectMaxPrice`)
+            }
+        }
 }
 </script>
 <style scoped>

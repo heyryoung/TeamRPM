@@ -43,7 +43,9 @@ public class CarsController {
 
     @GetMapping("/getcategory/{param}/{column}")
     public Map<String, Object> getCategory(@PathVariable String param, @PathVariable String column){
+        System.out.println("inside getCategory");
         trunk.clear();
+        cars = carsService.findAllByDistinct((List<Cars>) carsRepository.findAll());
         switch (column){
             case "CAR_TYPE":
                 trunk.put(Arrays.asList("category", "count"),
@@ -51,22 +53,15 @@ public class CarsController {
                                 carsService.getCategory1(carsRepository.findAll()).get(param).values()));
                 break;
             case "MAKENM" :
-                trunk.put(Arrays.asList("category", "count"),
+                trunk.put(Arrays.asList("category", "count", "modelList"),
                         Arrays.asList(carsService.getCategory2(param).keySet(),
-                                carsService.getCategory2(param).values()));
+                                carsService.getCategory2(param).values(),
+                                carsService.findByModelNMCategory((List<Cars>) cars , param )));
                 break;
             case "MODEL_GRP_NM" :
                 trunk.put(Arrays.asList("category", "count"),
                         Arrays.asList(carsService.getCategory3(param).keySet(),
                                 carsService.getCategory3(param).values()));
-                break;
-            case "makerList" :
-                trunk.put(Arrays.asList("makerList"),
-                        Arrays.asList(carsService.findByMakecdWithCount((List<Cars>) cars)));
-                break;
-            case "modelList" :
-                trunk.put(Arrays.asList("modelList"),
-                        Arrays.asList(carsService.findByModelWithCount((List<Cars>) cars , param )));
                 break;
         }
 
@@ -76,8 +71,8 @@ public class CarsController {
 
     @RequestMapping("/searchWithCondition")
     public Map<String,Object> searchWithCondition(@RequestBody  SearchCondition searchCondition){
+        System.out.println( " inside searchWithCondition" );
         trunk.clear();
-        System.out.println(searchCondition.getOrderBySub());
         cars = carsService.findAllByDistinct((List<Cars>) carsRepository.findAll());
         List<Cars> carsProcessingList = new ArrayList<>();
         List<SearchDetailCondition> categoryList = searchCondition.getCategoryList();
@@ -88,16 +83,16 @@ public class CarsController {
 
 
 
-        if ( "minPrice".equals(searchCondition.getMinPrice().getBigCategory())) {
+        if ( "minPrice".equals(String.valueOf(searchCondition.getMinPrice().getBigCategory()))) {
                 carsProcessingList.addAll(
                         cars.stream().filter(car -> car.getPrice()
-                                <= Integer.parseInt(searchCondition.getMinPrice().getCode()))
+                                >= Integer.parseInt(searchCondition.getMinPrice().getCode()))
                                 .collect(Collectors.toList()));
                 cars.clear();
                 cars.addAll(carsProcessingList);
                 carsProcessingList.clear();
         }
-        if ( "maxPrice".equals(String.valueOf(searchCondition.getMaxPrice()))) {
+        if ( "maxPrice".equals(String.valueOf(searchCondition.getMaxPrice().getBigCategory()))) {
                 carsProcessingList.addAll(
                         cars.stream().filter( car ->  car.getPrice()
                                                         <= Integer.parseInt(searchCondition.getMaxPrice().getCode()))
@@ -106,7 +101,7 @@ public class CarsController {
                 cars.addAll(carsProcessingList);
                 carsProcessingList.clear();
         }
-        if ( "minMilage".equals(String.valueOf(searchCondition.getMinMilage()))) {
+        if ( "minMilage".equals(String.valueOf(searchCondition.getMinMilage().getBigCategory())) ) {
                 carsProcessingList.addAll(
                         cars.stream().filter( car ->  car.getMilage()
                                                         >= Integer.parseInt(searchCondition.getMinMilage().getCode()))
@@ -115,7 +110,7 @@ public class CarsController {
                 cars.addAll(carsProcessingList);
                 carsProcessingList.clear();
         }
-        if ( "maxMilage".equals(String.valueOf(searchCondition.getMaxMilage()))) {
+        if ( "maxMilage".equals(String.valueOf(searchCondition.getMaxMilage().getBigCategory()))) {
                 carsProcessingList.addAll(
                         cars.stream().filter( car ->  car.getMilage()
                                                 <= Integer.parseInt(searchCondition.getMaxMilage().getCode()))

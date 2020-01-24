@@ -211,7 +211,7 @@
                                                     </div>
                                                 </li>
                                                 <li class="search_btn" id="divBtnSearch">
-                                                    <a @click="goSearchWithCondition()">검색하기&nbsp;<span v-if="resultCount">({{resultCount}}대)</span></a>
+                                                    <a @click="goSearchWithCondition('withModel')">검색하기&nbsp;<span v-if="resultCount">({{resultCount}}대)</span></a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -311,7 +311,7 @@
                                                     </div>
                                                 </li>
                                                 <li class="search_btn" id="divBtnSearchWithPrice"><a
-                                                        href="javascript:;">검색하기&nbsp;<span></span></a></li>
+                                                        @click="goSearchWithCondition('withBudget')">검색하기&nbsp;<span></span></a></li>
                                                 <!--//20180801 검색셀렉트박스 수정-->
                                             </ul>
                                         </div>
@@ -995,6 +995,11 @@
         data(){
             return{
                 searchKeyWord : '',
+                defaultKeyWord1 : '제조사를 선택하세요',
+                defaultKeyWord2 : '모델을 선택하세요',
+                defaultKeyWord3 : '세부모델을 선택하세요',
+                defaultMinPrice : '최저가격을 선택하세요',
+                defaultMaxPrice : '최고가격을 선택하세요',
                 keyWord1 : '제조사를 선택하세요',
                 keyWord2 : '모델을 선택하세요',
                 keyWord3 : '세부모델을 선택하세요',
@@ -1052,9 +1057,9 @@
                 korCar.className = "on"
                 impCar.className = ""
                 this.$store.dispatch('cmm/getCategory1',{'param':'KOR','column':'CAR_TYPE'})
-                this.keyWord1 = '제조사를 선택하세요',
-                this.keyWord2 = '모델을 선택하세요'
-                this.keyWord3 = '세부모델을 선택하세요'
+                this.keyWord1 = this.defaultKeyWord1,
+                this.keyWord2 = this.defaultKeyWord2,
+                this.keyWord3 = this.defaultKeyWord3,
                 this.resultCount = 0
 
             },
@@ -1067,9 +1072,9 @@
                 category1.style.width = "220px"
                 category1.style.height = "300px"
                 this.$store.dispatch('cmm/getCategory1',{'param':'IMP','column':'CAR_TYPE'})
-                this.keyWord1 = '제조사를 선택하세요',
-                this.keyWord2 = '모델을 선택하세요'
-                this.keyWord3 = '세부모델을 선택하세요'
+                this.keyWord1 = this.defaultKeyWord1,
+                this.keyWord2 = this.defaultKeyWord2
+                this.keyWord3 = this.defaultKeyWord3
                 this.resultCount = 0
 
             },
@@ -1094,14 +1099,14 @@
             },
 
             setCategory2(param){
-                this.keyWord2 = '모델을 선택하세요'
-                this.keyWord3 = '세부모델을 선택하세요'
+                this.keyWord2 = this.defaultKeyWord2
+                this.keyWord3 = this.defaultKeyWord3
                 this.keyWord1 = param.name
                 this.resultCount = param.count
                 this.$store.dispatch('cmm/getCategory2',{'param':this.keyWord1,'column':'MAKENM'})
             },
             setCategory3(param){
-                this.keyWord3 = '세부모델을 선택하세요'
+                this.keyWord3 = this.defaultKeyWord3
                 this.keyWord2 = param.name
                 this.resultCount = param.count
                 this.$store.dispatch('cmm/getCategory3',{'param':this.keyWord2,'column':'MODEL_GRP_NM'})
@@ -1122,11 +1127,25 @@
                 }
 
             },
-            goSearchWithCondition(){
-                if(this.keyWord1 === '제조사를 선택하세요'){
-                    alert('제조사를 선택해주세요.')
+            goSearchWithCondition(condition){
+                let selectedCondition = {}
+                switch (condition) {
+                    case 'withModel' :
+                        selectedCondition = { 'maker' : (this.keyWord1 === this.defaultKeyWord1) ? false : this.keyWord1
+                        , 'model' : (this.keyWord2 === this.defaultKeyWord2) ? false : this.keyWord2
+                        , 'modelText' : (this.keyWord3 === this.defaultKeyWord3) ? false : this.keyWord3}
+                        break
+                    case 'withBudget' :
+                        selectedCondition = { 'maker' : (this.keyWord1 === this.defaultKeyWord1) ? false : this.keyWord1
+                            , 'minPrice' : (this.minPrice === this.defaultMinPrice ) ? false : this.minPrice.replace(`만원`,'')
+                            , 'maxPrice' : (this.maxPrice === this.defaultMaxPrice ) ? false : this.maxPrice.replace(`만원`,'')}
+                        break
+                }
+
+                if(this.keyWord1 === this.defaultKeyWord1){
+                    alert(this.defaultKeyWord1)
                 }else{
-                    this.$store.dispatch('cmm/mainSearch',{'maker':this.keyWord1,'model':this.keyWord2,'modelText' : this.keyWord3, 'minPrice' : this.minPrice, 'maxPrice' : this.maxPrice})
+                    this.$store.dispatch('cmm/mainSearch' , selectedCondition )
                     this.$router.push('/searchMain')
                 }
             }
@@ -1135,7 +1154,7 @@
             prices : function(){
                 let list = []
                 for(let i=1;i<=100;i++){
-                    list.push({index : i, name : `${i*100}만원`})
+                    list.push({index : i, name : `${i*100}만원` , code : i*100})
                 }
                 return list
             }
