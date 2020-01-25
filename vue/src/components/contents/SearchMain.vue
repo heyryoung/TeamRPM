@@ -717,24 +717,14 @@ export default {
             if ( target === 'PriceRange' ) {
                 this.selectedMinPrice = this.minDefault
                 this.selectedMaxPrice = this.maxDefault
-/*                this.selectedMinPrice.code = this.minDefault.code
-                this.selectedMinPrice.name = this.minDefault.name
-                this.selectedMaxPrice.code = this.maxDefault.code
-                this.selectedMaxPrice.name = this.maxDefault.name*/
             } else if ( target === 'MilageRange' ) {
-                this.selectedMinMilage.code = this.minDefault.code
-                this.selectedMinMilage.name = this.minDefault.name
-                this.selectedMaxMilage.code = this.maxDefault.code
-                this.selectedMaxMilage.name = this.maxDefault.name
+                this.selectedMinMilage = this.minDefault
+                this.selectedMaxMilage = this.maxDefault
             } else {
-                this.selectedMinPrice.code = this.minDefault.code
-                this.selectedMinPrice.name = this.minDefault.name
-                this.selectedMaxPrice.code = this.maxDefault.code
-                this.selectedMaxPrice.name = this.maxDefault.name
-                this.selectedMinMilage.code = this.minDefault.code
-                this.selectedMinMilage.name = this.minDefault.name
-                this.selectedMaxMilage.code = this.maxDefault.code
-                this.selectedMaxMilage.name = this.maxDefault.name
+                this.selectedMinPrice = this.minDefault
+                this.selectedMaxPrice = this.maxDefault
+                this.selectedMinMilage = this.minDefault
+                this.selectedMaxMilage = this.maxDefault
             }
         },
         thousandFormatter ( value ) {
