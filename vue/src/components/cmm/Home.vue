@@ -1135,12 +1135,14 @@
                 let selectedCondition = {}
                 switch (condition) {
                     case 'withModel' :
-                        selectedCondition = { 'maker' : (this.keyWord1 === this.defaultKeyWord1) ? false : this.keyWord1
-                        , 'model' : (this.keyWord2 === this.defaultKeyWord2) ? false : this.keyWord2
-                        , 'modelText' : (this.keyWord3 === this.defaultKeyWord3) ? false : this.keyWord3}
+                        selectedCondition =
+                            { 'maker' : (this.keyWord1 === this.defaultKeyWord1) ? false : this.keyWord1
+                            , 'model' : (this.keyWord2 === this.defaultKeyWord2) ? false : this.keyWord2
+                            , 'modelText' : (this.keyWord3 === this.defaultKeyWord3) ? false : this.keyWord3}
                         break
                     case 'withBudget' :
-                        selectedCondition = { 'maker' : (this.keyWord1 === this.defaultKeyWord1) ? false : this.keyWord1
+                        selectedCondition =
+                            { 'maker' : (this.keyWord1 === this.defaultKeyWord1) ? false : this.keyWord1
                             , 'minPrice' : (this.minPrice === this.defaultMinPrice ) ? false : this.minPrice.replace(`만원`,'')
                             , 'maxPrice' : (this.maxPrice === this.defaultMaxPrice ) ? false : this.maxPrice.replace(`만원`,'')}
                         break
