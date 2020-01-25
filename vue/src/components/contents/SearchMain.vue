@@ -103,7 +103,7 @@
                                         <div class="selectric-items" tabindex="-1"  id = "minPrice" style="width: 120px; height: 300px;">
                                             <div class="selectric-scroll">
                                                 <ul v-for="minPrice of minPriceList" :key="minPrice.code">
-                                                    <li @click="setStartOrmaxPrice(minPrice)" >{{minPrice.name}}
+                                                    <li @click="setSelectBoxCondition(minPrice)" >{{minPrice.name}}
                                                     </li>
                                                 </ul>
                                             </div>
@@ -122,7 +122,7 @@
                                         <div class="selectric-items" tabindex="-1" id = "maxPrice"  style="width: 120px; height: 300px;">
                                             <div class="selectric-scroll">
                                                 <ul  v-for="maxPrice of maxPriceList" :key="maxPrice.code">
-                                                    <li @click="setStartOrmaxPrice(maxPrice)">{{maxPrice.name}}
+                                                    <li @click="setSelectBoxCondition(maxPrice)">{{maxPrice.name}}
                                                     </li>
                                                 </ul>
                                             </div>
@@ -148,7 +148,7 @@
                                         <div class="selectric-items" tabindex="-1" id = "minMilage" style="width: 120px; height: 300px;">
                                             <div class="selectric-scroll" >
                                                 <ul v-for="minMilage of minMilages" :key="minMilage.code">
-                                                    <li @click="setStartOrmaxMilage(minMilage)">{{minMilage.name}}</li>
+                                                    <li @click="setSelectBoxCondition(minMilage)">{{minMilage.name}}</li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -168,7 +168,7 @@
                                         <div class="selectric-items" tabindex="-1"  id="maxMilage" style="width: 120px; height: 300px;">
                                             <div class="selectric-scroll">
                                                 <ul v-for="maxMilage of maxMilages" :key="maxMilage.code">
-                                                    <li @click="setStartOrmaxMilage(maxMilage)"> {{maxMilage.name}}
+                                                    <li @click="setSelectBoxCondition(maxMilage)"> {{maxMilage.name}}
                                                     </li>
                                                 </ul>
                                             </div>
@@ -477,7 +477,7 @@ export default {
             searchWord: '',
             carcd: '',
             limits : [15,30,45,60],
-            orderBySubs : [{index : 1 , value : [{name : "기본정렬", sub : 'default' , selected : true , class : 'basic' }]},
+            orderBySubs : [{index : 1 , value : [{name : "기본정렬", sub : 'default' , selected : true , class : 'txt default' }]},
                 { index : 2 , value : [{name : "가격순", sub : 'priceDFT' , selected : false , class : 'txt' },
                 {name : "낮은순", sub : 'priceDESC' , selected : false , class : 'down ' },
                 {name : "높은순", sub : 'priceASC' , selected : false , class : 'up ' }]},
@@ -518,14 +518,14 @@ export default {
         minPriceList : function(){
             let list = [this.minDefault]
             for( let i = 1 ; i <= 20 ; i++ ){
-                list.push({ code : `${i*1000}` , name : `${i},000만원`, bigCategory : 'minPrice' })
+                list.push({ code : `${i*100}` , name : this.thousandFormatter(i*100)+`만원`, bigCategory : 'minPrice' })
             }
             return list
         },
         maxPriceList : function(){
             let list = [this.maxDefault]
             for( let i = 1 ; i <= 20 ; i++ ){
-                list.push({ code : `${i*1000}` , name : `${i},000만원`, bigCategory : 'maxPrice' })
+                list.push({ code : `${i*100}` , name : this.thousandFormatter(i*100)+`만원`, bigCategory : 'maxPrice' })
             }
             return list
         },
@@ -547,7 +547,8 @@ export default {
     methods: {
         conditionSelector( targetItem ){
             this.$store.dispatch('cmm/conditionSelector', targetItem , { root: true })
-            if( targetItem.bigCategory === 'makerList' ) this.$store.dispatch( 'cmm/treeConditionControl' , targetItem )
+            if ( targetItem.bigCategory === 'makerList' ) this.$store.dispatch( 'cmm/treeConditionControl' , targetItem )
+            if ( targetItem.bigCategory.indexOf( 'Range' ) > 0 ) this.resettingSelectBox( targetItem.bigCategory )
             this.searchWithCondition()
         },
 
@@ -567,6 +568,7 @@ export default {
             }else{
                 searchKey.className = "selectric-wrapper selectric-selectric selectric-below selectric-hover"
             }
+
         },
         addHistory( carItem ){
             this.$store.dispatch( 'cmm/addSeenHistory' , carItem )
@@ -626,7 +628,6 @@ export default {
             }
             this.$store.dispatch( 'cmm/searchWithCondition', selectedConditionData )
         },
-
         clickPageLimit( pageLimit ){
             this.$store.dispatch('cmm/pageLimitSetting', pageLimit)
             this.searchWithCondition()
@@ -688,7 +689,7 @@ export default {
                     this.$store.dispatch('cmm/orderBySubSetting', this.orderByName)
                     this.searchWithCondition()
         },
-        setStartOrmaxPrice ( param ) {
+        setSelectBoxCondition ( param ) {
             switch ( param.bigCategory ) {
                 case 'minPrice' :
                     this.selectedMinPrice = param
@@ -696,12 +697,6 @@ export default {
                 case 'maxPrice' :
                     this.selectedMaxPrice = param
                     break
-            }
-
-            this.searchWithCondition()
-        },
-        setStartOrmaxMilage ( param ) {
-            switch ( param.bigCategory ) {
                 case 'minMilage' :
                     this.selectedMinMilage = param
                     break
@@ -709,22 +704,44 @@ export default {
                     this.selectedMaxMilage = param
                     break
             }
+
+            this.$store.dispatch('cmm/conditionSelectorBySelectBox', param , { root: true })
             this.searchWithCondition()
         },
         reset () {
-            this.resettingSelectBox()
+            this.resettingSelectBox( 'All' )
             this.$store.dispatch('cmm/resetCheckedItem')
             this.$store.dispatch('cmm/init')
         },
-        resettingSelectBox () {
-            this.selectedMinPrice.code = this.minDefault.code
-            this.selectedMinPrice.name = this.minDefault.name
-            this.selectedMaxPrice.code = this.maxDefault.code
-            this.selectedMaxPrice.name = this.maxDefault.name
-            this.selectedMinMilage.code = this.minDefault.code
-            this.selectedMinMilage.name = this.minDefault.name
-            this.selectedMaxMilage.code = this.maxDefault.code
-            this.selectedMaxMilage.name = this.maxDefault.name
+        resettingSelectBox ( target ) {
+            if ( target === 'PriceRange' ) {
+                this.selectedMinPrice = this.minDefault
+                this.selectedMaxPrice = this.maxDefault
+/*                this.selectedMinPrice.code = this.minDefault.code
+                this.selectedMinPrice.name = this.minDefault.name
+                this.selectedMaxPrice.code = this.maxDefault.code
+                this.selectedMaxPrice.name = this.maxDefault.name*/
+            } else if ( target === 'MilageRange' ) {
+                this.selectedMinMilage.code = this.minDefault.code
+                this.selectedMinMilage.name = this.minDefault.name
+                this.selectedMaxMilage.code = this.maxDefault.code
+                this.selectedMaxMilage.name = this.maxDefault.name
+            } else {
+                this.selectedMinPrice.code = this.minDefault.code
+                this.selectedMinPrice.name = this.minDefault.name
+                this.selectedMaxPrice.code = this.maxDefault.code
+                this.selectedMaxPrice.name = this.maxDefault.name
+                this.selectedMinMilage.code = this.minDefault.code
+                this.selectedMinMilage.name = this.minDefault.name
+                this.selectedMaxMilage.code = this.maxDefault.code
+                this.selectedMaxMilage.name = this.maxDefault.name
+            }
+        },
+        thousandFormatter ( value ) {
+            if ( !value ) return ''
+            if( value.toString().length === 3) return value
+            value = value.toString()
+            return value.slice( 0 , value.length-3)+`,`+ value.slice(-3,value.length)
         }
     },
     filters: {
