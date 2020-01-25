@@ -558,6 +558,25 @@ export default {
                         ? "selectric-wrapper selectric-selectric selectric-below selectric-open"
                         : "selectric-wrapper selectric-selectric selectric-below"
         },
+        setSelectBoxCondition ( param ) {
+            switch ( param.bigCategory ) {
+                case 'minPrice' :
+                    this.selectedMinPrice = param
+                    break
+                case 'maxPrice' :
+                    this.selectedMaxPrice = param
+                    break
+                case 'minMilage' :
+                    this.selectedMinMilage = param
+                    break
+                case 'maxMilage' :
+                    this.selectedMaxMilage = param
+                    break
+            }
+
+            this.$store.dispatch('cmm/conditionSelectorBySelectBox', param , { root: true })
+            this.searchWithCondition()
+        },
         selectBoxChanger( targetItem ){
             const searchKey = document.getElementById( targetItem )
             if(searchKey.className === "selectric-wrapper selectric-selectric selectric-below selectric-hover"){
@@ -689,25 +708,7 @@ export default {
                     this.$store.dispatch('cmm/orderBySubSetting', this.orderByName)
                     this.searchWithCondition()
         },
-        setSelectBoxCondition ( param ) {
-            switch ( param.bigCategory ) {
-                case 'minPrice' :
-                    this.selectedMinPrice = param
-                    break
-                case 'maxPrice' :
-                    this.selectedMaxPrice = param
-                    break
-                case 'minMilage' :
-                    this.selectedMinMilage = param
-                    break
-                case 'maxMilage' :
-                    this.selectedMaxMilage = param
-                    break
-            }
 
-            this.$store.dispatch('cmm/conditionSelectorBySelectBox', param , { root: true })
-            this.searchWithCondition()
-        },
         reset () {
             this.resettingSelectBox( 'All' )
             this.$store.dispatch('cmm/resetCheckedItem')

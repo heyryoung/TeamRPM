@@ -343,13 +343,18 @@ const mutations = {
             })
         }
     },
-
     CONDITIONSELECTOR( state, foundItem ) {
         if ( foundItem.bigCategory.indexOf( 'Range' ) > 0 ) {
             let processingList  = state.checkedItems.filter( item => (item.bigCategory != 'PriceRange') && (item.bigCategory != 'MilageRange') )
             state.checkedItems = []
             state.checkedItems = processingList
-            console.log('processingList' + processingList.length)
+            if ( foundItem.bigCategory === 'PriceRange' ) {
+                state.minPrice = ''
+                state.maxPrice = ''
+            }else {
+                state.minMilag = ''
+                state.minMilag = ''
+            }
         } else {
             foundItem.checked = !foundItem.checked
 
