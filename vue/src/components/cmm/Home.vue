@@ -21,7 +21,7 @@
                                                     <span class="tit">RPM에서 판매하는 차 <strong class="all_car_cnt">총 {{this.$store.state.cmm.carAllCount}}대</strong></span>
                             <span class="searchinput">
                               <input type="text" class="placeho modelSearchInput" name="quickSearch" id="quickSearch" @click="searchBoxOn"
-                                     v-model = "searchKeyWord" @keyup="stringMatchOn"
+                                     v-model="searchKeyWord" @keyup="stringMatchOn"
                                      placeholder=" 모델명을 입력해주세요. 예시)아반떼" maxlength="20" autocomplete="off"><a @click="goSearch" class="hid">검색</a>
                             </span>
                                                     <!--검색기록유-->
@@ -119,7 +119,8 @@
                                                         -->
                                                         <h3 class="tit1">연관 모델명</h3>
                                                         <div class="recentl1">
-                                                            <ul><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="022|006|006|IMP|DS3(12년~18년)">DS3(12년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="022|009|008|IMP|DS5(11년~18년)">DS5(11년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="022|006|009|IMP|DS3 카브리오(13년~18년)">DS3 카브리오(13년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="022|008|012|IMP|DS4 크로스백(16년~18년)">DS4 크로스백(16년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="022|008|007|IMP|DS4(12년~18년)">DS4(12년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="043|010|010|IMP|DTS(06년~11년)">DTS(06년~11년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="070|002|002|IMP|DB9(04년~18년)">DB9(04년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="070|004|004|IMP|DBS(07년~18년)">DBS(07년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="070|008|075|IMP|DB7(94년~03년)">DB7(94년~03년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="001|017|111|KOR|싼타페 DM(12년~15년)">싼타페 DM(12년~15년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="001|025|124|KOR|제네시스 DH(13년~16년)">제네시스 DH(13년~16년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="001|018|163|KOR|쏘나타 DN8(19년~현재)">쏘나타 DN8(19년~현재)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="054|002|006|IMP|쿠퍼 D 클럽맨(09년~18년)">쿠퍼 D 클럽맨(09년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="054|003|115|IMP|쿠퍼 D 컨트리맨(11년~18년)">쿠퍼 D 컨트리맨(11년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="054|001|117|IMP|쿠퍼 D(07년~18년)">쿠퍼 D(07년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="054|012|133|IMP|쿠퍼 D 페이스맨(13년~18년)">쿠퍼 D 페이스맨(13년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="001|019|037|KOR|아반떼 XD(00년~03년)">아반떼 XD(00년~03년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="001|019|071|KOR|뉴 아반떼 XD(03년~06년)">뉴 아반떼 XD(03년~06년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="001|019|081|KOR|아반떼 HD(06년~10년)">아반떼 HD(06년~10년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="001|019|104|KOR|아반떼 MD(10년~13년)">아반떼 MD(10년~13년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="001|019|136|KOR|아반떼 AD(15년~18년)">아반떼 AD(15년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="001|019|154|KOR|더 뉴 아반떼 AD(18년~현재)">더 뉴 아반떼 AD(18년~현재)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="054|001|118|IMP|쿠퍼 SD(12년~18년)">쿠퍼 SD(12년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="058|001|016|IMP|FX30d(09년~13년)">FX30d(09년~13년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="082|004|004|IMP|xD(07년~14년)">xD(07년~14년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="058|003|014|IMP|M30d(10년~13년)">M30d(10년~13년)</a></li></ul>
+                                                            <ul v-for = "(j,i) of this.$store.state.cmm.stringMatchList" :key="i"><li><a>{{j}}</a></li>
+                                                            </ul>
                                                         </div>
                                                         <div class="btclose divSearchConHide"><a @click="searchBoxOff(`stringMatch`)"><img src="https://www.kcar.com/resources/images/index/recentclose.jpg" width="44" height="20" alt="닫기" border="0"></a></div>
                                                     </div>
@@ -1046,10 +1047,13 @@
                 if(this.searchKeyWord != "") {
                     searchBox.style.display = "none"
                     stringMatch.style.display = "block"
+
                 }else{
                     stringMatch.style.display = "none"
                     searchBox.style.display = "block"
                 }
+                this.$store.dispatch('cmm/stringMatch',this.searchKeyWord)
+
             },
             korCar(korCarID, impCarID){
                 const korCar = document.getElementById(korCarID)

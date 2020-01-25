@@ -29,8 +29,8 @@ const state = {
     minPriceFromMain : '',
     maxPriceFromMain : '',
     mainConditionSettingFlag : false,
-    carItem : {}
-
+    carItem : {},
+    stringMatchList : []
 };
 const getters = {
     makerList : state => state.makerList,
@@ -171,7 +171,19 @@ const actions = {
     },
     async setProduct({commit}, data){
         commit('SETPRODUCT', data)
+    },
+    async stringMatch({commit}, searchKeyWord){
+        axios
+            .get(`http://localhost:8080/stringMatch/`+searchKeyWord)
+            .then(({data})=>{
+                if(data.result){
+                commit('STRINGMATCH', data)}
+            })
+            .catch(()=>{
+                alert('잘못된 요청입니다.')
+            })
     }
+
 };
 const mutations = {
     INIT(state, data) {
@@ -437,8 +449,12 @@ const mutations = {
             state.checkedItems = []
             state.checkedItems = processingList
         }
+    },
+    STRINGMATCH(state, data){
+        state.stringMatchList = []
+        state.stringMatchList = data.result
     }
-    }
+}
 
 
 export default {

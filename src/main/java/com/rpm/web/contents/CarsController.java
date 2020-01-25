@@ -3,9 +3,9 @@ package com.rpm.web.contents;
 import com.rpm.web.proxy.Box;
 import com.rpm.web.proxy.Trunk;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 @RestController
@@ -21,13 +21,25 @@ public class CarsController {
     CarsService carsService;
     @Autowired
     List<Cars> cars;
+    @Autowired
+    StringMatch stringMatch;
+    private List<Object> carModelList;
+    private List<Object> carModelHangeulList;
 
-
+    public CarsController() {
+        this.carModelList = new ArrayList<>();
+        this.carModelHangeulList = new ArrayList<>();
+    }
 
     @GetMapping("/init")
     public Map<String, Object> init(){
         trunk.clear();
         cars = (List<Cars>) carsRepository.findAll();
+        carModelList.addAll(cars.stream().collect(Collectors.groupingBy(Cars::getModelnmText
+                , Collectors.counting())).keySet());
+        carModelList.forEach(s-> carModelHangeulList.add(stringMatch.seperateHan(s.toString().replace(" ", ""))));
+        System.out.println("carModelList :" + carModelList);
+        System.out.println("carModelHangeulList :" + carModelHangeulList);
         cars.sort((a,b) -> a.getCid().compareTo(b.getCid()));
         trunk.put(Arrays.asList("allCount" ,"carInitList","makerList","fuelTypeList", "regionList","categoryList")
                 ,Arrays.asList(String.valueOf(carsRepository.count())
@@ -201,5 +213,29 @@ public class CarsController {
     public Object getShowCarList(@PathVariable String startrow, @PathVariable String endrow){
         return cars.subList(Integer.parseInt(startrow),Integer.parseInt(endrow));
         }
+
+    @GetMapping("/stringMatch/{searchWord}")
+    public Map<String, Object> stringMatch(@PathVariable String searchWord){
+        System.out.println(stringMatch.seperateHan(searchWord.replace(" ", "")));
+        List<Object> result = new ArrayList<>();
+        List<Integer> index = new ArrayList<>();
+        Consumer<Object> c = new Consumer<Object>() {
+            @Override
+            public void accept(Object o) {
+                if(o.toString().contains(stringMatch.seperateHan(searchWord.replace(" ", "")))){
+                    index.add(carModelHangeulList.indexOf(o));
+                }
+            }
+        };
+        carModelHangeulList.forEach(s-> c.accept(s));
+        System.out.println("index : " + index);
+        if(index.size()!=0) {
+            for (int i = 0 ; i<index.size();i++) {
+                result.add(carModelList.get(index.get(i)));
+            }
+        }
+        trunk.put(Arrays.asList("result"), Arrays.asList((result.size()>0)?result:false));
+        return trunk.get();
+    }
 
 }
