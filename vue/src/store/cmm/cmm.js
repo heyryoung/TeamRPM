@@ -459,10 +459,10 @@ const mutations = {
         state.modelTextFromMain = ( data.modelText  === false ) ? '' : data.modelText
         state.minPriceFromMain = ( data.minPrice  === false )
                                     ? { checked : false , code : 'minDefault' , name : ` 최 소 ` , bigCategory : 'minDefault' }
-                                    : { code: data.minPrice , name : ` 최 소 ` , bigCategory : 'minPrice' }
+                                    : data.minPrice
         state.maxPriceFromMain = ( data.maxPrice  === false )
                                     ? { checked: false , code : 'maxDefault' , name : ` 최 대 `, bigCategory : 'maxDefault'  }
-                                    :  { code: data.maxPrice , name : ` 최 소 ` , bigCategory : 'maxPrice' }
+                                    :  data.maxPrice
 
     },
     SETPRODUCT( state, data ){

@@ -488,12 +488,12 @@ export default {
                 {name : "낮은순", sub : 'beginyearDESC' , selected : false , class : 'down ' },
                 {name : "높은순", sub : 'beginyearASC' , selected : false , class :  'up ' }]}],
             orderByName : '기본정렬',
-            minDefault : { code: 'minDefault' ,name : ` 최 소 ` , bigcategory : 'minDefault' },
-            maxDefault : { code: 'maxDefault' ,name : ` 최 대 `, bigcategory : 'maxDefault'  },
-            selectedMinPrice : { code: 'selectedMinPrice' , name : ` 최 소 ` , bigcategory : 'minPrice' },
-            selectedMaxPrice : { code: 'selectedMaxPrice' , name : ` 최 대 ` , bigcategory : 'maxPrice' },
-            selectedMinMilage : { code: 'selectedMinMilage' , name : ` 최 소 ` , bigcategory : 'minMilage' },
-            selectedMaxMilage : { code: 'selectedMaxMilage' , name : ` 최 대 ` , bigcategory : 'maxMilage' }
+            minDefault : { code: 'minDefault' ,name : ` 최 소 ` , bigCategory : 'minDefault' },
+            maxDefault : { code: 'maxDefault' ,name : ` 최 대 `, bigCategory : 'maxDefault'  },
+            selectedMinPrice : { code: 'selectedMinPrice' , name : ` 최 소 ` , bigCategory : 'minDefault' },
+            selectedMaxPrice : { code: 'selectedMaxPrice' , name : ` 최 대 ` , bigCategory : 'maxDefault' },
+            selectedMinMilage : { code: 'selectedMinMilage' , name : ` 최 소 ` , bigCategory : 'minDefault' },
+            selectedMaxMilage : { code: 'selectedMaxMilage' , name : ` 최 대 ` , bigCategory : 'maxDefault' }
         }
     },
     computed: {
@@ -573,8 +573,6 @@ export default {
                     this.selectedMaxMilage = param
                     break
             }
-
-            this.$store.dispatch('cmm/conditionSelectorBySelectBox', param , { root: true })
             this.searchWithCondition()
         },
         selectBoxChanger( targetItem ){
@@ -630,6 +628,8 @@ export default {
                 }
             })
 
+            this.selectBoxRangeSetter()
+
             let selectedConditionData = {
                     categoryList : checkedCategoryList,
                     modelList : checkedModelList,
@@ -639,13 +639,29 @@ export default {
                     carcd : this.carcd,
                     pageLimit : this.$store.state.cmm.pageLimit,
                     maker : maker.code,
-                    minPrice : this.selectedMinPrice,
                     orderBySub : this.$store.state.cmm.orderBySub,
+                    minPrice : this.selectedMinPrice,
                     maxPrice : this.selectedMaxPrice,
                     minMilage : this.selectedMinMilage,
                     maxMilage : this.selectedMaxMilage
             }
+
             this.$store.dispatch( 'cmm/searchWithCondition', selectedConditionData )
+        },
+        selectBoxRangeSetter () {
+            console.log(this.selectedMinPrice.bigCategory + this.selectedMinPrice.name)
+            if ( this.selectedMinPrice.bigCategory.indexOf('Default') < 0  ) {
+                this.$store.dispatch('cmm/conditionSelectorBySelectBox', this.selectedMinPrice , { root: true })
+            }
+            if ( this.selectedMaxPrice.bigCategory.indexOf('Default') < 0  ) {
+                this.$store.dispatch('cmm/conditionSelectorBySelectBox', this.selectedMaxPrice , { root: true })
+            }
+            if ( this.selectedMinMilage.bigCategory.indexOf('Default') < 0  ) {
+                this.$store.dispatch('cmm/conditionSelectorBySelectBox', this.selectedMinMilage , { root: true })
+            }
+            if ( this.selectedMaxMilage.bigCategory.indexOf('Default') < 0  ) {
+                this.$store.dispatch('cmm/conditionSelectorBySelectBox', this.selectedMaxMilage , { root: true })
+            }
         },
         clickPageLimit( pageLimit ){
             this.$store.dispatch('cmm/pageLimitSetting', pageLimit)
