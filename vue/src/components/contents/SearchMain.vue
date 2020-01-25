@@ -35,7 +35,7 @@
                                     <ul class="row_list">
                                         <li v-for="category of categoryList"
                                             :key="category.code">
-                                            <div class="checker" :id="category.code"><span :class="{checked:category.checked}" @click="check(category)">
+                                            <div class="checker" :id="category.code"><span :class="{checked:category.checked}" @click="conditionSelector(category)">
                                                 <input type="checkbox"
                                                                                                       name="categoryList"
                                                                                                       :id="category.code"
@@ -60,7 +60,7 @@
                                                     v-for="maker of makerList" :key="maker.code" >
                                                     <div class="row false">
                                                     <span class="txt"><div class="checker" id="uniform-v_makecd">
-                                                    <span :class="{checked:maker.checked}" @click="checkMakeTree(maker)" >
+                                                    <span :class="{checked:maker.checked}" @click="conditionSelector(maker)" >
                                                         <input type="checkbox" id="v_makecd0" name="v_makecd" class="uniform maker">
                                                     </span></div>
                                                     <label for="v_makecd0">{{maker.name}}</label></span><span class="count">
@@ -71,7 +71,7 @@
                    <div class="row false">
                        <span class="txt">
                        <div class="checker" id="uniform-v_model_grp_cd0">
-                           <span :class="{checked:model.checked}" @click="check(model)" >
+                           <span :class="{checked:model.checked}" @click="conditionSelector(model)" >
                                <input type="checkbox" id="v_model_grp_cd0" name="v_model_grp_cd" class="uniform maker" value="001" data-v_model_grp_cd="001" data-count="59" data-v_makecd="001" data-v_model_grp_nm="i30" data-v_makenm="현대" data-v_car_type="KOR" data-beusable-tracking="">
                            </span>
                        </div>
@@ -181,7 +181,7 @@
                                 <div class="sub_type_list">
                                     <ul class="row_list"  v-for="fuelType of fuelTypeList" :key="fuelType.code">
                                         <li>
-                                            <div class="checker" id="uniform-carFuel1"><span :class="{checked:fuelType.checked}" @click="check(fuelType)"><input type="checkbox"
+                                            <div class="checker" id="uniform-carFuel1"><span :class="{checked:fuelType.checked}" @click="conditionSelector(fuelType)"><input type="checkbox"
                                                                                                     name="fuelTypeList"
                                                                                                     id="fuelTypeList"
                                                                                                     class="uniform"
@@ -204,7 +204,7 @@
                                                 <li class="dep01" v-for=" region of regionList" :key="region.code">
                                                     <div class="row">
 <span class="txt">
-<div class="checker" id="uniform-areaL1"><span :class="{checked:region.checked}" @click="check(region)"><input type="checkbox" name="wr_in_v_center_region_code" id="areaL1"
+<div class="checker" id="uniform-areaL1"><span :class="{checked:region.checked}" @click="conditionSelector(region)"><input type="checkbox" name="wr_in_v_center_region_code" id="areaL1"
                                                       class="uniform" value="region.code"></span></div>
 <label for="areaL1">{{region.name}}</label>
 </span>
@@ -299,7 +299,7 @@
                     </div>
                     <div class="result_box_wrap">
                         <ul class="choice_area">
-                            <li v-for="checkedItem of checkedItems" :key="checkedItem.code">{{checkedItem.name}}<span class="close" @click="removeHashTag(checkedItem)">닫기</span></li>
+                            <li v-for="checkedItem of checkedItems" :key="checkedItem.code">{{checkedItem.name}}<span class="close" @click="conditionSelector(checkedItem)">닫기</span></li>
                         </ul> <!-- 검색 선택 항목 javascript -->
                         <div class="until_box">
                             <div class="top_field">
@@ -307,7 +307,7 @@
                                 <div class="hit"></div>
                                 <div id="headerCustom">
                                     <div class="primary">
-                                    <div class="inner">
+                                    <div class="inner1">
                                     <ul class="util_link">
                                         <router-link to="/seencar">
                                         <li class="recent">
@@ -329,7 +329,27 @@
                                 </div>
                             </div>
                             <div class="align_field">
-                                <div class="detail_check">
+                                <div class="align" >
+                                    <span><a href="javascript:;" class="3dview_flag txt " name="wr_eq_v_3dview_flag"><em></em> </a></span>
+                                    <span class="basic" v-for=" orderBysub of orderBySubs" :key="orderBysub.index" >
+                                        <a href="javascript:;" v-for=" orderBysubDetail of orderBysub.value " :key="orderBysubDetail.name" :class="orderBysubDetail.class" @click="orderBy(orderBysubDetail)" >{{orderBysubDetail.name}}</a>
+<!--                                    &lt;!&ndash; <span>&ndash;&gt;
+                                         <a href="javascript:;" class="txt">가격순</a>
+                                        <a href="javascript:;" class="down ">낮은순</a>
+                                        <a href="javascript:;" class="up ">높은순</a>
+                                 &lt;!&ndash;   </span>
+                                    <span>&ndash;&gt;
+                                        <a href="javascript:;" class="txt">주행거리 순</a>
+                                        <a href="javascript:;" class="down ">낮은순</a>
+                                        <a href="javascript:;" class="up ">높은순</a>
+                              &lt;!&ndash;      </span>
+                                    <span>&ndash;&gt;
+                                        <a href="javascript:;" class="txt">연식 순</a>
+                                        <a href="javascript:;" class="down ">낮은순</a>
+                                        <a href="javascript:;" class="up ">높은순</a>-->
+                                    </span>
+                                </div>
+<!--                                <div class="detail_check">
                                     <div class="count_sel">
                                         <div id="sorting" @click="searchKeyClick(`sorting`)"
                                              class="selectric-wrapper selectric-selectric selectric-below">
@@ -345,13 +365,13 @@
                                             <div class="selectric-items" tabindex="-1" style="width: 100px;">
                                                 <div class="selectric-scroll">
                                                     <ul  v-for="orderBysub of orderBySubs" :key="orderBysub.sub">
-                                                        <li data-index="0" @click="orderBy(orderBysub)">{{orderBysub.name}}</li>
+                                                        <li data-index="0" @click="orderBy(orderBysub)" :id="orderBysub.name" >{{orderBysub.name}}</li>
                                                     </ul>
                                                 </div>
                                             </div>
                                             <input class="selectric-input" tabindex="0"></div>
                                     </div>
-                                </div>
+                                </div>-->
                                 <div class="detail_check">
                                     <div class="count_sel">
                                         <div id="carCnt" @click="searchKeyClick(`carCnt`)"
@@ -451,19 +471,22 @@ import { mapState , mapGetters } from 'vuex'
 import Pager from '@/components/cmm/Pagination'
 export default {
     name: 'searchMain',
-    components : {Pager},
+    components : { Pager },
     data() {
         return {
             searchWord: '',
             carcd: '',
             limits : [15,30,45,60],
-            orderBySubs : [{name : "기본정렬", sub : 'default'},
-                {name : "가격▲", sub : 'priceASC'},
-                {name : "가격▼", sub : 'priceDESC'},
-                {name : "주행거리▲", sub : 'mileageASC'},
-                {name : "주행거리▼", sub : 'mileageDESC'},
-                {name : "연식▲", sub : 'beginyearASC'},
-                {name : "연식▲", sub : 'beginyearDESC'}],
+            orderBySubs : [{index : 1 , value : [{name : "기본정렬", sub : 'default' , selected : true , class : 'basic' }]},
+                { index : 2 , value : [{name : "가격순", sub : 'priceDFT' , selected : false , class : 'txt' },
+                {name : "낮은순", sub : 'priceDESC' , selected : false , class : 'down ' },
+                {name : "높은순", sub : 'priceASC' , selected : false , class : 'up ' }]},
+                { index : 3 , value : [{name : "주행거리순", sub : 'mileageDFT' , selected : false , class : 'txt' },
+                {name : "낮은순", sub : 'mileageDESC' , selected : false , class : 'down ' },
+                {name : "높은순", sub : 'mileageASC' , selected : false , class : 'up ' }]} ,
+                { index : 4 , value : [{name : "연식순", sub : 'beginyearDFT' , selected : false , class : 'txt' },
+                {name : "낮은순", sub : 'beginyearDESC' , selected : false , class : 'down ' },
+                {name : "높은순", sub : 'beginyearASC' , selected : false , class :  'up ' }]}],
             orderByName : '기본정렬',
             minDefault : { code: 'minDefault' ,name : ` 최 소 ` , bigcategory : 'minDefault' },
             maxDefault : { code: 'maxDefault' ,name : ` 최 대 `, bigcategory : 'maxDefault'  },
@@ -486,70 +509,56 @@ export default {
             modelListIsOpen : state => state.cmm.modelListIsOpen,
             modelList : state => state.cmm.modelList
         }),
-        ...mapGetters('cmm', {
+        ...mapGetters( 'cmm' , {
             initFlag : 'initFlag'
         }),
         isAny : function(){
             return (this.$store.state.cmm.showCarList.length>0)
-
         },
         minPriceList : function(){
             let list = [this.minDefault]
-            for(let i=1;i<=20;i++){
-                list.push({ code : `${i*1000}` ,name : `${i},000만원`, bigCategory : 'minPrice' })
+            for( let i = 1 ; i <= 20 ; i++ ){
+                list.push({ code : `${i*1000}` , name : `${i},000만원`, bigCategory : 'minPrice' })
             }
             return list
         },
         maxPriceList : function(){
             let list = [this.maxDefault]
-            for(let i=1;i<=20;i++){
-                list.push({ code : `${i*1000}` ,name : `${i},000만원`, bigCategory : 'maxPrice'})
+            for( let i = 1 ; i <= 20 ; i++ ){
+                list.push({ code : `${i*1000}` , name : `${i},000만원`, bigCategory : 'maxPrice' })
             }
             return list
         },
         minMilages : function(){
             let list = [this.minDefault]
-            for(let i=1;i<=20;i++){
-                list.push({ code : `${i*1000}` ,name : `${i}0,000km`, bigCategory : 'minMilage'})
+            for( let i = 1 ; i <= 20 ; i++ ){
+                list.push({ code : `${i*1000}` , name : `${i}0,000km`, bigCategory : 'minMilage' })
             }
             return list
         },
         maxMilages : function(){
             let list = [this.maxDefault]
-            for(let i=1;i<=20;i++){
-                list.push({ code : `${i*1000}` ,name : `${i}0,000km`, bigCategory : 'maxMilage'})
+            for( let i = 1 ; i <= 20 ; i++ ){
+                list.push({ code : `${i*1000}` , name : `${i}0,000km`, bigCategory : 'maxMilage' })
             }
             return list
-        },
-        beginYearCalc : function () {
-            return true
         }
-
-
     },
     methods: {
-        check(targetItem){
-            this.$store.dispatch('cmm/CHECKER', { targetItem : targetItem , act : 'checked' }, { root: true })
+        conditionSelector( targetItem ){
+            this.$store.dispatch('cmm/conditionSelector', targetItem , { root: true })
+            if( targetItem.bigCategory === 'makerList' ) this.$store.dispatch( 'cmm/treeConditionControl' , targetItem )
             this.searchWithCondition()
         },
-        removeHashTag (targetItem) {
-            this.$store.dispatch('cmm/CHECKER',{ targetItem : targetItem , act : 'remove' })
-            this.searchWithCondition()
-        },
-        checkMakeTree(targetItem){
-            this.$store.dispatch('cmm/CHECKER', { targetItem : targetItem , act : 'checked' }, { root: true })
-            this.$store.dispatch('cmm/getTreeChild',targetItem )
-            this.searchWithCondition()
-        },
-        searchKeyClick(searchKeyID) {
-            const searchKey = document.getElementById(searchKeyID)
+
+        searchKeyClick( searchKeyID ) {
+            const searchKey = document.getElementById( searchKeyID )
             searchKey.className = (searchKey.className === "selectric-wrapper selectric-selectric selectric-below")
                         ? "selectric-wrapper selectric-selectric selectric-below selectric-open"
                         : "selectric-wrapper selectric-selectric selectric-below"
         },
-        selectBoxChanger(targetItem){
-            const searchKey = document.getElementById(targetItem)
-            //const cate2 = document.getElementById("m"+targetItem.substr(7))
+        selectBoxChanger( targetItem ){
+            const searchKey = document.getElementById( targetItem )
             if(searchKey.className === "selectric-wrapper selectric-selectric selectric-below selectric-hover"){
                 for (let elementsByClassNameElement of document.getElementsByClassName("selectric-wrapper selectric-selectric selectric-below selectric-hover selectric-open selectric-focus")) {
                     elementsByClassNameElement.className = "selectric-wrapper selectric-selectric selectric-below selectric-hover"
@@ -559,18 +568,18 @@ export default {
                 searchKey.className = "selectric-wrapper selectric-selectric selectric-below selectric-hover"
             }
         },
-        addHistory(carItem){
-            this.$store.dispatch('cmm/addSeenHistory',carItem)
+        addHistory( carItem ){
+            this.$store.dispatch( 'cmm/addSeenHistory' , carItem )
         },
         productClick(carItem){
             this.addHistory(carItem)
             this.$store.dispatch('cmm/setProduct',carItem)
             this.$router.push('/product')
         },
-        bigCategoryIsOpen(categoryType) {
-            const searchConditionCategory = document.getElementById(categoryType)
-            searchConditionCategory.className = (searchConditionCategory.className.substr(-2, 2) === 'on')
-                        ? (searchConditionCategory.className.substring(0, searchConditionCategory.className.length - 3))
+        bigCategoryIsOpen( categoryType ) {
+            const searchConditionCategory = document.getElementById( categoryType )
+            searchConditionCategory.className = ( searchConditionCategory.className.substr(-2, 2) === 'on')
+                        ? (searchConditionCategory.className.replace(' on' , '' ))
                         : searchConditionCategory.className = searchConditionCategory.className + " on"
         },
         searchWithCondition() {
@@ -581,32 +590,32 @@ export default {
             let maker = ''
 
             this.$store.state.cmm.checkedItems.forEach( item => {
-                switch (item.bigCategory) {
+                switch ( item.bigCategory ) {
                     case 'categoryList':
-                        checkedCategoryList.push(item)
+                        checkedCategoryList.push( item )
                         break
                     case 'makerList':
                         maker = item
                         break
                     case 'fuelTypeList':
-                        checkedFuelTypeList.push(item)
+                        checkedFuelTypeList.push( item )
                         break
                     case 'regionList':
-                        checkedRegionList.push(item)
+                        checkedRegionList.push( item )
                         break
                     case 'modelList':
-                        checkedModelList.push(item)
+                        checkedModelList.push( item )
                         break
                 }
             })
 
             let selectedConditionData = {
-                    categoryList: checkedCategoryList,
-                    modelList: checkedModelList,
-                    fuelTypeList: checkedFuelTypeList,
-                    regionList: checkedRegionList,
-                    searchWord: this.searchWord,
-                    carcd: this.carcd,
+                    categoryList : checkedCategoryList,
+                    modelList : checkedModelList,
+                    fuelTypeList : checkedFuelTypeList,
+                    regionList : checkedRegionList,
+                    searchWord : this.searchWord,
+                    carcd : this.carcd,
                     pageLimit : this.$store.state.cmm.pageLimit,
                     maker : maker.code,
                     minPrice : this.selectedMinPrice,
@@ -615,17 +624,69 @@ export default {
                     minMilage : this.selectedMinMilage,
                     maxMilage : this.selectedMaxMilage
             }
-            this.$store.dispatch('cmm/searchWithCondition', selectedConditionData)
+            this.$store.dispatch( 'cmm/searchWithCondition', selectedConditionData )
         },
 
-        clickPageLimit(pageLimit){
+        clickPageLimit( pageLimit ){
             this.$store.dispatch('cmm/pageLimitSetting', pageLimit)
             this.searchWithCondition()
         },
         orderBy(orderByValue){
-            this.$store.dispatch('cmm/orderBySubSetting', orderByValue.sub)
-            this.orderByName = orderByValue.name
-            this.searchWithCondition()
+            let selectedOrderCondition = '';
+            for (let i = 0; i < this.orderBySubs.length ; i++) {
+                for (let j = 0; j < this.orderBySubs[i].value.length ; j++) {
+                    if ( this.orderBySubs[i].value[j].sub === this.orderByName) this.orderBySubs[i].value[j].class = this.orderBySubs[i].value[j].class.replace( 'on' , '')
+                }
+            }
+
+            if ( orderByValue.sub === 'default' ) {
+                selectedOrderCondition = 'default'
+            } else if ( orderByValue.sub.indexOf('DFT') > 0 ) {
+                switch (orderByValue.sub.replace('DFT', '')) {
+                    case 'price' :
+                        if (this.orderBySubs[1].value[1].sub != this.orderByName && this.orderBySubs[1].value[2].sub != this.orderByName) {
+                            this.orderBySubs[1].value[1].class += 'on'
+                            selectedOrderCondition = this.orderBySubs[1].value[1].sub
+                        } else if (this.orderBySubs[1].value[1].sub === this.orderByName) {
+                            this.orderBySubs[1].value[2].class += 'on'
+                            selectedOrderCondition = this.orderBySubs[1].value[2].sub
+                        } else {
+                            this.orderBySubs[1].value[1].class += 'on'
+                            selectedOrderCondition = this.orderBySubs[1].value[1].sub
+                        }
+                        break
+                    case 'mileage' :
+                        if (this.orderBySubs[2].value[1].sub != this.orderByName && this.orderBySubs[2].value[2].sub != this.orderByName) {
+                            this.orderBySubs[2].value[1].class += 'on'
+                            selectedOrderCondition = this.orderBySubs[2].value[1].sub
+                        } else if (this.orderBySubs[2].value[1].sub === this.orderByName) {
+                            this.orderBySubs[2].value[2].class += 'on'
+                            selectedOrderCondition = this.orderBySubs[2].value[2].sub
+                        } else {
+                            this.orderBySubs[2].value[1].class += 'on'
+                            selectedOrderCondition = this.orderBySubs[2].value[1].sub
+                        }
+                        break
+                    case 'beginyear' :
+                        if (this.orderBySubs[3].value[1].sub != this.orderByName && this.orderBySubs[3].value[2].sub != this.orderByName ) {
+                            this.orderBySubs[3].value[1].class += 'on'
+                            selectedOrderCondition = this.orderBySubs[3].value[1].sub
+                        } else if (this.orderBySubs[3].value[1].sub === this.orderByName) {
+                            this.orderBySubs[3].value[2].class += 'on'
+                            selectedOrderCondition = this.orderBySubs[3].value[2].sub
+                        } else {
+                            this.orderBySubs[3].value[1].class += 'on'
+                            selectedOrderCondition = this.orderBySubs[3].value[1].sub
+                        }
+                        break
+                    }
+                } else if (orderByValue.sub.indexOf('DFT') < 0) {
+                        orderByValue.class += 'on'
+                        selectedOrderCondition = orderByValue.sub
+                }
+                    this.orderByName = selectedOrderCondition
+                    this.$store.dispatch('cmm/orderBySubSetting', this.orderByName)
+                    this.searchWithCondition()
         },
         setStartOrmaxPrice ( param ) {
             switch ( param.bigCategory ) {
@@ -636,6 +697,7 @@ export default {
                     this.selectedMaxPrice = param
                     break
             }
+
             this.searchWithCondition()
         },
         setStartOrmaxMilage ( param ) {
@@ -651,7 +713,7 @@ export default {
         },
         reset () {
             this.resettingSelectBox()
-            this.$store.dispatch('cmm/reset')
+            this.$store.dispatch('cmm/resetCheckedItem')
             this.$store.dispatch('cmm/init')
         },
         resettingSelectBox () {
@@ -666,19 +728,19 @@ export default {
         }
     },
     filters: {
-        mfrDateFormatter: function (value) {
-            if (!value) return ''
+        mfrDateFormatter: function ( value ) {
+            if ( !value ) return ''
             value = value.toString()
             return value.slice(2,4)+`년` + value.slice(4,6)+`월식`
         },
-        beginYearFormatter: function (value) {
-            if (!value) return ''
+        beginYearFormatter: function ( value ) {
+            if ( !value ) return ''
             value = value.toString()
             return value.slice(2,4)+``
         },
-        thousandFormatter: function (value) {
-            if (!value) return ''
-            if(value.toString().length === 3) return value
+        thousandFormatter: function ( value ) {
+            if ( !value ) return ''
+            if( value.toString().length === 3) return value
             value = value.toString()
             return value.slice( 0 , value.length-3)+`,`+ value.slice(-3,value.length)
         }
@@ -691,8 +753,6 @@ export default {
             this.selectedMaxPrice = this.$store.state.cmm.maxPriceFromMain
             this.searchWord = this.$store.state.cmm.modelTextFromMain
             this.searchWithCondition()
-            if ( this.selectedMinPrice.code != 'minDefault' ) this.selectBoxChanger(`selectMinPrice`)
-            if ( this.selectedMinPrice.code != 'maxDefault' ) this.selectBoxChanger(`selectMaxPrice`)
             }
         }
 }
