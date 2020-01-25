@@ -350,7 +350,7 @@
                 let monthPrice = 0
                 for(let i =0;i<5;i++){
                     monthPrice = Math.round((price)*((defaultRate/12)*Math.pow(1+(defaultRate/12),this.interestMonth)
-                        /(Math.pow(1+(defaultRate/12),this.interestMonth)-1))).toString()
+                                                /(Math.pow(1+(defaultRate/12),this.interestMonth)-1))).toString()
                     if(defaultRate == this.interestRate)
                         interestRateList.push({class : 'on', value : defaultRate, month : monthPrice.slice(0,2)})
                     else
@@ -376,7 +376,7 @@
                 let rate = this.interestRate/12
                 let month = this.interestMonth
                 return Math.round((this.$store.state.cmm.carItem.price*10000*0.7)*(rate*Math.pow(1+rate,month)
-                    /(Math.pow(1+rate,month)-1)))
+                                        /(Math.pow(1+rate,month)-1)))
             },
             yearInterest : function(){
                 return Math.round(((this.interest*this.interestMonth+(this.$store.state.cmm.carItem.price*10000*0.3))-this.$store.state.cmm.carItem.price*10000)/this.interestMonthIndex)
