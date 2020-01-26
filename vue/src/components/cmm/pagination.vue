@@ -1,98 +1,91 @@
 <template>
     <div class="cm_pagination">
-        <ul class="pagination">
-            <li class="move prev" @click="prev()" v-if="pageNums[0].num!=1"> <a @click.prevent href=""></a></li>
-            <li :class="{'num on':pageNum.on,'num':!pageNum.on}" v-for="(pageNum,index) of pageNums" :key="pageNum.num" @click="pageSwitch(index)"><a>{{pageNum.num}}</a></li>
-            <li class="move next" @click="next()" v-if="pageNums.length==5&& pageNums[4].num<(this.pagination.length/5)+1">
-                <a @click.prevent href=""></a> </li>
+        <span class="move prev" v-if="existPrev"><a @click="previous">◀</a></span>
+        <ul class="pagination" v-for="page of pageList" :key="page.number">
+            <li :class="page.class"><a @click="pageClick(page.number)">{{page.number}}</a></li>
         </ul>
+        <span class="move next" v-if="existNext"><a @click = "next">▶</a></span>
     </div>
 </template>
 
 <script>
     export default {
         name: "pagination",
-        props:['pagination'],
         data(){
             return{
-                pageNums:[],
+                totalCount : 0,
+                pageSize : 0,
+                pageNum : 0,
+                blockSize : 10,
+                pageCount : 0,
+                startRow : 0,
+                endRow : 0,
+                blockCount : 0,
+                blockNum : 0,
+                startPage : 0,
+                endPage : 0,
+                existPrev : true,
+                existNext : true
             }
         },
-        methods:{
-            cutPage(i){
-                let pageBlock=[]
-
-                for(let j=(i-1)*5;j<(i-1)*5+5;j++) {
-                    if(j>=this.pagination.length){
-                        break
-                    }
-                    pageBlock.push(this.pagination[j])
-                    console.log(this.pagination[j].customerID)
+        computed : {
+            pageList : function(){
+                this.init()
+                let pageList = []
+                for(let i = this.startPage; i<= this.endPage; i++){
+                    if (i == this.$store.state.cmm.pageNum)
+                        pageList.push({number : i, class : "num on"})
+                    else
+                        pageList.push({number : i, class : "num"})
                 }
-                return pageBlock
+                return pageList
+            }
+
+        },
+        methods : {
+            pageClick(number){
+                this.$store.dispatch('cmm/pageNumSetting', number)
+                this.init()
+                this.$store.dispatch('cmm/pageClick', {start : this.startRow,end : this.endRow})
+
             },
-
-            pageSwitch(i){
-                this.pageNums[i].on=true
-                for(let j=0; j<this.pageNums.length;j++){
-                    if(j!=i){
-                        this.pageNums[j].on=false
-                    }
-                }
-                this.$emit("movePage",this.cutPage(this.pageNums[i].num))
+            init(){
+                this.totalCount = this.$store.state.cmm.resultLength
+                this.pageSize = this.$store.state.cmm.pageLimit
+                this.pageNum = this.$store.state.cmm.pageNum
+                this.startRow = (this.pageNum-1)*this.pageSize
+                this.endRow = (this.pageNum==this.pageCount)
+                    ? this.totalCount
+                    : this.startRow+this.pageSize
+                this.pageCount = (this.totalCount % this.pageSize == 0)
+                    ? parseInt(this.totalCount / this.pageSize)
+                    : parseInt(this.totalCount / this.pageSize)+1
+                this.blockCount = ((this.pageCount % this.blockSize) == 0)
+                    ? parseInt(this.pageCount / this.blockSize)
+                    : parseInt(this.pageCount / this.blockSize)+1
+                this.blockNum = Math.ceil(this.pageNum / this.blockSize)
+                this.startPage = ((this.blockNum-1) * this.blockSize)+1
+                this.endPage = (this.blockNum == this.blockCount)
+                    ? this.pageCount
+                    : this.startPage + this.blockSize-1
+                this.existPrev = (this.blockNum != 1)
+                this.existNext = !(this.blockNum == this.blockCount)
             },
-
-            prev(){
-                this.$emit("movePage",this.cutPage(this.pageNums[0].num-5))
-                let temp =this.pageNums[0].num
-                this.pageNums=[]
-                for(let i=0; i<5;i++){
-                    if(i==0){
-                        this.pageNums.push({num:temp-5,on:true})
-                    }else{
-                        this.pageNums.push({num:temp-5+i,on:false})
-                    }
-                    if(this.pageNums[i].num>=(this.pagination.length/5)){
-                        this.pageNums.splice(i,)
-                        break
-                    }
-                }
+            previous(){
+                this.$store.dispatch('cmm/pageNumSetting', this.startPage-1)
+                this.init()
+                this.$store.dispatch('cmm/pageClick', {start : this.startRow,end : this.endRow})
             },
             next(){
-                this.$emit("movePage",this.cutPage(this.pageNums[4].num+1))
-                let temp =this.pageNums[0].num
-                this.pageNums=[]
-                for(let i=0; i<5;i++){
-                    if(i==0){
-                        this.pageNums.push({num:temp+5,on:true})
-                    }else{
-                        this.pageNums.push({num:temp+5+i,on:false})
-                    }
-                    if(this.pageNums[i].num>=(this.pagination.length/5)+1){
-                        this.pageNums.splice(i,)
-                        break
-                    }
-                }
-            },
-            first() {
-                let num=0
-                if(this.pagination.length/5>=5){
-                    num=5
-                }else{
-                    num=this.pagination.length/5
-                }
-                for(let i=0; i<num;i++){
-                    if(i==0) {
-                        this.pageNums.push({num:i+1,on:true})
-                    }else{
-                        this.pageNums.push({num:i+1,on:false})
-                    }
-                }
-                this.$emit("movePage",this.cutPage(this.pageNums[0].num))
-
-
+                this.$store.dispatch('cmm/pageNumSetting', this.startPage+this.blockSize)
+                this.init()
+                this.$store.dispatch('cmm/pageClick', {start : this.startRow,end : this.endRow})
             }
         },
+        created() {
+            this.init()
+        }
+
 
     }
 </script>
