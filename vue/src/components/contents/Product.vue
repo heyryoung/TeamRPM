@@ -43,7 +43,7 @@
                             <div class="wrapper">
 
                                 <div class="carImg_imgArea">
-
+                                    <p class="attr">{{this.$store.state.cmm.carItem.simpleComment}}</p>
                                     <div class="visual_wrap">
                                         <div class="visual_area">
                                             <a href="">
@@ -352,9 +352,9 @@
                     monthPrice = Math.round((price)*((defaultRate/12)*Math.pow(1+(defaultRate/12),this.interestMonth)
                                                 /(Math.pow(1+(defaultRate/12),this.interestMonth)-1))).toString()
                     if(defaultRate == this.interestRate)
-                        interestRateList.push({class : 'on', value : defaultRate, month : monthPrice.slice(0,2)})
+                        interestRateList.push({class : 'on', value : defaultRate, month : monthPrice.slice(0,-4)})
                     else
-                        interestRateList.push({class : '', value : defaultRate,  month : monthPrice.slice(0,2)})
+                        interestRateList.push({class : '', value : defaultRate,  month : monthPrice.slice(0,-4)})
                     defaultRate += 0.015
                 }
                 return interestRateList

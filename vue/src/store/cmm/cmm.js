@@ -29,12 +29,12 @@ const state = {
     minPriceFromMain : '',
     maxPriceFromMain : '',
     mainConditionSettingFlag : false,
+    carItem : {},
+    stringMatchList : [],
     minPrice : '' ,
     maxPrice : '' ,
     minMilage : '' ,
-    maxMilage : '' ,
-    carItem : {}
-
+    maxMilage : '' 
 };
 const getters = {
     makerList : state => state.makerList,
@@ -145,6 +145,17 @@ const actions = {
     async mainSearch( { commit }, conditionList ){
         commit( 'MAINSEARCH' , conditionList )
     },
+    async stringMatch({commit}, searchKeyWord){
+        axios
+            .get(`http://localhost:8080/stringMatch/`+searchKeyWord)
+            .then(({data})=>{
+                commit('STRINGMATCH', data)
+            })
+            .catch(()=>{
+                alert('잘못된 요청입니다.')
+            })
+        },
+
     async setProduct( { commit } , data ){
         commit( 'SETPRODUCT', data )
     },
@@ -424,6 +435,19 @@ const mutations = {
             state.modelListIsOpen = true
         }
 
+
+        const model = state.modelList.find( item => item.name === data.model)
+        state.modelList = []
+
+        if ( model != undefined ) state.checkedItems.push( model )
+
+        state.modelTextFromMain = ( data.modelText  === false ) ? '' : data.modelText
+        state.minPriceFromMain = ( data.minPrice  === false )
+                                    ? { checked : false , code : 'minDefault' , name : ` 최 소 ` , bigCategory : 'minDefault' }
+                                    : { code: data.minPrice , name : ` 최 소 ` , bigcategory : 'minPrice' }
+        state.maxPriceFromMain = ( data.maxPrice  === false )
+                                    ? { checked: false , code : 'maxDefault' , name : ` 최 대 `, bigCategory : 'maxDefault'  }
+                                    :  { code: data.maxPrice , name : ` 최 소 ` , bigcategory : 'maxPrice' }
         state.makerFromMain = foundMaker
 
         if ( data.condition === 'withModel' ) {
@@ -443,6 +467,33 @@ const mutations = {
     },
     SETPRODUCT( state, data ){
         state.carItem = data
+
+    },
+
+    REMOVEHASHTAG(state, foundItem) {
+        foundItem.checked = false
+        if (foundItem.bigCategory === 'makerList') {
+            state.modelListIsOpen = false
+            let processingList = state.checkedItems.filter(item => !(item.name === foundItem.name))
+            state.checkedItems = []
+            state.modelList = []
+            processingList.forEach(item => {
+                console.log('processingList>>>' + item.bigCategory)
+                if (item.bigCategory != 'modelList') state.checkedItems.push(item)
+            })
+        } else {
+            let processingList = state.checkedItems.filter(item => !(item.name === foundItem.name && item.bigCategory === foundItem.bigCategory))
+            state.checkedItems = []
+            state.checkedItems = processingList
+        }
+    },
+    STRINGMATCH(state, data){
+        state.stringMatchList = []
+        if(!data.result){
+            state.stringMatchList.push("연관 모델명이 없습니다.")
+        }else{
+            state.stringMatchList = data.result
+        }
     }
 }
 
