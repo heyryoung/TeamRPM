@@ -546,8 +546,8 @@ export default {
     },
     methods: {
         conditionSelector( targetItem ){
-            this.$store.dispatch('cmm/conditionSelector', targetItem , { root: true })
             if ( targetItem.bigCategory === 'makerList' ) this.$store.dispatch( 'cmm/treeConditionControl' , targetItem )
+            this.$store.dispatch('cmm/conditionSelector', targetItem , { root: true })
             if ( targetItem.bigCategory.indexOf( 'Range' ) > 0 ) this.resettingSelectBox( targetItem.bigCategory )
             this.searchWithCondition()
         },
@@ -573,6 +573,7 @@ export default {
                     this.selectedMaxMilage = param
                     break
             }
+            this.selectBoxRangeSetter()
             this.searchWithCondition()
         },
         selectBoxChanger( targetItem ){
@@ -627,8 +628,6 @@ export default {
                         break
                 }
             })
-
-            this.selectBoxRangeSetter()
 
             let selectedConditionData = {
                     categoryList : checkedCategoryList,
@@ -772,10 +771,15 @@ export default {
     created() {
         if (!this.$store.state.cmm.initFlag)
             this.$store.dispatch('cmm/init')
-        if (this.$store.state.cmm.mainConditionSettingFlag) {
-            this.selectedMinPrice = this.$store.state.cmm.minPriceFromMain
-            this.selectedMaxPrice = this.$store.state.cmm.maxPriceFromMain
-            this.searchWord = this.$store.state.cmm.modelTextFromMain
+
+        if (this.$store.state.cmm.mainConditionSettingFlag !== false) {
+                if (this.$store.state.cmm.mainConditionSettingFlag === 'withModel') {
+                    this.searchWord = this.$store.state.cmm.modelTextFromMain
+                } else {
+                    this.selectedMinPrice = this.$store.state.cmm.minPriceFromMain
+                    this.selectedMaxPrice = this.$store.state.cmm.maxPriceFromMain
+                    this.selectBoxRangeSetter()
+                }
             this.searchWithCondition()
             }
         }
