@@ -3,9 +3,9 @@ package com.rpm.web.contents;
 import com.rpm.web.proxy.Box;
 import com.rpm.web.proxy.Trunk;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 @RestController
@@ -21,13 +21,27 @@ public class CarsController {
     CarsService carsService;
     @Autowired
     List<Cars> cars;
+    @Autowired
+    StringMatch stringMatch;
+    private List<Object> carModelList;
+    private List<Object> carModelHangeulList;
 
-
+    public CarsController() {
+        this.carModelList = new ArrayList<>();
+        this.carModelHangeulList = new ArrayList<>();
+    }
 
     @GetMapping("/init")
     public Map<String, Object> init(){
         trunk.clear();
+        carModelList.clear();
+        carModelHangeulList.clear();
         cars = (List<Cars>) carsRepository.findAll();
+        carModelList.addAll(cars.stream().collect(Collectors.groupingBy(Cars::getModelnmText
+                , Collectors.counting())).keySet());
+        carModelList.forEach(s-> carModelHangeulList.add(stringMatch.seperateHan(s.toString().replace(" ", ""))));
+        System.out.println("carModelList :" + carModelList);
+        System.out.println("carModelHangeulList :" + carModelHangeulList);
         cars.sort((a,b) -> a.getCid().compareTo(b.getCid()));
         trunk.put(Arrays.asList("allCount" ,"carInitList","makerList","fuelTypeList", "regionList","categoryList")
                 ,Arrays.asList(String.valueOf(carsRepository.count())
@@ -159,6 +173,12 @@ public class CarsController {
             cars.addAll(carsProcessingList);
             carsProcessingList.clear();
         }
+        if( searchCondition.getModelText() != null){
+            carsProcessingList.clear();
+            carsProcessingList.addAll(cars.stream().filter(s -> s.getModelnmText().equals(searchCondition.getModelText())).collect(Collectors.toList()));
+            cars.clear();
+            cars.addAll(carsProcessingList);
+        }
 
         if(searchCondition.getOrderBySub()=="default"){
             cars.sort((a,b) -> a.getCid().compareTo(b.getCid()));
@@ -201,5 +221,40 @@ public class CarsController {
     public Object getShowCarList(@PathVariable String startrow, @PathVariable String endrow){
         return cars.subList(Integer.parseInt(startrow),Integer.parseInt(endrow));
         }
+
+    @GetMapping("/stringMatch/{searchWord}")
+    public Map<String, Object> stringMatch(@PathVariable String searchWord){
+        List<Object> result = new ArrayList<>();
+        List<Integer> index = new ArrayList<>();
+        Consumer<Object> c = new Consumer<Object>() {
+            @Override
+            public void accept(Object o) {
+                if(o.toString().contains(stringMatch.seperateHan(searchWord.replace(" ", "")))){
+                    index.add(carModelHangeulList.indexOf(o));
+                }
+            }
+        };
+        carModelHangeulList.forEach(s-> c.accept(s));
+        if(index.size()!=0) {
+            for (int i : index) {
+                result.add(carModelList.get(i));
+            }
+        }
+        trunk.put(Arrays.asList("result"), Arrays.asList((result.size()>0)?result:false));
+        return trunk.get();
+    }
+
+    @GetMapping("/findMaker/{modelText}")
+    public Map<String, Object> findMaker(@PathVariable String modelText){
+        trunk.clear();
+        trunk.put(Arrays.asList("maker", "model"), Arrays.asList(
+                carsService.findMakerAndModelByModelText(modelText).keySet()
+                        .toString().replace("[", "").replace("]", ""),
+                carsService.findMakerAndModelByModelText(modelText).get(
+                        carsService.findMakerAndModelByModelText(modelText).keySet()
+                                .toString().replace("[", "").replace("]", ""))
+                        .keySet().toString().replace("[", "").replace("]", "")));
+        return trunk.get();
+    }
 
 }
