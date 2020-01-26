@@ -11,7 +11,7 @@
                     <img src="https://blackrockdigital.github.io/startbootstrap-agency/img/portfolio/02-thumbnail.jpg" class="pic-image" alt="">
                     <span class="pic-caption bottom-to-top">
                         <div>
-                            <em><h1 class="pic-title">김예지 님의 차량정보 </h1></em>
+                            <em><h1 class="pic-title">{{this.$store.state.user.user.name}} 님의 차량정보 </h1></em>
                         </div>
                         <div>
                             <p>

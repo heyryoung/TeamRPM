@@ -1,5 +1,6 @@
 package com.rpm.web.contents;
 
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
@@ -9,6 +10,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 @Component
+@Lazy
 public interface CarsService {
     public Map<String, List<Cars>> getCategoryByCarType(Iterable<Cars> cars);
 
@@ -27,6 +29,13 @@ public interface CarsService {
 
     public List<SearchDetailCondition> findByMakecd(List<Cars> carsList);
 
+
+    List<SearchDetailCondition> findByModelWithCount(List<Cars> carsList, String code);
+
+    public List<SearchDetailCondition> findByModelCategory(List<Cars> carsList, String code);
+
+    List<SearchDetailCondition> findByModelNMCategory(List<Cars> carsList, String name);
+
     List<Cars> findCarWithFuleType(List<Cars> carsList);
 
     List<Cars> findCarWithCenterRegionCode(List<Cars> carsList);
@@ -37,9 +46,15 @@ public interface CarsService {
 
     List<Cars> findCarBySelectedCategory(List<Cars> carsList, String category);
 
-    Collection<? extends Cars> findCarBySelectedMaker(List<Cars> carsList, String code);
+    List<Cars> findCarBySelectedMaker(List<Cars> carsList, String code);
 
-    Collection<? extends Cars> findCarBySelectedFuelType(List<Cars> carsList, String code);
+    List<Cars> findCarBySelectedFuelType(List<Cars> carsList, String code);
 
-    Collection<? extends Cars> findCarBySelectedRegion(List<Cars> carsList, String code);
+    List<Cars> findCarBySelectedRegion(List<Cars> carsList, String code);
+
+    List<Cars> findCarBySelectedModel(List<Cars> carsList, String code);
+
+    List<Cars> findCarBySelectedMakerNM(List<Cars> carsList, String name);
+
+    Map<String,Map<String,List<Cars>>> findMakerAndModelByModelText(String modelnmText);
 }

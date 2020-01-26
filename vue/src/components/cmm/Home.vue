@@ -21,7 +21,7 @@
                                                     <span class="tit">RPM에서 판매하는 차 <strong class="all_car_cnt">총 {{this.$store.state.cmm.carAllCount}}대</strong></span>
                             <span class="searchinput">
                               <input type="text" class="placeho modelSearchInput" name="quickSearch" id="quickSearch" @click="searchBoxOn"
-                                     v-model = "searchKeyWord" @keyup="stringMatchOn"
+                                     v-on:input="searchKeyWord=$event.target.value" @keyup="stringMatchOn"
                                      placeholder=" 모델명을 입력해주세요. 예시)아반떼" maxlength="20" autocomplete="off"><a @click="goSearch" class="hid">검색</a>
                             </span>
                                                     <!--검색기록유-->
@@ -110,16 +110,17 @@
                                                         <div class="recentr1">
                                                             <ul><li><div class="carthumlist "><a href="/car/info/car_info_imported_detail.do?i_sCarCd=EC60309032"><img src="https://img.kcar.com/3dcarpicture/2019/12/010/60309032_1/main/main780.jpg" width="100" height="66" alt="car" target="_blank"><span>시트로엥 DS7 크로스백 2.0 BlueHDi 소 시크<br><em>3,900만원</em></span></a></div></li><li><div class="carthumlist last"><a href="/car/info/car_info_detail.do?i_sCarCd=EC60325171"><img src="https://img.kcar.com/carpicture/carpicture02/pic6032/kcar_60325171_011.jpg" width="100" height="66" alt="car" target="_blank"><span>현대 쏘나타 DN8 2.0 가솔린<br><em>2,130만원</em></span></a></div></li></ul>
                                                         </div>
-                                                        <!--검색기록무
-                                                        <div class="recentr1" style="display:none">
+
+                                                   <!--     <div class="recentr1">
                                                             <ul>
                                                                 <li class="noresult">추천직영차가 없습니다</li>
                                                             </ul>
-                                                        </div>
-                                                        -->
+                                                        </div>-->
+
                                                         <h3 class="tit1">연관 모델명</h3>
-                                                        <div class="recentl1">
-                                                            <ul><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="022|006|006|IMP|DS3(12년~18년)">DS3(12년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="022|009|008|IMP|DS5(11년~18년)">DS5(11년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="022|006|009|IMP|DS3 카브리오(13년~18년)">DS3 카브리오(13년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="022|008|012|IMP|DS4 크로스백(16년~18년)">DS4 크로스백(16년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="022|008|007|IMP|DS4(12년~18년)">DS4(12년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="043|010|010|IMP|DTS(06년~11년)">DTS(06년~11년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="070|002|002|IMP|DB9(04년~18년)">DB9(04년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="070|004|004|IMP|DBS(07년~18년)">DBS(07년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="070|008|075|IMP|DB7(94년~03년)">DB7(94년~03년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="001|017|111|KOR|싼타페 DM(12년~15년)">싼타페 DM(12년~15년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="001|025|124|KOR|제네시스 DH(13년~16년)">제네시스 DH(13년~16년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="001|018|163|KOR|쏘나타 DN8(19년~현재)">쏘나타 DN8(19년~현재)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="054|002|006|IMP|쿠퍼 D 클럽맨(09년~18년)">쿠퍼 D 클럽맨(09년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="054|003|115|IMP|쿠퍼 D 컨트리맨(11년~18년)">쿠퍼 D 컨트리맨(11년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="054|001|117|IMP|쿠퍼 D(07년~18년)">쿠퍼 D(07년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="054|012|133|IMP|쿠퍼 D 페이스맨(13년~18년)">쿠퍼 D 페이스맨(13년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="001|019|037|KOR|아반떼 XD(00년~03년)">아반떼 XD(00년~03년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="001|019|071|KOR|뉴 아반떼 XD(03년~06년)">뉴 아반떼 XD(03년~06년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="001|019|081|KOR|아반떼 HD(06년~10년)">아반떼 HD(06년~10년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="001|019|104|KOR|아반떼 MD(10년~13년)">아반떼 MD(10년~13년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="001|019|136|KOR|아반떼 AD(15년~18년)">아반떼 AD(15년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="001|019|154|KOR|더 뉴 아반떼 AD(18년~현재)">더 뉴 아반떼 AD(18년~현재)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="054|001|118|IMP|쿠퍼 SD(12년~18년)">쿠퍼 SD(12년~18년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="058|001|016|IMP|FX30d(09년~13년)">FX30d(09년~13년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="082|004|004|IMP|xD(07년~14년)">xD(07년~14년)</a></li><li><a href="javascript:;" onclick="mainEvent.moveCarSearchListWithCodeGroup(this);" data-item="058|003|014|IMP|M30d(10년~13년)">M30d(10년~13년)</a></li></ul>
+                                                        <div class="recentl1" >
+                                                            <ul v-for = "(j,i) of this.$store.state.cmm.stringMatchList" :key="i"><li><a @click="stringMatchClick(j)">{{j}}</a></li>
+                                                            </ul>
                                                         </div>
                                                         <div class="btclose divSearchConHide"><a @click="searchBoxOff(`stringMatch`)"><img src="https://www.kcar.com/resources/images/index/recentclose.jpg" width="44" height="20" alt="닫기" border="0"></a></div>
                                                     </div>
@@ -174,7 +175,7 @@
                                                             <div id = "category2" class="selectric-items" tabindex="-1" >
                                                                 <div class="selectric-scroll">
                                                                     <ul v-for="category of this.$store.state.cmm.category2" :key="category.name">
-                                                                        <li data-index="1" @click="setCategory3(category.name, category.count)" class="">{{category.name}}<em>{{category.count}}</em>
+                                                                        <li data-index="1" @click="setCategory3(category)" class="">{{category.name}}<em>{{category.count}}</em>
                                                                         </li>
                                                                     </ul>
                                                                 </div>
@@ -202,7 +203,7 @@
                                                             <div class="selectric-items" tabindex="-1">
                                                                 <div class="selectric-scroll">
                                                                     <ul v-for="category of this.$store.state.cmm.category3" :key="category.name">
-                                                                        <li data-index="1" @click="setKeyWord3(category.name, category.count)" class="">{{category.name}}<em>{{category.count}}</em>
+                                                                        <li data-index="1" @click="setKeyWord3(category)" class="">{{category.name}}<em>{{category.count}}</em>
                                                                         </li>
                                                                     </ul>
                                                                 </div>
@@ -211,7 +212,7 @@
                                                     </div>
                                                 </li>
                                                 <li class="search_btn" id="divBtnSearch">
-                                                    <a @click="goSearchWithCondition()">검색하기&nbsp;<span v-if="resultCount">({{resultCount}}대)</span></a>
+                                                    <a @click="goSearchWithCondition('withModel')">검색하기&nbsp;<span v-if="resultCount">({{resultCount}}대)</span></a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -276,11 +277,11 @@
                                                                     <option value = "price.value">{{price.name}}</option>
                                                             </select></div>
                                                             <div class="selectric"><span
-                                                                    class="label">{{minPrice}}</span></div>
+                                                                    class="label">{{minPrice | thousandFormatter}}</span></div>
                                                             <div class="selectric-items" tabindex="-1" style="width: 220px; height: 300px;">
                                                                 <div class="selectric-scroll">
                                                                     <ul v-for="price of prices" :key="price.name">
-                                                                        <li @click="setMinPrice(price.name)" data-index="price.index" class="">{{price.name}}</li>
+                                                                        <li @click="setMinPrice(price.name)" data-index="price.index" class="">{{price.name | thousandFormatter}}</li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -299,11 +300,11 @@
                                                                     <option value = "price.value">{{price.name}}</option>
                                                             </select></div>
                                                             <div class="selectric"><span
-                                                                    class="label">{{maxPrice}}</span></div>
+                                                                    class="label">{{maxPrice | thousandFormatter}}</span></div>
                                                             <div class="selectric-items" tabindex="-1" style="width: 220px; height: 300px;">
                                                                 <div class="selectric-scroll">
                                                                     <ul v-for="price of prices" :key="price.name">
-                                                                         <li @click="setMaxPrice(price.name)" data-index="price.index" class="">{{price.name}}</li>
+                                                                         <li @click="setMaxPrice(price.name)" data-index="price.index" class="">{{price.name | thousandFormatter}}</li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -311,7 +312,7 @@
                                                     </div>
                                                 </li>
                                                 <li class="search_btn" id="divBtnSearchWithPrice"><a
-                                                        href="javascript:;">검색하기&nbsp;<span></span></a></li>
+                                                        @click="goSearchWithCondition('withBudget')">검색하기&nbsp;<span></span></a></li>
                                                 <!--//20180801 검색셀렉트박스 수정-->
                                             </ul>
                                         </div>
@@ -991,10 +992,16 @@
     </div>
 </template>
 <script>
+    import axios from 'axios'
     export default {
         data(){
             return{
                 searchKeyWord : '',
+                defaultKeyWord1 : '제조사를 선택하세요',
+                defaultKeyWord2 : '모델을 선택하세요',
+                defaultKeyWord3 : '세부모델을 선택하세요',
+                defaultMinPrice : '최저가격을 선택하세요',
+                defaultMaxPrice : '최고가격을 선택하세요',
                 keyWord1 : '제조사를 선택하세요',
                 keyWord2 : '모델을 선택하세요',
                 keyWord3 : '세부모델을 선택하세요',
@@ -1041,6 +1048,7 @@
                 if(this.searchKeyWord != "") {
                     searchBox.style.display = "none"
                     stringMatch.style.display = "block"
+                    this.$store.dispatch('cmm/stringMatch',this.searchKeyWord)
                 }else{
                     stringMatch.style.display = "none"
                     searchBox.style.display = "block"
@@ -1052,9 +1060,9 @@
                 korCar.className = "on"
                 impCar.className = ""
                 this.$store.dispatch('cmm/getCategory1',{'param':'KOR','column':'CAR_TYPE'})
-                this.keyWord1 = '제조사를 선택하세요',
-                this.keyWord2 = '모델을 선택하세요'
-                this.keyWord3 = '세부모델을 선택하세요'
+                this.keyWord1 = this.defaultKeyWord1,
+                this.keyWord2 = this.defaultKeyWord2,
+                this.keyWord3 = this.defaultKeyWord3,
                 this.resultCount = 0
 
             },
@@ -1067,9 +1075,9 @@
                 category1.style.width = "220px"
                 category1.style.height = "300px"
                 this.$store.dispatch('cmm/getCategory1',{'param':'IMP','column':'CAR_TYPE'})
-                this.keyWord1 = '제조사를 선택하세요',
-                this.keyWord2 = '모델을 선택하세요'
-                this.keyWord3 = '세부모델을 선택하세요'
+                this.keyWord1 = this.defaultKeyWord1,
+                this.keyWord2 = this.defaultKeyWord2
+                this.keyWord3 = this.defaultKeyWord3
                 this.resultCount = 0
 
             },
@@ -1094,21 +1102,21 @@
             },
 
             setCategory2(param){
-                this.keyWord2 = '모델을 선택하세요'
-                this.keyWord3 = '세부모델을 선택하세요'
+                this.keyWord2 = this.defaultKeyWord2
+                this.keyWord3 = this.defaultKeyWord3
                 this.keyWord1 = param.name
                 this.resultCount = param.count
                 this.$store.dispatch('cmm/getCategory2',{'param':this.keyWord1,'column':'MAKENM'})
             },
-            setCategory3(keyWord2, resultCount){
-                this.keyWord3 = '세부모델을 선택하세요'
-                this.keyWord2 = keyWord2
-                this.resultCount = resultCount
+            setCategory3(param){
+                this.keyWord3 = this.defaultKeyWord3
+                this.keyWord2 = param.name
+                this.resultCount = param.count
                 this.$store.dispatch('cmm/getCategory3',{'param':this.keyWord2,'column':'MODEL_GRP_NM'})
             },
-            setKeyWord3(keyWord3, resultCount){
-                this.keyWord3 = keyWord3
-                this.resultCount = resultCount
+            setKeyWord3(param){
+                this.keyWord3 = param.name
+                this.resultCount = param.count
             },
             setMinPrice(minPrice){
                 this.minPrice = minPrice
@@ -1122,17 +1130,60 @@
                 }
 
             },
-            goSearchWithCondition(){
+            goSearchWithCondition(condition){
+                let selectedCondition = {}
+                switch (condition) {
+                    case 'withModel' :
+                        selectedCondition =
+                            { 'maker' : (this.keyWord1 === this.defaultKeyWord1) ? false : this.keyWord1
+                            , 'model' : (this.keyWord2 === this.defaultKeyWord2) ? false : this.keyWord2
+                            , 'modelText' : (this.keyWord3 === this.defaultKeyWord3) ? false : this.keyWord3}
+                        break
+                    case 'withBudget' :
+                        selectedCondition =
+                            { 'maker' : (this.keyWord1 === this.defaultKeyWord1) ? false : this.keyWord1
+                            , 'minPrice' : (this.minPrice === this.defaultMinPrice ) ? false : { code: this.minPrice.replace(`만원`,'') , name : this.thousandFormatter(this.minPrice.replace(`만원`,''))+ `만원`  , bigCategory : 'minPrice' }
+                            , 'maxPrice' : (this.maxPrice === this.defaultMaxPrice ) ? false : { code: this.maxPrice.replace(`만원`,'') , name : this.thousandFormatter(this.maxPrice.replace(`만원`,''))+ `만원` , bigCategory : 'maxPrice' }}
+                        break
+                }
 
+                if(this.keyWord1 === this.defaultKeyWord1){
+                    alert(this.defaultKeyWord1)
+                }else{
+                    this.$store.dispatch('cmm/mainSearch' , { selectedCondition : selectedCondition , condition : condition }  )
+                    this.$router.push('/searchMain')
+                }
+            },
+            stringMatchClick(modelText){
+                axios
+                    .get(`http://localhost:8080/findMaker/`+modelText)
+                    .then(({data})=>{
+                        this.keyWord1 = data.maker.replace(" ", "")
+                        this.keyWord2 = data.model.replace(" ", "")
+                        this.keyWord3 = modelText
+                        this.goSearchWithCondition('withModel')
+                    })
+                    .catch(()=>{
+                        alert('잘못된 요청입니다.')
+                    })
+            },
+            thousandFormatter (value) {
+                return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             }
+
         },
         computed : {
             prices : function(){
                 let list = []
                 for(let i=1;i<=100;i++){
-                    list.push({index : i, name : `${i*100}만원`})
+                    list.push({index : i, name : `${i*100}만원` , code : i*100})
                 }
                 return list
+            }
+        },
+        filters : {
+            thousandFormatter: function (value) {
+                return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             }
         },
         created(){
