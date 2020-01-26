@@ -762,10 +762,7 @@ export default {
             return value.slice(2,4)+``
         },
         thousandFormatter: function ( value ) {
-            if ( !value ) return ''
-            if( value.toString().length === 3) return value
-            value = value.toString()
-            return value.slice( 0 , value.length-3)+`,`+ value.slice(-3,value.length)
+            return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
     },
     created() {
