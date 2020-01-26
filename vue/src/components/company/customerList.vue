@@ -98,6 +98,7 @@
 <script>
     import {checkBox} from "../mixins/checkBox";
     import pagination from "../cmm/pagination";
+    import axios from "axios"
     export default {
         components:{
           pagination
@@ -106,39 +107,49 @@
             return {
                 allchecked:false,
                 List:[],
-                customers:[]
+                customers:[],
+                context:'http://localhost:8080/',
 
             }
         },
         methods: {
-            movePageBlock(){
+            movePageBlock(pagination){
                 this.customers=pagination
             }
 
         },
         mixins:[checkBox],
         created() {
-            for(let i=0;i<10;i++) {
-                this.List.push({
-                    customerID: "001",
-                    comment: "벤츠 suv 최저가 구합니다",
-                    checked: false,
-                    minCarYear: "2000",
-                    maxCarYear: "2010",
-                    minDistance: "10000",
-                    maxDistance: "150000",
-                    minPrice: "7000",
-                    maxPrice: "10000",
-                    acident: "무사고",
-                    color: "갈색",
-                    region: "경기/인천",
-                    fuel: "디젤",
-                    carType: "SUV",
-                    people: "5인승",
-                    thumb: "https://story-img.kakaocdn.net/dn/qoQx7/hyBwU4vCEL/RswKkc4XSgAQPTF4piHXQ0/img_xl.jpg?width=1096&height=822&face=481_327_571_426&avg=%23c9c6c7"
+            axios
+                .get(`${this.context}/company/carList`)
+                .then(res=>{
+                    console.log(res.data.result)
+                    for(let i=0;i<10;i++) {
+                        this.List.push({
+                            customerID: i,
+                            comment: "벤츠 suv 최저가 구합니다",
+                            checked: false,
+                            minCarYear: "2000",
+                            maxCarYear: "2010",
+                            minDistance: "10000",
+                            maxDistance: "150000",
+                            minPrice: "7000",
+                            maxPrice: "10000",
+                            acident: "무사고",
+                            color: "갈색",
+                            region: "경기/인천",
+                            fuel: "디젤",
+                            carType: "SUV",
+                            people: "5인승",
+                            thumb: "https://story-img.kakaocdn.net/dn/qoQx7/hyBwU4vCEL/RswKkc4XSgAQPTF4piHXQ0/img_xl.jpg?width=1096&height=822&face=481_327_571_426&avg=%23c9c6c7"
+                        })
+                    }
+                    this.$refs.pagination.first()
                 })
-            }
-            this.$refs.pagination.first()
+                .catch(e=>{
+                    alert(`axios fail${e}`)
+                })
+
         }
 
     }

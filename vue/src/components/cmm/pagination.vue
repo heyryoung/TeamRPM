@@ -27,6 +27,7 @@
                         break
                     }
                     pageBlock.push(this.pagination[j])
+                    console.log(this.pagination[j].customerID)
                 }
                 return pageBlock
             },
@@ -87,7 +88,7 @@
                         this.pageNums.push({num:i+1,on:false})
                     }
                 }
-                this.$emit("movePage",this.cutPage(this.pageNums[4].num+1))
+                this.$emit("movePage",this.cutPage(this.pageNums[0].num))
 
 
             }

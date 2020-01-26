@@ -20,13 +20,19 @@ package com.rpm.web.company;
 public class CompanyController {
     @Autowired
     CarsRepository carsRepository;
+
     @GetMapping("/carList")
     public Map<String, List<Cars>> carList(){
         System.out.println("들어옴");
         Map<String,List<Cars>> map = new HashMap();
-
-
         map.put("result",carsRepository.findByCenterCode("114"));
+        return map;
+    }
+    @GetMapping("/customerList")
+    public Map<String, String> customerList(){
+        System.out.println("들어옴");
+        Map<String,String> map = new HashMap();
+        map.put("result","aa");
         return map;
     }
 }
