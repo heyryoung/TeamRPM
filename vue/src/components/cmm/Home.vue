@@ -1147,7 +1147,7 @@
                 if(this.keyWord1 === this.defaultKeyWord1){
                     alert(this.defaultKeyWord1)
                 }else{
-                    this.$store.dispatch('cmm/mainSearch' , selectedCondition )
+                    this.$store.dispatch('cmm/mainSearch' , { selectedCondition : selectedCondition , condition : condition }  )
                     this.$router.push('/searchMain')
                 }
             },
