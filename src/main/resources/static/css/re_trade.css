@@ -1591,7 +1591,7 @@ a.cmBtnRe { display: inline-block; padding: 10px 30px; border: 1px solid #d42a35
 .carSearch_cont .result_box_wrap .until_box .align_field .align { float: left; padding-left: 20px; }
 .carSearch_cont .result_box_wrap .until_box .align_field .align span { display: inline-block; vertical-align: middle; margin-left: 15px; line-height: 44px;}
 .carSearch_cont .result_box_wrap .until_box .align_field .align span:first-child { margin-left: 0; padding-right: 20px; border-right: 1px solid #ddd;}
-.carSearch_cont .result_box_wrap .until_box .align_field .align span a.txt{ font-size: 12px; color: #000; letter-spacing: -0.07em; }
+.carSearch_cont .result_box_wrap .until_box .align_field .align span a.txt{ font-size: 12px; color: #000; letter-spacing: -0.07em; font-weight: 500;}
 .carSearch_cont .result_box_wrap .until_box .align_field .align span a em.vr_ordermark{ background:url( https://www.kcar.com/resources/images/content/buy/vr_ordermark.png) no-repeat;display: inline-block; width: 23px; height: 20px; text-indent: -9999px; vertical-align: middle; }
 .carSearch_cont .result_box_wrap .until_box .align_field .align span a.up, .carSearch_cont .result_box_wrap .until_box .align_field .align span a.down { display: inline-block; width: 15px; height: 15px; text-indent: -9999px; vertical-align: middle; background-image: url("https://www.kcar.com/resources/images/content/buy/up_down_arrow.png"); background-repeat: no-repeat; }
 .carSearch_cont .result_box_wrap .until_box .align_field .align span a.up { background-position: 0 0; }

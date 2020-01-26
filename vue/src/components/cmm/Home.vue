@@ -1142,15 +1142,15 @@
                     case 'withBudget' :
                         selectedCondition =
                             { 'maker' : (this.keyWord1 === this.defaultKeyWord1) ? false : this.keyWord1
-                            , 'minPrice' : (this.minPrice === this.defaultMinPrice ) ? false : this.minPrice.replace(`만원`,'')
-                            , 'maxPrice' : (this.maxPrice === this.defaultMaxPrice ) ? false : this.maxPrice.replace(`만원`,'')}
+                            , 'minPrice' : (this.minPrice === this.defaultMinPrice ) ? false : { code: this.minPrice.replace(`만원`,'') , name : this.thousandFormatter(this.minPrice.replace(`만원`,''))+ `만원`  , bigCategory : 'minPrice' }
+                            , 'maxPrice' : (this.maxPrice === this.defaultMaxPrice ) ? false : { code: this.maxPrice.replace(`만원`,'') , name : this.thousandFormatter(this.maxPrice.replace(`만원`,''))+ `만원` , bigCategory : 'maxPrice' }}
                         break
                 }
 
                 if(this.keyWord1 === this.defaultKeyWord1){
                     alert(this.defaultKeyWord1)
                 }else{
-                    this.$store.dispatch('cmm/mainSearch' , selectedCondition )
+                    this.$store.dispatch('cmm/mainSearch' , { selectedCondition : selectedCondition , condition : condition }  )
                     this.$router.push('/searchMain')
                 }
             },
@@ -1166,7 +1166,11 @@
                     .catch(()=>{
                         alert('잘못된 요청입니다.')
                     })
+            },
+            thousandFormatter (value) {
+                return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             }
+
         },
         computed : {
             prices : function(){

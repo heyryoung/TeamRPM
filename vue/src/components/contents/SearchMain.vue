@@ -103,7 +103,7 @@
                                         <div class="selectric-items" tabindex="-1"  id = "minPrice" style="width: 120px; height: 300px;">
                                             <div class="selectric-scroll">
                                                 <ul v-for="minPrice of minPriceList" :key="minPrice.code">
-                                                    <li @click="setStartOrmaxPrice(minPrice)" >{{minPrice.name}}
+                                                    <li @click="setSelectBoxCondition(minPrice)" >{{minPrice.name}}
                                                     </li>
                                                 </ul>
                                             </div>
@@ -122,7 +122,7 @@
                                         <div class="selectric-items" tabindex="-1" id = "maxPrice"  style="width: 120px; height: 300px;">
                                             <div class="selectric-scroll">
                                                 <ul  v-for="maxPrice of maxPriceList" :key="maxPrice.code">
-                                                    <li @click="setStartOrmaxPrice(maxPrice)">{{maxPrice.name}}
+                                                    <li @click="setSelectBoxCondition(maxPrice)">{{maxPrice.name}}
                                                     </li>
                                                 </ul>
                                             </div>
@@ -148,7 +148,7 @@
                                         <div class="selectric-items" tabindex="-1" id = "minMilage" style="width: 120px; height: 300px;">
                                             <div class="selectric-scroll" >
                                                 <ul v-for="minMilage of minMilages" :key="minMilage.code">
-                                                    <li @click="setStartOrmaxMilage(minMilage)">{{minMilage.name}}</li>
+                                                    <li @click="setSelectBoxCondition(minMilage)">{{minMilage.name}}</li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -168,7 +168,7 @@
                                         <div class="selectric-items" tabindex="-1"  id="maxMilage" style="width: 120px; height: 300px;">
                                             <div class="selectric-scroll">
                                                 <ul v-for="maxMilage of maxMilages" :key="maxMilage.code">
-                                                    <li @click="setStartOrmaxMilage(maxMilage)"> {{maxMilage.name}}
+                                                    <li @click="setSelectBoxCondition(maxMilage)"> {{maxMilage.name}}
                                                     </li>
                                                 </ul>
                                             </div>
@@ -477,7 +477,7 @@ export default {
             searchWord: '',
             carcd: '',
             limits : [15,30,45,60],
-            orderBySubs : [{index : 1 , value : [{name : "기본정렬", sub : 'default' , selected : true , class : 'basic' }]},
+            orderBySubs : [{index : 1 , value : [{name : "기본정렬", sub : 'default' , selected : true , class : 'txt default' }]},
                 { index : 2 , value : [{name : "가격순", sub : 'priceDFT' , selected : false , class : 'txt' },
                 {name : "낮은순", sub : 'priceDESC' , selected : false , class : 'down ' },
                 {name : "높은순", sub : 'priceASC' , selected : false , class : 'up ' }]},
@@ -488,12 +488,12 @@ export default {
                 {name : "낮은순", sub : 'beginyearDESC' , selected : false , class : 'down ' },
                 {name : "높은순", sub : 'beginyearASC' , selected : false , class :  'up ' }]}],
             orderByName : '기본정렬',
-            minDefault : { code: 'minDefault' ,name : ` 최 소 ` , bigcategory : 'minDefault' },
-            maxDefault : { code: 'maxDefault' ,name : ` 최 대 `, bigcategory : 'maxDefault'  },
-            selectedMinPrice : { code: 'selectedMinPrice' , name : ` 최 소 ` , bigcategory : 'minPrice' },
-            selectedMaxPrice : { code: 'selectedMaxPrice' , name : ` 최 대 ` , bigcategory : 'maxPrice' },
-            selectedMinMilage : { code: 'selectedMinMilage' , name : ` 최 소 ` , bigcategory : 'minMilage' },
-            selectedMaxMilage : { code: 'selectedMaxMilage' , name : ` 최 대 ` , bigcategory : 'maxMilage' }
+            minDefault : { code: 'minDefault' ,name : ` 최 소 ` , bigCategory : 'minDefault' },
+            maxDefault : { code: 'maxDefault' ,name : ` 최 대 `, bigCategory : 'maxDefault'  },
+            selectedMinPrice : { code: 'selectedMinPrice' , name : ` 최 소 ` , bigCategory : 'minDefault' },
+            selectedMaxPrice : { code: 'selectedMaxPrice' , name : ` 최 대 ` , bigCategory : 'maxDefault' },
+            selectedMinMilage : { code: 'selectedMinMilage' , name : ` 최 소 ` , bigCategory : 'minDefault' },
+            selectedMaxMilage : { code: 'selectedMaxMilage' , name : ` 최 대 ` , bigCategory : 'maxDefault' }
         }
     },
     computed: {
@@ -518,14 +518,14 @@ export default {
         minPriceList : function(){
             let list = [this.minDefault]
             for( let i = 1 ; i <= 20 ; i++ ){
-                list.push({ code : `${i*1000}` , name : `${i},000만원`, bigCategory : 'minPrice' })
+                list.push({ code : `${i*100}` , name : this.thousandFormatter(i*100)+`만원`, bigCategory : 'minPrice' })
             }
             return list
         },
         maxPriceList : function(){
             let list = [this.maxDefault]
             for( let i = 1 ; i <= 20 ; i++ ){
-                list.push({ code : `${i*1000}` , name : `${i},000만원`, bigCategory : 'maxPrice' })
+                list.push({ code : `${i*100}` , name : this.thousandFormatter(i*100)+`만원`, bigCategory : 'maxPrice' })
             }
             return list
         },
@@ -547,8 +547,9 @@ export default {
     methods: {
         conditionSelector( targetItem ){
             this.searchWord =  ''
+            if ( targetItem.bigCategory === 'makerList' ) this.$store.dispatch( 'cmm/treeConditionControl' , targetItem )
             this.$store.dispatch('cmm/conditionSelector', targetItem , { root: true })
-            if( targetItem.bigCategory === 'makerList' ) this.$store.dispatch( 'cmm/treeConditionControl' , targetItem )
+            if ( targetItem.bigCategory.indexOf( 'Range' ) > 0 ) this.resettingSelectBox( targetItem.bigCategory )
             this.searchWithCondition()
         },
 
@@ -557,6 +558,24 @@ export default {
             searchKey.className = (searchKey.className === "selectric-wrapper selectric-selectric selectric-below")
                         ? "selectric-wrapper selectric-selectric selectric-below selectric-open"
                         : "selectric-wrapper selectric-selectric selectric-below"
+        },
+        setSelectBoxCondition ( param ) {
+            switch ( param.bigCategory ) {
+                case 'minPrice' :
+                    this.selectedMinPrice = param
+                    break
+                case 'maxPrice' :
+                    this.selectedMaxPrice = param
+                    break
+                case 'minMilage' :
+                    this.selectedMinMilage = param
+                    break
+                case 'maxMilage' :
+                    this.selectedMaxMilage = param
+                    break
+            }
+            this.selectBoxRangeSetter()
+            this.searchWithCondition()
         },
         selectBoxChanger( targetItem ){
             const searchKey = document.getElementById( targetItem )
@@ -568,6 +587,7 @@ export default {
             }else{
                 searchKey.className = "selectric-wrapper selectric-selectric selectric-below selectric-hover"
             }
+
         },
         addHistory( carItem ){
             this.$store.dispatch( 'cmm/addSeenHistory' , carItem )
@@ -618,16 +638,31 @@ export default {
                     carcd : this.carcd,
                     pageLimit : this.$store.state.cmm.pageLimit,
                     maker : maker.code,
-                    minPrice : this.selectedMinPrice,
                     orderBySub : this.$store.state.cmm.orderBySub,
+                    minPrice : this.selectedMinPrice,
                     maxPrice : this.selectedMaxPrice,
                     minMilage : this.selectedMinMilage,
                     maxMilage : this.selectedMaxMilage,
                     modelText : this.searchWord
             }
+
             this.$store.dispatch( 'cmm/searchWithCondition', selectedConditionData )
         },
-
+        selectBoxRangeSetter () {
+            console.log(this.selectedMinPrice.bigCategory + this.selectedMinPrice.name)
+            if ( this.selectedMinPrice.bigCategory.indexOf('Default') < 0  ) {
+                this.$store.dispatch('cmm/conditionSelectorBySelectBox', this.selectedMinPrice , { root: true })
+            }
+            if ( this.selectedMaxPrice.bigCategory.indexOf('Default') < 0  ) {
+                this.$store.dispatch('cmm/conditionSelectorBySelectBox', this.selectedMaxPrice , { root: true })
+            }
+            if ( this.selectedMinMilage.bigCategory.indexOf('Default') < 0  ) {
+                this.$store.dispatch('cmm/conditionSelectorBySelectBox', this.selectedMinMilage , { root: true })
+            }
+            if ( this.selectedMaxMilage.bigCategory.indexOf('Default') < 0  ) {
+                this.$store.dispatch('cmm/conditionSelectorBySelectBox', this.selectedMaxMilage , { root: true })
+            }
+        },
         clickPageLimit( pageLimit ){
             this.$store.dispatch('cmm/pageLimitSetting', pageLimit)
             this.searchWord =  ''
@@ -691,6 +726,7 @@ export default {
                     this.searchWord =  ''
                     this.searchWithCondition()
         },
+
         setStartOrmaxPrice ( param ) {
             switch ( param.bigCategory ) {
                 case 'minPrice' :
@@ -715,20 +751,31 @@ export default {
             this.searchWord =  ''
             this.searchWithCondition()
         },
+
         reset () {
-            this.resettingSelectBox()
+            this.resettingSelectBox( 'All' )
             this.$store.dispatch('cmm/resetCheckedItem')
             this.$store.dispatch('cmm/init')
         },
-        resettingSelectBox () {
-            this.selectedMinPrice.code = this.minDefault.code
-            this.selectedMinPrice.name = this.minDefault.name
-            this.selectedMaxPrice.code = this.maxDefault.code
-            this.selectedMaxPrice.name = this.maxDefault.name
-            this.selectedMinMilage.code = this.minDefault.code
-            this.selectedMinMilage.name = this.minDefault.name
-            this.selectedMaxMilage.code = this.maxDefault.code
-            this.selectedMaxMilage.name = this.maxDefault.name
+        resettingSelectBox ( target ) {
+            if ( target === 'PriceRange' ) {
+                this.selectedMinPrice = this.minDefault
+                this.selectedMaxPrice = this.maxDefault
+            } else if ( target === 'MilageRange' ) {
+                this.selectedMinMilage = this.minDefault
+                this.selectedMaxMilage = this.maxDefault
+            } else {
+                this.selectedMinPrice = this.minDefault
+                this.selectedMaxPrice = this.maxDefault
+                this.selectedMinMilage = this.minDefault
+                this.selectedMaxMilage = this.maxDefault
+            }
+        },
+        thousandFormatter ( value ) {
+            if ( !value ) return ''
+            if( value.toString().length === 3) return value
+            value = value.toString()
+            return value.slice( 0 , value.length-3)+`,`+ value.slice(-3,value.length)
         }
     },
     filters: {
@@ -752,10 +799,15 @@ export default {
     created() {
         if (!this.$store.state.cmm.initFlag)
             this.$store.dispatch('cmm/init')
-        if (this.$store.state.cmm.mainConditionSettingFlag) {
-            this.selectedMinPrice = this.$store.state.cmm.minPriceFromMain
-            this.selectedMaxPrice = this.$store.state.cmm.maxPriceFromMain
-            this.searchWord = this.$store.state.cmm.modelTextFromMain
+
+        if (this.$store.state.cmm.mainConditionSettingFlag !== false) {
+                if (this.$store.state.cmm.mainConditionSettingFlag === 'withModel') {
+                    this.searchWord = this.$store.state.cmm.modelTextFromMain
+                } else {
+                    this.selectedMinPrice = this.$store.state.cmm.minPriceFromMain
+                    this.selectedMaxPrice = this.$store.state.cmm.maxPriceFromMain
+                    this.selectBoxRangeSetter()
+                }
             this.searchWithCondition()
             }
         }
