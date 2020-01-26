@@ -19,7 +19,7 @@
                         </div>
                         <div class="quick_search">
                             <div class="ip_field">
-                                <input type="text" name="quickSearch" id="searchWord" v-model="searchWord" placeholder="모델명 입력 예시) 아반떼 MD"
+                                <input type="text" name="quickSearch" id="searchWord" v-model="searchWord" placeholder="준비중입니다.."
                                        autocomplete="off" v-on:keyup.enter="searchWithCondition()" >
                                 <label for="quickSearch">검색아이콘</label>
                                 <ul class="drop_box"></ul>
@@ -546,6 +546,7 @@ export default {
     },
     methods: {
         conditionSelector( targetItem ){
+            this.searchWord =  ''
             this.$store.dispatch('cmm/conditionSelector', targetItem , { root: true })
             if( targetItem.bigCategory === 'makerList' ) this.$store.dispatch( 'cmm/treeConditionControl' , targetItem )
             this.searchWithCondition()
@@ -614,7 +615,6 @@ export default {
                     modelList : checkedModelList,
                     fuelTypeList : checkedFuelTypeList,
                     regionList : checkedRegionList,
-                    searchWord : this.searchWord,
                     carcd : this.carcd,
                     pageLimit : this.$store.state.cmm.pageLimit,
                     maker : maker.code,
@@ -622,13 +622,15 @@ export default {
                     orderBySub : this.$store.state.cmm.orderBySub,
                     maxPrice : this.selectedMaxPrice,
                     minMilage : this.selectedMinMilage,
-                    maxMilage : this.selectedMaxMilage
+                    maxMilage : this.selectedMaxMilage,
+                    modelText : this.searchWord
             }
             this.$store.dispatch( 'cmm/searchWithCondition', selectedConditionData )
         },
 
         clickPageLimit( pageLimit ){
             this.$store.dispatch('cmm/pageLimitSetting', pageLimit)
+            this.searchWord =  ''
             this.searchWithCondition()
         },
         orderBy(orderByValue){
@@ -686,6 +688,7 @@ export default {
                 }
                     this.orderByName = selectedOrderCondition
                     this.$store.dispatch('cmm/orderBySubSetting', this.orderByName)
+                    this.searchWord =  ''
                     this.searchWithCondition()
         },
         setStartOrmaxPrice ( param ) {
@@ -697,7 +700,7 @@ export default {
                     this.selectedMaxPrice = param
                     break
             }
-
+            this.searchWord =  ''
             this.searchWithCondition()
         },
         setStartOrmaxMilage ( param ) {
@@ -709,6 +712,7 @@ export default {
                     this.selectedMaxMilage = param
                     break
             }
+            this.searchWord =  ''
             this.searchWithCondition()
         },
         reset () {

@@ -172,8 +172,7 @@ const actions = {
         axios
             .get(`http://localhost:8080/stringMatch/`+searchKeyWord)
             .then(({data})=>{
-                if(data.result){
-                commit('STRINGMATCH', data)}
+                commit('STRINGMATCH', data)
             })
             .catch(()=>{
                 alert('잘못된 요청입니다.')
@@ -426,10 +425,10 @@ const mutations = {
 
         state.modelTextFromMain = ( data.modelText  === false ) ? '' : data.modelText
         state.minPriceFromMain = ( data.minPrice  === false )
-                                    ? { checked : false , code : 'minDefault' , name : ` 최 소 ` , bigcategory : 'minDefault' }
+                                    ? { checked : false , code : 'minDefault' , name : ` 최 소 ` , bigCategory : 'minDefault' }
                                     : { code: data.minPrice , name : ` 최 소 ` , bigcategory : 'minPrice' }
         state.maxPriceFromMain = ( data.maxPrice  === false )
-                                    ? { checked: false , code : 'maxDefault' , name : ` 최 대 `, bigcategory : 'maxDefault'  }
+                                    ? { checked: false , code : 'maxDefault' , name : ` 최 대 `, bigCategory : 'maxDefault'  }
                                     :  { code: data.maxPrice , name : ` 최 소 ` , bigcategory : 'maxPrice' }
 
     },
@@ -457,8 +456,11 @@ const mutations = {
     },
     STRINGMATCH(state, data){
         state.stringMatchList = []
-        state.stringMatchList = data.result
-
+        if(!data.result){
+            state.stringMatchList.push("연관 모델명이 없습니다.")
+        }else{
+            state.stringMatchList = data.result
+        }
     }
 }
 

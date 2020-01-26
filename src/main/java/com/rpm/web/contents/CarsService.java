@@ -55,4 +55,6 @@ public interface CarsService {
     List<Cars> findCarBySelectedModel(List<Cars> carsList, String code);
 
     List<Cars> findCarBySelectedMakerNM(List<Cars> carsList, String name);
+
+    Map<String,Map<String,List<Cars>>> findMakerAndModelByModelText(String modelnmText);
 }

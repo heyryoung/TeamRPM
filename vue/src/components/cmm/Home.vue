@@ -21,7 +21,7 @@
                                                     <span class="tit">RPM에서 판매하는 차 <strong class="all_car_cnt">총 {{this.$store.state.cmm.carAllCount}}대</strong></span>
                             <span class="searchinput">
                               <input type="text" class="placeho modelSearchInput" name="quickSearch" id="quickSearch" @click="searchBoxOn"
-                                     v-model="searchKeyWord" @keyup="stringMatchOn"
+                                     v-on:input="searchKeyWord=$event.target.value" @keyup="stringMatchOn"
                                      placeholder=" 모델명을 입력해주세요. 예시)아반떼" maxlength="20" autocomplete="off"><a @click="goSearch" class="hid">검색</a>
                             </span>
                                                     <!--검색기록유-->
@@ -110,16 +110,16 @@
                                                         <div class="recentr1">
                                                             <ul><li><div class="carthumlist "><a href="/car/info/car_info_imported_detail.do?i_sCarCd=EC60309032"><img src="https://img.kcar.com/3dcarpicture/2019/12/010/60309032_1/main/main780.jpg" width="100" height="66" alt="car" target="_blank"><span>시트로엥 DS7 크로스백 2.0 BlueHDi 소 시크<br><em>3,900만원</em></span></a></div></li><li><div class="carthumlist last"><a href="/car/info/car_info_detail.do?i_sCarCd=EC60325171"><img src="https://img.kcar.com/carpicture/carpicture02/pic6032/kcar_60325171_011.jpg" width="100" height="66" alt="car" target="_blank"><span>현대 쏘나타 DN8 2.0 가솔린<br><em>2,130만원</em></span></a></div></li></ul>
                                                         </div>
-                                                        <!--검색기록무
-                                                        <div class="recentr1" style="display:none">
+
+                                                   <!--     <div class="recentr1">
                                                             <ul>
                                                                 <li class="noresult">추천직영차가 없습니다</li>
                                                             </ul>
-                                                        </div>
-                                                        -->
+                                                        </div>-->
+
                                                         <h3 class="tit1">연관 모델명</h3>
-                                                        <div class="recentl1">
-                                                            <ul v-for = "(j,i) of this.$store.state.cmm.stringMatchList" :key="i"><li><a>{{j}}</a></li>
+                                                        <div class="recentl1" >
+                                                            <ul v-for = "(j,i) of this.$store.state.cmm.stringMatchList" :key="i"><li><a @click="stringMatchClick(j)">{{j}}</a></li>
                                                             </ul>
                                                         </div>
                                                         <div class="btclose divSearchConHide"><a @click="searchBoxOff(`stringMatch`)"><img src="https://www.kcar.com/resources/images/index/recentclose.jpg" width="44" height="20" alt="닫기" border="0"></a></div>
@@ -992,6 +992,7 @@
     </div>
 </template>
 <script>
+    import axios from 'axios'
     export default {
         data(){
             return{
@@ -1047,13 +1048,11 @@
                 if(this.searchKeyWord != "") {
                     searchBox.style.display = "none"
                     stringMatch.style.display = "block"
-
+                    this.$store.dispatch('cmm/stringMatch',this.searchKeyWord)
                 }else{
                     stringMatch.style.display = "none"
                     searchBox.style.display = "block"
                 }
-                this.$store.dispatch('cmm/stringMatch',this.searchKeyWord)
-
             },
             korCar(korCarID, impCarID){
                 const korCar = document.getElementById(korCarID)
@@ -1154,6 +1153,19 @@
                     this.$store.dispatch('cmm/mainSearch' , selectedCondition )
                     this.$router.push('/searchMain')
                 }
+            },
+            stringMatchClick(modelText){
+                axios
+                    .get(`http://localhost:8080/findMaker/`+modelText)
+                    .then(({data})=>{
+                        this.keyWord1 = data.maker.replace(" ", "")
+                        this.keyWord2 = data.model.replace(" ", "")
+                        this.keyWord3 = modelText
+                        this.goSearchWithCondition('withModel')
+                    })
+                    .catch(()=>{
+                        alert('잘못된 요청입니다.')
+                    })
             }
         },
         computed : {

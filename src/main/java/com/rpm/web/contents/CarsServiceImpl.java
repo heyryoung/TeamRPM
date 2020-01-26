@@ -191,5 +191,13 @@ public class CarsServiceImpl implements CarsService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public Map<String,Map<String,List<Cars>>> findMakerAndModelByModelText(String modelnmText) {
+        return StreamSupport.stream(carsRepository.findByModelnmText(modelnmText).spliterator(), false)
+                .collect(Collectors.groupingBy(Cars::getMakenm, Collectors.groupingBy(Cars::getModelGrpNm)));
+
+    }
+
+
 
 }

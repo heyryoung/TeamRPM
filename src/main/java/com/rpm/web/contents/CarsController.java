@@ -34,6 +34,8 @@ public class CarsController {
     @GetMapping("/init")
     public Map<String, Object> init(){
         trunk.clear();
+        carModelList.clear();
+        carModelHangeulList.clear();
         cars = (List<Cars>) carsRepository.findAll();
         carModelList.addAll(cars.stream().collect(Collectors.groupingBy(Cars::getModelnmText
                 , Collectors.counting())).keySet());
@@ -171,6 +173,12 @@ public class CarsController {
             cars.addAll(carsProcessingList);
             carsProcessingList.clear();
         }
+        if( searchCondition.getModelText() != null){
+            carsProcessingList.clear();
+            carsProcessingList.addAll(cars.stream().filter(s -> s.getModelnmText().equals(searchCondition.getModelText())).collect(Collectors.toList()));
+            cars.clear();
+            cars.addAll(carsProcessingList);
+        }
 
         if(searchCondition.getOrderBySub()=="default"){
             cars.sort((a,b) -> a.getCid().compareTo(b.getCid()));
@@ -216,7 +224,6 @@ public class CarsController {
 
     @GetMapping("/stringMatch/{searchWord}")
     public Map<String, Object> stringMatch(@PathVariable String searchWord){
-        System.out.println(stringMatch.seperateHan(searchWord.replace(" ", "")));
         List<Object> result = new ArrayList<>();
         List<Integer> index = new ArrayList<>();
         Consumer<Object> c = new Consumer<Object>() {
@@ -228,13 +235,25 @@ public class CarsController {
             }
         };
         carModelHangeulList.forEach(s-> c.accept(s));
-        System.out.println("index : " + index);
         if(index.size()!=0) {
-            for (int i = 0 ; i<index.size();i++) {
-                result.add(carModelList.get(index.get(i)));
+            for (int i : index) {
+                result.add(carModelList.get(i));
             }
         }
         trunk.put(Arrays.asList("result"), Arrays.asList((result.size()>0)?result:false));
+        return trunk.get();
+    }
+
+    @GetMapping("/findMaker/{modelText}")
+    public Map<String, Object> findMaker(@PathVariable String modelText){
+        trunk.clear();
+        trunk.put(Arrays.asList("maker", "model"), Arrays.asList(
+                carsService.findMakerAndModelByModelText(modelText).keySet()
+                        .toString().replace("[", "").replace("]", ""),
+                carsService.findMakerAndModelByModelText(modelText).get(
+                        carsService.findMakerAndModelByModelText(modelText).keySet()
+                                .toString().replace("[", "").replace("]", ""))
+                        .keySet().toString().replace("[", "").replace("]", "")));
         return trunk.get();
     }
 
