@@ -1167,8 +1167,6 @@
                         this.keyWord1 = data.maker.replace(" ", "")
                         this.keyWord2 = data.model.replace(" ", "")
                         this.keyWord3 = modelText
-                    })
-                    .then(()=>{
                         this.goSearchWithCondition('stringMatch')
                     })
                     .catch(()=>{
