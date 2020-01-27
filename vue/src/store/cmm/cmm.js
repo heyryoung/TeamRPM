@@ -23,18 +23,18 @@ const state = {
     initFlag : false,
     modelListIsOpen : false,
     orderBySub : 'default',
-    makerFromMain : '',
     modelFromMain : '',
     modelTextFromMain : '',
     minPriceFromMain : '',
     maxPriceFromMain : '',
     mainConditionSettingFlag : false,
     carItem : {},
+    selectedCondition : {},
     stringMatchList : [],
     minPrice : '' ,
     maxPrice : '' ,
     minMilage : '' ,
-    maxMilage : '' 
+    maxMilage : ''
 };
 const getters = {
     makerList : state => state.makerList,
@@ -98,22 +98,22 @@ const actions = {
 
     async searchWithCondition({commit}, param){
 
-            let url = `http://localhost:8080/searchWithCondition`;
-            let headers = {
-                'authorization': 'JWT fefege..',
-                'Accept' : 'application/json',
-                'Content-Type': 'application/json'
-            };
-            axios
-                .post(url, param ,headers)
-                .then(({data})=>
-                {
-                    commit('SEARCHWITHCONDITION',data)
-                })
-                .catch(()=>
-                    console.log("들어옴 실패")
-                )
-        },
+        let url = `http://localhost:8080/searchWithCondition`;
+        let headers = {
+            'authorization': 'JWT fefege..',
+            'Accept' : 'application/json',
+            'Content-Type': 'application/json'
+        };
+        axios
+            .post(url, param ,headers)
+            .then(({data})=>
+            {
+                commit('SEARCHWITHCONDITION',data)
+            })
+            .catch(()=>
+                console.log("들어옴 실패")
+            )
+    },
 
     async conditionSelector ({ commit }, targetItem ) {
         commit( 'CONDITIONSELECTOR' , targetItem );
@@ -154,13 +154,16 @@ const actions = {
             .catch(()=>{
                 alert('잘못된 요청입니다.')
             })
-        },
+    },
 
     async setProduct( { commit } , data ){
         commit( 'SETPRODUCT', data )
     },
     async conditionSelectorBySelectBox ( { commit } , data ) {
         commit( 'CONDITIONSELECTORBYSELECTBOX', data )
+    },
+    async stringMatchModelCHecker ( { commit }) {
+        commit( 'stringMatchModelCHecker' )
     }
 };
 const mutations = {
@@ -230,7 +233,7 @@ const mutations = {
             state.resultLength = 0,
             state.modelList = [],
             state.modelListIsOpen = false
-            state.initFlag = false
+        state.initFlag = false
     },
     TREECONDITIONCONTROL ( state, param ) {
         state.modelListIsOpen = !state.modelListIsOpen
@@ -313,10 +316,10 @@ const mutations = {
             })
         }
 
-        console.log(state.modelListIsOpen)
         if ( state.modelListIsOpen ) {
             state.modelList = []
             data.modelList.forEach( el => {
+                console.log('여기 들어왔음.' + el.name)
                 state.modelList.push({
                     checked: ( state.checkedItems.find( checkedItem => el.name === checkedItem.name )) ? true : false,
                     bigCategory: 'modelList',
@@ -343,7 +346,7 @@ const mutations = {
             foundItem.checked = !foundItem.checked
 
             if ( foundItem.bigCategory === 'makerList' && !state.modelListIsOpen ) {
-                let processingList = state.checkedItems.filter( item => !( item.name === foundItem.name && item.bigCategory === foundItem.bigCategory))
+                let processingList = state.checkedItems.filter( item => !( item.name === foundItem.name))
                 state.checkedItems = []
                 state.modelList = []
                 processingList.forEach(item => {
@@ -369,11 +372,11 @@ const mutations = {
         switch ( category ) {
             case 'Price' :
                 if ( range === 'min' ) state.minPrice = targetItem.name
-                   else state.maxPrice =  targetItem.name
+                else state.maxPrice =  targetItem.name
                 break
             case 'Milage' :
                 if ( range === 'min' ) state.minMilage = targetItem.name
-                    else state.maxMilage =  targetItem.name
+                else state.maxMilage =  targetItem.name
                 break
         }
         state.checkedItems.push({
@@ -429,63 +432,42 @@ const mutations = {
         state.mainConditionSettingFlag = data.condition;
         const foundMaker = state.makerList.find( item => item.name === data.selectedCondition.maker)
 
-        if ( foundMaker !== undefined ){
-            foundMaker.checked = true;
-            state.checkedItems.push(foundMaker)
-            state.modelListIsOpen = true
-        }
-
-
-        const model = state.modelList.find( item => item.name === data.model)
-        state.modelList = []
-
-        if ( model != undefined ) state.checkedItems.push( model )
-
-        state.modelTextFromMain = ( data.modelText  === false ) ? '' : data.modelText
-        state.minPriceFromMain = ( data.minPrice  === false )
-                                    ? { checked : false , code : 'minDefault' , name : ` 최 소 ` , bigCategory : 'minDefault' }
-                                    : { code: data.minPrice , name : ` 최 소 ` , bigcategory : 'minPrice' }
-        state.maxPriceFromMain = ( data.maxPrice  === false )
-                                    ? { checked: false , code : 'maxDefault' , name : ` 최 대 `, bigCategory : 'maxDefault'  }
-                                    :  { code: data.maxPrice , name : ` 최 소 ` , bigcategory : 'maxPrice' }
-        state.makerFromMain = foundMaker
-
-        if ( data.condition === 'withModel' ) {
-            const model = state.modelList.find( item => item.name === data.selectedCondition.model)
+         if ( foundMaker !== undefined ){
+                state.checkedItems.push(foundMaker)
+                state.modelListIsOpen = true
+         }
+        if ( data.condition !== 'stringMatch' ) {
+            if ( data.condition === 'withModel' ) {
+                const model = state.modelList.find( item => item.name === data.selectedCondition.model)
+                state.modelFromMain = model
+                state.modelList = []
+                if ( model !== undefined ) state.checkedItems.push( model )
+                state.modelTextFromMain = ( data.selectedCondition.modelText  === false ) ? '' : data.selectedCondition.modelText
+            } else {
+                state.minPriceFromMain = ( data.selectedCondition.minPrice  === false )
+                    ? { checked : false , code : 'minDefault' , name : ` 최 소 ` , bigCategory : 'minDefault' }
+                    : data.selectedCondition.minPrice
+                state.maxPriceFromMain = ( data.selectedCondition.maxPrice  === false )
+                    ? { checked: false , code : 'maxDefault' , name : ` 최 대 `, bigCategory : 'maxDefault'  }
+                    :  data.selectedCondition.maxPrice
+            }
+        } else if (  data.condition === 'stringMatch' ) {
+           // state.selectedCondition = data.selectedCondition
+            const model = {
+                checked: false ,
+                bigCategory: 'modelList',
+                code: 'stringMatch',
+                name:  data.selectedCondition.model,
+                count: 0
+            }
             state.modelFromMain = model
-            state.modelList = []
-            if ( model !== undefined ) state.checkedItems.push( model )
+            state.modelList.push(model)
             state.modelTextFromMain = ( data.selectedCondition.modelText  === false ) ? '' : data.selectedCondition.modelText
-        } else {
-            state.minPriceFromMain = ( data.selectedCondition.minPrice  === false )
-                ? { checked : false , code : 'minDefault' , name : ` 최 소 ` , bigCategory : 'minDefault' }
-                : data.selectedCondition.minPrice
-            state.maxPriceFromMain = ( data.selectedCondition.maxPrice  === false )
-                ? { checked: false , code : 'maxDefault' , name : ` 최 대 `, bigCategory : 'maxDefault'  }
-                :  data.selectedCondition.maxPrice
         }
     },
     SETPRODUCT( state, data ){
         state.carItem = data
 
-    },
-
-    REMOVEHASHTAG(state, foundItem) {
-        foundItem.checked = false
-        if (foundItem.bigCategory === 'makerList') {
-            state.modelListIsOpen = false
-            let processingList = state.checkedItems.filter(item => !(item.name === foundItem.name))
-            state.checkedItems = []
-            state.modelList = []
-            processingList.forEach(item => {
-                console.log('processingList>>>' + item.bigCategory)
-                if (item.bigCategory != 'modelList') state.checkedItems.push(item)
-            })
-        } else {
-            let processingList = state.checkedItems.filter(item => !(item.name === foundItem.name && item.bigCategory === foundItem.bigCategory))
-            state.checkedItems = []
-            state.checkedItems = processingList
-        }
     },
     STRINGMATCH(state, data){
         state.stringMatchList = []
@@ -494,6 +476,11 @@ const mutations = {
         }else{
             state.stringMatchList = data.result
         }
+    },
+    stringMatchModelCHecker ( state ) {
+        let targetItem = state.modelList.find( item => item.name === state.modelFromMain.name )
+        targetItem.checked = true
+        state.checkedItems.push( targetItem )
     }
 }
 

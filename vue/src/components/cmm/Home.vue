@@ -1,7 +1,7 @@
 <template>
     <div>
         <div id='app'>
-           <div style="padding-top: 80px;"></div>
+            <div style="padding-top: 80px;"></div>
             <div id="content">
                 <div class="main_content">
                     <!--검색-->
@@ -19,7 +19,7 @@
                                             <ul>
                                                 <li>
                                                     <span class="tit">RPM에서 판매하는 차 <strong class="all_car_cnt">총 {{this.$store.state.cmm.carAllCount}}대</strong></span>
-                            <span class="searchinput">
+                                                    <span class="searchinput">
                               <input type="text" class="placeho modelSearchInput" name="quickSearch" id="quickSearch" @click="searchBoxOn"
                                      v-on:input="searchKeyWord=$event.target.value" @keyup="stringMatchOn"
                                      placeholder=" 모델명을 입력해주세요. 예시)아반떼" maxlength="20" autocomplete="off"><a @click="goSearch" class="hid">검색</a>
@@ -111,11 +111,11 @@
                                                             <ul><li><div class="carthumlist "><a href="/car/info/car_info_imported_detail.do?i_sCarCd=EC60309032"><img src="https://img.kcar.com/3dcarpicture/2019/12/010/60309032_1/main/main780.jpg" width="100" height="66" alt="car" target="_blank"><span>시트로엥 DS7 크로스백 2.0 BlueHDi 소 시크<br><em>3,900만원</em></span></a></div></li><li><div class="carthumlist last"><a href="/car/info/car_info_detail.do?i_sCarCd=EC60325171"><img src="https://img.kcar.com/carpicture/carpicture02/pic6032/kcar_60325171_011.jpg" width="100" height="66" alt="car" target="_blank"><span>현대 쏘나타 DN8 2.0 가솔린<br><em>2,130만원</em></span></a></div></li></ul>
                                                         </div>
 
-                                                   <!--     <div class="recentr1">
-                                                            <ul>
-                                                                <li class="noresult">추천직영차가 없습니다</li>
-                                                            </ul>
-                                                        </div>-->
+                                                        <!--     <div class="recentr1">
+                                                                 <ul>
+                                                                     <li class="noresult">추천직영차가 없습니다</li>
+                                                                 </ul>
+                                                             </div>-->
 
                                                         <h3 class="tit1">연관 모델명</h3>
                                                         <div class="recentl1" >
@@ -143,11 +143,11 @@
                                                                         tabindex="-1"
                                                                         v-for="category of this.$store.state.cmm.category1"
                                                                         :key="category.name">
-                                                                <option data-type="MAKE_TYPE010"
-                                                                        data-cnt="category.count">{{category.name}}</option>
-                                                            </select></div>
+                                                                    <option data-type="MAKE_TYPE010"
+                                                                            data-cnt="category.count">{{category.name}}</option>
+                                                                </select></div>
                                                             <div class="selectric" ><span class="label"
-                                                                                         data-beusable-tracking="" >{{keyWord1}}</span></div>
+                                                                                          data-beusable-tracking="" >{{keyWord1}}</span></div>
                                                             <div id = "category1" class="selectric-items" tabindex="-1">
                                                                 <div class="selectric-scroll">
                                                                     <ul v-for="category of this.$store.state.cmm.category1" :key="category.name">
@@ -188,15 +188,15 @@
                                                              class="selectric-wrapper selectric-selectric selectric-below selectric-hover">
                                                             <div class="selectric-hide-select">
                                                                 <select
-                                                                    id="modelList"
-                                                                   title="세부모델을 선택하세요"
-                                                                   class="selectric"
-                                                                   data-beusable-tracking=""
-                                                                   tabindex="-1"
-                                                                   v-for="category of this.$store.state.cmm.category3"
-                                                                   :key="category.name">
-                                                                <option data-type="MAKE_TYPE010"
-                                                                        data-cnt="category.count">{{category.name}}</option>
+                                                                        id="modelList"
+                                                                        title="세부모델을 선택하세요"
+                                                                        class="selectric"
+                                                                        data-beusable-tracking=""
+                                                                        tabindex="-1"
+                                                                        v-for="category of this.$store.state.cmm.category3"
+                                                                        :key="category.name">
+                                                                    <option data-type="MAKE_TYPE010"
+                                                                            data-cnt="category.count">{{category.name}}</option>
                                                                 </select></div>
                                                             <div class="selectric"><span class="label"
                                                                                          data-beusable-tracking="">{{keyWord3}}</span></div>
@@ -242,15 +242,15 @@
                                                              class="selectric-wrapper selectric-selectric selectric-below selectric-hover">
                                                             <div class="selectric-hide-select">
                                                                 <select
-                                                                    id="makeList"
-                                                                    title="제조사를 선택하세요"
-                                                                    lass="selectric"
-                                                                    data-beusable-tracking=""
-                                                                    tabindex="-1"
-                                                                    v-for="category of this.$store.state.cmm.category1"
-                                                                    :key="category.name">
+                                                                        id="makeList"
+                                                                        title="제조사를 선택하세요"
+                                                                        lass="selectric"
+                                                                        data-beusable-tracking=""
+                                                                        tabindex="-1"
+                                                                        v-for="category of this.$store.state.cmm.category1"
+                                                                        :key="category.name">
                                                                     <option data-type="MAKE_TYPE010"
-                                                                        data-cnt="category.count">{{category.name}}</option>
+                                                                            data-cnt="category.count">{{category.name}}</option>
                                                                 </select></div>
                                                             <div class="selectric" ><span class="label"
                                                                                           data-beusable-tracking="">{{keyWord1}}</span></div>
@@ -266,7 +266,7 @@
                                                     </div>
                                                     <div class="searchr2">
                                                         <div id="priceDiv1" @click="searchKeyClick(`priceDiv1`)"
-                                                        class="selectric-wrapper selectric-selectric selectric-below selectric-hover">
+                                                             class="selectric-wrapper selectric-selectric selectric-below selectric-hover">
                                                             <div class="selectric-hide-select">
                                                                 <select id="minCarPrice"
                                                                         title="최저가격을 선택하세요"
@@ -275,7 +275,7 @@
                                                                         v-for="price of prices"
                                                                         :key="price.name">
                                                                     <option value = "price.value">{{price.name}}</option>
-                                                            </select></div>
+                                                                </select></div>
                                                             <div class="selectric"><span
                                                                     class="label">{{minPrice | thousandFormatter}}</span></div>
                                                             <div class="selectric-items" tabindex="-1" style="width: 220px; height: 300px;">
@@ -298,13 +298,13 @@
                                                                         v-for="price of prices"
                                                                         :key="price.name">
                                                                     <option value = "price.value">{{price.name}}</option>
-                                                            </select></div>
+                                                                </select></div>
                                                             <div class="selectric"><span
                                                                     class="label">{{maxPrice | thousandFormatter}}</span></div>
                                                             <div class="selectric-items" tabindex="-1" style="width: 220px; height: 300px;">
                                                                 <div class="selectric-scroll">
                                                                     <ul v-for="price of prices" :key="price.name">
-                                                                         <li @click="setMaxPrice(price.name)" data-index="price.index" class="">{{price.name | thousandFormatter}}</li>
+                                                                        <li @click="setMaxPrice(price.name)" data-index="price.index" class="">{{price.name | thousandFormatter}}</li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -1061,9 +1061,9 @@
                 impCar.className = ""
                 this.$store.dispatch('cmm/getCategory1',{'param':'KOR','column':'CAR_TYPE'})
                 this.keyWord1 = this.defaultKeyWord1,
-                this.keyWord2 = this.defaultKeyWord2,
-                this.keyWord3 = this.defaultKeyWord3,
-                this.resultCount = 0
+                    this.keyWord2 = this.defaultKeyWord2,
+                    this.keyWord3 = this.defaultKeyWord3,
+                    this.resultCount = 0
 
             },
             impCar(korCarID, impCarID, category1ID){
@@ -1076,7 +1076,7 @@
                 category1.style.height = "300px"
                 this.$store.dispatch('cmm/getCategory1',{'param':'IMP','column':'CAR_TYPE'})
                 this.keyWord1 = this.defaultKeyWord1,
-                this.keyWord2 = this.defaultKeyWord2
+                    this.keyWord2 = this.defaultKeyWord2
                 this.keyWord3 = this.defaultKeyWord3
                 this.resultCount = 0
 
@@ -1136,22 +1136,28 @@
                     case 'withModel' :
                         selectedCondition =
                             { 'maker' : (this.keyWord1 === this.defaultKeyWord1) ? false : this.keyWord1
-                            , 'model' : (this.keyWord2 === this.defaultKeyWord2) ? false : this.keyWord2
-                            , 'modelText' : (this.keyWord3 === this.defaultKeyWord3) ? false : this.keyWord3}
+                                , 'model' : (this.keyWord2 === this.defaultKeyWord2) ? false : this.keyWord2
+                                , 'modelText' : (this.keyWord3 === this.defaultKeyWord3) ? false : this.keyWord3}
+                        break
+                    case 'stringMatch' :
+                        selectedCondition =
+                            { 'maker' : (this.keyWord1 === this.defaultKeyWord1) ? false : this.keyWord1
+                                , 'model' : (this.keyWord2 === this.defaultKeyWord2) ? false : this.keyWord2
+                                , 'modelText' : (this.keyWord3 === this.defaultKeyWord3) ? false : this.keyWord3}
                         break
                     case 'withBudget' :
                         selectedCondition =
                             { 'maker' : (this.keyWord1 === this.defaultKeyWord1) ? false : this.keyWord1
-                            , 'minPrice' : (this.minPrice === this.defaultMinPrice ) ? false : { code: this.minPrice.replace(`만원`,'') , name : this.thousandFormatter(this.minPrice.replace(`만원`,''))+ `만원`  , bigCategory : 'minPrice' }
-                            , 'maxPrice' : (this.maxPrice === this.defaultMaxPrice ) ? false : { code: this.maxPrice.replace(`만원`,'') , name : this.thousandFormatter(this.maxPrice.replace(`만원`,''))+ `만원` , bigCategory : 'maxPrice' }}
+                                , 'minPrice' : (this.minPrice === this.defaultMinPrice ) ? false : { code: this.minPrice.replace(`만원`,'') , name : this.thousandFormatter(this.minPrice.replace(`만원`,''))+ `만원`  , bigCategory : 'minPrice' }
+                                , 'maxPrice' : (this.maxPrice === this.defaultMaxPrice ) ? false : { code: this.maxPrice.replace(`만원`,'') , name : this.thousandFormatter(this.maxPrice.replace(`만원`,''))+ `만원` , bigCategory : 'maxPrice' }}
                         break
                 }
-
                 if(this.keyWord1 === this.defaultKeyWord1){
                     alert(this.defaultKeyWord1)
                 }else{
-                    this.$store.dispatch('cmm/mainSearch' , { selectedCondition : selectedCondition , condition : condition }  )
+                    this.$store.dispatch('cmm/mainSearch' , { selectedCondition : selectedCondition , condition : condition } )
                     this.$router.push('/searchMain')
+
                 }
             },
             stringMatchClick(modelText){
@@ -1161,7 +1167,9 @@
                         this.keyWord1 = data.maker.replace(" ", "")
                         this.keyWord2 = data.model.replace(" ", "")
                         this.keyWord3 = modelText
-                        this.goSearchWithCondition('withModel')
+                    })
+                    .then(()=>{
+                        this.goSearchWithCondition('stringMatch')
                     })
                     .catch(()=>{
                         alert('잘못된 요청입니다.')
