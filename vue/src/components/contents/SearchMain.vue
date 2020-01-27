@@ -723,7 +723,7 @@ export default {
                 }
                     this.orderByName = selectedOrderCondition
                     this.$store.dispatch('cmm/orderBySubSetting', this.orderByName)
-                    this.searchWord =  ''
+                    //this.searchWord =  ''
                     this.searchWithCondition()
         },
 
@@ -790,25 +790,30 @@ export default {
             return value.slice(2,4)+``
         },
         thousandFormatter: function ( value ) {
-            if ( !value ) return ''
-            if( value.toString().length === 3) return value
-            value = value.toString()
-            return value.slice( 0 , value.length-3)+`,`+ value.slice(-3,value.length)
+            return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
     },
     created() {
         if (!this.$store.state.cmm.initFlag)
             this.$store.dispatch('cmm/init')
 
-        if (this.$store.state.cmm.mainConditionSettingFlag !== false) {
-                if (this.$store.state.cmm.mainConditionSettingFlag === 'withModel') {
+        let mainConditionSettingFlag = this.$store.state.cmm.mainConditionSettingFlag
+        if ( mainConditionSettingFlag !== false) {
+            switch ( mainConditionSettingFlag ) {
+                case 'withModel' :
                     this.searchWord = this.$store.state.cmm.modelTextFromMain
-                } else {
+                    break
+                case 'withBudget' :
                     this.selectedMinPrice = this.$store.state.cmm.minPriceFromMain
                     this.selectedMaxPrice = this.$store.state.cmm.maxPriceFromMain
                     this.selectBoxRangeSetter()
-                }
+                    break
+                case 'stringMatch' :
+                    this.searchWord = this.$store.state.cmm.modelTextFromMain
+                    break
+            }
             this.searchWithCondition()
+            if ( mainConditionSettingFlag === 'stringMatch' ) this.$store.dispatch('cmm/stringMatchModelCHecker')
             }
         }
 }

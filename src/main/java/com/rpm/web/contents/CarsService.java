@@ -48,6 +48,8 @@ public interface CarsService {
 
     List<Cars> findCarBySelectedMaker(List<Cars> carsList, String code);
 
+    List<Cars> findCarBySelectedModelNM(List<Cars> carsList, String modelCode);
+
     List<Cars> findCarBySelectedFuelType(List<Cars> carsList, String code);
 
     List<Cars> findCarBySelectedRegion(List<Cars> carsList, String code);

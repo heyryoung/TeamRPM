@@ -98,40 +98,40 @@ public class CarsController {
 
 
         if ( "minPrice".equals(String.valueOf(searchCondition.getMinPrice().getBigCategory()))) {
-                carsProcessingList.addAll(
-                        cars.stream().filter(car -> car.getPrice()
-                                >= Integer.parseInt(searchCondition.getMinPrice().getCode()))
-                                .collect(Collectors.toList()));
-                cars.clear();
-                cars.addAll(carsProcessingList);
-                carsProcessingList.clear();
+            carsProcessingList.addAll(
+                    cars.stream().filter(car -> car.getPrice()
+                            >= Integer.parseInt(searchCondition.getMinPrice().getCode()))
+                            .collect(Collectors.toList()));
+            cars.clear();
+            cars.addAll(carsProcessingList);
+            carsProcessingList.clear();
         }
         if ( "maxPrice".equals(String.valueOf(searchCondition.getMaxPrice().getBigCategory()))) {
-                carsProcessingList.addAll(
-                        cars.stream().filter( car ->  car.getPrice()
-                                                        <= Integer.parseInt(searchCondition.getMaxPrice().getCode()))
-                                .collect(Collectors.toList()));
-                cars.clear();
-                cars.addAll(carsProcessingList);
-                carsProcessingList.clear();
+            carsProcessingList.addAll(
+                    cars.stream().filter( car ->  car.getPrice()
+                            <= Integer.parseInt(searchCondition.getMaxPrice().getCode()))
+                            .collect(Collectors.toList()));
+            cars.clear();
+            cars.addAll(carsProcessingList);
+            carsProcessingList.clear();
         }
         if ( "minMilage".equals(String.valueOf(searchCondition.getMinMilage().getBigCategory())) ) {
-                carsProcessingList.addAll(
-                        cars.stream().filter( car ->  car.getMilage()
-                                                        >= Integer.parseInt(searchCondition.getMinMilage().getCode()))
-                                .collect(Collectors.toList()));
-                cars.clear();
-                cars.addAll(carsProcessingList);
-                carsProcessingList.clear();
+            carsProcessingList.addAll(
+                    cars.stream().filter( car ->  car.getMilage()
+                            >= Integer.parseInt(searchCondition.getMinMilage().getCode()))
+                            .collect(Collectors.toList()));
+            cars.clear();
+            cars.addAll(carsProcessingList);
+            carsProcessingList.clear();
         }
         if ( "maxMilage".equals(String.valueOf(searchCondition.getMaxMilage().getBigCategory()))) {
-                carsProcessingList.addAll(
-                        cars.stream().filter( car ->  car.getMilage()
-                                                <= Integer.parseInt(searchCondition.getMaxMilage().getCode()))
-                                .collect(Collectors.toList()));
-                cars.clear();
-                cars.addAll(carsProcessingList);
-                carsProcessingList.clear();
+            carsProcessingList.addAll(
+                    cars.stream().filter( car ->  car.getMilage()
+                            <= Integer.parseInt(searchCondition.getMaxMilage().getCode()))
+                            .collect(Collectors.toList()));
+            cars.clear();
+            cars.addAll(carsProcessingList);
+            carsProcessingList.clear();
         }
 
         if ( !categoryList.isEmpty()) {
@@ -163,22 +163,22 @@ public class CarsController {
             cars.addAll(carsProcessingList);
             carsProcessingList.clear();
             trunk.put(Arrays.asList("modelList"),Arrays.asList(carsService.findByModelWithCount(cars,searchCondition.getMaker())));
-            //resultModelList = carsService.findByModelWithCount(cars,searchCondition.getMaker());
         }
         if ( !modelList.isEmpty() ) {
             for (SearchDetailCondition model : modelList) {
-                carsProcessingList.addAll(carsService.findCarBySelectedModel(cars , model.getCode()));
+                carsProcessingList.addAll(carsService.findCarBySelectedModelNM(cars , model.getName()));
             }
             cars.clear();
             cars.addAll(carsProcessingList);
             carsProcessingList.clear();
         }
-        if( searchCondition.getModelText() != null){
+        if( searchCondition.getModelText() != null && searchCondition.getModelText() != ""){
             carsProcessingList.clear();
             carsProcessingList.addAll(cars.stream().filter(s -> s.getModelnmText().equals(searchCondition.getModelText())).collect(Collectors.toList()));
             cars.clear();
             cars.addAll(carsProcessingList);
         }
+
 
         if(searchCondition.getOrderBySub()=="default"){
             cars.sort((a,b) -> a.getCid().compareTo(b.getCid()));
@@ -213,14 +213,14 @@ public class CarsController {
                                 ? cars.stream().limit(searchCondition.getPageLimit()).toArray()
                                 : false
                         ,carsService.findByMakecdWithCount(cars)
-                        ));
+                ));
         return trunk.get();
     }
-  
+
     @GetMapping("/getshowcarlist/{startrow}/{endrow}")
     public Object getShowCarList(@PathVariable String startrow, @PathVariable String endrow){
         return cars.subList(Integer.parseInt(startrow),Integer.parseInt(endrow));
-        }
+    }
 
     @GetMapping("/stringMatch/{searchWord}")
     public Map<String, Object> stringMatch(@PathVariable String searchWord){
