@@ -7,7 +7,7 @@
             <div class="align_field">
                 <div class="all_check">
                     <div class="checker" id="uniform-allCheck">
-                        <span :class="{checked:allchecked}" @click="allcheck(List)" :key="allchecked"><input type="checkbox" name="allCheck" id="allCheck" class="uniform" title="전체체크"></span>
+                        <span :class="{checked:allchecked}" @click="allcheck(cars)" :key="allchecked"><input type="checkbox" name="allCheck" id="allCheck" class="uniform" title="전체체크"></span>
                     </div>
                 </div>
                 <div class="align">
@@ -42,11 +42,11 @@
                         <col>
                     </colgroup>
 
-                    <tbody  v-for="car of List" :key="car.cid">
+                    <tbody  v-for="car of cars" :key="car.carcd">
                     <tr>
                         <td class="check">
                             <div class="checker" id="uniform-interest_list_check1">
-                                <span  :class="{checked:car.checked}" @click="check(car)" @change='updateCheckall()' >
+                                <span  :class="{checked:car.checked}" @click="check(car)" @change='updateCheckall(car)' >
                                     <input type="checkbox" id="interest_list_check1" class="uniform"  >
                                 </span>
                             </div>
@@ -95,19 +95,9 @@
 
                 </div>
             </div>
+            <pagination :pagination="List" @movePage="movePageBlock" ref="pagination"></pagination>
 
 
-            <div class="cm_pagination">
-                <ul class="pagination">
-                    <li class="move prev"><a href=""><img
-                            src="/resources/images/content/buy/pagination_arrows.png" border="0" alt="이전10개"
-                            style="cursor:pointer"></a></li>
-                    <li class="num on"><a>1</a></li>
-                    <li class="move next"><a href=""><img
-                            src="/resources/images/content/buy/pagination_arrows.png" border="0" alt="다음10개"
-                            style="cursor:pointer"></a></li>
-                </ul>
-            </div>
         </div>
     </div>
 </template>
@@ -115,21 +105,25 @@
 
     import {checkBox} from "../mixins/checkBox";
     import axios from'axios'
+    import pagination from "../cmm/pagination";
     export default {
+        components:{
+          pagination
+        },
         data(){
             return {
                 context:'http://localhost:8080/',
                 allchecked:false,
-                List:[
-
-                ],
-                checkedList:[
-
-                ]
+                List:[],
+                checkedList:[],
+                cars:[]
 
             }
         },
         methods: {
+            movePageBlock(pagination){
+                this.cars= pagination
+            }
 
         },
         mixins:[checkBox],
@@ -137,17 +131,20 @@
                 axios
                 .get(`${this.context}/company/carList`)
                     .then(res=>{
-                        res.data.result.forEach(el=>{
+                       res.data.result.forEach(el=>{
                            el.checked=false
                             this.List.push(el)
+                           console.log('1')
                         })
-
+                        this.$refs.pagination.first()
 
                     })
         .catch(e=>{
             alert(`axios fail${e}`)
         })
-        }
+
+        },
+
     }
 
 

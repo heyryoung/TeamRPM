@@ -71,7 +71,7 @@ import employee from "./employee";
 
         methods   : {
             handleScroll: function () {
-                console.log(scrollY)
+               //console.log(scrollY)
 
                 if(scrollY<536){
                     this.fix='direct_center_detail '
@@ -80,11 +80,11 @@ import employee from "./employee";
                 }
                 if(0<scrollY && scrollY<1062){
                     this.tabSwitch(0)
-                }else if(1062<=scrollY && scrollY<2951){
+                }else if(1062<=scrollY && scrollY<2316){
                     this.tabSwitch(1)
-                }else if(2951<=scrollY && scrollY<3654){
+                }else if(2316<=scrollY && scrollY<3430){
                     this.tabSwitch(2)
-                }else if(3654<=scrollY){
+                }else if(3430<=scrollY){
                     this.tabSwitch(3)
                 }
 
@@ -112,6 +112,7 @@ import employee from "./employee";
             window.removeEventListener('scroll', this.handleScroll);
         }
     }
+
 </script>
 <style scoped>
     .center_info h4{
