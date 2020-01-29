@@ -1,7 +1,9 @@
 package com.rpm.web.contents;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.rpm.web.proxy.Proxy;
 import com.rpm.web.util.MakeCarDummyList;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -11,6 +13,9 @@ import java.util.Map;
 
 @Component
 public class CarsInit implements ApplicationRunner {
+    @Autowired
+    Proxy proxy;
+    @Autowired
     private CarsRepository carsRepository;
 
     public CarsInit(CarsRepository carsRepository) {
@@ -29,7 +34,7 @@ public class CarsInit implements ApplicationRunner {
             for (int i = 1; i <= 8000; i++) {
                 Map<String, String> strJson = new HashMap<>();
                 map = jsonMapper.readValue(
-                        http.sendPost("https://www.kcar.com/search/api/getCarSearchWithCondition.do", String.valueOf(i))
+                        http.sendPost("https://www.kcar.com/search/api/getCarSearchWithCondition.do", proxy.string(i))
                                 .replace("=", ":"), Map.class);
                 json = map.get("result").get("rows").toString()
                         .replace("[{", "").replace("}]", "").split(",");

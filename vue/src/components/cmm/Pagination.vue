@@ -33,7 +33,7 @@
                 this.init()
                 let pageList = []
                 for(let i = this.startPage; i<= this.endPage; i++){
-                    if (i == this.$store.state.cmm.pageNum)
+                    if (i == this.$store.state.contents.pageNum)
                         pageList.push({number : i, class : "num on"})
                     else
                         pageList.push({number : i, class : "num"})
@@ -44,15 +44,15 @@
         },
         methods : {
             pageClick(number){
-                this.$store.dispatch('cmm/pageNumSetting', number)
+                this.$store.dispatch('contents/pageNumSetting', number)
                 this.init()
-                this.$store.dispatch('cmm/pageClick', {start : this.startRow,end : this.endRow})
+                this.$store.dispatch('contents/pageClick', {start : this.startRow,end : this.endRow})
 
             },
             init(){
-                this.totalCount = this.$store.state.cmm.resultLength
-                this.pageSize = this.$store.state.cmm.pageLimit
-                this.pageNum = this.$store.state.cmm.pageNum
+                this.totalCount = this.$store.state.contents.resultLength
+                this.pageSize = this.$store.state.contents.pageLimit
+                this.pageNum = this.$store.state.contents.pageNum
                 this.startRow = (this.pageNum-1)*this.pageSize
                 this.endRow = (this.pageNum==this.pageCount)
                     ? this.totalCount
@@ -72,14 +72,14 @@
                 this.existNext = !(this.blockNum == this.blockCount)
             },
             previous(){
-                this.$store.dispatch('cmm/pageNumSetting', this.startPage-1)
+                this.$store.dispatch('contents/pageNumSetting', this.startPage-1)
                 this.init()
-                this.$store.dispatch('cmm/pageClick', {start : this.startRow,end : this.endRow})
+                this.$store.dispatch('contents/pageClick', {start : this.startRow,end : this.endRow})
             },
             next(){
-                this.$store.dispatch('cmm/pageNumSetting', this.startPage+this.blockSize)
+                this.$store.dispatch('contents/pageNumSetting', this.startPage+this.blockSize)
                 this.init()
-                this.$store.dispatch('cmm/pageClick', {start : this.startRow,end : this.endRow})
+                this.$store.dispatch('contents/pageClick', {start : this.startRow,end : this.endRow})
             }
         },
         created() {

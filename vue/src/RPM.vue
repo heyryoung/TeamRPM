@@ -12,7 +12,7 @@
         <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/window.css?v=200108090126">
         <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/compare.css?v=200103163154">
         <div id="main_image" style="width: 100%; height: 100px; line-height: 100px; text-align: center">
-            <router-link to = "/"><img style="width: 100%; max-width: 760px; vertical-align: middle" src="@/assets/image/rpmlogoblack.png" alt=""></router-link>
+            <a @click="goHome"><img style="width: 100%; max-width: 760px; vertical-align: middle" src="@/assets/image/rpmlogoblack.png" alt=""></a>
         </div>
         <nav >
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,6 +64,10 @@
                 this.$store.dispatch('user/logout')
 
 
+            },
+            goHome(){
+                this.$store.dispatch('contents/resetCheckedItem')
+                this.$router.push("/")
             }
         }
     }

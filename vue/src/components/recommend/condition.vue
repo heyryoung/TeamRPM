@@ -34,7 +34,7 @@
                                                                 class="selectric"
                                                                 data-beusable-tracking=""
                                                                 tabindex="-1"
-                                                                v-for="category of this.$store.state.cmm.category1"
+                                                                v-for="category of this.$store.state.contents.category1"
                                                                 :key="category.name">
                                                             <option data-type="MAKE_TYPE010"
                                                                     data-cnt="category.count">{{category.name}}</option>
@@ -43,7 +43,7 @@
                                                                                   data-beusable-tracking="" >{{keyWord1}}</span></div>
                                                     <div id = "category1" class="selectric-items" tabindex="-1">
                                                         <div class="selectric-scroll">
-                                                            <ul v-for="category of this.$store.state.cmm.category1" :key="category.name">
+                                                            <ul v-for="category of this.$store.state.contents.category1" :key="category.name">
                                                                 <li data-index="1" @click="setCategory2(category)" class="">{{category.name}}<em>{{category.count}}</em>
                                                                 </li>
                                                             </ul>
@@ -66,7 +66,7 @@
                                                             id="modelGroupList" title="모델을 선택하세요"
                                                             class="selectric" data-beusable-tracking=""
                                                             tabindex="-1"
-                                                            v-for="category of this.$store.state.cmm.category2"
+                                                            v-for="category of this.$store.state.contents.category2"
                                                             :key="category.name">
                                                         <option data-type="MAKE_TYPE010"
                                                                 data-cnt="category.count">{{category.name}}</option>
@@ -75,7 +75,7 @@
                                                                                  data-beusable-tracking="">{{keyWord2}}</span></div>
                                                     <div id = "category2" class="selectric-items" tabindex="-1" >
                                                         <div class="selectric-scroll">
-                                                            <ul v-for="category of this.$store.state.cmm.category2" :key="category.name">
+                                                            <ul v-for="category of this.$store.state.contents.category2" :key="category.name">
                                                                 <li data-index="1" @click="setCategory3(category.name, category.count)" class="">{{category.name}}<em>{{category.count}}</em>
                                                                 </li>
                                                             </ul>
@@ -97,7 +97,7 @@
                                                                 class="selectric"
                                                                 data-beusable-tracking=""
                                                                 tabindex="-1"
-                                                                v-for="category of this.$store.state.cmm.category3"
+                                                                v-for="category of this.$store.state.contents.category3"
                                                                 :key="category.name">
                                                             <option data-type="MAKE_TYPE010"
                                                                     data-cnt="category.count">{{category.name}}</option>
@@ -106,7 +106,7 @@
                                                                                  data-beusable-tracking="">{{keyWord3}}</span></div>
                                                     <div class="selectric-items" tabindex="-1">
                                                         <div class="selectric-scroll">
-                                                            <ul v-for="category of this.$store.state.cmm.category3" :key="category.name">
+                                                            <ul v-for="category of this.$store.state.contents.category3" :key="category.name">
                                                                 <li data-index="1" @click="setKeyWord3(category.name, category.count)" class="">{{category.name}}<em>{{category.count}}</em>
                                                                 </li>
                                                             </ul>
@@ -438,7 +438,7 @@
                 }else{
                     searchKey.className = "selectric-wrapper selectric-selectric selectric-below selectric-hover"
                 }
-                if(this.$store.state.cmm.category2.length>=10) {
+                if(this.$store.state.contents.category2.length>=10) {
                     cate2.style.width = "500px"
                     cate2.style.height = "300px"
                 }{
@@ -452,13 +452,13 @@
                 this.keyWord3 = '세부모델을 선택하세요'
                 this.keyWord1 = param.name
                 this.resultCount = param.count
-                this.$store.dispatch('cmm/getCategory2',{'param':this.keyWord1,'column':'MAKENM'})
+                this.$store.dispatch('contents/getCategory2',{'param':this.keyWord1,'column':'MAKENM'})
             },
             setCategory3(keyWord2, resultCount){
                 this.keyWord3 = '세부모델을 선택하세요'
                 this.keyWord2 = keyWord2
                 this.resultCount = resultCount
-                this.$store.dispatch('cmm/getCategory3',{'param':this.keyWord2,'column':'MODEL_GRP_NM'})
+                this.$store.dispatch('contents/getCategory3',{'param':this.keyWord2,'column':'MODEL_GRP_NM'})
             },
             setKeyWord3(keyWord3, resultCount){
                 this.keyWord3 = keyWord3
@@ -469,7 +469,7 @@
                 this.keyWord3 = '세부모델을 선택하세요'
                 this.keyWord2 = keyWord
                 this.resultCount = resultCount
-                this.$store.dispatch('cmm/getCategory3',{'param':this.keyWord2,'column':'MODEL_GRP_NM'})
+                this.$store.dispatch('contents/getCategory3',{'param':this.keyWord2,'column':'MODEL_GRP_NM'})
             },
 
 

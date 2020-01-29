@@ -1,16 +1,22 @@
 package com.rpm.web.contents;
 
 import com.rpm.web.proxy.Box;
+import com.rpm.web.proxy.Proxy;
 import com.rpm.web.proxy.Trunk;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8081")
 public class CarsController {
+    @Autowired
+    Proxy proxy;
     @Autowired
     CarsRepository carsRepository;
     @Autowired
@@ -23,6 +29,10 @@ public class CarsController {
     List<Cars> cars;
     @Autowired
     StringMatch stringMatch;
+    @Autowired
+    RecentSearchWordRepository recentSearchWordRepository;
+    @Autowired
+    RecentSeenCarRepository recentSeenCarRepository;
     private List<Object> carModelList;
     private List<Object> carModelHangeulList;
 
@@ -44,7 +54,7 @@ public class CarsController {
         System.out.println("carModelHangeulList :" + carModelHangeulList);
         cars.sort((a,b) -> a.getCid().compareTo(b.getCid()));
         trunk.put(Arrays.asList("allCount" ,"carInitList","makerList","fuelTypeList", "regionList","categoryList")
-                ,Arrays.asList(String.valueOf(carsRepository.count())
+                ,Arrays.asList(proxy.string(carsRepository.count())
                         ,cars.subList(0,15)
                         ,carsService.findByMakecdWithCount(cars)
                         ,carsService.findCarWithFuleType(cars)
@@ -57,7 +67,6 @@ public class CarsController {
 
     @GetMapping("/getcategory/{param}/{column}")
     public Map<String, Object> getCategory(@PathVariable String param, @PathVariable String column){
-        System.out.println("inside getCategory");
         trunk.clear();
         cars = carsService.findAllByDistinct((List<Cars>) carsRepository.findAll());
         switch (column){
@@ -97,37 +106,37 @@ public class CarsController {
 
 
 
-        if ( "minPrice".equals(String.valueOf(searchCondition.getMinPrice().getBigCategory()))) {
+        if ( proxy.equals("minPrice",proxy.string(searchCondition.getMinPrice().getBigCategory()))) {
             carsProcessingList.addAll(
                     cars.stream().filter(car -> car.getPrice()
-                            >= Integer.parseInt(searchCondition.getMinPrice().getCode()))
+                            >= proxy.integer(searchCondition.getMinPrice().getCode()))
                             .collect(Collectors.toList()));
             cars.clear();
             cars.addAll(carsProcessingList);
             carsProcessingList.clear();
         }
-        if ( "maxPrice".equals(String.valueOf(searchCondition.getMaxPrice().getBigCategory()))) {
+        if ( proxy.equals("maxPrice",proxy.string(searchCondition.getMaxPrice().getBigCategory()))) {
             carsProcessingList.addAll(
                     cars.stream().filter( car ->  car.getPrice()
-                            <= Integer.parseInt(searchCondition.getMaxPrice().getCode()))
+                            <= proxy.integer(searchCondition.getMaxPrice().getCode()))
                             .collect(Collectors.toList()));
             cars.clear();
             cars.addAll(carsProcessingList);
             carsProcessingList.clear();
         }
-        if ( "minMilage".equals(String.valueOf(searchCondition.getMinMilage().getBigCategory())) ) {
+        if ( proxy.equals("minMilage",proxy.string(searchCondition.getMinMilage().getBigCategory())) ) {
             carsProcessingList.addAll(
                     cars.stream().filter( car ->  car.getMilage()
-                            >= Integer.parseInt(searchCondition.getMinMilage().getCode()))
+                            >= proxy.integer(searchCondition.getMinMilage().getCode()))
                             .collect(Collectors.toList()));
             cars.clear();
             cars.addAll(carsProcessingList);
             carsProcessingList.clear();
         }
-        if ( "maxMilage".equals(String.valueOf(searchCondition.getMaxMilage().getBigCategory()))) {
+        if ( proxy.equals("maxMilage",proxy.string(searchCondition.getMaxMilage().getBigCategory()))) {
             carsProcessingList.addAll(
                     cars.stream().filter( car ->  car.getMilage()
-                            <= Integer.parseInt(searchCondition.getMaxMilage().getCode()))
+                            <= proxy.integer(searchCondition.getMaxMilage().getCode()))
                             .collect(Collectors.toList()));
             cars.clear();
             cars.addAll(carsProcessingList);
@@ -174,7 +183,7 @@ public class CarsController {
         }
         if( searchCondition.getModelText() != null && searchCondition.getModelText() != ""){
             carsProcessingList.clear();
-            carsProcessingList.addAll(cars.stream().filter(s -> s.getModelnmText().equals(searchCondition.getModelText())).collect(Collectors.toList()));
+            carsProcessingList.addAll(cars.stream().filter(s -> proxy.equals(s.getModelnmText(),searchCondition.getModelText())).collect(Collectors.toList()));
             cars.clear();
             cars.addAll(carsProcessingList);
         }
@@ -219,7 +228,7 @@ public class CarsController {
 
     @GetMapping("/getshowcarlist/{startrow}/{endrow}")
     public Object getShowCarList(@PathVariable String startrow, @PathVariable String endrow){
-        return cars.subList(Integer.parseInt(startrow),Integer.parseInt(endrow));
+        return cars.subList(proxy.integer(startrow),proxy.integer(endrow));
     }
 
     @GetMapping("/stringMatch/{searchWord}")
@@ -244,17 +253,27 @@ public class CarsController {
         return trunk.get();
     }
 
-    @GetMapping("/findMaker/{modelText}")
-    public Map<String, Object> findMaker(@PathVariable String modelText){
+    @GetMapping("/stringMatchClick/{modelText}/{date}/{userId}")
+    public Map<String, Object> stringMatchClick(@PathVariable String modelText, @PathVariable String date, @PathVariable String userId){
         trunk.clear();
         trunk.put(Arrays.asList("maker", "model"), Arrays.asList(
-                carsService.findMakerAndModelByModelText(modelText).keySet()
-                        .toString().replace("[", "").replace("]", ""),
-                carsService.findMakerAndModelByModelText(modelText).get(
-                        carsService.findMakerAndModelByModelText(modelText).keySet()
-                                .toString().replace("[", "").replace("]", ""))
-                        .keySet().toString().replace("[", "").replace("]", "")));
+                proxy.arrayToString(carsService.findMakerAndModelByModelText(modelText).keySet().toString()),
+                proxy.arrayToString(carsService.findMakerAndModelByModelText(modelText).get(
+                        proxy.arrayToString(carsService.findMakerAndModelByModelText(modelText).keySet().toString()))
+                        .keySet().toString())));
+        recentSearchWordRepository.save(new RecentSearchWord(modelText, Long.parseLong(date), userId));
         return trunk.get();
     }
 
+    @GetMapping("/setProduct/{carcd}/{date}/{userid}")
+    public void setProduct(@PathVariable String carcd, @PathVariable String date, @PathVariable String userid){
+        recentSeenCarRepository.save(new RecentSeenCar(carcd, Long.parseLong(date), userid));
+    }
+
+    @GetMapping("/searchWordRank")
+    public Set<String> getSearchWordRank(){
+        return proxy.sortByValue(StreamSupport.stream(recentSearchWordRepository.findAll().spliterator(), false)
+                .filter( s -> s.getSearchTime()<=proxy.longify(proxy.string(LocalDate.now().minusMonths(-6)).replace("-", "")+"000000000"))
+                .collect(Collectors.groupingBy(RecentSearchWord::getSearchWord,Collectors.counting()))).keySet();
+    }
 }
