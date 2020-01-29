@@ -105,21 +105,14 @@
         padding-bottom: 50px; text-align: center;
     }
     .mc_header{
-        /*background:url( C:/STSWorkspace/TeamRPM/vue/src/assets/image/bg1.jpg) center no-repeat ;*/
-        /*padding-top: 100px;*/
         max-height:800px;
     }
-    .mc_wide_search{margin-bottom: 57px; }
     .mc_wide_searchbox{  width:1212px; background: #ffffff;height:603px;position:relative;display:inline-block; z-index:2; margin-bottom:50px;}
     .mc_wide_searchbox .searchbg{ margin-top: 50px; width:100%; background:url( https://www.kcar.com/resources/images/index/search_bg.png) center no-repeat; opacity: 0.97; display:inline-block;}
-    .mc_wide_searchbox .searchbg .mc_search{margin: 0px auto 0 auto; }
+    .mc_wide_searchbox .searchbg .mc_search{margin: 0px auto 0 auto;z-index:2; }
     .mc_search .selectric-items .selectric-scroll {
         overflow-x: hidden;
         overflow-y: auto;
     }
-    .fst{
-        opacity: 0.97; display:inline-block;
-    }
-    .wrap_section{max-width:1112px;margin:0 auto}
-    .area_section {background-color: aliceblue; margin-top: 150px;}
+
 </style>
