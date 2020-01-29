@@ -359,6 +359,7 @@
 import { mapState , mapGetters } from 'vuex'
 import Pager from '@/components/cmm/Pagination'
 import axios from "axios";
+
 export default {
     name: 'searchMain',
     components : { Pager },

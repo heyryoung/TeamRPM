@@ -34,7 +34,7 @@
                             <router-link to="/buycar">자동차구매 </router-link>
                             <router-link to="/buycarSelectGoods">자동차구매1 </router-link>
                             <router-link to="/buycarInsertContractorInfomation">자동차구매2 </router-link>
-                            <router-link to="/buycarInsertContractorInfomation">자동차구매3 </router-link>
+                            <router-link to="/magazine">매거진 </router-link>
                             <router-link to="/recommendHome">딜러에게 추천받기</router-link>
                             <router-link to="/companyHome">ADMIN </router-link>
                             <router-link to="/sns">SNS(REVIEW) </router-link>

@@ -6,6 +6,7 @@ import Join from '@/components/user/Join.vue'
 import Login from '@/components/user/Login.vue'
 import Product from '@/components/contents/Product.vue'
 import Sale from '@/components/contents/Sale.vue'
+import Magazine from '@/components/magazine/Magazine.vue'
 import Mypage from '@/components/carbook/MyPage.vue'
 import MypageModify from '@/components/carbook/MypageModify.vue'
 import MypageModifyCheck from '@/components/carbook/MypageModifyCheck.vue'
@@ -43,6 +44,7 @@ export default new Router({
         {path:'/mycarModify', name:'mycarModify', component : MycarModify},
         {path:'/mypageModifyCheck', name:'mypageModifyCheck', component : MypageModifyCheck},
         {path:'/seencar', name:'seencar', component : SeenCar},
+        {path:'/magazine', name:'magazine', component : Magazine},
         {path:'/stationInfo', name:'stationInfo', component : StationInfo},
         {path:'/mapList', name:'mapList', component : MapList},
         {path:'/sale', name:'sale', component : Sale},

@@ -249,7 +249,7 @@ const mutations = {
             state.resultLength = 0,
             state.modelList = [],
             state.modelListIsOpen = false
-        state.initFlag = false
+            state.initFlag = false
     },
     TREECONDITIONCONTROL ( state, param ) {
         state.modelListIsOpen = !state.modelListIsOpen
@@ -482,7 +482,6 @@ const mutations = {
     },
     SETPRODUCT( state, data ){
         state.carItem = data
-
     },
     STRINGMATCH(state, data){
         state.stringMatchList = []
