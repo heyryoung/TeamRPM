@@ -2,6 +2,7 @@ import axios from 'axios'
 
 const state = {
     context : 'http://localhost:8081',
+    guestid : '',
     carAllCount : '',
     searchResultEmpty : false,
     category1 : [],
@@ -34,7 +35,9 @@ const state = {
     minPrice : '' ,
     maxPrice : '' ,
     minMilage : '' ,
-    maxMilage : ''
+    maxMilage : '',
+    recentSearchWord : [],
+    searchWordRank : []
 };
 const getters = {
     makerList : state => state.makerList,
@@ -42,7 +45,7 @@ const getters = {
     regionList : state => state.regionList,
     searchResultEmpty : state => state.searchResultEmpty,
     showCarList : state => state.showCarList,
-    fuelTypeList: state => state.cmm.fuelTypeList,
+    fuelTypeList: state => state.contents.fuelTypeList,
     checkedItems : state => state.checkedItems,
     seenHistoryList : state => state.seenHistoryList,
     initFlag : state => state.initFlag,
@@ -164,10 +167,24 @@ const actions = {
     },
     async stringMatchModelCHecker ( { commit }) {
         commit( 'stringMatchModelCHecker' )
+    },
+    async getSearchWordRank({commit}){
+        axios
+            .get(`http://localhost:8080/searchWordRank`)
+            .then(({data})=>{
+                commit('GETSEARCHWORDRANK', data)
+            })
+            .catch(()=>{
+                alert('잘못된 요청입니다.')
+            })
+    },
+    async handleRecentSearchWord({commit}, data){
+        commit('HANDLERECENTSEARCHWORD',data)
     }
 };
 const mutations = {
     INIT( state , data ) {
+        state.guestid = new Date().toISOString()+(Math.floor(Math.random() * 99999) + 1).toString()
         state.carAllCount = data.allCount
         state.resultLength = data.allCount
         state.categoryList = []
@@ -218,7 +235,6 @@ const mutations = {
         }
     },
     RESETCHECKEDITEM( state ) {
-            state.carAllCount = '',
             state.searchResultEmpty = false,
             state.categoryList = [],
             state.showCarList = [],
@@ -470,7 +486,7 @@ const mutations = {
     STRINGMATCH(state, data){
         state.stringMatchList = []
         if(!data.result){
-            state.stringMatchList.push("연관 모델명이 없습니다.")
+            state.stringMatchList = []
         }else{
             state.stringMatchList = data.result
         }
@@ -479,12 +495,34 @@ const mutations = {
         let targetItem = state.modelList.find( item => item.name === state.modelFromMain.name )
         targetItem.checked = true
         state.checkedItems.push( targetItem )
+    },
+    GETSEARCHWORDRANK(state, data){
+        for (let i = 1; i<=10; i++){
+            if(data[i]!=undefined)
+            state.searchWordRank.push({name : `${i}위 ${data[i]}`, value : data[i]})
+        }
+    },
+    HANDLERECENTSEARCHWORD(state, data){
+        switch (data.key) {
+            case '+' :
+                if(!state.recentSearchWord.includes(data.modelText))
+                    state.recentSearchWord.push(data.modelText)
+                break
+            case '-' :
+                state.recentSearchWord.splice(state.recentSearchWord.indexOf(data.modelText)
+                    ,state.recentSearchWord.indexOf(data.modelText)+1)
+                break
+            case '#' :
+                state.recentSearchWord = []
+                break
+        }
+
     }
 }
 
 
 export default {
-    name: 'cmm',
+    name: 'contents',
     namespaced: true,
     state,
     getters,

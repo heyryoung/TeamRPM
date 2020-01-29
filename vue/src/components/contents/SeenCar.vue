@@ -160,11 +160,11 @@
 			return {}
 		},
 		computed: mapState({
-			seenHistoryList : state => state.cmm.seenHistoryList
+			seenHistoryList : state => state.contents.seenHistoryList
 		}),
 		methods : {
 			check(checkedItem){
-				this.$store.dispatch('cmm/CHECKER', checkedItem , { root: true })
+				this.$store.dispatch('contents/CHECKER', checkedItem , { root: true })
 				this.searchWithCondition()
 			},
 			hello () {

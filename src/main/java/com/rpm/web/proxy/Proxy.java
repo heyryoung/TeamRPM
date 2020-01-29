@@ -2,7 +2,7 @@ package com.rpm.web.proxy;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
@@ -18,6 +18,10 @@ public class Proxy {
 		Function<Object, String> f = String :: valueOf;
 		return f.apply(param);
 	}
+	public Long longify(String param) {
+		Function<String, Long> f = Long :: parseLong;
+		return f.apply(param);
+	}
 	public boolean equals(String p1, String p2) {
 		BiPredicate<String, String> b = String :: equals;
 		return b.test(p1, p2);
@@ -25,18 +29,22 @@ public class Proxy {
 	public int random(int a, int b) {
 		BiFunction<Integer, Integer, Integer> f =(t,u)->(int)(Math.random()*(u-t))+t;
 		return f.apply(a, b);
-		
 	}
-	public int[] array(int size) {
-		Function<Integer, int[]> f = int[] :: new;
-		return f.apply(size);
+
+	public String arrayToString(String array){
+		return array.replace("[", "").replace("]", "");
 	}
-	public String currentDate() {
-		return new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+
+	public <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
+		List<Map.Entry<K, V>> list = new ArrayList<>(map.entrySet());
+		list.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
+		Map<K, V> result = new LinkedHashMap<>();
+		for (Map.Entry<K, V> entry : list) {
+			result.put(entry.getKey(), entry.getValue());
+		}
+		return result;
 	}
-	public String currentTime() {
-		return new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date());
-	}
+
 	public File makeDir(String t, String u) {
 		BiFunction<String,String, File> f = File::new;
 		return f.apply(t, u);
