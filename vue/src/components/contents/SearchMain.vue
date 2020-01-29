@@ -468,7 +468,7 @@
 </template>
 <script>
 import { mapState , mapGetters } from 'vuex'
-import Pager from '@/components/cmm/Pagination'
+import Pager from '@/components/cmm/pagination'
 export default {
     name: 'searchMain',
     components : { Pager },

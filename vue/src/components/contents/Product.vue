@@ -1,13 +1,6 @@
 <template>
     <div>
-
-        <!-- 지점 동급 리스트 더보기 -->
-
-
         <form name="frm" method="post" action="">
-
-
-            <!--  content 컨텐츠에 따라 변경 필요 -->
             <div id="content" class="sub_content">
                 <div class="car_detail_cont">
                     <div class="head_field">
@@ -31,11 +24,9 @@
                                     <p class="pay"><strong>{{this.$store.state.cmm.carItem.price | thousandFormatter}}</strong>만원</p>
                                 </div>
                             </div>
-                            <!--4015 온라인구매-->
                             <div class="btn_area">
                                 <a href="/buycar" class="online" id="onlineBuy"><span class="onlinebuy_txt">온라인 구매</span></a>
                             </div>
-                            <!--//4015 온라인구매-->
                         </div>
                     </div>
                     <div class="view_field">
@@ -47,19 +38,13 @@
                                     <div class="visual_wrap">
                                         <div class="visual_area">
                                             <a href="">
-
-
                                                 <div class="visual" :style="`display:block`">
                                                     <img :src="elanPath"
                                                          alt="차량이미지">
                                                 </div>
-
-
                                             </a>
                                         </div>
-
                                     </div>
-
                                     <div class="until_area">
                                         <ul class="ico_area">
                                             <li><a href="" class="down"><span class="blind">다운</span></a></li>
@@ -135,12 +120,8 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- //일반차량 -->
                         </div>
                     </div>
-
-
                     <div class="buy_cap" id="cap_area">
                         <h3>사고 싶은 이 차, 월 얼마면 될까? <span>목돈은 아껴두고 할부로 구매하세요.</span></h3>
                         <div class="cap_bx">

@@ -218,7 +218,7 @@ const mutations = {
         }
     },
     RESETCHECKEDITEM( state ) {
-        state.carAllCount = '',
+            state.carAllCount = '',
             state.searchResultEmpty = false,
             state.categoryList = [],
             state.showCarList = [],
@@ -233,7 +233,7 @@ const mutations = {
             state.resultLength = 0,
             state.modelList = [],
             state.modelListIsOpen = false
-        state.initFlag = false
+            state.initFlag = false
     },
     TREECONDITIONCONTROL ( state, param ) {
         state.modelListIsOpen = !state.modelListIsOpen
@@ -319,7 +319,6 @@ const mutations = {
         if ( state.modelListIsOpen ) {
             state.modelList = []
             data.modelList.forEach( el => {
-                console.log('여기 들어왔음.' + el.name)
                 state.modelList.push({
                     checked: ( state.checkedItems.find( checkedItem => el.name === checkedItem.name )) ? true : false,
                     bigCategory: 'modelList',
@@ -467,7 +466,6 @@ const mutations = {
     },
     SETPRODUCT( state, data ){
         state.carItem = data
-
     },
     STRINGMATCH(state, data){
         state.stringMatchList = []
