@@ -15,7 +15,7 @@ import java.util.List;
 @Data
 @Lazy
 @Component("pager")
-public class PageProxy extends Proxy{
+public class PageProxy{
 	private int totalCount, startRow, endRow, 
 				pageCount,pageNum, pageSize, startPage, endPage,
 				blockCount, blockNum, nextBlock, prevBlock;

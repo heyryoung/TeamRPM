@@ -230,72 +230,7 @@
                                 </div>
                             </li>
                         </ul>
-                        <div class="car_tags">
-                            <h5>#핫마크 태그</h5>
-                            <a href="#none" data-hotmarkcd="09">#특옵션</a>
-                            <a href="#none" data-hotmarkcd="10">#1인소유</a>
-                            <a href="#none" data-hotmarkcd="19">#짧은Km</a>
-                            <a href="#none" data-hotmarkcd="20">#4WD</a>
-                            <a href="#none" data-hotmarkcd="22">#세금계산서</a>
-                            <a href="#none" data-hotmarkcd="26">#제조사AS</a>
-                            <a href="#none" data-hotmarkcd="29">#신차급</a>
-                            <a href="#none" data-hotmarkcd="30">#보험이력無</a>
-                            <a href="#none" data-hotmarkcd="31">#7인승</a>
-                            <a href="#none" data-hotmarkcd="33">#무이자할부</a>
-                            <a href="#none" data-hotmarkcd="34">#세제혜택</a>
-                            <a href="#none" data-hotmarkcd="35">#차계부有</a>
-                            <a href="#none" data-hotmarkcd="36">#구변완료</a>
-                            <a href="#none" data-hotmarkcd="37">#속도제한無</a>
-                            <a href="#none" data-hotmarkcd="38">#보증연장</a>
-                            <a href="#none" data-hotmarkcd="39">#바우처有</a>
-                            <a href="#none" data-hotmarkcd="40">#리콜완료</a>
-                            <a href="#none" data-hotmarkcd="41">#정비OK</a>
-                            <a href="#none" data-hotmarkcd="42">#주행보조</a>
-                            <a href="#none" data-hotmarkcd="43">#브라운시트</a>
-                            <a href="#none" data-hotmarkcd="44">#베이지시트</a>
-                            <input type="checkbox" name="wr_in_v_hot_markcd" id="hotMarkCd09" data-hotmarknm="특옵션"
-                                   value="09">
-                            <input type="checkbox" name="wr_in_v_hot_markcd" id="hotMarkCd10" data-hotmarknm="1인소유"
-                                   value="10">
-                            <input type="checkbox" name="wr_in_v_hot_markcd" id="hotMarkCd19" data-hotmarknm="짧은KM"
-                                   value="19">
-                            <input type="checkbox" name="wr_in_v_hot_markcd" id="hotMarkCd20" data-hotmarknm="4WD"
-                                   value="20">
-                            <input type="checkbox" name="wr_in_v_hot_markcd" id="hotMarkCd22" data-hotmarknm="세금계산서"
-                                   value="22">
-                            <input type="checkbox" name="wr_in_v_hot_markcd" id="hotMarkCd26" data-hotmarknm="제조사AS"
-                                   value="26">
-                            <input type="checkbox" name="wr_in_v_hot_markcd" id="hotMarkCd29" data-hotmarknm="신차급"
-                                   value="29">
-                            <input type="checkbox" name="wr_in_v_hot_markcd" id="hotMarkCd30" data-hotmarknm="보험이력無"
-                                   value="30">
-                            <input type="checkbox" name="wr_in_v_hot_markcd" id="hotMarkCd31" data-hotmarknm="7인승"
-                                   value="31">
-                            <input type="checkbox" name="wr_in_v_hot_markcd" id="hotMarkCd33" data-hotmarknm="무이자할부"
-                                   value="33">
-                            <input type="checkbox" name="wr_in_v_hot_markcd" id="hotMarkCd34" data-hotmarknm="세제혜택"
-                                   value="34">
-                            <input type="checkbox" name="wr_in_v_hot_markcd" id="hotMarkCd35" data-hotmarknm="차계부有"
-                                   value="35">
-                            <input type="checkbox" name="wr_in_v_hot_markcd" id="hotMarkCd36" data-hotmarknm="구변완료"
-                                   value="36">
-                            <input type="checkbox" name="wr_in_v_hot_markcd" id="hotMarkCd37" data-hotmarknm="속도제한無"
-                                   value="37">
-                            <input type="checkbox" name="wr_in_v_hot_markcd" id="hotMarkCd38" data-hotmarknm="보증연장"
-                                   value="38">
-                            <input type="checkbox" name="wr_in_v_hot_markcd" id="hotMarkCd39" data-hotmarknm="바우처有"
-                                   value="39">
-                            <input type="checkbox" name="wr_in_v_hot_markcd" id="hotMarkCd40" data-hotmarknm="리콜완료"
-                                   value="40">
-                            <input type="checkbox" name="wr_in_v_hot_markcd" id="hotMarkCd41" data-hotmarknm="정비OK"
-                                   value="41">
-                            <input type="checkbox" name="wr_in_v_hot_markcd" id="hotMarkCd42" data-hotmarknm="주행보조"
-                                   value="42">
-                            <input type="checkbox" name="wr_in_v_hot_markcd" id="hotMarkCd43" data-hotmarknm="브라운시트"
-                                   value="43">
-                            <input type="checkbox" name="wr_in_v_hot_markcd" id="hotMarkCd44" data-hotmarknm="베이지시트"
-                                   value="44">
-                        </div>
+
                     </div>
                     <div class="result_box_wrap">
                         <ul class="choice_area">
@@ -303,25 +238,17 @@
                         </ul> <!-- 검색 선택 항목 javascript -->
                         <div class="until_box">
                             <div class="top_field">
-                                <div id="totalCount" class="total">총 <strong>{{this.$store.state.cmm.carAllCount}}</strong>대</div>
+                                <div id="totalCount" class="total">총 <strong>{{this.$store.state.contents.resultLength}}</strong>대</div>
                                 <div class="hit"></div>
                                 <div id="headerCustom">
                                     <div class="primary">
                                     <div class="inner1">
                                     <ul class="util_link">
-                                        <router-link to="/seencar">
                                         <li class="recent">
-                                            <a >
+                                            <router-link to="/seencar">
                                                 <i class="ico"></i>최근본차량
                                                 <span class="badge">{{seenHistoryList.length}}</span>
-                                            </a>
-                                        </li>
-                                        </router-link>
-                                        <li class="favorite">
-                                            <a href="/user/interest_car.do">
-                                                <i class="ico"></i>관심차량
-                                                <span></span>
-                                            </a>
+                                            </router-link>
                                         </li>
                                     </ul>
                                 </div>
@@ -333,45 +260,8 @@
                                     <span><a href="javascript:;" class="3dview_flag txt " name="wr_eq_v_3dview_flag"><em></em> </a></span>
                                     <span class="basic" v-for=" orderBysub of orderBySubs" :key="orderBysub.index" >
                                         <a href="javascript:;" v-for=" orderBysubDetail of orderBysub.value " :key="orderBysubDetail.name" :class="orderBysubDetail.class" @click="orderBy(orderBysubDetail)" >{{orderBysubDetail.name}}</a>
-<!--                                    &lt;!&ndash; <span>&ndash;&gt;
-                                         <a href="javascript:;" class="txt">가격순</a>
-                                        <a href="javascript:;" class="down ">낮은순</a>
-                                        <a href="javascript:;" class="up ">높은순</a>
-                                 &lt;!&ndash;   </span>
-                                    <span>&ndash;&gt;
-                                        <a href="javascript:;" class="txt">주행거리 순</a>
-                                        <a href="javascript:;" class="down ">낮은순</a>
-                                        <a href="javascript:;" class="up ">높은순</a>
-                              &lt;!&ndash;      </span>
-                                    <span>&ndash;&gt;
-                                        <a href="javascript:;" class="txt">연식 순</a>
-                                        <a href="javascript:;" class="down ">낮은순</a>
-                                        <a href="javascript:;" class="up ">높은순</a>-->
                                     </span>
                                 </div>
-<!--                                <div class="detail_check">
-                                    <div class="count_sel">
-                                        <div id="sorting" @click="searchKeyClick(`sorting`)"
-                                             class="selectric-wrapper selectric-selectric selectric-below">
-                                            <div class="selectric-hide-select"><select name="sortinf" id="sortingList"
-                                                                                       class="selectric"
-                                                                                       data-beusable-tracking=""
-                                                                                       tabindex="-1"
-                                                                                       v-for="orderBysub of orderBySubs" :key="orderBysub.sub">
-                                                <option value="limit">{{orderBysub.name}}</option>
-                                            </select></div>
-                                            <div class="selectric" style="width: 100px;"><span class="label"
-                                                                         data-beusable-tracking="" >{{orderByName}}</span></div>
-                                            <div class="selectric-items" tabindex="-1" style="width: 100px;">
-                                                <div class="selectric-scroll">
-                                                    <ul  v-for="orderBysub of orderBySubs" :key="orderBysub.sub">
-                                                        <li data-index="0" @click="orderBy(orderBysub)" :id="orderBysub.name" >{{orderBysub.name}}</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <input class="selectric-input" tabindex="0"></div>
-                                    </div>
-                                </div>-->
                                 <div class="detail_check">
                                     <div class="count_sel">
                                         <div id="carCnt" @click="searchKeyClick(`carCnt`)"
@@ -384,7 +274,7 @@
                                                 <option value="limit">{{limit}}개</option>
                                             </select></div>
                                             <div class="selectric" style="width: 100px;"><span class="label"
-                                                                         data-beusable-tracking="" >{{this.$store.state.cmm.pageLimit}}개씩보기</span></div>
+                                                                         data-beusable-tracking="" >{{this.$store.state.contents.pageLimit}}개씩보기</span></div>
                                             <div class="selectric-items" tabindex="-1" style="width: 100px;">
                                                 <div class="selectric-scroll">
                                                     <ul  v-for="limit of limits" :key="limit.name">
@@ -409,9 +299,8 @@
                                 </colgroup>
 
                                 <tbody>
-                                <td class="empty_result" colspan="4" v-show="searchResultEmpty"><p><span>찾으시는 조건의 차량이 없으세요?</span>관심차량등록알림을 신청하면<br>해당차량 등록시 문자알림을 드립니다.</p>
+                                <td class="empty_result" colspan="4" v-show="searchResultEmpty"><p><span>찾으시는 조건의 차량이 없습니다!</span>다른 검색어를 입력해주세요.</p>
                                     <img src="https://www.kcar.com//resources/images/common/ico_empty.jpg" alt="차량없음 이미지">
-                                    <a href="/help/helpMain.do">관심차량등록알림 신청하기</a>
                                 </td>
                                 <tr v-for="showCar of showCarList" :key="showCar.carcd" >
                                     <td class="thumb">
@@ -452,7 +341,7 @@
                                     </td>
                                     <td class="btn_area">
                                         <a id="toastid0"
-                                           href=""
+                                           @click="goPayment"
                                            class="oline_btn">온라인 구매</a>
                                     </td>
                                 </tr>
@@ -469,6 +358,7 @@
 <script>
 import { mapState , mapGetters } from 'vuex'
 import Pager from '@/components/cmm/Pagination'
+import axios from "axios";
 export default {
     name: 'searchMain',
     components : { Pager },
@@ -498,22 +388,22 @@ export default {
     },
     computed: {
         ...mapState({
-            showCarList : state => state.cmm.showCarList,
-            categoryList: state => state.cmm.categoryList,
-            makerList: state => state.cmm.makerList,
-            fuelTypeList: state => state.cmm.fuelTypeList,
-            regionList: state => state.cmm.regionList,
-            searchResultEmpty : state => state.cmm.searchResultEmpty,
-            checkedItems : state => state.cmm.checkedItems,
-            seenHistoryList : state => state.cmm.seenHistoryList,
-            modelListIsOpen : state => state.cmm.modelListIsOpen,
-            modelList : state => state.cmm.modelList
+            showCarList : state => state.contents.showCarList,
+            categoryList: state => state.contents.categoryList,
+            makerList: state => state.contents.makerList,
+            fuelTypeList: state => state.contents.fuelTypeList,
+            regionList: state => state.contents.regionList,
+            searchResultEmpty : state => state.contents.searchResultEmpty,
+            checkedItems : state => state.contents.checkedItems,
+            seenHistoryList : state => state.contents.seenHistoryList,
+            modelListIsOpen : state => state.contents.modelListIsOpen,
+            modelList : state => state.contents.modelList
         }),
         ...mapGetters( 'cmm' , {
             initFlag : 'initFlag'
         }),
         isAny : function(){
-            return (this.$store.state.cmm.showCarList.length>0)
+            return (this.$store.state.contents.showCarList.length>0)
         },
         minPriceList : function(){
             let list = [this.minDefault]
@@ -547,8 +437,8 @@ export default {
     methods: {
         conditionSelector( targetItem ){
             this.searchWord =  ''
-            if ( targetItem.bigCategory === 'makerList' ) this.$store.dispatch( 'cmm/treeConditionControl' , targetItem )
-            this.$store.dispatch('cmm/conditionSelector', targetItem , { root: true })
+            if ( targetItem.bigCategory === 'makerList' ) this.$store.dispatch( 'contents/treeConditionControl' , targetItem )
+            this.$store.dispatch('contents/conditionSelector', targetItem , { root: true })
             if ( targetItem.bigCategory.indexOf( 'Range' ) > 0 ) this.resettingSelectBox( targetItem.bigCategory )
             this.searchWithCondition()
         },
@@ -590,12 +480,25 @@ export default {
 
         },
         addHistory( carItem ){
-            this.$store.dispatch( 'cmm/addSeenHistory' , carItem )
+            this.$store.dispatch( 'contents/addSeenHistory' , carItem )
         },
         productClick(carItem){
-            this.addHistory(carItem)
-            this.$store.dispatch('cmm/setProduct',carItem)
-            this.$router.push('/product')
+            let userid = ''
+            if(this.$store.state.user.auth)
+                userid = this.$store.state.user.user.userid
+            else
+                userid = this.$store.state.contents.guestid
+            axios
+                .get(`http://localhost:8080/setProduct/`+carItem.carcd+'/'+new Date().toISOString().replace(/[^0-9]/g,"")+'/'+userid)
+                .then(()=>{
+                    this.addHistory(carItem)
+                    this.$store.dispatch('contents/setProduct',carItem)
+                    this.$router.push('/product')
+                })
+                .catch(()=>{
+                    alert('잘못된 요청입니다.')
+                })
+
         },
         bigCategoryIsOpen( categoryType ) {
             const searchConditionCategory = document.getElementById( categoryType )
@@ -610,7 +513,7 @@ export default {
             let checkedRegionList = []
             let maker = ''
 
-            this.$store.state.cmm.checkedItems.forEach( item => {
+            this.$store.state.contents.checkedItems.forEach( item => {
                 switch ( item.bigCategory ) {
                     case 'categoryList':
                         checkedCategoryList.push( item )
@@ -636,9 +539,9 @@ export default {
                     fuelTypeList : checkedFuelTypeList,
                     regionList : checkedRegionList,
                     carcd : this.carcd,
-                    pageLimit : this.$store.state.cmm.pageLimit,
+                    pageLimit : this.$store.state.contents.pageLimit,
                     maker : maker.code,
-                    orderBySub : this.$store.state.cmm.orderBySub,
+                    orderBySub : this.$store.state.contents.orderBySub,
                     minPrice : this.selectedMinPrice,
                     maxPrice : this.selectedMaxPrice,
                     minMilage : this.selectedMinMilage,
@@ -646,25 +549,25 @@ export default {
                     modelText : this.searchWord
             }
 
-            this.$store.dispatch( 'cmm/searchWithCondition', selectedConditionData )
+            this.$store.dispatch( 'contents/searchWithCondition', selectedConditionData )
         },
         selectBoxRangeSetter () {
             console.log(this.selectedMinPrice.bigCategory + this.selectedMinPrice.name)
             if ( this.selectedMinPrice.bigCategory.indexOf('Default') < 0  ) {
-                this.$store.dispatch('cmm/conditionSelectorBySelectBox', this.selectedMinPrice , { root: true })
+                this.$store.dispatch('contents/conditionSelectorBySelectBox', this.selectedMinPrice , { root: true })
             }
             if ( this.selectedMaxPrice.bigCategory.indexOf('Default') < 0  ) {
-                this.$store.dispatch('cmm/conditionSelectorBySelectBox', this.selectedMaxPrice , { root: true })
+                this.$store.dispatch('contents/conditionSelectorBySelectBox', this.selectedMaxPrice , { root: true })
             }
             if ( this.selectedMinMilage.bigCategory.indexOf('Default') < 0  ) {
-                this.$store.dispatch('cmm/conditionSelectorBySelectBox', this.selectedMinMilage , { root: true })
+                this.$store.dispatch('contents/conditionSelectorBySelectBox', this.selectedMinMilage , { root: true })
             }
             if ( this.selectedMaxMilage.bigCategory.indexOf('Default') < 0  ) {
-                this.$store.dispatch('cmm/conditionSelectorBySelectBox', this.selectedMaxMilage , { root: true })
+                this.$store.dispatch('contents/conditionSelectorBySelectBox', this.selectedMaxMilage , { root: true })
             }
         },
         clickPageLimit( pageLimit ){
-            this.$store.dispatch('cmm/pageLimitSetting', pageLimit)
+            this.$store.dispatch('contents/pageLimitSetting', pageLimit)
             this.searchWord =  ''
             this.searchWithCondition()
         },
@@ -722,7 +625,7 @@ export default {
                         selectedOrderCondition = orderByValue.sub
                 }
                     this.orderByName = selectedOrderCondition
-                    this.$store.dispatch('cmm/orderBySubSetting', this.orderByName)
+                    this.$store.dispatch('contents/orderBySubSetting', this.orderByName)
                     //this.searchWord =  ''
                     this.searchWithCondition()
         },
@@ -753,9 +656,10 @@ export default {
         },
 
         reset () {
+            this.searchWord =  ''
             this.resettingSelectBox( 'All' )
-            this.$store.dispatch('cmm/resetCheckedItem')
-            this.$store.dispatch('cmm/init')
+            this.$store.dispatch('contents/resetCheckedItem')
+            this.$store.dispatch('contents/init')
         },
         resettingSelectBox ( target ) {
             if ( target === 'PriceRange' ) {
@@ -776,6 +680,14 @@ export default {
             if( value.toString().length === 3) return value
             value = value.toString()
             return value.slice( 0 , value.length-3)+`,`+ value.slice(-3,value.length)
+        },
+        goPayment(){
+            if(this.$store.state.user.auth)
+                this.$router.push('/payment')
+            else{
+                alert(`로그인이 필요한 서비스입니다.`)
+                this.$router.push('/login')
+            }
         }
     },
     filters: {
@@ -794,26 +706,26 @@ export default {
         }
     },
     created() {
-        if (!this.$store.state.cmm.initFlag)
-            this.$store.dispatch('cmm/init')
+        if (!this.$store.state.contents.initFlag)
+            this.$store.dispatch('contents/init')
 
-        let mainConditionSettingFlag = this.$store.state.cmm.mainConditionSettingFlag
+        let mainConditionSettingFlag = this.$store.state.contents.mainConditionSettingFlag
         if ( mainConditionSettingFlag !== false) {
             switch ( mainConditionSettingFlag ) {
                 case 'withModel' :
-                    this.searchWord = this.$store.state.cmm.modelTextFromMain
+                    this.searchWord = this.$store.state.contents.modelTextFromMain
                     break
                 case 'withBudget' :
-                    this.selectedMinPrice = this.$store.state.cmm.minPriceFromMain
-                    this.selectedMaxPrice = this.$store.state.cmm.maxPriceFromMain
+                    this.selectedMinPrice = this.$store.state.contents.minPriceFromMain
+                    this.selectedMaxPrice = this.$store.state.contents.maxPriceFromMain
                     this.selectBoxRangeSetter()
                     break
                 case 'stringMatch' :
-                    this.searchWord = this.$store.state.cmm.modelTextFromMain
+                    this.searchWord = this.$store.state.contents.modelTextFromMain
                     break
             }
             this.searchWithCondition()
-            if ( mainConditionSettingFlag === 'stringMatch' ) this.$store.dispatch('cmm/stringMatchModelCHecker')
+            if ( mainConditionSettingFlag === 'stringMatch' ) this.$store.dispatch('contents/stringMatchModelCHecker')
             }
         }
 }

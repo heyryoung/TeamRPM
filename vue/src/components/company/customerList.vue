@@ -97,7 +97,7 @@
 </template>
 <script>
     import {checkBox} from "../mixins/checkBox";
-    import pagination from "../cmm/pagination";
+    import pagination from "../common/Pagination2";
     import axios from "axios"
     export default {
         components:{

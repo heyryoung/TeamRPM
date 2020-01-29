@@ -142,7 +142,7 @@ import JoinModal from "./JoinModal.vue"
 export default {
 	name: 'join',
 	data(){
-        return{context: this.$store.state.cmm.context,
+        return{context: this.$store.state.contents.context,
 			name: '',
 			userid:'',
 			idCheckmsg:'',
