@@ -20,15 +20,15 @@ import java.util.stream.Collectors;
 public class SocialServiceImpl implements SocialService{
     @Autowired SocialRepository socialRepository;
     @Autowired CarsRepository carsRepository;
-    @Autowired ModelMapper modelMapper;
-    @Bean public ModelMapper modelMapper() {return new ModelMapper();}
+/*    @Autowired ModelMapper modelMapper;
+    @Bean public ModelMapper modelMapper() {return new ModelMapper();}*/
 
     @Transactional(readOnly = true)
     @Override
     public List<SocialListDto> allList() {
         Iterable<Social> socials = socialRepository.findAll();
         List<Social> list = new ArrayList<>();
-        for(Social s : socials){
+/*        for(Social s : socials){
             list.add(modelMapper.map(s, Social.class));
         }
         Iterable<Cars> cars = carsRepository.findAll();
@@ -42,8 +42,8 @@ public class SocialServiceImpl implements SocialService{
                         social.getCarCode(), social.getCarName(), social.getBoardContent(), social.getBoardImg(),
                         social.getUserSeq().getName(), social.getComments().size(), social.getThumbs().size()))
                 .sorted(Comparator.comparing(SocialListDto::getBoardSeq).reversed())
-                .collect(Collectors.toList());
-        return lists;
+                .collect(Collectors.toList());*/
+        return null;
     }
 
 

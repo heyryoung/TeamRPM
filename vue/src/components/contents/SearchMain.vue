@@ -541,7 +541,7 @@ export default {
                 regionList: checkedRegionList,
                 searchWord: this.searchWord,
                 carcd: this.carcd,
-                pageLimit : this.$store.state.cmm.pageLimit,
+                pageLimit : this.$store.state.contents.pageLimit,
                 maker : maker.code,
             }
             this.$store.dispatch('cmm/searchWithCondition', data)

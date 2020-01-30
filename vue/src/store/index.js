@@ -10,12 +10,9 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
     modules: {
         user,
-        carbook
-        contents,
-        user,
+        carbook,
         contents,
         magazine
-
     },
     strict: true
 })
