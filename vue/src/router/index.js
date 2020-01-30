@@ -14,6 +14,7 @@ import MypageModifyCheck from '@/components/carbook/MypageModifyCheck.vue'
 import SeenCar from '@/components/contents/SeenCar.vue'
 import StationInfo from '@/components/carbook/StationInfo.vue'
 import MapList from '@/components/carbook/MapList.vue'
+import MapList2 from '@/components/carbook/MapList2.vue'
 import Condition from "@/components/recommend/condition.vue"
 import RecommendContent from "@/components/recommend/recommendContent.vue"
 import CarList from "@/components/company/carList.vue"
@@ -51,6 +52,7 @@ export default new Router({
         {path:'/chartMaker', name:'chartMaker', component : ChartMaker},
         {path:'/stationInfo', name:'stationInfo', component : StationInfo},
         {path:'/mapList', name:'mapList', component : MapList},
+        {path:'/mapList2', name:'mapList2', component : MapList2},
         {path:'/sale', name:'sale', component : Sale},
         {path:'/sns', name:'snspage', component : SnsPage},
         {path:'/snsdetail/:id', name:'snsdetail', component : SnsDetail},

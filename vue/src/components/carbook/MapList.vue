@@ -1,15 +1,17 @@
 <template>
 
 <div id="wrap">
-	<vue-daum-map
-			:appKey="appKey"
-			:center.sync="center"
-			:level.sync="level"
-			:mapTypeId="mapTypeId"
-			:libraries="libraries"
-			@load="onLoad"
 
-			style="width:500px;height:500px;"/>
+	<vue-daum-map id="map"
+		:appKey="appKey"
+		:center.sync="center"
+		:level.sync="level"
+		:mapTypeId="mapTypeId"
+		:libraries="libraries"
+		@load="onLoad"
+
+
+		style="width:500px;height:500px;"/>
 	<div class="list">
 		<strong>
 			<span _ngcontent-wjl-c76="" class="search_title_text"><button><router-link to="/stationInfo">S-OIL 서울에너지</router-link></button></span>
@@ -81,9 +83,19 @@
 		},
 		methods: {
 			// 지도가 로드 완료되면 load 이벤트 발생
-			onLoad (map) {
-				this.map = map
+			onLoad () {
+				//let ps = new kakao.maps.services.Places();
+
+
+
+
+
 			}
+		},
+		mounted() {
+			this.map = document.getElementById('map');
+
+
 		}
 	}
 
