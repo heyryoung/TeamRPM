@@ -27,7 +27,7 @@ public class SocialInit implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-
+/*
         //socialBoard 테이블을 지운 후 social더미만 먼저 실행
         //index관련 에러날 수 있음.
 
@@ -52,11 +52,6 @@ public class SocialInit implements ApplicationRunner {
             }
             System.out.println("socialboard 등록 완료");
         }
-
-
-
-
-
         //comment 더미데이터
 
         Iterable<Social> socials = socialRepository.findAll();
@@ -67,7 +62,7 @@ public class SocialInit implements ApplicationRunner {
         socialList.stream().sorted(Comparator.comparing(Social::getBoardSeq)).collect(Collectors.toList());
         List<Social> commentedSocialList = new ArrayList<>();
         commentedSocialList.clear();
-        for(int i=socialList.size()-1; i>socialList.size()-30; i--){
+        for(int i=socialList.size()-1; i>socialList.size()-5; i--){
             commentedSocialList.add(socialList.get(i));
         }
         long commentCount = commentRepository.count();
@@ -81,9 +76,6 @@ public class SocialInit implements ApplicationRunner {
             System.out.println("comment 등록 완료");
         }
 
-
-
-
         //Thumb 더미데이터
 
         long thumbCount = thumbRepository.count();
@@ -93,6 +85,6 @@ public class SocialInit implements ApplicationRunner {
                 thumbRepository.save(socialDummy.makeThumbList(user, commentedSocialList));
             }
             System.out.println("thumb 등록 완료");
-        }
+        }*/
     }
 }

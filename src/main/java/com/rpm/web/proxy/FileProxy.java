@@ -29,6 +29,6 @@ public class FileProxy extends Proxy{
         }
     }
     public String getFolder() {
-        return currentDate().replace("-", File.separator);
+        return null;
     }
 }

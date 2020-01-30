@@ -21,13 +21,13 @@ public class ChartMakerController {
 
     @RequestMapping("/chartSave")
     public Map< String , String  >  chartMaker (@RequestParam("uploadFile") MultipartFile[] uploadFile) {
-        Map< String , String  > map = new HashMap<>();
+/*        Map< String , String  > map = new HashMap<>();
         System.out.println(uploadFile.length);
         filemgr = new FileProxy();
         filemgr.fileupload(uploadFile);
         System.out.println(uploadFile.toString());
-        map.put("result","SUCCESS");
-        return map;
+        map.put("result","SUCCESS");*/
+        return null;//map;
     }
 
     @RequestMapping("/chartReader/{fileName}")
