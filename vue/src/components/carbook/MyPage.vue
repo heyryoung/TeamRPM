@@ -4,6 +4,7 @@
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://blackrockdigital.github.io/startbootstrap-agency/css/agency.min.css">
         <link type="application/atom+xml" rel="alternate" href="https://startbootstrap.com/feed.xml" title="startbootstrap">
+        <link rel="stylesheet" href="https://blackrockdigital.github.io/startbootstrap-agency/vendor/fontawesome-free/css/all.min.css">
 
         <div class="mycarInfo">
             <div class="col-md-4 col-sm-6 portfolio-item">
@@ -11,11 +12,11 @@
                     <img src="https://blackrockdigital.github.io/startbootstrap-agency/img/portfolio/02-thumbnail.jpg" class="pic-image" alt="">
                     <span class="pic-caption bottom-to-top">
                         <div>
-                            <em><h1 class="pic-title">{{this.$store.state.user.user.name}} 님의 차량정보 </h1></em>
+                            <em><h1 class="pic-title">{{this.user.name}} 님의 차량정보 </h1></em>
                         </div>
                         <div>
                             <p>
-                                차종: 쉐보레 <br/>연식: 2019년 3월
+                                차종:{{this.mycar.model}} <br/>연식: 20{{this.mycar.year}}년 {{this.mycar.month}}월
                             </p>
                         </div>
                     </span>
@@ -25,9 +26,9 @@
         </div>
         <div class="row" >
             <div class="changeInfo">
-                <h2>주행거리: 50,263km</h2>
+                <h2>주행거리: {{this.mycar.distance}}km</h2>
                 <h2>내 차 연비: 7.5km/L</h2>
-                <h2>마지막 정비일: 20.01.12</h2>
+                <h2>마지막 정비일:  {{this.record[this.record.length-1].date}}</h2>
             </div>
             <div class="col-md-6 col-lg-3">
                 <div class="widget-small primary coloured-icon"><i class="icon fa fa-users fa-3x"></i>
@@ -74,27 +75,20 @@
                             <th>주유/정비</th>
                             <th>내역</th>
                             <th>금액</th>
+                            <th><a href=""><i @click="insertRecord" class="fas fa-plus-square"></i></a></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>20.01.12</td>
-                            <td>주유</td>
-                            <td>5L</td>
-                            <td>40,000원</td>
+                        <tr v-for="i of record" :key="i.date">
+                            <td>{{i.date}}</td>
+                            <td v-if="i.serviceCode==='refuel'">주유</td>
+                            <td v-else>정비</td>
+                            <td>{{i.detail}}</td>
+                            <td>{{i.price}}</td>
+                            <td><a href=""><i @click="deleteRecord" class="fas fa-trash-alt"></i>
+                                <modals-container /></a></td>
                         </tr>
-                        <tr>
-                            <td>20.01.12</td>
-                            <td>정비</td>
-                            <td>타이어교체</td>
-                            <td>120,000원</td>
-                        </tr>
-                        <tr>
-                            <td>19.12.29</td>
-                            <td>주유</td>
-                            <td>5L</td>
-                            <td>40,000원</td>
-                        </tr>
+
                         </tbody>
                     </table>
                 </div>
@@ -107,9 +101,56 @@
 </template>
 
 <script>
-
+import {mapState} from 'vuex'
+import addModal from './AddModal'
     export default {
-        name: "MyCarPage"
+        name: "MyCarPage",
+        data(){
+            return{
+             }
+        },
+        computed:{
+            ...mapState({
+                mycar: state => state.carbook.mycar,
+                user: state=>state.user.user,
+                record: state=>state.carbook.record,
+                auth: state=>state.user.auth
+
+            })
+
+        },
+        methods:{
+
+            insertRecord(){
+                this.$modal.show(addModal,{
+                    modal: this.$modal},{
+                    name: 'dynamic-modal',
+                    height: 'auto',
+                    draggable: true,
+                })
+            },
+            deleteRecord(){
+                this.$store.dispatch('deleteRecord', {mycarid: this.mycarid})
+            }
+
+        },
+
+        created() {
+            if(this.$store.state.user.auth === false){
+                alert('잘못된접근')
+                this.$router.push('/login')
+
+            }
+            else{
+                this.$store.dispatch('carbook/getMycar',{user:this.user })
+
+            }
+
+
+
+        },
+
+
     }
 </script>
 
@@ -387,7 +428,6 @@
     }
     .tile {
         position: relative;
-        width: 1800px;
         margin: auto;
         background: #ffffff;
         border-radius: 3px;
