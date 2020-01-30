@@ -16,7 +16,7 @@ public class RevenueInit implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        long count = revenueRepository.count();
+      /*  long count = revenueRepository.count();
 
         if (count == 0) {
 
@@ -31,6 +31,6 @@ public class RevenueInit implements ApplicationRunner {
                 }
             });
 
-        }
+        }*/
     }
 }
