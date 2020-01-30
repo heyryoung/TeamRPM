@@ -5,17 +5,10 @@ const state = {
     user : {},
     auth: false,
 
-
-
-
 }
 const getters = {
     getUSer : state=>state.user,
     getIsAuth : state=>state.auth,
-
-
-
-
 
 }
 const actions = {

@@ -20,7 +20,7 @@ public class Employee implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull @Column(name = "EM_ID") private Long emId;
-    @NotNull @Column(name = "EM_CODE") private int emCode;
+    @NotNull @Column(name = "EM_CODE") private String emCode;
     @Column(name = "MONTH_REVENUE") private int monthRevenue;
     @Column(name = "CENTER_NAME", length = 20) private String centerName;
     @Column(name = "EM_NAME", length = 20) private String emName;
