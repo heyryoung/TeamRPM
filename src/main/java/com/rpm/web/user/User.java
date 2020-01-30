@@ -1,5 +1,6 @@
 package com.rpm.web.user;
 
+import com.rpm.web.carbook.Carbook;
 import com.rpm.web.social.Social;
 import lombok.*;
 import org.springframework.context.annotation.Lazy;
@@ -13,8 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component @Lazy @Entity
-@ToString
 @Getter @Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="USER")
@@ -35,6 +36,12 @@ public class User implements Serializable {
             cascade = CascadeType.ALL,
             orphanRemoval = true)
     private List<Social> socials = new ArrayList<>();
+
+
+
+
+
+
 
     @Builder
     private User(String userid, String passwd, String name, String email,

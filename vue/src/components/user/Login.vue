@@ -23,12 +23,15 @@
 						<input type="checkbox" class="am" id="id_save" name="id_save" value="Y">
 						<label for="id_save" class="id_save">아이디 저장</label>
 					</span>
-							<a @click.prevent="checkSubmit" href=""><img src="https://www.kcar.com/resources/images/common/loginBtn.gif" alt="로그인" class="am"></a>
+							<a @click.prevent="checkSubmit" href=""><img src="https://www.kcar.com/resources/images/common/loginBtn.gif" alt="로그인" class="am">{{this.$store.state.user.fail}}</a>
 						</div>
 						<div class="findjoin">
 							<a @click.prevent="">아이디 찾기</a> <a href="/user/passInf.do">비밀번호 찾기</a><modals-container />
 						</div>
 						<div class="snsjoin">
+							<div v-if="this.fail==='fail'" class="error" >
+								<p>가입하지 않은 아이디이거나, 잘못된 비밀번호입니다. </p>
+							</div>
 
 
 						</div>
@@ -42,50 +45,55 @@
 	</div>
 </template>
 <script>
+	import {mapGetters} from 'vuex'
 	export default {
+		computed:{
+			...mapGetters(['getFail']),
+			//...mapState(['fail'])
+
+		},
 		data(){
 			return{
 
 				userid : '',
 				passwd : '',
-				auth: this.$store.state.user.auth
+				auth: this.$store.state.user.auth,
+				result :'',
+				fail : 'success'
+
 
 			}
 		},
 		methods:{
 			checkSubmit(){
+				alert(`wpqkf :${this.fail.toString()}`)
 				if(this.userid.length >= 4 && this.passwd.length>=4){
 					this.login()
+
 				}
 
 			},
 			login(){
-				this.$store.dispatch('user/login', {userid:this.userid,passwd:this.passwd})
 
+
+				this.$store.dispatch('user/login', {userid:this.userid,passwd:this.passwd})
+				alert(this.result.result)
 
 			},
 
-			/*gologin(){
-					this.$store.dispatch('user/login', {userid:this.userid,passwd:this.passwd})
-							.then(()=>{
-								this.auth = this.$store.state.user.auth
-								alert(`gologin ${this.$store.state.user.auth}`)
 
-
-
-
-							}).catch(()=>{
-						alert('gologin fail')
-					})
-				if(this.$store.state.user.auth){
-					this.$router.push('/')
-
-				}
-			},*/
 
 
 
 		},
+		created() {
+			if(this.$store.state.auth === true){
+				alert('이미로그인중입니다')
+				this.$router.push('/')
+
+			}
+		}
+
 
 	}
 </script>

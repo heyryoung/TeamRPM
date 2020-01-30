@@ -10,6 +10,17 @@ Vue.use(VModal, { dynamic: true })
 Vue.config.productionTip = false
 
 new Vue({
+  beforeCreate(){
+    if(localStorage.getItem('token')){
+      this.$store.dispatch('user/getUserInfo')
+      this.$store.state.auth = true
+
+    }
+
+
+
+
+  },
   render: h => h(App),
   router,
   axios,
