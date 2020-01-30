@@ -37,7 +37,8 @@ const state = {
     minMilage : '' ,
     maxMilage : '',
     recentSearchWord : [],
-    searchWordRank : []
+    searchWordRank : [],
+    recommendBySearchWordList : []
 };
 const getters = {
     makerList : state => state.makerList,
@@ -180,6 +181,16 @@ const actions = {
     },
     async handleRecentSearchWord({commit}, data){
         commit('HANDLERECENTSEARCHWORD',data)
+    },
+    async getRecommendBySearchWord({commit}, searchWord){
+        axios
+            .get(`http://localhost:8080/getRecommendBySearching/`+searchWord)
+            .then(({data})=>{
+                commit('GETRECOMMENDBYSEARCHWORD', data)
+            })
+            .catch(()=>{
+                alert('잘못된 요청입니다.')
+            })
     }
 };
 const mutations = {
@@ -516,7 +527,9 @@ const mutations = {
                 state.recentSearchWord = []
                 break
         }
-
+    },
+    GETRECOMMENDBYSEARCHWORD(state,data){
+        state.recommendBySearchWordList = data
     }
 }
 
