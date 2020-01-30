@@ -11,6 +11,7 @@ const state = {
 
 }
 const getters = {
+
     getMember : state=>state.user,
     getIsAuth : state=>state.auth,
     getFail : state=>state.fail
@@ -90,7 +91,6 @@ const mutations = {
         state.auth = true
         state.user = data.user
         state.fail = false
-
 
 
     },

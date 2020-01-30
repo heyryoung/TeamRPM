@@ -41,6 +41,7 @@ public class UserController {
     }
     @PostMapping("/join")
     public HashMap<String, Object> join(@RequestBody User param){
+        printer.accept("컨트롤러");
         HashMap<String, Object> map = new HashMap<>();
         userRepository.save(param);
         if (user != null) {

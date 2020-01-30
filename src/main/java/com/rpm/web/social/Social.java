@@ -1,5 +1,6 @@
 package com.rpm.web.social;
 
+import com.fasterxml.jackson.annotation.*;
 import com.rpm.web.user.User;
 import lombok.*;
 import org.springframework.context.annotation.Lazy;
@@ -12,27 +13,34 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component @Lazy @Entity @ToString
+@Component @Lazy @Entity
 @Getter @Setter
+@ToString(exclude = {"userSeq", "comments", "thumbs"})
 @NoArgsConstructor
 @Table(name="SOCIALBOARD")
-
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "boardSeq")
 public class Social implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "BOARDSEQ") @NotNull private long boardSeq;
+    @Column(name = "BOARDSEQ") @NotNull private Long boardSeq;
     @Column(name = "BOARDDATE") @NotNull private String boardDate;
     @Column(name = "CARCODE") @NotNull private String carCode;
-    @Column(name = "BOARDCONTENT") @NotNull private String boardContent;
+    @Column(name = "CARNAME") @NotNull private String carName;
+    @Column(name = "BOARDCONTENT", length = 20000) @NotNull private String boardContent;
     @Column(name = "BOARDIMG") @NotNull private String boardImg;
 
-
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userSeq")
+    @JoinColumn(name = "USERSEQ")
+    @NotNull
     private User userSeq;
+
     @OneToMany(mappedBy = "boardSeq", cascade = CascadeType.ALL,
             orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
+
+    @OneToMany(mappedBy = "boardSeq", cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private List<Thumb> thumbs = new ArrayList<>();
 
     @Builder
     private Social(String boardDate, String carCode, String boardContent, String boardImg) {
