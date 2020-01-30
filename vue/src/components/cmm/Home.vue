@@ -39,7 +39,7 @@
                                                         <div v-if="this.$store.state.contents.recentSearchWord.length>0" class="recentr">
                                                             <ul>
                                                                 <li v-for="(j,i) of this.$store.state.contents.recentSearchWord" :key="i">
-                                                                    <a>{{j}}</a><span><a @click="deleteRecentSearchWord('one', j)"><img
+                                                                    <a @click="stringMatchClick(j)">{{j}}</a><span><a @click="deleteRecentSearchWord('one', j)"><img
                                                                         src="https://www.kcar.com/resources/images/index/listclose.jpg"
                                                                         width="20" height="21" alt="닫기" border="0"></a></span>
                                                                 </li>
@@ -475,6 +475,7 @@
                         this.keyWord2 = data.model.replace(" ", "")
                         this.keyWord3 = modelText
                         this.$store.dispatch('contents/handleRecentSearchWord' , {key : "+",modelText : modelText})
+                        this.$store.dispatch('contents/getRecommendBySearchWord' , modelText)
                         this.goSearchWithCondition('stringMatch')
                     })
                     .catch(()=>{
@@ -496,6 +497,7 @@
             },
             noIdea(){
                 this.$store.dispatch('contents/resetCheckedItem')
+                this.$store.dispatch('contents/init')
                 this.$router.push('/searchmain')
             }
 

@@ -12,27 +12,26 @@ import java.util.function.Predicate;
 @Component
 @Lazy
 public interface CarsService {
-    public Map<String, List<Cars>> getCategoryByCarType(Iterable<Cars> cars);
+    Map<String, List<Cars>> getCategoryByCarType(Iterable<Cars> cars);
 
-    public Map<String, Map<String, Long>> getCategory1(Iterable<Cars> cars);
+    Map<String, Map<String, Long>> getCategory1(Iterable<Cars> cars);
 
 
     List<Cars> findAllByDistinct(List<Cars> carsList);
 
     List<Cars> findAllByDistinct(Iterable<Cars> cars);
 
-    public <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor);
+    <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor);
 
-    public Map<String, Long> getCategory2(String param);
+    Map<String, Long> getCategory2(String param);
 
-    public Map<String, Long> getCategory3(String param);
+    Map<String, Long> getCategory3(String param);
 
-    public List<SearchDetailCondition> findByMakecd(List<Cars> carsList);
-
+    List<SearchDetailCondition> findByMakecd(List<Cars> carsList);
 
     List<SearchDetailCondition> findByModelWithCount(List<Cars> carsList, String code);
 
-    public List<SearchDetailCondition> findByModelCategory(List<Cars> carsList, String code);
+    List<SearchDetailCondition> findByModelCategory(List<Cars> carsList, String code);
 
     List<SearchDetailCondition> findByModelNMCategory(List<Cars> carsList, String name);
 
@@ -59,4 +58,5 @@ public interface CarsService {
     List<Cars> findCarBySelectedMakerNM(List<Cars> carsList, String name);
 
     Map<String,Map<String,List<Cars>>> findMakerAndModelByModelText(String modelnmText);
+
 }

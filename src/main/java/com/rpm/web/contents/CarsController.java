@@ -2,11 +2,13 @@ package com.rpm.web.contents;
 
 import com.rpm.web.proxy.Box;
 import com.rpm.web.proxy.Proxy;
+import com.rpm.web.proxy.Table;
 import com.rpm.web.proxy.Trunk;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.function.Consumer;
@@ -35,6 +37,9 @@ public class CarsController {
     RecentSearchWordRepository recentSearchWordRepository;
     @Autowired
     RecentSeenCarRepository recentSeenCarRepository;
+    @Autowired
+    Table<String, String, Integer> table;
+
     private List<Object> carModelList;
     private List<Object> carModelHangeulList;
 
@@ -96,7 +101,6 @@ public class CarsController {
 
     @RequestMapping("/searchWithCondition")
     public Map<String,Object> searchWithCondition(@RequestBody  SearchCondition searchCondition){
-        System.out.println( " inside searchWithCondition" );
         trunk.clear();
         cars = carsService.findAllByDistinct((List<Cars>) carsRepository.findAll());
         List<Cars> carsProcessingList = new ArrayList<>();
@@ -277,5 +281,50 @@ public class CarsController {
         return proxy.sortByValue(StreamSupport.stream(recentSearchWordRepository.findAll().spliterator(), false)
                 .filter( s -> s.getSearchTime()<=proxy.longify(proxy.string(LocalDate.now().minusMonths(-6)).replace("-", "")+"000000000"))
                 .collect(Collectors.groupingBy(RecentSearchWord::getSearchWord,Collectors.counting()))).keySet();
+    }
+
+    @GetMapping("/getRecommendBySearching/{searchWord}")
+    public void getRecommendBySearching(@PathVariable String searchWord){
+        table.clear();
+        Map<String, Double> calcList = new HashMap<>();
+        Map<String, List<RecentSearchWord>> matrix = StreamSupport.stream(recentSearchWordRepository.findAll().spliterator(), false)
+                .collect(Collectors.groupingBy(RecentSearchWord::getUserId));
+        int count = 0, listVal = 0, targetVal = 0;
+
+        if(matrix != null){
+            for(Object model : carModelList){
+                for(String user : matrix.keySet()){
+                    count = 1;
+                    for(RecentSearchWord recentSearchWord : matrix.get(user)){
+                        if(model.toString().equals(recentSearchWord.getSearchWord())){
+                            count++;
+                        }
+                    }
+                    table.put(model.toString(), user, count);
+                }
+            }
+        }
+        if(table.getRow(searchWord).values().stream().reduce((a,b)-> a*b).get()!=1){
+            targetVal = table.getRow(searchWord).values().stream().reduce((a,b) -> a*b).get();
+            System.out.println("타겟벨류!!!!!!"+targetVal);
+            for(String rowKey:table.getRowKeys()){
+                if(table.getRow(rowKey).values().stream().reduce((a,b)-> a*b).get()!=1&&!rowKey.equals(searchWord)){
+                    listVal = table.getRow(rowKey).values().stream().reduce((a,b)-> a*b).get();
+                    System.out.println("리스트벨류!!!!!!!"+listVal);
+                    System.out.println((targetVal+listVal)
+                            /(Math.sqrt(Math.pow(targetVal, 2))
+                            +Math.sqrt(Math.pow(listVal, 2))));
+                    calcList.put(rowKey, (targetVal+listVal)
+                            /(Math.sqrt(Math.pow(targetVal, 2))
+                            +Math.sqrt(Math.pow(listVal, 2))));
+                }
+            }
+        }
+        System.out.println("매트릭스!!"+matrix);
+        System.out.println("타겟!!"+table.getCol("2020-01-28T09:06:30.698Z20519"));
+        System.out.println("calc!!"+calcList);
+
+
+
     }
 }
