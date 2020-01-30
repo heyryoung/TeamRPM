@@ -25,6 +25,8 @@ import CustomerList from "@/components/company/customerList.vue"
 import recommendHome from "@/components/recommend/recommendHome.vue"
 import SnsPage from "@/components/social/SnsPage.vue"
 import SnsDetail from "@/components/social/SnsDetail.vue"
+import SnsModify from "@/components/social/SnsModify.vue"
+import SnsWrite from "@/components/social/SnsWrite.vue"
 import MycarModify from '@/components/carbook/MycarModify.vue'
 import Payment from '@/components/contents/Payment.vue'
 
@@ -51,7 +53,9 @@ export default new Router({
         {path:'/mapList', name:'mapList', component : MapList},
         {path:'/sale', name:'sale', component : Sale},
         {path:'/sns', name:'snspage', component : SnsPage},
-        {path:'/snsdetail', name:'snsdetail', component : SnsDetail},
+        {path:'/snsdetail/:id', name:'snsdetail', component : SnsDetail},
+        {path:'/snsmodify', name:'snsmodify', component : SnsModify},
+        {path:'/snswrite', name:'snswrite', component : SnsWrite},
         {path:'/payment', name:'payment', component : Payment},
         // 강성조꺼
         {path: '/customerDetail',name: 'customerDetail', component:customerDetail},
