@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 public class Printer {
 	public void accept(Object o) {
 		Consumer<String> c = System.out :: println;
-		c.accept((String)o);
+		c.accept(String.valueOf(o));
 	}
 }
+

@@ -1,5 +1,8 @@
 package com.rpm.web.social;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.rpm.web.user.User;
 import lombok.*;
 import org.springframework.context.annotation.Lazy;
@@ -15,6 +18,7 @@ import java.io.Serializable;
 @Getter @Setter(AccessLevel.PUBLIC)
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @Table(name="COMMENT")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "commentSeq")
 public class Comment implements Serializable {
 
     @Id
@@ -24,11 +28,13 @@ public class Comment implements Serializable {
     @Column(name = "COMMENTDETAIL") @NotNull private String commentDetail;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "boardSeq")
+    @JoinColumn(name = "BOARDSEQ")
+    @NotNull
     private Social boardSeq;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userSeq")
+    @JoinColumn(name = "USERSEQ")
+    @NotNull
     private User userSeq;
 
     @Builder
