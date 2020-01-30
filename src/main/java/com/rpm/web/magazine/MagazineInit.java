@@ -33,7 +33,10 @@ public class MagazineInit implements ApplicationRunner {
         ArticleCrawler crawler = new ArticleCrawler( articleRepository , extractedWordRepository );
         if (articleRepository.count() == 0 ) crawler.motorgraphComtroller();
         if (extractedWordRepository.count() == 0 ) crawler.extractor();
-        //morphemeAnalyzer();
+
+/*        ChartReader cr = new ChartReader();
+        cr.reader();*/
+
     }
 
 

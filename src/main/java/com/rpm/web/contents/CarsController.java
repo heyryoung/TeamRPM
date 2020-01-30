@@ -4,6 +4,7 @@ import com.rpm.web.proxy.Box;
 import com.rpm.web.proxy.Proxy;
 import com.rpm.web.proxy.Trunk;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -15,6 +16,7 @@ import java.util.stream.StreamSupport;
 @RestController
 @CrossOrigin(origins = "http://localhost:8081")
 public class CarsController {
+    @Qualifier("pxy")
     @Autowired
     Proxy proxy;
     @Autowired
