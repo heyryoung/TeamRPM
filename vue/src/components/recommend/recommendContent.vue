@@ -97,7 +97,7 @@
                 <a href="" class="delete" >선택삭제</a>
 
                 <div class="center_btn">
-                <button  href="" @click="doc_del_rendar">한눈에 비교하기</button>
+                <button  href="" @click="pop_rendar">한눈에 비교하기</button>
                     <modals-container />
                 </div>
             </div>
@@ -136,7 +136,7 @@
         },
         methods: {
 
-            doc_del_rendar(){
+            pop_rendar(){
 
                 for(let i=0;i<this.List.length;i++) {
                     if (this.List[i].checked == true) {

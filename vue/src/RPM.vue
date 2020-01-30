@@ -12,7 +12,7 @@
         <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/window.css?v=200108090126">
         <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/compare.css?v=200103163154">
         <div id="main_image" style="width: 100%; height: 100px; line-height: 100px; text-align: center">
-            <a href="/"><img style="width: 100%; max-width: 760px; vertical-align: middle" src="@/assets/image/rpmlogoblack.png" alt=""></a>
+            <a @click="goHome"><img style="width: 100%; max-width: 760px; vertical-align: middle" src="@/assets/image/rpmlogoblack.png" alt=""></a>
         </div>
         <nav >
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,6 +43,25 @@
                             </Slide >
                         </div>
 
+                        <Slide noOverlay ableOutsideClick :crossIcon="false">
+                            <router-link to="/">HOME</router-link>
+                            <router-link v-if="this.$store.state.user.auth==false" to="/login">로그인</router-link>
+                            <div v-else @click="logout">로그아웃</div>
+                            <router-link to="/join">회원가입</router-link>
+                            <router-link to="/searchmain">검색창</router-link>
+                            <router-link to="/product">제품</router-link>
+                            <router-link to="/mypage">마이페이지</router-link>
+                            <router-link to="/seencar">최근 본 차량(비교함)</router-link>
+                            <router-link to="/mapList">주유소 지도</router-link>
+                            <router-link to="/buycar">자동차구매 </router-link>
+                            <router-link to="/buycarSelectGoods">자동차구매1 </router-link>
+                            <router-link to="/buycarInsertContractorInfomation">자동차구매2 </router-link>
+                            <router-link to="/magazine">매거진 </router-link>
+                            <router-link to="/recommendHome">딜러에게 추천받기</router-link>
+                            <router-link to="/companyHome">ADMIN </router-link>
+                            <router-link to="/sns">SNS(REVIEW) </router-link>
+                            <router-link to="/sns">차계부 </router-link>
+                        </Slide >
                     </li>
                 </ul>
         </div>
@@ -69,6 +88,10 @@
                 this.$store.dispatch('user/logout')
 
 
+            },
+            goHome(){
+                this.$store.dispatch('contents/resetCheckedItem')
+                this.$router.push("/")
             }
         }
     }

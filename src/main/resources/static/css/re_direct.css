@@ -1,6 +1,6 @@
 @charset "utf-8";
 
-.sMainBg{margin-bottom:20px; padding-bottom:19px; border:1px solid #E3E3E3; background:#fff url('/resources/images/main/sMainBbg.gif') left bottom repeat-x; display:inline;}
+.sMainBg{margin-bottom:20px; padding-bottom:19px; border:1px solid #E3E3E3; background:#fff url('https://www.kcar.com/resources/images/main/sMainBbg.gif') left bottom repeat-x; display:inline;}
 .directCenter{overflow:hidden; *zoom:1; padding-bottom:20px;}
 .directCenter .centerMselect{float:left; width:187px; padding:43px 0 0 0;}
 .directCenter .centerMselect h2{padding:0 0 15px 15px;}
@@ -14,8 +14,8 @@
 .directCenter .centerMintro{float:left; width:218px; height:632px; border-right:1px solid #e5e5e5;}
 .directCenter .centerMintro .centerMintroBx{padding-left:16px;}
 .directCenter .centerMintro h4{padding-top:40px;}
-.directCenter .centerMintro .direct_mguide{height:123px; padding:18px 0 20px 0;  backg  round:url(/resources/images/content/center/direct_m_guideList.gif) left 18px no-repeat; overflow:hidden;}
-.directCenter .centerMintro .direct_mguide li{float:left; width:93px; height:26px; background:url(/resources/images/content/center/direct_m_guideList.gif) left top no-repeat; line-height:0; font-size:0;text-indent:-5555px;}
+.directCenter .centerMintro .direct_mguide{height:123px; padding:18px 0 20px 0;  background:url(https://www.kcar.com/resources/images/content/center/direct_m_guideList.gif) left 18px no-repeat; overflow:hidden;}
+.directCenter .centerMintro .direct_mguide li{float:left; width:93px; height:26px; background:url(https://www.kcar.com/resources/images/content/center/direct_m_guideList.gif) left top no-repeat; line-height:0; font-size:0;text-indent:-5555px;}
 .directCenter .centerMintro .direct_mguide li.g0{background-position:0 0;}
 .directCenter .centerMintro .direct_mguide li.g4{background-position:-93px 0;}
 .directCenter .centerMintro .direct_mguide li.g1{background-position:0 -26px;}
@@ -71,15 +71,15 @@
 .cenReIF{padding:10px 0 10px 0;overflow:hidden; *zoom:1;}
 .cenReIF .cenReType{float:left; width:200px; height:22px;}
 .cenReIF .cenReType select{width:100px;  height:21px; vertical-align:middle; border:1px solid #c6c6c6; font-family:Arial;}
-.cenReTyList span{display:inline-block; width:21px; height:20px; background:url(/resources/images/content/buy/carSeType.gif) left -20px no-repeat; line-height:0; font-size:0; text-indent:-5555px; cursor:pointer; vertical-align:middle;}
-.cenReTyImg span{display:inline-block; width:20px; height:20px; background:url(/resources/images/content/buy/carSeType.gif) -21px top no-repeat; line-height:0; font-size:0; text-indent:-5555px; cursor:pointer; vertical-align:middle;}
-.cenReTyList span.on{display:inline-block; width:21px; height:20px; background:url(/resources/images/content/buy/carSeType.gif) left 0 no-repeat; line-height:0; font-size:0; text-indent:-5555px; cursor:pointer;}
-.cenReTyImg span.on{display:inline-block; width:20px; height:20px; background:url(/resources/images/content/buy/carSeType.gif) -21px -20px no-repeat; line-height:0; font-size:0; text-indent:-5555px; cursor:pointer;}
+.cenReTyList span{display:inline-block; width:21px; height:20px; background:url(https://www.kcar.com/resources/images/content/buy/carSeType.gif) left -20px no-repeat; line-height:0; font-size:0; text-indent:-5555px; cursor:pointer; vertical-align:middle;}
+.cenReTyImg span{display:inline-block; width:20px; height:20px; background:url(https://www.kcar.com/resources/images/content/buy/carSeType.gif) -21px top no-repeat; line-height:0; font-size:0; text-indent:-5555px; cursor:pointer; vertical-align:middle;}
+.cenReTyList span.on{display:inline-block; width:21px; height:20px; background:url(https://www.kcar.com/resources/images/content/buy/carSeType.gif) left 0 no-repeat; line-height:0; font-size:0; text-indent:-5555px; cursor:pointer;}
+.cenReTyImg span.on{display:inline-block; width:20px; height:20px; background:url(https://www.kcar.com/resources/images/content/buy/carSeType.gif) -21px -20px no-repeat; line-height:0; font-size:0; text-indent:-5555px; cursor:pointer;}
 .cenReIF .cenRePage{float:right; width:175px;}
 .cenReIF .cenRePage select{width:60px;  height:21px; vertical-align:middle; border:1px solid #c6c6c6; font-family:Arial;}
 .cenReIF .cenRePage input{width:30px; height:17px; padding-top:2px; vertical-align:middle; border:1px solid #c6c6c6; text-align:center;}
-.cenRePrev span{display:inline-block; width:19px; height:20px; background:url(/resources/images/common/pageBtn.gif) left top no-repeat; line-height:0; font-size:0; text-indent:-5555px; cursor:pointer;vertical-align:middle; }
-.cenReNext span{display:inline-block; width:18px; height:20px; background:url(/resources/images/common/pageBtn.gif) -21px top no-repeat; line-height:0; font-size:0; text-indent:-5555px; cursor:pointer; vertical-align:middle;}
+.cenRePrev span{display:inline-block; width:19px; height:20px; background:url(https://www.kcar.com/resources/images/common/pageBtn.gif) left top no-repeat; line-height:0; font-size:0; text-indent:-5555px; cursor:pointer;vertical-align:middle; }
+.cenReNext span{display:inline-block; width:18px; height:20px; background:url(https://www.kcar.com/resources/images/common/pageBtn.gif) -21px top no-repeat; line-height:0; font-size:0; text-indent:-5555px; cursor:pointer; vertical-align:middle;}
 /* listtype */
 .cenReList_table{border-top:1px solid #dfdfdf;}
 .cenReList_table td{border-bottom:1px solid #dfdfdf;}
@@ -92,9 +92,9 @@
 .cenReList_table td .cenReCont .cenReDetail span{padding:0 4px 0 5px; border-left:1px solid #666;}
 .cenReList_table td .cenReCont .cenReDetail span.km{padding:0 6px 0 0;border-left:none}
 .cenReList_table td .cenReCont .cenReLink{display:block; padding-top:12px; font-size:11px;}
-.cenReList_table td .cenReCont .cenReLink .cenReView{padding:0 0 0 11px; margin-right:8px; background:url(/resources/images/common/icon_carReView.gif) left top no-repeat; border-bottom:1px solid #666;}
-.cenReList_table td .cenReCont .cenReLink .cenReBlank{padding:0 0 0 11px; margin-right:8px; background:url(/resources/images/common/icon_carReBlank.gif) left top no-repeat; border-bottom:1px solid #666;}
-.cenReList_table td .cenReCont .cenReLink .cenReJjim{padding:0 0 0 9px; margin-right:8px; background:url(/resources/images/common/icon_carReJjim.gif) left top no-repeat; border-bottom:1px solid #666;}
+.cenReList_table td .cenReCont .cenReLink .cenReView{padding:0 0 0 11px; margin-right:8px; background:url(https://www.kcar.com/resources/images/common/icon_carReView.gif) left top no-repeat; border-bottom:1px solid #666;}
+.cenReList_table td .cenReCont .cenReLink .cenReBlank{padding:0 0 0 11px; margin-right:8px; background:url(https://www.kcar.com/resources/images/common/icon_carReBlank.gif) left top no-repeat; border-bottom:1px solid #666;}
+.cenReList_table td .cenReCont .cenReLink .cenReJjim{padding:0 0 0 9px; margin-right:8px; background:url(https://www.kcar.com/resources/images/common/icon_carReJjim.gif) left top no-repeat; border-bottom:1px solid #666;}
 .cenReList_table td .cenReYear{font-size:14px;}
 .cenReList_table td .cenReMoney{font-size:14px; color:#f05200;}
 .cenReList_table .week_icon{position:relative;}
@@ -113,9 +113,9 @@
 .cenReImgType .cenReDetail span.fuel{padding:0 4px 0 0;border-left:none}
 .cenReImgType .cenReLink{display:block; padding-top:4px; font-size:11px;}
 .cenReImgType .cenReMoney{display:block; padding-top:4px; font-size:12px; color:#f05200;}
-.cenReImgType .cenReLink .cenReView{padding:0 0 0 11px; margin-right:8px; background:url(/resources/images/common/icon_carReView.gif) left top no-repeat; border-bottom:1px solid #666;}
-.cenReImgType .cenReLink .cenReBlank{padding:0 0 0 11px; margin-right:8px; background:url(/resources/images/common/icon_carReBlank.gif) left top no-repeat; border-bottom:1px solid #666;}
-.cenReImgType .cenReLink .cenReJjim{padding:0 0 0 9px; margin-right:8px; background:url(/resources/images/common/icon_carReJjim.gif) left top no-repeat; border-bottom:1px solid #666;}
+.cenReImgType .cenReLink .cenReView{padding:0 0 0 11px; margin-right:8px; background:url(https://www.kcar.com/resources/images/common/icon_carReView.gif) left top no-repeat; border-bottom:1px solid #666;}
+.cenReImgType .cenReLink .cenReBlank{padding:0 0 0 11px; margin-right:8px; background:url(https://www.kcar.com/resources/images/common/icon_carReBlank.gif) left top no-repeat; border-bottom:1px solid #666;}
+.cenReImgType .cenReLink .cenReJjim{padding:0 0 0 9px; margin-right:8px; background:url(https://www.kcar.com/resources/images/common/icon_carReJjim.gif) left top no-repeat; border-bottom:1px solid #666;}
 .directNewCar_bx{position:relative; border:1px solid #d1d1d1; background:#f0edea;}
 .directNewCar_bx h4{color:#f33307; font-weight:bold; padding:10px 0 9px 10px;}
 .directNewCar_bx .directNewCar{}
@@ -138,7 +138,7 @@
 .centerNaver{height:395px; border:1px solid #cfd1cd;}
 .naverOpenapi{padding:5px 0 10px 0;}
 /* notice */
-.centerNotice{position:relative; height:179px; padding:15px 11px 0 11px; border:1px solid #d1d1d1; background:url('/resources/images/content/center/centerNotice_bg.gif') left top repeat-x; overflow:hidden; *zoom:1;}
+.centerNotice{position:relative; height:179px; padding:15px 11px 0 11px; border:1px solid #d1d1d1; background:url('https://www.kcar.com/resources/images/content/center/centerNotice_bg.gif') left top repeat-x; overflow:hidden; *zoom:1;}
 .centerNotice .noticeTit{position:absolute; top:30px; left:8px;}
 .centerNotice .centerImg{float:left; border:1px solid #d1d1d1;}
 .centerNotice .centerImg img{border:3px solid #fff; width:227px; height:157px;}
@@ -221,9 +221,9 @@
 .kw_inner.kwcompare .compare:after { content: ""; display: table;clear:both; }
 .kw_inner.kwcompare .compare p{width:100%;}
 .kw_inner.kwcompare .compare p span.comparetxt{position:absolute;width:500px;font-size:20px;color:#ff0040;bottom:-15px;right:0px}
-.kw_inner.kwcompare .compare p span.comparecir{position:absolute;color:#fff;background:url(/resources/images/content/ew/save_circle.png) no-repeat 0 10px;width:140px;height:140px;font-size:20px;font-weight:normal;bottom:-50px;right:-60px}
-.kw_inner.kwcompare ul.compare_left{float:left;width:440px;height:660px;background:url(/resources/images/content/ew/bgsavegray.png) no-repeat;}
-.kw_inner.kwcompare ul.compare_right{float:right;width:440px;height:660px;background:url(/resources/images/content/ew/bgsavered.png) no-repeat}
+.kw_inner.kwcompare .compare p span.comparecir{position:absolute;color:#fff;background:url(https://www.kcar.com/resources/images/content/ew/save_circle.png) no-repeat 0 10px;width:140px;height:140px;font-size:20px;font-weight:normal;bottom:-50px;right:-60px}
+.kw_inner.kwcompare ul.compare_left{float:left;width:440px;height:660px;background:url(https://www.kcar.com/resources/images/content/ew/bgsavegray.png) no-repeat;}
+.kw_inner.kwcompare ul.compare_right{float:right;width:440px;height:660px;background:url(https://www.kcar.com/resources/images/content/ew/bgsavered.png) no-repeat}
 .kw_inner.kwcompare ul.inbox{padding:45px 30px}
 .kw_inner.kwcompare ul.inbox > li{border-bottom:2px solid #e7e7e8;font-size:20px;color:#5a5a5a;padding:20px 0}
 .kw_inner.kwcompare ul.inbox > li span{float:right;color:#000}
@@ -233,7 +233,7 @@
 .kw_inner.kwcompare ul.inbox > li ul.sul li{font-size:17px;line-height:2em;}
 .kw_inner.kwcompare ul.inbox > li ul.sul li:first-child{padding-top:10px}
 .kw_inner.kwcompare .comparecau{text-align:center;font-size:16px;color:#555; }
-.kw_inner.kwrepair{width:1180px;height:1370px;color:#000;margin:0 auto;background:url(/resources/images/content/ew/kw_bgsave.png) no-repeat center 280px;}
+.kw_inner.kwrepair{width:1180px;height:1370px;color:#000;margin:0 auto;background:url(https://www.kcar.com/resources/images/content/ew/kw_bgsave.png) no-repeat center 280px;}
 .kw_inner.kwrepair h4{font-size:24px;padding-top:30px;text-align:center;font-weight:bold;color:#000}
 .kw_inner.kwrepair h4 span{font-size:16px;color:#ff0040;display:block;padding-top:10px}
 .kw_inner.kwrepair h4 em{font-size:18px;color:#000;display:block;padding-top:50px;font-style:normal}
@@ -262,7 +262,7 @@
 .kw_inner.kwrepair .repaircau span.cir{position:absolute;background:url( ../images/content/ew/save_circle1.png) no-repeat 0 0 ;width:120px;height:120px;bottom:215px;right:345px;background-position: 0px 0px}
 .kw_inner.kwrepair .repaircau span.cir em{position:absolute;font-size:20px;font-weight:normal;color:#fff;top:40px;left:25px}
 .kw_inner.kwrepair .repaircau span.broke{position:absolute;display:block;text-align:center;font-size:19px;color:#555;top:278px;width:1180px}
-.kw_inner.kwprocess{width:1180px;height:330px;margin:0 auto;background:url(/resources/images/content/ew/bgkwprocess.png) no-repeat center 160px;}
+.kw_inner.kwprocess{width:1180px;height:330px;margin:0 auto;background:url(https://www.kcar.com/resources/images/content/ew/bgkwprocess.png) no-repeat center 160px;}
 .kw_inner.kwprocess h4{font-size:24px;padding-top:30px;text-align:center;font-weight:bold;color:#000}
 .kw_inner.kwprocess ul{padding-left:90px}
 .kw_inner.kwprocess li{display:inline-block;font-size:18px;padding-top:100px;text-align:center;color:#000;padding-right:180px;padding-left:16px}
@@ -273,8 +273,8 @@
 .kw_inner.kwcall{width:1180px;height:170px;margin:0 auto;}
 .kw_inner.kwcall ul{padding-left:220px;padding-top:30px}
 .kw_inner.kwcall li{display:inline-block;font-size:18px;font-weight:bold;line-height:2;padding-left:45px}
-.kw_inner.kwcall li:first-child{padding-right:300px;background:url(/resources/images/content/ew/kw_phone_icon.png ) no-repeat}
-.kw_inner.kwcall li:last-child{background:url(/resources/images/content/ew/kw_mouse_icon.png ) no-repeat}
+.kw_inner.kwcall li:first-child{padding-right:300px;background:url(https://www.kcar.com/resources/images/content/ew/kw_phone_icon.png ) no-repeat}
+.kw_inner.kwcall li:last-child{background:url(https://www.kcar.com/resources/images/content/ew/kw_mouse_icon.png ) no-repeat}
 .kw_inner.kwcall li span{display:block;font-size:18px;font-weight:normal;}
 .kw_inner.kwcall li span.btn{display:block;font-size:13px;color:#fff;width:160px;text-align:center;background:#2d2d38;height:40px;line-height:40px;margin-top:10px}
 .kw_inner .kw_table_inner{width: 100%;}
@@ -311,7 +311,7 @@
 .kw_inner .kw_btm_cont.is_fixed{display: block; position: fixed; left: 50%; margin-left: -590px; bottom: 0;}
 
 
-#section .main_visual{width: 100%; height: 747px; background: url(/resources/images/homeencar/contents/section01_bg.jpg) center center no-repeat; background-size: cover; position: relative; overflow: hidden;}
+#section .main_visual{width: 100%; height: 747px; background: url(https://www.kcar.com/resources/images/homeencar/contents/section01_bg.jpg) center center no-repeat; background-size: cover; position: relative; overflow: hidden;}
 #section .main_phone{width: 372px; height: 477px; position: absolute; bottom: 0px; left: 50%; margin-left: -194.5px;}
 #section .main_text{width: 436px; height: 55px; position: absolute; top: -55px; left: 50%; margin-left: -135px;}
 #section .main_logo{width: 194px; height: 54px; position: absolute; top: -54px; left: 50%; margin-left: -360px;}
@@ -328,15 +328,15 @@
 .article01 .art01_cont dl{padding-top: 210px; text-align: center;}
 .article01 .art01_cont dl dt{font-size: 21px; color: #020202; font-weight: bold; letter-spacing: -0.6px; padding-bottom: 5px; font-weight: bold;}
 .article01 .art01_cont dl dd{font-size: 17px; color: #808080; letter-spacing: -0.5px; line-height: 21px;}
-.article01 .cont01{width:200px; margin: 0 72.5px 0 75px; background: url(/resources/images/homeencar/contents/art01_img01.png) top center no-repeat;}
-.article01 .cont02{width:220px; margin-right: 72.5px; background: url(/resources/images/homeencar/contents/art01_img02.png) top center no-repeat;}
-.article01 .cont03{width:200px; margin-right: 75px; background: url(/resources/images/homeencar/contents/art01_img03.png) top center no-repeat;}
+.article01 .cont01{width:200px; margin: 0 72.5px 0 75px; background: url(https://www.kcar.com/resources/images/homeencar/contents/art01_img01.png) top center no-repeat;}
+.article01 .cont02{width:220px; margin-right: 72.5px; background: url(https://www.kcar.com/resources/images/homeencar/contents/art01_img02.png) top center no-repeat;}
+.article01 .cont03{width:200px; margin-right: 75px; background: url(https://www.kcar.com/resources/images/homeencar/contents/art01_img03.png) top center no-repeat;}
 /* article02 */
 .article02{width: 100%; height: 716px; background: #f4f4f4; background-size: cover;}
 .article02 h3{font-size: 28px; color: #262525; letter-spacing: -0.5px; padding: 50px 0 20px 0; text-align: center; font-weight: bold;}
 .article02 h3 span{color: #f10739;}
 .article02 p{font-size: 20px; color: #747474; letter-spacing: -0.75px; line-height: 25px; text-align: center;}
-.article02 .art02_cont{width: 920px; height: 332px; background: url(/resources/images/homeencar/contents/art02_cont.jpg) no-repeat; margin: 50px auto 50px; position: relative;}
+.article02 .art02_cont{width: 920px; height: 332px; background: url(https://www.kcar.com/resources/images/homeencar/contents/art02_cont.jpg) no-repeat; margin: 50px auto 50px; position: relative;}
 .article02 .art02_cont dl{width: 307px; height: 166px; position: absolute;}
 .article02 .art02_cont dl dt{font-size: 21px; color: #0a0a0a; letter-spacing: -1px; line-height: 24px; padding: 35px 0 0 40px; font-weight: bold;}
 .article02 .art02_cont dl dd{font-size: 14px; color: #999999; letter-spacing: -0.5px; letter-spacing: -0.5px; line-height: 17px; padding: 10px 0 0 40px;}
@@ -364,8 +364,8 @@
 .article03 .main_notice .bx-pager .bx-pager-item a{display:block; width:10px; height:10px;border-radius:50%;text-indent:-9999em; background:#a7a7a7;}
 .article03 .main_notice .bx-controls-direction{width: 920px; height: 47px; position: absolute; left: 50%; margin-left: -460px; top: 50%; margin-top: -23.5px;}
 .article03 .main_notice .bx-controls-direction a{display:block; width:57px; height:47px; text-indent:-9999em;}
-.article03 .main_notice .bx-controls-direction a.bx-prev{background:url("/resources/images/homeencar/btn/pager_left.png") center center no-repeat; float: left;}
-.article03 .main_notice .bx-controls-direction a.bx-next{background:url("/resources/images/homeencar/btn/pager_right.png") center center no-repeat; float: right;}
+.article03 .main_notice .bx-controls-direction a.bx-prev{background:url("https://www.kcar.com/resources/images/homeencar/btn/pager_left.png") center center no-repeat; float: left;}
+.article03 .main_notice .bx-controls-direction a.bx-next{background:url("https://www.kcar.com/resources/images/homeencar/btn/pager_right.png") center center no-repeat; float: right;}
 .article03 .main_notice .bx-controls{}
 .article03 .main_notice .bx-controls .bx-pager{position:absolute; left:51%; bottom:15px; z-index:500; margin-left: -50px;}
 .article03 .main_notice .bx-controls .bx-pager .bx-pager-item{display:inline-block; margin-left:5px;}
@@ -374,7 +374,7 @@
 .article04 h3{font-size: 28px; letter-spacing: -0.5px; color: #262525; text-align: center; padding: 70px 0 20px 0; font-weight: bold;}
 .article04 h3 span{color: #f17a07;}
 .article04 p{font-size: 20px; color: #6b6b6b; letter-spacing: -0.5px; line-height: 25px; text-align: center;}
-.article04 .art04_cont{width: 920px; height: 332px; background: url(/resources/images/homeencar/contents/art04_cont.jpg) no-repeat; margin: 50px auto 50px; position: relative;}
+.article04 .art04_cont{width: 920px; height: 332px; background: url(https://www.kcar.com/resources/images/homeencar/contents/art04_cont.jpg) no-repeat; margin: 50px auto 50px; position: relative;}
 .article04 .art04_cont dl{width: 307px; height: 166px; position: absolute;}
 .article04 .art04_cont dl dt{font-size: 21px; color: #0a0a0a; letter-spacing: -1px; line-height: 24px; padding: 35px 0 0 40px; font-weight: bold;}
 .article04 .art04_cont dl dd{font-size: 14px; color: #999999; letter-spacing: -0.5px; letter-spacing: -0.5px; line-height: 17px; padding: 10px 0 0 40px;}
@@ -407,7 +407,7 @@
 .amazing_event span{display: none;}
 
 /* 지점 메인 */
-.branch_main { width: 1180px; margin: 0 auto; font-family: 'Noto Sans Korean'; }
+.branch_main { width: 1180px; margin: 0 auto; font-family: 'Segoe UI'; }
 .branch_main:before, .branch_main:after { content: ""; display: table; }
 .branch_main:after { clear: both; }
 .branch_main select { visibility: hidden; }
@@ -449,7 +449,7 @@
 .branch_main .branchCont .branch_layer_cont .layer_btn_wrap{position:absolute; left:0; bottom:0; width:100%; height:40px; font-size:0;}
 .branch_main .branchCont .branch_layer_cont .layer_btn_wrap .btn_dkgray{display:inline-block; width:160px; height:40px; background:#2d2d38; font-size:12px; line-height:40px; color:#fff; text-align:center;}
 .branch_main .branchCont .branch_layer_cont .layer_btn_wrap .btn_white{display:inline-block; width:160px; height:39px; background:#f7f7f7; border-top:1px solid #dddddd; font-size:12px; line-height:39px; color:#555555; text-align:center;}
-.branch_main .branchCont .branch_layer_cont .btn_sms {display:block; position:absolute; right:0; top:0; width:49px; height:38px; border:1px solid #dddddd; background:#fbfbfb url(/resources/images/content/direct/ico_sms.png) 15px 14px no-repeat; text-indent:-9999px; font-size:0; line-height:0;}
+.branch_main .branchCont .branch_layer_cont .btn_sms {display:block; position:absolute; right:0; top:0; width:49px; height:38px; border:1px solid #dddddd; background:#fbfbfb url(https://www.kcar.com/resources/images/content/direct/ico_sms.png) 15px 14px no-repeat; text-indent:-9999px; font-size:0; line-height:0;}
 .branch_main .direct_center_cont{overflow:hidden; margin-top:30px;}
 .branch_main .module_area{margin-top:30px;text-align:center;background:#fffae8;height:50px}
 .branch_main .module_area:after { clear: both;  content: ""; display:block;}
@@ -477,8 +477,8 @@
 .branch_main .direct_center_cont .notice_event .notice_event_inner .event_img a img{width:380px; height:125px;}
 .branch_main .direct_center_cont .notice_event .bx-controls {position:absolute; right:29px;  top:23px; width:76px; height:17px;}
 .branch_main .direct_center_cont .notice_event .bx-controls-direction a{display:inline-block; width:17px; height:17px; margin-top:0; font-size:0; line-height:0;}
-.branch_main .direct_center_cont .notice_event .bx-controls-direction .bx-prev{position:absolute; left:0; top:0; background: url(/resources/images/content/direct/btn_prev.png) left top no-repeat;}
-.branch_main .direct_center_cont .notice_event .bx-controls-direction .bx-next{position:absolute; right:0; top:0; background: url(/resources/images/content/direct/btn_next.png) left top no-repeat;}
+.branch_main .direct_center_cont .notice_event .bx-controls-direction .bx-prev{position:absolute; left:0; top:0; background: url(https://www.kcar.com/resources/images/content/direct/btn_prev.png) left top no-repeat;}
+.branch_main .direct_center_cont .notice_event .bx-controls-direction .bx-next{position:absolute; right:0; top:0; background: url(https://www.kcar.com/resources/images/content/direct/btn_next.png) left top no-repeat;}
 .branch_main .direct_center_cont .notice_event .banner_score {position: absolute; right:56px; top:24px; font-size:12px; color:#555555; letter-spacing:-1px;}
 .branch_main .direct_center_cont .notice_event .banner_score .current {font-weight:bold;}
 .branch_main .direct_center_cont .notice_event .notice_list {}
@@ -489,10 +489,10 @@
 .branch_main .direct_center_cont .qna_wrap {position:relative; float:right; width:378px; height:256px; border:1px solid #dddddd; box-sizing:border-box;}
 .branch_main .direct_center_cont .qna_wrap h4 {padding:20px 0 18px 30px; border-bottom:1px solid #dddddd; font-size:18px; color:#181819; font-weight:bold; letter-spacing:-1px;}
 .branch_main .direct_center_cont .qna_wrap ul{padding: 26px 30px 0 30px;}
-.branch_main .direct_center_cont .qna_wrap ul li{margin-bottom:16px; padding-left:16px;background: url(/resources/images/content/direct/ico_question.png) left 2px no-repeat; }
+.branch_main .direct_center_cont .qna_wrap ul li{margin-bottom:16px; padding-left:16px;background: url(https://www.kcar.com/resources/images/content/direct/ico_question.png) left 2px no-repeat; }
 .branch_main .direct_center_cont .qna_wrap ul li a{font-size:12px; color:#555555; letter-spacing:-1px;}
 .branch_main .direct_center_cont .qna_wrap ul li a:hover{padding-bottom:4px; border-bottom:1px solid #7d7d7e; color:#181819; text-decoration:none;}
-.branch_main .direct_center_cont .qna_wrap .btn_more02 {display:block; position:absolute; right:30px; top:27px; padding-right:7px; background: url(/resources/images/content/direct/bg_arrow.png) right 4px no-repeat;  font-size:12px; color:#555555; text-decoration:underline;}
+.branch_main .direct_center_cont .qna_wrap .btn_more02 {display:block; position:absolute; right:30px; top:27px; padding-right:7px; background: url(https://www.kcar.com/resources/images/content/direct/bg_arrow.png) right 4px no-repeat;  font-size:12px; color:#555555; text-decoration:underline;}
 .branch_main .service_guide_wrap {margin-top:47px;}
 .branch_main .service_guide_wrap h4 {font-size:18px; color:#181819; font-weight:bold; letter-spacing:-1px;}
 .branch_main .service_guide_wrap ul{overflow:hidden; width:100%; margin-top:15px;}
@@ -506,7 +506,7 @@
 .branch_main .service_guide_wrap ul li .txt {display: block; margin-top:5px; font-size:13px; line-height: 21px; color:#555555; letter-spacing:-1.5px;}
 
 /* 지점 안내 */
-.direct_center_detail{position: relative; font-family: 'Noto Sans Korean'; padding-top: 256px;}
+.direct_center_detail{position: relative; font-family: 'Segoe UI'; padding-top: 256px;}
 .direct_center_detail:before, .direct_center_detail:after { content: ""; display: table; }
 .direct_center_detail:after { clear: both; }
 .direct_center_detail select { visibility: hidden; }
@@ -530,14 +530,14 @@
 .direct_center_detail.is_fixed .head_cont .detail_tab li a{height:59px; border-bottom:none;}
 .center_head .head_cont .detail_tab li.on a {width:296px; border:none; background:#ff0040; color:#fff; font-weight:bold;}
 .center_head .head_cont .detail_tab li a .num {display: inline-block; position:absolute; left:50%; top:-12px; width:62px; margin-left:-31px; background:#ff0040; border-radius:11px; color:#fff; font-size:12px; line-height:21px; letter-spacing:-1px; box-sizing:border-box;}
-.center_head .head_cont .detail_tab li a .num:after{display:inline-block; content:''; position:absolute; left:50%; bottom:-3px; width:5px; height:3px; margin-left:-3px; background: url(/resources/images/content/direct/bg_arrow02.png) left top no-repeat;}
+.center_head .head_cont .detail_tab li a .num:after{display:inline-block; content:''; position:absolute; left:50%; bottom:-3px; width:5px; height:3px; margin-left:-3px; background: url(https://www.kcar.com/resources/images/content/direct/bg_arrow02.png) left top no-repeat;}
 .center_head .head_cont .detail_tab li.on a .num{border:1px solid #ff0040; background:#ffffff; color:#ff0040;}
-.center_head .head_cont .detail_tab li.on a .num:after{bottom:-4px; height:4px; background: url(/resources/images/content/direct/bg_arrow03.png) left top no-repeat;}
+.center_head .head_cont .detail_tab li.on a .num:after{bottom:-4px; height:4px; background: url(https://www.kcar.com/resources/images/content/direct/bg_arrow03.png) left top no-repeat;}
 .center_head .head_cont .detail_tab li.last a{width:297px;}
 .center_head .head_cont .btn_branch {display:block; position:absolute; left:0; top:15px; width:160px; height:37px; border:1px solid #9a9793; border-radius:20px; box-sizing:border-box; line-height:35px; letter-spacing:-1px; text-decoration: none;}
 .center_head .head_cont .btn_branch:hover{width:162px; height:39px; background:#2d2d38; border:none; line-height:37px;}
-.center_head .head_cont .btn_branch span{display:block; padding-left:43px; background: url(/resources/images/content/direct/ico_center.png) 9px 6px no-repeat; font-size:13px; color:#fff;}
-.center_head .head_cont .btn_branch:hover span{ padding-left:44px; background: url(/resources/images/content/direct/ico_center.png) 10px 7px no-repeat;}
+.center_head .head_cont .btn_branch span{display:block; padding-left:43px; background: url(https://www.kcar.com/resources/images/content/direct/ico_center.png) 9px 6px no-repeat; font-size:13px; color:#fff;}
+.center_head .head_cont .btn_branch:hover span{ padding-left:44px; background: url(https://www.kcar.com/resources/images/content/direct/ico_center.png) 10px 7px no-repeat;}
 .direct_center_detail.is_fixed .head_cont .btn_branch{border:1px solid #dddddd;}
 .direct_center_detail.is_fixed .head_cont .btn_branch span {color:#181819;}
 .direct_center_detail.is_fixed .head_cont .btn_branch:hover{border:none;}
@@ -553,16 +553,16 @@
 .center_head .centerlink_layer .cont .selectric-items .selectric-scroll li em{position: absolute; top: 10px; right: 20px; font-style:normal;}
 .center_head .centerlink_layer .cont .btn_move{display:inline-block; width:82px; height:35px; background:#2d2d38; margin-top:0; line-height:35px; text-align:center; font-weight:bold; color:#fff; vertical-align:top;}
 .center_head .centerlink_layer .cont .btn_move:hover{text-decoration:none;}
-.center_head .centerlink_layer .cont .btn_close02{display:block; position:absolute; right:0; top:0; width:49px; height:49px; background:#818181 url(/resources/images/content/direct/btn_close.png) 16px 15px no-repeat; text-indent:-9999px;}.center_detail_cont{width: 1180px; margin: 0 auto;}
+.center_head .centerlink_layer .cont .btn_close02{display:block; position:absolute; right:0; top:0; width:49px; height:49px; background:#818181 url(https://www.kcar.com/resources/images/content/direct/btn_close.png) 16px 15px no-repeat; text-indent:-9999px;}.center_detail_cont{width: 1180px; margin: 0 auto;}
 .center_detail_cont .centerGuide{position:relative; padding-top:50px;}
 .center_detail_cont .centerGuide .center_info{position: relative; overflow:hidden; border:1px solid #dddddd; box-sizing:border-box;}
 .center_detail_cont .centerGuide .center_info .left{position:relative; float:left; width:459px; height:306px;}
 .center_detail_cont .centerGuide .center_info .left .item a img{width:459px; height:306px;}
 .center_detail_cont .centerGuide .center_info .left .slick-arrow{display: block; position: absolute; top: auto; bottom: -1px; left: auto; width: 22px; height: 23px; margin: 0; font-size: 0; line-height: 0; transform: none; z-index: 1; overflow: hidden; text-indent: -9999px;}
-.center_detail_cont .centerGuide .center_info .left .slick-arrow.slick-next{right: 23px; background: url(/resources/images/content/direct/btn_next02.png) left top no-repeat;}
-.center_detail_cont .centerGuide .center_info .left .slick-arrow.slick-prev{right: 44px; background: url(/resources/images/content/direct/btn_prev02.png) left top no-repeat;}
+.center_detail_cont .centerGuide .center_info .left .slick-arrow.slick-next{right: 23px; background: url(https://www.kcar.com/resources/images/content/direct/btn_next02.png) left top no-repeat;}
+.center_detail_cont .centerGuide .center_info .left .slick-arrow.slick-prev{right: 44px; background: url(https://www.kcar.com/resources/images/content/direct/btn_prev02.png) left top no-repeat;}
 .center_detail_cont .centerGuide .center_info .left .banner_score{position:absolute; bottom:0; right:77px; font-size:12px; color:#fff; line-height:24px; letter-spacing:-2px;}
-.center_detail_cont .centerGuide .center_info .left .btn_plus{display:block; position:absolute; right:0; bottom:-1px; width:23px; height:23px;background: url(/resources/images/content/direct/btn_plus.png) left top no-repeat; font-size:0; line-height:0;}
+.center_detail_cont .centerGuide .center_info .left .btn_plus{display:block; position:absolute; right:0; bottom:-1px; width:23px; height:23px;background: url(https://www.kcar.com/resources/images/content/direct/btn_plus.png) left top no-repeat; font-size:0; line-height:0;}
 .center_detail_cont .centerGuide .center_info .right{float:left; position:relative; width:719px; padding:0 0 0 48px; border-left:none; box-sizing:border-box;}
 .center_detail_cont .centerGuide .center_info .right h4{padding-top:30px; font-size:21px; color:#181819; font-weight:bold; letter-spacing:-1.5px;}
 .center_detail_cont .centerGuide .center_info .right h4 .ico_rest_day{display:inline-block; width:42px; height:19px; border:1px solid #ff0040; border-radius:11px; line-height:19px; font-size:12px; color:#ff0040; text-align:center; letter-spacing:-1px; vertical-align: 4px;}
@@ -574,23 +574,23 @@
 .center_detail_cont .centerGuide .center_info .right table td .ervice_info li{float:left; width:119px; height: 21px; margin-bottom:10px;}
 /*.center_detail_cont .centerGuide .center_info .right table td .ervice_info li.type01{width:113px;}*/
 .center_detail_cont .centerGuide .center_info .right table td .ervice_info li span{display:inline-block; width:32px; font-size:0; line-height: 0; vertical-align:middle;}
-.center_detail_cont .centerGuide .center_info .right table td .ervice_info li .ico_buy{height:21px; background: url(/resources/images/content/direct/ico_buy.png) left top no-repeat;}
-.center_detail_cont .centerGuide .center_info .right table td .ervice_info li .ico_sell{height:21px; background: url(/resources/images/content/direct/ico_sell.png) left top no-repeat;}
-.center_detail_cont .centerGuide .center_info .right table td .ervice_info li .ico_type01{height:21px; background: url(/resources/images/content/direct/ico_work01.png) left top no-repeat;}
-.center_detail_cont .centerGuide .center_info .right table td .ervice_info li .ico_type02{height:20px; background: url(/resources/images/content/direct/ico_work02.png) left top no-repeat;}
-.center_detail_cont .centerGuide .center_info .right table td .ervice_info li .ico_type03{height:21px; background: url(/resources/images/content/direct/ico_work03.png) 2px top no-repeat;}
-.center_detail_cont .centerGuide .center_info .right table td .ervice_info li .ico_type04{height:21px; background: url(/resources/images/content/direct/ico_work04.png) left top no-repeat;}
-.center_detail_cont .centerGuide .center_info .right table td .ervice_info li .ico_type05{height:21px; background: url(/resources/images/content/direct/ico_work05.png) 2px top no-repeat;}
-.center_detail_cont .centerGuide .center_info .right table td .ervice_info li .ico_type06{height:21px; background: url(/resources/images/content/direct/ico_work06.png) left top no-repeat;}
-.center_detail_cont .centerGuide .center_info .right table td .ervice_info li .ico_type07{height:21px; background: url(/resources/images/content/direct/ico_work07.png) left top no-repeat;}
-.center_detail_cont .centerGuide .center_info .right table td .ervice_info li .ico_type08{height:21px; background: url(/resources/images/content/direct/ico_work08.png) left top no-repeat;}
-.center_detail_cont .centerGuide .center_info .right table td .ervice_info li .ico_type09{height:21px; background: url(/resources/images/content/direct/ico_work09.png) left top no-repeat;}
-.center_detail_cont .centerGuide .center_info .right table td .ervice_info li .ico_type12{height:21px; background: url(/resources/images/content/direct/ico_work12.png) left top no-repeat;}
+.center_detail_cont .centerGuide .center_info .right table td .ervice_info li .ico_buy{height:21px; background: url(https://www.kcar.com/resources/images/content/direct/ico_buy.png) left top no-repeat;}
+.center_detail_cont .centerGuide .center_info .right table td .ervice_info li .ico_sell{height:21px; background: url(https://www.kcar.com/resources/images/content/direct/ico_sell.png) left top no-repeat;}
+.center_detail_cont .centerGuide .center_info .right table td .ervice_info li .ico_type01{height:21px; background: url(https://www.kcar.com/resources/images/content/direct/ico_work01.png) left top no-repeat;}
+.center_detail_cont .centerGuide .center_info .right table td .ervice_info li .ico_type02{height:20px; background: url(https://www.kcar.com/resources/images/content/direct/ico_work02.png) left top no-repeat;}
+.center_detail_cont .centerGuide .center_info .right table td .ervice_info li .ico_type03{height:21px; background: url(https://www.kcar.com/resources/images/content/direct/ico_work03.png) 2px top no-repeat;}
+.center_detail_cont .centerGuide .center_info .right table td .ervice_info li .ico_type04{height:21px; background: url(https://www.kcar.com/resources/images/content/direct/ico_work04.png) left top no-repeat;}
+.center_detail_cont .centerGuide .center_info .right table td .ervice_info li .ico_type05{height:21px; background: url(https://www.kcar.com/resources/images/content/direct/ico_work05.png) 2px top no-repeat;}
+.center_detail_cont .centerGuide .center_info .right table td .ervice_info li .ico_type06{height:21px; background: url(https://www.kcar.com/resources/images/content/direct/ico_work06.png) left top no-repeat;}
+.center_detail_cont .centerGuide .center_info .right table td .ervice_info li .ico_type07{height:21px; background: url(https://www.kcar.com/resources/images/content/direct/ico_work07.png) left top no-repeat;}
+.center_detail_cont .centerGuide .center_info .right table td .ervice_info li .ico_type08{height:21px; background: url(https://www.kcar.com/resources/images/content/direct/ico_work08.png) left top no-repeat;}
+.center_detail_cont .centerGuide .center_info .right table td .ervice_info li .ico_type09{height:21px; background: url(https://www.kcar.com/resources/images/content/direct/ico_work09.png) left top no-repeat;}
+.center_detail_cont .centerGuide .center_info .right table td .ervice_info li .ico_type12{height:21px; background: url(https://www.kcar.com/resources/images/content/direct/ico_work12.png) left top no-repeat;}
 .center_detail_cont .centerGuide .center_info .right .btn_wrap{margin:5px 0 0 -48px; text-align:center;}
 .center_detail_cont .centerGuide .center_info .right .btn_wrap .btn_white_s{display:inline-block; width:150px; height:33px; border:1px solid #2d2d38; font-size:13px; line-height: 33px; color:#555555;}
 .center_detail_cont .centerGuide .center_info .right .btn_wrap .btn_white_s:hover{text-decoration:none;}
 .center_detail_cont .centerGuide .center_info .right .btn_sms{display:block; position:absolute; right:0; top:0; width:173px; height:39px; border-left:1px solid #dddddd; border-bottom:1px solid #dddddd;}
-.center_detail_cont .centerGuide .center_info .right .btn_sms span{display:inline-block; padding:0 37px 0 21px; background: url(/resources/images/content/direct/ico_sms.png) right center no-repeat; color:#555555; font-size:13px; line-height:39px; letter-spacing:-1px;}
+.center_detail_cont .centerGuide .center_info .right .btn_sms span{display:inline-block; padding:0 37px 0 21px; background: url(https://www.kcar.com/resources/images/content/direct/ico_sms.png) right center no-repeat; color:#555555; font-size:13px; line-height:39px; letter-spacing:-1px;}
 .center_detail_cont .centerGuide .centerPopup { display: none; width: 720px; height:595px; border: 1px solid #222; position: fixed; top:138px; left: 50%; margin-left:-431px; z-index: 50; background-color: #fff; }
 .center_detail_cont .centerGuide .centerPopup .head { height: 50px; line-height: 50px; position: relative; padding: 0 20px; background-color: #2d2d38; }
 .center_detail_cont .centerGuide .centerPopup .head strong { font-weight: 500; letter-spacing: -0.07em; font-size: 17px; color: #fff; }
@@ -631,8 +631,8 @@
 .center_detail_cont .direct_mcarList_wrap ul li:first-child{margin-left:0;}
 .center_detail_cont .direct_mcarList_wrap ul li.nodata{float:none; width:100%; height:110px; padding-top:50px; text-align:center; overflow:hidden;}
 .center_detail_cont .direct_mcarList_wrap ul li a span.mark01 {position: absolute; top: 0; left: 0; z-index: 10; background-color: #ff0040; display: block; width: 40px; height: 24px; line-height: 24px; text-align: center; font-size: 13px; color: #fff;}
-.center_detail_cont .direct_mcarList_wrap ul li a span.markvr {position: absolute; top:64px; left:50%; margin-left:-28px; background-image: url(/resources/images/content/buy/pc_3d_icon_20190318.png); display: block; width: 56px; height: 56px; overflow: hidden; text-indent: -9999px; font-size: 0.01em; color: transparent; -webkit-background-size: 56px 56px; background-size: 56px 56px; background-position: center center; background-repeat: no-repeat; white-space: nowrap;}
-.center_detail_cont .direct_mcarList_wrap ul li a span.markwater {position: absolute; top: 2px; right:2px; background-image: url(/resources/images/content/buy/vr_watermark.png); display: block; width: 22px; height: 24px; overflow: hidden; text-indent: -9999px; font-size: 0.01em; color: transparent; -webkit-background-size: 22px 24px; background-size: 22px 24px; background-position: center center; background-repeat: no-repeat; white-space: nowrap;}
+.center_detail_cont .direct_mcarList_wrap ul li a span.markvr {position: absolute; top:64px; left:50%; margin-left:-28px; background-image: url(https://www.kcar.com/resources/images/content/buy/pc_3d_icon_20190318.png); display: block; width: 56px; height: 56px; overflow: hidden; text-indent: -9999px; font-size: 0.01em; color: transparent; -webkit-background-size: 56px 56px; background-size: 56px 56px; background-position: center center; background-repeat: no-repeat; white-space: nowrap;}
+.center_detail_cont .direct_mcarList_wrap ul li a span.markwater {position: absolute; top: 2px; right:2px; background-image: url(https://www.kcar.com/resources/images/content/buy/vr_watermark.png); display: block; width: 22px; height: 24px; overflow: hidden; text-indent: -9999px; font-size: 0.01em; color: transparent; -webkit-background-size: 22px 24px; background-size: 22px 24px; background-position: center center; background-repeat: no-repeat; white-space: nowrap;}
 .center_detail_cont .direct_mcarList_wrap .thumb img { max-width: 100%; }
 .center_detail_cont .direct_mcarList_wrap .desc-area { display: block; padding: 15px 13px 0 13px; }
 .center_detail_cont .direct_mcarList_wrap .desc-area span { letter-spacing: -0.07em; font-weight: 400; }
@@ -678,7 +678,7 @@
 .center_detail_cont .centerEmployee .employee_list ul li ul li:hover .employee_info{display:block;}
 .center_detail_cont .centerEmployee .employee_list ul li ul li .employee_info .employee_name02{display:block; padding:38px 0 7px 0; font-size:15px; color:#fff;}
 .center_detail_cont .centerEmployee .employee_list ul li ul li .employee_info a{display:inline-block; font-size:12px; color:#fff; text-decoration:underline;}
-.center_detail_cont .centerEmployee .employee_list ul li ul li .employee_info a span{padding-right:7px; background: url(/resources/images/content/direct/bg_arrow05.png) right 7px no-repeat;}
+.center_detail_cont .centerEmployee .employee_list ul li ul li .employee_info a span{padding-right:7px; background: url(https://www.kcar.com/resources/images/content/direct/bg_arrow05.png) right 7px no-repeat;}
 .center_detail_cont .centerEmployee .employee_list ul li.nodata{float:none; width:100%; height:60px; padding-top:50px; text-align:center; overflow:hidden;}
 .center_detail_cont .carSearch_cont{padding-top:50px;}
 
@@ -686,7 +686,7 @@
 .buy_exchange .text-center {text-align: center;}
 .buy_exchange img.aligncenter {display: block; margin: 0 auto;}
 .buy_exchange .buy_exchange_section {padding: 0;}
-.buy_exchange .buy_exchange_section1 {height: 420px; background: url(/resources/images/content/trade/buy_exchange_section1.gif) center center no-repeat #d9d9d9;}
+.buy_exchange .buy_exchange_section1 {height: 420px; background: url(https://www.kcar.com/resources/images/content/trade/buy_exchange_section1.gif) center center no-repeat #d9d9d9;}
 .buy_exchange .buy_exchange_section1_inner {position: relative; width: 1140px; margin: 0 auto; padding-top: 50px;}
 .buy_exchange .buy_exchange_section1_tit {font-size: 39px; line-height: 1; font-weight: 700; letter-spacing: -.05em; color: #000; margin: 0 0 20px;}
 .buy_exchange .buy_exchange_section1_desc {font-size: 24px; line-height: 1; font-weight: 500; letter-spacing: -.05em; color: #000; margin: 0 0 12px; line-height:1.3;}
@@ -708,10 +708,10 @@
 .buy_exchange .buy_exchange_section4 .faq_wrap .faq_list li .faq_body {font-size: 16px; line-height: 24px; font-weight: 400; letter-spacing: -.05em;}
 .buy_exchange .buy_exchange_section4 .faq_wrap .faq_list{margin:38px 0 0px; border-top:1px solid #555555;}
 .buy_exchange .buy_exchange_section4 .faq_wrap .faq_list li{border-bottom:1px solid #ededed;}
-.buy_exchange .buy_exchange_section4 .faq_wrap .faq_list li .faq_head a{position:relative; display:block; padding-left:44px; background:#fafafa url(/resources/images/content/trade/ico_q.png) no-repeat 15px 18px; font-size:15px; line-height:55px; color:#181819;}
-.buy_exchange .buy_exchange_section4 .faq_wrap .faq_list li .faq_head a:after{display:block; content: ''; position:absolute; right:25px; top:25px; width:10px; height:5px; background:url(/resources/images/content/trade/bg_faq_arrow.png) no-repeat left top;}
+.buy_exchange .buy_exchange_section4 .faq_wrap .faq_list li .faq_head a{position:relative; display:block; padding-left:44px; background:#fafafa url(https://www.kcar.com/resources/images/content/trade/ico_q.png) no-repeat 15px 18px; font-size:15px; line-height:55px; color:#181819;}
+.buy_exchange .buy_exchange_section4 .faq_wrap .faq_list li .faq_head a:after{display:block; content: ''; position:absolute; right:25px; top:25px; width:10px; height:5px; background:url(https://www.kcar.com/resources/images/content/trade/bg_faq_arrow.png) no-repeat left top;}
 .buy_exchange .buy_exchange_section4 .faq_wrap .faq_list li.active .faq_head a:after{background-position:0 -5px;}
-.buy_exchange .buy_exchange_section4 .faq_wrap .faq_list li .faq_body{display:none; border-top:1px solid #ededed; padding:25px 45px 22px; background:url(/resources/images/content/trade/ico_a.png) no-repeat 15px 27px; font-size:15px; line-height:24px; color:#555555;}
+.buy_exchange .buy_exchange_section4 .faq_wrap .faq_list li .faq_body{display:none; border-top:1px solid #ededed; padding:25px 45px 22px; background:url(https://www.kcar.com/resources/images/content/trade/ico_a.png) no-repeat 15px 27px; font-size:15px; line-height:24px; color:#555555;}
 .buy_exchange .buy_exchange_section4 .faq_wrap .faq_list li.active .faq_body{display: block;}
 
 /* 금융 */
@@ -723,20 +723,20 @@
 .carfinance .carfin_tab a.on { border-color: #2d2d38; background-color: #2d2d38; color: #fff;  font-weight:bold;}
 /*탭별 컨텐츠 타입순*/
 .carfin_cont{border-top:1px solid #2d2d38;}
-.carfin_cont .carfin_type01_bg{height:549px; background: #878381 url(/resources/images/content/finance/car_fin_bg1.png) no-repeat center 0;}
+.carfin_cont .carfin_type01_bg{height:549px; background: #878381 url(https://www.kcar.com/resources/images/content/finance/car_fin_bg1.png) no-repeat center 0;}
 .carfin_cont .carfin_type01_bg h2.tit{padding:70px 0 34px 0; text-align:center; font-size:24px; font-weight:bold; color: #fff; font-size:32px;  text-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);}
 .carfin_cont .cap_point{margin-top:10px; text-align:center;}
-.carfin_cont .cap_point span{padding:0 0 2px 20px; background:url(/resources/images/common/icon_info.png) left 2px no-repeat; font-size:11px; color:#fff;}
+.carfin_cont .cap_point span{padding:0 0 2px 20px; background:url(https://www.kcar.com/resources/images/common/icon_info.png) left 2px no-repeat; font-size:11px; color:#fff;}
 /* type01 금융계산 차량리스트 */
-.carfin_cap{width:940px; height:303px; margin:0 auto; padding:34px 49px 0 49px; background: url(/resources/images/content/finance/car_fin_bg.png) no-repeat left top;}
+.carfin_cap{width:940px; height:303px; margin:0 auto; padding:34px 49px 0 49px; background: url(https://www.kcar.com/resources/images/content/finance/car_fin_bg.png) no-repeat left top;}
 .carfin_cap .cap_bx{}
 .carfin_cap .cap_bx:after{content:""; display:block; clear:both;}
 .carfin_cap .cap_bx .le{float:left; width:560px;}
 .carfin_cap .cap_bx h4{position:relative; margin:15px 0 10px 0; font-size:13px; font-weight:bold; color:#181819;}
 .carfin_cap .cap_bx h4 span.txt{color:#aaa; font-size:11px; font-weight:normal; }
-.carfin_cap .cap_bx h4 .monfin_info b{display:inline-block; width:24px; height:14px; background:url(/resources/images/common/icon_info.png) center 0 no-repeat; overflow:hidden; text-indent:-9999px; font-size:0.01em; color:transparent; cursor:pointer; vertical-align:top;}
+.carfin_cap .cap_bx h4 .monfin_info b{display:inline-block; width:24px; height:14px; background:url(https://www.kcar.com/resources/images/common/icon_info.png) center 0 no-repeat; overflow:hidden; text-indent:-9999px; font-size:0.01em; color:transparent; cursor:pointer; vertical-align:top;}
 .carfin_cap .cap_bx h4 .ly_tip{display:none;}
-.carfin_cap .cap_bx h4 .monfin_info:hover .ly_tip{display:block; position:absolute; top:22px; left:0; width:280px; padding:15px 18px 15px 30px; background:#fff url(/resources/images/common/icon_info.png) 10px 17px no-repeat; opacity: 0.95; border:1px solid #000;  line-height:1.6; font-size:11px; z-index:13}
+.carfin_cap .cap_bx h4 .monfin_info:hover .ly_tip{display:block; position:absolute; top:22px; left:0; width:280px; padding:15px 18px 15px 30px; background:#fff url(https://www.kcar.com/resources/images/common/icon_info.png) 10px 17px no-repeat; opacity: 0.95; border:1px solid #000;  line-height:1.6; font-size:11px; z-index:13}
 .carfin_cap .cap_bx h4 span.captab_Self{position:absolute; top:0; right:30px; font-weight:normal; vertical-align:middle;}
 .carfin_cap .captab ul:after{content:""; display:block; clear:both;}
 .carfin_cap .captab ul li{float:left; margin-right:5px;}
@@ -752,9 +752,9 @@
 .carfin_cap .cap_bx .cap_month{position:relative; height:178px;  padding:35px 62px 35px 62px; border:solid 1px #2d2d38; background-color:#fff; border-radius: 15px;  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);}
 .carfin_cap .cap_bx .cap_month .tit{text-align:center; font-weight:bold; color:#181819;}
 .carfin_cap .cap_bx .cap_month .tit{position:relative; padding:0 0 5px 0;text-align:center; font-weight:bold; color:#181819;}
-.carfin_cap .cap_bx .cap_month .tit .monfin_info b{display:inline-block; width:24px; height:14px; background:url(/resources/images/common/icon_info.png) center 0 no-repeat; overflow:hidden; text-indent:-9999px; font-size:0.01em; color:transparent; cursor:pointer; vertical-align:top;}
+.carfin_cap .cap_bx .cap_month .tit .monfin_info b{display:inline-block; width:24px; height:14px; background:url(https://www.kcar.com/resources/images/common/icon_info.png) center 0 no-repeat; overflow:hidden; text-indent:-9999px; font-size:0.01em; color:transparent; cursor:pointer; vertical-align:top;}
 .carfin_cap .cap_bx .cap_month .tit .ly_tip{display:none;}
-.carfin_cap .cap_bx .cap_month .tit .monfin_info:hover .ly_tip{display:block; position:absolute; top:22px; left:100px; width:285px; padding:15px 18px 15px 30px; background:#fff url(/resources/images/common/icon_info.png) 10px 17px no-repeat; opacity: 0.95; border:1px solid #000;  line-height:1.6; font-size:11px; z-index:13; text-align:left;}
+.carfin_cap .cap_bx .cap_month .tit .monfin_info:hover .ly_tip{display:block; position:absolute; top:22px; left:100px; width:285px; padding:15px 18px 15px 30px; background:#fff url(https://www.kcar.com/resources/images/common/icon_info.png) 10px 17px no-repeat; opacity: 0.95; border:1px solid #000;  line-height:1.6; font-size:11px; z-index:13; text-align:left;}
 .carfin_cap .cap_bx .cap_month .cap_money{display:block; font-size:38px; color:#ff0040; text-align:center;}
 .carfin_cap .cap_bx .cap_month .cap_money span{vertical-align: middle;}
 .carfin_cap .cap_bx .cap_month ul.cap_total{padding:10px 0 10px 0;}
@@ -762,10 +762,10 @@
 .carfin_cap .cap_bx .cap_month ul.cap_total li span{float:left; width:50%; font-size:14px; color:#555;}
 .carfin_cap .cap_bx .cap_month ul.cap_total li span.ct_mon{text-align:right; color:#181819;}
 .carfin_cap .cap_bx .cap_month a.cap_link{position:relative; display:block; height:40px; line-height:40px; background-color:#ff0040; vertical-align:middle; border-radius:20px; color:#fff; text-align:center;}
-.carfin_cap .cap_bx .cap_month a.cap_link:after{display:inline-block; content:""; width:20px; height:15px; vertical-align:middle; background:url(/resources/images/common/icon_info_w.png) center top no-repeat; }
+.carfin_cap .cap_bx .cap_month a.cap_link:after{display:inline-block; content:""; width:20px; height:15px; vertical-align:middle; background:url(https://www.kcar.com/resources/images/common/icon_info_w.png) center top no-repeat; }
 .carfin_cap .cap_bx .cap_month a.cap_link .ly_tip{display:none;}
-.carfin_cap .cap_bx .cap_month a.cap_link:hover .ly_tip{display:block; position:absolute; top:45px; left:-43px; width:295px; padding:15px 18px 15px 30px; background:#fff url(/resources/images/common/icon_info.png) 10px 17px no-repeat; opacity: 0.95; border:1px solid #000;  line-height:1.6; font-size:11px; z-index:13; text-align:left; color:#181819;}
-.carfin_cap .cap_bx .cap_month a.cap_re{position:absolute; top:15px; right:15px; width:68px; height:20px; padding-top:2px; background: url(/resources/images/common/refresh_ico2.png) no-repeat right 0; color:#888;}
+.carfin_cap .cap_bx .cap_month a.cap_link:hover .ly_tip{display:block; position:absolute; top:45px; left:-43px; width:295px; padding:15px 18px 15px 30px; background:#fff url(https://www.kcar.com/resources/images/common/icon_info.png) 10px 17px no-repeat; opacity: 0.95; border:1px solid #000;  line-height:1.6; font-size:11px; z-index:13; text-align:left; color:#181819;}
+.carfin_cap .cap_bx .cap_month a.cap_re{position:absolute; top:15px; right:15px; width:68px; height:20px; padding-top:2px; background: url(https://www.kcar.com/resources/images/common/refresh_ico2.png) no-repeat right 0; color:#888;}
 .car_fin_bx{width:1180px; margin:30px auto 0 auto; position:relative;}
 .car_fin_bx .sefin_total{padding-bottom:13px; font-size:15px; color:#181819; font-weight:bold;}
 .car_fin_bx .sefin_total b{font-weight:normal;}
@@ -806,7 +806,7 @@
 .car_fin_bx .car_fin_list li span{display:block;}
 .car_fin_bx .car_fin_list li .mark_spot1{position:absolute;top:0;left:0px}
 .car_fin_bx .car_fin_list li a:hover span.model{text-decoration:underline}
-.car_fin_bx .car_fin_list li span.mov_ico { position: absolute; top:73px; left:50%; margin-left:-20px; background: url(/resources/images/content/buy/pc_play_icon.png);width:40px;height:40px; text-indent: -9999px;}
+.car_fin_bx .car_fin_list li span.mov_ico { position: absolute; top:73px; left:50%; margin-left:-20px; background: url(https://www.kcar.com/resources/images/content/buy/pc_play_icon.png);width:40px;height:40px; text-indent: -9999px;}
 .car_fin_bx .car_fin_list li span.model{ font-size: 14px;color: #181819;letter-spacing: -0.03em;font-weight: 400;display: -webkit-box;height: 38px;text-overflow: ellipsis;-webkit-line-clamp: 2;-webkit-box-orient: vertical;word-wrap: break-word;overflow: hidden;padding:0 20px 0 20px;}
 .car_fin_bx .car_fin_list li span.year{font-size:13px;color:#888888; padding:16px 20px 22px 20px;overflow:hidden;text-overflow:ellipsis; word-wrap : break-word;white-space:nowrap;width:240px}
 .car_fin_bx .car_fin_list li span.monthly{font-size:16px;padding:19px 20px 10px 20px;display:block;color:#ff0040; font-weight:bold;}
@@ -814,62 +814,62 @@
 .car_fin_bx .car_fin_list li span.mark{margin:20px;margin-top:0}
 .car_fin_bx .car_fin_list li span.mark:after{content:""; display:block; clear:both;}
 .car_fin_bx .car_fin_list li span.mark span{display:inline-block;}
-.car_fin_bx .car_fin_list li span.markvr {position: absolute; top: 62px; left:50%; margin-left:-28px; background-image: url(/resources/images/content/buy/pc_3d_icon_20190318.png); display: block; width: 56px; height: 56px; overflow: hidden; text-indent: -9999px; font-size: 0.01em; color: transparent; -webkit-background-size: 56px 56px; background-size: 56px 56px; background-position: center center; background-repeat: no-repeat; white-space: nowrap;}
-.car_fin_bx .car_fin_list li span.markwater {position: absolute; top: 2px; right:2px; background-image: url(/resources/images/content/buy/vr_watermark.png); display: block; width: 22px; height: 24px; overflow: hidden; text-indent: -9999px; font-size: 0.01em; color: transparent; -webkit-background-size: 22px 24px; background-size: 22px 24px; background-position: center center; background-repeat: no-repeat; white-space: nowrap;}
+.car_fin_bx .car_fin_list li span.markvr {position: absolute; top: 62px; left:50%; margin-left:-28px; background-image: url(https://www.kcar.com/resources/images/content/buy/pc_3d_icon_20190318.png); display: block; width: 56px; height: 56px; overflow: hidden; text-indent: -9999px; font-size: 0.01em; color: transparent; -webkit-background-size: 56px 56px; background-size: 56px 56px; background-position: center center; background-repeat: no-repeat; white-space: nowrap;}
+.car_fin_bx .car_fin_list li span.markwater {position: absolute; top: 2px; right:2px; background-image: url(https://www.kcar.com/resources/images/content/buy/vr_watermark.png); display: block; width: 22px; height: 24px; overflow: hidden; text-indent: -9999px; font-size: 0.01em; color: transparent; -webkit-background-size: 22px 24px; background-size: 22px 24px; background-position: center center; background-repeat: no-repeat; white-space: nowrap;}
 .car_se_link{position:relative; width:606px; margin:20px auto 0 auto;  padding:31px 60px; }
-.car_se_link p{padding:0 0 0 72px;background: url(/resources/images/content/finance/car_fin_link.jpg) left 50% no-repeat; font-size:13px; line-height:1.62; color:#181819; }
-.car_se_link p.thema{background: url(/resources/images/content/group/themalist_banner.png) left 50% no-repeat;  }
+.car_se_link p{padding:0 0 0 72px;background: url(https://www.kcar.com/resources/images/content/finance/car_fin_link.jpg) left 50% no-repeat; font-size:13px; line-height:1.62; color:#181819; }
+.car_se_link p.thema{background: url(https://www.kcar.com/resources/images/content/group/themalist_banner.png) left 50% no-repeat;  }
 .car_se_link p b{font-size:15px;}
 .car_se_link a{position:absolute; top:35px; right:60px; display:inline-block; wdith:180px; padding:11px 28px 10px 28px; background:#2d2d38; color:#fff; }
-.carfin_cont .carfin_type02_bg{height:549px; background: #878381 url(/resources/images/content/finance/car_fin_bg2.png) no-repeat center 0;}
+.carfin_cont .carfin_type02_bg{height:549px; background: #878381 url(https://www.kcar.com/resources/images/content/finance/car_fin_bg2.png) no-repeat center 0;}
 .carfin_cont .carfin_type02_bg h2.tit{padding:70px 0 34px 0; text-align:center; font-size:24px; font-weight:bold; color: #fff; font-size:32px;  text-shadow:0 3px 5px rgba(0, 0, 0, 0.22);}
 .carfin_cont .carfin_point{width:1180px; margin:0 auto;}
 .carfin_cont .carfin_point .point_list{overflow:hidden; }
 .carfin_cont .carfin_point .point_list li{width:280px; height:207px; float:left; padding-top:45px; margin-right:20px; border-radius:25px;  box-shadow:0 3px 6px 0 rgba(0, 0, 0, 0.25); font-size:13px; color:#666; text-align:center;}
 .carfin_cont .carfin_point .point_list li strong{display:block; margin-top:3px; font-size:18px;  color:#000;}
-.carfin_cont .carfin_point .point_list li.po_img1{background:#fff url(/resources/images/content/finance/carfin_po_img1.png) 50% 112px no-repeat;}
-.carfin_cont .carfin_point .point_list li.po_img2{background:#fff url(/resources/images/content/finance/carfin_po_img2.png) 50% 112px no-repeat;}
-.carfin_cont .carfin_point .point_list li.po_img3{background:#fff url(/resources/images/content/finance/carfin_po_img3.png) 50% 112px no-repeat;}
-.carfin_cont .carfin_point .point_list li.po_img4{background:#fff url(/resources/images/content/finance/carfin_po_img4.png) 50% 112px no-repeat; margin-right:0;}
+.carfin_cont .carfin_point .point_list li.po_img1{background:#fff url(https://www.kcar.com/resources/images/content/finance/carfin_po_img1.png) 50% 112px no-repeat;}
+.carfin_cont .carfin_point .point_list li.po_img2{background:#fff url(https://www.kcar.com/resources/images/content/finance/carfin_po_img2.png) 50% 112px no-repeat;}
+.carfin_cont .carfin_point .point_list li.po_img3{background:#fff url(https://www.kcar.com/resources/images/content/finance/carfin_po_img3.png) 50% 112px no-repeat;}
+.carfin_cont .carfin_point .point_list li.po_img4{background:#fff url(https://www.kcar.com/resources/images/content/finance/carfin_po_img4.png) 50% 112px no-repeat; margin-right:0;}
 .carfin_cont .carfin_point .point_btn{margin-top:30px; text-align:center;}
 .carfin_cont .carfin_point .point_btn a{display:inline-block; font-size:13px; padding:14px 44px; color:#fff; background:#ff0040; text-align:center;}
 .carfin_cont .carfin_point .point_btn a.cap_link{position:relative;}
-.carfin_cont .carfin_point .point_btn a.cap_link:after{display:inline-block; content:""; width:20px; height:14px; vertical-align:middle; background:url(/resources/images/common/icon_info_w.png) center top no-repeat; }
+.carfin_cont .carfin_point .point_btn a.cap_link:after{display:inline-block; content:""; width:20px; height:14px; vertical-align:middle; background:url(https://www.kcar.com/resources/images/common/icon_info_w.png) center top no-repeat; }
 .carfin_cont .carfin_point .point_btn a.cap_link .ly_tip{display:none;}
-.carfin_cont .carfin_point .point_btn a.cap_link:hover .ly_tip{display:block; position:absolute; top:45px; left:-55px; width:295px; padding:15px 18px 15px 30px; background:#fff url(/resources/images/common/icon_info.png) 10px 17px no-repeat; opacity: 0.95; border:1px solid #000;  line-height:1.6; font-size:11px; z-index:13; text-align:left; color:#181819;}
+.carfin_cont .carfin_point .point_btn a.cap_link:hover .ly_tip{display:block; position:absolute; top:45px; left:-55px; width:295px; padding:15px 18px 15px 30px; background:#fff url(https://www.kcar.com/resources/images/common/icon_info.png) 10px 17px no-repeat; opacity: 0.95; border:1px solid #000;  line-height:1.6; font-size:11px; z-index:13; text-align:left; color:#181819;}
 .carfin_cont .carfin_point .point_txt{margin-top:15px; text-align:center; color:#eee;}
 .carfin_cont .carfin_type02_bx1{padding:60px 0;  background:#f4f4f8;}
 .carfin_cont .carfin_type02_bx2{padding:60px 0;}
 .carfin_cont.type02 h3{padding-bottom:25px; font-size:26px; color:#181819;  font-weight:bold; text-align:center;}
 .carfin_cont.type02 h3 span.col_red{color:#ff0040;}
 .carfin_cont.type02 h3 span.txt{display:block; padding-top:10px; font-size:15px; color:#555; font-weight:normal}
-.carfin_cont.type02 h3 a.more{display:inline-block; font-size:12px; text-decoration:underline; color:#555; font-weight:normal; background: url(/resources/images/index/more.jpg) no-repeat right 5px; width:65px; text-align:left; color:#888;}
+.carfin_cont.type02 h3 a.more{display:inline-block; font-size:12px; text-decoration:underline; color:#555; font-weight:normal; background: url(https://www.kcar.com/resources/images/index/more.jpg) no-repeat right 5px; width:65px; text-align:left; color:#888;}
 .carfin_cont .carfin_aplly{width:1000px; margin:0 auto;}
 .carfin_cont .carfin_aplly .aplly_list{overflow:hidden;}
 .carfin_cont .carfin_aplly .aplly_list li{float:left; padding-right:50px;}
 .carfin_cont .carfin_aplly .aplly_list li div{width:300px; height:230px; padding-top:70px; border-radius:100%; text-align:center; font-size:15px; color:#555;}
 .carfin_cont .carfin_aplly .aplly_list li div b{color:#181819; font-size:18px; font-weight:no; }
 .carfin_cont .carfin_aplly .aplly_list li.ap_img3{padding-right:0; }
-.carfin_cont .carfin_aplly .aplly_list li.ap_img1 div{background:#fff url(/resources/images/content/finance/carfin_ap_img1.png) 50% 130px no-repeat;}
-.carfin_cont .carfin_aplly .aplly_list li.ap_img2 div{background:#fff url(/resources/images/content/finance/carfin_ap_img2.png) 50% 130px no-repeat;}
-.carfin_cont .carfin_aplly .aplly_list li.ap_img3 div{background:#fff url(/resources/images/content/finance/carfin_ap_img3.png) 50% 130px no-repeat;  margin-right:0;}
+.carfin_cont .carfin_aplly .aplly_list li.ap_img1 div{background:#fff url(https://www.kcar.com/resources/images/content/finance/carfin_ap_img1.png) 50% 130px no-repeat;}
+.carfin_cont .carfin_aplly .aplly_list li.ap_img2 div{background:#fff url(https://www.kcar.com/resources/images/content/finance/carfin_ap_img2.png) 50% 130px no-repeat;}
+.carfin_cont .carfin_aplly .aplly_list li.ap_img3 div{background:#fff url(https://www.kcar.com/resources/images/content/finance/carfin_ap_img3.png) 50% 130px no-repeat;  margin-right:0;}
 .carfin_cont .carfin_man{width:1000px; margin:0 auto;}
 .carfin_cont .carfin_man .carfin_man_bx{padding-top:20px; overflow:hidden; position:relative;}
 .carfin_cont .carfin_man .carfin_man_bx .le{ position:relative; float:left; width:500px; }
 .carfin_cont .carfin_man .carfin_man_bx .le h4{position:absolute; top:-20px; left:150px; width:200px; padding:9px 0; text-align:center; background:#efeff5; border-radius:70px; font-size:15px; color:#181819; font-weight:bold;}
-.carfin_cont .carfin_man .carfin_man_bx .le ul{padding:50px 0 0 60px; background:url(/resources/images/content/finance/carfin_man_img1.png) 300px 72px no-repeat;}
+.carfin_cont .carfin_man .carfin_man_bx .le ul{padding:50px 0 0 60px; background:url(https://www.kcar.com/resources/images/content/finance/carfin_man_img1.png) 300px 72px no-repeat;}
 .carfin_cont .carfin_man .carfin_man_bx .le ul li{padding-bottom:24px; font-size:13px;}
 .carfin_cont .carfin_man .carfin_man_bx .le ul li b{display:block; padding-bottom:5px; font-size:15px; color:#181819;}
 .carfin_cont .carfin_man .carfin_man_bx .ri{ position:relative; float:right; width:500px;}
 .carfin_cont .carfin_man .carfin_man_bx .ri h4{position:absolute; top:-20px; left:150px; width:200px; padding:9px 0; text-align:center; background:#ff0040; border-radius:70px;  font-size:15px; color:#fff; font-weight:bold;}
 .carfin_cont .carfin_man .carfin_man_bx .ri .ri_line{border:2px solid #ff0040; height:268px;  border-radius:20px;}
-.carfin_cont .carfin_man .carfin_man_bx .ri ul{padding:50px 0 0 60px; background:url(/resources/images/content/finance/carfin_man_img2.png) 300px 72px no-repeat;}
-.carfin_cont .carfin_man .carfin_man_bx .ri ul li{background:url(/resources/images/content/finance/carfin_man_check.png) left top no-repeat; padding: 0 0 24px 24px; font-size:13px;}
+.carfin_cont .carfin_man .carfin_man_bx .ri ul{padding:50px 0 0 60px; background:url(https://www.kcar.com/resources/images/content/finance/carfin_man_img2.png) 300px 72px no-repeat;}
+.carfin_cont .carfin_man .carfin_man_bx .ri ul li{background:url(https://www.kcar.com/resources/images/content/finance/carfin_man_check.png) left top no-repeat; padding: 0 0 24px 24px; font-size:13px;}
 .carfin_cont .carfin_man .carfin_man_bx .ri ul li b{display:block; padding-bottom:5px; font-size:15px; color:#181819;}
-.carfin_cont .carfin_man .carfin_man_bx .vs{position:absolute; top:107px; left:50%; width:100px; height:100px; margin-left:-50px; background:url(/resources/images/content/finance/carfin_man_vs.png) 50% 50% no-repeat; z-index:1; overflow:hidden; font-size:0.1em; text-indent:-9999px;}
+.carfin_cont .carfin_man .carfin_man_bx .vs{position:absolute; top:107px; left:50%; width:100px; height:100px; margin-left:-50px; background:url(https://www.kcar.com/resources/images/content/finance/carfin_man_vs.png) 50% 50% no-repeat; z-index:1; overflow:hidden; font-size:0.1em; text-indent:-9999px;}
 /*
 .carfin_cont .carfin_compare{width:1000px; margin:0 auto;}
-.carfin_cont .carfin_compare .carfin_compare_bx{overflow:hidden; padding:40px 60px; border-radius: 20px; background:#fff url(/resources/images/content/finance/carfin_comp_line.png) 340px 50% no-repeat;}
+.carfin_cont .carfin_compare .carfin_compare_bx{overflow:hidden; padding:40px 60px; border-radius: 20px; background:#fff url(https://www.kcar.com/resources/images/content/finance/carfin_comp_line.png) 340px 50% no-repeat;}
 .carfin_cont .carfin_compare .carfin_compare_bx h4{padding-bottom:20px; text-align:center; font-size:17px; font-weight:bold; color:#181819;}
 .carfin_cont .carfin_compare .carfin_compare_bx .le{float:left; width:225px;}
 .carfin_cont .carfin_compare .carfin_compare_bx .ri{float:right; width:534px;}
@@ -883,14 +883,14 @@
 .carfin_cont .carfin_compare .carfin_compare_bx .ri table tr .bg_red2{background:#ffdddd;  color:#181819;}
 .carfin_cont .carfin_compare .carfin_compare_bx .ri table tr .col_red2{color:#ff0040;}
 .carfin_cont .carfin_compare .carfin_compare_bx .ri table td b.save{display:inline-block; position:relative;}
-.carfin_cont .carfin_compare .carfin_compare_bx .ri table td b.save i{position:absolute; top:-4px; right:-50px;; display:inline-block; margin-left:5px; width:45px; height:27px; background:url(/resources/images/content/finance/carfin_comp_save.png) left top  no-repeat; vertical-align:middle; font-size:0.1em; text-indent:-9999px; overflow:hidden;}
+.carfin_cont .carfin_compare .carfin_compare_bx .ri table td b.save i{position:absolute; top:-4px; right:-50px;; display:inline-block; margin-left:5px; width:45px; height:27px; background:url(https://www.kcar.com/resources/images/content/finance/carfin_comp_save.png) left top  no-repeat; vertical-align:middle; font-size:0.1em; text-indent:-9999px; overflow:hidden;}
 .carfin_cont .carfin_compare .carfin_compare_bx .ri table td img{vertical-align:middle;}
 .carfin_cont .carfin_compare .carfin_compare_bx .ri .txt{margin-top:20px;color:#555; font-size:13px; line-height:1.6;}
 .carfin_cont .carfin_compare .carfin_compare_bx .ri .txt b{color:#181819;}
 .carfin_cont .carfin_compare .carfin_compare_bx .ri .txt b.col{color:#ff0040;}
 .carfin_cont .carfin_compare .point_txt{margin-top:10px; font-size:11px; color:#888;}
 .carfin_cont .carfin_money{width:1000px; margin:0 auto;}
-.carfin_cont .carfin_money .carfin_money_bx{padding:67px 40px 20px 150px; border:solid 4px #f4f4f8; border-radius:20px; background:#fff url(/resources/images/content/finance/carfin_money_img.png) 457px 68px no-repeat;}
+.carfin_cont .carfin_money .carfin_money_bx{padding:67px 40px 20px 150px; border:solid 4px #f4f4f8; border-radius:20px; background:#fff url(https://www.kcar.com/resources/images/content/finance/carfin_money_img.png) 457px 68px no-repeat;}
 .carfin_cont .carfin_money .carfin_money_bx h4{font-size:17px; color:#181819; font-weight:bold;}
 .carfin_cont .carfin_money .carfin_money_bx ul{min-height:161px; font-size: 13px;}
 .carfin_cont .carfin_money .carfin_money_bx ul li{padding-top:24px; color:#555;}
@@ -901,13 +901,13 @@
 */
 .carfin_cont .carfin_steps{width:1000px; margin:0 auto;}
 .carfin_cont .carfin_steps .steps_list{overflow:hidden;}
-.carfin_cont .carfin_steps .steps_list li{float:left; width:164px; padding-right:45px;  background:url(/resources/images/content/finance/carfin_ap_arr.png) 90% 50% no-repeat; background-size:9px 18px;}
+.carfin_cont .carfin_steps .steps_list li{float:left; width:164px; padding-right:45px;  background:url(https://www.kcar.com/resources/images/content/finance/carfin_ap_arr.png) 90% 50% no-repeat; background-size:9px 18px;}
 .carfin_cont .carfin_steps .steps_list li.last, .carfin_cont .carfin_steps .steps_list li:last-child{padding:0;}
 .carfin_cont .carfin_steps .steps_list li div{ width:165px; height:165px; background:#fff; font-size:13px; color:#181819;  border-radius:100%; text-align:center; line-height:1.6; font-weight:bold;}
 .carfin_cont .carfin_steps .steps_list li span{display:block; padding:50px 0 8px 0; color:#ff0040; font-size:11px;}
 .carfin_cont .carfin_intro{width:1000px; margin:0 auto;}
 .carfin_cont .carfin_intro .carfin_intro_bx{overflow:hidden; min-height:197px;}
-.carfin_cont .carfin_intro .carfin_intro_bx h4{float:left; width:332px; background:url(/resources/images/content/finance/carfin_intro_img.png) 50% 55px no-repeat; text-align:center; font-size:12px;}
+.carfin_cont .carfin_intro .carfin_intro_bx h4{float:left; width:332px; background:url(https://www.kcar.com/resources/images/content/finance/carfin_intro_img.png) 50% 55px no-repeat; text-align:center; font-size:12px;}
 .carfin_cont .carfin_intro .carfin_intro_bx h4 b{display:block;  padding:166px 0 3px 0; font-size:13px; color:#181819;}
 .carfin_cont .carfin_intro .carfin_intro_bx ul{float:left; margin-left:12px; width:650px; overflow:hidden;}
 .carfin_cont .carfin_intro .carfin_intro_bx ul li{float:left; width:180px; position:relative; margin-top:30px;}
@@ -915,12 +915,12 @@
 .carfin_cont .carfin_intro .carfin_intro_bx ul li div i{position:absolute;; top:0; left:0; padding-bottom:12px; color:#ccc; font-style:normal;  font-size:12px;}
 .carfin_cont .carfin_intro .carfin_intro_bx ul li div span{display:block;}
 .carfin_cont .carfin_intro .carfin_intro_bx ul li div span.txt{color:#555;}
-.carfin_cont .carfin_intro .carfin_intro_bx ul li div a.link{display:inline-block;padding:4px 9px 15px 0; font-weight:bold; background: url(/resources/images/index/more.jpg) no-repeat right 9px; color:#000;}
+.carfin_cont .carfin_intro .carfin_intro_bx ul li div a.link{display:inline-block;padding:4px 9px 15px 0; font-weight:bold; background: url(https://www.kcar.com/resources/images/index/more.jpg) no-repeat right 9px; color:#000;}
 .carfin_cont .carfin_intro .carfin_intro_bx ul li div span.mon{font-weight:bold;color:#ff0040;}
-.carfin_cont .carfin_type03_bg{height:549px; background: #878381 url(/resources/images/content/finance/car_fin_bg3.png) no-repeat center 0;}
+.carfin_cont .carfin_type03_bg{height:549px; background: #878381 url(https://www.kcar.com/resources/images/content/finance/car_fin_bg3.png) no-repeat center 0;}
 .carfin_cont .carfin_type03_bg h2.tit{padding:70px 0 34px 0; text-align:center; font-size:24px; font-weight:bold; color: #fff; font-size:32px;  text-shadow:0 3px 5px rgba(0, 0, 0, 0.22);}
 .carfin_cont .carfin_point{width:1180px; margin:0 auto;}
-.carfin_cont .carfin_point .carfin_type03_img{margin-top:15px; height:234px; background:url(/resources/images/content/finance/fin_bg3_img.png) 50% 0 no-repeat; overflow:hidden; font-size:0.1em; text-indent:-5555px;}
+.carfin_cont .carfin_point .carfin_type03_img{margin-top:15px; height:234px; background:url(https://www.kcar.com/resources/images/content/finance/fin_bg3_img.png) 50% 0 no-repeat; overflow:hidden; font-size:0.1em; text-indent:-5555px;}
 .carfin_cont .carfin_point .point_txt{margin-top:15px; text-align:center; color:#aaa;}
 .carfin_cont .installment{width:1180px; margin:42px auto 0 auto;}
 .carfin_cont .installment .inst_tab {overflow:hidden; margin-bottom:30px;}
@@ -928,22 +928,22 @@
 .carfin_cont .installment .inst_tab li:first-child {margin-left:0;}
 .carfin_cont .installment .inst_tab li a {position:relative; display:block; width:236px; height:60px; border:1px solid #dddddd; background:#fbfbfb; text-align:center; color:#181819; font-size:15px; line-height:58px; letter-spacing:-1px; text-decoration:none; box-sizing:border-box;}
 .carfin_cont .installment .inst_tab li a.on {width:238px; border:none; background:#2d2d38; color:#fff; font-weight:bold;}
-.carfin_cont .installment .inst_cont{overflow:hidden; background:url(/resources/images/content/finance/fin_inst_bgline.png) left top repeat-y;}
+.carfin_cont .installment .inst_cont{overflow:hidden; background:url(https://www.kcar.com/resources/images/content/finance/fin_inst_bgline.png) left top repeat-y;}
 .carfin_cont .installment .inst_cont .le{float:left; width:256px; margin-right:60px; padding:40px 0 40px 40px;}
 .carfin_cont .installment .inst_cont .le .tit_txt{font-size:15px; color:#555;}
-.carfin_cont .installment .inst_cont .le .tit{padding:9px 0 22px 0; background:url(/resources/images/content/finance/fin_inst_titline.png) left bottom no-repeat; font-size:26px; color:#181819; }
+.carfin_cont .installment .inst_cont .le .tit{padding:9px 0 22px 0; background:url(https://www.kcar.com/resources/images/content/finance/fin_inst_titline.png) left bottom no-repeat; font-size:26px; color:#181819; }
 .carfin_cont .installment .inst_cont .le .mon_top{padding:2px 0 3px 0; font-size:13px; color:#555;}
 .carfin_cont .installment .inst_cont .le .mon_f{margin-top:40px; font-size:21px; color:#ff0040; font-weight:bold;}
 .carfin_cont .installment .inst_cont .le .mon_s{font-size:21px; color:#ff0040; font-weight:bold;}
-.carfin_cont .installment .inst_cont .le .mon_arr{margin-top:40px;  font-size:21px; color:#ff0040; font-weight:bold; font-weight:bold; padding-bottom:65px; background:url(/resources/images/content/finance/fin_inst_arr.png) 30px 50px no-repeat;}
+.carfin_cont .installment .inst_cont .le .mon_arr{margin-top:40px;  font-size:21px; color:#ff0040; font-weight:bold; font-weight:bold; padding-bottom:65px; background:url(https://www.kcar.com/resources/images/content/finance/fin_inst_arr.png) 30px 50px no-repeat;}
 .carfin_cont .installment .inst_cont .le .mon_txt{margin-top:12px; font-size:13px; color:#555; line-height:1.6;}
 .carfin_cont .installment .inst_cont .le ul li{font-size:15px; font-weight:bold; padding:5px 0px; color:#000;}
 .carfin_cont .installment .inst_cont .ri{float:right; width:824px; padding-bottom:25px;}
-.carfin_cont .installment .inst_tab_img1{height:420px; background:url(/resources/images/content/finance/fin_inst_carimg1.png) left top no-repeat; overflow:hidden; font-size:0.1em; text-indent:-5555px;}
-.carfin_cont .installment .inst_tab_img2{height:420px; background:url(/resources/images/content/finance/fin_inst_carimg2.png) left top no-repeat; overflow:hidden; font-size:0.1em; text-indent:-5555px;}
-.carfin_cont .installment .inst_tab_img3{height:420px; background:url(/resources/images/content/finance/fin_inst_carimg3.png) left top no-repeat; overflow:hidden; font-size:0.1em; text-indent:-5555px;}
-.carfin_cont .installment .inst_tab_img4{height:420px; background:url(/resources/images/content/finance/fin_inst_carimg4.png) left top no-repeat; overflow:hidden; font-size:0.1em; text-indent:-5555px;}
-.carfin_cont .installment .inst_tab_img5{height:420px; background:url(/resources/images/content/finance/fin_inst_carimg5.png) left top no-repeat; overflow:hidden; font-size:0.1em; text-indent:-5555px;}
+.carfin_cont .installment .inst_tab_img1{height:420px; background:url(https://www.kcar.com/resources/images/content/finance/fin_inst_carimg1.png) left top no-repeat; overflow:hidden; font-size:0.1em; text-indent:-5555px;}
+.carfin_cont .installment .inst_tab_img2{height:420px; background:url(https://www.kcar.com/resources/images/content/finance/fin_inst_carimg2.png) left top no-repeat; overflow:hidden; font-size:0.1em; text-indent:-5555px;}
+.carfin_cont .installment .inst_tab_img3{height:420px; background:url(https://www.kcar.com/resources/images/content/finance/fin_inst_carimg3.png) left top no-repeat; overflow:hidden; font-size:0.1em; text-indent:-5555px;}
+.carfin_cont .installment .inst_tab_img4{height:420px; background:url(https://www.kcar.com/resources/images/content/finance/fin_inst_carimg4.png) left top no-repeat; overflow:hidden; font-size:0.1em; text-indent:-5555px;}
+.carfin_cont .installment .inst_tab_img5{height:420px; background:url(https://www.kcar.com/resources/images/content/finance/fin_inst_carimg5.png) left top no-repeat; overflow:hidden; font-size:0.1em; text-indent:-5555px;}
 .carfin_cont .installment .inst_cont_bx{position:relative; padding:0 0 20px 87px; font-size:13px;}
 .carfin_cont .installment .inst_cont_bx h6{position:absolute; top:0; left:0; font-weight:bold; font-size:13px; color:#181819;}
 .carfin_cont .installment .inst_cont_bx ul.inst_way li{padding-bottom:8px;}
@@ -951,19 +951,19 @@
 .carfin_cont .installment .inst_cont_bx table.t_inst th{height:40px; border:1px solid #ddd; background:#f7f7f7; color:#181819;}
 .carfin_cont .installment .inst_cont_bx table.t_inst td{height:90px; border:1px solid #ddd; text-align:center; color:#555;}
 .carfin_cont .installment .inst_cont_bx table.t_inst td span{display:inline-block; padding-top:5px; font-size:12px; color:#888;}
-.carfin_cont .installment .inst_cont_bx .ex_point{margin-top:7px; padding:3px 0 3px 20px; background: url(/resources/images/common/icon_info.png) left 3px no-repeat; font-size:11px; color:#8888}
+.carfin_cont .installment .inst_cont_bx .ex_point{margin-top:7px; padding:3px 0 3px 20px; background: url(https://www.kcar.com/resources/images/common/icon_info.png) left 3px no-repeat; font-size:11px; color:#8888}
 .carfin_cont .installment .inst_cont_bx .inst_caution{margin-top:30px; padding:20px; background:#f7f7f7; font-size:14px; line-height:1.7;}
 .carfin_cont .installment .inst_cont_bx .inst_caution ul{padding-top:5px;}
 .carfin_cont .installment .inst_cont_bx .inst_caution ul li{font-size:12px; color:#888; padding:0;}
 
 /* 직영리스 */
 .financeCont{}
-.finTit{height:260px; background:url(/resources/images/content/finance/fin_mtop_bg.gif) 850px top no-repeat;}
+.finTit{height:260px; background:url(https://www.kcar.com/resources/images/content/finance/fin_mtop_bg.gif) 850px top no-repeat;}
 .finTit h2{font-size:24px;}
 .finTit .txt1{padding:50px 0 10px 0; font-size:44px; font-weight:bold;}
 .finTit .txt2{font-size:20px; }
 .finTit p span{color:#d42a35;}
-.oneTab{*zoom:1; overflow:hidden; margin-top:20px; height:50px; width:100%; background:url('/resources/images/common/dot02.gif') left 49px repeat-x;}
+.oneTab{*zoom:1; overflow:hidden; margin-top:20px; height:50px; width:100%; background:url('https://www.kcar.com/resources/images/common/dot02.gif') left 49px repeat-x;}
 .oneTab a{float:left; display:block; width:226px; padding-left:5px;text-decoration:none;}
 .oneTab a:first-child{padding-left:0; width:227px; }
 .oneTab a span{display:block; height:33px; padding-top:15px; border-top:1px solid #eee; border-left:1px solid #eee; border-right:1px solid #eee; background:#eee; text-align:center; font-size:16px; color:#333;}
@@ -973,26 +973,26 @@
 .financeCont .tabCont{padding-top:10px;}
 .fin_mlist{width:100%; padding:20px 0; overflow:hidden;}
 .fin_mlist li.nwbanner{float:left; width:100%;}
-.fin_mlist li{float:left; width:50%; background:url('/resources/images/content/finance/fin_mdot.gif') left 50% no-repeat; text-align:center;}
+.fin_mlist li{float:left; width:50%; background:url('https://www.kcar.com/resources/images/content/finance/fin_mdot.gif') left 50% no-repeat; text-align:center;}
 .fin_mlist li:first-child{background:none;}
 .fin_mlist li p{padding:30px 0;}
-.financeCont .tabCont .fin_bank_tit{margin-top:20px; height:30px; padding:10px 0 10px 55px; background:url('/resources/images/content/finance/fin_icon_tit.gif') left top no-repeat; font-size:26px; font-weight:bold;}
-.financeCont .tabCont .fin_direct_tit{margin-top:50px; height:30px; padding:10px 0 10px 55px; background:url('/resources/images/content/finance/fin_icon_tit.gif') left -70px no-repeat; font-size:26px; font-weight:bold;}
-.financeCont .tabCont .fin_tax_tit{margin-top:50px; height:30px; padding:10px 0 10px 55px; background:url('/resources/images/content/finance/fin_icon_tit.gif') left -130px no-repeat; font-size:26px; font-weight:bold;}
-.fin_file_tit{margin-top:50px; height:30px; padding:10px 0 10px 55px; background:url('/resources/images/content/finance/fin_icon_tit.gif') left -200px no-repeat; font-size:26px; font-weight:bold;}
+.financeCont .tabCont .fin_bank_tit{margin-top:20px; height:30px; padding:10px 0 10px 55px; background:url('https://www.kcar.com/resources/images/content/finance/fin_icon_tit.gif') left top no-repeat; font-size:26px; font-weight:bold;}
+.financeCont .tabCont .fin_direct_tit{margin-top:50px; height:30px; padding:10px 0 10px 55px; background:url('https://www.kcar.com/resources/images/content/finance/fin_icon_tit.gif') left -70px no-repeat; font-size:26px; font-weight:bold;}
+.financeCont .tabCont .fin_tax_tit{margin-top:50px; height:30px; padding:10px 0 10px 55px; background:url('https://www.kcar.com/resources/images/content/finance/fin_icon_tit.gif') left -130px no-repeat; font-size:26px; font-weight:bold;}
+.fin_file_tit{margin-top:50px; height:30px; padding:10px 0 10px 55px; background:url('https://www.kcar.com/resources/images/content/finance/fin_icon_tit.gif') left -200px no-repeat; font-size:26px; font-weight:bold;}
 .financeCont .tabCont .finCol1{color:#de3f18;}
 .financeCont .tabCont .fin_img{padding:30px 0 50px 0; text-align:center;}
 .financeCont .tabCont .fin_ex{padding-bottom:50px; border-bottom:1px solid #dadada; }
-.financeCont .tabCont .fin_ex ul{padding:15px 20px 15px 60px; border:1px solid #dadada; background:#f7f7f7 url('/resources/images/content/finance/fin_icon_feel.gif') 20px 20px no-repeat; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px;}
+.financeCont .tabCont .fin_ex ul{padding:15px 20px 15px 60px; border:1px solid #dadada; background:#f7f7f7 url('https://www.kcar.com/resources/images/content/finance/fin_icon_feel.gif') 20px 20px no-repeat; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px;}
 .financeCont .tabCont .fin_ex ul li{padding:2px 0;}
 .fin_leaseTab{position:relative; padding-top:30px; border-bottom:1px solid #e9e9e9; border-top:1px solid #ccc;}
 .fin_leaseTab .cont{padding:0 0 0 130px;}
 .fin_leaseTab .cont h4{font-size:28px; font-weight:bold;}
 .fin_leaseTab .cont h4 span{color:#de3f18;}
 .fin_leaseTab .cont .txt{padding:15px 0 40px 0; font-size:18px;}
-.fin_leaseTab .cont .cl_op{position:absolute; top:60px; right:40px; width:43px; height:42px; background:url('/resources/images/content/finance/fin_top_off.gif') left top no-repeat; cursor:pointer; overflow:hidden; text-indent:-555px;}
-.fin_leaseTab .cont .on{background:url('/resources/images/content/finance/fin_top_on.gif') left top no-repeat}
-.fin_leaseTab.img3 .cont{background:url('/resources/images/content/finance/fin_icon_tab.gif') left -290px no-repeat;}
+.fin_leaseTab .cont .cl_op{position:absolute; top:60px; right:40px; width:43px; height:42px; background:url('https://www.kcar.com/resources/images/content/finance/fin_top_off.gif') left top no-repeat; cursor:pointer; overflow:hidden; text-indent:-555px;}
+.fin_leaseTab .cont .on{background:url('https://www.kcar.com/resources/images/content/finance/fin_top_on.gif') left top no-repeat}
+.fin_leaseTab.img3 .cont{background:url('https://www.kcar.com/resources/images/content/finance/fin_icon_tab.gif') left -290px no-repeat;}
 .hiddenCont{padding:40px 0 40px 50px; border-top:1px solid #e9e9e9;}
 .hiddenCont h5.hideTit{font-size:24px; color:#1b5e8f; letter-spacing:-1px;}
 .hiddenCont h6{padding:20px 0 10px 0; color:#e56546; font-weight:bold; text-decoration:underline;}
@@ -1000,13 +1000,13 @@
 .hiddenCont .txtTy02{padding:10px 0 5px 0; text-align:center;}
 .hiddenCont .hideImg{}
 .hiddenCont .hideList{padding:30px 0 10px 0;}
-.hiddenCont .hideList li{padding:4px 0 4px 20px; background:url('/resources/images/content/finance/fin_icon_arr.gif') left 3px no-repeat;}
+.hiddenCont .hideList li{padding:4px 0 4px 20px; background:url('https://www.kcar.com/resources/images/content/finance/fin_icon_arr.gif') left 3px no-repeat;}
 .hiddenCont .hideList2{padding:20px 0 10px 0;}
 .hiddenCont .hideList2 li{padding:4px 0 4px 0;line-height:1.5;}
-.hiddenCont .fin_back_table{ background:url('/resources/images/content/finance/fin_back_table1.gif') left top no-repeat; height:150px; overflow:hidden;}
+.hiddenCont .fin_back_table{ background:url('https://www.kcar.com/resources/images/content/finance/fin_back_table1.gif') left top no-repeat; height:150px; overflow:hidden;}
 .hiddenCont .fin_back_table table{position:absolute; top:0; right:5000px;}
 .hideLease{padding-right:65px;}
-.hideLease li{margin-bottom:10px; padding:15px 20px 15px 120px;border:1px solid #e9e9e9; background:url('/resources/images/content/finance/fin_icon_lease.gif') left top no-repeat;}
+.hideLease li{margin-bottom:10px; padding:15px 20px 15px 120px;border:1px solid #e9e9e9; background:url('https://www.kcar.com/resources/images/content/finance/fin_icon_lease.gif') left top no-repeat;}
 .hideLease li.lesbg1{background-position:30px 10px;}
 .hideLease li.lesbg2{background-position:30px -80px;}
 .hideLease li.lesbg3{background-position:30px -170px;}
@@ -1017,7 +1017,7 @@
 .fin_file {padding-left:60px;}
 .fin_file .file_img{padding-top:30px;}
 .fin_file .file_point{padding:20px 0 10px 0;}
-.fin_file .file_point dt{padding:4px 0 4px 20px; background:url('/resources/images/content/finance/fin_icon_que.gif') left 3px no-repeat; color:#e56546; font-weight:bold;}
+.fin_file .file_point dt{padding:4px 0 4px 20px; background:url('https://www.kcar.com/resources/images/content/finance/fin_icon_que.gif') left 3px no-repeat; color:#e56546; font-weight:bold;}
 .fin_file .file_point dd{padding:5px 0 5px 10px;}
 .finTable{border-top:2px solid #565656; text-align:center;}
 .finTable th{padding:5px 0; border-left:1px solid #dcdcdc; border-right:1px solid #dcdcdc; border-bottom:1px solid #dcdcdc; background:#f4f6f9; font-weight:normal;}
@@ -1030,12 +1030,12 @@
 .leasemainnew{padding:0 0 20px 0;}
 .leasemainnew .hide{visibility:hidden; position:absolute; height:0; margin:0; padding:0; background:none; font-size:0; line-height:0; text-indent:-999em;}
 .leasemainnew h4{font-size:20px;color:#000;font-weight:bold}
-.leasemainnew .bene{ background:url(/resources/images/content/finance/bene_img.jpg) no-repeat 850px 30px;margin:40px 0 30px 0;height:100px;border-bottom:1px dotted #ccc;padding-bottom:20px}
+.leasemainnew .bene{ background:url(https://www.kcar.com/resources/images/content/finance/bene_img.jpg) no-repeat 850px 30px;margin:40px 0 30px 0;height:100px;border-bottom:1px dotted #ccc;padding-bottom:20px}
 .leasemainnew .exp{margin:20px 0;position:relative;border-bottom:1px dotted #ccc;overflow:hidden;padding-bottom:10px}
 .leasemainnew .exp ul{float:left;height:290px;}
-.leasemainnew .exp ul.num1{background:url(/resources/images/content/finance/num_1.png) no-repeat 0 0;width:340px;}
-.leasemainnew .exp ul.num2{background:url(/resources/images/content/finance/num_2.png) no-repeat 0 0;width:360px;}
-.leasemainnew .exp ul.num3{background:url(/resources/images/content/finance/num_3.png) no-repeat 0 0 ;width:360px;}
+.leasemainnew .exp ul.num1{background:url(https://www.kcar.com/resources/images/content/finance/num_1.png) no-repeat 0 0;width:340px;}
+.leasemainnew .exp ul.num2{background:url(https://www.kcar.com/resources/images/content/finance/num_2.png) no-repeat 0 0;width:360px;}
+.leasemainnew .exp ul.num3{background:url(https://www.kcar.com/resources/images/content/finance/num_3.png) no-repeat 0 0 ;width:360px;}
 .leasemainnew .exp ul li{padding-left:70px;}
 .leasemainnew .exp ul li span.st{display:block;padding-top:10px}
 .leasemainnew .exp p.abimg1{position:absolute;top:170px ;left:50px}
@@ -1047,8 +1047,8 @@
 .leasemainnew .recom ul li h5{position:relative; padding-left:15px; font-size:16px; font-weight:bold; color:#181819;}
 .leasemainnew .recom ul li h5 b{position:absolute; top:0; left:-10px;}
 .leasemainnew .recom ul li p{padding:10px 0 0 0;}
-.leasemainnew .recom ul li.recomper1{padding-left:100px; background:url(/resources/images/content/finance/recomimg1.jpg) no-repeat 0 0;width:400px;}
-.leasemainnew .recom ul li.recomper2{padding-left:160px; background:url(/resources/images/content/finance/recomimg2.jpg) no-repeat 0 0;width:470px;}
+.leasemainnew .recom ul li.recomper1{padding-left:100px; background:url(https://www.kcar.com/resources/images/content/finance/recomimg1.jpg) no-repeat 0 0;width:400px;}
+.leasemainnew .recom ul li.recomper2{padding-left:160px; background:url(https://www.kcar.com/resources/images/content/finance/recomimg2.jpg) no-repeat 0 0;width:470px;}
 .leasemainnew ul{margin:20px 20px}
 .leasemainnew li{font-size:16px}
 .leasemainnew li span{font-size:14px}

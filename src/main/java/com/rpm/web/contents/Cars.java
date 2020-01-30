@@ -7,6 +7,7 @@ import org.springframework.util.Assert;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.List;
 
 @Component
 @Entity
@@ -30,7 +31,7 @@ public class Cars implements Serializable {
     @Column(name = "EXTERIOR_COLORDCD", length = 10) private String exteriorColordcd;
     @Column(name = "CENTER_REGION", length = 10) private String centerRegion;
     @Column(name = "ECC_REG_DTM", length = 14) private String eccRegDtm;
-    @Column(name = "BEGIN_YEAR", length = 4) private String beginYear;
+    @Column(name = "BEGIN_YEAR") private Integer beginYear;
     @Column(name = "MAKECD", length = 3) private String makecd;
     @Column(name = "SMALL_IMG", length = 100) private String smallImg;
     @Column(name = "MODELNM", length = 45) private String modelnm;
@@ -38,12 +39,12 @@ public class Cars implements Serializable {
     @Column(name = "CAR_TYPE", length = 3) private String carType;
     @Column(name = "PN_MOBILE", length = 16) private String pnMobile;
     @Column(name = "USERNM", length = 8) private String usernm;
-    @Column(name = "MILEAGE", length = 45) private String milage;
+    @Column(name = "MILEAGE") private Integer milage;
     @Column(name = "SIMPLE_COMMENT", length = 100) private String simpleComment;
     @Column(name = "MODELNM_TEXT", length = 100) private String modelnmText;
     @Column(name = "TRANSMISSIONCD", length = 100) private String transmissioncd;
     @Column(name = "CAR_NUMBER", length = 9) private String carNumber;
-    @Column(name = "PRICE", length = 5) private String price;
+    @Column(name = "PRICE") private Integer price;
     @Column(name = "FUEL_TYPED_NAME", length = 9) private String fuleTypedName;
     @Column(name = "CAR_URL", length = 100) private String carUrl;
     @Column(name = "FULE_TYPED", length = 3) private String fuelTyped;
@@ -66,10 +67,10 @@ public class Cars implements Serializable {
     @Builder
     public Cars(
             String carcd, String optioncd, String categorycd, String centerCode, String middleImg, String elanPath,
-            String exteriorColordcd, String centerRegion, String eccRegDtm, String beginYear, String makecd,
+            String exteriorColordcd, String centerRegion, String eccRegDtm, int beginYear, String makecd,
             String smallImg, String modelnm, String optioncdName, String carType, String pnMobile, String usernm,
-            String milage, String simpleComment, String modelnmText, String transmissioncd, String carNumber,
-            String price, String fuleTypedName, String carUrl, String fuelTyped, String centerRegionCode,
+            int milage, String simpleComment, String modelnmText, String transmissioncd, String carNumber,
+            int price, String fuleTypedName, String carUrl, String fuelTyped, String centerRegionCode,
             String truckName, String categorynm, String exteriorColornm, String hotMarkcd, String transmissioncdName,
             String passCnt, String modelcd, String recCommentCd, String makenm, String pn, String mfrDate,
             String modelGrpCd, String centerName, String modelGrpNm

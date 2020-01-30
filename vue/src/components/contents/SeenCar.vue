@@ -3,21 +3,14 @@
 <link rel="shortcut icon" href="https://www.kcar.com/resources/images/common/favicon.ico" type="image/x-icon">
 <link rel="icon" href="https://www.kcar.com/resources/images/common/favicon.ico" type="image/x-icon">
 <link rel="apple-touch-icon-precomposed" href="https://www.kcar.com/resources/images/mobile/common/apple-touch-icon.png">
-<link rel="stylesheet" href="https://www.kcar.com/resources/css/re_import.css?v=20191230094250">
-<link rel="stylesheet" href="https://www.kcar.com/resources/css/plugin/selectric.css?v=20191230094250">
-<link rel="stylesheet" type="text/css" href="https://www.kcar.com/resources/css/plugin/ion.rangeSlider.css">
-<link rel="stylesheet" type="text/css" href="https://www.kcar.com/resources/css/plugin/ion.rangeSlider.skinHTML5.css">
-<link rel="stylesheet" href="https://www.kcar.com/resources/css/plugin/uniform.css">
-<link rel="stylesheet" href="https://www.kcar.com/resources/css/plugin/jquery.scrollbar.css">
+<link rel="stylesheet" type="text/css"  href="css/re_import.css">
+<link rel="stylesheet" type="text/css"  href="css/plugin/selectric.css">
+<link rel="stylesheet" type="text/css" href="css/plugin/ion.rangeSlider.css">
+<link rel="stylesheet" type="text/css"  href="css/plugin/ion.rangeSlider.skinHTML5.css">
+<link rel="stylesheet" type="text/css"  href="css/plugin/uniform.css">
+<link rel="stylesheet" type="text/css"  href="css/plugin/jquery.scrollbar.css">
 	
 		<div id="content" class="content_1180"> 
-		
-			
-
-
-
-
-
 
 <!-- [s] view 화면으로 이동용 -->
 <form name="movefrm" method="post" action="">
@@ -55,11 +48,21 @@
 				<div class="checker" id="uniform-allCheck"><span><input type="checkbox" name="allCheck" id="allCheck" class="uniform" title="전체체크"></span></div>
 			</div>
 			<div class="align">
-				<span><a href="javascript:orderbyVrFlag();" class="3dview_flag txt " name="wr_eq_v_3dview_flag"><em class="vr_ordermark"></em> </a></span>
-				<span class="basic"><a href="javascript:orderbyChange('');" class="txt">기본정렬</a></span>
-				<span><a href="javascript:orderbyChange('C.N_PRICE ASC');" class="txt">가격순</a><a href="javascript:orderbyChange('C.N_PRICE ASC');" class="down ">낮은순</a><a href="javascript:orderbyChange('C.N_PRICE DESC');" class="up ">높은순</a></span>
-				<span><a href="javascript:orderbyChange('C.N_MILEAGE ASC');" class="txt">주행거리 순</a><a href="javascript:orderbyChange('C.N_MILEAGE ASC');" class="down ">낮은순</a><a href="javascript:orderbyChange('C.N_MILEAGE DESC');" class="up ">높은순</a></span>
-				<span><a href="javascript:orderbyChange('C.V_MFR_DATE ASC');" class="txt">연식 순</a><a href="javascript:orderbyChange('C.V_MFR_DATE ASC');" class="down ">낮은순</a><a href="javascript:orderbyChange('C.V_MFR_DATE DESC');" class="up ">높은순</a></span>
+				<span><a href="javascript:;" class="3dview_flag txt " name="wr_eq_v_3dview_flag"><em></em> </a></span>
+				<span class="basic"><a href="javascript:;" class="txt" @click="hello()">기본정렬</a>
+				</span>
+				<span><a href="javascript:orderbyChange('C.N_PRICE ASC');" class="txt">가격순</a>
+					<a href="javascript:orderbyChange('C.N_PRICE ASC');" class="down ">낮은순</a>
+					<a href="javascript:orderbyChange('C.N_PRICE DESC');" class="up ">높은순</a>
+				</span>
+				<span><a href="javascript:orderbyChange('C.N_MILEAGE ASC');" class="txt">주행거리 순</a>
+					<a href="javascript:orderbyChange('C.N_MILEAGE ASC');" class="down ">낮은순</a>
+					<a href="javascript:orderbyChange('C.N_MILEAGE DESC');" class="up ">높은순</a>
+				</span>
+				<span><a href="javascript:orderbyChange('C.V_MFR_DATE ASC');" class="txt">연식 순</a>
+					<a href="javascript:orderbyChange('C.V_MFR_DATE ASC');" class="down ">낮은순</a>
+					<a href="javascript:orderbyChange('C.V_MFR_DATE DESC');" class="up ">높은순</a>
+				</span>
 			</div>
 		</div>
 
@@ -77,23 +80,33 @@
 				<tbody>
 				<tr v-for="seenHistory of seenHistoryList" :key="seenHistory.carcd">
 					<td class="check">
-						<div class="checker" ><span><input type="checkbox" class="uniform" name="i_arrCarCd" value=""></span></div>
+						<div class="checker" ><span :class="{checked:seenHistory.checked}"  @click="check(category)"><input type="checkbox" class="uniform" name="v_makecd" value=""></span></div>
 					</td>
 					<td class="thumb">
-						<a :href="seenHistory.carUrl" target="_blank">
+						<a href="#" >
 							<div class="mark_area"></div>
 							<img :src="seenHistory.middleImg" alt="자동차 썸네일">
 						</a>
 					</td>
 					<td class="car_info">
-						<router-link to="/product">
-							<a href="" target="_blank" class="name" @click="addHistory(seenHistory)"></a>
-							{{seenHistory.truckName}}
-						</router-link>
-						<span class="md_year">{{seenHistory.mfrDate}}({{seenHistory.beginYear}}년형)  &nbsp;&nbsp; {{seenHistory.mileage}}km &nbsp;&nbsp;{{seenHistory.fuelTypecdName}}</span>
-						<span class="price">{{seenHistory.price}}만원 <em></em></span>
-						<a href=""><span
-								class="monthly"></span></a>
+						<ul>
+							<li>
+								<router-link to="/product" target="_blank"  >
+									<a class="name" @click="addHistory(seenHistory)">
+										{{seenHistory.truckName}}
+									</a>
+								</router-link>
+							</li>
+							<li>
+								<span class="price">{{ seenHistory.price | thousandFormatter }}만원 <em></em></span>
+							</li>
+							<li>
+								<span class="md_year">{{ seenHistory.mfrDate | mfrDateFormatter }} &nbsp; ({{ seenHistory.beginYear | beginYearFormatter }}년형)&nbsp;{{ seenHistory.milage | thousandFormatter }}km &nbsp;&nbsp;{{seenHistory.fuelTypecdName}}</span>
+							</li>
+							<li>
+								<b>열람 시간 : </b><span class="seenTime"> {{ seenHistory.seenTime }} </span>
+							</li>
+						</ul>
 					</td>
 					<td class="car_opt">
 						<div class="mark">
@@ -105,25 +118,32 @@
 						</div>
 						<ul class="opt_list">
 							<li>
-								<span>단순교환</span><span>SUV</span>
+								<span>{{seenHistory.categorynm}}</span><span>&nbsp;</span>
 							</li>
 							<li>
-								<span>성동</span><span></span>
+								<span>{{seenHistory.centerRegion}}</span><span>&nbsp;</span>
 							</li>
 							<li>
-								<span>5인승</span><span>&nbsp;</span>
+								<span>{{seenHistory.passCnt}}  인승</span><span>&nbsp;</span>
 							</li>
 						</ul>
 						<span class="online_buy">{{seenHistory.simpleComment}}</span>
 					</td>
 					<td class="btn_area">
-						<a id="toastid0"  href="#" class="oline_btn">온라인 구매</a>
+						<a id="toastid0" href="" class="oline_btn">온라인 구매</a>
 					</td>
 				</tr>
 				</tbody>
 			</table>
 		</div>
-
+		<div class="btn_cont">
+			<a href="javascript:;" class="delete" onclick="">선택삭제</a>
+			<div class="center_btn">
+				<a href="javascript:;" onclick="">선택한 차량 모바일에서 보기</a>
+				<a href="javascript:;" onclick="">선택한 차량 PC에 저장하기</a>
+				<a href="javascript:;" onclick="">선택한 차량 메일보내기</a>
+			</div>
+		</div>
 		
 		
 	</div>
@@ -140,7 +160,37 @@
 			return {}
 		},
 		computed: mapState({
-			seenHistoryList : state => state.cmm.seenHistoryList
-		})
+			seenHistoryList : state => state.contents.seenHistoryList
+		}),
+		methods : {
+			check(checkedItem){
+				this.$store.dispatch('contents/CHECKER', checkedItem , { root: true })
+				this.searchWithCondition()
+			},
+			hello () {
+				alert('dddd')
+			}
+		},
+		filters: {
+			mfrDateFormatter: function (value) {
+				if (!value) return ''
+				value = value.toString()
+				return value.slice(2,4)+`년` + value.slice(4,6)+`월식`
+			},
+			beginYearFormatter: function (value) {
+				if (!value) return ''
+				value = value.toString()
+				return value.slice(2,4)+``
+			},
+			thousandFormatter: function (value) {
+				if (!value) return ''
+				if(value.toString().length === 3) return value
+				value = value.toString()
+				return value.slice( 0 , value.length-3)+`,`+ value.slice(-3,value.length)
+			},
+		}
 	}
 </script>
+<style scoped>
+	.mark {padding-top: 0px; padding-bottom: 20px;}
+</style>

@@ -6,10 +6,7 @@ import Join from '@/components/user/Join.vue'
 import Login from '@/components/user/Login.vue'
 import Product from '@/components/contents/Product.vue'
 import Sale from '@/components/contents/Sale.vue'
-import Buycar from '@/components/contents/Buycar.vue'
-import BuycarSelectGoods from '@/components/contents/BuycarSelectGoods.vue'
-import BuycarInsertContractorInfomation from '@/components/contents/BuycarInsertContractorInfomation.vue'
-import BuycarInsertContractorInfomation2 from '@/components/contents/BuycarInsertContractorInfomation2.vue'
+import Magazine from '@/components/magazine/Magazine.vue'
 import Mypage from '@/components/carbook/MyPage.vue'
 import MypageModify from '@/components/carbook/MypageModify.vue'
 import MypageModifyCheck from '@/components/carbook/MypageModifyCheck.vue'
@@ -29,6 +26,7 @@ import recommendHome from "@/components/recommend/recommendHome.vue"
 import SnsPage from "@/components/social/SnsPage.vue"
 import SnsDetail from "@/components/social/SnsDetail.vue"
 import MycarModify from '@/components/carbook/MycarModify.vue'
+import Payment from '@/components/contents/Payment.vue'
 
 
 Vue.use(Router)
@@ -47,16 +45,14 @@ export default new Router({
         {path:'/mycarModify', name:'mycarModify', component : MycarModify},
         {path:'/mypageModifyCheck', name:'mypageModifyCheck', component : MypageModifyCheck},
         {path:'/seencar', name:'seencar', component : SeenCar},
+        {path:'/magazine', name:'magazine', component : Magazine},
         {path:'/stationInfo', name:'stationInfo', component : StationInfo},
         {path:'/mapList', name:'mapList', component : MapList},
         {path:'/mapList2', name:'mapList2', component : MapList2},
         {path:'/sale', name:'sale', component : Sale},
-        {path:'/buycar', name:'buycar', component : Buycar},
-        {path:'/buycarSelectGoods', name:'buycarSelectGoods', component : BuycarSelectGoods},
-        {path:'/buycarInsertContractorInfomation', name:'buycarInsertContractorInfomation', component : BuycarInsertContractorInfomation},
-        {path:'/buycarInsertContractorInfomation2', name:'buycarInsertContractorInfomation2', component : BuycarInsertContractorInfomation2},
         {path:'/sns', name:'snspage', component : SnsPage},
         {path:'/snsdetail', name:'snsdetail', component : SnsDetail},
+        {path:'/payment', name:'payment', component : Payment},
         // 강성조꺼
         {path: '/customerDetail',name: 'customerDetail', component:customerDetail},
         {path: '/companyHome',name: 'companyHome', component:companyHome,children:

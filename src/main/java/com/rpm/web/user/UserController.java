@@ -75,6 +75,8 @@ public class UserController {
         }
         // printer.accept(map.get("result"));
       //  printer.accept(map.get("user").toString());
+         printer.accept(map.get("result"));
+        printer.accept(param.toString());
         return map;
 
     }

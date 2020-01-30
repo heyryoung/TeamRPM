@@ -1,6 +1,7 @@
 package com.rpm.web.proxy;
 
 
+import com.rpm.web.contents.Cars;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
@@ -9,21 +10,21 @@ import com.rpm.web.util.Printer;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Lazy
 @Component("pager")
-public class PageProxy extends Proxy{
+public class PageProxy{
 	private int totalCount, startRow, endRow, 
 				pageCount,pageNum, pageSize, startPage, endPage,
 				blockCount, blockNum, nextBlock, prevBlock;
 	private boolean existPrev, existNext;
-	private String search;
-	private final int BLOCK_SIZE = 5;
-	@Autowired private Printer printer;
+	private final int BLOCK_SIZE = 10;
 
 	
-	public void paging() {
-		/* totalCount = ; */
+	public void paging(List<Cars> cars) {
+		totalCount = cars.size();
 		pageCount = (totalCount % pageSize != 0) ? (totalCount / pageSize)+1 : totalCount / pageSize;
 		startRow = (pageNum-1)*pageSize;
 		endRow = (pageNum==pageCount) ? totalCount -1 : startRow + pageSize -1;

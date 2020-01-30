@@ -9,18 +9,11 @@ const state = {
 
 
 
-
-
-
 }
 const getters = {
     getMember : state=>state.user,
     getIsAuth : state=>state.auth,
     getFail : state=>state.fail
-
-
-
-
 
 
 }
