@@ -2,10 +2,7 @@ package com.rpm.web.social;
 
 import com.rpm.web.contents.Cars;
 import com.rpm.web.contents.CarsRepository;
-import com.rpm.web.contents.SearchDetailCondition;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,21 +17,18 @@ import java.util.stream.Collectors;
 public class SocialServiceImpl implements SocialService{
     @Autowired SocialRepository socialRepository;
     @Autowired CarsRepository carsRepository;
-/*    @Autowired ModelMapper modelMapper;
-    @Bean public ModelMapper modelMapper() {return new ModelMapper();}*/
-
     @Transactional(readOnly = true)
     @Override
     public List<SocialListDto> allList() {
         Iterable<Social> socials = socialRepository.findAll();
         List<Social> list = new ArrayList<>();
-/*        for(Social s : socials){
-            list.add(modelMapper.map(s, Social.class));
+        for(Social s : socials){
+            list.add(s);
         }
         Iterable<Cars> cars = carsRepository.findAll();
         List<Cars> carList = new ArrayList<>();
-        for (Cars s : cars) {
-            carList.add(modelMapper.map(s, Cars.class));
+        for (Cars c : cars) {
+            carList.add(c);
         }
 
         List<SocialListDto> lists =  list.stream()
@@ -42,7 +36,7 @@ public class SocialServiceImpl implements SocialService{
                         social.getCarCode(), social.getCarName(), social.getBoardContent(), social.getBoardImg(),
                         social.getUserSeq().getName(), social.getComments().size(), social.getThumbs().size()))
                 .sorted(Comparator.comparing(SocialListDto::getBoardSeq).reversed())
-                .collect(Collectors.toList());*/
+                .collect(Collectors.toList());
         return null;
     }
 

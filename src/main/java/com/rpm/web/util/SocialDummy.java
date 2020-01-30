@@ -59,7 +59,7 @@ public class SocialDummy {
         list.clear();
         List<String> urls = crawlingUrl().get("url");
         List<String> dates = crawlingUrl().get("dates");
-        for (int i = 7; i < urls.size(); i++) {
+        for (int i = 9; i < urls.size(); i++) {
             try {
                 Collections.shuffle(user);
                 Collections.shuffle(car);
