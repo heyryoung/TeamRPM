@@ -4,10 +4,14 @@ import router from '@/router'
 const state = {
     member : {},
     auth: false,
+
 }
+
 const getters = {
-    member : state=>state.member,
-    auth : state=>state.auth,
+    getUSer : state=>state.user,
+    getIsAuth : state=>state.auth,
+
+
 }
 const actions = {
     async login({commit}, { userid, passwd}){
@@ -54,7 +58,7 @@ const actions = {
 const mutations = {
     LOGIN_COMMIT(state, data){
         state.auth = true
-        state.member = data.user
+        state.user = data.user
 
 
     },

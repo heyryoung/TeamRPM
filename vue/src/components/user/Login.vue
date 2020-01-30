@@ -45,7 +45,6 @@
 	export default {
 		data(){
 			return{
-
 				userid : '',
 				passwd : '',
 				auth: this.$store.state.user.auth

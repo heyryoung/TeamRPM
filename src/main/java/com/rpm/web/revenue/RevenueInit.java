@@ -16,7 +16,7 @@ public class RevenueInit implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-      /*  long count = revenueRepository.count();
+       long count = revenueRepository.count();
 
         if (count == 0) {
 
@@ -25,12 +25,12 @@ public class RevenueInit implements ApplicationRunner {
                     Revenue revenue =new Revenue();
                     revenue.setMonth(String.valueOf(i));
                     revenue.setEmCode(el);
-                   // revenue.setCenterCode(employeeRepository.findByEmCode(el));
+                    revenue.setCenterCode(employeeRepository.findByEmCode(el));
                     revenue.setEmRevenue((int)(Math.random()*100+1)*1000);
                     revenueRepository.save(revenue);
                 }
             });
 
-        }*/
+        }
     }
 }

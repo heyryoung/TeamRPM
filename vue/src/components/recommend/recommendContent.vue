@@ -112,7 +112,7 @@
     import comparePop from "./comparePop";
     import {checkBox} from "../mixins/checkBox";
     import axios from 'axios';
-    import Pagination2 from "../common/Pagination2";
+    import Pagination2 from "../common/pagination2";
 
     export default {
         components:{

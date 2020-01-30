@@ -28,13 +28,8 @@ const state = {
     modelTextFromMain : '',
     minPriceFromMain : '',
     maxPriceFromMain : '',
-    mainConditionSettingFlag : false,
-    carItem : {},
-    stringMatchList : [],
-    minPrice : '' ,
-    maxPrice : '' ,
-    minMilage : '' ,
-    maxMilage : '' 
+    carItem : ''
+
 };
 const getters = {
     makerList : state => state.makerList,
@@ -62,11 +57,11 @@ const actions = {
                 })
         }
     },
-    async resetCheckedItem ({commit}) {
-        commit('RESETCHECKEDITEM')
+    async reset ({commit}) {
+        commit('RESETTING')
     },
-    async treeConditionControl({commit}, param){
-        commit('TREECONDITIONCONTROL', param)
+    async getTreeChild({commit}, param){
+        commit('GETTREECHILD', param)
     },
     async getCategory1({commit}, param){
         axios
@@ -115,8 +110,36 @@ const actions = {
                 )
         },
 
-    async conditionSelector ({ commit }, targetItem ) {
-        commit( 'CONDITIONSELECTOR' , targetItem );
+    async CHECKER ({ commit }, param ) {
+        console.log( "actionCHECKER>>>>>>" + param.targetItem.name)
+        switch ( param.act ) {
+            case "checked": commit( 'CHECKER' , foundWhichListIsItemOn(param.targetItem ));
+                break
+            case "remove":  commit ( 'REMOVEHASHTAG' , foundWhichListIsItemOn(param.targetItem ) );
+                break
+        }
+
+        function foundWhichListIsItemOn ( data ) {
+            let foundItem ='';
+            switch (data.bigCategory) {
+                case 'categoryList':
+                    foundItem = state.categoryList.find( item => item.code === data.code)
+                    break
+                case 'makerList':
+                    foundItem = state.makerList.find( item => item.code === data.code)
+                    break
+                case 'fuelTypeList':
+                    foundItem = state.fuelTypeList.find( item => item.code === data.code)
+                    break
+                case 'regionList':
+                    foundItem = state.regionList.find( item => item.code === data.code)
+                    break
+                case 'modelList':
+                    foundItem = state.modelList.find( item => item.code === data.code)
+                    break
+            }
+            return foundItem
+        }
     },
     async addSeenHistory ({ commit }, param ) {
         commit('ADDSEENHISTORY', param );
@@ -133,38 +156,24 @@ const actions = {
                 alert('잘못된 요청입니다.')
             })
     },
-    async pageNumSetting( { commit } , data ){
-        commit( 'PAGENUMSETTING' , data )
+    async pageNumSetting({commit}, data){
+        commit('PAGENUMSETTING', data )
     },
-    async pageLimitSetting( { commit } , data ){
-        commit( 'PAGELIMITSETTING' , data )
+    async pageLimitSetting({commit}, data){
+        commit('PAGELIMITSETTING', data)
     },
-    async orderBySubSetting( { commit } , data ){
-        commit( 'ORDERBYSUBSETTING' , data )
+    async orderBySubSetting({commit}, data){
+        commit('ORDERBYSUBSETTING', data)
     },
-    async mainSearch( { commit }, conditionList ){
-        commit( 'MAINSEARCH' , conditionList )
+    async mainSearch({commit}, data){
+        commit('MAINSEARCH', data)
     },
-    async stringMatch({commit}, searchKeyWord){
-        axios
-            .get(`http://localhost:8080/stringMatch/`+searchKeyWord)
-            .then(({data})=>{
-                commit('STRINGMATCH', data)
-            })
-            .catch(()=>{
-                alert('잘못된 요청입니다.')
-            })
-        },
-
-    async setProduct( { commit } , data ){
-        commit( 'SETPRODUCT', data )
-    },
-    async conditionSelectorBySelectBox ( { commit } , data ) {
-        commit( 'CONDITIONSELECTORBYSELECTBOX', data )
+    async setProduct({commit}, data){
+        commit('SETPRODUCT', data)
     }
 };
 const mutations = {
-    INIT( state , data ) {
+    INIT(state, data) {
         state.carAllCount = data.allCount
         state.resultLength = data.allCount
         state.categoryList = []
@@ -173,7 +182,7 @@ const mutations = {
         state.regionList = []
         state.showCarList = []
 
-        data.categoryList.forEach( el => {
+        data.categoryList.forEach(el => {
             state.categoryList.push({
                 checked: false,
                 bigCategory: 'categoryList',
@@ -181,7 +190,7 @@ const mutations = {
                 name: el.categorynm
             })
         })
-        data.makerList.forEach( el => {
+        data.makerList.forEach(el => {
             state.makerList.push({
                 checked: false,
                 bigCategory: 'makerList',
@@ -190,8 +199,7 @@ const mutations = {
                 count: el.count
             })
         })
-        state.originMakerList = state.makerList
-        data.fuelTypeList.forEach( el => {
+        data.fuelTypeList.forEach(el => {
             state.fuelTypeList.push({
                 checked: false,
                 bigCategory: 'fuelTypeList',
@@ -199,7 +207,7 @@ const mutations = {
                 name: el.fuleTypedName
             })
         })
-        data.regionList.forEach( el => {
+        data.regionList.forEach(el => {
             state.regionList.push({
                 checked: false,
                 bigCategory: 'regionList',
@@ -211,10 +219,10 @@ const mutations = {
         state.originRegionList = state.regionList
         state.initFlag = true
         for (let list of data.carInitList) {
-            state.showCarList.push( list )
+            state.showCarList.push(list)
         }
     },
-    RESETCHECKEDITEM( state ) {
+    RESETTING(state) {
         state.carAllCount = '',
             state.searchResultEmpty = false,
             state.categoryList = [],
@@ -232,69 +240,55 @@ const mutations = {
             state.modelListIsOpen = false
             state.initFlag = false
     },
-    TREECONDITIONCONTROL ( state, param ) {
+    GETTREECHILD(state, param) {
         state.modelListIsOpen = !state.modelListIsOpen
-        if ( state.modelListIsOpen ) {
+        if (state.modelListIsOpen) {
+            param.checked = true
             state.makerList = []
-            state.makerList.push( param )
+            state.makerList.push(param)
         }
     },
-    CATEGORY1( state , data ) {
+    CATEGORY1(state, data) {
         state.category1 = []
         state.category2 = []
         state.category3 = []
-        for ( let i = 0 ; i < data.category.length ; i++ ) {
-            state.category1.push({ name : data.category[i] , count : data.count[i] })
+        for (let i = 0; i < data.category.length; i++) {
+            state.category1.push({name: data.category[i], count: data.count[i]})
 
         }
     },
-    CATEGORY2( state, data ) {
+    CATEGORY2(state, data) {
         state.category2 = []
         state.category3 = []
-        for ( let i = 0 ; i < data.category.length ; i++ ) {
+        for (let i = 0; i < data.category.length; i++) {
             state.category2.push({
                 checked: false,
                 bigCategory: 'modelGroupList',
                 name: data.category[i],
                 count: data.count[i]
             })
-
         }
-
-        data.modelList.forEach( item => {
-            state.modelList.push({
-                checked: false,
-                bigCategory: 'modelList',
-                name: item.name,
-                count: item.count,
-                code : item.code
-            })
-        })
-
     },
-    CATEGORY3( state , data ) {
+    CATEGORY3(state, data) {
         state.category3 = []
-        for ( let i = 0 ; i < data.category.length ; i++ ) {
-            state.category3.push({ name : data.category[i] , count : data.count[i] })
+        for (let i = 0; i < data.category.length; i++) {
+            state.category3.push({name: data.category[i], count: data.count[i]})
         }
     },
 
-    SEARCHWITHCONDITION( state, data ) {
-        state.showCarList = []
+    SEARCHWITHCONDITION(state, data) {
         state.resultLength = data.resultLength
         state.pageNum = 1
         state.showCarList = []
-        if ( data.showCarList )
-            for ( let list of data.showCarList ) {
-                state.showCarList.push( list )
+        if (data.showCarList)
+            for (let list of data.showCarList) {
+                state.showCarList.push(list)
             }
-
-        state.searchResultEmpty = ( state.resultLength === 0 )
+        state.searchResultEmpty = (state.resultLength === 0)
 
         state.makerList = []
-
-        if ( !state.modelListIsOpen ) {
-            data.makerList.forEach( item => {
+        if (!state.modelListIsOpen) {
+            data.makerList.forEach(item => {
                 state.makerList.push({
                     checked: false,
                     bigCategory: 'makerList',
@@ -313,12 +307,11 @@ const mutations = {
             })
         }
 
-        console.log(state.modelListIsOpen)
-        if ( state.modelListIsOpen ) {
+        if (state.modelListIsOpen) {
             state.modelList = []
-            data.modelList.forEach( el => {
+            data.modelList.forEach(el => {
                 state.modelList.push({
-                    checked: ( state.checkedItems.find( checkedItem => el.name === checkedItem.name )) ? true : false,
+                    checked: !!(state.checkedItems.find(checkedItem => el.name === checkedItem.name)),
                     bigCategory: 'modelList',
                     code: el.code,
                     name: el.name,
@@ -327,175 +320,99 @@ const mutations = {
             })
         }
     },
-    CONDITIONSELECTOR( state, foundItem ) {
-        if ( foundItem.bigCategory.indexOf( 'Range' ) > 0 ) {
-            let processingList  = state.checkedItems.filter( item => !(item.bigCategory === foundItem.bigCategory) )
+
+
+    CHECKER(state, foundItem) {
+        foundItem.checked = !foundItem.checked
+
+        if (foundItem.checked === false && foundItem.bigCategory === 'makerList') {
+            let processingList = state.checkedItems.filter(item => !(item.code === foundItem.code && item.bigCategory === foundItem.bigCategory))
             state.checkedItems = []
-            state.checkedItems = processingList
-            if ( foundItem.bigCategory === 'PriceRange' ) {
-                state.minPrice = ''
-                state.maxPrice = ''
-            }else {
-                state.minMilag = ''
-                state.minMilag = ''
-            }
-        } else {
-            foundItem.checked = !foundItem.checked
+            state.modelList = []
+            processingList.forEach(item => {
+                if (item.bigCategory != 'modelList') state.checkedItems.push(item)
+            })
 
-            if ( foundItem.bigCategory === 'makerList' && !state.modelListIsOpen ) {
-                let processingList = state.checkedItems.filter( item => !( item.name === foundItem.name && item.bigCategory === foundItem.bigCategory))
+        } else {
+            if (foundItem.checked) state.checkedItems.push(foundItem)
+            else {
+                let processingList = state.checkedItems.filter(item => !(item.code === foundItem.code && item.bigCategory === foundItem.bigCategory))
                 state.checkedItems = []
-                state.modelList = []
-                processingList.forEach(item => {
-                    if ( item.bigCategory != 'modelList' ) state.checkedItems.push( item )
-                })
-
-            } else {
-                if ( foundItem.checked ) state.checkedItems.push( foundItem )
-                else {
-                    let processingList = state.checkedItems.filter( item => !( item.name === foundItem.name && item.bigCategory === foundItem.bigCategory ))
-                    state.checkedItems = []
-                    state.checkedItems = processingList
-                }
+                state.checkedItems = processingList
             }
         }
-    },
-    CONDITIONSELECTORBYSELECTBOX ( state, targetItem ) {
-        let category = targetItem.bigCategory.slice( 3 , targetItem.bigCategory.length )
-        let range = targetItem.bigCategory.slice( 0 , 3)
-        let processingList = state.checkedItems.filter( item => item.bigCategory != `${category}Range` )
-        state.checkedItems = []
-        state.checkedItems = processingList
-        switch ( category ) {
-            case 'Price' :
-                if ( range === 'min' ) state.minPrice = targetItem.name
-                   else state.maxPrice =  targetItem.name
-                break
-            case 'Milage' :
-                if ( range === 'min' ) state.minMilage = targetItem.name
-                    else state.maxMilage =  targetItem.name
-                break
-        }
-        state.checkedItems.push({
-            checked: false,
-            bigCategory: `${category}Range`,
-            code: (category === 'Price') ? `${state.minPrice} ~ ${state.maxPrice}` : `${state.minMilage} ~ ${state.maxMilage}`  ,
-            name: (category === 'Price') ? `${state.minPrice} ~ ${state.maxPrice}` : `${state.minMilage} ~ ${state.maxMilage}`
-        })
-    },
-    ADDSEENHISTORY( state , param ) {
 
-        if ( state.seenHistoryList.length === 0 ) {
-            state.seenHistoryList.push(makeSeenCar( param ))
+
+    },
+    ADDSEENHISTORY(state, param) {
+        if (state.seenHistoryList.length === 0) {
+            state.seenHistoryList.push(makeSeenCar(param))
         } else {
-            let existFlag = state.seenHistoryList.find( item => item.carcd === param.carcd )
-            switch ( existFlag != undefined ) {
+            let existFlag = state.seenHistoryList.find(item => item.carcd === param.carcd)
+            switch (existFlag != undefined) {
                 case true :
                     existFlag.count++
                     break
                 case false :
-                    state.seenHistoryList.push( makeSeenCar( param ) )
+                    state.seenHistoryList.push(makeSeenCar(param))
                     break
             }
         }
 
-        function makeSeenCar( param ) {
+        function makeSeenCar(param) {
             const date = new Date();
             param.count = 1;
             param.seenTime = date
+            console.log('makeSeenCar>>> ' + date)
             return param
         }
     },
-    PAGELIMIT( state , data ) {
+    PAGELIMIT(state, data) {
         state.pageLimit = data
     },
-    SHOWCARLIST( state , data ) {
+    SHOWCARLIST(state, data) {
         state.showCarList = []
-        for ( let list of data ) {
-            state.showCarList.push( list )
+        for (let list of data) {
+            state.showCarList.push(list)
         }
     },
-    PAGENUMSETTING( state, data ) {
+    PAGENUMSETTING(state, data) {
         state.pageNum = data
     },
-    PAGELIMITSETTING( state, data ) {
+    PAGELIMITSETTING(state, data) {
         state.pageLimit = data
     },
     ORDERBYSUBSETTING(state, data){
         state.orderBySub = data
     },
-    MAINSEARCH( state, data ){
-
-        state.mainConditionSettingFlag = data.condition;
-        const foundMaker = state.makerList.find( item => item.name === data.selectedCondition.maker)
-
-        if ( foundMaker !== undefined ){
-            foundMaker.checked = true;
-            state.checkedItems.push(foundMaker)
-            state.modelListIsOpen = true
-        }
-
-
-        const model = state.modelList.find( item => item.name === data.model)
-        state.modelList = []
-
-        if ( model != undefined ) state.checkedItems.push( model )
-
-        state.modelTextFromMain = ( data.modelText  === false ) ? '' : data.modelText
-        state.minPriceFromMain = ( data.minPrice  === false )
-                                    ? { checked : false , code : 'minDefault' , name : ` 최 소 ` , bigCategory : 'minDefault' }
-                                    : { code: data.minPrice , name : ` 최 소 ` , bigcategory : 'minPrice' }
-        state.maxPriceFromMain = ( data.maxPrice  === false )
-                                    ? { checked: false , code : 'maxDefault' , name : ` 최 대 `, bigCategory : 'maxDefault'  }
-                                    :  { code: data.maxPrice , name : ` 최 소 ` , bigcategory : 'maxPrice' }
-        state.makerFromMain = foundMaker
-
-        if ( data.condition === 'withModel' ) {
-            const model = state.modelList.find( item => item.name === data.selectedCondition.model)
-            state.modelFromMain = model
-            state.modelList = []
-            if ( model !== undefined ) state.checkedItems.push( model )
-            state.modelTextFromMain = ( data.selectedCondition.modelText  === false ) ? '' : data.selectedCondition.modelText
-        } else {
-            state.minPriceFromMain = ( data.selectedCondition.minPrice  === false )
-                ? { checked : false , code : 'minDefault' , name : ` 최 소 ` , bigCategory : 'minDefault' }
-                : data.selectedCondition.minPrice
-            state.maxPriceFromMain = ( data.selectedCondition.maxPrice  === false )
-                ? { checked: false , code : 'maxDefault' , name : ` 최 대 `, bigCategory : 'maxDefault'  }
-                :  data.selectedCondition.maxPrice
-        }
+    MAINSEARCH(state, data){
+        state.makerFromMain = data.maker
+        state.modelFromMain = data.model
+        state.modelTextFromMain = data.modelText
+        state.minPriceFromMain = data.minPrice
+        state.maxPriceFromMain = data.maxPrice
     },
-    SETPRODUCT( state, data ){
+    SETPRODUCT(state, data){
         state.carItem = data
-
     },
 
     REMOVEHASHTAG(state, foundItem) {
-        foundItem.checked = false
-        if (foundItem.bigCategory === 'makerList') {
+        foundItem.checked = !foundItem.checked
+        if (foundItem.checked === false && foundItem.bigCategory === 'makerList') {
             state.modelListIsOpen = false
-            let processingList = state.checkedItems.filter(item => !(item.name === foundItem.name))
+            let processingList = state.checkedItems.filter(item => !(item.code === foundItem.code && item.bigCategory === foundItem.bigCategory))
             state.checkedItems = []
             state.modelList = []
             processingList.forEach(item => {
-                console.log('processingList>>>' + item.bigCategory)
                 if (item.bigCategory != 'modelList') state.checkedItems.push(item)
             })
         } else {
-            let processingList = state.checkedItems.filter(item => !(item.name === foundItem.name && item.bigCategory === foundItem.bigCategory))
+            let processingList = state.checkedItems.filter(item => !(item.code === foundItem.code && item.bigCategory === foundItem.bigCategory))
             state.checkedItems = []
             state.checkedItems = processingList
         }
     },
-    STRINGMATCH(state, data){
-        state.stringMatchList = []
-        if(!data.result){
-            state.stringMatchList.push("연관 모델명이 없습니다.")
-        }else{
-            state.stringMatchList = data.result
-        }
     }
-}
 
 
 export default {

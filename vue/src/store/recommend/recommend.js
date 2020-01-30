@@ -9,7 +9,6 @@ const getters = {
 
 const actions={
     inputDetail({commit},customer){
-
         commit('CUSTOMERDETAILINIT',customer)
     }
 }

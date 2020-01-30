@@ -34,7 +34,7 @@
                                                                 class="selectric"
                                                                 data-beusable-tracking=""
                                                                 tabindex="-1"
-                                                                v-for="category of this.$store.state.cmm.category1"
+                                                                v-for="category of this.$store.state.contents.category1"
                                                                 :key="category.name">
                                                             <option data-type="MAKE_TYPE010"
                                                                     data-cnt="category.count">{{category.name}}</option>
@@ -43,7 +43,7 @@
                                                                                   data-beusable-tracking="" >{{recommend.makeNm}}</span></div>
                                                     <div id = "category1" class="selectric-items" tabindex="-1">
                                                         <div class="selectric-scroll">
-                                                            <ul v-for="category of this.$store.state.cmm.category1" :key="category.name">
+                                                            <ul v-for="category of this.$store.state.contents.category1" :key="category.name">
                                                                 <li data-index="1" @click="setCategory2(category)" class="">{{category.name}}<em>{{category.count}}</em>
                                                                 </li>
                                                             </ul>
@@ -66,7 +66,7 @@
                                                             id="modelGroupList" title="모델을 선택하세요"
                                                             class="selectric" data-beusable-tracking=""
                                                             tabindex="-1"
-                                                            v-for="category of this.$store.state.cmm.category2"
+                                                            v-for="category of this.$store.state.contents.category2"
                                                             :key="category.name">
                                                         <option data-type="MAKE_TYPE010"
                                                                 data-cnt="category.count">{{category.name}}</option>
@@ -75,7 +75,7 @@
                                                                                  data-beusable-tracking="">{{recommend.modelGrpNm}}</span></div>
                                                     <div id = "category2" class="selectric-items" tabindex="-1" >
                                                         <div class="selectric-scroll">
-                                                            <ul v-for="category of this.$store.state.cmm.category2" :key="category.name">
+                                                            <ul v-for="category of this.$store.state.contents.category2" :key="category.name">
                                                                 <li data-index="1" @click="setCategory3(category.name, category.count)" class="">{{category.name}}<em>{{category.count}}</em>
                                                                 </li>
                                                             </ul>
@@ -91,7 +91,9 @@
 
                                                      class="selectric-wrapper selectric-selectric selectric-below selectric-hover">
                                                     <div class="selectric-hide-select">
+
                                                         <select id="modelList" title="세부모델을 선택하세요" class="selectric" data-beusable-tracking="" tabindex="-1" v-for="category of this.$store.state.cmm.category3" :key="category.name">
+
                                                             <option data-type="MAKE_TYPE010"
                                                                     data-cnt="category.count">{{category.name}}</option>
                                                         </select></div>
@@ -99,7 +101,7 @@
                                                                                  data-beusable-tracking="">{{recommend.modelNm}}</span></div>
                                                     <div class="selectric-items" tabindex="-1">
                                                         <div class="selectric-scroll">
-                                                            <ul v-for="category of this.$store.state.cmm.category3" :key="category.name">
+                                                            <ul v-for="category of this.$store.state.contents.category3" :key="category.name">
                                                                 <li data-index="1" @click="setKeyWord3(category.name, category.count)" class="">{{category.name}}<em>{{category.count}}</em>
                                                                 </li>
                                                             </ul>
@@ -116,7 +118,7 @@
                                                 <h5>연식 <span class="icon_must">*</span></h5>
                                                 <div   id="startYear"  class="selectric-wrapper selectric-selectric selectric-below selectric-hover" @click= "searchKeyClick(`startYear`)">
                                                     <div class="selectric-hide-select">
-                                                        <select name="wr_gt_v_mfr_date" id="modelYear01" class="selectric" data-unit="년">
+                                                        <select name="wr_gt_v_mfr_date"  class="selectric" data-unit="년">
                                                         <option v-for="year of maxYears" :key="year" value="">{{year}}</option>
 
                                                     </select></div>
@@ -134,7 +136,7 @@
                                             <div class="type_ri">
                                                 <div class="selectric-wrapper selectric-selectric selectric-hover" id="endYear"  @click= "searchKeyClick(`endYear`)">
                                                     <div class="selectric-hide-select">
-                                                        <select name="wr_lt_v_mfr_date" id="modelYear02" class="selectric" data-unit="년" tabindex="-1">
+                                                        <select name="wr_lt_v_mfr_date"  class="selectric" data-unit="년" tabindex="-1">
                                                         <option v-for="year of maxYears" :key="year" value="">{{year}}</option>
                                                     </select></div>
                                                     <div class="selectric"><span class="label" data-beusable-tracking="">{{recommend.maxBeginYear}}</span></div>
@@ -156,7 +158,7 @@
                                                 <h5>주행거리 <span class="icon_must">*</span></h5>
                                                 <div id="startKM"  class="selectric-wrapper selectric-selectric selectric-below selectric-hover" @click= "searchKeyClick(`startKM`)">
                                                     <div class="selectric-hide-select"><select name="wr_gt_v_mfr_date"
-                                                                                               id="modelYear01" class="selectric"
+                                                                                                class="selectric"
                                                                                                data-unit="년">
                                                         <option v-for="milage of minMilages" :key="milage" value="">{{milage}}</option>
 
@@ -219,7 +221,7 @@
                                             <div class="type_ri">
                                                 <h5>연료</h5>
                                                 <div id="fuel"  class="selectric-wrapper selectric-selectric selectric-below selectric-hover" @click= "searchKeyClick(`fuel`)">
-                                                    <div class="selectric-hide-select"><select name="wr_gt_v_mfr_date" id="modelYear01" class="selectric" data-unit="년">
+                                                    <div class="selectric-hide-select"><select name="wr_gt_v_mfr_date"  class="selectric" data-unit="년">
                                                         <option v-for="fuel of fuels" :key="fuel" value="">{{fuel}}</option>
                                                     </select></div>
                                                     <div class="selectric"><span class="label" >{{recommend.fuleTypedName}}</span></div>
@@ -238,7 +240,7 @@
                                             <div class="type_le">
                                                 <h5>추천 직영점</h5>
                                                 <div id="region"  class="selectric-wrapper selectric-selectric selectric-below selectric-hover" @click= "searchKeyClick(`region`)">
-                                                    <div class="selectric-hide-select"><select name="wr_gt_v_mfr_date" id="modelYear01" class="selectric" data-unit="년">
+                                                    <div class="selectric-hide-select"><select name="wr_gt_v_mfr_date"  class="selectric" data-unit="년">
                                                         <option v-for="region of regions" :key="region" value="">{{region}}</option>
                                                     </select></div>
                                                     <div class="selectric"><span class="label" >{{recommend.centerRegion}}</span></div>
@@ -254,7 +256,7 @@
 
                                             <div class="type_ri">
                                                 <div id="centernm"  class="selectric-wrapper selectric-selectric selectric-below selectric-hover" @click= "searchKeyClick(`centernm`)">
-                                                    <div class="selectric-hide-select"><select name="wr_gt_v_mfr_date" id="modelYear01" class="selectric" data-unit="년">
+                                                    <div class="selectric-hide-select"><select name="wr_gt_v_mfr_date"  class="selectric" data-unit="년">
                                                         <option v-for="centerName of centerNames" :key="centerName" value="">{{centerName}}</option>
 
                                                     </select></div>
@@ -274,7 +276,7 @@
                                             <div class="type_le">
                                                 <h5>구입예산 <span class="icon_must">*</span></h5>
                                                 <div id="minPrice"  class="selectric-wrapper selectric-selectric selectric-below selectric-hover" @click= "searchKeyClick(`minPrice`)">
-                                                    <div class="selectric-hide-select"><select name="wr_gt_v_mfr_date" id="modelYear01" class="selectric" data-unit="년">
+                                                    <div class="selectric-hide-select"><select name="wr_gt_v_mfr_date"  class="selectric" data-unit="년">
                                                         <option v-for="price of minPrices"  :key="price" value="">{{price}}</option>
                                                     </select></div>
                                                     <div class="selectric"><span class="label" >{{recommend.minPrice}}</span></div>
@@ -289,7 +291,7 @@
                                             </div>
                                             <div class="type_ri">
                                                 <div id="maxPrice"  class="selectric-wrapper selectric-selectric selectric-below selectric-hover" @click= "searchKeyClick(`maxPrice`)">
-                                                    <div class="selectric-hide-select"><select name="wr_gt_v_mfr_date" id="modelYear01" class="selectric" data-unit="년">
+                                                    <div class="selectric-hide-select"><select name="wr_gt_v_mfr_date"  class="selectric" data-unit="년">
                                                         <option  v-for="price of maxPrices" :key="price" value="">{{price}}</option>
 
                                                     </select></div>
@@ -362,7 +364,7 @@
                 }else{
                     searchKey.className = "selectric-wrapper selectric-selectric selectric-below selectric-hover"
                 }
-                if(this.$store.state.cmm.category2.length>=10) {
+                if(this.$store.state.contents.category2.length>=10) {
                     cate2.style.width = "500px"
                     cate2.style.height = "300px"
                 }{
@@ -376,14 +378,18 @@
                 this.recommend.modelNm = '세부모델을 선택하세요'
                 this.recommend.makeNm = param.name
                 this.resultCount = param.count
-                this.$store.dispatch('cmm/getCategory2',{'param':this.recommend.makeNm,'column':'MAKENM'})
+
+                this.$store.dispatch('contents/getCategory2',{'param':this.recommend.makeNm,'column':'MAKENM'})
+
 
             },
             setCategory3(keyWord2, resultCount){
                 this.recommend.modelNm = '세부모델을 선택하세요'
                 this.recommend.modelGrpNm  = keyWord2
                 this.resultCount = resultCount
-                this.$store.dispatch('cmm/getCategory3',{'param':this.recommend.modelGrpNm,'column':'MODEL_GRP_NM'})
+
+                this.$store.dispatch('contents/getCategory3',{'param':this.recommend.modelGrpNm,'column':'MODEL_GRP_NM'})
+
             },
             setKeyWord3(keyWord3, resultCount){
                 this.recommend.modelNm = keyWord3
@@ -391,52 +397,6 @@
             },
 
 
-            selectMinYear(year,i){
-                this.recommend.minBeginYear=year
-                this.recommend.maxBeginYear="최대"
-                this.maxYears=[]
-                for(;i<this.minYears.length;i++){
-                this.maxYears.push(this.minYears[i])
-                }
-
-            },
-            selectMaxYear(year){
-                this.recommend.maxBeginYear=year
-            },
-            selectMilage(milage,i){
-              this.recommend.minMilage=  milage
-                this.recommend.maxMilage='최대'
-                this.maxMilages=[]
-                for(i;i<this.minMilages.length;i++){
-                    this.maxMilages.push(this.minMilages[i])
-                }
-            },
-            selectMinPrice(price,i){
-                this.recommend.maxPrice='최대'
-                this.maxPrices=[]
-                this.recommend.minPrice=price
-                for(i;i<this.minPrices.length;i++){
-                    this.maxPrices.push(this.minPrices[i])
-                }
-            },
-            selectRegion(region){
-                this.recommend.centerRegion=region
-                this.centerNames=[]
-                if(region=='경기/인천'){
-                    region='경기'
-                }
-                axios
-                    .get(`http://localhost:8080/recommend/centerName/${region}`)
-                    .then((res)=>{
-                        res.data.forEach(el=>{
-                            this.centerNames.push(el)
-                        })
-                    })
-                    .catch((e)=>{
-                        alert('잘못된 요청입니다.'+e)
-                    })
-
-            },
             sendRecommend(){
                 alert("신청이 완료되었습니다!!")
                 this.recommend.userId='kangsj24'
@@ -466,7 +426,7 @@
             for(let i =0; i<10;i++){
                 this.minPrices.push(1000*i)
             }
-            this.$store.dispatch('cmm/getCategory1',{'param':'KOR','column':'CAR_TYPE'})
+            this.$store.dispatch('contents/getCategory1',{'param':'KOR','column':'CAR_TYPE'})
             axios
                 .get(`http://localhost:8080/recommend/centerRigion`)
                 .then((res)=>{

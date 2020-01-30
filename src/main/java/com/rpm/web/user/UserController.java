@@ -14,8 +14,7 @@ import java.util.HashMap;
 public class UserController {
     @Autowired User user;
     @Autowired UserRepository userRepository;
-    @Autowired
-    Printer printer;
+    @Autowired Printer printer;
 
     @PostMapping("/idCheck")
     public HashMap<String, String> idCheck(@RequestBody User param){
@@ -30,6 +29,7 @@ public class UserController {
     }
     @PostMapping("/join")
     public HashMap<String, Object> join(@RequestBody User param){
+        printer.accept("컨트롤러");
         HashMap<String, Object> map = new HashMap<>();
         userRepository.save(param);
         if (user != null) {

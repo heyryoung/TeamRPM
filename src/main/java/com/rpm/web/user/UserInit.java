@@ -2,13 +2,12 @@ package com.rpm.web.user;
 
 import com.rpm.web.company.CompanyRepository;
 import com.rpm.web.util.UserDummy;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
+
 
 @Component
 public class UserInit implements ApplicationRunner {

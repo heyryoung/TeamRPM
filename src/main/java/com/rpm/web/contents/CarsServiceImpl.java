@@ -163,6 +163,12 @@ public class CarsServiceImpl implements CarsService {
                 .filter(cars -> modelCode.equals(cars.getModelGrpCd()))
                 .collect(Collectors.toList());
     }
+    @Override
+    public List<Cars> findCarBySelectedModelNM(List<Cars> carsList, String modelName) {
+        return carsList.stream()
+                .filter(cars -> modelName.equals(cars.getModelGrpNm()))
+                .collect(Collectors.toList());
+    }
 
     @Override
     public List<Cars> findCarBySelectedFuelType(List<Cars> carsList, String fuelTypecode) {

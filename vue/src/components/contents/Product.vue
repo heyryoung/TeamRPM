@@ -1,41 +1,32 @@
 <template>
     <div>
-
-        <!-- 지점 동급 리스트 더보기 -->
-
-
         <form name="frm" method="post" action="">
-
-
-            <!--  content 컨텐츠에 따라 변경 필요 -->
             <div id="content" class="sub_content">
                 <div class="car_detail_cont">
                     <div class="head_field">
                         <div class="wrapper">
                             <div class="tit_area">
                                 <div class="top_field">
-                                    <h3><span>{{this.$store.state.cmm.carItem.truckName}}</span></h3>
+                                    <h3><span>{{this.$store.state.contents.carItem.truckName}}</span></h3>
                                     <p class="desc">
                                         <span><strong>{{recCommentCd}}</strong></span>
-                                        <span>{{this.$store.state.cmm.carItem.mfrDate | mfrDateFormatter}}</span>
-                                        <span>{{this.$store.state.cmm.carItem.milage|thousandFormatter}}km</span>
-                                        <span>{{this.$store.state.cmm.carItem.fuelTypedName}}</span>
-                                        <span>{{this.$store.state.cmm.carItem.exteriorColordnm}}</span>
-                                        <span>{{this.$store.state.cmm.carItem.transmissioncdName}}</span>
-                                        <span>{{this.$store.state.cmm.carItem.centerName}}</span>
+                                        <span>{{this.$store.state.contents.carItem.mfrDate | mfrDateFormatter}}</span>
+                                        <span>{{this.$store.state.contents.carItem.milage|thousandFormatter}}km</span>
+                                        <span>{{this.$store.state.contents.carItem.fuelTypedName}}</span>
+                                        <span>{{this.$store.state.contents.carItem.exteriorColordnm}}</span>
+                                        <span>{{this.$store.state.contents.carItem.transmissioncdName}}</span>
+                                        <span>{{this.$store.state.contents.carItem.centerName}}</span>
                                     </p>
                                 </div>
 
                                 <div class="price">
                                <!--     <a href="" class="int_price fix">월 23만원</a>-->
-                                    <p class="pay"><strong>{{this.$store.state.cmm.carItem.price | thousandFormatter}}</strong>만원</p>
+                                    <p class="pay"><strong>{{this.$store.state.contents.carItem.price | thousandFormatter}}</strong>만원</p>
                                 </div>
                             </div>
-                            <!--4015 온라인구매-->
                             <div class="btn_area">
-                                <a href="/buycar" class="online" id="onlineBuy"><span class="onlinebuy_txt">온라인 구매</span></a>
+                                <a @click="goPayment" class="online" id="onlineBuy"><span class="onlinebuy_txt">온라인 구매</span></a>
                             </div>
-                            <!--//4015 온라인구매-->
                         </div>
                     </div>
                     <div class="view_field">
@@ -43,23 +34,17 @@
                             <div class="wrapper">
 
                                 <div class="carImg_imgArea">
-                                    <p class="attr">{{this.$store.state.cmm.carItem.simpleComment}}</p>
+                                    <p class="attr">{{this.$store.state.contents.carItem.simpleComment}}</p>
                                     <div class="visual_wrap">
                                         <div class="visual_area">
                                             <a href="">
-
-
                                                 <div class="visual" :style="`display:block`">
                                                     <img :src="elanPath"
                                                          alt="차량이미지">
                                                 </div>
-
-
                                             </a>
                                         </div>
-
                                     </div>
-
                                     <div class="until_area">
                                         <ul class="ico_area">
                                             <li><a href="" class="down"><span class="blind">다운</span></a></li>
@@ -75,8 +60,8 @@
                                                  alt="직원사진">
                                         </div>
                                         <div class="info">
-                                            <p class="store">K Car {{this.$store.state.cmm.carItem.centerName}}</p>
-                                            <p class="name">{{this.$store.state.cmm.carItem.usernm}} 차량평가사<br><span class="num">010-5051-0997</span>
+                                            <p class="store">K Car {{this.$store.state.contents.carItem.centerName}}</p>
+                                            <p class="name">{{this.$store.state.contents.carItem.usernm}} 차량평가사<br><span class="num">010-5051-0997</span>
                                             </p>
                                         </div>
                                     </div>
@@ -135,12 +120,8 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- //일반차량 -->
                         </div>
                     </div>
-
-
                     <div class="buy_cap" id="cap_area">
                         <h3>사고 싶은 이 차, 월 얼마면 될까? <span>목돈은 아껴두고 할부로 구매하세요.</span></h3>
                         <div class="cap_bx">
@@ -148,7 +129,7 @@
                                 <div class="captab tabcom">
                                     <h4>선수금 <span class="txt">(최초 30%)</span></h4>
                                     <div class="captab_input"><input type="text" class="" id="advancePay" maxlength="5">
-                                        &nbsp;{{this.$store.state.cmm.carItem.price*0.3}}만원
+                                        &nbsp;{{this.$store.state.contents.carItem.price*0.3}}만원
                                     </div>
                                 </div>
                                 <div class="captab tabcom">
@@ -187,7 +168,7 @@
                                         </li>
                                         <li>
                                             <span>총비용</span>
-                                            <span class="ct_mon" id="totalPay">{{interest*interestMonth+(this.$store.state.cmm.carItem.price*10000*0.3) | thousandFormatter}}원</span>
+                                            <span class="ct_mon" id="totalPay">{{interest*interestMonth+(this.$store.state.contents.carItem.price*10000*0.3) | thousandFormatter}}원</span>
                                         </li>
                                     </ul>
                                     <a href="#none" class="cap_link">내 한도금액 간편 확인 <span class="ly_tip">rpm 캐피탈에서 고객님의 신용조회 및 한도 산출을 진행합니다. </span></a>
@@ -257,16 +238,16 @@
                                             <ul>
                                                 <li>
                                                     <span class="type">차량번호</span>
-                                                    <span class="txt">{{this.$store.state.cmm.carItem.carNumber}}</span>
+                                                    <span class="txt">{{this.$store.state.contents.carItem.carNumber}}</span>
                                                 </li>
                                                 <li>
                                                     <span class="type">차종</span>
-                                                    <span class="txt">{{this.$store.state.cmm.carItem.categorynm}}</span>
+                                                    <span class="txt">{{this.$store.state.contents.carItem.categorynm}}</span>
                                                 </li>
 
                                                 <li>
                                                     <span class="type">인승</span>
-                                                    <span class="txt">{{this.$store.state.cmm.carItem.passCnt}}</span>
+                                                    <span class="txt">{{this.$store.state.contents.carItem.passCnt}}</span>
                                                 </li>
                                                 <li>
                                                     <span class="type">압류/저당</span>
@@ -274,10 +255,17 @@
                                                 </li>
                                                 <li>
                                                     <span class="type">제시신고번호</span>
-                                                    <span class="txt">제 {{this.$store.state.cmm.carItem.eccRegDtm}}호</span>
+                                                    <span class="txt">제 {{this.$store.state.contents.carItem.eccRegDtm}}호</span>
                                                 </li>
                                             </ul>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="cont920pix">
+                                    <div class="cusinfo_box">
+                                <div class="btn_ar">
+                                    <a @click="goBack" class="btn_gry" >뒤로가기</a>
+                                </div>
                                     </div>
                                 </div>
                             </div>
@@ -300,8 +288,8 @@
         },
         data(){
             return{
-                elanPath : this.$store.state.cmm.carItem.elanPath,
-                list : this.$store.state.cmm.carItem.optioncdName.split('|'),
+                elanPath : this.$store.state.contents.carItem.elanPath,
+                list : this.$store.state.contents.carItem.optioncdName.split('|'),
                 interestRate : 0.065,
                 interestMonth : 36,
                 interestMonthIndex : 3
@@ -317,14 +305,36 @@
                     this.interestRate = interestValue.value
                 }
 
+            },
+            goPayment(){
+                if(this.$store.state.user.auth)
+                    this.$router.push('/payment')
+                else{
+                    alert(`로그인이 필요한 서비스입니다.`)
+                    this.$router.push('/login')
+                }
+            },
+            goBack(){
+                this.$router.go(-1)
             }
         },
         computed:{
             recCommentCd : function(){
                 let recCommentCd = ''
-                switch (this.$store.state.cmm.carItem.recCommentCd) {
+                switch (this.$store.state.contents.carItem.recCommentCd) {
                     case '001':
                         recCommentCd = '무사고'
+                        break;
+                    case '002':
+                        recCommentCd = '단순교환'
+                        break;
+                    case '003':
+                        recCommentCd = '단순사고(접촉)'
+                        break;
+                    case '004':
+                        recCommentCd = '사고'
+                        break;
+
                 }
                 return recCommentCd
             },
@@ -332,21 +342,21 @@
                 return this.list.slice(0,this.list.length*0.1)
             },
             optionList2 : function(){
-                let list = this.$store.state.cmm.carItem.optioncdName.split('|')
+                let list = this.$store.state.contents.carItem.optioncdName.split('|')
                 return list.slice(this.list.length*0.1,this.list.length*0.3)
             },
             optionList3 : function(){
-                let list = this.$store.state.cmm.carItem.optioncdName.split('|')
+                let list = this.$store.state.contents.carItem.optioncdName.split('|')
                 return list.slice(this.list.length*0.3,this.list.length*0.6)
             },
             optionList4 : function(){
-                let list = this.$store.state.cmm.carItem.optioncdName.split('|')
+                let list = this.$store.state.contents.carItem.optioncdName.split('|')
                 return list.slice(this.list.length*0.6,this.list.length)
             },
             interestRateList : function(){
                 let interestRateList = []
                 let defaultRate = 0.065
-                let price = this.$store.state.cmm.carItem.price*10000*0.7
+                let price = this.$store.state.contents.carItem.price*10000*0.7
                 let monthPrice = 0
                 for(let i =0;i<5;i++){
                     monthPrice = Math.round((price)*((defaultRate/12)*Math.pow(1+(defaultRate/12),this.interestMonth)
@@ -375,11 +385,11 @@
             interest : function(){
                 let rate = this.interestRate/12
                 let month = this.interestMonth
-                return Math.round((this.$store.state.cmm.carItem.price*10000*0.7)*(rate*Math.pow(1+rate,month)
+                return Math.round((this.$store.state.contents.carItem.price*10000*0.7)*(rate*Math.pow(1+rate,month)
                                         /(Math.pow(1+rate,month)-1)))
             },
             yearInterest : function(){
-                return Math.round(((this.interest*this.interestMonth+(this.$store.state.cmm.carItem.price*10000*0.3))-this.$store.state.cmm.carItem.price*10000)/this.interestMonthIndex)
+                return Math.round(((this.interest*this.interestMonth+(this.$store.state.contents.carItem.price*10000*0.3))-this.$store.state.contents.carItem.price*10000)/this.interestMonthIndex)
             }
         },
         filters: {

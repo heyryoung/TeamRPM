@@ -101,7 +101,7 @@
 
     import {checkBox} from "../mixins/checkBox";
     import axios from'axios'
-    import pagination from "../common/Pagination2";
+    import pagination from "../common/pagination2";
     import sendCarPop from "./sendCarPop";
     export default {
         components:{

@@ -58,7 +58,7 @@ public class EmployeeInit implements ApplicationRunner {
                 }else{
                     employee.setEmCode(el +'0'+ String.valueOf(j));
                 }
-
+                employee.setCenterCode(el);
                 employee.setCenterName(element4.text());
                 employee.setEmName(ie1.next().text());
                 employee.setEmPosition(ie2.next().text());
