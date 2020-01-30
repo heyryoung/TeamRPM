@@ -1,6 +1,5 @@
 package com.rpm.web.social;
 
-import com.rpm.web.proxy.FileProxy;
 import com.rpm.web.proxy.PageProxy;
 import com.rpm.web.user.UserRepository;
 import com.rpm.web.util.Printer;
@@ -10,7 +9,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.*;
 
 @RestController
@@ -21,7 +19,6 @@ public class SocialController {
     @Autowired UserRepository userRepository;
     @Autowired SocialService socialService;
     @Autowired PageProxy pager;
-    @Autowired FileProxy fileProxy;
 
     @GetMapping("/viewList/{pageNo}")
     public SocialListDto[] viewList(@PathVariable String pageNo){
