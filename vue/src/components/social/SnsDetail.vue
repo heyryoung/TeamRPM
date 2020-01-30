@@ -1,5 +1,6 @@
 <template>
 <div class= "snsDetail">
+  <link rel="stylesheet" type="text/css"  href="css/agency.min.css">
   <link rel="stylesheet" href="https://startbootstrap.com/assets/style-theme.css">
   <link rel="stylesheet" href="https://blackrockdigital.github.io/startbootstrap-agency/css/agency.min.css">
   <link rel="stylesheet" href="https://blackrockdigital.github.io/startbootstrap-agency/vendor/fontawesome-free/css/all.min.css">
@@ -64,7 +65,7 @@
         content:"나 이차 넘나 죠하요 헤헤헤헿 Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!",
         contentDate:"2020.01.09 19:02",
         contentUserid:"hyeryeongee_",
-        myContent:false,
+        myContent:true,
       }
     },
     methods:{

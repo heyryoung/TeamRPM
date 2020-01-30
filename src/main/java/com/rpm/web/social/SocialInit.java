@@ -33,20 +33,20 @@ public class SocialInit implements ApplicationRunner {
 
         SocialDummy socialDummy = new SocialDummy();
         Iterable<User> users = userRepository.findAll();
-        List<User> seq = new ArrayList<>();
+        List<User> user = new ArrayList<>();
         for(User u : users){
-            seq.add(u);
+            user.add(u);
         }
-        Iterable<Cars> cars = carsRepository.findAll();//더미데이터 넣은 후에 find.All() 모두 주석처리 바랍니다.
-        List<String> carCd = new ArrayList<>();
+        Iterable<Cars> cars = carsRepository.findAll();
+        List<Cars> car = new ArrayList<>();
         for(Cars c : cars){
-            carCd.add(c.getCarcd());
+            car.add(c);
         }
         long count= socialRepository.count();
         if(count == 0){
             System.out.println("socialboard 등록 시작");
-            for(int i=0; i<300; i++) {
-                for (Social s : socialDummy.crawlingBoard(seq, carCd)) {
+            for(int i=0; i<30; i++) {
+                for (Social s : socialDummy.crawlingBoard(user, car)) {
                     socialRepository.save(s);
                 }
             }
@@ -64,18 +64,17 @@ public class SocialInit implements ApplicationRunner {
         for(Social s : socials){
             socialList.add(s);
         }
-        socialList.stream().sorted(Comparator.comparing(Social::getBoardSeq)
-        .reversed()).collect(Collectors.toList());
+        socialList.stream().sorted(Comparator.comparing(Social::getBoardSeq)).collect(Collectors.toList());
         List<Social> commentedSocialList = new ArrayList<>();
         commentedSocialList.clear();
-        for(int i=0; i<20; i++){
+        for(int i=socialList.size()-1; i>socialList.size()-30; i--){
             commentedSocialList.add(socialList.get(i));
         }
         long commentCount = commentRepository.count();
         if(commentCount==0){
             System.out.println("comment 등록 시작");
             for(int i=0; i<6; i++){
-                for(Comment c : socialDummy.crawlingComment(seq, commentedSocialList)){
+                for(Comment c : socialDummy.crawlingComment(user, commentedSocialList)){
                     commentRepository.save(c);
                 }
             }
@@ -90,8 +89,8 @@ public class SocialInit implements ApplicationRunner {
         long thumbCount = thumbRepository.count();
         if(thumbCount==0){
             System.out.println("thumb 등록 시작");
-            for(int i = 0; i<1000; i++){
-                thumbRepository.save(socialDummy.makeThumbList(seq, commentedSocialList));
+            for(int i = 0; i<500; i++){
+                thumbRepository.save(socialDummy.makeThumbList(user, commentedSocialList));
             }
             System.out.println("thumb 등록 완료");
         }

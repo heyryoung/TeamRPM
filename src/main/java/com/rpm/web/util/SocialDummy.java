@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class SocialDummy {
     @Autowired
@@ -53,18 +54,19 @@ public class SocialDummy {
         return map;
     }
 
-    public ArrayList<Social> crawlingBoard(List<User>seq, List<String>carCd) {
+    public ArrayList<Social> crawlingBoard(List<User> user, List<Cars> car) {
         ArrayList<Social> list = new ArrayList<>();
         list.clear();
         List<String> urls = crawlingUrl().get("url");
         List<String> dates = crawlingUrl().get("dates");
         for (int i = 0; i < urls.size(); i++) {
             try {
-                Collections.shuffle(seq);
-                Collections.shuffle(carCd);
+                Collections.shuffle(user);
+                Collections.shuffle(car);
                 Social social = new Social();
-                //social.setUserSeq(seq.get(0));
-                social.setCarCode(carCd.get(0));
+                social.setUserSeq(user.get(0));
+                social.setCarCode(car.get(0).getCarcd());
+                social.setCarName(car.get(0).getTruckName());
                 social.setBoardDate(dates.get(i));
                 Document rawData = Jsoup.connect(urls.get(i)).timeout(10 * 1000).get();
                 Elements boardContent = rawData.select(".pic_bg")
@@ -82,17 +84,17 @@ public class SocialDummy {
         return list;
     }
 
-    public ArrayList<Comment> crawlingComment(List<User>seq, List<Social> socialList) {
+    public ArrayList<Comment> crawlingComment(List<User>user, List<Social> socialList) {
         ArrayList<Comment> list = new ArrayList<>();
         list.clear();
         List<String> urls = crawlingUrl().get("url");
         for (int i = 0; i < urls.size(); i++) {
             try {
                 Comment comment = new Comment();
-                Collections.shuffle(seq);
+                Collections.shuffle(user);
                 Collections.shuffle(socialList);
-                //comment.setUserSeq(seq.get(0));
-               // comment.setBoardSeq(socialList.get(0));
+                comment.setUserSeq(user.get(0));
+                comment.setBoardSeq(socialList.get(0));
                 Document rawData = Jsoup.connect(urls.get(i)).timeout(10 * 1000).get();
                 Elements commentContents = rawData.select("div#newbbs")
                         .select("div").select("div").select("div")
@@ -123,8 +125,8 @@ public class SocialDummy {
         Thumb thumb = new Thumb();
         Collections.shuffle(seq);
         Collections.shuffle(socialList);
-       // thumb.setUserSeq(seq.get(0));
-      //  thumb.setBoardSeq(socialList.get(0));
+        thumb.setUserSeq(seq.get(0));
+        thumb.setBoardSeq(socialList.get(0));
         return thumb;
     }
 

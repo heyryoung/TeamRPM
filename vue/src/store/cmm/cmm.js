@@ -412,11 +412,6 @@ const mutations = {
             state.checkedItems = processingList
         }
     },
-        ORDERBYSUBSETTING(state, data)
-        {
-            state.orderBySub = data
-
-        }
     }
 
 

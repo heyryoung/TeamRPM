@@ -1,95 +1,247 @@
 <template>
 <div class= "snsDetail">
-<link rel="stylesheet" href="https://blackrockdigital.github.io/startbootstrap-agency/css/agency.min.css">
-<link rel="stylesheet" href="https://blackrockdigital.github.io/startbootstrap-agency/vendor/scss/_reboot.scss">
-<link rel="stylesheet" href="https://blackrockdigital.github.io/startbootstrap-agency/vendor/fontawesome-free/css/all.min.css">
-<link rel="stylesheet" href="https://blackrockdigital.github.io/startbootstrap-agency/vendor/scss/_modal.scss">
-<link rel="stylesheet" href="https://blackrockdigital.github.io/startbootstrap-agency/vendor/scss/utilities/_spacing.scss">
-<link rel="stylesheet" href="https://blackrockdigital.github.io/startbootstrap-agency/vendor/scss/mixins/_transition.scss">
-<link rel="stylesheet" href="https://blackrockdigital.github.io/startbootstrap-agency/vendor/scss/mixins/_grid.scss">
-<link rel="stylesheet" href="https://blackrockdigital.github.io/startbootstrap-agency/vendor/scss/mixins/_grid-framework.scss">
-<link rel="stylesheet" href="https://blackrockdigital.github.io/startbootstrap-agency/vendor/scss/mixins/_image.scss">
-<link type="application/atom+xml" rel="alternate" href="https://startbootstrap.com/feed.xml" title="startbootstrap">
+  <link rel="stylesheet" href="https://blackrockdigital.github.io/startbootstrap-agency/vendor/fontawesome-free/css/all.min.css">
 
-<div class="portfolio-modal modal fade show"  tabindex="-1" role="dialog" style="display: block; padding-right: 16.9962px;" aria-modal="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="close-modal" data-dismiss="modal">
-          <div class="lr">
-            <div class="rl"></div>
-          </div>
-        </div>
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-8 mx-auto">
-              <div class="modal-body">
-                <!-- Project Details Go Here -->
-                <h2 class="text-uppercase">{{contentTitle}}</h2>
-                <p class="item-intro text-muted">{{userName}}</p>
-                <div class="dropbox">
-                  <input type="file" ref="photoimage" class="img-fluid d-block mx-auto" @change="upload($event.target.name, $event.target.files)" @drop="upload($event.target.name, $event.target.files)"  alt="">
-                  <h3>파일을 드래그 해주세요.</h3>
-                </div>
-                <input type="text" class="img-fluid d-block mx-auto" v-model="content">
-                <p>{{this.content}}</p>
-                <ul class="list-inline">
-                  <li>작성시간: {{this.contentDate}}</li>
-                  <li>작성자: @{{this.contentUserid}}</li>
-                </ul>
-
-              </div>
+    <div class="col-lg-9">
+        <div class="card mt-4">
+            <div class="dropbox" >
+                <file-pond
+                        ref="pond"
+                        label-idle="이 곳에 사진 파일을 드래그 해주세요."
+                        allow-multiple="false"
+                        max-files="1"
+                        accepted-file-types="image/jpeg, image/png"
+                        server="server"
+                        :files="myFiles"
+                        @init="handleFilePondInit"/>
             </div>
-          </div>
+            <div class="checkbox">
+                <h1>모델명</h1>
+                <!--<div class="sub_type_list sub_type_tree"  >
+                    <div class="scroll-wrapper scrollbar-dynamic" style="position: relative;">
+                        <div class="sscrollbar-dynamic scroll-content scroll-sscrolly_visible"
+                             style="height: 260px; margin-bottom: 0px; margin-right: 0px; max-height: none;">
+                            <ul class="tree">
+                                <li class="dep01" v-for=" region of regionList" :key="region.code">
+                                    <div class="row">
+                                        <span class="txt">
+                                            <div class="checker" id="uniform-areaL1">
+                                                <span :class="{checked:region.checked}" @click="check(region)">
+                                                <input type="checkbox" name="wr_in_v_center_region_code" id="areaL1" class="uniform" value="region.code">
+                                                </span>
+                                            </div>
+                                            <label for="areaL1">{{region.name}}</label>
+                                        </span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="scroll-element scroll-x">
+                            <div class="scroll-element_outer">
+                                <div class="scroll-element_size"></div>
+                                <div class="scroll-element_track"></div>
+                                <div class="scroll-bar"></div>
+                            </div>
+                        </div>
+                        <div class="scroll-element scroll-y">
+                            <div class="scroll-element_outer">
+                                <div class="scroll-element_size"></div>
+                                <div class="scroll-element_track"></div>
+                                <div class="scroll-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+            </div>
+
+            <div class="inputbox">
+                <p>{{contentTitle}}</p>
+                <br/>
+
+                <textarea class="card-text" v-model="content"/>
+            </div>
         </div>
-      </div>
+        <div class="btnbox">
+            <button class="btn btn-primary" v-if="writeBtn" @click="inputContent" data-dismiss="modal" type="button">
+                <i class="fas fa-pen"></i> <b>글 입력하기</b></button>
+            <button class="btn btn-primary" v-if="updateBtn" @click="cancel" data-dismiss="modal" type="button">
+                <i class="fas fa-pen"></i><b> 글 수정하기</b></button>
+        </div>
     </div>
-  </div>
+
 </div>
+<!--    </div>
+  </div>
+</div>-->
 </template>
 <script>
- // import axios from "axios"
+    import vueFilePond from 'vue-filepond';
+    import 'filepond/dist/filepond.min.css';
+    // Import FilePond plugins
+    // Please note that you need to install these plugins separately
+    // Import image preview plugin styles
+    import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css';
+    // Import image preview and file type validation plugins
+    import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
+    import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
+    // Create component
+    const FilePond = vueFilePond(FilePondPluginFileValidateType, FilePondPluginImagePreview);
+    import axios from "axios"
+    let url = 'http://localhost:8080'
   export default{
-    name: "SnsModify",
     data(){
       return{
-        contentTitle:"",
-        userName:"",
-        content:"",
-        contentDate:"",
-        contentUserid:"",
+          server: {
+              url: `${url}/uploadImg`,
+              process: {
+                  headers: {
+                      Authorization: localStorage.getItem('token')
+                  }
+              }
+          },
+          myFiles: [],
+          contentTitle:"차량이름",
+          userName:"김예지",
+          content:"내가요.. 차를 샀는데요... 비쌌어요.",
+          writeBtn:true,
+          updateBtn:false,
       }
     },
-    methods:{
-      upload(/*name, files*/) {
-        /*const formData = new FormData();
-        formData.append(name, files[0], files[0].name);
-        const url = "http://127.0.0.1:12010/upload/1";
-        axios.post(url, formData).then(response => {
-          console.log(response);
-        })*/
+      components: {
+          FilePond
       },
+      /* 체크박스
+      created() {
+          if(!this.$store.state.cmm.initFlag)
+              this.$store.dispatch('cmm/init')
+          /!*        if(this.$store.state.cmm.makerFromMain!=''){
+
+                  }*!/
+      },*/
+    methods:{
+        handleFilePondInit() {
+            this.$refs.pond.getFiles()
+
+            let headers = {
+                'authorization': 'JWT fefege..',
+                'Accept' : 'application/json',
+                'Content-Type': 'application/json'
+            }
+            console.log(`${this.server.process.headers.Authorization}`);
+            console.log(`${this.myFiles}`);
+            axios.post(this.server.url, '12345', headers)
+            .then((res)=>{
+                alert(res.data)
+            })
+            .catch(()=>{})
+            // FilePond instance methods are available on `this.$refs.pond`
+        },
+        inputContent(){
+
+        },
+        cancel(){
+
+        },
 
     }
 
   }
 </script>
 <style scoped>
+
+.col-lg-9 {
+    margin: 0 auto;
+    -ms-flex: 0 0 75%;
+    flex: 0 0 75%;
+    max-width: 75%;
+    position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    display: table;
+}
+.inputbox p {
+    font-size: 2.5rem;
+    position: relative;
+    margin: 1rem;
+    font-weight: 500;
+    line-height: 1.2;
+}
+.mt-4 {
+    margin-top: 1.5rem!important;
+}
+.card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    flex-flow: wrap;
+    -ms-flex-direction: column;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    width: min-content;
+    margin: 0 auto;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border-radius: .25rem;
+}
 .snsDetail {
-   overflow:auto;
+   overflow: none;
  }
-.dropbox {
-  outline: 2px dashed #aaa;
-  width: 300px;
-  height: 300px;
+.dropbox{
+  width: 500px;
+  height: 400px;
   position: relative;
   margin: 0 auto;
+  float: left;
 }
-.dropbox > h3{
-/*  position: absolute;*/
+.checkbox {
+    width: 350px;
+    padding: 25px;
+    height: 350px;
+    float: left;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 10px 10px;
+    margin-left:50px;
+}
+.inputbox{
+    float: left;
+    width: 1050px;
+    margin: 0 auto;
+    inline-size: auto;
+}
+.btnbox{
+    margin: 0 auto;
+    margin-top: 50px;
+    width: 1050px;
+    text-align: center;
+}
+.dropbox > h3 {
+  position: absolute;
   font-size: 2em;
-  margin: 50px auto;
-  left: 0;
+  margin: 100px auto;
+  padding-left: 40px;
   z-index: 2;
+}
+
+.input-file {
+  position: absolute;
+  opacity: 0;
+  width:100%;
+  height:100%;
+  top:0;
+  left:0;
+}
+.inputbox textarea {
+  resize: none;
+  width: 950px;
+  height: 300px;
+  font-size: 17px;
+  margin: 0 auto;
+    padding: 10px;
+    border-radius: 10px 10px;
+    box-shadow: #0a0a0a;
 }
 .img-fluid d-block mx-auto{
   position: absolute;
@@ -100,7 +252,6 @@
   left:0;
   z-index: 3;
 }
-
 .btn-primary {
 	margin: auto 10px;
 }
@@ -130,6 +281,10 @@
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
   padding: 1rem;
+}
+.portfolio-modal .modal-content {
+  padding: 20px 0;
+  text-align: center;
 }
 .portfolio-modal .modal-content img {
   margin-bottom: 30px;
@@ -164,5 +319,27 @@ img {
 }
 .portfolio-modal .modal-content button {
   cursor: pointer;
+}
+@media (prefers-reduced-motion: reduce) {
+    .btn {
+        transition: none;
+    }
+}
+.btn:hover {
+    color: #212529;
+    text-decoration: none;
+}
+.btn-primary {
+  margin: auto 10px;
+    height: 50px;
+    width: 140px;
+    border-radius: 10px 10px;
+    font-size:1.3em;
+    background-color: #212529;
+    color: #fff;
+}
+.btn-primary:hover {
+    color: #fff;
+    background-color: #fac200;
 }
 </style>

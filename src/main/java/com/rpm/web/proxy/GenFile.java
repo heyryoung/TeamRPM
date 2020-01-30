@@ -2,11 +2,15 @@ package com.rpm.web.proxy;
 import java.io.File;
 import java.util.HashMap;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.springframework.stereotype.Component;
 
-import lombok.Data;
-@Data 
-@Component("gfile")
+@Getter
+@Setter
+@ToString
+@Component
 public class GenFile<T> {
 	private File file;
 

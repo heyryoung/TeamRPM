@@ -2,6 +2,7 @@ package com.rpm.web.user;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.rpm.web.social.Comment;
 import com.rpm.web.social.Social;
@@ -19,12 +20,11 @@ import java.util.List;
 
 @Component @Lazy @Entity
 @Getter @Setter
+@ToString(exclude = {"socials", "comments", "thumbs"})
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="USER")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "userSeq")
-@JsonIdentityReference(alwaysAsId = true)
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "userSeq")
 public class User implements Serializable {
 
     @Id
@@ -37,6 +37,7 @@ public class User implements Serializable {
     @Column(name = "GENDER")  private String gender;
     @Column(name = "BIRTHMONTH")  private String birthMonth;
     @Column(name = "REGION")  private String region;
+
 
     @OneToMany(mappedBy = "userSeq", cascade = CascadeType.ALL,
             orphanRemoval = true)

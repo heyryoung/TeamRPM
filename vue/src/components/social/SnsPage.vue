@@ -1,10 +1,9 @@
 <template>
 <div class= "snsPage">
-<link rel="stylesheet" href="https://blackrockdigital.github.io/startbootstrap-agency/css/agency.min.css">
+  <link rel="stylesheet" href="https://blackrockdigital.github.io/startbootstrap-agency/css/agency.min.css">
 <link rel="stylesheet" href="https://blackrockdigital.github.io/startbootstrap-agency/vendor/fontawesome-free/css/all.min.css">
 
 <section class="bg-light page-section" id="portfolio">
-  <modals-container />
     <div class="container">
       <div class="row">
         <div class="col-lg-12 text-center">
@@ -16,67 +15,103 @@
                   <i class="fas fa-edit"></i> 글쓰기</button>
         </div>
       </div>
-      <div class="row"
-           v-infinite-scroll="loadMore"
-           infinite-scroll-disabled="busy"
-           infinite-scroll-distance="10">
+      <div class="row-contents">
 
-
-        <div v-for="b of getBoardList" :key="b.boardSeq" class="col-md-4 col-sm-6 portfolio-item">
-          <a class="portfolio-link" data-toggle="modal" href="/snsdetail">
+        <div v-for="(item, index) in boardList" :key="index" class="col-md-4 col-sm-6 portfolio-item">
+          <router-link class="portfolio-link" :to="{name: 'snsdetail', params: { id: item.boardSeq }}" active-class="active">
             <div class="portfolio-hover">
               <div class="portfolio-hover-content">
                 <i class="fas fa-plus fa-3x"></i>
               </div>
             </div>
-            <img class="img-fluid" src="https://blackrockdigital.github.io/startbootstrap-agency/img/portfolio/01-thumbnail.jpg" alt="">
-          </a>
+            <img class="img-fluid" :src="item.boardImg" alt="">
+          </router-link>
           <div class="portfolio-caption">
-            <h4>쉐보레(GM대우) 더 넥스트 스파크</h4>
-            <p class="text-muted">강성조</p>
+            <h4>{{item.carName}}</h4>
+            <p class="text-muted">{{item.userName}}</p>
             <div class="btn-like-comment">
-              <a class="btn-like"><i class="far fa-heart"></i> 2</a>
-              <a class="btn-comment"><i class="far fa-comment"></i> 7</a>
+              <a class="btn-like"><i class="far fa-heart"></i> {{item.thumbCount}}</a>
+              <a class="btn-comment"><i class="far fa-comment"></i> {{item.commentCount}}</a>
             </div>
           </div>
         </div>
-
-
+      </div>
+      <div style="text-align: center;" class="btn-edit" >
+        <button class="btn btn-primary"  v-if="hasMore" style="width: 1000px" @click="more"><i class="fas fa-angle-down"></i></button>
+        <h4 v-if="noMore">더이상의 게시물이 없습니다.</h4>
       </div>
     </div>
   </section>
 </div>
 </template>
 <script>
+  import axios from "axios"
 
-import {mapGetters} from 'vuex'
-export default {
-  data(){
-    return{
-      discussions: [],
-      busy: false,
+  export default {
+    data() {
+      return {
+        loadedData:'',
+        boardList:[],
+        page: 1,
+        hasMore:true,
+        noMore: false,
+      }
+    },
+    created(){
+      this.loadData()
+    },
+   /* mounted(){
+      this.scroll()
+    },*/
+    methods: {
+      loadData(){
+        axios
+                .get(`http://localhost:8080/viewList/${this.page}`)
+                .then(res => {
+                  if (res.data.length) {
+                    this.page += 1
+                    this.boardList.push(...res.data)
+                    if(res.data.length<12){
+                      this.noMore = true
+                      this.hasMore = false
+                    }
+                  } else {
+                    this.noMore = true
+                    this.hasMore = false
+                  }
+                })
+      },
+     /* scroll () {
+        window.onscroll = () => {
+
+          let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.scrollHeight+100
+          if (bottomOfWindow) {
+            this.scrolledToBottom = true
+            alert('')
+            this.loadData()
+          }
+        }
+      },*/
+      more(){
+         this.loadData()
+      },
+      write() {
+        this.$router.push({path: '/snsmodify'})
+      },
+
     }
-  },
-  computed:{
-    ...mapGetters(['getBoardList'])
-  },
-  methods:{
-    write(){
-      this.$router.push({path : '/snsModify'})
-    },
-    loadMore() {
-      this.busy = true // 무한 스크롤 기능 비활성화
-      this.getDiscussions()
-    },
-
-  },
-  created() {
-    this.$store.dispatch('viewList');
-
   }
-}
+
 </script>
 <style scoped>
+  body{
+    overflow: visible;
+  }
+  .row-contents{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+  }
   #portfolio .portfolio-item .portfolio-link .portfolio-hover {
     background: #0d124f78;
   }
@@ -85,9 +120,16 @@ export default {
     position: relative;
     color: #fac200;
   }
-  .btn-primary[data-v-0845def5] {
-    background-color: #0d124f;
-    border-color: #0d124f;
+
+  .btn-primary {
+    background-color: #010876 !important;
+    border-color: #010876!important;
+    margin: 30px;
+  }
+  .btn-primary:hover {
+    background-color: #0d124f !important;
+    border-color: #0d124f!important;
+    margin: 30px;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -129,7 +171,8 @@ export default {
 
   .img-fluid {
     max-width: 100%;
-    height: auto;
+    height: 350px;
+    inline-size: -webkit-fill-available;
   }
 
   kbd {
@@ -204,9 +247,9 @@ export default {
       max-width: 50%;
     }
     .col-md-4 {
-      -ms-flex: 0 0 33.333333%;
-      flex: 0 0 33.333333%;
-      max-width: 33.333333%;
+      -ms-flex: 0 0 30%;
+      flex: 0 0 30%;
+      max-width: 30%;
     }
     .col-lg-12 {
       -ms-flex: 0 0 100%;
@@ -405,6 +448,7 @@ export default {
     z-index: 1;
   }
 
+
   .btn-group > .btn:focus, .btn-group > .btn:active, .btn-group > .btn.active,
   .btn-group-vertical > .btn:focus,
   .btn-group-vertical > .btn:active {
@@ -568,4 +612,8 @@ export default {
     background-color: #fed136;
     border-color: #fed136;
   }
+  .btn-like-comment a:hover {
+    text-decoration: dashed;
+  }
+
 </style>

@@ -1,6 +1,8 @@
 package com.rpm.web.social;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.rpm.web.user.User;
 import lombok.*;
 import org.springframework.context.annotation.Lazy;
@@ -17,19 +19,20 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @Table(name="THUMB")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "thumbSeq")
 public class Thumb implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "THUMBSEQ") @NotNull private Long thumbSeq;
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "BOARDSEQ")
+    @NotNull
     private Social boardSeq;
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USERSEQ")
+    @NotNull
     private User userSeq;
 
 }
