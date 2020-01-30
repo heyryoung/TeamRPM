@@ -51,7 +51,7 @@ public class UserController {
         if (user != null) {
             map.put("result", "success");
             map.put("user", user);
-
+            printer.accept(user.toString());
         } else {
             map.put("result", "fail");
         }

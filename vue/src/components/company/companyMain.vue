@@ -5,8 +5,8 @@
                 <div class="head_cont">
                     <div class="center_tit">
                         <div class="region_name"></div>
-                        <h3 class="center_name">RPM 1호점</h3>
-                        <div class="car_num01">보유차량 276대</div>
+                        <h3 class="center_name">RPM {{this.$store.state.user.member.name}}</h3>
+
                     </div>
                     <ul class="detail_tab">
                         <li v-for="(tab,index) of tabs" :key="tab.title" :class="{on:tab.switch}" @click="tabSwitch(index)"><a :href="tab.link"> {{tab.title}}</a></li>

@@ -1,7 +1,7 @@
 <template>
     <div class="cm_pagination">
         <ul class="pagination">
-            <li class="move prev" @click="prev()" v-if="pageNums[0].num!=1"> <a @click.prevent href=""></a></li>
+            <li class="move prev" @click="prev()" v-if="pageNums.length<0"> <a @click.prevent href=""></a></li>
             <li :class="{'num on':pageNum.on,'num':!pageNum.on}" v-for="(pageNum,index) of pageNums" :key="pageNum.num" @click="pageSwitch(index)"><a>{{pageNum.num}}</a></li>
             <li class="move next" @click="next()" v-if="pageNums.length==5&& pageNums[4].num<(this.pagination.length/5)+1">
                 <a @click.prevent href=""></a> </li>
@@ -27,7 +27,6 @@
                         break
                     }
                     pageBlock.push(this.pagination[j])
-                    console.log(this.pagination[j].customerID)
                 }
                 return pageBlock
             },
@@ -75,6 +74,7 @@
                 }
             },
             first() {
+
                 let num=0
                 if(this.pagination.length/5>=5){
                     num=5

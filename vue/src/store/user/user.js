@@ -2,21 +2,12 @@ import axios from 'axios'
 import router from '@/router'
 
 const state = {
-    user : {},
+    member : {},
     auth: false,
-
-
-
-
 }
 const getters = {
-    getMember : state=>state.member,
-    getIsAuth : state=>state.auth,
-
-
-
-
-
+    member : state=>state.member,
+    auth : state=>state.auth,
 }
 const actions = {
     async login({commit}, { userid, passwd}){
@@ -34,8 +25,11 @@ const actions = {
                 //alert(data.result.toString())
                 if(data.result == "success") {
                     commit('LOGIN_COMMIT', data)
-                    router.push('/')
-
+                    if(data.user.auth==true) {
+                        router.push('/')
+                    }else{
+                        router.push('/companyHome')
+                    }
 
                 }else{
                     router.push('/login')
@@ -66,7 +60,7 @@ const mutations = {
     },
     LOGOUT_COMMIT(state){
         state.auth = false
-        state.user  = {}
+        state.member  = {}
 
     }
 }

@@ -25,7 +25,7 @@ public class CompanyInit implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         long count = companyRepository.count();
-        List<String> code= companyRepository.findByCenterCode();
+        List<String> code= companyRepository.findCenterCode();
         List<String> centerName =  companyRepository.findByCenterRegion("서울");
         System.out.println(centerName);
         code.forEach(el->{

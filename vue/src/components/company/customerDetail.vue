@@ -4,7 +4,9 @@
         <div class="form_area clearFix personal_info" id="formarea">
             <carDetail_left></carDetail_left>
                     <div class="carlist">
+                        <div class="mypage_CarList interest">
                         <carDetail_right></carDetail_right>
+                        </div>
                     </div>
 
         </div>

@@ -54,37 +54,11 @@
 		},
 		methods:{
 			checkSubmit(){
-				if(this.userid.length >= 4 && this.passwd.length>=4){
 					this.login()
-				}
-
 			},
 			login(){
 				this.$store.dispatch('user/login', {userid:this.userid,passwd:this.passwd})
-
-
 			},
-
-			/*gologin(){
-					this.$store.dispatch('user/login', {userid:this.userid,passwd:this.passwd})
-							.then(()=>{
-								this.auth = this.$store.state.user.auth
-								alert(`gologin ${this.$store.state.user.auth}`)
-
-
-
-
-							}).catch(()=>{
-						alert('gologin fail')
-					})
-				if(this.$store.state.user.auth){
-					this.$router.push('/')
-
-				}
-			},*/
-
-
-
 		},
 
 	}

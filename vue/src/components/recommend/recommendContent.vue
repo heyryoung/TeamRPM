@@ -46,38 +46,39 @@
                         <col>
                     </colgroup>
 
-                    <tbody v-for="car of List" :key="car.carID">
+                    <tbody v-for="car of recommendedCar" :key="car.carcd">
                     <tr>
                         <td class="check">
                             <div class="checker" id="uniform-interest_list_check1">
-                                <span  :class="{checked:car.checked}" @click="check(car)" @change='updateCheckall()' >
+                                <span  :class="{checked:car.checked}" @click="check(car)" @change='updateCheckall(List)' >
                                     <input type="checkbox" id="interest_list_check1" class="uniform"  >
                                 </span>
                             </div>
                         </td>
                         <td class="thumb">
-                            <a href="/product">
-                                <img :src="car.thumb" alt="자동차 썸네일">
+                            <a @click="productClick(car)">
+                                <img  :src="car.middleImg" alt="자동차 썸네일">
                             </a>
                         </td>
                         <td class="car_info">
-                            <a href="/product" class="name">{{car.title}}<br> {{car.subTitle}} </a>
-                            <span class="md_year">{{car.caryear}} &nbsp; {{car.distance}}</span>
-                            <span class="price">{{car.price}} </span>
+                            <span class="md_year">{{car.centerName}}</span>
+                            <a @click="productClick(car)" class="name">{{car.makenm}} {{car.modelnm}} </a>
+                            <span class="md_year">{{car.beginYear}}년 주행거리 : {{car.milage}} km </span>
+                            <span class="price">가격 :{{car.price}}만원 </span>
                         </td>
                         <td class="car_opt">
                             <ul class="opt_list">
                                 <li>
-                                    <span class="pt">{{car.acident}}</span>
-                                    <span>{{car.fuel}}</span>
+                                    <span class="pt">{{car.transmissioncdName}}</span>
+                                    <span>{{car.fuleTypedName}}</span>
                                 </li>
                                 <li>
-                                    <span>{{car.color}}</span>
+                                    <span>{{car.exteriorColornm}}</span>
                                     <span>{{car.carType}}</span>
                                 </li>
                                 <li>
-                                    <span>{{car.region}}</span>
-                                    <span>{{car.people}}</span>
+                                    <span>{{car.centerRegion}}</span>
+                                    <span>{{car.passCnt}}</span>
                                 </li>
                             </ul>
 
@@ -102,35 +103,29 @@
                 </div>
             </div>
 
+            <Pagination2 :pagination="List" @movePage="movePageBlock" ref="pagination"></Pagination2>
 
-            <div class="cm_pagination">
-                <ul class="pagination">
-                    <li class="move prev"><a href=""></a></li>
-                    <li class="num on"><a>1</a></li>
-                    <li class="move next"><a href=""></a></li>
-                </ul>
-            </div>
         </div>
     </div>
 </template>
 <script>
     import comparePop from "./comparePop";
     import {checkBox} from "../mixins/checkBox";
+    import axios from 'axios';
+    import Pagination2 from "../common/Pagination2";
 
     export default {
+        components:{
+            Pagination2
+        },
         data(){
            return {
                allchecked:false,
-               List:[
-                   {carID:"001",title:"벤츠 GLE-클래스 W166",subTitle:"GLE350 d 4MATIC 프리미엄",checked: false, caryear:"18년 11월식(18년형)", distance:"7,368km", price:"7,990만원", acident:"무사고",
-                   color:"갈색", region:"경기/인천", fuel:"디젤",carType:"SUV", people:"5인승",thumb:"https://img.kcar.com/carpicture/carpicture06/pic6026/kcar_60263050_001.jpg"},
-
-                   {carID:"002",title:"벤츠 GLE-클래스 W166",subTitle:"GLE350 d 4MATIC 프리미엄",checked: false, caryear:"18년 11월식(18년형)", distance:"7,368km", price:"7,990만원", acident:"무사고",
-                       color:"갈색", region:"경기/인천", fuel:"디젤",carType:"SUV", people:"5인승",thumb:"https://img.kcar.com/carpicture/carpicture06/pic6026/kcar_60263050_001.jpg"}
-                   ],
+               List:[],
                checkedList:[
 
-               ]
+               ],
+               recommendedCar:[]
 
            }
         },
@@ -148,18 +143,43 @@
                     modal : this.$modal},{
                     name: 'dynamic-modal',
                     width : '800px',
-                    height : '800px',
+                    height : '650px',
                     draggable: true,
                 },{closed:this.checkedList=[]})
+            },
+            addHistory( carItem ){
+                this.$store.dispatch( 'cmm/addSeenHistory' , carItem )
+            },
+            productClick(carItem){
+                this.addHistory(carItem)
+                this.$store.dispatch('cmm/setProduct',carItem)
+                this.$router.push('/product')
+            },
+            movePageBlock(pagination){
+                this.recommendedCar=pagination
             },
 
 
 
 
-
         },
-        mixins:[checkBox]
+        mixins:[checkBox],
+        created() {
+            axios
+                .get(`http://localhost:8080//recommendedCar/getRecommendedCar/`+'kangsj24')
+                .then(({data})=>{
+                    data.forEach(el=>{
+                        el.checked=false
+                        this.List.push(el)
+                    })
+                    this.$refs.pagination.first()
+                })
+                .catch(e=>{
+                    alert(`axios fail${e}`)
+                })
+        }
     }
+
 
 </script>
 <style>

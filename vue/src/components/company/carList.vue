@@ -52,12 +52,12 @@
                             </div>
                         </td>
                         <td class="thumb">
-                            <a href="/product">
-                                <img :src="car.middleImg" alt="자동차 썸네일">
+                            <a  >
+                                <img @click="productClick(car)" :src="car.middleImg" alt="자동차 썸네일">
                             </a>
                         </td>
                         <td class="car_info">
-                            <a href="/product" class="name">모델명:{{car.modelnm}} </a>
+                            <a @click="productClick(car)" class="name">모델명:{{car.modelnm}} </a>
                             <span class="md_year">연식:{{car.beginYear}}년 &nbsp;<br>주행거리:{{car.milage}}km</span>
                             <span class="price">가격{{car.price}}만원 </span>
                         </td>
@@ -123,7 +123,15 @@
         methods: {
             movePageBlock(pagination){
                 this.cars= pagination
-            }
+            },
+            addHistory( carItem ){
+                this.$store.dispatch( 'cmm/addSeenHistory' , carItem )
+            },
+            productClick(carItem){
+                this.addHistory(carItem)
+                this.$store.dispatch('cmm/setProduct',carItem)
+                this.$router.push('/product')
+            },
 
         },
         mixins:[checkBox],

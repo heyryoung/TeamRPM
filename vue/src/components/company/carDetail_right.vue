@@ -1,104 +1,177 @@
 <template>
     <div>
-        <div class="center_detail_cont">
-            <div class="centerGuide">
-                <form name="carSearchForm" action="/car/search/directcenter_search_list.do?i_sCenterCode=014" method="post">
-                    <div class="centercar_sch mc_store">
-                        <label for="centerSelect02">직영점차량 검색</label>
-                        <div class="btn_wrap makeTypeBtn">
-                            <a href="javascript:;" data-item="MAKE_TYPE010" class="btn_white on">국산차</a>
-                            <a href="javascript:;" data-item="MAKE_TYPE020" class="btn_white">수입차</a>
-                        </div>
-                        <input type="hidden" name="i_sMakeType" id="makeType" value="MAKE_TYPE010">
-                        <div class="selectric-wrapper selectric-selectric">
-                            <div class="selectric-hide-select"><select class="selectric" id="makeList" name="i_sMakeCd" data-beusable-tracking="" tabindex="-1">
-                                <option value="">제조사를 선택하세요</option>
-                                <option value="001" data-cnt="57">현대</option>
-                                <option value="007" data-cnt="6">제네시스</option>
-                                <option value="002" data-cnt="76">기아</option>
-                                <option value="003" data-cnt="48">쉐보레(GM대우)</option>
-                                <option value="005" data-cnt="36">르노삼성</option>
-                                <option value="004" data-cnt="14">쌍용</option>
-                                <option value="088" data-cnt="0">대우버스</option>
-                                <option value="006" data-cnt="0">기타 제조사</option>
-                            </select></div>
 
-                        </div>
-                        <div class="selectric-wrapper selectric-selectric">
-                            <div class="selectric-hide-select"><select class="selectric" id="modelList" name="i_sModelGrpCd" data-beusable-tracking="" tabindex="-1">
-                                <option value="">모델를 선택하세요</option>
-                            </select></div>
+        <div>
 
-                          </div>
-                        <div class="selectric-wrapper selectric-selectric">
-                            <div class="selectric-hide-select"><select class="selectric" id="detailModelList" name="i_sModelCd" data-beusable-tracking="" tabindex="-1">
-                                <option value="">세부모델를 선택하세요</option>
-                            </select></div>
 
-                           </div>
-                        <button type="submit" class="btn_move searchCarCnt searchDirectcenter">검색 (237대)</button>
+            <div class="align_field">
+                <div class="all_check">
+                    <div class="checker" id="uniform-allCheck">
+                        <span :class="{checked:allchecked}" @click="allcheck(cars)" :key="allchecked"><input type="checkbox" name="allCheck" id="allCheck" class="uniform" title="전체체크"></span>
                     </div>
-                </form>
+                </div>
+                <div class="align">
+                    <!-- 20181217 VR차량 -->
+                    <span><a href="" class="3dview_flag txt "><em class="vr_ordermark"></em> 3D 라이브 뷰 차량</a></span>
+                    <!-- //20181217 VR차량 -->
+                    <span class="basic"><a href=""
+                                           class="txt">기본정렬</a></span>
+                    <span><a href="" class="txt">가격순</a><a href="" class="down ">낮은순</a>
+												<a href="" class="up ">높은순</a>
+						</span>
+                    <span><a href="" class="txt">주행거리 순</a><a
+                            href="" class="down ">낮은순</a>
+						<a href=""
+                           class="up ">높은순</a>
+						</span>
+                    <span><a href="" class="txt">연식 순</a><a
+                            href="" class="down ">낮은순</a>
+						<a href="" class="up ">높은순</a>
+						</span>
+                </div>
             </div>
-        </div>
-        <div class="mypage_CarList interest">
-        <carList></carList>
+            <div class="result_list">
+                <table>
+                    <caption>관심차량</caption>
+
+                    <colgroup>
+                        <col style="width: 55px;">
+                        <col style="width: 190px;">
+                        <col style="width: 485px;">
+                        <col style="width: 290px;">
+                        <col>
+                    </colgroup>
+
+                    <tbody  v-for="car of cars" :key="car.carcd">
+                    <tr>
+                        <td class="check">
+                            <div class="checker" id="uniform-interest_list_check1">
+                                <span  :class="{checked:car.checked}" @click="check(car)" @change='updateCheckall(cars)'>
+                                    <input type="checkbox" id="interest_list_check1" class="uniform"  >
+                                </span>
+                            </div>
+                        </td>
+                        <td class="thumb">
+                            <a  >
+                                <img @click="productClick(car)" :src="car.middleImg" alt="자동차 썸네일">
+                            </a>
+                        </td>
+                        <td class="car_info">
+                            <a @click="productClick(car)" class="name">모델명:{{car.modelnm}} </a>
+                            <span class="md_year">연식:{{car.beginYear}}년 &nbsp;<br>주행거리:{{car.milage}}km</span>
+                            <span class="price">가격{{car.price}}만원 </span>
+                        </td>
+                        <td class="car_opt">
+                            <ul class="opt_list">
+                                <li>
+                                    <span class="pt">사고 : {{car.recCommentCd}}</span>
+                                    <span>{{car.fuleTypedName}}</span>
+                                </li>
+                                <li>
+                                    <span>{{car.exteriorColornm}}</span>
+                                    <span>{{car.categorynm}}</span>
+                                </li>
+                                <li>
+                                    <span>{{car.centerRegion}}</span>
+                                    <span>{{car.passCnt}}인승</span>
+                                </li>
+                            </ul>
+
+
+                        </td>
+
+                    </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="btn_cont">
+                <button @click="pop_rendar" class="delete" >추가</button>
+                <modals-container />
+            </div>
+            <pagination :pagination="List" @movePage="movePageBlock" ref="pagination"></pagination>
+
+
         </div>
     </div>
 </template>
 <script>
-    import sendCarPop from "./sendCarPop"
+
     import {checkBox} from "../mixins/checkBox";
-    import carList from "./carList";
-
+    import axios from'axios'
+    import pagination from "../common/Pagination2";
+    import sendCarPop from "./sendCarPop";
     export default {
-        components:{carList},
-        data() {
+        components:{
+            pagination
+        },
+        data(){
             return {
-                allchecked : false,
-                List       : [
-                    {
-                        carID: "001", title: "벤츠 GLE-클래스 W166", subTitle: "GLE350 d 4MATIC 프리미엄", checked: false, caryear: "18년 11월식(18년형)", distance: "7,368km", price: "7,990만원", acident: "무사고",
-                        color: "갈색", region: "경기/인천", fuel: "디젤", carType: "SUV", people: "5인승", thumb: "https://img.kcar.com/carpicture/carpicture06/pic6026/kcar_60263050_001.jpg"
-                    },
-
-                    {
-                        carID: "002", title: "벤츠 GLE-클래스 W166", subTitle: "GLE350 d 4MATIC 프리미엄", checked: false, caryear: "18년 11월식(18년형)", distance: "7,368km", price: "7,990만원", acident: "무사고",
-                        color: "갈색", region: "경기/인천", fuel: "디젤", carType: "SUV", people: "5인승", thumb: "https://img.kcar.com/carpicture/carpicture06/pic6026/kcar_60263050_001.jpg"
-                    }
-                ],
-                checkedList: []
+                context:'http://localhost:8080/',
+                allchecked:false,
+                List:[],
+                checkedList:[],
+                cars:[]
 
             }
         },
         methods: {
+            movePageBlock(pagination){
+                this.cars= pagination
+            },
+            addHistory( carItem ){
+                this.$store.dispatch( 'cmm/addSeenHistory' , carItem )
+            },
+            productClick(carItem){
+                this.addHistory(carItem)
+                this.$store.dispatch('cmm/setProduct',carItem)
+                this.$router.push('/product')
+            },
+            pop_rendar(){
 
-            popRendor() {
-
-                for (let i = 0; i < this.List.length; i++) {
-                    if (this.List[i].checked == true) {
-                        this.checkedList.push(this.List[i])
+                for(let i=0;i<this.cars.length;i++) {
+                    if (this.cars[i].checked == true) {
+                        this.checkedList.push(this.cars[i])
                     }
                 }
-                this.$modal.show(sendCarPop, {
-                    checkedList: this.checkedList,
-                    modal      : this.$modal
-                }, {
-                    name     : 'dynamic-modal',
-                    width    : '800px',
-                    height   : '800px',
+                this.$modal.show(sendCarPop,{
+                    checkedList : this.checkedList,
+                    modal : this.$modal},{
+                    name: 'dynamic-modal',
+                    width : '800px',
+                    height : '680px',
                     draggable: true,
-                }, {closed: this.checkedList = []})
+                },{closed:this.checkedList=[]})
             },
 
+        },
+        mixins:[checkBox],
+        created(){
+            axios
+                .get(`${this.context}/company/carList`)
+                .then(res=>{
+                    res.data.result.forEach(el=>{
+                        el.checked=false
+                        this.List.push(el)
+                        console.log('1')
+                    })
+                    this.$refs.pagination.first()
+
+                })
+                .catch(e=>{
+                    alert(`axios fail${e}`)
+                })
 
         },
-        mixins : [checkBox]
+
     }
+
 
 </script>
 <style>
-    .center_btn button {
+    .center_btn button{
         display: inline-block;
         width: 217px;
         height: 45px;
@@ -107,13 +180,5 @@
         border: 1px solid #000;
         text-align: center;
         font-size: 13px;
-    }
-
-
-    .btn_move{
-        width: 140px !important;
-    }
-    .centerGuide{
-        padding: 0!important;
     }
 </style>

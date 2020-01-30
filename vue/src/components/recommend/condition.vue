@@ -112,7 +112,6 @@
 
 
                                         <div class="deType02">
-
                                             <div class="type_le">
                                                 <h5>연식 <span class="icon_must">*</span></h5>
                                                 <div   id="startYear"  class="selectric-wrapper selectric-selectric selectric-below selectric-hover" @click= "searchKeyClick(`startYear`)">
@@ -312,23 +311,7 @@
                         </div>
                         <div class="helpAgr">
 
-                            <div class="helpAgrOpen secretYnTab">
-                                신청한 내용을 공개하시겠어요?
-                                <label for="bTabAgreeY">
-                                        <span class="holds-cbox checked"><input type="radio" id="bTabAgreeY"
-                                                                                class="cbox"
-                                                                                value="N"
-                                                                                onclick="javascript:secretYn(this.value);"
-                                                                                checked="checked"></span> <b>공개&nbsp;
-                                    &nbsp;</b>
-                                </label>
-                                <label for="bTabAgreeN">
-                                        <span class="holds-cbox"><input type="radio" id="bTabAgreeN" class="cbox"
-                                                                        value="Y"
-                                                                        onclick="javascript:secretYn(this.value);"></span>
-                                    <b>비공개</b>
-                                </label>
-                            </div>
+
                             <div class="helpAgrBtn">
                                 <a @click.prevent @click="sendRecommend" href="" class="agrBtnOk">신청완료</a>
                             </div>
@@ -351,7 +334,7 @@
                 recommend:{ userId:'',makeNm : '제조사를 선택하세요', modelGrpNm : '모델을 선택하세요', modelNm : '세부모델을 선택하세요',
                             minBeginYear :'최소', maxBeginYear:'최대',minMilage:'최소',maxMilage:'최대',transmissioncdName:'변속기를 선택하세요',
                             fuleTypedName:'연료를 선택하세요',recCommentCd:'',centerRegion:'지역',centerName:'직영점',minPrice:'최소',
-                            maxPrice:'최대'},
+                            maxPrice:'최대',recoCode:0,auth:true,name:'강성조'},
                 minYears:[],
                 maxYears:[],
                 transmissions:['오토','수동'],
@@ -456,9 +439,10 @@
             },
             sendRecommend(){
                 alert("신청이 완료되었습니다!!")
-                alert(this.$store.state.user.user.userid)
                 this.recommend.userId='kangsj24'
-                axios.post('/recommend/inputRecommend', this.recommend)
+
+                axios
+                    .post('/recommend/inputRecommend', this.recommend)
                     .then(res => { console.log(res.data) })
                     .catch(e=>{
                         alert('erorr'+e)
@@ -513,5 +497,8 @@
     .mc_search .selectric-items .selectric-scroll {
         overflow-x: hidden;
         overflow-y: auto;
+    }
+    .helpAgrBtn{
+        padding: 20px;
     }
 </style>

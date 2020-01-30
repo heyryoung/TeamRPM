@@ -6,6 +6,7 @@ import com.rpm.web.contents.CarsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,8 +40,13 @@ public class RecommendController {
     }
     @PostMapping("/inputRecommend")
     public void inputRecommend(@RequestBody Recommend recommend){
+        System.out.println(recommend.toString());
+        recommend.setAuth(true);
+        recommend.setRecoCode(String.valueOf(recommendRepository.count()/2));
         recommendRepository.save(recommend);
         Recommend recommendCenter =new Recommend();
+        recommendCenter.setAuth(false);
+        recommendCenter.setRecoCode(String.valueOf(recommendRepository.count()/2));
         recommendCenter.setFuleTypedName(recommend.getFuleTypedName());
         recommendCenter.setMaxBeginYear(recommend.getMaxBeginYear());
         recommendCenter.setMinBeginYear(recommend.getMinBeginYear());
@@ -53,7 +59,16 @@ public class RecommendController {
         recommendCenter.setMakeNm(recommend.getMakeNm());
         recommendCenter.setTransmissioncdName(recommend.getTransmissioncdName());
         recommendCenter.setUserId(companyRepository.findByCenterName(recommend.getCenterName()));
+        recommendCenter.setName(recommend.getName());
         recommendRepository.save(recommendCenter);
+
+    }
+    @GetMapping("/customerList/{userid}")
+    public List<Recommend> customerList(@PathVariable String userid){
+        System.out.println(userid);
+        List<Recommend> list=recommendRepository.findByUserId(userid);
+        list.sort((a,b) -> b.getRecoSeq().compareTo(a.getRecoSeq()));
+        return  list;
 
     }
 }

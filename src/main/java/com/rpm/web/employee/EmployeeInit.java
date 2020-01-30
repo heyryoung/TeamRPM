@@ -26,7 +26,7 @@ public class EmployeeInit implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         long count = employeeRepository.count();
-        List<String> code= employeeRepository.findByCenterCode();
+        List<String> code= employeeRepository.findCenterCode();
         code.forEach(el->{
 
 

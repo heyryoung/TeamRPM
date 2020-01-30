@@ -47,7 +47,7 @@
                                 <tbody>
                                 <tr id="unitPhoto" cont="index">
                                     <td id="Photo_1" v-for="row of rows" :key="row.rowNum">
-                                        <button type="button" id="addBtn" v-if="row.button">추가하기</button>
+                                       <!-- <button type="button" id="addBtn" v-if="row.button"></button>-->
                                         <img class="compare_img" :src="row.imageUrl" alt="" v-if="row.image">
                                     </td>
 
@@ -57,9 +57,8 @@
                             <table class="tableComp right body" cellspacing="0" id="compRightBody" style="width: 900px;">
                                 <tbody>
 
-                                <tr id="unitSumy1" type="gapSpec" v-for="col of columns" :key="col">
-                                    <td id="Sumy1_1" v-for="row of rows" :key="row.rowNum"></td>
-
+                                <tr class="compare_row" type="gapSpec" v-for="compare of compares" :key="compare">
+                                    <td class="compare_col" v-for="row of compare" :key="row" >{{row}}</td>
                                 </tr>
 
 
@@ -84,28 +83,55 @@
         data:function(){
             return {
                     columns:[
-                        '가격','연식','주행거리','연료','차종','연비','1','2','3','4','5','6','7','8'
+                       '제조사', '기종', '가격','연식','주행거리','연료','변속기'
                     ],
                 rows:[
+                    {rowNum:0,button:true,image:false,imageUrl:''},
                     {rowNum:1,button:true,image:false,imageUrl:''},
                     {rowNum:2,button:true,image:false,imageUrl:''},
                     {rowNum:3,button:true,image:false,imageUrl:''},
                     {rowNum:4,button:true,image:false,imageUrl:''},
-                    {rowNum:5,button:true,image:false,imageUrl:''},
-                ]
+                ],
+                compares: [ [],[],[],[],[],[],[]],
+                send:{userid:'kangsj24',centercode:'114',carcodeList:[]}
+
 
             }
         },props : [
             'checkedList',
         ],methods : {
 
+
+
         },
         created() {
-            for(let i=0; i<this.checkedList.length;i++){
-                this.rows[i].button=false
-                this.rows[i].image=true
-                this.rows[i].imageUrl=this.checkedList[i].thumb
+
+            for(let i=0; i<6;i++){
+
+                if(i<this.checkedList.length) {
+                    this.rows[i].button=false
+                    this.rows[i].image=true
+                    this.rows[i].imageUrl=this.checkedList[i].middleImg
+                    this.compares[0].push(this.checkedList[i].makenm)
+                    this.compares[1].push(this.checkedList[i].modelnm)
+                    this.compares[2].push(this.checkedList[i].price)
+                    this.compares[3].push(this.checkedList[i].beginYear)
+                    this.compares[4].push(this.checkedList[i].milage)
+                    this.compares[5].push(this.checkedList[i].fuleTypedName)
+                    this.compares[6].push(this.checkedList[i].transmissioncdName)
+                    this.send.carcodeList.push(this.checkedList[i].carcd)
+                } else{
+                    this.compares[0].push('')
+                    this.compares[1].push('')
+                    this.compares[2].push('')
+                    this.compares[3].push('')
+                    this.compares[4].push('')
+                    this.compares[5].push('')
+                    this.compares[6].push('')
+                }
             }
+
+
         },
     }
 </script>
@@ -129,4 +155,13 @@
         width: 140px;
         height: 100px;
     }
+    .compare_col{
+
+        border-right: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+        background: #ffffff;
+        text-align: center;
+
+    }
+
 </style>

@@ -258,6 +258,7 @@ export default {
 					gender:this.gender,
 					birthMonth:this.birthMonth,
 					region:this.region,
+					auth:true
 				}
 
 				let headers = {
