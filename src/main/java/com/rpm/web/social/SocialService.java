@@ -9,7 +9,8 @@ import java.util.List;
 @Lazy
 public interface SocialService {
     List<SocialListDto> allList();
-    void writeContent(SocialWriteDto param);
-    void updateContent(SocialWriteDto param);
     SocialDetailDto loadBoard(String boardSeq);
+    void writeContent(SocialWriteDto param);
+    void updateContent(String boardSeq, SocialWriteDto socialWriteDto);
+    void delateContent(String boardSeq);
 }

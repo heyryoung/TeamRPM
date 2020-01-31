@@ -12,7 +12,7 @@
         <div class="col-lg-9">
             <div class="card mt-4">
                 <div class="dropbox" >
-                    <img :src="board.boardImg" v-if="imgSeen" class="img-fluid">
+                    <img :src="board.boardImg" class="img-fluid">
                     <div style="width:300px; float:right">
                         <file-pond
                                 ref="pond"
@@ -132,7 +132,7 @@
                 </div>
             </div>
             <div class="btnbox">
-                <button class="btn btn-primary" @click="inputContent" data-dismiss="modal" type="button">
+                <button class="btn btn-primary" @click="updateContent" data-dismiss="modal" type="button">
                     <i class="fas fa-pen"></i> <b>수정하기</b></button>
                 <button class="btn btn-primary" @click.prevent="modal" data-dismiss="modal" type="button">
                     <i class="fas fa-times"></i> <b>취소하기</b></button>
@@ -146,7 +146,7 @@
     </div>-->
 </template>
 <script>
-    import SnsModal from "./SnsModal.vue"
+    import SnsModal from "./SnsModifyModal.vue"
     import vueFilePond from 'vue-filepond';
     import 'filepond/dist/filepond.min.css';
     import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css';
@@ -185,7 +185,6 @@
                 userName:'',
                 filename:'',
                 content:'',
-                imgSeen:true,
             }
         },
         components: {
@@ -204,12 +203,14 @@
                     return this.contentTitle1 + ' ' + this.contentTitle2 + ' ' + this.contentTitle3
                 }
             },
+            boardImgName(){
+                return (this.filename!=='')?this.$refs.pond.getFile().filename:this.board.boardImg
+            }
         },
         created(){
             this.boardSeq = localStorage.getItem('boardSeq')//기존 board 내용 뿌려주기
             this.$store.dispatch('contents/init')
             this.$store.dispatch('contents/getCategory1',{'param':'KOR','column':'CAR_TYPE'})
-            alert(this.boardSeq)
             axios.get(`${url}/loadBoard/${this.boardSeq}`)
                 .then(res=>{
                     this.board = res.data
@@ -221,10 +222,8 @@
         },
         methods:{
             handleFilePondInit(){
-                this.imgSeen = false
                 this.$refs.pond.getFile()
                 this.filename = this.$refs.pond.getFile().filename
-                console.log(this.imgSeen)
                 console.log(this.filename)
             },
             korCar(korCarID, impCarID){
@@ -289,21 +288,20 @@
                 this.keyWord3 = param.name
                 this.contentTitle3 = this.keyWord3
             },
-            inputContent() {
+            updateContent() {
                 let headers = {
                     'authorization': 'JWT fefege..',
                     'Accept' : 'application/json',
                     'Content-Type': 'application/json'
                 }
                 let data={
-                    boardSeq : this.boardSeq,
-                    boardImgName: this.$refs.pond.getFile().filename,
+                    boardImgName: this.boardImgName,
                     carName : this.contentTitle,
-                    boardContent : this.content,
+                    boardContent : this.board.boardContent,
                     user : this.$store.state.user
                 }
                 console.log(`${this.boardImgName}`);
-                axios.post(`${url}/updateContent`, data , headers)
+                axios.post(`${url}/updateContent/${this.boardSeq}`, data , headers)
                     .then((res)=>{
                         if(res.data === "success"){
                             alert('글이 수정되었습니다')

@@ -24,16 +24,18 @@
                   <li>작성자: @{{board.userid}}</li>
                 </ul>
                 <!--thumb-->
-              <!--  <div>
-                  <a class="btn-like" @click="thumbup" v-if="empty"><i class="far fa-heart fa-2x"></i> {{thumb}}</a>
-                  <a class="btn-like" @click="thumbdown" v-if="full"><i class="fas fa-heart fa-2x"></i>{{thumb}}</a>
-                </div>-->
+                <div style="margin:30px">
+                  <a class="btn-like" @click="thumbup" v-if="empty"><i class="far fa-heart fa-2x"></i> </a>
+                  <a class="btn-like" @click="thumbdown" v-if="full"><i class="fas fa-heart fa-2x"></i></a>
+                  {{board.thumbCount}}
+                </div>
                 <div v-if="myContent">
                   <button class="btn btn-primary" @click="goModify" data-dismiss="modal" type="button">
                   <i class="fas fa-pen"></i> 글 수정하기</button>
                 <button class="btn btn-primary" @click="deleteBoard" data-dismiss="modal" type="button">
                   <i class="far fa-trash-alt"></i> 글 삭제하기</button>
-                  </div>
+                  <modals-container />
+                </div>
                 <div>
                   <!--댓글창-->
                 </div>
@@ -48,20 +50,18 @@
 </template>
 <script>
   import axios from "axios"
+  import SnsModal from "./SnsDeleteModal"
   export default {
     data(){
       return{
         board:'',
-        boardSeq: ''
-        //thumb: "  "+0, //엑시오스로 이 글에 참조된 thumb 테이블 갯수 알아오기.
-        /*empty:true,
-        full:false,*/
-        //writer : {},
+        boardSeq: '',
+        empty:true,
+        full:false,
       }
     },
     created(){
       this.boardSeq = localStorage.getItem('storedData')
-      alert(this.boardSeq)
       axios.get(`http://localhost:8080/loadBoard/${this.boardSeq}`)
       .then(res=>{
         this.board = res.data
@@ -74,12 +74,15 @@
     computed:{
       myContent(){
         return true
-       /* if(this.writer.userid === this.$store.state.user.user.userid){
+       /* if(this.board.userid === this.$store.state.user.user.userid){
           return true
         }else{
           return false
         }*/
-      }
+      },
+      /*thumbs(){
+        return (this.board.thumbs==='')?0:this.board.thumbs
+      }*/
     },
     methods:{
       gotoList(){
@@ -96,7 +99,13 @@
         this.$router.push({path: '/snsmodify'})
       },
       deleteBoard(){
-
+        localStorage.setItem('boardSeq', this.boardSeq)
+        this.$modal.show(SnsModal,{
+          modal: this.$modal},{
+          name: 'dynamic-modal',
+          height: 'auto',
+          draggable: true,
+        })
       }
     }
   }

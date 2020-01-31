@@ -57,11 +57,9 @@ public class SocialController {
     }
 
     @PostMapping("/writeContent")
-    public Map<String, Object> writeContent (@RequestBody SocialWriteDto param){
-        Map<String, Object> map = new HashMap<>();
+    public String writeContent (@RequestBody SocialWriteDto param){
         socialService.writeContent(param);
-        map.put("data", "success");
-        return map;
+        return "success";
     }
 
     @GetMapping("/loadBoard/{boardSeq}")
@@ -69,11 +67,14 @@ public class SocialController {
         return socialService.loadBoard(boardSeq);
     }
 
-    @PostMapping("/updateContent")
-    public Map<String, Object> updateContent (@RequestBody SocialWriteDto param){
-        Map<String, Object> map = new HashMap<>();
-        socialService.updateContent(param);
-        map.put("data", "success");
-        return map;
+    @PostMapping("/updateContent/{boardSeq}")
+    public String updateContent (@PathVariable String boardSeq, @RequestBody SocialWriteDto socialWriteDto){
+        socialService.updateContent(boardSeq, socialWriteDto);
+        return "success";
+    }
+    @GetMapping("/delateContent/{boardSeq}")
+    public String delateContent(@PathVariable String boardSeq){
+        socialService.delateContent(boardSeq);
+        return "success";
     }
 }

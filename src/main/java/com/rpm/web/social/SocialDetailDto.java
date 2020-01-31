@@ -18,4 +18,6 @@ public class SocialDetailDto {
     private String boardDate;
     private String userName;
     private String userid;
+    //private int commentCount;
+    private int thumbCount;
 }
