@@ -19,6 +19,7 @@ public class Revenue {
     @Column(name = "REVENUE_SEQ") @NotNull private Long revenueSeq;
     @Column(name = "CENTER_CODE", length = 3) @NotNull private String centerCode;
     @Column(name = "MONTH") @NotNull private String month;
+    @Column(name = "EM_NAME", length = 20)@NotNull private String emName;
     @Column(name = "EM_CODE") @NotNull private String emCode;
     @Column(name = "EM_REVENUE") @NotNull private int emRevenue;
 }

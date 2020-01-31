@@ -3,7 +3,7 @@
         <ul class="pagination">
             <li class="move prev" @click="prev()" v-if="pageNums.length<0"> <a @click.prevent href=""></a></li>
             <li :class="{'num on':pageNum.on,'num':!pageNum.on}" v-for="(pageNum,index) of pageNums" :key="pageNum.num" @click="pageSwitch(index)"><a>{{pageNum.num}}</a></li>
-            <li class="move next" @click="next()" v-if="pageNums.length==5&& pageNums[4].num<(this.pagination.length/5)+1">
+            <li class="move next" @click="next()" v-if="pageNums.length==5&& pageNums[4].num<(this.pagination.length/5)">
                 <a @click.prevent href=""></a> </li>
         </ul>
     </div>

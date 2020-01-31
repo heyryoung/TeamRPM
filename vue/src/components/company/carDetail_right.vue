@@ -122,11 +122,11 @@
                 this.cars= pagination
             },
             addHistory( carItem ){
-                this.$store.dispatch( 'cmm/addSeenHistory' , carItem )
+                this.$store.dispatch( 'contents/addSeenHistory' , carItem )
             },
             productClick(carItem){
                 this.addHistory(carItem)
-                this.$store.dispatch('cmm/setProduct',carItem)
+                this.$store.dispatch('contents/setProduct',carItem)
                 this.$router.push('/product')
             },
             pop_rendar(){

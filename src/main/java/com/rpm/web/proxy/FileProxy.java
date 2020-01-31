@@ -1,15 +1,15 @@
 package com.rpm.web.proxy;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
+
 import org.springframework.stereotype.Component;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.util.UUID;
 
 @Component
 public class FileProxy {
-/*    @Autowired GenFile genFile;
+    /*@Autowired GenFile genFile;
     public void fileUpload(MultipartFile[] uploadFile) {
         String uploadFolder = "C:\\Users\\User\\git\\EGOV_HANRABONG\\src\\main\\webapp\\resources\\upload";
         File uploadPath = genFile.makeFile(uploadFolder,getFolder());
@@ -27,8 +27,9 @@ public class FileProxy {
                 e.printStackTrace();
             }
         }
-    }*/
-/*    public String getFolder() {
+    }
+    public String getFolder() {
         return currentDate().replace("-", File.separator);
     }*/
+
 }

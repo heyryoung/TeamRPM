@@ -1,10 +1,6 @@
 package com.rpm.web.user;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import com.rpm.web.social.Comment;
+import com.rpm.web.carbook.Carbook;
 import com.rpm.web.social.Social;
 import com.rpm.web.social.Thumb;
 import lombok.*;
@@ -20,7 +16,7 @@ import java.util.List;
 
 @Component @Lazy @Entity
 @Getter @Setter
-@ToString(exclude = {"socials", "comments", "thumbs"})
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="USER")
@@ -44,28 +40,7 @@ public class User implements Serializable {
             orphanRemoval = true)
     private List<Social> socials = new ArrayList<>();
 
-    @OneToMany(mappedBy = "userSeq", cascade = CascadeType.ALL,
-            orphanRemoval = true)
-    private List<Comment> comments = new ArrayList<>();
 
-    @OneToMany(mappedBy = "userSeq", cascade = CascadeType.ALL,
-            orphanRemoval = true)
-    private List<Thumb> thumbs = new ArrayList<>();
-
-
-   /* @OneToMany(fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL)
-    @JoinColumn(name = "USERSEQ")
-    private List<Social> socials = new ArrayList<>();
-    @OneToMany(fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL)
-    @JoinColumn(name = "USERSEQ")
-    private List<Comment> comments = new ArrayList<>();
-    @OneToMany(fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL)
-    @JoinColumn(name = "USERSEQ")
-    private List<Thumb> thumbs = new ArrayList<>();
-*/
     @Builder
     private User(String userid, String passwd, String name, String email,
                  String gender, String birthMonth, String region) {

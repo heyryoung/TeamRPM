@@ -4,10 +4,7 @@ import contents from "./contents/contents"
 import user from './user/user'
 import recommend from "./recommend/recommend"
 import cmm from "./cmm/cmm"
-
-import snsPage from './social/snsPage'
-import snsDetail from './social/snsDetail'
-import snsModify from './social/snsModify'
+import carbook from "./carbook/carbook"
 import magazine from './magazine/magazine'
 
 
@@ -17,10 +14,8 @@ export const store = new Vuex.Store({
     modules: {
         cmm,
         recommend,
+        carbook,
         user,
-        snsPage,
-        snsDetail,
-        snsModify,
         contents,
         magazine
 

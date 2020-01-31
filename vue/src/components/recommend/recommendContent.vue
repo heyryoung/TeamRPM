@@ -46,7 +46,7 @@
                         <col>
                     </colgroup>
 
-                    <tbody v-for="car of recommendedCar" :key="car.carcd">
+                    <tbody v-for="car of recommendedCar" :key="car.cid">
                     <tr>
                         <td class="check">
                             <div class="checker" id="uniform-interest_list_check1">
@@ -148,11 +148,11 @@
                 },{closed:this.checkedList=[]})
             },
             addHistory( carItem ){
-                this.$store.dispatch( 'cmm/addSeenHistory' , carItem )
+                this.$store.dispatch( 'contents/addSeenHistory' , carItem )
             },
             productClick(carItem){
                 this.addHistory(carItem)
-                this.$store.dispatch('cmm/setProduct',carItem)
+                this.$store.dispatch('contents/setProduct',carItem)
                 this.$router.push('/product')
             },
             movePageBlock(pagination){

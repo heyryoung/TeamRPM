@@ -26,7 +26,7 @@ public class SocialInit implements ApplicationRunner {
     @Autowired ThumbRepository thumbRepository;
 
     @Override
-    public void run(ApplicationArguments args) throws Exception {
+    public void run(ApplicationArguments args) throws Exception {/*
 
         //socialBoard 테이블을 지운 후 social더미만 먼저 실행
         //index관련 에러날 수 있음.
@@ -93,6 +93,6 @@ public class SocialInit implements ApplicationRunner {
                 thumbRepository.save(socialDummy.makeThumbList(user, commentedSocialList));
             }
             System.out.println("thumb 등록 완료");
-        }
+        }*/
     }
 }

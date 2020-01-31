@@ -4,7 +4,6 @@ import com.rpm.web.contents.Cars;
 import com.rpm.web.contents.CarsRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,8 +29,10 @@ public class SocialServiceImpl implements SocialService{
         }
         Iterable<Cars> cars = carsRepository.findAll();
         List<Cars> carList = new ArrayList<>();
-        for (Cars s : cars) {
-            carList.add(s);
+
+        for (Cars c : cars) {
+            carList.add(c);
+
         }
 
         List<SocialListDto> lists =  list.stream()

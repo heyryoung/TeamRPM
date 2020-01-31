@@ -47,5 +47,10 @@
 .mypageTab{
     margin-left: 700px;
 }
-
+.mypageTab a.on span {
+    font-weight: 600;
+    background-color: rgb(0, 31, 65)!important;
+    color: #fff;
+    border-color: whitesmoke!important;
+}
 </style>

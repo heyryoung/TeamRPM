@@ -2,16 +2,29 @@ import { HorizontalBar } from './BaseCharts'
 
 export default {
   extends: HorizontalBar,
+  props:['data'],
+  data(){
+    return{
+      name:[],
+      revenue:[]
+    }
+  },
+  methods:{
+    dataInit(){
+      this.renderChart({
+        labels: Object.keys(this.data),
+        datasets: [
+          {
+            label: '판매량',
+            backgroundColor: '#33ccff',
+            data: Object.values(this.data)
+          }
+        ]
+      }, {responsive: true, maintainAspectRatio: false})
+
+    },
+
+  },
   mounted () {
-    this.renderChart({
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-      datasets: [
-        {
-          label: 'Data One',
-          backgroundColor: '#f87979',
-          data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11]
-        }
-      ]
-    }, {responsive: true, maintainAspectRatio: false})
   }
 }

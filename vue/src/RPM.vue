@@ -21,6 +21,8 @@
             <div class="collapse navbar-collapse justify-content-start" id="navbarSupportedContent">
                 <ul class="navbar-nav">
                     <li class="nav-item">
+
+
                         <Slide noOverlay ableOutsideClick :crossIcon="false">
                             <router-link to="/">HOME</router-link>
                             <router-link v-if="this.$store.state.user.auth==false" to="/login">로그인</router-link>
@@ -54,9 +56,11 @@
 
 <script>
     import {Slide} from 'vue-burger-menu'
+
     export default {
         name: 'app',
         components: {
+
             Slide
         },
         methods:{

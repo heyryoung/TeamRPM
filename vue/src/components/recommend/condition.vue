@@ -143,7 +143,7 @@
                                                     <div class="selectric-items" tabindex="-1">
                                                         <div class="selectric-scroll" style="width: 230px; visibility: visible; display: block;">
                                                             <ul>
-                                                                <li @click="selectMaxYear(year)" v-for="year of maxYears" :key="year" data-index="0" class="">{{year}}</li>
+                                                                <li @click="recommend.maxBeginYear=year" v-for="year of maxYears" :key="year" data-index="0" class="">{{year}}</li>
 
                                                             </ul>
                                                         </div>
@@ -409,6 +409,41 @@
                     })
 
 
+            },
+            selectMinYear(year, i){
+                this.recommend.minBeginYear=year
+                this.maxYears=[]
+                for(i;i<this.minYears.length;i++){
+                    this.maxYears.push(this.minYears[i])
+                }
+
+            },
+            selectMilage(milage,i){
+                this.recommend.minMilage=milage
+                this.maxMilages=[]
+                for(i;i<this.minMilages.length;i++){
+                    this.maxMilages.push(this.minMilages[i])
+                }
+            },
+            selectMinPrice(price,i){
+                this.recommend.minPrice=price
+                this.maxPrice=[]
+                for(i;i<this.minPrices.length;i++){
+                    this.maxPrices.push(this.minPrices[i])
+                }
+            },
+            selectRegion(region){
+                this.recommend.centerRegion=region
+                axios
+                    .get(`http://localhost:8080/recommend/centerName/`+region)
+                    .then((res)=>{
+                        this.centerNames=res.data
+
+
+                    })
+                    .catch((e)=>{
+                        alert('잘못된 요청입니다.'+e)
+                    })
             }
 
 

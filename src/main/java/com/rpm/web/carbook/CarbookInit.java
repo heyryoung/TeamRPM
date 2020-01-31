@@ -1,4 +1,175 @@
 package com.rpm.web.carbook;
 
-public class CarbookInit {
+import com.rpm.web.user.*;
+import com.rpm.web.util.Printer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Component
+public class CarbookInit implements ApplicationRunner {
+    @Autowired RecordRepository recordRepository;
+    @Autowired UserRepository userRepository;
+    @Autowired Printer printer;
+    private CarbookRepository carbookRepository;
+
+
+    public CarbookInit(CarbookRepository carbookRepository) {
+        this.carbookRepository = carbookRepository;
+
+
+    }
+
+    @Override
+    public void run(ApplicationArguments args) throws Exception {
+        mycarInit();
+        recordInit();
+
+
+
+
+
+
+    }
+    public void mycarInit(){
+        String[] brand ={ "현대" ,"기아" , "gm" , "르노" , "쌍용"};
+        String[] hyundai ={"그랜저", "아반떼", "소나타", "산타페",
+                "스타렉스","에쿠스", "투싼", "팰리세이드" };
+        String[] kia = {"k3","k5","k7","k9","모닝" ,"모하비", "스포티지",
+                "소렌토", "소울", "카니발", "프라이드"};
+        String[] gm ={ "말리부", "스파크","올란도", "윈스톰", "임팔라",
+                "카마로", "크루즈" ,"트랙스"};
+        String[] rn ={"sm3","sm5","sm6","sm7","qm3","qm5","qm6"};
+        String[] ss = {"렉스턴", "무쏘","체어맨","코란도","티볼리"};
+
+        long count = carbookRepository.count();
+        Carbook carbook = null;
+        Iterable<User> users = userRepository.findAll();
+        List<User> list = new ArrayList<>();
+        for(User u : users){
+            list.add(u);
+
+        }
+
+
+
+
+
+        if(count ==0 && userRepository.count()!=0){
+
+            for(int i = 0 ; i < 500; i++){
+                carbook = new Carbook();
+
+                int ranBrand = (int)(Math.random()*5);
+                carbook.setBrand(brand[ranBrand]);
+                switch(carbook.getBrand()){
+                    case "현대":
+                        int ranHyundai = (int)(Math.random()*hyundai.length);
+                        carbook.setModel(hyundai[ranHyundai]);
+                        break;
+                    case "기아":
+                        int rankia = (int)(Math.random()*kia.length);
+                        carbook.setModel(kia[rankia]);
+
+                        break;
+                    case "gm":
+                        int ranGm = (int)(Math.random()*gm.length);
+                        carbook.setModel(gm[ranGm]);
+                        break;
+                    case "르노":
+                        int ranRN = (int)(Math.random()*rn.length);
+                        carbook.setModel(rn[ranRN]);
+                        break;
+                    case "쌍용":
+                        int ranSS = (int)(Math.random()*ss.length);
+                        carbook.setModel(ss[ranSS]);
+                        break;
+
+
+
+
+                }
+                carbook.setYear( String.valueOf(
+                        (int)Math.floor(Math.random() * (19 - 10 + 1) + 10)
+                ) );
+                carbook.setMonth( String.valueOf(
+                        (int)(Math.random()*12)+1
+                ) );
+                carbook.setDistance( String.valueOf(
+                        (int)(Math.random()*99999)+1000
+                ) );
+                carbook.setUserSeq(list.get(i));
+
+
+
+                carbookRepository.save(carbook);
+
+
+
+
+
+            }
+        }
+    }
+    public void recordInit(){
+        Record record = null;
+        long counter = recordRepository.count();
+        printer.accept(String.valueOf(counter));
+        Iterable<Carbook> carbooks = carbookRepository.findAll();
+        List<Carbook> listCarbook =new ArrayList<>();
+        for(Carbook c: carbooks){
+            listCarbook.add(c);
+
+        }
+
+
+        if(counter == 0 && carbookRepository.count()!=0){
+            for(int i = 0 ; i < 3000; i++){
+                record = new Record();
+                record.setDate(randDate());
+                record.setServiceCode(
+                        (((int)(Math.random()*2))== 0 ?
+                                "refuel" : "check")
+                );
+                record.setPrice(String.valueOf(
+                        (int)((Math.random()*10)+1)*10000
+                ));
+                /*record.setMycarId(
+                        listCarbook.get(
+                                (int)(Math.random()*500))
+                );*/
+
+                recordRepository.save(record);
+
+            }
+
+
+
+
+        }
+
+    }
+    public String randDate(){
+
+        String result = null;
+        String year = String.valueOf(
+                (int)Math.floor(Math.random() * (20 - 19 + 1) + 19)
+        );
+        int month =
+                (int)(Math.random()*12)+1;
+        int day =
+                (int)(Math.random()*30) +1;
+
+        result = year+((month<10 && month%10!=0)?"0"+month : month ) +
+                ((day<10 && day%10!=0)? "0"+day:day);
+
+        return result;
+
+    }
+
+
 }
