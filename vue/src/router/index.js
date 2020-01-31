@@ -53,7 +53,7 @@ export default new Router({
         {path:'/mapList2', name:'mapList2', component : MapList2},
         {path:'/sale', name:'sale', component : Sale},
         {path:'/sns', name:'snspage', component : SnsPage},
-        {path:'/snsdetail/:id', name:'snsdetail', component : SnsDetail},
+        {path:'/snsdetail', name:'snsdetail', component : SnsDetail},
         {path:'/snsmodify', name:'snsmodify', component : SnsModify},
         {path:'/snswrite', name:'snswrite', component : SnsWrite},
         {path:'/payment', name:'payment', component : Payment},

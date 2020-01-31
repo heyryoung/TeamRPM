@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.util.*;
 
@@ -37,10 +38,9 @@ public class SocialController {
     @PostMapping("/uploadImg")
     public String uploadImg(MultipartHttpServletRequest uploadFile) {
         Iterator<String> itr =uploadFile.getFileNames();
-        MultipartFile mfile = null;
         String filename = itr.next();
         System.out.println(filename);
-        mfile = uploadFile.getFile(filename);
+        MultipartFile mfile = uploadFile.getFile(filename);
         String origName=mfile.getOriginalFilename();
         String path = "C:\\Users\\yejee\\IdeaProjects\\TeamRPM\\src\\main\\resources\\static\\img\\";
         File serverFile = new File(path +origName);
@@ -51,22 +51,28 @@ public class SocialController {
         }
         return "uploadImg";
     }
-    @PostMapping("/searchModel/{param}")//제조사->모델명 찾기
-    public Map<String, Object> searchModel(@PathVariable String param){
-        Map<String, Object> map = new HashMap<>();
-
-        return map;
-    }@PostMapping("/searchModelName/{param}")
-    public Map<String, Object> searchModelName(@PathVariable String param){
-        Map<String, Object> map = new HashMap<>();
-
-        return map;
+    @DeleteMapping("/uploadImg")
+    public String uploadImg() {
+        return "uploadImg";
     }
+
     @PostMapping("/writeContent")
     public Map<String, Object> writeContent (@RequestBody SocialWriteDto param){
         Map<String, Object> map = new HashMap<>();
-        System.out.println("1");
-        printer.accept("들어옴");
+        socialService.writeContent(param);
+        map.put("data", "success");
+        return map;
+    }
+
+    @GetMapping("/loadBoard/{boardSeq}")
+    public SocialDetailDto loadBoard(@PathVariable String boardSeq){
+        return socialService.loadBoard(boardSeq);
+    }
+
+    @PostMapping("/updateContent")
+    public Map<String, Object> updateContent (@RequestBody SocialWriteDto param){
+        Map<String, Object> map = new HashMap<>();
+        socialService.updateContent(param);
         map.put("data", "success");
         return map;
     }

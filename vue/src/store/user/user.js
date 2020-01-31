@@ -6,9 +6,6 @@ const state = {
     user : {},
     auth: false,
     fail : 'fail'
-
-
-
 }
 const getters = {
 

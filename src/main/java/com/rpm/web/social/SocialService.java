@@ -8,5 +8,8 @@ import java.util.List;
 @Component
 @Lazy
 public interface SocialService {
-    public List<SocialListDto> allList();
+    List<SocialListDto> allList();
+    void writeContent(SocialWriteDto param);
+    void updateContent(SocialWriteDto param);
+    SocialDetailDto loadBoard(String boardSeq);
 }
