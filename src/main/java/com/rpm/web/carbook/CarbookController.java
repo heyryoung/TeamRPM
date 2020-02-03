@@ -2,6 +2,7 @@ package com.rpm.web.carbook;
 
 import com.rpm.web.user.User;
 import com.rpm.web.util.Printer;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,8 +37,8 @@ public class CarbookController {
                 List<Record> records = new ArrayList<>();
                 if(itRecord !=null){
                     for(Record r: itRecord){
-                        Record bean = modelMapper.map(r, Record.class);
-                        records.add(bean);
+
+                        records.add(r);
                         printer.accept("in the carbook.for");
 
                     }
@@ -63,6 +64,7 @@ public class CarbookController {
 
         List<Record> list = new ArrayList<>();
         for(Record r : records){
+
             list.add(r);
 
         }
