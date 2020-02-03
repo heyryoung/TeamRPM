@@ -1,6 +1,7 @@
 package com.rpm.web.social;
 
 import com.rpm.web.proxy.PageProxy;
+import com.rpm.web.user.User;
 import com.rpm.web.user.UserRepository;
 import com.rpm.web.util.Printer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.util.*;
 
@@ -19,9 +21,11 @@ public class SocialController {
     @Autowired UserRepository userRepository;
     @Autowired SocialService socialService;
     @Autowired PageProxy pager;
+    @Autowired ThumbRepository thumbRepository;
 
-    @GetMapping("/viewList/{pageNo}")
-    public SocialListDto[] viewList(@PathVariable String pageNo){
+    @GetMapping("/viewList/{pageNo}/{userid}")
+    public Map<String, Object> viewList(@PathVariable String pageNo, @PathVariable String userid){
+        Map<String, Object> map = new HashMap<>();
         pager.setPageNum(Integer.parseInt(pageNo));
         pager.setPageSize(12);
         pager.paging(socialService.allList());
@@ -30,17 +34,19 @@ public class SocialController {
         for(int i=0; i<thisPageSize; i++){
             list[i]=socialService.allList().get(pager.getStartRow()+i);
         }
-        printer.accept(pageNo+"페이지 로딩");
-        return list;
+        map.put("boardList", list);
+        if(!userid.equals("undefined")){
+            map.put("thumbedboard", socialService.thumbed(userid));
+        }
+
+        return map;
     }
 
     @PostMapping("/uploadImg")
     public String uploadImg(MultipartHttpServletRequest uploadFile) {
         Iterator<String> itr =uploadFile.getFileNames();
-        MultipartFile mfile = null;
         String filename = itr.next();
-        System.out.println(filename);
-        mfile = uploadFile.getFile(filename);
+        MultipartFile mfile = uploadFile.getFile(filename);
         String origName=mfile.getOriginalFilename();
         String path = "C:\\Users\\yejee\\IdeaProjects\\TeamRPM\\src\\main\\resources\\static\\img\\";
         File serverFile = new File(path +origName);
@@ -51,23 +57,53 @@ public class SocialController {
         }
         return "uploadImg";
     }
-    @PostMapping("/searchModel/{param}")//제조사->모델명 찾기
-    public Map<String, Object> searchModel(@PathVariable String param){
-        Map<String, Object> map = new HashMap<>();
-
-        return map;
-    }@PostMapping("/searchModelName/{param}")
-    public Map<String, Object> searchModelName(@PathVariable String param){
-        Map<String, Object> map = new HashMap<>();
-
-        return map;
+    @DeleteMapping("/uploadImg")
+    public String uploadImg() {
+        return "uploadImg";
     }
+
     @PostMapping("/writeContent")
-    public Map<String, Object> writeContent (@RequestBody SocialWriteDto param){
-        Map<String, Object> map = new HashMap<>();
-        System.out.println("1");
-        printer.accept("들어옴");
-        map.put("data", "success");
-        return map;
+    public String writeContent (@RequestBody SocialWriteDto param){
+        socialService.writeContent(param);
+        return "success";
     }
+
+    @GetMapping("/loadBoard/{boardSeq}")
+    public SocialDetailDto loadBoard(@PathVariable String boardSeq){
+        return socialService.loadBoard(boardSeq);
+    }
+
+    @PostMapping("/updateContent/{boardSeq}")
+    public String updateContent (@PathVariable String boardSeq, @RequestBody SocialWriteDto socialWriteDto){
+        socialService.updateContent(boardSeq, socialWriteDto);
+        return "success";
+    }
+    @GetMapping("/deleteContent/{boardSeq}")
+    public String deleteContent(@PathVariable String boardSeq){
+        socialService.deleteContent(boardSeq);
+        return "success";
+    }
+
+    @GetMapping("/thumbUp/{boardSeq}/{userid}")
+    public String thumbUp(@PathVariable String boardSeq, @PathVariable String userid){
+        socialService.thumbUp(boardSeq, userid);
+        return "success";
+    }
+    @GetMapping("/thumbDown/{boardSeq}/{userid}")
+    public String thumbDown(@PathVariable String boardSeq, @PathVariable String userid){
+        socialService.thumbDown(boardSeq, userid);
+        return "success";
+    }
+
+    @GetMapping("/thumbed/{boardSeq}/{userid}")
+    public String thumbed(@PathVariable String boardSeq, @PathVariable String userid){
+        String result = "";
+        Social social = socialRepository.findById(Long.parseLong(boardSeq)).get();
+        User user = userRepository.findByUserid(userid);
+        Thumb thumb = thumbRepository.findByBoardSeqAndUserSeq(social, user);
+        if(thumb != null){result = "true";}
+        else{result = "false";}
+        return result;
+    }
+
 }

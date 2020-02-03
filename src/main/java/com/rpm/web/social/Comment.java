@@ -1,3 +1,4 @@
+/*
 package com.rpm.web.social;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -45,3 +46,4 @@ public class Comment implements Serializable {
         this.commentDetail = commentDetail;
     }
 }
+*/

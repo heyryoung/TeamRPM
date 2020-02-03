@@ -37,6 +37,7 @@ public class UserDummy{
                 "paran.com","yahoo.co.kr","chollian.net","hanmail.net","kebi.com");
         List<String> regions = Arrays.asList("서울","인천","대전","대구","광주","부산","울산","세종","경기","강원","경남","경북",
                 "전남","전북","충남","충북","제주");
+        Collections.shuffle(LN);
         Collections.shuffle(FN);
         Collections.shuffle(genders);
         Collections.shuffle(emails);
