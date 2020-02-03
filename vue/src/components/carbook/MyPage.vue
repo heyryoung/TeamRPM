@@ -28,7 +28,7 @@
             <div class="changeInfo">
                 <h2>주행거리: {{this.mycar.distance}}km</h2>
                 <h2>내 차 연비: 7.5km/L</h2>
-                <h2>마지막 정비일:  {{this.record[this.record.length-1].date}}</h2>
+                <h2>마지막 정비일:  {{this.record[0].date}}</h2>
             </div>
             <div class="col-md-6 col-lg-3">
                 <div class="widget-small primary coloured-icon"><i class="icon fa fa-users fa-3x"></i>
@@ -75,7 +75,11 @@
                             <th>주유/정비</th>
                             <th>내역</th>
                             <th>금액</th>
-                            <th><a href=""><i @click="insertRecord" class="fas fa-plus-square"></i></a></th>
+                            <th><a  href=""><i  @click.prevent="insertRecord" class="fas fa-plus-square"></i></a></th>
+
+
+
+
                         </tr>
                         </thead>
                         <tbody>
@@ -85,13 +89,15 @@
                             <td v-else>정비</td>
                             <td>{{i.detail}}</td>
                             <td>{{i.price}}</td>
-                            <td><a href=""><i @click="deleteRecord" class="fas fa-trash-alt"></i>
-                                <modals-container /></a></td>
+                            <td><a   href=""><i @click="deleteRecord" class="fas fa-trash-alt"></i></a></td>
+
                         </tr>
 
                         </tbody>
                     </table>
+
                 </div>
+                <modals-container />
             </div>
 
         </div>
@@ -102,27 +108,34 @@
 
 <script>
 import {mapState} from 'vuex'
-import addModal from './AddModal'
+import AddModal from './AddModal'
     export default {
         name: "MyCarPage",
         data(){
             return{
-             }
+                record : JSON.parse(localStorage.getItem("record")),
+                mycar :JSON.parse(localStorage.getItem("mycar"))
+
+
+                }
+
+
+
         },
         computed:{
-            ...mapState({
-                mycar: state => state.carbook.mycar,
-                user: state=>state.user.user,
-                record: state=>state.carbook.record,
-                auth: state=>state.user.auth
+        ...mapState({
+                user: state => state.user.user,
+                auth: state => state.user.auth
 
             })
+
 
         },
         methods:{
 
+
             insertRecord(){
-                this.$modal.show(addModal,{
+                this.$modal.show(AddModal,{
                     modal: this.$modal},{
                     name: 'dynamic-modal',
                     height: 'auto',
@@ -136,13 +149,15 @@ import addModal from './AddModal'
         },
 
         created() {
-            if(this.$store.state.user.auth === false){
+            if(this.mycar === {}){
                 alert('잘못된접근')
                 this.$router.push('/login')
 
             }
             else{
-                this.$store.dispatch('carbook/getMycar',{user:this.user })
+                console.log('user === '+ this.user.userseq)
+                // this.user.useseq = JSON.parse(localStorage.getItem("token"))
+                //this.$store.dispatch('carbook/getMycar',{user:this.user })
 
             }
 

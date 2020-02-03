@@ -10,12 +10,14 @@ import java.util.List;
 public interface RecordRepository extends CrudRepository<Record, Long> {
     public List<Record> findByMycarIdOrderByDate(Long id);
 
-    @Query(value ="SELECT * FROM RECORD INNER JOIN MYCAR ON RECORD.MYCAR_ID = MYCAR.MYCARID WHERE MYCAR_ID =:mycar ORDER BY RDATE",
-                nativeQuery = true)
-    public List<Record> findbyMycarId(long mycar);
+    @Query(value = "SELECT * FROM RECORD INNER JOIN MYCAR ON MYCAR.MYCARID = RECORD.MYCAR_ID WHERE MYCAR_ID =:id",
+            nativeQuery = true)
+    public List<Record> findByMycarId(long id);
 
 
     public void deleteRecordByRecordId(long id);
+
+
 
 
 

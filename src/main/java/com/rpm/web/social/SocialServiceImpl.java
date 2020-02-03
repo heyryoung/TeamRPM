@@ -21,7 +21,6 @@ public class SocialServiceImpl implements SocialService{
     @Autowired SocialRepository socialRepository;
     @Autowired CarsRepository carsRepository;
     @Autowired ModelMapper modelMapper;
-    @Bean public ModelMapper modelMapper() {return new ModelMapper();}
 
     @Transactional(readOnly = true)
     @Override
@@ -31,11 +30,7 @@ public class SocialServiceImpl implements SocialService{
         for(Social s : socials){
             list.add(modelMapper.map(s, Social.class));
         }
-        Iterable<Cars> cars = carsRepository.findAll();
-        List<Cars> carList = new ArrayList<>();
-        for (Cars s : cars) {
-            carList.add(modelMapper.map(s, Cars.class));
-        }
+
 
         List<SocialListDto> lists =  list.stream()
                 .map(social -> new SocialListDto(social.getBoardSeq(), social.getBoardDate(),
