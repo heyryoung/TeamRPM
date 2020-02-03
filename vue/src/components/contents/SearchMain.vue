@@ -728,8 +728,16 @@ export default {
             this.searchWithCondition()
             if ( mainConditionSettingFlag === 'stringMatch' ) this.$store.dispatch('contents/stringMatchModelCHecker')
             }
+<<<<<<< HEAD
+        },
+    destroyed(){
+        this.reset()
+    }
+}    
+=======
         }
 }
+>>>>>>> develop
 </script>
 <style scoped>
     .main_content{
