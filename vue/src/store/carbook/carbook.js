@@ -15,7 +15,6 @@ const getters = {
 const actions = {
     async getMycar({commit},{user}){
        // let name = user.name
-        alert(`ㅁㄴㅇㄹ`)
 
         let headers ={  'authorization': 'JWT fefege..',
             'Accept' : 'application/json',
@@ -52,10 +51,10 @@ const actions = {
         let headers ={  'authorization': 'JWT fefege..',
             'Accept' : 'application/json',
             'Content-Type': 'application/json'}
+           // console.log(`${oneRecord.toString()}`)
             axios
                 .post('http://localhost:8080/insertRecord' , oneRecord , headers)
                 .then(({data})=>{
-                    alert(data)
                     commit('addRecord', data.rec)
 
 
@@ -79,14 +78,16 @@ const actions = {
 }
 const mutations = {
     mycarCommit(state, data){
-        alert('commit mycar')
         state.mycar = data.mycar
+        localStorage.setItem("mycar", JSON.stringify(data.mycar))
+
 
 
     },
     recordCommit(state, data){
-        alert('commit record')
         state.record = data.record
+        localStorage.setItem("record", JSON.stringify(data.record))
+
 
     },
     addRecord(state, data ){

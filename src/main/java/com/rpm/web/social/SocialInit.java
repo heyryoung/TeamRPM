@@ -31,6 +31,7 @@ public class SocialInit implements ApplicationRunner {
         //socialBoard 테이블을 지운 후 social더미만 먼저 실행
         //index관련 에러날 수 있음.
 
+        if(userRepository.count()==0) return;
         SocialDummy socialDummy = new SocialDummy();
         Iterable<User> users = userRepository.findAll();
         List<User> user = new ArrayList<>();
@@ -43,7 +44,7 @@ public class SocialInit implements ApplicationRunner {
             car.add(c);
         }
         long count= socialRepository.count();
-        if(count == 0){
+        if(count == 0 && userRepository.count() !=0){
             System.out.println("socialboard 등록 시작");
             for(int i=0; i<30; i++) {
                 for (Social s : socialDummy.crawlingBoard(user, car)) {
@@ -66,7 +67,7 @@ public class SocialInit implements ApplicationRunner {
             commentedSocialList.add(socialList.get(i));
         }
         long commentCount = commentRepository.count();
-        if(commentCount==0){
+        if(commentCount==0  ){
             System.out.println("comment 등록 시작");
             for(int i=0; i<6; i++){
                 for(Comment c : socialDummy.crawlingComment(user, commentedSocialList)){

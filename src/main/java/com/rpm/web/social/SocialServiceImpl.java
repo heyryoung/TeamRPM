@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 public class SocialServiceImpl implements SocialService{
     @Autowired SocialRepository socialRepository;
     @Autowired CarsRepository carsRepository;
+
     @Transactional(readOnly = true)
     @Override
     public List<SocialListDto> allList() {
@@ -25,6 +26,7 @@ public class SocialServiceImpl implements SocialService{
         for(Social s : socials){
             list.add(s);
         }
+
         Iterable<Cars> cars = carsRepository.findAll();
         List<Cars> carList = new ArrayList<>();
         for (Cars c : cars) {

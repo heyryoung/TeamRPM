@@ -1,6 +1,6 @@
 package com.rpm.web.proxy;
 
 
-public class FileProxy {
+public class FileProxy extends Proxy{
 
 }
