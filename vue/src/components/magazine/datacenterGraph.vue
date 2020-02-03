@@ -10,6 +10,8 @@
     import LineExample from './chartjs/LineExample'
     import HorizontalBarExample from './chartjs/HorizontalBarExample'
     import { mapState } from 'vuex';
+    import { EventBus } from "./chartjs/event-bus";
+
     export default {
         name: 'datacenterGraph',
         components: {
@@ -27,7 +29,11 @@
                 subCategoryItem: state => state.decenter.subCategoryItem,
                 GrandTotal: state => state.decenter.GrandTotals,
                 isLineGraph : state => state.decenter.isLineGraph,
-                GraphItem : state => state.decenter.GraphItem
+                GraphItem : state => state.decenter.GraphItem,
+                lineGraphLabels : state => state.decenter.lineGraphLabels,
+                barGraphLabels  : state => state.decenter.barGraphLabels ,
+                lineGraphRowData : state => state.decenter.lineGraphRowData ,
+                barGraphRowData  : state => state.decenter.barGraphRowData
             })
 
         },
@@ -74,12 +80,18 @@
         },
         methods : {
           fillData() {
-              this.$refs.monthRevenue.dataInit(this.month_revenue[this.year])
+              EventBus.$on('dataSettup',()=>{
+                  this.$refs.monthRevenue.hi()
+                  this.$refs.monthRevenue.dataInit({ title : this.title, labels : this.lineGraphLabels, lineGraphRowData : this.lineGraphRowData})
+                  this.$refs.modelRevenue.dataInit({ title : this.title, labels : this.barGraphLabels, barGraphRowData : this.barGraphRowData})
+              })
           }
         },
-        created() {
+        created(){
 
-            this.$refs.monthRevenue.dataInit([40, 20, 12, 39, 10, 40, 39, 50, 40, 20, 12, 11])
+           /* this.$refs.monthRevenue.dataInit({ title : 'lineGraph' , labels : ['January' , 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December', 'Total' ]
+                , lineGraphRowData : [ 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10] })
+            this.$refs.modelRevenue.dataInit({ title : 'barGraph' , labels : ['January' , 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December', 'Total' ] , barGraphRowData : [ 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10]})*/
         }
     }
 </script>

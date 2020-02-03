@@ -1,5 +1,5 @@
 <template>
-    <div id="wrap" onunload="reset()">
+    <div id="wrap">
         <link rel="shortcut icon" href="https://www.kcar.com/resources/images/common/favicon.ico" type="image/x-icon">
         <link rel="icon" href="https://www.kcar.com/resources/images/common/favicon.ico" type="image/x-icon">
         <link rel="apple-touch-icon-precomposed"
@@ -731,7 +731,10 @@ export default {
 
             this.$store.dispatch('contents/mainConditionSettingFlagResetter')
             }
-        }
+        },
+    destroyed(){
+        this.reset()
+    }
 }
 </script>
 <style scoped>

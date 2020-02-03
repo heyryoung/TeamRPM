@@ -25,7 +25,7 @@
                 </th>
                 <tr v-for=" ( d , index ) of Domestic" :key=" d.Total ">
                     <td class="subCate" :colspan="DcolspanNum( d.subCategory )" :rowspan=" DrowspanNum( d.subCategory ) " v-if=" DrowspanSetting( d.subCategory , index ) "> {{ d.subCategory }}</td>
-                    <td class="model"  @click="drawingChartByModel( d.modelName )" v-if="TotcolspanSetting( d.subCategory )" > {{ d.modelName }}</td>
+                    <td class="model"  @click="drawingChartByModel( d )" v-if="TotcolspanSetting( d.subCategory )" > {{ d.modelName }}</td>
                     <td class="month" @dblclick="ctf( index , 3 )" @focusout="ctfsave( index , 3 ) "> {{ d.Jan | thousandFormatter }} </td>
                     <td class="month"> {{ d.Feb | thousandFormatter }} </td>
                     <td class="month"> {{ d.Mar | thousandFormatter }} </td>
@@ -109,6 +109,8 @@
 
 <script>
     import { mapState } from 'vuex';
+    import { EventBus } from "./chartjs/event-bus";
+
     export default {
         name: "datacenterChart",
         data: function () {
@@ -137,8 +139,8 @@
                 console.log('month >>>' + month)
                 this.$store.dispatch('decenter/changeGraph' , this.GraphItem.HorizontalBar )
             },
-            drawingChartByModel ( Model ) {
-                this.$store.dispatch('decenter/drawingChartByModel' , { labels : 'lll', modelName : Model  } )
+            drawingChartByModel ( targetItem ) {
+                this.$store.dispatch('decenter/drawingChartByModel' , { targetItem : targetItem  } )
                 this.$store.dispatch('decenter/changeGraph' , this.GraphItem.Line )
             },
             thousandFormatter ( value ) {
@@ -248,9 +250,11 @@
 
                             const content = e.target.result;
                             this.$store.dispatch('decenter/setChartData', content)
+
                         }
                         myReader.readAsText(theFile.files[0]);
                         document.getElementById('defaultOpen').click()
+                        EventBus.$emit('dataSettup')
                         //this.setStore()
                     } else {
                         alert("This browser does not support HTML5.");

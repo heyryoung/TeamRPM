@@ -1,16 +1,16 @@
 const state = {
     title : '' ,
     labels :[] ,
-    lineGraphLabels :[] ,
-    barGraphLabels :[] ,
+    lineGraphLabels :['January' , 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ] ,
+    barGraphLabels :['January' , 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'] ,
     rowData : [],
-    lineGraphRowData : [],
-    barGraphRowData : [],
+    lineGraphRowData : [10,10,10,10,10,10,10,10,10,10,10,10],
+    barGraphRowData : [10,10,10,10,10,10,10,10,10,10,10,10],
     modelNM : [],
     Domestic : [],
     Export : [],
     GrandTotal : [],
-    isLineGraph : true ,
+    isLineGraph : false ,
     mainCategoryItem : { domestic : 'Domestic' , export : 'Export'},
     subCategoryItem : {PC: 'PC', RV: 'RV', CV: 'CV', total: 'Total' , Etotal : 'Total (excluding CKD)' , GrandTotal : 'Grand Total'},
     GraphItem : { Line : 'Line' , HorizontalBar : 'HorizontalBar'}
@@ -228,8 +228,10 @@ const mutations = {
     },
     DRAWINGCHARTBYMODEL ( state , data ) {
         state.title = data.labels ;
-        console.log(data.modelName)
-        //data.rowData.forEach( item => /*state.rowData.push(item) ;*/ console.log( 'DRAWINGCHARTBYMODEL' + item))
+        for (let i = 2; i < data.length ; i++) {
+            state.barGraphRowData.push(data[i])
+            console.log(data[i] + "<<<<<<<<<<<" + i)
+        }
     },
     CHANGEGRAPH ( state , data ) {
         switch ( data ) {
