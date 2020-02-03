@@ -18,5 +18,5 @@ public class SocialWriteDto {
     private String carName;
     private String boardContent;
     private String boardImgName;
-    private User user;
+    private String userid;
 }

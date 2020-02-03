@@ -79,11 +79,12 @@
     methods: {
       loadData(){
         axios
-                /*.get(`${url}/viewList/${this.page}/${this.$store.state.user.user.userid}`)*/
-                .get(`${url}/viewList/${this.page}/yejee`)
+                .get(`${url}/viewList/${this.page}/${this.$store.state.user.user.userid}`)
                 .then(res => {
                   if (res.data.boardList.length) {
-                    this.thumbedboard.push(...res.data.thumbedboard)
+                    if(res.data.thumbedboard!=null){
+                      this.thumbedboard.push(...res.data.thumbedboard)
+                    }
                     this.boardList.push(...res.data.boardList)
                     if(res.data.length<12){
                       this.noMore = true

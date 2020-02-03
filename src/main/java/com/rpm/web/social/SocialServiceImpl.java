@@ -58,12 +58,10 @@ public class SocialServiceImpl implements SocialService{
         }
         List<Thumb> thumbsByUserid =thumbList.stream().filter(t->t.getUserSeq().getUserid().equals(userid))
                 .collect(Collectors.toList());
-        System.out.println(thumbsByUserid.get(0).getBoardSeq().getBoardSeq());
         String[] thumbArray = new String[thumbsByUserid.size()];
         for(int i = 0; i<thumbsByUserid.size(); i++){
             thumbArray[i]= String.valueOf(thumbsByUserid.get(i).getBoardSeq().getBoardSeq());
         }
-        System.out.println(thumbArray[0]+ thumbArray[1]+ thumbArray[2]);
         return thumbArray;
     }
 
@@ -80,7 +78,6 @@ public class SocialServiceImpl implements SocialService{
         socialDetailDto.setUserName(social.getUserSeq().getName());
         //socialDetailDto.setCommentCount(social.getComments().size());
         socialDetailDto.setThumbCount(social.getThumbs().size());
-        System.out.println(socialDetailDto.getThumbCount());
         return socialDetailDto;
     }
 
@@ -96,6 +93,7 @@ public class SocialServiceImpl implements SocialService{
         social.setCarCode("board"+social.getBoardDate());
         social.setBoardImg("img\\"+param.getBoardImgName());
         social.setBoardContent(param.getBoardContent());
+        social.setUserSeq(userRepository.findByUserid(param.getUserid()));
         socialRepository.save(social);
     }
 
@@ -125,7 +123,6 @@ public class SocialServiceImpl implements SocialService{
         thumb.setBoardSeq(socialRepository.findById(Long.parseLong(boardSeq)).get());
         thumb.setUserSeq(userRepository.findByUserid(userid));
         thumbRepository.save(thumb);
-        System.out.println(socialRepository.findById(Long.parseLong(boardSeq)).get().getThumbs().size());
     }
 
     @Override
@@ -134,6 +131,5 @@ public class SocialServiceImpl implements SocialService{
         user = userRepository.findByUserid(userid);
         thumb = thumbRepository.findByBoardSeqAndUserSeq(social, user);
         thumbRepository.delete(thumb);
-        System.out.println(thumb.getThumbSeq());
     }
 }

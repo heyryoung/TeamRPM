@@ -69,11 +69,11 @@
         this.board = res.data
         console.log(this.board)
         this.checkThumb()
-        /*if(this.board.userid === this.$store.state.user.user.userid){
+        if(this.board.userid === this.$store.state.user.user.userid){
           this.myContent = true
         }else{
           this.myContent = false
-        }*/
+        }
       })
       .catch(()=>{
         alert('axios error')
@@ -86,8 +86,7 @@
         this.$router.push({path: '/sns'})
       },
       checkThumb(){
-        /*axios.get(`${url}/thumbed/${this.boardSeq}/${this.$store.state.user.user.userid}`)*/
-        axios.get(`${url}/thumbed/${this.boardSeq}/yejee`)
+        axios.get(`${url}/thumbed/${this.boardSeq}/${this.$store.state.user.user.userid}`)
                 .then((res)=>{
                   console.log(res.data)
                   console.log(res)
@@ -107,8 +106,7 @@
       thumbUp(){
         this.empty=false
         this.fall=true
-        /*axios.get(`${url}/thumbUp/${this.boardSeq}/${this.$store.state.user.user.userid}`)*/
-        axios.get(`${url}/thumbUp/${this.boardSeq}/yejee`)
+        axios.get(`${url}/thumbUp/${this.boardSeq}/${this.$store.state.user.user.userid}`)
                 .then(res=>{
                   if(res.data === "success"){
                     this.board.thumbCount +=1
@@ -122,8 +120,7 @@
       thumbDown(){
         this.empty=true
         this.fall=false
-        /*axios.get(`${url}/thumbDown/${this.boardSeq}/${this.$store.state.user.user.userid}`)*/
-        axios.get(`${url}/thumbDown/${this.boardSeq}/yejee`)
+        axios.get(`${url}/thumbDown/${this.boardSeq}/${this.$store.state.user.user.userid}`)
                 .then(res=>{
                   if(res.data === "success"){
                     this.board.thumbCount -=1

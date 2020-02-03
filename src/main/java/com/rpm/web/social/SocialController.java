@@ -34,9 +34,11 @@ public class SocialController {
         for(int i=0; i<thisPageSize; i++){
             list[i]=socialService.allList().get(pager.getStartRow()+i);
         }
-        printer.accept(pageNo+"페이지 로딩");
         map.put("boardList", list);
-        map.put("thumbedboard", socialService.thumbed(userid));
+        if(!userid.equals("undefined")){
+            map.put("thumbedboard", socialService.thumbed(userid));
+        }
+
         return map;
     }
 
@@ -44,7 +46,6 @@ public class SocialController {
     public String uploadImg(MultipartHttpServletRequest uploadFile) {
         Iterator<String> itr =uploadFile.getFileNames();
         String filename = itr.next();
-        System.out.println(filename);
         MultipartFile mfile = uploadFile.getFile(filename);
         String origName=mfile.getOriginalFilename();
         String path = "C:\\Users\\yejee\\IdeaProjects\\TeamRPM\\src\\main\\resources\\static\\img\\";
@@ -102,7 +103,6 @@ public class SocialController {
         Thumb thumb = thumbRepository.findByBoardSeqAndUserSeq(social, user);
         if(thumb != null){result = "true";}
         else{result = "false";}
-        printer.accept(result);
         return result;
     }
 

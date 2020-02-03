@@ -198,13 +198,13 @@
           }
       },
       created(){
-          /*if(this.$store.state.user.user === {}|| this.$store.state.user.auth===false){
+          if(this.$store.state.user.user === {}|| this.$store.state.user.auth===false){
               alert('로그인해주세요')
               this.$router.push({path: '/login'})
-          }else{*/
+          }else{
               this.$store.dispatch('contents/init')
               this.$store.dispatch('contents/getCategory1',{'param':'KOR','column':'CAR_TYPE'})
-         /* }*/
+          }
       },
     methods:{
         handleFilePondInit(){
@@ -283,7 +283,7 @@
                 boardImgName: this.$refs.pond.getFile().filename,
                 carName : this.contentTitle,
                 boardContent : this.content,
-                user : this.$store.state.user,
+                userid : this.$store.state.user.user.userid,
             }
             if(this.$refs.pond.getFile()===null||this.contentTitle===''||this.content==='') {
                 alert('모든 값을 입력해주세요')

@@ -304,7 +304,7 @@
                     boardImgName: this.boardImgName,
                     carName : this.contentTitle,
                     boardContent : this.board.boardContent,
-                    user : this.$store.state.user
+                    userid : this.$store.state.user.user.userid
                 }
                 console.log(`boardImgName console${this.boardImgName}`);
                 console.log(this.filename)

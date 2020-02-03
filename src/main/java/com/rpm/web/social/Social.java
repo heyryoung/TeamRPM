@@ -18,7 +18,7 @@ import java.util.List;
 @ToString(exclude = {"userSeq","thumbs"})
 @NoArgsConstructor
 @Table(name="SOCIALBOARD")
-//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "boardSeq")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "boardSeq")
 public class Social implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
