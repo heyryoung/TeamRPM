@@ -145,6 +145,7 @@ public class CarsController {
             cars.clear();
             cars.addAll(carsProcessingList);
             carsProcessingList.clear();
+
         }
 
         if ( !categoryList.isEmpty()) {

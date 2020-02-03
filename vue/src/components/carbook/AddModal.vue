@@ -1,4 +1,5 @@
 <template>
+
     <div style ="margin : 0 auto"> <form action="#" class="contact-form">
         <input v-model="rdate" type="text" placeholder="날짜"/>
         <input v-model="servicecode" type="text" placeholder="주유/정비"/>
@@ -12,9 +13,10 @@
 <script>
 
     export default {
+        name: "addModal",
        data(){
            return {
-               mycarid : this.$store.state.carbook.mycar.mycarid,
+               mycar: JSON.parse(localStorage.getItem("mycar")),
                rdate: '',
                servicecode: '',
                detail: '',
@@ -25,13 +27,25 @@
        },
         methods:{
             callAddRecord(){
-                this.$store.dispatch('addRecord', {mycarid:this.mycarid,rdate:this.rdate, servicecode: this.servicecode,
-                detail: this.detail, price : this.price})
+                console.log('price ' + this.price)
+               this.$store.dispatch('carbook/addRecord',  {
+                   //mycarId : this.getcarId,
+                   date: this.rdate,
+                   serviceCode: this.servicecode,
+                   detail : this.detail,
+                   price: this.price
+               })
 
 
 
             }
 
+        },
+        computed:{
+            getcarId(){
+                return this.mycar.mycarId
+
+            }
         }
 
     }
