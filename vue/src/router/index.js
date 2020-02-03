@@ -7,7 +7,6 @@ import Login from '@/components/user/Login.vue'
 import Product from '@/components/contents/Product.vue'
 import Sale from '@/components/contents/Sale.vue'
 import Magazine from '@/components/magazine/Magazine.vue'
-import ChartMaker from '@/components/magazine/datacenter.vue'
 import Mypage from '@/components/carbook/MyPage.vue'
 import MypageModify from '@/components/carbook/MypageModify.vue'
 import MypageModifyCheck from '@/components/carbook/MypageModifyCheck.vue'
@@ -49,7 +48,6 @@ export default new Router({
         {path:'/mypageModifyCheck', name:'mypageModifyCheck', component : MypageModifyCheck},
         {path:'/seencar', name:'seencar', component : SeenCar},
         {path:'/magazine', name:'magazine', component : Magazine},
-        {path:'/chartMaker', name:'chartMaker', component : ChartMaker},
         {path:'/stationInfo', name:'stationInfo', component : StationInfo},
         {path:'/mapList', name:'mapList', component : MapList},
         {path:'/mapList2', name:'mapList2', component : MapList2},

@@ -1,12 +1,17 @@
 package com.rpm.web.util;
 
+import com.rpm.web.contents.CarsRepository;
 import org.jsoup.Jsoup;
+
 import java.io.IOException;
 
 
 public class MakeCarDummyList {
+    private CarsRepository carsRepository;
 
     private final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.117 Safari/537.36";
+
+
 
     public String sendPost(String targetUrl, String pageno) throws Exception {
         String jsonResult = "";

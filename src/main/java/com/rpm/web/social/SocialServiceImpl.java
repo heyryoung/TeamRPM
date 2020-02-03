@@ -18,6 +18,7 @@ public class SocialServiceImpl implements SocialService{
     @Autowired SocialRepository socialRepository;
     @Autowired CarsRepository carsRepository;
 
+
     @Transactional(readOnly = true)
     @Override
     public List<SocialListDto> allList() {
@@ -39,7 +40,7 @@ public class SocialServiceImpl implements SocialService{
                         social.getUserSeq().getName(), social.getComments().size(), social.getThumbs().size()))
                 .sorted(Comparator.comparing(SocialListDto::getBoardSeq).reversed())
                 .collect(Collectors.toList());
-        return null;
+        return lists;
     }
 
 
