@@ -5,20 +5,20 @@ import router from '@/router'
 const state = {
     user : {},
     auth: false,
-    fail : 'fail'
+    fail: false
 }
 const getters = {
 
     getMember : state=>state.user,
     getIsAuth : state=>state.auth,
-    getFail : state=>state.fail
+    getFail : state=> state.fail
+
 
 
 }
 const actions = {
     async login({commit}, { userid, passwd}){
         let url = `http://localhost:8080/login`
-        alert(url.toString())
         let headers ={  'authorization': 'JWT fefege..',
             'Accept' : 'application/json',
             'Content-Type': 'application/json'}
@@ -28,8 +28,17 @@ const actions = {
                 //alert(data.result.toString())
                 if(data.result == "success") {
                     commit('LOGIN_COMMIT', data)
-                    alert(data.token)
                     localStorage.setItem("token", data.token)
+                    if(data.mycar){
+                        localStorage.setItem("mycar", JSON.stringify(data.mycar))
+                        if(data.record){
+                            console.log(`record = ${data.record}`)
+                            localStorage.setItem("record", JSON.stringify(data.record))
+
+                        }
+
+                    }
+
 
 
 
@@ -40,8 +49,9 @@ const actions = {
 
 
                 }else{
-                    alert('login fail')
-                    commit('LOGIN_FAIL')
+                    commit('fail_commit')
+
+
 
 
 
@@ -54,13 +64,14 @@ const actions = {
             })
     },
     async logout({commit}){
-        alert('in the logout')
         commit('LOGOUT_COMMIT')
         localStorage.removeItem("token")
+        localStorage.removeItem("mycar")
+        localStorage.removeItem("record")
+
 
     },
     async getUserInfo({commit}){
-        alert('getuser')
         let token = localStorage.getItem("token")
         let headers = {  'authorization': 'JWT fefege..',
             'Accept' : 'application/json',
@@ -87,21 +98,19 @@ const mutations = {
     LOGIN_COMMIT(state, data){
         state.auth = true
         state.user = data.user
-        state.fail = false
 
 
     },
-    LOGIN_FAIL(state){
-        state.fail = 'fail'
 
-    },
-    COMMIT_FAIL(state){
-        alert('commit')
-        state.fail = 'success'
-    },
     LOGOUT_COMMIT(state){
+        console.log('로그아웃')
         state.auth = false
         state.user  = {}
+
+    },
+    fail_commit(state){
+        console.log('commit fail')
+        state.fail = true
 
     }
 }

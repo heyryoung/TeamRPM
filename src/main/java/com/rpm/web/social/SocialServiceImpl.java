@@ -25,6 +25,7 @@ public class SocialServiceImpl implements SocialService{
     @Autowired ThumbRepository thumbRepository;
     @Autowired Thumb thumb;
 
+
     @Transactional(readOnly = true)
     @Override
     public List<SocialListDto> allList() {
@@ -33,6 +34,7 @@ public class SocialServiceImpl implements SocialService{
         for(Social s : socials){
             list.add(s);
         }
+
         Iterable<Cars> cars = carsRepository.findAll();
         List<Cars> carList = new ArrayList<>();
         for (Cars c : cars) {

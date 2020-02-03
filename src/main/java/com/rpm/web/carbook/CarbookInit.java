@@ -140,10 +140,10 @@ public class CarbookInit implements ApplicationRunner {
                 record.setPrice(String.valueOf(
                         (int)((Math.random()*10)+1)*10000
                 ));
-                /*record.setMycarId(
+                record.setMycarId(
                         listCarbook.get(
                                 (int)(Math.random()*500))
-                );*/
+                );
 
                 recordRepository.save(record);
 
