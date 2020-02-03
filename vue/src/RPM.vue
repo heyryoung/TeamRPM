@@ -12,7 +12,7 @@
         <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/window.css?v=200108090126">
         <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/compare.css?v=200103163154">
         <div id="main_image" style="width: 100%; height: 100px; line-height: 100px; text-align: center">
-            <a @click="goHome"><img style="width: 100%; max-width: 760px; vertical-align: middle" src="@/assets/image/rpmlogoblack.png" alt=""></a>
+            <router-link to="/"><img style="width: 100%; max-width: 760px; vertical-align: middle" src="@/assets/image/rpmlogoblack.png" alt=""></router-link>
         </div>
         <nav >
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,8 +33,8 @@
                                 <router-link v-if="this.user.admin!='admin'" to="/seencar">최근 본 차량(비교함)</router-link> <!--//공통-->
                                 <router-link v-if="this.user.admin!='admin'" to="/buycar">자동차구매 </router-link> <!--//공통-->
                                 <router-link v-if="this.user.admin!='admin'" to="/buycarSelectGoods">자동차구매1 </router-link> <!--//로그인전후-->
-                                <router-link v-if="this.user.admin!='admin'" to="/buycarInsertContractorInfomation">자동차구매2 </router-link><!-- //로그인전후-->
-                                <router-link v-if="this.user.admin!='admin'" to="/buycarInsertContractorInfomation">자동차구매3 </router-link> <!--//로그인전후-->
+                                <router-link v-if="this.user.admin!='admin'" to="/magazine">magazine </router-link><!-- //로그인전후-->
+                                <router-link v-if="this.user.admin!='admin'" to="/chartMaker">chartMaker </router-link> <!--//로그인전후-->
                                 <router-link v-if="this.user.admin!='admin'" to="/recommendHome">딜러에게 추천받기</router-link> <!--//로그인전후-->
                                 <router-link v-if="this.user.admin=='admin'" to="/companyHome">ADMIN </router-link> <!--//admin-->
                                 <router-link v-if="this.user.admin!='admin'" to="/sns">SNS(REVIEW) </router-link> <!--//공통-->
@@ -81,10 +81,6 @@
                 this.$store.dispatch('user/logout')
 
 
-            },
-            goHome(){
-                this.$store.dispatch('contents/resetCheckedItem')
-                this.$router.push("/")
             }
         }
     }

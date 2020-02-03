@@ -2,9 +2,7 @@ package com.rpm.web.carbook;
 
 import com.rpm.web.user.User;
 import com.rpm.web.util.Printer;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -21,7 +19,6 @@ public class CarbookController {
     @Autowired Record record;
     @Autowired CarbookService carbookService;
     @Autowired RecordRepository recordRepository;
-    @Autowired
 
 
     @PostMapping("/getMycar")
