@@ -18,7 +18,6 @@ import java.util.stream.StreamSupport;
 @RestController
 @CrossOrigin(origins = "http://localhost:8081")
 public class CarsController {
-    @Qualifier("pxy")
     @Autowired
     Proxy proxy;
     @Autowired

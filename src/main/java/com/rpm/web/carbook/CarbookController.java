@@ -2,9 +2,7 @@ package com.rpm.web.carbook;
 
 import com.rpm.web.user.User;
 import com.rpm.web.util.Printer;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -21,10 +19,6 @@ public class CarbookController {
     @Autowired Record record;
     @Autowired RecordRepository recordRepository;
 
-    @Autowired
-    ModelMapper modelMapper;
-    @Bean public ModelMapper modelMapper(){return new ModelMapper();}
-
 
     @PostMapping("/getMycar")
     public HashMap<String, Object> getMycar(@RequestBody User param){
@@ -40,8 +34,7 @@ public class CarbookController {
             List<Record> records = new ArrayList<>();
             if(itRecord !=null){
                 for(Record r: itRecord){
-                    Record bean = modelMapper.map(r, Record.class);
-                    records.add(bean);
+                    records.add(r);
                     printer.accept("in the carbook.for");
 
                 }
@@ -65,8 +58,7 @@ public class CarbookController {
 
         List<Record> list = new ArrayList<>();
         for(Record r : records){
-            Record bean = modelMapper.map(r, Record.class);
-            list.add(bean);
+            list.add(r);
 
         }
 

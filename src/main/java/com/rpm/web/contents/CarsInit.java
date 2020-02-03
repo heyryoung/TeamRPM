@@ -14,7 +14,7 @@ import java.util.Map;
 
 @Component
 public class CarsInit implements ApplicationRunner {
-    @Qualifier("pxy")
+
     @Autowired
     Proxy proxy;
     private CarsRepository carsRepository;

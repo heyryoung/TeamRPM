@@ -1,5 +1,5 @@
 <template>
-    <div id="wrap">
+    <div id="wrap" onunload="reset()">
         <link rel="shortcut icon" href="https://www.kcar.com/resources/images/common/favicon.ico" type="image/x-icon">
         <link rel="icon" href="https://www.kcar.com/resources/images/common/favicon.ico" type="image/x-icon">
         <link rel="apple-touch-icon-precomposed"
@@ -353,8 +353,8 @@
                 </div>
             </div>
         </div>
-    </div>
-</template>
+    </div >
+</template >
 <script>
 import { mapState , mapGetters } from 'vuex'
 import Pager from '@/components/cmm/Pagination'
@@ -400,7 +400,7 @@ export default {
             modelListIsOpen : state => state.contents.modelListIsOpen,
             modelList : state => state.contents.modelList
         }),
-        ...mapGetters( 'cmm' , {
+        ...mapGetters( 'contents' , {
             initFlag : 'initFlag'
         }),
         isAny : function(){
@@ -534,17 +534,7 @@ export default {
                 }
             })
 
-            let data = {
-                categoryList: checkedCategoryList,
-                modelList: checkedModelList,
-                fuelTypeList: checkedFuelTypeList,
-                regionList: checkedRegionList,
-                searchWord: this.searchWord,
-                carcd: this.carcd,
-                pageLimit : this.$store.state.contents.pageLimit,
-                maker : maker.code,
-            }
-            this.$store.dispatch('cmm/searchWithCondition', data)
+
             let selectedConditionData = {
                     categoryList : checkedCategoryList,
                     modelList : checkedModelList,
@@ -718,6 +708,7 @@ export default {
         }
     },
     created() {
+
         if (!this.$store.state.contents.initFlag)
             this.$store.dispatch('contents/init')
 
@@ -738,6 +729,8 @@ export default {
             }
             this.searchWithCondition()
             if ( mainConditionSettingFlag === 'stringMatch' ) this.$store.dispatch('contents/stringMatchModelCHecker')
+
+            this.$store.dispatch('contents/mainConditionSettingFlagResetter')
             }
         }
 }

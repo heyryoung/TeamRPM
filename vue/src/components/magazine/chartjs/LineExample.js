@@ -8,8 +8,11 @@ export default {
       datasets: [
         {
           label: 'Data One',
-          backgroundColor: '#f87979',
-          data: [40, 39, 10, 40, 39, 80, 40, 39, 10, 40, 39, 80, 40]
+          borderColor : '#005276',
+          data: [40, 39, 10, 40, 39, 30, 40, 39, 10, 40, 39, 80, 40],
+          borderCapStyle : 'butt',
+          lineTension : 0.2,
+          fill : false
         }
       ]
     }, {responsive: true, maintainAspectRatio: false})

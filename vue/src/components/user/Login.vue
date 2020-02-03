@@ -18,7 +18,7 @@
 						</div>
 						<div class="paddBox">
 							<label for="input_pass" class="loginLabel"><img src="https://www.kcar.com/resources/images/common/login_pass.gif" alt="패스워드" class="am"></label>
-							<input v-model="passwd" type="password" name="i_sPassWord" class="input_pass am" id="input_pass" value="" maxlength="20" onkeydown="fnEnterLogIn(event);">&nbsp;&nbsp;
+							<input v-model="passwd" type="password" name="i_sPassWord" class="input_pass am" id="input_pass" value="" maxlength="20" >&nbsp;&nbsp;
 							<span class="idSave">
 						<input type="checkbox" class="am" id="id_save" name="id_save" value="Y">
 						<label for="id_save" class="id_save">아이디 저장</label>

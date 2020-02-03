@@ -32,11 +32,7 @@
                             <router-link to="/mypage">마이페이지</router-link>
                             <router-link to="/seencar">최근 본 차량(비교함)</router-link>
                             <router-link to="/mapList">주유소 지도</router-link>
-                            <router-link to="/buycar">자동차구매 </router-link>
-                            <router-link to="/buycarSelectGoods">자동차구매1 </router-link>
-                            <router-link to="/buycarInsertContractorInfomation">자동차구매2 </router-link>
                             <router-link to="/magazine">매거진 </router-link>
-                            <router-link to="/chartMaker"> </router-link>
                             <router-link to="/chartMaker">차트메이커 </router-link>
                             <router-link to="/recommendHome">딜러에게 추천받기</router-link>
                             <router-link to="/companyHome">ADMIN </router-link>
@@ -61,14 +57,11 @@
     export default {
         name: 'app',
         components: {
-
             Slide
         },
         methods:{
             logout(){
                 this.$store.dispatch('user/logout')
-
-
             },
             goHome(){
                 this.$store.dispatch('contents/resetCheckedItem')
