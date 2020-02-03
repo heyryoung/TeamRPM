@@ -2,7 +2,6 @@ package com.rpm.web.carbook;
 
 import com.rpm.web.user.User;
 import com.rpm.web.util.Printer;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
