@@ -3,12 +3,12 @@
   <link rel="stylesheet" href="https://blackrockdigital.github.io/startbootstrap-agency/css/agency.min.css">
 <link rel="stylesheet" href="https://blackrockdigital.github.io/startbootstrap-agency/vendor/fontawesome-free/css/all.min.css">
 
-<section class="bg-light page-section" id="portfolio">
+<section class="bg-light page-section" style="padding: 20px 0;" id="portfolio">
     <div class="container">
       <div class="row">
         <div class="col-lg-12 text-center">
           <h2 class="section-heading text- uppercase">INSTARPM</h2>
-          <h3 class="section-subheading text-muted">내 차 자랑하기</h3>
+          <h3 class="section-subheading text-muted" style="margin:0"></h3>
         </div>
         <div class="btn-edit">
         <button class="btn btn-primary" @click="write" type="button">
@@ -30,8 +30,10 @@
             <h4>{{item.carName}}</h4>
             <p class="text-muted">{{item.userName}}</p>
             <div class="btn-like-comment">
-              <a class="btn-like"><i class="far fa-heart"></i> {{item.thumbCount}}</a>
-              <a class="btn-comment"><i class="far fa-comment"></i> {{item.commentCount}}</a>
+              <a class="btn-like" v-if="thumbed(item.boardSeq)" style="color:#E81919"><i class="fas fa-heart"></i></a>
+              <a class="btn-like" v-else><i class="far fa-heart"></i></a>
+              {{item.thumbCount}}
+              <!--<a class="btn-comment"><i class="far fa-comment"></i> {{item.commentCount}}</a>-->
             </div>
           </div>
         </div>
@@ -46,7 +48,7 @@
 </template>
 <script>
   import axios from "axios"
-
+  const url = "http://localhost:8080"
   export default {
     data() {
       return {
@@ -55,21 +57,34 @@
         page: 1,
         hasMore:true,
         noMore: false,
+        empty:true,
+        fall:false,
+        thumbedboard:[],
       }
     },
     created(){
       this.loadData()
     },
-   /* mounted(){
-      this.scroll()
-    },*/
+    computed: {
+      thumbed(){
+        return(b)=>{
+          return this.thumbedboard.some(i=>i==b)
+        }
+      }
+    },
+
+    /* mounted(){
+       this.scroll()
+     },*/
     methods: {
       loadData(){
         axios
-                .get(`http://localhost:8080/viewList/${this.page}`)
+                /*.get(`${url}/viewList/${this.page}/${this.$store.state.user.user.userid}`)*/
+                .get(`${url}/viewList/${this.page}/yejee`)
                 .then(res => {
-                  if (res.data.length) {
-                    this.boardList.push(...res.data)
+                  if (res.data.boardList.length) {
+                    this.thumbedboard.push(...res.data.thumbedboard)
+                    this.boardList.push(...res.data.boardList)
                     if(res.data.length<12){
                       this.noMore = true
                       this.hasMore = false
@@ -80,8 +95,9 @@
                   }
                 })
                 .catch(()=>{
-                  alert('axios error')
+                  alert('loadData axios error')
                 })
+
         this.page += 1
       },
      /* scroll () {
@@ -96,7 +112,7 @@
         }
       },*/
       write() {
-          this.$router.push({path: '/snswrite'})
+        this.$router.push({path: '/snswrite'})
       },
       goDetail(boardSeq){
         localStorage.setItem('storedData', boardSeq)

@@ -9,8 +9,11 @@ import java.util.List;
 @Lazy
 public interface SocialService {
     List<SocialListDto> allList();
+    String[] thumbed(String userid);
     SocialDetailDto loadBoard(String boardSeq);
     void writeContent(SocialWriteDto param);
     void updateContent(String boardSeq, SocialWriteDto socialWriteDto);
-    void delateContent(String boardSeq);
+    void deleteContent(String boardSeq);
+    void thumbUp(String boardSeq, String userid);
+    void thumbDown(String boardSeq, String userid);
 }

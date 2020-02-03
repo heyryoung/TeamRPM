@@ -5,11 +5,13 @@ import com.rpm.web.util.Printer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Order(2)
 @Component
 public class CarbookInit implements ApplicationRunner {
     @Autowired RecordRepository recordRepository;

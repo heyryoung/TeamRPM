@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @Service
 @Lazy
@@ -23,6 +22,8 @@ public class SocialServiceImpl implements SocialService{
     @Autowired Social social;
     @Autowired SocialDetailDto socialDetailDto;
     @Autowired User user;
+    @Autowired ThumbRepository thumbRepository;
+    @Autowired Thumb thumb;
 
     @Transactional(readOnly = true)
     @Override
@@ -40,11 +41,30 @@ public class SocialServiceImpl implements SocialService{
         List<SocialListDto> lists =  list.stream()
                 .map(social -> new SocialListDto(social.getBoardSeq(), social.getBoardDate(),
                         social.getCarCode(), social.getCarName(), social.getBoardContent(), social.getBoardImg(),
-                        social.getUserSeq().getName(), social.getComments().size(), social.getThumbs().size()))
+                        social.getUserSeq().getName(), social.getThumbs().size()))
                 .sorted(Comparator.comparing(SocialListDto::getBoardSeq).reversed())
                 .collect(Collectors.toList());
         return lists;
     }
+
+    @Override
+    public String[] thumbed(String userid) {
+        Iterable<Thumb> thumbs = thumbRepository.findAll();
+        List<Thumb> thumbList = new ArrayList<>();
+        for(Thumb t : thumbs){
+            thumbList.add(t);
+        }
+        List<Thumb> thumbsByUserid =thumbList.stream().filter(t->t.getUserSeq().getUserid().equals(userid))
+                .collect(Collectors.toList());
+        System.out.println(thumbsByUserid.get(0).getBoardSeq().getBoardSeq());
+        String[] thumbArray = new String[thumbsByUserid.size()];
+        for(int i = 0; i<thumbsByUserid.size(); i++){
+            thumbArray[i]= String.valueOf(thumbsByUserid.get(i).getBoardSeq().getBoardSeq());
+        }
+        System.out.println(thumbArray[0]+ thumbArray[1]+ thumbArray[2]);
+        return thumbArray;
+    }
+
 
     @Override
     public SocialDetailDto loadBoard(String boardSeq){
@@ -80,16 +100,38 @@ public class SocialServiceImpl implements SocialService{
     @Override
     public void updateContent(String boardSeq, SocialWriteDto socialWriteDto){
         social = socialRepository.findById(Long.parseLong(boardSeq)).get();
-        String boardImgName = socialWriteDto.getBoardImgName().replace("img\\","");
+        if(socialWriteDto.getBoardImgName().contains("img\\")||
+                socialWriteDto.getBoardImgName().contains("//cdn")){
+            social.setBoardImg(socialWriteDto.getBoardImgName());
+        }else{
+            social.setBoardImg("img\\"+socialWriteDto.getBoardImgName());
+        }
         social.setCarName(socialWriteDto.getCarName());
-        social.setBoardImg("img\\"+boardImgName);
         social.setBoardContent(socialWriteDto.getBoardContent());
         socialRepository.save(social);
     }
 
     @Override
-    public void delateContent(String boardSeq) {
+    public void deleteContent(String boardSeq) {
         social = socialRepository.findById(Long.parseLong(boardSeq)).get();
         socialRepository.delete(social);
+    }
+
+    @Override
+    public void thumbUp(String boardSeq, String userid) {
+        thumb= new Thumb();
+        thumb.setBoardSeq(socialRepository.findById(Long.parseLong(boardSeq)).get());
+        thumb.setUserSeq(userRepository.findByUserid(userid));
+        thumbRepository.save(thumb);
+        System.out.println(socialRepository.findById(Long.parseLong(boardSeq)).get().getThumbs().size());
+    }
+
+    @Override
+    public void thumbDown(String boardSeq, String userid) {
+        social = socialRepository.findById(Long.parseLong(boardSeq)).get();
+        user = userRepository.findByUserid(userid);
+        thumb = thumbRepository.findByBoardSeqAndUserSeq(social, user);
+        thumbRepository.delete(thumb);
+        System.out.println(thumb.getThumbSeq());
     }
 }

@@ -7,8 +7,8 @@
 <div class="portfolio-modal modal fade show" id="portfolioModal2" tabindex="-1" style="overflow: scroll; display: block; padding-right: 16.9962px;">
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="close-modal" @click="gotoList" data-dismiss="modal">
-          뒤로가기
+        <div class="close-modal" style="color:#0d124f" @click="gotoList" data-dismiss="modal">
+          <i class="fas fa-undo fa-3x"></i>
         </div>
         <div class="container">
           <div class="row">
@@ -25,8 +25,8 @@
                 </ul>
                 <!--thumb-->
                 <div style="margin:30px">
-                  <a class="btn-like" @click="thumbup" v-if="empty"><i class="far fa-heart fa-2x"></i> </a>
-                  <a class="btn-like" @click="thumbdown" v-if="full"><i class="fas fa-heart fa-2x"></i></a>
+                  <a class="btn-like" @click="thumbUp" v-if="empty"><i class="far fa-heart fa-2x"></i> </a>
+                  <a class="btn-like" @click="thumbDown" v-if="fall"><i class="fas fa-heart fa-2x"></i></a>
                   {{board.thumbCount}}
                 </div>
                 <div v-if="myContent">
@@ -51,55 +51,93 @@
 <script>
   import axios from "axios"
   import SnsModal from "./SnsDeleteModal"
+  let url = "http://localhost:8080"
   export default {
     data(){
       return{
         board:'',
         boardSeq: '',
         empty:true,
-        full:false,
+        fall:false,
+        myContent:true
       }
     },
     created(){
       this.boardSeq = localStorage.getItem('storedData')
-      axios.get(`http://localhost:8080/loadBoard/${this.boardSeq}`)
+      axios.get(`${url}/loadBoard/${this.boardSeq}`)
       .then(res=>{
         this.board = res.data
         console.log(this.board)
+        this.checkThumb()
+        /*if(this.board.userid === this.$store.state.user.user.userid){
+          this.myContent = true
+        }else{
+          this.myContent = false
+        }*/
       })
       .catch(()=>{
         alert('axios error')
       })
-    },
-    computed:{
-      myContent(){
-        return true
-       /* if(this.board.userid === this.$store.state.user.user.userid){
-          return true
-        }else{
-          return false
-        }*/
-      },
-      /*thumbs(){
-        return (this.board.thumbs==='')?0:this.board.thumbs
-      }*/
+
+      localStorage.setItem('boardSeq', this.boardSeq)
     },
     methods:{
       gotoList(){
         this.$router.push({path: '/sns'})
       },
-      thumbup(){
-        //+1
+      checkThumb(){
+        /*axios.get(`${url}/thumbed/${this.boardSeq}/${this.$store.state.user.user.userid}`)*/
+        axios.get(`${url}/thumbed/${this.boardSeq}/yejee`)
+                .then((res)=>{
+                  console.log(res.data)
+                  console.log(res)
+                  if(res.data === true){
+                    this.empty=false
+                    this.fall=true
+                  }
+                  if(res.data === false){
+                    this.empty=true
+                    this.fall=false
+                  }
+                })
+                .catch(()=>{
+                  alert('axios error')
+                })
       },
-      thumbdown(){
-        //-1
+      thumbUp(){
+        this.empty=false
+        this.fall=true
+        /*axios.get(`${url}/thumbUp/${this.boardSeq}/${this.$store.state.user.user.userid}`)*/
+        axios.get(`${url}/thumbUp/${this.boardSeq}/yejee`)
+                .then(res=>{
+                  if(res.data === "success"){
+                    this.board.thumbCount +=1
+                    console.log(this.board)
+                  }
+                })
+                .catch(()=>{
+                  alert('axios error')
+                })
+      },
+      thumbDown(){
+        this.empty=true
+        this.fall=false
+        /*axios.get(`${url}/thumbDown/${this.boardSeq}/${this.$store.state.user.user.userid}`)*/
+        axios.get(`${url}/thumbDown/${this.boardSeq}/yejee`)
+                .then(res=>{
+                  if(res.data === "success"){
+                    this.board.thumbCount -=1
+                    console.log(this.board)
+                  }
+                })
+                .catch(()=>{
+                  alert('axios error')
+                })
       },
       goModify(){
-        localStorage.setItem('boardSeq', this.boardSeq)
         this.$router.push({path: '/snsmodify'})
       },
       deleteBoard(){
-        localStorage.setItem('boardSeq', this.boardSeq)
         this.$modal.show(SnsModal,{
           modal: this.$modal},{
           name: 'dynamic-modal',
@@ -118,7 +156,7 @@
 	margin: auto 10px;
 }
 .fa-heart:before{
-  color : rgba(232, 25, 25, 0.94);
+  color : #E81919;
 }
 h2 {
   color: #0d124f;

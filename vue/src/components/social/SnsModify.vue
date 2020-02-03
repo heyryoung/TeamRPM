@@ -22,7 +22,9 @@
                                 accepted-file-types="image/jpeg, image/png"
                                 :server="server"
                                 :file="file"
-                                :init="handleFilePondInit"/>
+                                @init="handleFilePondInit"
+                                @removefile="handleRemoveFile"
+                                @processfile="handleaddFile"/>
                         <p>*10Mb 이하의 파일을 업로드 해주세요.</p>
                     </div>
 
@@ -183,7 +185,6 @@
                 contentTitle2 : '',
                 contentTitle3 : '',
                 userName:'',
-                filename:'',
                 content:'',
             }
         },
@@ -204,7 +205,7 @@
                 }
             },
             boardImgName(){
-                return (this.filename!=='')?this.$refs.pond.getFile().filename:this.board.boardImg
+                return (this.$refs.pond.getFile()===null)?this.board.boardImg:this.$refs.pond.getFile().filename
             }
         },
         created(){
@@ -222,9 +223,15 @@
         },
         methods:{
             handleFilePondInit(){
-                this.$refs.pond.getFile()
+                console.log('init')
+                this.filename = ''
+            },
+            handleaddFile(){
+                console.log('handleProcessFile')
                 this.filename = this.$refs.pond.getFile().filename
-                console.log(this.filename)
+            },
+            handleRemoveFile(){
+                this.filename = ''
             },
             korCar(korCarID, impCarID){
                 const korCar = document.getElementById(korCarID)
@@ -235,7 +242,6 @@
                 this.keyWord1 = this.defaultKeyWord1
                 this.keyWord2 = this.defaultKeyWord2
                 this.keyWord3 = this.defaultKeyWord3
-
             },
             impCar(korCarID, impCarID, category1ID){
                 const korCar = document.getElementById(korCarID)
@@ -300,7 +306,9 @@
                     boardContent : this.board.boardContent,
                     user : this.$store.state.user
                 }
-                console.log(`${this.boardImgName}`);
+                console.log(`boardImgName console${this.boardImgName}`);
+                console.log(this.filename)
+
                 axios.post(`${url}/updateContent/${this.boardSeq}`, data , headers)
                     .then((res)=>{
                         if(res.data === "success"){

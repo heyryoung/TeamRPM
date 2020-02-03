@@ -6,5 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SocialRepository extends CrudRepository<Social, Long>{
-    public Social findSocialByUserSeq(User user);
 }

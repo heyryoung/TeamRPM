@@ -178,7 +178,6 @@
           contentTitle1 : '',
           contentTitle2 : '',
           contentTitle3 : '',
-          userName:"김예지",
           filename:'',
           content:"내가요.. 차를 샀는데요... 비쌌어요.",
           writeBtn:true,
@@ -212,7 +211,6 @@
             this.$refs.pond.getFile();
             this.filename = this.$refs.pond.getFile().filename;
         },
-
         korCar(korCarID, impCarID){
             const korCar = document.getElementById(korCarID)
             const impCar = document.getElementById(impCarID)
@@ -287,14 +285,19 @@
                 boardContent : this.content,
                 user : this.$store.state.user,
             }
-            axios.post(`${url}/writeContent`, data , headers)
-                .then((res)=>{
-                    alert(res.data)
-                    this.$router.push({path:'/sns'})
-                })
-                .catch(()=>{
-                    alert('axios error')
-                })
+            if(this.$refs.pond.getFile()===null||this.contentTitle===''||this.content==='') {
+                alert('모든 값을 입력해주세요')
+            }else {
+                axios.post(`${url}/writeContent`, data, headers)
+                    .then((res) => {
+                        if (res.data === "success") {
+                            this.$router.push({path: '/sns'})
+                        }
+                    })
+                    .catch(() => {
+                        alert('axios error')
+                    })
+            }
             // FilePond instance methods are available on `this.$refs.pond`
         },
         modal(){

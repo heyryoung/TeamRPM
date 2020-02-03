@@ -19,7 +19,7 @@ public class SocialListDto {
     private String boardContent;
     private String boardImg;
     private String userName;
-    private int commentCount;
+    //private int commentCount;
     private int thumbCount;
 
 }

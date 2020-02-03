@@ -1,6 +1,7 @@
 package com.rpm.web.social;
 
 import com.rpm.web.proxy.PageProxy;
+import com.rpm.web.user.User;
 import com.rpm.web.user.UserRepository;
 import com.rpm.web.util.Printer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +21,11 @@ public class SocialController {
     @Autowired UserRepository userRepository;
     @Autowired SocialService socialService;
     @Autowired PageProxy pager;
+    @Autowired ThumbRepository thumbRepository;
 
-    @GetMapping("/viewList/{pageNo}")
-    public SocialListDto[] viewList(@PathVariable String pageNo){
+    @GetMapping("/viewList/{pageNo}/{userid}")
+    public Map<String, Object> viewList(@PathVariable String pageNo, @PathVariable String userid){
+        Map<String, Object> map = new HashMap<>();
         pager.setPageNum(Integer.parseInt(pageNo));
         pager.setPageSize(12);
         pager.paging(socialService.allList());
@@ -32,7 +35,9 @@ public class SocialController {
             list[i]=socialService.allList().get(pager.getStartRow()+i);
         }
         printer.accept(pageNo+"페이지 로딩");
-        return list;
+        map.put("boardList", list);
+        map.put("thumbedboard", socialService.thumbed(userid));
+        return map;
     }
 
     @PostMapping("/uploadImg")
@@ -72,9 +77,33 @@ public class SocialController {
         socialService.updateContent(boardSeq, socialWriteDto);
         return "success";
     }
-    @GetMapping("/delateContent/{boardSeq}")
-    public String delateContent(@PathVariable String boardSeq){
-        socialService.delateContent(boardSeq);
+    @GetMapping("/deleteContent/{boardSeq}")
+    public String deleteContent(@PathVariable String boardSeq){
+        socialService.deleteContent(boardSeq);
         return "success";
     }
+
+    @GetMapping("/thumbUp/{boardSeq}/{userid}")
+    public String thumbUp(@PathVariable String boardSeq, @PathVariable String userid){
+        socialService.thumbUp(boardSeq, userid);
+        return "success";
+    }
+    @GetMapping("/thumbDown/{boardSeq}/{userid}")
+    public String thumbDown(@PathVariable String boardSeq, @PathVariable String userid){
+        socialService.thumbDown(boardSeq, userid);
+        return "success";
+    }
+
+    @GetMapping("/thumbed/{boardSeq}/{userid}")
+    public String thumbed(@PathVariable String boardSeq, @PathVariable String userid){
+        String result = "";
+        Social social = socialRepository.findById(Long.parseLong(boardSeq)).get();
+        User user = userRepository.findByUserid(userid);
+        Thumb thumb = thumbRepository.findByBoardSeqAndUserSeq(social, user);
+        if(thumb != null){result = "true";}
+        else{result = "false";}
+        printer.accept(result);
+        return result;
+    }
+
 }

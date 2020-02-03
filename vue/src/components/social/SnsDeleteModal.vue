@@ -31,7 +31,7 @@
         },
         methods:{
             cancelCheck(){
-                axios.get('http://localhost:8080/delateContent/'+localStorage.getItem('boardSeq'))
+                axios.get('http://localhost:8080/deleteContent/'+localStorage.getItem('boardSeq'))
                     .then(res=>{
                         if(res.data === "success"){
                             this.question = false

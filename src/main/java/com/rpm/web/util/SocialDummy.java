@@ -2,9 +2,7 @@ package com.rpm.web.util;
 
 import com.rpm.web.contents.Cars;
 import com.rpm.web.contents.CarsRepository;
-import com.rpm.web.social.Comment;
 import com.rpm.web.social.Social;
-import com.rpm.web.social.Thumb;
 import com.rpm.web.user.User;
 import com.rpm.web.user.UserRepository;
 import org.jsoup.Jsoup;
@@ -14,9 +12,7 @@ import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class SocialDummy {
     @Autowired
@@ -89,7 +85,7 @@ public class SocialDummy {
         return str;
     }
 
-    public ArrayList<Comment> crawlingComment(List<User>user, List<Social> socialList) {
+    /*public ArrayList<Comment> crawlingComment(List<User>user, List<Social> socialList) {
         ArrayList<Comment> list = new ArrayList<>();
         list.clear();
         List<String> urls = crawlingUrl().get("url");
@@ -124,15 +120,6 @@ public class SocialDummy {
         }
         return list;
 
-    }
-
-    public Thumb makeThumbList(List<User>seq, List<Social> socialList){
-        Thumb thumb = new Thumb();
-        Collections.shuffle(seq);
-        Collections.shuffle(socialList);
-        thumb.setUserSeq(seq.get(0));
-        thumb.setBoardSeq(socialList.get(0));
-        return thumb;
-    }
+    }*/
 
 }
