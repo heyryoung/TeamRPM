@@ -50,7 +50,7 @@
         opacity: 0.97; display:inline-block;
     }
     .wrap_section{max-width:1112px;margin:0 auto}
-    .area_section {background-color: aliceblue; margin-top: 100px;}
+    .area_section {background-color: aliceblue; margin-top: 0px;}
     .list_1boon {
         overflow: hidden;
         margin: 0 auto;

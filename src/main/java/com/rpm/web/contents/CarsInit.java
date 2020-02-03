@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rpm.web.proxy.Proxy;
 import com.rpm.web.util.MakeCarDummyList;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -14,9 +13,9 @@ import java.util.Map;
 
 @Component
 public class CarsInit implements ApplicationRunner {
-
     @Autowired
     Proxy proxy;
+    @Autowired
     private CarsRepository carsRepository;
 
     public CarsInit(CarsRepository carsRepository) {
