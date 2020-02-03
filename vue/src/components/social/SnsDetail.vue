@@ -1,44 +1,41 @@
 <template>
 <div class= "snsDetail">
-  <link rel="stylesheet" type="text/css"  href="css/agency.min.css">
   <link rel="stylesheet" href="https://startbootstrap.com/assets/style-theme.css">
   <link rel="stylesheet" href="https://blackrockdigital.github.io/startbootstrap-agency/css/agency.min.css">
   <link rel="stylesheet" href="https://blackrockdigital.github.io/startbootstrap-agency/vendor/fontawesome-free/css/all.min.css">
 
-<div class="modal-open" style="padding-right: 16.9962px;">
-<div class="portfolio-modal modal fade show" id="portfolioModal2" tabindex="-1" style="display: block; padding-right: 16.9962px;">
+<div class="portfolio-modal modal fade show" id="portfolioModal2" tabindex="-1" style="overflow: scroll; display: block; padding-right: 16.9962px;">
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="close-modal" @click="close" data-dismiss="modal">
-          <div class="lr">
-            <div class="rl"></div>
-          </div>
+        <div class="close-modal" style="color:#0d124f" @click="gotoList" data-dismiss="modal">
+          <i class="fas fa-undo fa-3x"></i>
         </div>
         <div class="container">
           <div class="row">
             <div class="col-lg-8 mx-auto">
               <div class="modal-body">
                 <!-- Project Details Go Here -->
-                <h2 class="text-uppercase">{{contentTitle}}</h2>
-                <p class="item-intro text-muted">{{userName}}</p>
-                <img class="img-fluid d-block mx-auto" src="http://global-autonews.com/data/file/ct_097/2038852047_Q8TCdrg7_1.JPG" alt="">
-                <p>{{content}}</p>
+                <h2 class="text-uppercase">{{board.carName}}</h2>
+                <p class="item-intro text-muted">{{board.userName}}</p>
+                <img class="img-fluid d-block mx-auto" :src="board.boardImg" alt="">
+                <p>{{board.boardContent}}</p>
                 <ul class="list-inline">
-                  <li>작성시간: {{contentDate}}</li>
-                  <li>작성자: @{{contentUserid}}</li>
+                  <li>작성시간: {{board.boardDate}}</li>
+                  <li>작성자: @{{board.userid}}</li>
                 </ul>
-                <div>
-                  <a class="btn-like" @click="thumbup" v-if="empty"><i class="far fa-heart fa-2x"></i> {{thumb}}</a>
-                  <a class="btn-like" @click="thumbdown" v-if="full"><i class="fas fa-heart fa-2x"></i>{{thumb}}</a>
+                <!--thumb-->
+                <div style="margin:30px">
+                  <a class="btn-like" @click="thumbUp" v-if="empty"><i class="far fa-heart fa-2x"></i> </a>
+                  <a class="btn-like" @click="thumbDown" v-if="fall"><i class="fas fa-heart fa-2x"></i></a>
+                  {{board.thumbCount}}
                 </div>
-
                 <div v-if="myContent">
-                <button class="btn btn-primary" @click="goModify" data-dismiss="modal" type="button">
+                  <button class="btn btn-primary" @click="goModify" data-dismiss="modal" type="button">
                   <i class="fas fa-pen"></i> 글 수정하기</button>
                 <button class="btn btn-primary" @click="deleteBoard" data-dismiss="modal" type="button">
                   <i class="far fa-trash-alt"></i> 글 삭제하기</button>
-                  </div>
-
+                  <modals-container />
+                </div>
                 <div>
                   <!--댓글창-->
                 </div>
@@ -50,39 +47,100 @@
     </div>
   </div>
 </div>
-</div>
 </template>
 <script>
+  import axios from "axios"
+  import SnsModal from "./SnsDeleteModal"
+  let url = "http://localhost:8080"
   export default {
     data(){
       return{
-        board:{},
-        thumb: "  "+0, //엑시오스로 이 글에 참조된 thumb 테이블 갯수 알아오기.
+        board:'',
+        boardSeq: '',
         empty:true,
-        full:false,
-        contentTitle:"포르쉐 박스터 718 gts",
-        userName:"권혜령",
-        content:"나 이차 넘나 죠하요 헤헤헤헿 Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!",
-        contentDate:"2020.01.09 19:02",
-        contentUserid:"hyeryeongee_",
-        myContent:true,
+        fall:false,
+        myContent:true
       }
     },
+    created(){
+      this.boardSeq = localStorage.getItem('storedData')
+      axios.get(`${url}/loadBoard/${this.boardSeq}`)
+      .then(res=>{
+        this.board = res.data
+        console.log(this.board)
+        this.checkThumb()
+        if(this.board.userid === this.$store.state.user.user.userid){
+          this.myContent = true
+        }else{
+          this.myContent = false
+        }
+      })
+      .catch(()=>{
+        alert('axios error')
+      })
+
+      localStorage.setItem('boardSeq', this.boardSeq)
+    },
     methods:{
-      close(){
-
+      gotoList(){
+        this.$router.push({path: '/sns'})
       },
-      thumbup(){
-        //+1
+      checkThumb(){
+        axios.get(`${url}/thumbed/${this.boardSeq}/${this.$store.state.user.user.userid}`)
+                .then((res)=>{
+                  console.log(res.data)
+                  console.log(res)
+                  if(res.data === true){
+                    this.empty=false
+                    this.fall=true
+                  }
+                  if(res.data === false){
+                    this.empty=true
+                    this.fall=false
+                  }
+                })
+                .catch(()=>{
+                  alert('axios error')
+                })
       },
-      thumbdown(){
-        //-1
+      thumbUp(){
+        this.empty=false
+        this.fall=true
+        axios.get(`${url}/thumbUp/${this.boardSeq}/${this.$store.state.user.user.userid}`)
+                .then(res=>{
+                  if(res.data === "success"){
+                    this.board.thumbCount +=1
+                    console.log(this.board)
+                  }
+                })
+                .catch(()=>{
+                  alert('axios error')
+                })
       },
-      goModify:{
-
+      thumbDown(){
+        this.empty=true
+        this.fall=false
+        axios.get(`${url}/thumbDown/${this.boardSeq}/${this.$store.state.user.user.userid}`)
+                .then(res=>{
+                  if(res.data === "success"){
+                    this.board.thumbCount -=1
+                    console.log(this.board)
+                  }
+                })
+                .catch(()=>{
+                  alert('axios error')
+                })
       },
-      deleteBoard:{
-
+      goModify(){
+        this.$router.push({path: '/snsmodify'})
+      },
+      deleteBoard(){
+        this.$modal.show(SnsModal,{
+          modal: this.$modal},{
+          name: 'dynamic-modal',
+          height: 'auto',
+          draggable: true,
+        })
       }
     }
   }
@@ -95,11 +153,7 @@
 	margin: auto 10px;
 }
 .fa-heart:before{
-  color : rgba(232, 25, 25, 0.94);
-}
-.modal-open .modal {
-  overflow-x: hidden;
-  overflow-y: -moz-scrollbars-none;
+  color : #E81919;
 }
 h2 {
   color: #0d124f;

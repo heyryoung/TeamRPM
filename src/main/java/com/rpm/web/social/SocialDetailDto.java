@@ -11,15 +11,13 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 @Getter
 @Setter
-public class SocialListDto {
-    private Long boardSeq;
-    private String boardDate;
-    private String carCode;
+public class SocialDetailDto {
     private String carName;
     private String boardContent;
     private String boardImg;
+    private String boardDate;
     private String userName;
+    private String userid;
     //private int commentCount;
     private int thumbCount;
-
 }

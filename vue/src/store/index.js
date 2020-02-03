@@ -15,7 +15,6 @@ export const store = new Vuex.Store({
         contents,
         magazine,
         decenter
-
     },
     strict: true
 })

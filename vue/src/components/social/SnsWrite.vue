@@ -20,9 +20,7 @@
                         accepted-file-types="image/jpeg, image/png"
                         :server="server"
                         :file="file"
-                        :init="handleFilePondInit"
-                        :processfile="handleFilePondProcessfile"
-                        :removefile="handleFilePondRemovefile"/>
+                        :init="handleFilePondInit"/>
                 <p>*10Mb 이하의 파일을 업로드 해주세요.</p>
 
             </div>
@@ -40,13 +38,15 @@
                             </li>
                             <li class="spreset">
                                 <div class="searchr1">
+                                    <div id="searchKey1" @click="searchKeyClick(`searchKey1`)"
+                                         class="selectric-wrapper selectric-selectric selectric-below selectric-hover">
                                         <div class="selectric-hide-select">
                                             <select id="makeList"
                                                     title="제조사를 선택하세요"
                                                     class="selectric"
                                                     data-beusable-tracking=""
                                                     tabindex="-1"
-                                                    v-for="category of this.$store.state.cmm.category1"
+                                                    v-for="category of this.$store.state.contents.category1"
                                                     :key="category.name">
                                                 <option data-type="MAKE_TYPE010"
                                                         data-cnt="category.count">{{category.name}}</option>
@@ -55,13 +55,13 @@
                                                                       data-beusable-tracking="" >{{keyWord1}}</span></div>
                                         <div id = "category1" class="selectric-items" tabindex="-1">
                                             <div class="selectric-scroll">
-                                                <ul v-for="category of this.$store.state.cmm.category1" :key="category.name">
+                                                <ul v-for="category of this.$store.state.contents.category1" :key="category.name">
                                                     <li data-index="1" @click="setCategory2(category)" class="">{{category.name}}
                                                     </li>
                                                 </ul>
                                             </div>
                                         </div>
-                                        <input class="selectric-input" tabindex="0">
+                                        <input class="selectric-input" tabindex="0"></div>
                                 </div>
                                 <div class="searchr2">
                                     <div id="searchKey2"  @click="searchKeyClick(`searchKey2`)"
@@ -70,7 +70,7 @@
                                                 id="modelGroupList" title="모델을 선택하세요"
                                                 class="selectric" data-beusable-tracking=""
                                                 tabindex="-1"
-                                                v-for="category of this.$store.state.cmm.category2"
+                                                v-for="category of this.$store.state.contents.category2"
                                                 :key="category.name">
                                             <option data-type="MAKE_TYPE010"
                                                     data-cnt="category.count">{{category.name}}</option>
@@ -79,7 +79,7 @@
                                                                      data-beusable-tracking="">{{keyWord2}}</span></div>
                                         <div id = "category2" class="selectric-items" tabindex="-1" >
                                             <div class="selectric-scroll">
-                                                <ul v-for="category of this.$store.state.cmm.category2" :key="category.name">
+                                                <ul v-for="category of this.$store.state.contents.category2" :key="category.name">
                                                     <li data-index="1" @click="setCategory3(category)" class="">{{category.name}}
                                                     </li>
                                                 </ul>
@@ -98,7 +98,7 @@
                                                     class="selectric"
                                                     data-beusable-tracking=""
                                                     tabindex="-1"
-                                                    v-for="category of this.$store.state.cmm.category3"
+                                                    v-for="category of this.$store.state.contents.category3"
                                                     :key="category.name">
                                                 <option data-type="MAKE_TYPE010"
                                                         data-cnt="category.count">{{category.name}}</option>
@@ -107,7 +107,7 @@
                                                                      data-beusable-tracking="">{{keyWord3}}</span></div>
                                         <div class="selectric-items" tabindex="-1">
                                             <div class="selectric-scroll">
-                                                <ul v-for="category of this.$store.state.cmm.category3" :key="category.name">
+                                                <ul v-for="category of this.$store.state.contents.category3" :key="category.name">
                                                     <li data-index="1" @click="setKeyWord3(category)" class="">{{category.name}}
                                                     </li>
                                                 </ul>
@@ -119,27 +119,6 @@
                         </ul>
                     </div>
                 </div>
-               <!-- <div>
-                    <div class="select_row .select_maker">
-                        <h3 class="maker_title"><label for="maker">제조사</label></h3>
-                        <div class="ps_box maker_code">
-                            <select id="maker" v-model="selectMaker" class="sel" aria-label="maker">
-                                <option value="" selected="">제조사</option>
-                                <option v-for="maker of makerList" :key="maker.code" @click="selectedMaker">{{maker.name}}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="select_row .select_model">
-                        <h3 class="model_title"><label for="model">모델명</label></h3>
-                        <div class="ps_box model_code">
-                            <select id="model" v-model="selectModel" class="sel" aria-label="model">
-                                <option value="" selected="">모델명</option>
-                                <option v-for="model of modelList" :key="model.code">{{model.name}}</option>
-                            </select>
-                        </div>
-                    </div>
-
-                </div>-->
             </div>
 
             <div class="inputbox">
@@ -151,7 +130,10 @@
         </div>
         <div class="btnbox">
             <button class="btn btn-primary" v-if="writeBtn" @click="inputContent" data-dismiss="modal" type="button">
-                <i class="fas fa-pen"></i> <b>글 입력하기</b></button>
+                <i class="fas fa-pen"></i> <b>글 쓰기</b></button>
+            <button class="btn btn-primary" @click.prevent="modal" data-dismiss="modal" type="button">
+                <i class="fas fa-times"></i> <b>취소하기</b></button>
+            <modals-container />
             <button class="btn btn-primary" v-if="updateBtn" @click="cancel" data-dismiss="modal" type="button">
                 <i class="fas fa-pen"></i><b> 글 수정하기</b></button>
         </div>
@@ -163,16 +145,12 @@
 </div>-->
 </template>
 <script>
+    import SnsModal from "./SnsModal.vue"
     import vueFilePond from 'vue-filepond';
     import 'filepond/dist/filepond.min.css';
-    // Import FilePond plugins
-    // Please note that you need to install these plugins separately
-    // Import image preview plugin styles
     import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css';
-    // Import image preview and file type validation plugins
     import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
     import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
-    // Create component
     const FilePond = vueFilePond(FilePondPluginFileValidateType, FilePondPluginImagePreview);
     import axios from "axios"
     import { mapState } from 'vuex'
@@ -191,11 +169,16 @@
           },
           file:[],
           uploadedFiles: [],
-          keyWord1 : '제조사를 선택하세요',
-          keyWord2 : '모델을 선택하세요',
-          keyWord3 : '세부모델을 선택하세요',
-          contentTitle:"",
-          userName:"김예지",
+          defaultKeyWord1 : '제조사를 선택하세요',
+          defaultKeyWord2 : '모델을 선택하세요',
+          defaultKeyWord3 : '세부모델을 선택하세요',
+          keyWord1 : '국산차/수입차를 먼저 선택하세요',
+          keyWord2 : '',
+          keyWord3 : '',
+          contentTitle1 : '',
+          contentTitle2 : '',
+          contentTitle3 : '',
+          filename:'',
           content:"내가요.. 차를 샀는데요... 비쌌어요.",
           writeBtn:true,
           updateBtn:false,
@@ -206,33 +189,27 @@
       },
       computed:{
           ...mapState({
-              makerList: state => state.cmm.makerList,
-              modelList : state => state.cmm.modelList,
-              modelListIsOpen : state => state.cmm.modelListIsOpen,
-          })
+              makerList: state => state.contents.makerList,
+              modelList : state => state.contents.modelList,
+              modelListIsOpen : state => state.contents.modelListIsOpen,
+          }),
+          contentTitle(){
+              return this.contentTitle1+' '+this.contentTitle2+' '+this.contentTitle3
+          }
       },
-      created() {
-          this.$store.dispatch('contents/init')
-          /*        if(this.$store.state.cmm.makerFromMain!=''){
-
-                  }*/
+      created(){
+          if(this.$store.state.user.user === {}|| this.$store.state.user.auth===false){
+              alert('로그인해주세요')
+              this.$router.push({path: '/login'})
+          }else{
+              this.$store.dispatch('contents/init')
+              this.$store.dispatch('contents/getCategory1',{'param':'KOR','column':'CAR_TYPE'})
+          }
       },
     methods:{
         handleFilePondInit(){
-            this.$refs.pond.getFiles();
-        },
-        handleFilePondProcessfile(error, file) {
-            console.log("FilePond succesfully processed file " + file);
-            this.uploadedFiles.push(file.filename);
-            this.$nextTick();
-        },
-        handleFilePondRemovefile(file) {
-            console.log("FilePond deleted file " + file.filename);
-            var index = this.myFiles.indexOf(file.filename);
-            if (index > -1) {
-                this.uploadedFiles.splice(index, 1);
-                this.$nextTick();
-            }
+            this.$refs.pond.getFile();
+            this.filename = this.$refs.pond.getFile().filename;
         },
         korCar(korCarID, impCarID){
             const korCar = document.getElementById(korCarID)
@@ -240,9 +217,9 @@
             korCar.className = "on"
             impCar.className = ""
             this.$store.dispatch('contents/getCategory1',{'param':'KOR','column':'CAR_TYPE'})
-            this.keyWord1 = '제조사를 선택하세요'
-            this.keyWord2 = '모델을 선택하세요'
-            this.keyWord3 = '세부모델을 선택하세요'
+            this.keyWord1 = this.defaultKeyWord1
+            this.keyWord2 = this.defaultKeyWord2
+            this.keyWord3 = this.defaultKeyWord3
 
         },
         impCar(korCarID, impCarID, category1ID){
@@ -253,10 +230,10 @@
             impCar.className = "on"
             category1.style.width = "220px"
             category1.style.height = "300px"
-            this.$store.dispatch('contents/getCategory1',{'param':'IMP','column':'CAR_TYPE'})
-            this.keyWord1 = '제조사를 선택하세요'
-            this.keyWord2 = '모델을 선택하세요'
-            this.keyWord3 = '세부모델을 선택하세요'
+            this.keyWord1 = this.defaultKeyWord1
+            this.keyWord2 = this.defaultKeyWord2
+            this.keyWord3 = this.defaultKeyWord3
+
 
         },
         searchKeyClick(searchKeyID){
@@ -270,7 +247,7 @@
             }else{
                 searchKey.className = "selectric-wrapper selectric-selectric selectric-below selectric-hover"
             }
-            if(this.$store.state.cmm.category2.length>=10) {
+            if(this.$store.state.contents.category2.length>=10) {
                 cate2.style.width = "220px"
                 cate2.style.height = "300px"
             }{
@@ -280,46 +257,59 @@
         },
 
         setCategory2(param){
-            this.keyWord2 = '모델을 선택하세요'
-            this.keyWord3 = '세부모델을 선택하세요'
+            this.keyWord2 = this.defaultKeyWord2
+            this.keyWord3 = this.defaultKeyWord3
             this.keyWord1 = param.name
+            this.contentTitle1 = this.keyWord1
+
             this.$store.dispatch('contents/getCategory2',{'param':this.keyWord1,'column':'MAKENM'})
         },
         setCategory3(param){
-            this.keyWord3 = '세부모델을 선택하세요'
+            this.keyWord3 = this.defaultKeyWord3
             this.keyWord2 = param.name
+            this.contentTitle2 = this.keyWord2
+
             this.$store.dispatch('contents/getCategory3',{'param':this.keyWord2,'column':'MODEL_GRP_NM'})
         },
         setKeyWord3(param){
             this.keyWord3 = param.name
+            this.contentTitle3 = this.keyWord3
         },
         inputContent() {
-            alert(this.$refs.pond.getFile().file)
             let headers = {
                 'authorization': 'JWT fefege..',
                 'Accept' : 'application/json',
                 'Content-Type': 'application/json'
             }
             let data={
-                boardImgFile : this.$refs.pond.getFile().file,
                 boardImgName: this.$refs.pond.getFile().filename,
-                carCode: '0',
-                carName : this.carName,
+                carName : this.contentTitle,
                 boardContent : this.content,
-                user : this.$store.state.user,
-                boardDate: ''
+                userid : this.$store.state.user.user.userid,
             }
-            console.log(`${this.boardImgName}`);
-            axios.post(`${url}/writeContent`, data , headers)
-                .then((res)=>{
-                    alert(res.data)
-                })
-                .catch(()=>{})
+            if(this.$refs.pond.getFile()===null||this.contentTitle===''||this.content==='') {
+                alert('모든 값을 입력해주세요')
+            }else {
+                axios.post(`${url}/writeContent`, data, headers)
+                    .then((res) => {
+                        if (res.data === "success") {
+                            this.$router.push({path: '/sns'})
+                        }
+                    })
+                    .catch(() => {
+                        alert('axios error')
+                    })
+            }
             // FilePond instance methods are available on `this.$refs.pond`
         },
-        cancel(){
-
-        },
+        modal(){
+            this.$modal.show(SnsModal,{
+                modal: this.$modal},{
+                name: 'dynamic-modal',
+                height: 'auto',
+                draggable: true,
+            })
+        }
 
     }
 
@@ -391,8 +381,7 @@
     inline-size: auto;
 }
 .btnbox{
-    margin: 0 auto;
-    margin-top: 50px;
+    margin: 50px auto;
     width: 1050px;
     text-align: center;
 }
@@ -449,10 +438,10 @@ img {
 }
 .btn-primary {
   margin: auto 10px;
-    height: 50px;
-    width: 140px;
+    height: 40px;
+    width: 100px;
     border-radius: 10px 10px;
-    font-size:1.3em;
+    font-size:1.2em;
     background-color: #212529;
     color: #fff;
 }
@@ -463,84 +452,20 @@ img {
 
 
 
+.searchcont1 .btnl{margin: 10px;float:left; background:url(https://www.kcar.com/resources/images/index/bar.jpg) bottom right no-repeat;height:45px}
+.searchcont1 span.btnl a{text-align:center;width:75px;height:43px;display:inline-block;line-height:45px;border:1px #ddd solid;font-size:13px;color:#181819}
+.searchcont1 span.btnl a:hover, .searchcont1 .btnl a.on, .searchcont1 .btnl a.on:hover{background:#2d2d38;color:#fff}
+.searchcont1 .searchr1{position:absolute;top:131px;left:605px;width:300px}
+.searchcont1 .searchr2{position:absolute;top:181px;left:605px;width:300px}
+.searchcont1 .searchr3{position:absolute;top:231px;left:605px;width:300px}
+.searchcont1 .spreset ul{ width: 220px; }
+select{visibility:hidden;}
+.selectric-wrapper select{visibility:visible;}
+.searchcont1 .selectric { position:absolute; width: 100%; border:1px solid #ddd; background-color: #fff; }
+.selectric-items .selectric-scroll{overflow-x:hidden; overflow-y:auto;}
+.selectric-items .selectric-scroll li{padding-right:60px;position:relative}
+.selectric-items .selectric-scroll li em{position:absolute;top: 10px ;right:20px}
+.searchcont1 .selectric .label { width: 100%; height: 40px; line-height: 40px; color: #acacaf;}
 
-.searchcont1 li .btnl {
-    margin: 10px;
-    float: left;
-    background: url(https://www.kcar.com/resources/images/index/bar.jpg) bottom right no-repeat;
-    height: 45px;
-    display: inline-block;
-}
-.searchcont1 li span.btnl a {
-    text-align: center;
-    width: 75px;
-    height: 43px;
-    display: inline-block;
-    line-height: 45px;
-    border: 1px #ddd solid;
-    font-size: 13px;
-    background: #2d2d38;
-    color: #fff;
-}
-.searchcont1 li span.btnl a:hover,
-.searchcont1 li .btnl a.on,
-.searchcont1 li .btnl a.on:hover {
-    background: #2d2d38;
-    color: #fff;
-}
-.searchr1, .searchr2, .searchr3 {
-    margin: 10px;
-}
-.selectric-wrapper {
-    position: relative;
-    cursor: pointer;
-}
-.selectric-hide-select {
-    position: relative;
-    overflow: hidden;
-    width: 0;
-    height: 0;
-}
-.selectric {
-    width: 100%;
-    border: 1px solid #ddd;
-    border-radius: 0px;
-    background: #F8F8F8;
-    position: relative;
-    overflow: hidden;
-}
-.selectric-items {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: #fff;
-    border: 1px solid #c4c4c4;
-    z-index: -1;
-    box-shadow: 0 0 10px -6px;
-}
-.selectric-input {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    overflow: hidden !important;
-    clip: rect(0, 0, 0, 0) !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    width: 1px !important;
-    height: 1px !important;
-    outline: none !important;
-    border: none !important;
-    *font: 0/0 a !important;
-    background: none !important;
-}
-.selectric-hide-select select {
-    position: absolute;
-    left: -100%;
-}
-.mc_search .search3box .searchcont1 li span.btnl a:hover,
-.mc_search .search3box .searchcont1 li .btnl a.on, .mc_search .search3box .searchcont1 li .btnl a.on:hover {
-    background: #2d2d38;
-    color: #fff;
-}
+
 </style>

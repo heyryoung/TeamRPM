@@ -35,10 +35,8 @@ public class CarbookController {
                 List<Record> records = new ArrayList<>();
                 if(itRecord !=null){
                     for(Record r: itRecord){
-
                         records.add(r);
                         printer.accept("in the carbook.for");
-
                     }
                     map.put("record", records);
 
