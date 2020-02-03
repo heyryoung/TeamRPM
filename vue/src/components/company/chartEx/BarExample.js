@@ -2,17 +2,20 @@ import { Bar } from './BaseCharts'
 export default {
   extends: Bar,
   props:['data'],
-  mounted(){
+  methods:{
+    dataInit(revenue){
       this.renderChart({
-        labels: this.data.x,
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
         datasets: [
           {
-            label: '정확도',
+            label: '판매액',
             backgroundColor: '#99ccff',
-            data: this.data.y
+            data: revenue
           }
         ]
       }, {responsive: true, maintainAspectRatio: false})
+    }
+
   },
 
 
