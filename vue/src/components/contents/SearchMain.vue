@@ -735,7 +735,7 @@ export default {
     destroyed(){
         this.reset()
     }
-}
+}    
 </script>
 <style scoped>
     .main_content{
