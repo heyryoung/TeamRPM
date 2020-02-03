@@ -72,9 +72,10 @@ public class SocialInit implements ApplicationRunner {
         socialList.stream().sorted(Comparator.comparing(Social::getBoardSeq)).collect(Collectors.toList());
         List<Social> commentedSocialList = new ArrayList<>();
         commentedSocialList.clear();
-        for(int i=socialList.size()-1; i>socialList.size()-30; i--){
+        for(int i=socialList.size()-1; i>socialList.size()-8 ; i--){
             commentedSocialList.add(socialList.get(i));
         }
+
         long commentCount = commentRepository.count();
         if(commentCount==0  ){
             System.out.println("comment 등록 시작");

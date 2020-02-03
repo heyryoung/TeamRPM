@@ -112,9 +112,10 @@
       },
       /* 체크박스
       created() {
-          if(!this.$store.state.cmm.initFlag)
-              this.$store.dispatch('contents/init')
-          /!*        if(this.$store.state.cmm.makerFromMain!=''){
+
+          if(!this.$store.state.contents.initFlag)
+              this.$store.dispatch('cmm/init')
+          /!*        if(this.$store.state.contents.makerFromMain!=''){
 
                   }*!/
       },*/

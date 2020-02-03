@@ -191,6 +191,9 @@ const actions = {
             .catch(()=>{
                 alert('잘못된 요청입니다.')
             })
+    },
+    async mainConditionSettingFlagResetter ( { commit } ) {
+        commit( 'CHANGEGRAPH' )
     }
 };
 const mutations = {
@@ -260,8 +263,9 @@ const mutations = {
             state.pageNum = 1,
             state.resultLength = 0,
             state.modelList = [],
-            state.modelListIsOpen = false
-            state.initFlag = false
+            state.modelListIsOpen = false,
+            state.initFlag = false,
+            state.mainConditionSettingFlag = false
     },
     TREECONDITIONCONTROL ( state, param ) {
         state.modelListIsOpen = !state.modelListIsOpen
@@ -531,6 +535,9 @@ const mutations = {
     },
     GETRECOMMENDBYSEARCHWORD(state,data){
         state.recommendBySearchWordList = data
+    },
+    FLAGRESETTER (state) {
+        state.mainConditionSettingFlag = false
     }
 }
 
