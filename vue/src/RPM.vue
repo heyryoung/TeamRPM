@@ -43,7 +43,6 @@
                         </div>
 
 
-
                     </li>
                 </ul>
         </div>
@@ -79,7 +78,6 @@
         methods:{
             logout(){
                 this.$store.dispatch('user/logout')
-
 
             }
         }

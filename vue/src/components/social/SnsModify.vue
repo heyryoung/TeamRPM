@@ -112,6 +112,7 @@
       },
       /* 체크박스
       created() {
+
           if(!this.$store.state.contents.initFlag)
               this.$store.dispatch('cmm/init')
           /!*        if(this.$store.state.contents.makerFromMain!=''){

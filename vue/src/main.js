@@ -14,12 +14,7 @@ new Vue({
     if(localStorage.getItem('token')){
       this.$store.dispatch('user/getUserInfo')
       this.$store.state.auth = true
-
     }
-
-
-
-
   },
   render: h => h(App),
   router,

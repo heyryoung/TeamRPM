@@ -62,7 +62,6 @@ public class CarbookController {
 
         List<Record> list = new ArrayList<>();
         for(Record r : records){
-
             list.add(r);
 
         }
