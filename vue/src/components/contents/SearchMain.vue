@@ -534,17 +534,6 @@ export default {
                 }
             })
 
-            let data = {
-                categoryList: checkedCategoryList,
-                modelList: checkedModelList,
-                fuelTypeList: checkedFuelTypeList,
-                regionList: checkedRegionList,
-                searchWord: this.searchWord,
-                carcd: this.carcd,
-                pageLimit : this.$store.state.cmm.pageLimit,
-                maker : maker.code,
-            }
-            this.$store.dispatch('cmm/searchWithCondition', data)
             let selectedConditionData = {
                     categoryList : checkedCategoryList,
                     modelList : checkedModelList,
