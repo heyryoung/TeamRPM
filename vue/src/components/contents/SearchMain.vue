@@ -578,8 +578,8 @@ export default {
             }
         },
         clickPageLimit( pageLimit ){
+            this.reset()
             this.$store.dispatch('contents/pageLimitSetting', pageLimit)
-            this.searchWord =  ''
             this.searchWithCondition()
         },
         orderBy(orderByValue){
