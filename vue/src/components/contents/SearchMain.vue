@@ -353,8 +353,8 @@
                 </div>
             </div>
         </div>
-    </div>
-</template>
+    </div >
+</template >
 <script>
 import { mapState , mapGetters } from 'vuex'
 import Pager from '@/components/cmm/Pagination'
@@ -400,7 +400,7 @@ export default {
             modelListIsOpen : state => state.contents.modelListIsOpen,
             modelList : state => state.contents.modelList
         }),
-        ...mapGetters( 'cmm' , {
+        ...mapGetters( 'contents' , {
             initFlag : 'initFlag'
         }),
         isAny : function(){
@@ -707,6 +707,7 @@ export default {
         }
     },
     created() {
+
         if (!this.$store.state.contents.initFlag)
             this.$store.dispatch('contents/init')
 
@@ -727,8 +728,13 @@ export default {
             }
             this.searchWithCondition()
             if ( mainConditionSettingFlag === 'stringMatch' ) this.$store.dispatch('contents/stringMatchModelCHecker')
+
+            this.$store.dispatch('contents/mainConditionSettingFlagResetter')
             }
-        }
+        },
+    destroyed(){
+        this.reset()
+    }
 }
 </script>
 <style scoped>

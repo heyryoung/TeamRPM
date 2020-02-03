@@ -33,13 +33,6 @@ public class Carbook implements Serializable {
     @JoinColumn(name = "userSeq")
     private User userSeq;
 
-/*    @OneToMany(mappedBy = "mycarId", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Record> records = new ArrayList<>();*/
-
-
-
-
-
 
     @Builder
     public Carbook(String brand, String model, String year,
