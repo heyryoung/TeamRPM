@@ -230,10 +230,10 @@
             impCar.className = "on"
             category1.style.width = "220px"
             category1.style.height = "300px"
-            this.$store.dispatch('contents/getCategory1',{'param':'IMP','column':'CAR_TYPE'})
             this.keyWord1 = this.defaultKeyWord1
             this.keyWord2 = this.defaultKeyWord2
             this.keyWord3 = this.defaultKeyWord3
+
 
         },
         searchKeyClick(searchKeyID){
@@ -261,12 +261,14 @@
             this.keyWord3 = this.defaultKeyWord3
             this.keyWord1 = param.name
             this.contentTitle1 = this.keyWord1
+
             this.$store.dispatch('contents/getCategory2',{'param':this.keyWord1,'column':'MAKENM'})
         },
         setCategory3(param){
             this.keyWord3 = this.defaultKeyWord3
             this.keyWord2 = param.name
             this.contentTitle2 = this.keyWord2
+
             this.$store.dispatch('contents/getCategory3',{'param':this.keyWord2,'column':'MODEL_GRP_NM'})
         },
         setKeyWord3(param){

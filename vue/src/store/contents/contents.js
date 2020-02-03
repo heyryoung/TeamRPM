@@ -38,7 +38,7 @@ const state = {
     maxMilage : '',
     recentSearchWord : [],
     searchWordRank : [],
-    recommendBySearchWordList : []
+    recommendBySearchWordList : {}
 };
 const getters = {
     makerList : state => state.makerList,
@@ -191,6 +191,9 @@ const actions = {
             .catch(()=>{
                 alert('잘못된 요청입니다.')
             })
+    },
+    async mainConditionSettingFlagResetter ( { commit } ) {
+        commit( 'CHANGEGRAPH' )
     }
 };
 const mutations = {
@@ -203,6 +206,7 @@ const mutations = {
         state.makerList = []
         state.regionList = []
         state.showCarList = []
+        state.recommendBySearchWordList = {}
 
         data.categoryList.forEach( el => {
             state.categoryList.push({
@@ -259,8 +263,9 @@ const mutations = {
             state.pageNum = 1,
             state.resultLength = 0,
             state.modelList = [],
-            state.modelListIsOpen = false
-            state.initFlag = false
+            state.modelListIsOpen = false,
+            state.initFlag = false,
+            state.mainConditionSettingFlag = false
     },
     TREECONDITIONCONTROL ( state, param ) {
         state.modelListIsOpen = !state.modelListIsOpen
@@ -509,8 +514,8 @@ const mutations = {
     },
     GETSEARCHWORDRANK(state, data){
         for (let i = 1; i<=10; i++){
-            if(data[i]!=undefined)
-            state.searchWordRank.push({name : `${i}위 ${data[i]}`, value : data[i]})
+            if(data[i-1]!=undefined)
+            state.searchWordRank.push({name : `${i}위 ${data[i-1]}`, value : data[i-1]})
         }
     },
     HANDLERECENTSEARCHWORD(state, data){
@@ -530,6 +535,9 @@ const mutations = {
     },
     GETRECOMMENDBYSEARCHWORD(state,data){
         state.recommendBySearchWordList = data
+    },
+    FLAGRESETTER (state) {
+        state.mainConditionSettingFlag = false
     }
 }
 

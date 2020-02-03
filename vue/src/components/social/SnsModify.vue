@@ -159,6 +159,7 @@
     import { mapState } from 'vuex'
     let url = 'http://localhost:8080'
 
+
     export default{
         data(){
             return{

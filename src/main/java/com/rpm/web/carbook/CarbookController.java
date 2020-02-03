@@ -3,7 +3,6 @@ package com.rpm.web.carbook;
 import com.rpm.web.user.User;
 import com.rpm.web.util.Printer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -20,6 +19,7 @@ public class CarbookController {
     @Autowired Record record;
     @Autowired CarbookService carbookService;
     @Autowired RecordRepository recordRepository;
+
 
     @PostMapping("/getMycar")
     public HashMap<String, Object> getMycar(@RequestBody User param){

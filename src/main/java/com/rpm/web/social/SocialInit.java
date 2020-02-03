@@ -29,6 +29,7 @@ public class SocialInit implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
+
         if (userRepository.count() != 0) {
             //socialBoard 테이블을 지운 후 social더미만 먼저 실행
 
@@ -50,13 +51,14 @@ public class SocialInit implements ApplicationRunner {
                     for (Social s : socialDummy.crawlingBoard(user, car)) {
                         socialRepository.save(s);
                     }
+
                 }
                 System.out.println("socialboard 등록 완료");
             }
 
 
-            //comment/ thumb 넣을 board 정렬
 
+            //comment/ thumb 넣을 board 정렬
             Iterable<Social> socials = socialRepository.findAll();
             List<Social> socialList = new ArrayList<>();
             for (Social s : socials) {
@@ -68,6 +70,7 @@ public class SocialInit implements ApplicationRunner {
             for (int i = socialList.size() - 1; i > socialList.size() - 30; i--) {
                 commentedSocialList.add(socialList.get(i));
             }
+
 
             /*Comment Dummy Data*/
 
@@ -105,5 +108,6 @@ public class SocialInit implements ApplicationRunner {
                 System.out.println("thumb 등록 완료");
             }
         }
+
     }
 }

@@ -334,9 +334,7 @@
                 this.korCar(`korCar2`,`impCar2`)
             },
             searchBoxOn(){
-                if(this.$store.state.contents.searchWordRank.length==0){
-                    this.$store.dispatch('contents/getSearchWordRank')
-                }
+                this.$store.dispatch('contents/getSearchWordRank')
                 const searchBox = document.getElementById("searchBox")
                 searchBox.style.display = "block"
             },

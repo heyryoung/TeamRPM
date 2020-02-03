@@ -349,6 +349,14 @@
                             </table>
                         </div>
                         <pager v-if="isAny" />
+                        <br>
+                        <div style="text-align: center" v-if="searchWord===''?false:true">
+                            <h3 @click="recommendOn" >
+                                다른 유저들이 검색한 '{{searchWord}}'와 같이 검색한 모델이 궁금하세요?
+
+                            </h3>
+                            <RecommendChart v-if="recommendFlag"></RecommendChart>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -358,11 +366,12 @@
 <script>
 import { mapState , mapGetters } from 'vuex'
 import Pager from '@/components/cmm/Pagination'
-import axios from "axios";
+import axios from "axios"
+import RecommendChart from "./RecommendChart";
 
 export default {
     name: 'searchMain',
-    components : { Pager },
+    components : { Pager,RecommendChart},
     data() {
         return {
             searchWord: '',
@@ -384,7 +393,8 @@ export default {
             selectedMinPrice : { code: 'selectedMinPrice' , name : ` 최 소 ` , bigCategory : 'minDefault' },
             selectedMaxPrice : { code: 'selectedMaxPrice' , name : ` 최 대 ` , bigCategory : 'maxDefault' },
             selectedMinMilage : { code: 'selectedMinMilage' , name : ` 최 소 ` , bigCategory : 'minDefault' },
-            selectedMaxMilage : { code: 'selectedMaxMilage' , name : ` 최 대 ` , bigCategory : 'maxDefault' }
+            selectedMaxMilage : { code: 'selectedMaxMilage' , name : ` 최 대 ` , bigCategory : 'maxDefault' },
+            recommendFlag : false
         }
     },
     computed: {
@@ -568,8 +578,8 @@ export default {
             }
         },
         clickPageLimit( pageLimit ){
+            this.reset()
             this.$store.dispatch('contents/pageLimitSetting', pageLimit)
-            this.searchWord =  ''
             this.searchWithCondition()
         },
         orderBy(orderByValue){
@@ -658,6 +668,7 @@ export default {
 
         reset () {
             this.searchWord =  ''
+            this.recommendFlag = false
             this.resettingSelectBox( 'All' )
             this.$store.dispatch('contents/resetCheckedItem')
             this.$store.dispatch('contents/init')
@@ -689,6 +700,10 @@ export default {
                 alert(`로그인이 필요한 서비스입니다.`)
                 this.$router.push('/login')
             }
+        },
+        recommendOn(){
+            this.recommendFlag = true
+
         }
     },
     filters: {
@@ -728,8 +743,12 @@ export default {
             this.searchWithCondition()
             if ( mainConditionSettingFlag === 'stringMatch' ) this.$store.dispatch('contents/stringMatchModelCHecker')
             }
-        }
-}
+        },
+    destroyed(){
+        this.reset()
+    }
+}    
+
 </script>
 <style scoped>
     .main_content{
