@@ -106,7 +106,7 @@ public class CarbookInit implements ApplicationRunner {
 
 
 
-               // carbookRepository.save(carbook);
+                carbookRepository.save(carbook);
 
 
 
