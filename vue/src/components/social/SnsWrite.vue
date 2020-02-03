@@ -212,7 +212,7 @@
           })
       },
       created() {
-          this.$store.dispatch('cmm/init')
+          this.$store.dispatch('contents/init')
           /*        if(this.$store.state.cmm.makerFromMain!=''){
 
                   }*/
@@ -239,7 +239,7 @@
             const impCar = document.getElementById(impCarID)
             korCar.className = "on"
             impCar.className = ""
-            this.$store.dispatch('cmm/getCategory1',{'param':'KOR','column':'CAR_TYPE'})
+            this.$store.dispatch('contents/getCategory1',{'param':'KOR','column':'CAR_TYPE'})
             this.keyWord1 = '제조사를 선택하세요'
             this.keyWord2 = '모델을 선택하세요'
             this.keyWord3 = '세부모델을 선택하세요'
@@ -253,7 +253,7 @@
             impCar.className = "on"
             category1.style.width = "220px"
             category1.style.height = "300px"
-            this.$store.dispatch('cmm/getCategory1',{'param':'IMP','column':'CAR_TYPE'})
+            this.$store.dispatch('contents/getCategory1',{'param':'IMP','column':'CAR_TYPE'})
             this.keyWord1 = '제조사를 선택하세요'
             this.keyWord2 = '모델을 선택하세요'
             this.keyWord3 = '세부모델을 선택하세요'
@@ -283,12 +283,12 @@
             this.keyWord2 = '모델을 선택하세요'
             this.keyWord3 = '세부모델을 선택하세요'
             this.keyWord1 = param.name
-            this.$store.dispatch('cmm/getCategory2',{'param':this.keyWord1,'column':'MAKENM'})
+            this.$store.dispatch('contents/getCategory2',{'param':this.keyWord1,'column':'MAKENM'})
         },
         setCategory3(param){
             this.keyWord3 = '세부모델을 선택하세요'
             this.keyWord2 = param.name
-            this.$store.dispatch('cmm/getCategory3',{'param':this.keyWord2,'column':'MODEL_GRP_NM'})
+            this.$store.dispatch('contents/getCategory3',{'param':this.keyWord2,'column':'MODEL_GRP_NM'})
         },
         setKeyWord3(param){
             this.keyWord3 = param.name

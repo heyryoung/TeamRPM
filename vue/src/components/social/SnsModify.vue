@@ -113,7 +113,7 @@
       /* 체크박스
       created() {
           if(!this.$store.state.cmm.initFlag)
-              this.$store.dispatch('cmm/init')
+              this.$store.dispatch('contents/init')
           /!*        if(this.$store.state.cmm.makerFromMain!=''){
 
                   }*!/

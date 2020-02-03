@@ -8,30 +8,34 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Component
 public class CarsInit implements ApplicationRunner {
     @Autowired
     Proxy proxy;
-    @Autowired
     private CarsRepository carsRepository;
+    private RecentSearchWordRepository recentSearchWord;
+    private List<String> list;
 
-    public CarsInit(CarsRepository carsRepository) {
+    public CarsInit(CarsRepository carsRepository, RecentSearchWordRepository recentSearchWord) {
         this.carsRepository = carsRepository;
+        this.recentSearchWord = recentSearchWord;
+        this.list = new ArrayList<>();
     }
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        long count = carsRepository.count();
         MakeCarDummyList http = new MakeCarDummyList();
         ObjectMapper jsonMapper = new ObjectMapper();
         String[] json = null;
         Map<String, Map<String, Object>> map = new HashMap<>();
-        if (count == 0) {
-            System.out.println("POST로 데이터 가져오기");
-            for (int i = 1; i <= 8000; i++) {
+        if (carsRepository.count() == 0) {
+            for (int i = 1; i <= 8300; i++) {
                 Map<String, String> strJson = new HashMap<>();
                 map = jsonMapper.readValue(
                         http.sendPost("https://www.kcar.com/search/api/getCarSearchWithCondition.do", proxy.string(i))
@@ -40,10 +44,11 @@ public class CarsInit implements ApplicationRunner {
                         .replace("[{", "").replace("}]", "").split(",");
                 for (int j = 0; j < json.length; j++) {
                     if (json[j].indexOf("=") + 1 >= 1) {
-                        System.out.println(json[j].substring(0, json[j].indexOf("=")).trim());
-                        System.out.println(json[j].substring(json[j].indexOf("=") + 1));
                         strJson.put(json[j].substring(0, json[j].indexOf("=")).trim(), json[j].substring(json[j].indexOf("=") + 1));
                     }
+                }
+                if(!list.contains(strJson.get("v_modelnm_text"))){
+                    list.add(strJson.get("v_modelnm_text"));
                 }
                 carsRepository.save(new Cars(strJson.get("v_carcd"),
                         strJson.get("v_optioncd"), strJson.get("v_categorycd"), strJson.get("v_center_code"),
@@ -61,9 +66,16 @@ public class CarsInit implements ApplicationRunner {
                         strJson.get("v_mfr_date"), strJson.get("v_model_grp_cd"), strJson.get("v_center_name"),
                         strJson.get("v_model_grp_nm")
                 ));
-
             }
-            System.out.println("데이터 가져오기 종료.");
+        }
+        if(recentSearchWord.count()==0){
+            int ranlist = 0;
+            for(int i =0; i<1000; i++){
+                for(int j = 0;j<30;j++){
+                    recentSearchWord.save(new RecentSearchWord(list.get((int)(Math.random() * list.size())), Long.parseLong("20200000000000000"), String.valueOf(i)));
+                }
+            }
+
         }
     }
 }

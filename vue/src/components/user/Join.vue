@@ -270,7 +270,6 @@ export default {
 							.then(res=>{
 								if(res.data.msg=="SUCCESS"){
 									alert(`RPM의 가족이 되신 것을 환영합니다. 로그인해주세요.`)
-									this.$store.commit('addUser', res.data.user)
 									return this.$router.push({path : '/login'})
 								}
 							})
