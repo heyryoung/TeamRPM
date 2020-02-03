@@ -534,7 +534,6 @@ export default {
                 }
             })
 
-
             let selectedConditionData = {
                     categoryList : checkedCategoryList,
                     modelList : checkedModelList,
