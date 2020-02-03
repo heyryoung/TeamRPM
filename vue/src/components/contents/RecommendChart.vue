@@ -1,19 +1,20 @@
 <template>
     <div class="Chart">
-        <bar-example :data="data" ref="bar"/>
+        <bar-chart :data="data" ref="bar"/>
     </div>
 
 </template>
 
 <script>
-    import BarExample from '@/components/company/chartEx/BarExample'
+    import BarChart from '@/components/contents/contentsJs/BarChart'
     export default {
         name: "RecommendChart",
-        components : {BarExample},
+        components : {BarChart},
         data() {
             return {data : []}
         },
         created() {
+            alert(this.$store.state.contents.recommendBySearchWordList.modelList)
                 this.data = {x : this.$store.state.contents.recommendBySearchWordList.modelList,
                     y : this.$store.state.contents.recommendBySearchWordList.similarities}
         }

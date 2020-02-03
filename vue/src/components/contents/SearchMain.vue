@@ -668,6 +668,7 @@ export default {
 
         reset () {
             this.searchWord =  ''
+            this.recommendFlag = false
             this.resettingSelectBox( 'All' )
             this.$store.dispatch('contents/resetCheckedItem')
             this.$store.dispatch('contents/init')
@@ -702,6 +703,7 @@ export default {
         },
         recommendOn(){
             this.recommendFlag = true
+
         }
     },
     filters: {

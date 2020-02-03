@@ -7,7 +7,7 @@ export default {
         labels: this.data.x,
         datasets: [
           {
-            label: '정확도',
+            label: '정확도 (10위까지)',
             backgroundColor: '#99ccff',
             data: this.data.y
           }
