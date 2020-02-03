@@ -410,7 +410,7 @@ export default {
             modelListIsOpen : state => state.contents.modelListIsOpen,
             modelList : state => state.contents.modelList
         }),
-        ...mapGetters( 'cmm' , {
+        ...mapGetters( 'contents' , {
             initFlag : 'initFlag'
         }),
         isAny : function(){
