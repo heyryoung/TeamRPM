@@ -2,10 +2,7 @@ package com.rpm.web.social;
 
 import com.rpm.web.contents.Cars;
 import com.rpm.web.contents.CarsRepository;
-import com.rpm.web.contents.SearchDetailCondition;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,7 +17,7 @@ import java.util.stream.Collectors;
 public class SocialServiceImpl implements SocialService{
     @Autowired SocialRepository socialRepository;
     @Autowired CarsRepository carsRepository;
-    @Autowired ModelMapper modelMapper;
+
 
     @Transactional(readOnly = true)
     @Override
@@ -28,9 +25,14 @@ public class SocialServiceImpl implements SocialService{
         Iterable<Social> socials = socialRepository.findAll();
         List<Social> list = new ArrayList<>();
         for(Social s : socials){
-            list.add(modelMapper.map(s, Social.class));
+            list.add(s);
         }
 
+        Iterable<Cars> cars = carsRepository.findAll();
+        List<Cars> carList = new ArrayList<>();
+        for (Cars c : cars) {
+            carList.add(c);
+        }
 
         List<SocialListDto> lists =  list.stream()
                 .map(social -> new SocialListDto(social.getBoardSeq(), social.getBoardDate(),
