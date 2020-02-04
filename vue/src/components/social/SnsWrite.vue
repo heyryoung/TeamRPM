@@ -179,7 +179,7 @@
           contentTitle2 : '',
           contentTitle3 : '',
           filename:'',
-          content:"내가요.. 차를 샀는데요... 비쌌어요.",
+          content:'',
           writeBtn:true,
           updateBtn:false,
       }
