@@ -110,6 +110,8 @@
                 this.customers=pagination
             },
             goDetail(customer){
+                alert(customer.makeNm)
+                localStorage.setItem("customerDetail",JSON.stringify(customer))
                 this.$store.dispatch('recommend/inputDetail',customer)
                 this.$router.push('/customerDetail')
             }

@@ -49,7 +49,7 @@
         name: "carDetail_left",
         data(){
             return{
-                customerInfo: this.$store.state.recommend.customerDetail
+                customerInfo:JSON.parse( localStorage.getItem("customerDetail"))
                 ,
                 columns:[
                    '희망 기종', '가격','연식','주행거리','연료','변속기'
@@ -57,6 +57,9 @@
 
             }
 
+        },
+        destroyed() {
+            localStorage.removeItem("customerDetail")
         }
     }
 </script>
