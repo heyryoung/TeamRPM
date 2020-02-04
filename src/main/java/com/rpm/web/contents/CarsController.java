@@ -5,9 +5,9 @@ import com.rpm.web.proxy.Proxy;
 import com.rpm.web.proxy.Table;
 import com.rpm.web.proxy.Trunk;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.function.Consumer;
@@ -35,8 +35,7 @@ public class CarsController {
     RecentSearchWordRepository recentSearchWordRepository;
     @Autowired
     RecentSeenCarRepository recentSeenCarRepository;
-    @Autowired
-    Table<String, String, Integer> table;
+
 
     private List<Object> carModelList;
     private List<Object> carModelHangeulList;
@@ -55,8 +54,6 @@ public class CarsController {
         carModelList.addAll(cars.stream().collect(Collectors.groupingBy(Cars::getModelnmText
                 , Collectors.counting())).keySet());
         carModelList.forEach(s-> carModelHangeulList.add(stringMatch.seperateHan(s.toString().replace(" ", ""))));
-        System.out.println("carModelList :" + carModelList);
-        System.out.println("carModelHangeulList :" + carModelHangeulList);
         cars.sort((a,b) -> a.getCid().compareTo(b.getCid()));
         trunk.put(Arrays.asList("allCount" ,"carInitList","makerList","fuelTypeList", "regionList","categoryList")
                 ,Arrays.asList(proxy.string(carsRepository.count())
@@ -283,47 +280,51 @@ public class CarsController {
     }
 
     @GetMapping("/getRecommendBySearching/{searchWord}")
-    public void getRecommendBySearching(@PathVariable String searchWord){
-        table.clear();
+    public ArrayList<Object> getRecommendBySearching(@PathVariable String searchWord){
+        box.clear();
+        Table<String, String, Integer> table = new Table<>();
         Map<String, Double> calcList = new HashMap<>();
         Map<String, List<RecentSearchWord>> matrix = StreamSupport.stream(recentSearchWordRepository.findAll().spliterator(), false)
                 .collect(Collectors.groupingBy(RecentSearchWord::getUserId));
-        int count = 0, listVal = 0, targetVal = 0;
+        makeTable(table, matrix);
+        getSimilarity(searchWord, table, calcList);
+        box.add(proxy.sortByValue(calcList).keySet().stream().limit(10));
+        box.add(proxy.sortByValue(calcList).values().stream().limit(10));
+        return box.getList();
+    }
 
+    private void makeTable(Table<String, String, Integer> table, Map<String, List<RecentSearchWord>> matrix) {
+        int count;
         if(matrix != null){
             for(Object model : carModelList){
                 for(String user : matrix.keySet()){
-                    count = 1;
+                    count = 0;
                     for(RecentSearchWord recentSearchWord : matrix.get(user)){
                         if(model.toString().equals(recentSearchWord.getSearchWord())){
-                            count++;
+                            count=1;
                         }
                     }
                     table.put(model.toString(), user, count);
                 }
             }
         }
-        if(table.getRow(searchWord).values().stream().reduce((a,b)-> a*b).get()!=1){
-            targetVal = table.getRow(searchWord).values().stream().reduce((a,b) -> a*b).get();
-            System.out.println("타겟벨류!!!!!!"+targetVal);
+    }
+
+    private void getSimilarity(@PathVariable String searchWord, Table<String, String, Integer> table, Map<String, Double> calcList) {
+        if(table.getRow(searchWord).values().stream().reduce((a,b)-> a+b).get()!=0){
+            Integer[] targetVal = table.getRow(searchWord).values().toArray(new Integer[table.getRow(searchWord).values().size()]);
             for(String rowKey:table.getRowKeys()){
-                if(table.getRow(rowKey).values().stream().reduce((a,b)-> a*b).get()!=1&&!rowKey.equals(searchWord)){
-                    listVal = table.getRow(rowKey).values().stream().reduce((a,b)-> a*b).get();
-                    System.out.println("리스트벨류!!!!!!!"+listVal);
-                    System.out.println((targetVal+listVal)
-                            /(Math.sqrt(Math.pow(targetVal, 2))
-                            +Math.sqrt(Math.pow(listVal, 2))));
-                    calcList.put(rowKey, (targetVal+listVal)
-                            /(Math.sqrt(Math.pow(targetVal, 2))
-                            +Math.sqrt(Math.pow(listVal, 2))));
+                long normA = 0, normB = 0, scla = 0;
+                if(table.getRow(rowKey).values().stream().reduce((a,b)-> a+b).get()!=0&&!rowKey.equals(searchWord)){
+                    Integer[] listVal = table.getRow(rowKey).values().toArray(new Integer[table.getRow(rowKey).values().size()]);
+                    for(int i = 0; i<targetVal.length;i++){
+                        normA += (targetVal[i]*targetVal[i]);
+                        normB += (listVal[i]*listVal[i]);
+                        scla += (targetVal[i]*listVal[i]);
+                    }
                 }
+                calcList.put(rowKey, (scla!=0)?scla/(Math.sqrt(normA)*Math.sqrt(normB)):0);
             }
         }
-        System.out.println("매트릭스!!"+matrix);
-        System.out.println("타겟!!"+table.getCol("2020-01-28T09:06:30.698Z20519"));
-        System.out.println("calc!!"+calcList);
-
-
-
     }
-}
+}/**/

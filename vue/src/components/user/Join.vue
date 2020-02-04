@@ -72,6 +72,8 @@
 					</td>
 				</tr>
 			</tbody></table>
+			<div class="user_info">
+				<h4>추가 정보 입력 (선택)</h4>
 			<table width="100%" class="t_user01">
 				<colgroup>
 					<col width="18%">
@@ -131,7 +133,7 @@
 			<a @click.prevent="modal" class="btn_form_g"><b>취소</b></a>
 			<modals-container />
 		</div>
-
+	</div>
 	</div>
 </div>
 </div>
@@ -258,6 +260,7 @@ export default {
 					gender:this.gender,
 					birthMonth:this.birthMonth,
 					region:this.region,
+					auth:true
 				}
 
 				let headers = {
@@ -270,7 +273,6 @@ export default {
 							.then(res=>{
 								if(res.data.msg=="SUCCESS"){
 									alert(`RPM의 가족이 되신 것을 환영합니다. 로그인해주세요.`)
-									this.$store.commit('addUser', res.data.user)
 									return this.$router.push({path : '/login'})
 								}
 							})

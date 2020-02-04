@@ -1,5 +1,7 @@
 package com.rpm.web.user;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.rpm.web.carbook.Carbook;
 import com.rpm.web.social.Social;
 import com.rpm.web.social.Thumb;
@@ -20,7 +22,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="USER")
-//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "userSeq")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "userSeq")
 public class User implements Serializable {
 
     @Id
@@ -30,6 +32,7 @@ public class User implements Serializable {
     @Column(name = "PASSWD") @NotNull private String passwd;
     @Column(name = "NAME") @NotNull private String name;
     @Column(name = "EMAIL") @NotNull private String email;
+    @Column(name = "AUTH") @NotNull private Boolean auth;
     @Column(name = "GENDER")  private String gender;
     @Column(name = "BIRTHMONTH")  private String birthMonth;
     @Column(name = "REGION")  private String region;

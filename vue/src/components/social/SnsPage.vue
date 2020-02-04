@@ -3,12 +3,12 @@
   <link rel="stylesheet" href="https://blackrockdigital.github.io/startbootstrap-agency/css/agency.min.css">
 <link rel="stylesheet" href="https://blackrockdigital.github.io/startbootstrap-agency/vendor/fontawesome-free/css/all.min.css">
 
-<section class="bg-light page-section" id="portfolio">
+<section class="bg-light page-section" style="padding: 20px 0;" id="portfolio">
     <div class="container">
       <div class="row">
         <div class="col-lg-12 text-center">
           <h2 class="section-heading text- uppercase">INSTARPM</h2>
-          <h3 class="section-subheading text-muted">내 차 자랑하기</h3>
+          <h3 class="section-subheading text-muted" style="margin:0"></h3>
         </div>
         <div class="btn-edit">
         <button class="btn btn-primary" @click="write" type="button">
@@ -18,26 +18,28 @@
       <div class="row-contents">
 
         <div v-for="(item, index) in boardList" :key="index" class="col-md-4 col-sm-6 portfolio-item">
-          <router-link class="portfolio-link" :to="{name: 'snsdetail', params: { id: item.boardSeq }}" active-class="active">
+          <a class="portfolio-link" href="/snsdetail" @click="goDetail(item.boardSeq)" active-class="active">
             <div class="portfolio-hover">
               <div class="portfolio-hover-content">
                 <i class="fas fa-plus fa-3x"></i>
               </div>
             </div>
             <img class="img-fluid" :src="item.boardImg" alt="">
-          </router-link>
+          </a>
           <div class="portfolio-caption">
             <h4>{{item.carName}}</h4>
             <p class="text-muted">{{item.userName}}</p>
             <div class="btn-like-comment">
-              <a class="btn-like"><i class="far fa-heart"></i> {{item.thumbCount}}</a>
-              <a class="btn-comment"><i class="far fa-comment"></i> {{item.commentCount}}</a>
+              <a class="btn-like" v-if="thumbed(item.boardSeq)" style="color:#E81919"><i class="fas fa-heart"></i></a>
+              <a class="btn-like" v-else><i class="far fa-heart"></i></a>
+              {{item.thumbCount}}
+              <!--<a class="btn-comment"><i class="far fa-comment"></i> {{item.commentCount}}</a>-->
             </div>
           </div>
         </div>
       </div>
       <div style="text-align: center;" class="btn-edit" >
-        <button class="btn btn-primary"  v-if="hasMore" style="width: 1000px" @click="more"><i class="fas fa-angle-down"></i></button>
+        <button class="btn btn-primary"  v-if="hasMore" style="float:right" @click="loadData"><i class="fas fa-angle-down"></i></button>
         <h4 v-if="noMore">더이상의 게시물이 없습니다.</h4>
       </div>
     </div>
@@ -46,7 +48,7 @@
 </template>
 <script>
   import axios from "axios"
-
+  const url = "http://localhost:8080"
   export default {
     data() {
       return {
@@ -55,22 +57,35 @@
         page: 1,
         hasMore:true,
         noMore: false,
+        empty:true,
+        fall:false,
+        thumbedboard:[],
       }
     },
     created(){
       this.loadData()
     },
-   /* mounted(){
-      this.scroll()
-    },*/
+    computed: {
+      thumbed(){
+        return(b)=>{
+          return this.thumbedboard.some(i=>i==b)
+        }
+      }
+    },
+
+    /* mounted(){
+       this.scroll()
+     },*/
     methods: {
       loadData(){
         axios
-                .get(`http://localhost:8080/viewList/${this.page}`)
+                .get(`${url}/viewList/${this.page}/${this.$store.state.user.user.userid}`)
                 .then(res => {
-                  if (res.data.length) {
-                    this.page += 1
-                    this.boardList.push(...res.data)
+                  if (res.data.boardList.length) {
+                    if(res.data.thumbedboard!=null){
+                      this.thumbedboard.push(...res.data.thumbedboard)
+                    }
+                    this.boardList.push(...res.data.boardList)
                     if(res.data.length<12){
                       this.noMore = true
                       this.hasMore = false
@@ -80,6 +95,11 @@
                     this.hasMore = false
                   }
                 })
+                .catch(()=>{
+                  alert('loadData axios error')
+                })
+
+        this.page += 1
       },
      /* scroll () {
         window.onscroll = () => {
@@ -92,12 +112,12 @@
           }
         }
       },*/
-      more(){
-         this.loadData()
-      },
       write() {
-        this.$router.push({path: '/snsmodify'})
+        this.$router.push({path: '/snswrite'})
       },
+      goDetail(boardSeq){
+        localStorage.setItem('storedData', boardSeq)
+      }
 
     }
   }
@@ -122,11 +142,13 @@
   }
 
   .btn-primary {
+    color: #fff;
     background-color: #010876 !important;
     border-color: #010876!important;
     margin: 30px;
   }
-  .btn-primary:hover {
+  .btn btn-primary:hover {
+    color: #fff;
     background-color: #0d124f !important;
     border-color: #0d124f!important;
     margin: 30px;
@@ -303,36 +325,14 @@
 
   .btn-primary {
     color: #fff;
-    background-color: #007bff;
-    border-color: #007bff;
   }
 
   .btn-primary:hover {
     color: #fff;
-    background-color: #0069d9;
-    border-color: #0062cc;
-  }
-
-  .btn-primary:focus, .btn-primary.focus {
-    box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
   }
 
   .btn-primary.disabled, .btn-primary:disabled {
     color: #fff;
-    background-color: #007bff;
-    border-color: #007bff;
-  }
-
-  .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
-  .show > .btn-primary.dropdown-toggle {
-    color: #fff;
-    background-color: #0062cc;
-    border-color: #005cbf;
-  }
-
-  .btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
-  .show > .btn-primary.dropdown-toggle:focus {
-    box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
   }
 
 

@@ -16,6 +16,8 @@ public interface CarsRepository extends CrudRepository<Cars, Long> {
     public List<Cars> findByModelGrpNm(String modelGrpNm);
     public List<Cars> findByCenterCode(String centerCode);
     public List<Cars> findByModelnmText(String ModelnmText);
+    public Cars findByCarcd(String carcd);
+
 
 
 }

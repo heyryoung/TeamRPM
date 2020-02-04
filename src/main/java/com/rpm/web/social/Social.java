@@ -15,10 +15,10 @@ import java.util.List;
 
 @Component @Lazy @Entity
 @Getter @Setter
-@ToString(exclude = {"userSeq", "comments", "thumbs"})
+@ToString(exclude = {"userSeq","thumbs"})
 @NoArgsConstructor
 @Table(name="SOCIALBOARD")
-//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "boardSeq")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "boardSeq")
 public class Social implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -34,9 +34,9 @@ public class Social implements Serializable {
     @NotNull
     private User userSeq;
 
-    @OneToMany(mappedBy = "boardSeq", cascade = CascadeType.ALL,
+    /*@OneToMany(mappedBy = "boardSeq", cascade = CascadeType.ALL,
             orphanRemoval = true)
-    private List<Comment> comments = new ArrayList<>();
+    private List<Comment> comments = new ArrayList<>();*/
 
     @OneToMany(mappedBy = "boardSeq", cascade = CascadeType.ALL,
             orphanRemoval = true)

@@ -11,6 +11,7 @@ import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.io.IOException;
 import java.util.*;
+
 public class SocialDummy {
     @Autowired
     Printer printer;
@@ -77,6 +78,7 @@ public class SocialDummy {
         str =str.replaceAll(match, "");
         return str;
     }
+
     /*public ArrayList<Comment> crawlingComment(List<User>user, List<Social> socialList) {
         ArrayList<Comment> list = new ArrayList<>();
         list.clear();
@@ -113,7 +115,5 @@ public class SocialDummy {
         return list;
     }*/
 }
-
-
 
 
