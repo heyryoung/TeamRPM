@@ -13,97 +13,54 @@
 				</colgroup>
 				<tbody><tr>
 					<th>이름</th>
-					<td colspan="3"><b>홍길동</b></td>
+					<td colspan="3"><b>{{this.$store.state.user.user.name}}</b></td>
 				</tr>
 				<tr>
-					<th><label for="i_sPassWord">변경할 비밀번호입력</label> <span class="org">*</span></th>
-					<td colspan="3"><input type="password" name="i_sPassWord" id="i_sPassWord" maxlength="20" class="user_input02 am" tabindex="1" value=""> &nbsp;&nbsp;&nbsp;<span>* 영문 대/소문자, 숫자, 특수문자(`~!@#$%^*+=-_만 허용)를 조합하여 8~20자로 입력해 주세요.</span></td>
-					<!-- script type="text/javascript"> addLoadEvent(funLoad);</script-->
+					<th>아이디</th>
+					<td colspan="3"><b>{{this.$store.state.user.user.userid}}</b></td>
 				</tr>
 				<tr>
-					<th><label for="i_sPassWord2">변경할 비밀번호 확인</label><span class="org">*</span></th>
-					<td colspan="3"><input type="password" name="i_sPassWord2" id="i_sPassWord2" maxlength="20" class="user_input02" tabindex="2" value=""></td>
-				</tr>
-				<tr>
-					<th>연락처<span class="org">*</span></th>
+					<th><span class="org">* </span><label for="i_sPassWord">변경할 비밀번호입력</label> </th>
 					<td colspan="3">
-						<div class="select open mr"> 
-							<select name="i_sMobile1" id="i_sMobile1" style="width:50px">
-								
-									<option value="010" selected="">010</option> 
-								
-									<option value="011">011</option> 
-								
-									<option value="016">016</option> 
-								
-									<option value="017">017</option> 
-								
-									<option value="018">018</option> 
-								
-									<option value="019">019</option> 
-								
-							</select> 
-						</div>
-						<input type="text" name="i_sMobile2" id="i_sMobile2" maxlength="4" title="휴대폰 중간자리" class="user_input03" tabindex="3" value="3013"> - <input type="text" name="i_sMobile3" id="i_sMobile3" maxlength="4" title="휴대폰 끝자리" class="user_input03" tabindex="4" value="4643"> <!-- a href="javascript:fnSend();" class="btn_user"><b>인증번호 발송</b></a--> 
-						<div class="mt5">
-						</div>
+						<input type="password" v-model="passwd" id="i_sPassWord" maxlength="20" class="user_input02 am" value=""> &nbsp;&nbsp;&nbsp;
+						<span>* 영문 대/소문자, 숫자, 특수문자(`~!@#$%^*+=-_만 허용)를 조합하여 8~20자로 입력해 주세요.</span>
 					</td>
 				</tr>
 				<tr>
-					<th>이메일 <span class="org">*</span></th>
+					<th><span class="org">*</span> <label for="i_sPassWord2">비밀번호 확인</label></th>
+					<td colspan="3"><input type="password" v-model="passwd2" id="i_sPassWord2" maxlength="20" class="user_input02" value="">
+						<b class="user_num_check mt5" v-if="1<passwd.length && passwd.length<8">{{passwdCheck}}</b>
+						<b class="user_num_check mt5" v-show="passwd!=passwd2">{{passwdCheck2}}</b>
+					</td>
+				</tr>
+				<tr>
+					<th><span class="org">*</span> 이메일 </th>
 					<td colspan="3">
-						<input type="text" name="i_sEmail1" id="i_sEmail1" title="이메일 아이디" class="user_input02 am" tabindex="5" value="yejee1228"> @ <input type="text" name="i_sEmail2" id="i_sEmail2" title="이메일 도메인" class="user_input03 am" value="naver.com"> 
-						<div class="select open mr">
-							<select name="domain" id="domain" onchange="userEvent.fnChange();">
-								
-									<option value="직접입력">직접입력</option> 
-								
-									<option value="daum.net">daum.net</option> 
-								
-									<option value="naver.com" selected="">naver.com</option> 
-								
-									<option value="nate.com">nate.com</option> 
-								
-									<option value="chol.com">chol.com</option> 
-								
-									<option value="dreamwiz.com">dreamwiz.com</option> 
-								
-									<option value="empal.com">empal.com</option> 
-								
-									<option value="freechal.com">freechal.com</option> 
-								
-									<option value="gmail.com">gmail.com</option> 
-								
-									<option value="hanafos.com">hanafos.com</option> 
-								
-									<option value="hanmir.com">hanmir.com</option> 
-								
-									<option value="hitel.net">hitel.net</option> 
-								
-									<option value="hotmail.com">hotmail.com</option> 
-								
-									<option value="korea.com">korea.com</option> 
-								
-									<option value="lycos.co.kr">lycos.co.kr</option> 
-								
-									<option value="netian.com">netian.com</option> 
-								
-									<option value="paran.com">paran.com</option> 
-								
-									<option value="yahoo.co.kr">yahoo.co.kr</option> 
-								
-									<option value="chollian.net">chollian.net</option> 
-								
-									<option value="hanmail.net">hanmail.net</option> 
-								
-									<option value="kebi.com">kebi.com</option> 
-								
-							</select> 
-						</div> 
-						<p class="mt5">
-							<label>이메일 수신에 동의하시겠습니까?&nbsp;&nbsp;&nbsp;<label><input type="radio" class="radio" name="i_sEmailCheck" value="Y">&nbsp;예</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label><input type="radio" class="radio" name="i_sEmailCheck" value="N" checked="checked">&nbsp;아니요</label><br>
-							수신에 동의하시면 이벤트, 중고차할인, 자동차 시승기등 흥미있는 소식들을 이메일로 전해드립니다.</label>
-						</p>
+						<input type="text" v-model="email1" id="i_sEmail1" title="이메일 아이디" class="user_input05 am" value="">
+						@
+						<input type="text" v-model="email2" id="i_sEmail2" title="이메일 도메인" class="user_input05 am" placeholder="직접입력">
+						<select v-model="email2" id="domain">
+							<option value="직접입력">직접입력</option>
+							<option value="daum.net">daum.net</option>
+							<option value="naver.com">naver.com</option>
+							<option value="nate.com">nate.com</option>
+							<option value="dreamwiz.com">dreamwiz.com</option>
+							<option value="empal.com">empal.com</option>
+							<option value="freechal.com">freechal.com</option>
+							<option value="gmail.com">gmail.com</option>
+							<option value="hanafos.com">hanafos.com</option>
+							<option value="hanmir.com">hanmir.com</option>
+							<option value="hitel.net">hitel.net</option>
+							<option value="hotmail.com">hotmail.com</option>
+							<option value="korea.com">korea.com</option>
+							<option value="lycos.co.kr">lycos.co.kr</option>
+							<option value="netian.com">netian.com</option>
+							<option value="paran.com">paran.com</option>
+							<option value="yahoo.co.kr">yahoo.co.kr</option>
+							<option value="chollian.net">chollian.net</option>
+							<option value="hanmail.net">hanmail.net</option>
+							<option value="kebi.com">kebi.com</option>
+						</select>
 					</td>
 				</tr>
 			</tbody></table>
@@ -121,67 +78,54 @@
 			<tbody><tr>
 				<th>성별 </th>
 				<td colspan="3" style="">
-					<input type="radio" name="genderCheck" value="1" id="man"> &nbsp;<label for="man">남성</label>   
+					<input type="radio" v-model="gender" id="man" value="man"> &nbsp;<label for="man">남성</label>
 					<span class="pr30"></span>
-					<input type="radio" name="genderCheck" value="2" id="woman"> &nbsp;<label for="woman">여성 </label>  
+					<input type="radio" v-model="gender" id="woman" value="woman"> &nbsp;<label for="woman">여성 </label>
 				</td>
 			</tr>
 			<tr>
 				<th>생년월</th>
 				<td colspan="3">
-					<input type="text" id="year" maxlength="4" class="user_input02 " value="" onkeyup="userEvent.fnBirth();"> &nbsp;<span>년 </span><span class="pr15"></span>
-					<input type="text" id="month" maxlength="2" class="user_input02 am" value="" onkeyup="userEvent.fnBirth();"> &nbsp;<span>월  </span></td>
-
+					<input type="text" v-model="bYear" id="year" maxlength="4" class="user_input02 " value="" placeholder="예시) 1997" @keyup="yearCheck"> &nbsp;
+					<span>년 </span>
+					<span class="pr15"></span>
+					<input type="text" v-model="bMonth" id="month" maxlength="2" class="user_input02 am" value="" placeholder="예시) 12" @keyup="monthCheck"> &nbsp;
+					<span>월  </span>
+					<b class="user_num_check mt5">{{bmsg}} {{bmmsg}}</b>
+				</td>
 			</tr>
 			<tr>
 				<th>지역 </th>
 				<td colspan="3">
-					<select style="width:130px" name="i_sUserRegion" id="i_sUserRegion">
+					<select style="width:130px" v-model="region" id="i_sUserRegion">
 						<option value="">지역을 선택하세요  </option>
-						
-							<option value="010">서울</option>
-						
-							<option value="020">인천</option>
-						
-							<option value="030">대전</option>
-						
-							<option value="040">대구</option>
-						
-							<option value="050">광주</option>
-						
-							<option value="060">부산</option>
-						
-							<option value="070">울산</option>
-						
-							<option value="080">세종</option>
-						
-							<option value="090">경기</option>
-						
-							<option value="100">강원</option>
-						
-							<option value="110">경남</option>
-						
-							<option value="120">경북</option>
-						
-							<option value="130">전남</option>
-						
-							<option value="140">전북</option>
-						
-							<option value="150">충남</option>
-						
-							<option value="160">충북</option>
-						
-							<option value="170">제주</option>
-						
+						<option value="서울">서울</option>
+						<option value="인천">인천</option>
+						<option value="대전">대전</option>
+						<option value="대구">대구</option>
+						<option value="광주">광주</option>
+						<option value="부산">부산</option>
+						<option value="울산">울산</option>
+						<option value="세종">세종</option>
+						<option value="경기">경기</option>
+						<option value="강원">강원</option>
+						<option value="경남">경남</option>
+						<option value="경북">경북</option>
+						<option value="전남">전남</option>
+						<option value="전북">전북</option>
+						<option value="충남">충남</option>
+						<option value="충북">충북</option>
+						<option value="제주">제주</option>
 					</select>
 				</td>
 			</tr>
 			
 		</tbody></table>
 		<div class="btn_formbts">
-				<a href="javascript:fnValidateForm();" class="btn_form_r"><b><router-link to="/mypage">수정</router-link></b></a>
-				<a href="/user/mychangeInfo.do" class="btn_form_g"><b>취소</b></a>
-				<a href="https://www.kcar.com/user/mygetLeave.do" class="btn_form_g btn_Leave"><b>회원탈퇴</b></a>
+			<a @click.prevent="modify" class="btn_form_r"><b>정보수정</b></a>
+			<a @click.prevent="modal" class="btn_form_g"><b>취소</b></a>
+			<modals-container />
+				<a class="btn_form_g btn_Leave" @click="withdrawal"><b>회원탈퇴</b></a>
 			</div>
 		
 	</div>
@@ -190,7 +134,139 @@
 	</div>
 </div>
 </template>
-<script></script>
-<style scoped>
+<script>
+	import axios from "axios"
+	import JoinModal from "../user/JoinModal"
+	import WithdrawalModal from "./WithdrawlModal"
+	export default {
+		name: 'join',
+		data(){
+			return{context: 'http://localhost:8080',
+				passwd:'',
+				passwd2:'',
+				passwdCheck:'비밀번호가 너무 짧습니다',
+				passwdCheck2:'입력한 비밀번호가 다릅니다',
+				email1:'',
+				email2:'',
+				gender:'',
+				bYear:'',
+				bMonth:'',
+				yearcheck:'',
+				monthcheck:'',
+				bmsg:'',
+				bmmsg:'',
+				region:''
+			}
+		},
+		computed : {
+			yeartrue(){
+				if(this.bYear>1900 && this.bYear<2021){
+					return true
+				}else{
+					return false
+				}
+			},
+			monthtrue(){
+				if(this.bMonth<13 && this.bMonth>0){
+					return true
+				}else{
+					return false
+				}
+			},
+			email(){
+				if(this.email1!=''&&this.email2!=''){
+					return this.email1+'@'+this.email2
+				}else{
+					return ''
+				}
+			},
+			birthMonth(){
+				let bM = ""
+				if(this.bMonth<10){
+					bM="0"+this.bMonth
+				}else{
+					bM=this.bMonth
+				}
+				if(this.yeartrue && this.monthtrue){
+					return this.bYear+bM
+				}else{
+					return ''
+				}
+			}
 
+		},
+		methods : {
+			yearCheck(){
+				if(this.yeartrue){
+					this.bmsg = ''
+				}else{
+					this.bmsg ='생년을 확인해주세요'
+				}
+			},
+			monthCheck(){
+				if(this.monthtrue){
+					this.bmmsg = ''
+				}else{
+					this.bmmsg ='생월을 확인해주세요'
+				}
+			},
+			modify(){
+				if(this.passwd==this.passwd2 &&
+						this.email1!='' && this.email2!=''){
+					let data = {
+						userid : this.$store.state.user.user.userid,
+						passwd : this.passwd,
+						name : this.$store.state.user.user.name,
+						email:this.email,
+						gender:this.gender,
+						birthMonth:this.birthMonth,
+						region:this.region,
+					}
+
+					let headers = {
+						'authorization': 'JWT fefege..',
+						'Accept' : 'application/json',
+						'Content-Type': 'application/json'
+					}
+					axios
+							.post(`${this.context}/update`, data, headers)
+							.then(res=>{
+								if(res.data.msg=="success"){
+									alert(`${res.data.user.name}님의 회원정보가 수정되었습니다. 다시 로그인해주세요.`)
+									this.$store.dispatch('user/logout', {userid:this.$store.state.user.user.userid,passwd:this.$store.state.user.user.passwd})
+									this.$router.push({path : '/login'})
+								}
+							})
+							.catch(()=>{
+								alert(`join axios Error`)
+							})
+				}else{
+					alert(`필수 입력값을 확인해주세요.`)
+				}
+			},
+			modal(){
+				this.$modal.show(JoinModal,{
+					modal: this.$modal},{
+					name: 'dynamic-modal',
+					height: 'auto',
+					draggable: true,
+				})
+			},
+			withdrawal(){
+				this.$modal.show(WithdrawalModal,{
+					modal: this.$modal},{
+					name: 'dynamic-modal',
+					height: 'auto',
+					draggable: true,
+				})
+			}
+		}
+	}
+
+</script>
+<style scoped>
+.wrap{
+	width:1050px;
+	margin: 0 auto;
+}
 </style>
