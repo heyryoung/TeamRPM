@@ -10,14 +10,14 @@ export default {
     }
   },
   methods:{
-    dataInit(){
+    dataInit(revenue){
       this.renderChart({
-        labels: Object.keys(this.data),
+        labels: Object.keys(revenue),
         datasets: [
           {
-            label: '판매량',
-            backgroundColor: '#33ccff',
-            data: Object.values(this.data)
+            label: '월 판매액(단위 : 만원)',
+            backgroundColor: '#99ccff',
+            data: Object.values(revenue)
           }
         ]
       }, {responsive: true, maintainAspectRatio: false})
@@ -25,6 +25,5 @@ export default {
     },
 
   },
-  mounted () {
-  }
+
 }

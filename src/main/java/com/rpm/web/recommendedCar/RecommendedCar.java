@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 @Entity
@@ -23,7 +25,9 @@ public class RecommendedCar implements Serializable {
     @Column(name = "RECOCAR_SEQ") @NotNull private Long recoCarSeq;
     @Column(name = "USERID") @NotNull private String userid;
     @Column(name = "CENTER_CODE", length = 3) @NotNull private String centerCode;
-    @Column(name = "CARCD", length = 12) @NotNull private String carcd;
 
-
+    @OneToOne
+    @JoinColumn(name="cid")
+    private Cars cars;
+   // @Column(name = "CARCD", length = 12) @NotNull private String carcd;
 }

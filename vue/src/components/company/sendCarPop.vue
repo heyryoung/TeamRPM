@@ -45,8 +45,10 @@
                         <div class="compRight">
                             <table class="tableComp right head" cellspacing="0" id="compRightHead" style="width: 900px;">
                                 <tbody>
-                                <tr id="unitPhoto" cont="index">
-                                    <td id="Photo_1" v-for="row of rows" :key="row.rowNum">
+                                <tr id="unitPhoto">
+                                    <td id="Photo_1" v-for="(row,index) of rows" :key="index">
+                                        <div  class="buttonModComp" v-if="row.image" @click="deleteCar(index)"><button type="button" job="delComp"><span class="screen_behind">삭제</span></button></div>
+
                                         <!-- <button type="button" id="addBtn" v-if="row.button"></button>-->
                                         <img class="compare_img" :src="row.imageUrl" alt="" v-if="row.image">
                                     </td>
@@ -57,8 +59,8 @@
                             <table class="tableComp right body" cellspacing="0" id="compRightBody" style="width: 900px;">
                                 <tbody>
 
-                                <tr class="compare_row" type="gapSpec" v-for="compare of compares" :key="compare">
-                                    <td class="compare_col" v-for="row of compare" :key="row" >{{row}}</td>
+                                <tr class="compare_row" type="gapSpec" v-for="(compare,index) of compares" :key="index">
+                                    <td class="compare_col" v-for="(row,index) of compare" :key="index" >{{row}}</td>
                                 </tr>
 
 
@@ -89,21 +91,14 @@
                 columns:[
                     '제조사', '기종', '가격','연식','주행거리','연료','변속기'
                 ],
-                rows:[
-                    {rowNum:0,button:true,image:false,imageUrl:''},
-                    {rowNum:1,button:true,image:false,imageUrl:''},
-                    {rowNum:2,button:true,image:false,imageUrl:''},
-                    {rowNum:3,button:true,image:false,imageUrl:''},
-                    {rowNum:4,button:true,image:false,imageUrl:''},
-                ],
+                rows:[],
                 compares: [ [],[],[],[],[],[],[]],
-                send:{userid:'kangsj24',centercode:'114',carcodeList:[]}
+                send:{userid:'kangsj24',centercode:'114',carcodeList:[]},
 
-
+                checkedList:this.$store.state.recommend.recommendedCar
             }
-        },props : [
-            'checkedList',
-        ],methods : {
+        },
+        methods : {
             sendCar(){
                 axios
                     .post('/recommendedCar/recommendedCar', this.send)
@@ -112,6 +107,25 @@
                         alert('erorr'+e)
                     })
                 this.$router.push('/companyHome')
+            },
+            deleteCar(i){
+                this.rows.splice(i,1)
+                this.compares[0].splice(i,1)
+                this.compares[1].splice(i,1)
+                this.compares[2].splice(i,1)
+                this.compares[3].splice(i,1)
+                this.compares[4].splice(i,1)
+                this.compares[5].splice(i,1)
+                this.compares[6].splice(i,1)
+                this.send.carcodeList.splice(i,1)
+                this.rows.push({image:false,imageUrl:''})
+                this.compares[0].push('')
+                this.compares[1].push('')
+                this.compares[2].push('')
+                this.compares[3].push('')
+                this.compares[4].push('')
+                this.compares[5].push('')
+                this.compares[6].push('')
             }
         },
         created() {
@@ -119,9 +133,7 @@
             for(let i=0; i<6;i++){
 
                 if(i<this.checkedList.length) {
-                    this.rows[i].button=false
-                    this.rows[i].image=true
-                    this.rows[i].imageUrl=this.checkedList[i].middleImg
+                    this.rows.push({image:true,imageUrl:this.checkedList[i].middleImg})
                     this.compares[0].push(this.checkedList[i].makenm)
                     this.compares[1].push(this.checkedList[i].modelnm)
                     this.compares[2].push(this.checkedList[i].price)
@@ -131,6 +143,7 @@
                     this.compares[6].push(this.checkedList[i].transmissioncdName)
                     this.send.carcodeList.push(this.checkedList[i].carcd)
                 } else{
+                    this.rows.push({image:false,imageUrl:''})
                     this.compares[0].push('')
                     this.compares[1].push('')
                     this.compares[2].push('')
@@ -172,6 +185,21 @@
         background: #ffffff;
         text-align: center;
 
+    }
+    .compTop {
+        height: 38px;
+        background: #ffffff;
+        border-bottom: 2px solid #0375e0;
+        z-index: 30;
+        width: 1000px !important;
+    }
+    .compBox{
+        width:120%;
+
+    }
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
     }
 
 </style>

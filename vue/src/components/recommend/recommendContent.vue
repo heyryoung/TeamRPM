@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div >
 
         <div class="mypage_CarList interest">
             <div class="tit_area">
@@ -35,16 +35,8 @@
                 </div>
             </div>
             <div class="result_list">
+                <h1 class="emptySign" v-if="recommendedCar.length==0">등록된 차량이 없습니다</h1>
                 <table>
-                    <caption>관심차량</caption>
-
-                    <colgroup>
-                        <col style="width: 55px;">
-                        <col style="width: 190px;">
-                        <col style="width: 485px;">
-                        <col style="width: 290px;">
-                        <col>
-                    </colgroup>
 
                     <tbody v-for="car of recommendedCar" :key="car.cid">
                     <tr>
@@ -169,8 +161,8 @@
                 .get(`http://localhost:8080//recommendedCar/getRecommendedCar/`+'kangsj24')
                 .then(({data})=>{
                     data.forEach(el=>{
-                        el.checked=false
-                        this.List.push(el)
+                        el.cars.checked=false
+                        this.List.push(el.cars)
                     })
                     this.$refs.pagination.first()
                 })
@@ -183,6 +175,11 @@
 
 </script>
 <style>
+    .emptySign{
+        font-size: large;
+        text-align: center;
+        padding: 50px;
+    }
     .center_btn button{
         display: inline-block;
         width: 217px;

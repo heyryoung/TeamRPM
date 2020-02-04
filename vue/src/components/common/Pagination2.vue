@@ -1,7 +1,7 @@
 <template>
     <div class="cm_pagination">
         <ul class="pagination">
-            <li class="move prev" @click="prev()" v-if="pageNums.length<0"> <a @click.prevent href=""></a></li>
+            <li class="move prev" @click="prev()" v-if="pageNums[0].num>5"> <a @click.prevent href=""></a></li>
             <li :class="{'num on':pageNum.on,'num':!pageNum.on}" v-for="(pageNum,index) of pageNums" :key="pageNum.num" @click="pageSwitch(index)"><a>{{pageNum.num}}</a></li>
             <li class="move next" @click="next()" v-if="pageNums.length==5&& pageNums[4].num<(this.pagination.length/5)">
                 <a @click.prevent href=""></a> </li>
@@ -15,7 +15,7 @@
         props:['pagination'],
         data(){
             return{
-                pageNums:[],
+                pageNums:[{num:1}],
             }
         },
         methods:{
@@ -38,6 +38,10 @@
                         this.pageNums[j].on=false
                     }
                 }
+                for(let j=0;j<this.pagination.length;j++){
+                    this.pagination[j].checked=false
+                }
+
                 this.$emit("movePage",this.cutPage(this.pageNums[i].num))
             },
 
@@ -46,11 +50,7 @@
                 let temp =this.pageNums[0].num
                 this.pageNums=[]
                 for(let i=0; i<5;i++){
-                    if(i==0){
-                        this.pageNums.push({num:temp-5,on:true})
-                    }else{
-                        this.pageNums.push({num:temp-5+i,on:false})
-                    }
+                    (i==0)? this.pageNums.push({num:temp-5,on:true}) :this.pageNums.push({num:temp-5+i,on:false})
                     if(this.pageNums[i].num>=(this.pagination.length/5)){
                         this.pageNums.splice(i,)
                         break
@@ -62,11 +62,7 @@
                 let temp =this.pageNums[0].num
                 this.pageNums=[]
                 for(let i=0; i<5;i++){
-                    if(i==0){
-                        this.pageNums.push({num:temp+5,on:true})
-                    }else{
-                        this.pageNums.push({num:temp+5+i,on:false})
-                    }
+                    (i==0) ? this.pageNums.push({num:temp+5,on:true}) : this.pageNums.push({num:temp+5+i,on:false})
                     if(this.pageNums[i].num>=(this.pagination.length/5)+1){
                         this.pageNums.splice(i,)
                         break
@@ -74,21 +70,16 @@
                 }
             },
             first() {
+                this.pageNums=[]
+                let number= (this.pagination.length/5>=5)?5 : this.pagination.length/5
+                Math.ceil(number)
+                for(let i=0; i<number;i++){
+                    (i==0) ? this.pageNums.push({num:i+1,on:true}):this.pageNums.push({num:i+1,on:false})
+                }
+                if (this.pagination.length>0){
+                    this.$emit("movePage",this.cutPage(this.pageNums[0].num))
+                }
 
-                let num=0
-                if(this.pagination.length/5>=5){
-                    num=5
-                }else{
-                    num=this.pagination.length/5
-                }
-                for(let i=0; i<num;i++){
-                    if(i==0) {
-                        this.pageNums.push({num:i+1,on:true})
-                    }else{
-                        this.pageNums.push({num:i+1,on:false})
-                    }
-                }
-                this.$emit("movePage",this.cutPage(this.pageNums[0].num))
 
 
             }

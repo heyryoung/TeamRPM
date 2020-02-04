@@ -23,7 +23,6 @@ public class Recommend implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "RECO_SEQ") @NotNull private Long recoSeq;
-    @Column(name = "RECO_CODE") @NotNull private String recoCode;
     @Column(name = "AUTH") @NotNull private Boolean auth;
     @Column(name = "USERID") @NotNull private String userId;
     @Column(name = "NAME") @NotNull private String name;

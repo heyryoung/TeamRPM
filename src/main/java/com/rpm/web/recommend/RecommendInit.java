@@ -45,7 +45,6 @@ public class RecommendInit implements ApplicationRunner {
                 for(int i =0; i<20;i++) {
 
                         Recommend recommend = new Recommend();
-                        recommend.setRecoCode(String.valueOf(i));
                         recommend.setAuth(true);
                         recommend.setCenterRegion(companyRepository.findByCenterCode2(el));
                         recommend.setCenterName(companyRepository.findByCenterCode(el));
@@ -63,7 +62,6 @@ public class RecommendInit implements ApplicationRunner {
                         recommend.setUserId(recommendRepository.findUserId().get(i));
                         recommend.setName(recommendRepository.findNameByUserId(recommendRepository.findUserId().get(i)));
                         Recommend recommendCenter = new Recommend();
-                        recommendCenter.setRecoCode(String.valueOf(i));
                         recommendCenter.setAuth(false);
                         recommendCenter.setFuleTypedName(recommend.getFuleTypedName());
                         recommendCenter.setMaxBeginYear(recommend.getMaxBeginYear());

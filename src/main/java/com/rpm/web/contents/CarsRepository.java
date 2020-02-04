@@ -19,4 +19,5 @@ public interface CarsRepository extends CrudRepository<Cars, Long> {
     public Cars findByCarcd(String carcd);
 
 
+
 }

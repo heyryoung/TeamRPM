@@ -120,27 +120,27 @@
         methods: {
             movePageBlock(pagination){
                 this.cars= pagination
-            },
-            addHistory( carItem ){
-                this.$store.dispatch( 'contents/addSeenHistory' , carItem )
+                this.allchecked=false
             },
             productClick(carItem){
-                this.addHistory(carItem)
                 this.$store.dispatch('contents/setProduct',carItem)
                 this.$router.push('/product')
             },
             pop_rendar(){
 
                 for(let i=0;i<this.cars.length;i++) {
-                    if (this.cars[i].checked == true) {
-                        this.checkedList.push(this.cars[i])
+
+                    if (!this.$store.state.recommend.recommendedCar.length<5&&this.cars[i].checked == true) {
+                        this.$store.dispatch('recommend/inputCar',this.cars[i])
+                    }else if(this.$store.state.recommend.recommendedCar.length==5){
+                        alert('최대 5개까지 가능합니다')
                     }
                 }
                 this.$modal.show(sendCarPop,{
-                    checkedList : this.checkedList,
+                   // checkedList : this.checkedList,
                     modal : this.$modal},{
                     name: 'dynamic-modal',
-                    width : '800px',
+                    width : '980px',
                     height : '680px',
                     draggable: true,
                 },{closed:this.checkedList=[]})
@@ -181,4 +181,5 @@
         text-align: center;
         font-size: 13px;
     }
+
 </style>

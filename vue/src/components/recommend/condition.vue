@@ -42,7 +42,7 @@
                                                     <div class="selectric" ><span class="label"
                                                                                   data-beusable-tracking="" >{{recommend.makeNm}}</span></div>
                                                     <div id = "category1" class="selectric-items" tabindex="-1">
-                                                        <div class="selectric-scroll">
+                                                        <div class="selectric-scroll" style="width: 477px; visibility: visible; display: block;">
                                                             <ul v-for="category of this.$store.state.contents.category1" :key="category.name">
                                                                 <li data-index="1" @click="setCategory2(category)" class="">{{category.name}}<em>{{category.count}}</em>
                                                                 </li>
@@ -74,7 +74,7 @@
                                                     <div class="selectric"><span class="label"
                                                                                  data-beusable-tracking="">{{recommend.modelGrpNm}}</span></div>
                                                     <div id = "category2" class="selectric-items" tabindex="-1" >
-                                                        <div class="selectric-scroll">
+                                                        <div class="selectric-scroll" style="width: 477px; visibility: visible; display: block;">
                                                             <ul v-for="category of this.$store.state.contents.category2" :key="category.name">
                                                                 <li data-index="1" @click="setCategory3(category.name, category.count)" class="">{{category.name}}<em>{{category.count}}</em>
                                                                 </li>
@@ -100,7 +100,7 @@
                                                     <div class="selectric"><span class="label"
                                                                                  data-beusable-tracking="">{{recommend.modelNm}}</span></div>
                                                     <div class="selectric-items" tabindex="-1">
-                                                        <div class="selectric-scroll">
+                                                        <div class="selectric-scroll" style="width: 477px; visibility: visible; display: block;">
                                                             <ul v-for="category of this.$store.state.contents.category3" :key="category.name">
                                                                 <li data-index="1" @click="setKeyWord3(category.name, category.count)" class="">{{category.name}}<em>{{category.count}}</em>
                                                                 </li>
@@ -238,7 +238,7 @@
 
                                         <div class="deType03" style="background: none;">
                                             <div class="type_le">
-                                                <h5>추천 직영점</h5>
+                                                <h5>추천 직영점 <span class="icon_must">*</span></h5>
                                                 <div id="region"  class="selectric-wrapper selectric-selectric selectric-below selectric-hover" @click= "searchKeyClick(`region`)">
                                                     <div class="selectric-hide-select"><select name="wr_gt_v_mfr_date"  class="selectric" data-unit="년">
                                                         <option v-for="region of regions" :key="region" value="">{{region}}</option>
@@ -398,15 +398,23 @@
 
 
             sendRecommend(){
-                alert("신청이 완료되었습니다!!")
                 this.recommend.userId='kangsj24'
+                if(this.recommend.makeNm=='제조사를 선택하세요'|| this.resultCount.modelGrpNm == '모델을 선택하세요'||this.recommend.modelNm == '세부모델을 선택하세요' ||
+                this.recommend.minBeginYear =='최소'|| this.recommend.maxBeginYear=='최대'|| this.recommend.minMilage=='최소'||this.recommend.maxMilage=='최대'||
+                    this.recommend.centerRegion=='지역'||this.recommend.centerName=='직영점'||this.recommend.minPrice=='최소'|| this.recommend.maxPrice=='최대'){
+                    alert('필수값을 입력하세요')
+                }else{
+                    axios
+                        .post('/recommend/inputRecommend', this.recommend)
+                        .then(res => { console.log(res.data) })
+                        .catch(e=>{
+                            alert('erorr'+e)
+                        })
+                    alert("신청이 완료되었습니다!!")
+                    this.$router.push('/recommendHome')
 
-                axios
-                    .post('/recommend/inputRecommend', this.recommend)
-                    .then(res => { console.log(res.data) })
-                    .catch(e=>{
-                        alert('erorr'+e)
-                    })
+                }
+
 
 
             },
@@ -433,7 +441,9 @@
                 }
             },
             selectRegion(region){
+
                 this.recommend.centerRegion=region
+               region = (region=='경기/인천')? '경기': region
                 axios
                     .get(`http://localhost:8080/recommend/centerName/`+region)
                     .then((res)=>{

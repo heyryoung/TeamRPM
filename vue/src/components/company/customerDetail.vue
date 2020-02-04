@@ -2,10 +2,10 @@
     <div>
 
         <div class="form_area clearFix personal_info" id="formarea">
-            <carDetail_left></carDetail_left>
+            <customerDetail_left></customerDetail_left>
                     <div class="carlist">
                         <div class="mypage_CarList interest">
-                        <carDetail_right></carDetail_right>
+                        <customerDetail_right></customerDetail_right>
                         </div>
                     </div>
 
@@ -13,11 +13,11 @@
     </div>
 </template>
 <script>
-    import carDetail_right from "./carDetail_right";
-    import carDetail_left from "./carDetail_left";
+    import customerDetail_right from "./customerDetail_right";
+    import customerDetail_left from "./customerDetail_left";
     export default {
         components:{
-            carDetail_right,carDetail_left
+            customerDetail_right,customerDetail_left
         }
     }
 </script>

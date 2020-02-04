@@ -42,11 +42,9 @@ public class RecommendController {
     public void inputRecommend(@RequestBody Recommend recommend){
         System.out.println(recommend.toString());
         recommend.setAuth(true);
-        recommend.setRecoCode(String.valueOf(recommendRepository.count()/2));
         recommendRepository.save(recommend);
         Recommend recommendCenter =new Recommend();
         recommendCenter.setAuth(false);
-        recommendCenter.setRecoCode(String.valueOf(recommendRepository.count()/2));
         recommendCenter.setFuleTypedName(recommend.getFuleTypedName());
         recommendCenter.setMaxBeginYear(recommend.getMaxBeginYear());
         recommendCenter.setMinBeginYear(recommend.getMinBeginYear());

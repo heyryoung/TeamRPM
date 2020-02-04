@@ -28,13 +28,16 @@ public class RevenueInit implements ApplicationRunner {
                 for(int year=2018;year<=2020;year++) {
 
                     if(year==2020){
-                        Revenue revenue = new Revenue();
-                        revenue.setMonth(String.valueOf(year) + "01");
-                        revenue.setEmCode(el);
-                        revenue.setEmName(employeeRepository.findEmNameByEmCode(el));
-                        revenue.setCenterCode(employeeRepository.findByEmCode(el));
-                        revenue.setEmRevenue((int) (Math.random() * 100 + 1) * 1000);
-                        revenueRepository.save(revenue);
+                        for(int i =1;i<3;i++){
+                            Revenue revenue = new Revenue();
+                            revenue.setMonth(String.valueOf(year) + "0"+String.valueOf(i));
+                            revenue.setEmCode(el);
+                            revenue.setEmName(employeeRepository.findEmNameByEmCode(el));
+                            revenue.setCenterCode(employeeRepository.findByEmCode(el));
+                            revenue.setEmRevenue((int) (Math.random() * 100 + 1) * 1000);
+                            revenueRepository.save(revenue);
+                        }
+
                     }else {
                         for (int i = 1; i < 13; i++) {
                             Revenue revenue = new Revenue();

@@ -9,7 +9,7 @@
                 <table>
                     <tr>
                         <td>
-                            <span class="img"><img  :src="col.emImg" alt="이학성"></span>
+                            <span class="img"><img  src="@/assets/image/user_default.jpg" alt="이학성"></span>
 
                         </td>
                         <td><span class="employeeTxt">{{col.emPosition}}<br>{{col.emName}}</span></td>

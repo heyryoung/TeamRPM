@@ -20,9 +20,10 @@ public class ReCommendedCarController {
         List<String> list=(List<String>) send.get("carcodeList");
         list.forEach(el->{
             RecommendedCar recommendedCar= new RecommendedCar();
-            recommendedCar.setCarcd(el);
+            recommendedCar.setCars(carsRepository.findByCarcd(el));
             recommendedCar.setUserid(String.valueOf(send.get("userid")));
             recommendedCar.setCenterCode(String.valueOf(send.get("centercode")));
+            System.out.println(recommendedCar.toString());
             recommendedCarRepository.save(recommendedCar);
         });
 
@@ -30,14 +31,9 @@ public class ReCommendedCarController {
 
     }
     @GetMapping("/getRecommendedCar/{userid}")
-    public List<Cars> getRecommendedCar(@PathVariable String userid){
-        System.out.println(userid);
-        List<Cars> list=new ArrayList<>();
-        recommendedCarRepository.findByUserid(userid).forEach(el->{
-           list.add(carsRepository.findByCarcd(el.getCarcd()));
-        });
-
-
+    public List<RecommendedCar> getRecommendedCar(@PathVariable String userid){
+        List<RecommendedCar> list =recommendedCarRepository.findByUserid(userid);
+        list.sort((a,b) -> b.getRecoCarSeq().compareTo(a.getRecoCarSeq()));
         return list;
     }
 }
