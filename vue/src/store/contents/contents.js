@@ -318,7 +318,6 @@ const mutations = {
         state.showCarList = []
         state.resultLength = data.resultLength
         state.pageNum = 1
-        state.showCarList = []
         if ( data.showCarList )
             for ( let list of data.showCarList ) {
                 state.showCarList.push( list )

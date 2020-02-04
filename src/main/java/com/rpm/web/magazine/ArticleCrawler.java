@@ -68,7 +68,6 @@ public class ArticleCrawler {
         } catch (KeyManagementException e) {
             e.printStackTrace();
         }
-        System.out.println("---------- 크롤링 결과 ------------");
         return null;
     }
 
@@ -93,8 +92,6 @@ public class ArticleCrawler {
                 Document entirePage = homePage.parse();
                 Elements articleListCntElement = entirePage.select("small.text-muted");
                 Elements articleList = entirePage.select("div.list-block");
-                System.out.println(articleListCntElement.text());
-                System.out.println(String.valueOf(year).substring(0,4));
                 Article article = new Article();
                 flag = (articleListCntElement.text() == "") ? true : false;
                 for (Element item : articleList) {
@@ -104,7 +101,6 @@ public class ArticleCrawler {
                     article.setWriteDate(item.select("div.list-dated").text().substring(item.select("div.list-dated").text().length() - 16, item.select("div.list-dated").text().length() - 9).replace("-",""));
                     article.setArticleImg("https://www.motorgraph.com/news" + item.select("div.list-image").select("img").attr("src").replace("./","/"));
                     article.setArticleHref("https://www.motorgraph.com" + item.select("div.list-image").select("a").attr("href").replace("./","/"));
-                    System.out.println(article.toString());
                     year = Integer.parseInt(item.select("div.list-dated").text().substring(item.select("div.list-dated").text().length() - 16, item.select("div.list-dated").text().length() - 9).replace("-",""));
                     cnt++;
 
@@ -112,7 +108,6 @@ public class ArticleCrawler {
 
                 }
                 pagecnt += 1;
-                System.out.println("---------- 크롤링 결과 ------------");
             }
         } catch ( IOException e ) {
             e.printStackTrace();
@@ -134,7 +129,6 @@ public class ArticleCrawler {
         for( int i = 0; i < kl.size(); i++ ) {
             SearchDetailCondition searchDetailCondition = new SearchDetailCondition();
             Keyword kwrd = kl.get(i);
-            //System.out.println(kwrd.getString() + "\t" + kwrd.getCnt());
             if (kwrd.getString().length() > 1 && kwrd.getCnt() > 2 ) {
                 extractedWordRepository.save(new ExtractedWord( kwrd.getString() , kwrd.getCnt() ));
             }
@@ -161,9 +155,7 @@ public class ArticleCrawler {
         // print the result
         for( int i = 0; i < stl.size(); i++ ) {
             Sentence st = (Sentence) stl.get(i);
-            System.out.println("===>  " + st.getSentence());
             for( int j = 0; j < st.size(); j++ ) {
-                System.out.println(st.get(j));
             }
         }
 

@@ -7,6 +7,8 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import java.text.SimpleDateFormat;
+
 @Component
 public class RevenueInit implements ApplicationRunner {
     @Autowired
@@ -19,6 +21,13 @@ public class RevenueInit implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
+
+
+        SimpleDateFormat SystemTime = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
+        String formattedTime1 = SystemTime.format (System.currentTimeMillis());
+
+        System.out.println( formattedTime1 + "  INFO 18844 --- [           RevenueInit ]         : RevenueInit Start ");
+
        long count = revenueRepository.count();
 
         if (count == 0) {
@@ -53,7 +62,9 @@ public class RevenueInit implements ApplicationRunner {
                 }
 
             });
-            System.out.println("끝");
+
+            System.out.println( formattedTime1 + "  INFO 18844 --- [           RevenueInit ]         : RevenueInit End ");
+
         }
     }
 }

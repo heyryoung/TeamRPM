@@ -14,30 +14,19 @@ import java.util.List;
 public class UserController {
     @Autowired User user;
     @Autowired UserRepository userRepository;
-    @Autowired
-    Printer printer;
-    @Autowired
-    Carbook carbook;
-    @Autowired
-    CarbookRepository carbookRepository;
-    @Autowired
-    Record record;
-    @Autowired
-    CarbookService carbookService;
+    @Autowired Printer printer;
+    @Autowired Carbook carbook;
+    @Autowired CarbookRepository carbookRepository;
+    @Autowired Record record;
+    @Autowired CarbookService carbookService;
     @Autowired UserService userService;
 
 
-    @PostMapping("/idCheck")
-    public HashMap<String, String> idCheck(@RequestBody User param){
-        printer.accept("idCheck컨트롤러 들어옴");
-        HashMap<String, String> map = new HashMap<>();
-        if(userRepository.findByUserid(param.getUserid())==null){
-            map.put("msg", "SUCCESS");
-        }else{
-            map.put("msg", "FAIL");
-        }
-        return map;
+    @GetMapping("/idCheck/{userid}")
+    public Boolean idCheck(@PathVariable String userid){
+        return userRepository.findByUserid(userid)==null;
     }
+
     @PostMapping("/join")
     public HashMap<String, Object> join(@RequestBody User param){
         printer.accept("컨트롤러");
@@ -71,18 +60,14 @@ public class UserController {
 
             if(carbook!=null ){
                 map.put("mycar", carbook);
-                Object obj = carbook.getMycarId();
-              /*  if(obj instanceof String){
-                    printer.accept("Strig");
-                }else if(obj instanceof Long){
-                    printer.accept("long");
-                }*/
+
                 List<Record> records = carbookService.getRecords(carbook.getMycarId());
 
 
 
                 if(records != null){
                     map.put("record", records);
+                    printer.accept(records.get(0).getDate());
 
                 }
             }
@@ -95,7 +80,7 @@ public class UserController {
         // printer.accept(map.get("result"));
       //  printer.accept(map.get("user").toString());
          printer.accept(map.get("result"));
-        printer.accept(param.toString());
+        printer.accept(user.toString());
         return map;
     }
     @PostMapping("/getUserInfo/{token}")

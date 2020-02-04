@@ -5,32 +5,36 @@
             <router-link to="/"><img style="width: 100%; max-width: 760px; vertical-align: middle" src="@/assets/image/rpmlogoblack.png" alt=""></router-link>
         </div>
         <nav >
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button v-if="!this.user.auth" class="navbar-toggler navbar-toggler-right"  type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse justify-content-start" id="navbarSupportedContent">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-
-                        <div>
+                        <div v-if="!this.auth">
                             <Slide noOverlay ableOutsideClick :crossIcon="false">
+                                <UserInfo/>
                                 <router-link to="/">HOME</router-link>
-                                <router-link v-if="this.auth==false" to="/login">로그인</router-link> <!--로그인전-->
-                                <div v-else @click="logout">로그아웃</div> <!--//로그인후, 어드민-->
-                                <router-link  v-if="this.auth==false" to="/join">회원가입</router-link><!-- //로그인전-->
-                                <router-link to="/searchmain">검색창</router-link> <!--//공통-->
-                                <router-link to="/product">제품</router-link> <!--공통-->
-                                <router-link  v-if="this.auth==true" to="/mypage">마이페이지</router-link> <!--로그인후, 어드민-->
-                                <router-link  to="/seencar">최근 본 차량(비교함)</router-link> <!--//공통-->
-                                <router-link  to="/buycar">자동차구매 </router-link> <!--//공통-->
-                                <router-link  to="/buycarSelectGoods">자동차구매1 </router-link> <!--//로그인전후-->
-                                <router-link  to="/magazine">magazine </router-link><!-- //로그인전후-->
-                                <router-link  to="/chartMaker">chartMaker </router-link> <!--//로그인전후-->
-                                <router-link  to="/recommendHome">딜러에게 추천받기</router-link> <!--//로그인전후-->
-                                <router-link  to="/companyHome">ADMIN </router-link> <!--//admin-->
-                                <router-link  to="/sns">SNS(REVIEW) </router-link> <!--//공통-->
-                                <router-link  to="/sns">차계부 </router-link> <!--// 공통-->
+                                <router-link  to="/login">로그인</router-link>
+                                <router-link to="/join">회원가입</router-link>
+                                <router-link to="/searchmain">검색</router-link>
+                                <router-link to="/magazine">magazine </router-link>
+                                <router-link to="/chartMaker">chartMaker </router-link>
+                                <router-link to="/sns">SNS(REVIEW) </router-link>
+                            </Slide>
+                        </div>
+                        <div v-if="this.auth">
+                            <Slide noOverlay ableOutsideClick :crossIcon="false">
+                                <UserInfo/>
+                                <router-link to="/">HOME</router-link>
+                                <router-link to="/logout">로그아웃</router-link>
+                                <router-link to="/mypage">마이페이지</router-link>
+                                <router-link to="/searchmain">검색</router-link>
+                                <router-link to="/recommendHome">딜러에게 추천받기</router-link>
+                                <router-link to="/sns">SNS(REVIEW) </router-link>
+                                <router-link to="/magazine">magazine </router-link>
+                                <router-link to="/chartMaker">chartMaker </router-link>
                             </Slide >
                         </div>
 
@@ -55,11 +59,13 @@
 <script>
     import {Slide} from 'vue-burger-menu'
     import {mapState} from 'vuex'
+    import UserInfo from "./components/cmm/UserInfo.vue";
 
 
     export default {
         name: 'app',
         components: {
+            UserInfo,
 
             Slide
         },

@@ -23,7 +23,7 @@
 					<th><span class="org">* </span><label for="i_sPassWord">변경할 비밀번호입력</label> </th>
 					<td colspan="3">
 						<input type="password" v-model="passwd" id="i_sPassWord" maxlength="20" class="user_input02 am" value=""> &nbsp;&nbsp;&nbsp;
-						<span>* 영문 대/소문자, 숫자, 특수문자(`~!@#$%^*+=-_만 허용)를 조합하여 8~20자로 입력해 주세요.</span>
+						<span>* 특수문자 제외. 영문 대/소문자, 숫자를 조합하여 8~20자로 입력해 주세요.</span>
 					</td>
 				</tr>
 				<tr>
@@ -31,6 +31,7 @@
 					<td colspan="3"><input type="password" v-model="passwd2" id="i_sPassWord2" maxlength="20" class="user_input02" value="">
 						<b class="user_num_check mt5" v-if="1<passwd.length && passwd.length<8">{{passwdCheck}}</b>
 						<b class="user_num_check mt5" v-show="passwd!=passwd2">{{passwdCheck2}}</b>
+						<b class="user_num_check mt5" v-show="checkSpecial(passwd)">{{passwdCheck3}}</b>
 					</td>
 				</tr>
 				<tr>
@@ -146,6 +147,7 @@
 				passwd2:'',
 				passwdCheck:'비밀번호가 너무 짧습니다',
 				passwdCheck2:'입력한 비밀번호가 다릅니다',
+				passwdCheck3:'특수문자는 사용할 수 없습니다.',
 				email1:'',
 				email2:'',
 				gender:'',
@@ -196,6 +198,14 @@
 
 		},
 		methods : {
+			checkSpecial(str) {
+				let special_pattern = /[~!@#$%^&*()_+|<>?:{}]/gi
+				if(special_pattern.test(str) == true) {
+					return true;
+				} else {
+					return false;
+				}
+			},
 			yearCheck(){
 				if(this.yeartrue){
 					this.bmsg = ''

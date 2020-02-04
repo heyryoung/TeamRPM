@@ -8,10 +8,11 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-@Order(2)
+@Order(value=3)
 @Component
 public class CarbookInit implements ApplicationRunner {
     @Autowired RecordRepository recordRepository;
@@ -28,13 +29,16 @@ public class CarbookInit implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
+
+        SimpleDateFormat SystemTime = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
+        String formattedTime1 = SystemTime.format (System.currentTimeMillis());
+
+        System.out.println( formattedTime1 + "  INFO 18844 --- [           CarbookInit ]         : CarbookInit Start ");
+
         mycarInit();
-        //recordInit();
+        recordInit();
 
-
-
-
-
+        System.out.println( formattedTime1 + "  INFO 18844 --- [           CarbookInit ]         : CarbookInit End ");
 
     }
     public void mycarInit(){
@@ -50,16 +54,7 @@ public class CarbookInit implements ApplicationRunner {
 
         long count = carbookRepository.count();
         Carbook carbook = null;
-        Iterable<User> users = userRepository.findAll();
-        List<User> list = new ArrayList<>();
-        for(User u : users){
-            list.add(u);
-
-        }
-
-
-
-
+        List<User> list = (List<User>) userRepository.findAll();
 
         if(count ==0 && userRepository.count()!=0){
 
@@ -107,7 +102,6 @@ public class CarbookInit implements ApplicationRunner {
                 carbook.setUserSeq(list.get(i));
 
 
-
                 carbookRepository.save(carbook);
 
 
@@ -135,7 +129,7 @@ public class CarbookInit implements ApplicationRunner {
                 record.setDate(randDate());
                 record.setServiceCode(
                         (((int)(Math.random()*2))== 0 ?
-                                "refuel" : "check")
+                                "주유" : "정비")
                 );
                 record.setPrice(String.valueOf(
                         (int)((Math.random()*10)+1)*10000
@@ -144,6 +138,7 @@ public class CarbookInit implements ApplicationRunner {
                         listCarbook.get(
                                 (int)(Math.random()*500))
                 );
+
 
                 recordRepository.save(record);
 

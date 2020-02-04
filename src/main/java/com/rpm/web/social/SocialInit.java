@@ -11,27 +11,38 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Order(4)
+
+@Order(value=4)
 @Component
 public class SocialInit implements ApplicationRunner {
     private SocialRepository socialRepository;
-    public SocialInit(SocialRepository socialRepository){ this.socialRepository = socialRepository;}
-    @Autowired UserRepository userRepository;
-    @Autowired CarsRepository carsRepository;
-/*    @Autowired CommentRepository commentRepository;*/
-    @Autowired ThumbRepository thumbRepository;
+    public SocialInit(SocialRepository socialRepository) {
+        this.socialRepository = socialRepository;
+    }
+
+    @Autowired
+    UserRepository userRepository;
+    @Autowired
+    CarsRepository carsRepository;
+    @Autowired
+    ThumbRepository thumbRepository;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
+        SimpleDateFormat SystemTime = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
+        String formattedTime1 = SystemTime.format (System.currentTimeMillis());
 
-        if (userRepository.count() != 0 && carsRepository.count()!=0) {
+        System.out.println( formattedTime1 + "  INFO 18844 --- [           SocialInit ]         : SocialInit Start ");
+
+        if (userRepository.count() != 0 && carsRepository.count() != 0) {
             //socialBoard 테이블을 지운 후 social더미만 먼저 실행
 
             SocialDummy socialDummy = new SocialDummy();
@@ -52,12 +63,9 @@ public class SocialInit implements ApplicationRunner {
                     for (Social s : socialDummy.crawlingBoard(user, car)) {
                         socialRepository.save(s);
                     }
-
                 }
                 System.out.println("socialboard 등록 완료");
             }
-
-
             //comment/ thumb 넣을 board 정렬
             Iterable<Social> socials = socialRepository.findAll();
             List<Social> socialList = new ArrayList<>();
@@ -70,6 +78,7 @@ public class SocialInit implements ApplicationRunner {
             for (int i = socialList.size() - 1; i > socialList.size() - 30; i--) {
                 commentedSocialList.add(socialList.get(i));
             }
+
 
 
             /*Comment Dummy Data
@@ -107,10 +116,10 @@ public class SocialInit implements ApplicationRunner {
                 }
                 System.out.println("thumb 등록 완료");
             }
-
         }
+        System.out.println( formattedTime1 + "  INFO 18844 --- [           SocialInit ]         : SocialInit End ");
     }
+}
 
 
-    }
 

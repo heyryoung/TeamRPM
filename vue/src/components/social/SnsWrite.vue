@@ -134,8 +134,6 @@
             <button class="btn btn-primary" @click.prevent="modal" data-dismiss="modal" type="button">
                 <i class="fas fa-times"></i> <b>취소하기</b></button>
             <modals-container />
-            <button class="btn btn-primary" v-if="updateBtn" @click="cancel" data-dismiss="modal" type="button">
-                <i class="fas fa-pen"></i><b> 글 수정하기</b></button>
         </div>
     </div>
 
@@ -179,7 +177,7 @@
           contentTitle2 : '',
           contentTitle3 : '',
           filename:'',
-          content:"내가요.. 차를 샀는데요... 비쌌어요.",
+          content:'',
           writeBtn:true,
           updateBtn:false,
       }
