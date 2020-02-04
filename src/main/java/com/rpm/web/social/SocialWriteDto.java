@@ -1,6 +1,5 @@
 package com.rpm.web.social;
 
-import com.rpm.web.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

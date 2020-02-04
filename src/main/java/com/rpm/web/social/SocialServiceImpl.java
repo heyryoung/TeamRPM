@@ -87,9 +87,7 @@ public class SocialServiceImpl implements SocialService{
 
     @Override
     public void writeContent(SocialWriteDto param){
-        //user 하드코딩//
-        user = userRepository.findByUserSeq(8093);
-        //user 바꾸기
+        user = userRepository.findByUserid(param.getUserid());
         social = new Social();
         social.setUserSeq(user);
         social.setCarName(param.getCarName());

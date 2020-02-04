@@ -44,7 +44,9 @@ public class CarsInit implements ApplicationRunner {
         Map<String, Map<String, Object>> map = new HashMap<>();
         if (carsRepository.count() == 0) {
             for (int i = 1; i <= 8000; i++) {
+            	
                 if ( i == 1000 )         System.out.println( formattedTime1 + "  INFO 18844 --- [           CarsInit ]         : CarsInit processing :: insert Data count = [ "+ i +" ] ");
+
                 Map<String, String> strJson = new HashMap<>();
                 map = jsonMapper.readValue(
                         http.sendPost("https://www.kcar.com/search/api/getCarSearchWithCondition.do", proxy.string(i))
