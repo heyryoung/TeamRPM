@@ -29,5 +29,4 @@ public class RecommendedCar implements Serializable {
     @OneToOne
     @JoinColumn(name="cid")
     private Cars cars;
-   // @Column(name = "CARCD", length = 12) @NotNull private String carcd;
 }

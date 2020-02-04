@@ -90,7 +90,7 @@
 </template>
 <script>
     import {checkBox} from "../mixins/checkBox";
-    import pagination from "../common/pagination2";
+    import pagination from "../common/Pager";
     import axios from "axios"
     export default {
         components:{
@@ -110,7 +110,7 @@
                 this.customers=pagination
             },
             goDetail(customer){
-                alert(customer.makeNm)
+
                 localStorage.setItem("customerDetail",JSON.stringify(customer))
                 this.$store.dispatch('recommend/inputDetail',customer)
                 this.$router.push('/customerDetail')

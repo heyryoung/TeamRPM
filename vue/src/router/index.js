@@ -15,15 +15,16 @@ import SeenCar from '@/components/contents/SeenCar.vue'
 import StationInfo from '@/components/carbook/StationInfo.vue'
 import MapList from '@/components/carbook/MapList.vue'
 import MapList2 from '@/components/carbook/MapList2.vue'
-import Condition from "@/components/recommend/condition.vue"
-import RecommendContent from "@/components/recommend/recommendContent.vue"
-import CarList from "@/components/company/carList.vue"
-import chart from "@/components/company/chartExample.vue"
-import companyHome from "@/components/company/companyHome.vue"
-import customerDetail from "@/components/company/customerDetail.vue"
-import companyMain from "@/components/company/companyMain.vue"
-import CustomerList from "@/components/company/customerList.vue"
-import recommendHome from "@/components/recommend/recommendHome.vue"
+import Condition from "@/components/recommend/Condition.vue"
+import RecommendContent from "@/components/recommend/RecommendContent.vue"
+import CarList from "@/components/company/CarList.vue"
+import companyHome from "@/components/company/CompanyHome.vue"
+import customerDetail from "@/components/company/CustomerDetail.vue"
+import customerDetailRight from "@/components/company/CustomerDetail_right.vue"
+import bestCarList from "@/components/company/BestCarList.vue"
+import companyMain from "@/components/company/CompanyMain.vue"
+import CustomerList from "@/components/company/CustomerList.vue"
+import recommendHome from "@/components/recommend/RecommendHome.vue"
 import SnsPage from "@/components/social/SnsPage.vue"
 import SnsDetail from "@/components/social/SnsDetail.vue"
 import SnsModify from "@/components/social/SnsModify.vue"
@@ -60,13 +61,17 @@ export default new Router({
         {path:'/snswrite', name:'snswrite', component : SnsWrite},
         {path:'/payment', name:'payment', component : Payment},
         // 강성조꺼
-        {path: '/customerDetail',name: 'customerDetail', component:customerDetail},
+        {path: '/customerDetail',name: 'customerDetail', component:customerDetail,children:
+        [
+            {path: '',name: 'customerDetailRight', component:customerDetailRight },
+            {path: 'bestCarList',name: 'bestCarList', component:bestCarList }
+        ]
+        },
         {path: '/companyHome',name: 'companyHome', component:companyHome,children:
                 [
                     {path: '',name: 'companyMain', component:companyMain },
                     {path: 'customerList',name: 'CustomerList', component: CustomerList},
                     {path: 'carList',name: 'CarList', component: CarList},
-                    {path: 'chart',name: 'chart', component:chart},
                 ]},
         {path: '/recommendHome',name: 'recommendHome', component:recommendHome, children:[
                 {path: '',name: 'RecommendContent', component: RecommendContent},

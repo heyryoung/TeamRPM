@@ -1,16 +1,6 @@
 <template>
     <div id="main_grid">
-        <link rel="stylesheet" type="text/css"  href="css/re_import.css">
-       <link rel="stylesheet" type="text/css" href="css/plugin/ion.rangeSlider.css">
-        <link rel="stylesheet" type="text/css" href="css/plugin/ion.rangeSlider.skinHTML5.css">
-        <link rel="stylesheet" href="css/plugin/uniform.css">
-        <link rel="stylesheet" href="css/plugin/jquery.scrollbar.css">
-        <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/common.css?v=200108090126">
-        <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/home.css?v=200108090126">
-        <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/theme.css?v=200108090126">
-        <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/auto.css?v=200108090126">
-        <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/window.css?v=200108090126">
-        <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/compare.css?v=200103163154">
+
         <div id="main_image" style="width: 100%; height: 100px; line-height: 100px; text-align: center">
             <router-link to="/"><img style="width: 100%; max-width: 760px; vertical-align: middle" src="@/assets/image/rpmlogoblack.png" alt=""></router-link>
         </div>
@@ -18,6 +8,7 @@
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="collapse navbar-collapse justify-content-start" id="navbarSupportedContent">
                 <ul class="navbar-nav">
                     <li class="nav-item">
@@ -47,10 +38,14 @@
 
                     </li>
                 </ul>
+
         </div>
         </nav>
 
         <div id = "main_layout">
+            <div v-if="this.$store.state.user.user.auth==1" class="logout" @click="logout">
+                <a @click.prevent>로그아웃</a>
+            </div>
             <router-view></router-view>
         </div>
     </div>
@@ -80,7 +75,8 @@
         methods:{
             logout(){
                 this.$store.dispatch('user/logout')
-
+                this.$router.push('/')
+                location.reload()
             }
         }
     }
@@ -218,7 +214,14 @@
     .container{
         margin: 0 200px;
     }
+    .logout{
+        padding-right: 300px;
 
+        text-align: right;
+        font-size: large;
+        font-weight: bold;
+        font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
+    }
 
 
 </style>

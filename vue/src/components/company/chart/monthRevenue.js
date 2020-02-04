@@ -1,4 +1,4 @@
-import { Bar } from './BaseCharts'
+import { Bar } from './baseCharts'
 export default {
   extends: Bar,
 

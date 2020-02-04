@@ -18,4 +18,5 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
     @Query(value = "SELECT distinct em_name FROM employee WHERE em_code like ?", nativeQuery = true)
     public String findEmNameByEmCode(String code);
     public List<Employee> findByCenterName(String centerName);
+    public List<Employee> findByCenterCode(String centerCode);
 }

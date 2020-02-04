@@ -4,6 +4,7 @@
         <div>
 
 
+
             <div class="align_field">
                 <div class="all_check">
                     <div class="checker" id="uniform-allCheck">
@@ -91,22 +92,17 @@
                 <button @click="pop_rendar" class="delete" >추가</button>
                 <modals-container />
             </div>
-            <pagination :pagination="List" @movePage="movePageBlock" ref="pagination"></pagination>
 
 
         </div>
     </div>
 </template>
 <script>
-
     import {checkBox} from "../mixins/checkBox";
-    import axios from'axios'
-    import pagination from "../common/pagination2";
-    import sendCarPop from "./sendCarPop";
+
+    import axios from "axios";
+    import sendCarPop from "./SendCarPop";
     export default {
-        components:{
-            pagination
-        },
         data(){
             return {
                 context:'http://localhost:8080/',
@@ -118,10 +114,8 @@
             }
         },
         methods: {
-            movePageBlock(pagination){
-                this.cars= pagination
-                this.allchecked=false
-            },
+
+
             productClick(carItem){
                 this.$store.dispatch('contents/setProduct',carItem)
                 this.$router.push('/product')
@@ -137,33 +131,27 @@
                     }
                 }
                 this.$modal.show(sendCarPop,{
-                   // checkedList : this.checkedList,
+                    // checkedList : this.checkedList,
                     modal : this.$modal},{
                     name: 'dynamic-modal',
                     width : '980px',
                     height : '680px',
                     draggable: true,
                 },{closed:this.checkedList=[]})
-            },
+            }
 
         },
         mixins:[checkBox],
         created(){
-            axios
-                .get(`${this.context}/company/carList/`+localStorage.getItem('userId'))
-                .then(res=>{
-                    res.data.result.forEach(el=>{
-                        el.checked=false
-                        this.List.push(el)
-                        console.log('1')
-                    })
-                    this.$refs.pagination.first()
 
+            axios
+                .post('/company/bestCarList', JSON.parse( localStorage.getItem("customerDetail")))
+                .then(res=> {
+                this.cars=res.data
                 })
                 .catch(e=>{
-                    alert(`axios fail${e}`)
+                    alert('erorr'+e)
                 })
-
         },
 
     }
@@ -181,5 +169,4 @@
         text-align: center;
         font-size: 13px;
     }
-
 </style>
