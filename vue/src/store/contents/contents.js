@@ -38,7 +38,7 @@ const state = {
     maxMilage : '',
     recentSearchWord : [],
     searchWordRank : [],
-    recommendBySearchWordList : {}
+    recommendBySearchWordList : []
 };
 const getters = {
     makerList : state => state.makerList,
