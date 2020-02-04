@@ -11,6 +11,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -22,7 +23,6 @@ import java.util.stream.Collectors;
 @Component
 public class SocialInit implements ApplicationRunner {
     private SocialRepository socialRepository;
-
     public SocialInit(SocialRepository socialRepository) {
         this.socialRepository = socialRepository;
     }
@@ -36,6 +36,11 @@ public class SocialInit implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
+
+        SimpleDateFormat SystemTime = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
+        String formattedTime1 = SystemTime.format (System.currentTimeMillis());
+
+        System.out.println( formattedTime1 + "  INFO 18844 --- [           SocialInit ]         : SocialInit Start ");
 
         if (userRepository.count() != 0 && carsRepository.count() != 0) {
             //socialBoard 테이블을 지운 후 social더미만 먼저 실행
@@ -112,11 +117,9 @@ public class SocialInit implements ApplicationRunner {
                 System.out.println("thumb 등록 완료");
             }
         }
-
-
+        System.out.println( formattedTime1 + "  INFO 18844 --- [           SocialInit ]         : SocialInit End ");
     }
 }
-
 
 
 

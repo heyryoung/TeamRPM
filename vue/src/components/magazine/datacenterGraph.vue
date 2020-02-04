@@ -34,8 +34,10 @@
                 barGraphLabels  : state => state.decenter.barGraphLabels ,
                 lineGraphRowData : state => state.decenter.lineGraphRowData ,
                 barGraphRowData  : state => state.decenter.barGraphRowData
-            })
-
+            }),
+            monthRevenue : function (){
+                return this.$refs.monthRevenue.dataInit({ title : this.title, labels : this.lineGraphLabels, lineGraphRowData : this.lineGraphRowData})
+            }
         },
         data: function() {
             return {
@@ -81,14 +83,18 @@
         methods : {
           fillData() {
               EventBus.$on('dataSettup',()=>{
-                  this.$refs.monthRevenue.hi()
-                  this.$refs.monthRevenue.dataInit({ title : this.title, labels : this.lineGraphLabels, lineGraphRowData : this.lineGraphRowData})
+                  this.$refs.modelRevenue.hi()
+                  //this.$refs.monthRevenue.dataInit({ title : this.title, labels : this.lineGraphLabels, lineGraphRowData : this.lineGraphRowData})
                   this.$refs.modelRevenue.dataInit({ title : this.title, labels : this.barGraphLabels, barGraphRowData : this.barGraphRowData})
               })
           }
         },
         created(){
-
+            EventBus.$on('dataSettup',()=>{
+                this.$refs.modelRevenue.hi()
+                //this.$refs.monthRevenue.dataInit({ title : this.title, labels : this.lineGraphLabels, lineGraphRowData : this.lineGraphRowData})
+                this.$refs.modelRevenue.dataInit({ title : this.title, labels : this.barGraphLabels, barGraphRowData : this.barGraphRowData})
+            })
            /* this.$refs.monthRevenue.dataInit({ title : 'lineGraph' , labels : ['January' , 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December', 'Total' ]
                 , lineGraphRowData : [ 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10] })
             this.$refs.modelRevenue.dataInit({ title : 'barGraph' , labels : ['January' , 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December', 'Total' ] , barGraphRowData : [ 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10]})*/

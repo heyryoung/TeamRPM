@@ -2,14 +2,15 @@ import { HorizontalBar } from './BaseCharts'
 
 export default {
   extends: HorizontalBar,
+  props: ['BarGraphDataSetup'],
   methods: {
-    dataInit(data) {
+    dataInit() {
       this.renderChart({
-        labels: data.labels,
+        labels: this.BarGraphDataSetup.labels,
         datasets: [
           {
-            label: data.title,
-            data: data.barGraphRowData,
+            label: this.BarGraphDataSetup.title,
+            data: this.BarGraphDataSetup.barGraphRowData,
             backgroundColor: ['#ccd8ff', '#b9d0d6', '#b9d0d6', '#5d7381', '#ccd8ff', '#b9d0d6', '#b9d0d6', '#5d7381', '#ccd8ff', '#b9d0d6', '#b9d0d6', '#5d7381'],
             hoverBorderColor: 'red',
             offset: true

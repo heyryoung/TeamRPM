@@ -11,6 +11,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -25,6 +26,14 @@ public class EmployeeInit implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
+
+
+        SimpleDateFormat SystemTime = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
+        String formattedTime1 = SystemTime.format (System.currentTimeMillis());
+
+        System.out.println( formattedTime1 + "  INFO 18844 --- [           EmployeeInit ]         : EmployeeInit Start ");
+
+
         long count = employeeRepository.count();
         List<String> code= employeeRepository.findCenterCode();
         code.forEach(el->{
@@ -44,7 +53,6 @@ public class EmployeeInit implements ApplicationRunner {
             Elements element3 = doc.select("span.img>img");
             Elements element4 = doc.select("h3.center_name");
 
-            System.out.println("============================================================");
 
             Iterator<Element> ie1 = element.iterator();
             Iterator<Element> ie2 = element2.iterator();
@@ -68,10 +76,9 @@ public class EmployeeInit implements ApplicationRunner {
 
 
             }
-
-            System.out.println("============================================================");
         }
         });
+        System.out.println( formattedTime1 + "  INFO 18844 --- [           EmployeeInit ]         : EmployeeInit End ");
     }
 
 }
