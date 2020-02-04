@@ -1,8 +1,6 @@
 <template>
     <div class="container">
         <div>
-
-
             <div id="autodanawa_wrap">
                 <header>
                     <div class="compHead">
