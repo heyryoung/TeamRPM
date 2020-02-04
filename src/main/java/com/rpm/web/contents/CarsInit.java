@@ -8,6 +8,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,12 +31,20 @@ public class CarsInit implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
+
+        SimpleDateFormat SystemTime = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
+        String formattedTime1 = SystemTime.format (System.currentTimeMillis());
+
+        System.out.println( formattedTime1 + "  INFO 18844 --- [           CarsInit ]         : CarsInit Start ");
+
+
         MakeCarDummyList http = new MakeCarDummyList();
         ObjectMapper jsonMapper = new ObjectMapper();
         String[] json = null;
         Map<String, Map<String, Object>> map = new HashMap<>();
         if (carsRepository.count() == 0) {
-            for (int i = 1; i <= 8300; i++) {
+            for (int i = 1; i <= 8000; i++) {
+                if ( i == 1000 )         System.out.println( formattedTime1 + "  INFO 18844 --- [           CarsInit ]         : CarsInit processing :: insert Data count = [ "+ i +" ] ");
                 Map<String, String> strJson = new HashMap<>();
                 map = jsonMapper.readValue(
                         http.sendPost("https://www.kcar.com/search/api/getCarSearchWithCondition.do", proxy.string(i))
@@ -75,5 +84,9 @@ public class CarsInit implements ApplicationRunner {
             }
 
         }
+
+
+        System.out.println( formattedTime1 + "  INFO 18844 --- [           CarsInit ]         : CarsInit End ");
+
     }
 }
