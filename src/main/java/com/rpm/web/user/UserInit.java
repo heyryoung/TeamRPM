@@ -12,9 +12,10 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
-@Order(1)
+@Order(value=2)
 @Component
 public class UserInit implements ApplicationRunner {
     private UserRepository userRepository;
@@ -31,6 +32,13 @@ public class UserInit implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
+        SimpleDateFormat SystemTime = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
+        String formattedTime1 = SystemTime.format (System.currentTimeMillis());
+
+        System.out.println( formattedTime1 + "  INFO 18844 --- [           UserInit ]         : UserInit Start ");
+
+
+
         UserDummy userDummy = new UserDummy();
        long count = userRepository.count();
         if(count == 0){
@@ -49,8 +57,7 @@ public class UserInit implements ApplicationRunner {
                 userRepository.save(user);
             });
         }
-        if(socialRepository.count()==0){
-            socialInit.run(args);
-        }
+
+        System.out.println( formattedTime1 + "  INFO 18844 --- [           UserInit ]         : UserInit END ");
     }
 }

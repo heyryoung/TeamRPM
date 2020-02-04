@@ -2,11 +2,13 @@ package com.rpm.web.company;
 
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+@Order(value=1)
 @Component
 public class CompanyInit implements ApplicationRunner {
     private CompanyRepository companyRepository;

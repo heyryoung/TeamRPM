@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-@Order(4)
+@Order(value=4)
 @Component
 public class SocialInit implements ApplicationRunner {
     private SocialRepository socialRepository;

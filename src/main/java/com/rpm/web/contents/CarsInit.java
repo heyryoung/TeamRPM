@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Order(2)
+@Order(value=0)
 @Component
 public class CarsInit implements ApplicationRunner {
     @Autowired
@@ -47,7 +47,7 @@ public class CarsInit implements ApplicationRunner {
         if (carsRepository.count() == 0) {
             for (int i = 1; i <= 8000; i++) {
             	
-                if ( i == 1000 )         System.out.println( formattedTime1 + "  INFO 18844 --- [           CarsInit ]         : CarsInit processing :: insert Data count = [ "+ i +" ] ");
+                if ( i % 1000 == 0 )         System.out.println( formattedTime1 + "  INFO 18844 --- [           CarsInit ]         : CarsInit processing :: insert Data count = [ "+ i +" ] ");
 
                 Map<String, String> strJson = new HashMap<>();
                 map = jsonMapper.readValue(

@@ -15,31 +15,30 @@
             <router-link to="/"><img style="width: 100%; max-width: 760px; vertical-align: middle" src="@/assets/image/rpmlogoblack.png" alt=""></router-link>
         </div>
         <nav >
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button v-if="!this.user.auth" class="navbar-toggler navbar-toggler-right"  type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-start" id="navbarSupportedContent">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-
-                        <div v-if="this.auth==false && this.user.auth==true">
+                        <div v-if="!this.auth">
                             <Slide noOverlay ableOutsideClick :crossIcon="false">
                                 <UserInfo/>
                                 <router-link to="/">HOME</router-link>
-                                <!--<router-link  to="/login">로그인</router-link>
-                                <router-link to="/join">회원가입</router-link>-->
+                                <router-link  to="/login">로그인</router-link>
+                                <router-link to="/join">회원가입</router-link>
                                 <router-link to="/searchmain">검색</router-link>
                                 <router-link to="/magazine">magazine </router-link>
                                 <router-link to="/chartMaker">chartMaker </router-link>
                                 <router-link to="/sns">SNS(REVIEW) </router-link>
                             </Slide>
                         </div>
-                        <div v-if="this.auth==false && this.user.auth==true">
+                        <div v-if="this.auth">
                             <Slide noOverlay ableOutsideClick :crossIcon="false">
                                 <UserInfo/>
                                 <router-link to="/">HOME</router-link>
-                                <!--<router-link to="/logout">로그아웃</router-link>
-                                <router-link to="/mypage">마이페이지</router-link> -->
+                                <router-link to="/logout">로그아웃</router-link>
+                                <router-link to="/mypage">마이페이지</router-link>
                                 <router-link to="/searchmain">검색</router-link>
                                 <router-link to="/recommendHome">딜러에게 추천받기</router-link>
                                 <router-link to="/sns">SNS(REVIEW) </router-link>
