@@ -2,7 +2,6 @@
 <div id =tempNav>
 
 
-
 <router-view></router-view>
 </div>
 </template>

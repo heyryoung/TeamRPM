@@ -33,7 +33,7 @@ export function generateChart (chartId, chartType) {
         type: Number
       },
       height: {
-        default: 180,
+        default: 250,
         type: Number
       },
       cssClasses: {

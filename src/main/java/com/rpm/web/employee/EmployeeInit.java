@@ -26,7 +26,7 @@ public class EmployeeInit implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         long count = employeeRepository.count();
-        List<String> code= employeeRepository.findByCenterCode();
+        List<String> code= employeeRepository.findCenterCode();
         code.forEach(el->{
 
 
@@ -58,7 +58,7 @@ public class EmployeeInit implements ApplicationRunner {
                 }else{
                     employee.setEmCode(el +'0'+ String.valueOf(j));
                 }
-
+                employee.setCenterCode(el);
                 employee.setCenterName(element4.text());
                 employee.setEmName(ie1.next().text());
                 employee.setEmPosition(ie2.next().text());

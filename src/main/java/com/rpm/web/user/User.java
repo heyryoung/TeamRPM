@@ -32,6 +32,7 @@ public class User implements Serializable {
     @Column(name = "PASSWD") @NotNull private String passwd;
     @Column(name = "NAME") @NotNull private String name;
     @Column(name = "EMAIL") @NotNull private String email;
+    @Column(name = "AUTH") @NotNull private Boolean auth;
     @Column(name = "GENDER")  private String gender;
     @Column(name = "BIRTHMONTH")  private String birthMonth;
     @Column(name = "REGION")  private String region;

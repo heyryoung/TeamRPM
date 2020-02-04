@@ -68,7 +68,7 @@ public class CarsInit implements ApplicationRunner {
                 ));
             }
         }
-        if(recentSearchWord.count()==0){
+        if(recentSearchWord.count()!=0){
             int ranlist = 0;
             for(int i =0; i<1000; i++){
                     recentSearchWord.save(new RecentSearchWord(list.get((int)(Math.random() * list.size())), Long.parseLong("20200000000000000"), String.valueOf(i)));

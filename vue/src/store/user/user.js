@@ -7,11 +7,13 @@ const state = {
     auth: false,
     fail: false
 }
+
 const getters = {
 
     getMember : state=>state.user,
     getIsAuth : state=>state.auth,
     getFail : state=> state.fail
+
 
 
 
@@ -24,20 +26,28 @@ const actions = {
             'Content-Type': 'application/json'}
         axios.post(url, {userid,passwd}, headers)
             .then(({data})=>{
-
                 //alert(data.result.toString())
                 if(data.result == "success") {
                     commit('LOGIN_COMMIT', data)
                     localStorage.setItem("token", data.token)
-                    if(data.mycar){
-                        localStorage.setItem("mycar", JSON.stringify(data.mycar))
-                        if(data.record){
-                            console.log(`record = ${data.record}`)
-                            localStorage.setItem("record", JSON.stringify(data.record))
+                    localStorage.setItem("userId",data.user.userid)
+                    if(data.user.auth==true) {
+                        if(data.mycar){
+                            localStorage.setItem("mycar", JSON.stringify(data.mycar))
+                            if(data.record){
+                                console.log(`record = ${data.record}`)
+                                localStorage.setItem("record", JSON.stringify(data.record))
+
+                            }
 
                         }
+                        router.push('/')
+                    }else{
 
+                        router.push('/companyHome')
                     }
+
+
 
 
 
@@ -45,7 +55,8 @@ const actions = {
                    // store.dispatch('getMycar', {user: data.user})
                     //store.dispatch('getRecord', {mycar: store.state.carbook.mycar})
 
-                    router.push('/')
+
+
 
 
                 }else{
@@ -68,6 +79,7 @@ const actions = {
         localStorage.removeItem("token")
         localStorage.removeItem("mycar")
         localStorage.removeItem("record")
+        localStorage.removeItem("userId")
 
 
     },
@@ -105,7 +117,7 @@ const mutations = {
     LOGOUT_COMMIT(state){
         console.log('로그아웃')
         state.auth = false
-        state.user  = {}
+        state.member  = {}
 
     },
     fail_commit(state){
