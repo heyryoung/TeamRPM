@@ -104,18 +104,22 @@
                 })
       },
       thumbUp(){
-        this.empty=false
-        this.fall=true
-        axios.get(`${url}/thumbUp/${this.boardSeq}/${this.$store.state.user.user.userid}`)
-                .then(res=>{
-                  if(res.data === "success"){
-                    this.board.thumbCount +=1
-                    console.log(this.board)
-                  }
-                })
-                .catch(()=>{
-                  alert('axios error')
-                })
+        if(this.$store.state.user.auth===false){
+          alert('로그인 해주세요.')
+        }else{
+          this.empty=false
+          this.fall=true
+          axios.get(`${url}/thumbUp/${this.boardSeq}/${this.$store.state.user.user.userid}`)
+                  .then(res=>{
+                    if(res.data === "success"){
+                      this.board.thumbCount +=1
+                      console.log(this.board)
+                    }
+                  })
+                  .catch(()=>{
+                    alert('axios error')
+                  })
+        }
       },
       thumbDown(){
         this.empty=true
