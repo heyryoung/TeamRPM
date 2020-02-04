@@ -22,30 +22,29 @@
                 <ul class="navbar-nav">
                     <li class="nav-item">
 
-                        <div>
+                        <div v-if="this.auth==false && this.user.auth==true">
                             <Slide noOverlay ableOutsideClick :crossIcon="false">
+                                <UserInfo/>
                                 <router-link to="/">HOME</router-link>
-                                <router-link v-if="this.auth==false" to="/login">로그인</router-link> <!--로그인전-->
-                                <div v-if="this.auth===true">
-                                    <UserInfo/>
-                                </div>
-                                <router-link  v-if="this.auth==false" to="/join">회원가입</router-link><!-- //로그인전-->
-                                <router-link to="/searchmain">검색창</router-link> <!--//공통-->
-                                <router-link v-if="this.user.admin!='admin'" to="/recommendHome">딜러에게 추천받기</router-link> <!--//로그인전후-->
-                                <router-link v-if="this.user.admin=='admin'" to="/companyHome">ADMIN </router-link> <!--//admin-->
-                                <router-link v-if="this.user.admin!='admin'" to="/sns">SNS(REVIEW) </router-link> <!--//공통-->
-                                <router-link v-if="this.user.admin!='admin'" to="/sns">차계부 </router-link> <!--// 공통-->
-                                <router-link to="/product">제품</router-link> <!--공통-->
-                                <router-link  v-if="this.auth==true" to="/mypage">마이페이지</router-link> <!--로그인후, 어드민-->
-                                <router-link  to="/seencar">최근 본 차량(비교함)</router-link> <!--//공통-->
-                                <router-link  to="/buycar">자동차구매 </router-link> <!--//공통-->
-                                <router-link  to="/buycarSelectGoods">자동차구매1 </router-link> <!--//로그인전후-->
-                                <router-link  to="/magazine">magazine </router-link><!-- //로그인전후-->
-                                <router-link  to="/chartMaker">chartMaker </router-link> <!--//로그인전후-->
-                                <router-link  to="/recommendHome">딜러에게 추천받기</router-link> <!--//로그인전후-->
-                                <router-link  to="/companyHome">ADMIN </router-link> <!--//admin-->
-                                <router-link  to="/sns">SNS(REVIEW) </router-link> <!--//공통-->
-                                <router-link  to="/sns">차계부 </router-link> <!--// 공통-->
+                                <!--<router-link  to="/login">로그인</router-link>
+                                <router-link to="/join">회원가입</router-link>-->
+                                <router-link to="/searchmain">검색</router-link>
+                                <router-link to="/magazine">magazine </router-link>
+                                <router-link to="/chartMaker">chartMaker </router-link>
+                                <router-link to="/sns">SNS(REVIEW) </router-link>
+                            </Slide>
+                        </div>
+                        <div v-if="this.auth==false && this.user.auth==true">
+                            <Slide noOverlay ableOutsideClick :crossIcon="false">
+                                <UserInfo/>
+                                <router-link to="/">HOME</router-link>
+                                <!--<router-link to="/logout">로그아웃</router-link>
+                                <router-link to="/mypage">마이페이지</router-link> -->
+                                <router-link to="/searchmain">검색</router-link>
+                                <router-link to="/recommendHome">딜러에게 추천받기</router-link>
+                                <router-link to="/sns">SNS(REVIEW) </router-link>
+                                <router-link to="/magazine">magazine </router-link>
+                                <router-link to="/chartMaker">chartMaker </router-link>
                             </Slide >
                         </div>
 
