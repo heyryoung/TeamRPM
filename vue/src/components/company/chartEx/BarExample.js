@@ -1,6 +1,7 @@
 import { Bar } from './BaseCharts'
 export default {
   extends: Bar,
+
 props:['data'],
     methods:{
       dataInit(revenue){
@@ -16,7 +17,7 @@ props:['data'],
           }, {responsive: true, maintainAspectRatio: false})
       }
 
-    },
+    }
 
 
 }

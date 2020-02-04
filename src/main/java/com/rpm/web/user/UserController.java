@@ -1,13 +1,11 @@
 package com.rpm.web.user;
 
-import com.rpm.web.carbook.Carbook;
-import com.rpm.web.carbook.CarbookRepository;
-import com.rpm.web.carbook.Record;
-import com.rpm.web.carbook.RecordRepository;
+import com.rpm.web.carbook.*;
 import com.rpm.web.util.Printer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -25,7 +23,9 @@ public class UserController {
     @Autowired
     Record record;
     @Autowired
-    RecordRepository recordRepository;
+    CarbookService carbookService;
+
+
 
 
     @PostMapping("/idCheck")
@@ -61,16 +61,34 @@ public class UserController {
         HashMap<String, Object> map = new HashMap<>();
         user = userRepository.findByUseridAndPasswd(param.getUserid(), param.getPasswd());
         if (user != null) {
-            map.put("result", "success");
+            printer.accept(param.getUserid());
+            printer.accept(user.toString());
+
             map.put("user", user);
 
             map.put("token", user.getUserSeq());
             carbook = carbookRepository.findBySeq(user.getUserSeq());
-            map.put("mycar", carbook);
-            List<Record> records = recordRepository.findbyMycarId(carbook.getMycarId());
-            map.put("records",records);
-            printer.accept(carbook.getModel());
-            printer.accept(records.get(0).getPrice());
+
+
+            if(carbook!=null ){
+                map.put("mycar", carbook);
+                Object obj = carbook.getMycarId();
+              /*  if(obj instanceof String){
+                    printer.accept("Strig");
+                }else if(obj instanceof Long){
+                    printer.accept("long");
+                }*/
+                List<Record> records = carbookService.getRecords(carbook.getMycarId());
+
+
+
+                if(records != null){
+                    map.put("record", records);
+
+                }
+            }
+
+            map.put("result", "success");
 
         } else {
             map.put("result", "fail");

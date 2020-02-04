@@ -5,11 +5,13 @@ import com.rpm.web.util.Printer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Order(2)
 @Component
 public class CarbookInit implements ApplicationRunner {
     @Autowired RecordRepository recordRepository;
@@ -138,10 +140,10 @@ public class CarbookInit implements ApplicationRunner {
                 record.setPrice(String.valueOf(
                         (int)((Math.random()*10)+1)*10000
                 ));
-                /*record.setMycarId(
+                record.setMycarId(
                         listCarbook.get(
                                 (int)(Math.random()*500))
-                );*/
+                );
 
                 recordRepository.save(record);
 

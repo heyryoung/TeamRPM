@@ -2,10 +2,7 @@ package com.rpm.web.carbook;
 
 import com.rpm.web.user.User;
 import com.rpm.web.util.Printer;
-import com.sun.org.apache.xpath.internal.operations.Mod;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -20,39 +17,36 @@ public class CarbookController {
     @Autowired CarbookRepository carbookRepository;
     @Autowired Carbook carbook;
     @Autowired Record record;
+    @Autowired CarbookService carbookService;
     @Autowired RecordRepository recordRepository;
-
-    @Autowired
-    ModelMapper modelMapper;
-    @Bean public ModelMapper modelMapper(){return new ModelMapper();}
 
 
     @PostMapping("/getMycar")
     public HashMap<String, Object> getMycar(@RequestBody User param){
         printer.accept("in the carbookCon");
         HashMap<String, Object> map = new HashMap<>();
-        carbook = carbookRepository.findBySeq(param.getUserSeq());
-        printer.accept(carbook.toString());
+        if(param.getUserid()!=null){
+            carbook = carbookRepository.findBySeq(param.getUserSeq());
 
-        if(carbook != null){
-            map.put("result" , "success");
-            map.put("mycar" , carbook);
-            Iterable<Record> itRecord =  recordRepository.findbyMycarId(carbook.getMycarId());
-            List<Record> records = new ArrayList<>();
-            if(itRecord !=null){
-                for(Record r: itRecord){
-                    Record bean = modelMapper.map(r, Record.class);
-                    records.add(bean);
-                    printer.accept("in the carbook.for");
+            if(carbook != null){
+                map.put("result" , "success");
+                map.put("mycar" , carbook);
+                Iterable<Record> itRecord =  carbookService.getRecords(carbook.getMycarId());
+                List<Record> records = new ArrayList<>();
+                if(itRecord !=null){
+                    for(Record r: itRecord){
+                        records.add(r);
+                        printer.accept("in the carbook.for");
+                    }
+                    map.put("record", records);
 
                 }
-                map.put("record", records);
+                return map;
+
 
             }
-            return map;
-
-
         }
+
         map.put("result", "fail");
         return map;
 
@@ -62,12 +56,11 @@ public class CarbookController {
         printer.accept("in the getrecord");
         HashMap<String, Object> map = new HashMap<>();
         printer.accept(String.valueOf(param.getMycarId()));
-        Iterable<Record> records = recordRepository.findbyMycarId(param.getMycarId());
+        Iterable<Record> records = carbookService.getRecords(param.getMycarId());
 
         List<Record> list = new ArrayList<>();
         for(Record r : records){
-            Record bean = modelMapper.map(r, Record.class);
-            list.add(bean);
+            list.add(r);
 
         }
 
@@ -87,7 +80,7 @@ public class CarbookController {
     @PostMapping("/insertRecord")
     public HashMap<String, Object> addRecord(@RequestBody Record param){
         HashMap<String, Object> map = new HashMap<>();
-        //printer.accept(String.valueOf(param.getMycarId()));
+        printer.accept("in the addrecord");
         record = recordRepository.save(param);
         if(record != null){
             map.put("rec", record);
