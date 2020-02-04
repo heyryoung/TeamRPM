@@ -44,10 +44,10 @@
     </div>
 </template>
 <script>
-import month_revenue from "./month_revenue";
-import carList from "./carList";
-import customerList from "./customerList";
-import employee from "./employee";
+import month_revenue from "./Month_revenue";
+import carList from "./CarList";
+import customerList from "./CustomerList";
+import employee from "./Employee";
     export default {
         components: {
             month_revenue,carList,customerList,employee

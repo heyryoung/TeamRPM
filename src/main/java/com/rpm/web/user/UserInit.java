@@ -52,7 +52,7 @@ public class UserInit implements ApplicationRunner {
                 user.setName(companyRepository.findCenterNameByCenterCode(el));
                 user.setPasswd(el);
                 user.setEmail(el+"@gmail.com");
-                user.setAuth(false);
+                user.setAuth(1);
                 user.setRegion(companyRepository.findRigionByCenterCode(el));
                 userRepository.save(user);
             });

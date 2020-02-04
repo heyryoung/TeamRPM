@@ -9,6 +9,7 @@ package com.rpm.web.company;
         import org.springframework.beans.factory.annotation.Autowired;
         import org.springframework.web.bind.annotation.*;
 
+        import java.util.ArrayList;
         import java.util.HashMap;
         import java.util.List;
         import java.util.Map;
@@ -23,6 +24,8 @@ public class CompanyController {
     CompanyRepository companyRepository;
     @Autowired
     RecommendRepository recommendRepository;
+    @Autowired
+    CompanyServiceImpl companyServiceImpl;
 
     @GetMapping("/carList/{centerCode}")
     public Map<String, List<Cars>> carList(@PathVariable String centerCode){
@@ -36,6 +39,12 @@ public class CompanyController {
         map.put("result","aa");
         return map;
 
+    }
+    @PostMapping("/bestCarList")
+    public List<Cars> bestCarList(@RequestBody Recommend recommend){
+        System.out.println(recommend.toString());
+
+        return companyServiceImpl.getBestCarList(recommend);
     }
 
 

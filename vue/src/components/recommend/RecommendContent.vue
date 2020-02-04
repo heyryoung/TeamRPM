@@ -101,10 +101,10 @@
     </div>
 </template>
 <script>
-    import comparePop from "./comparePop";
+    import comparePop from "./ComparePop";
     import {checkBox} from "../mixins/checkBox";
     import axios from 'axios';
-    import Pagination2 from "../common/pagination2";
+    import Pagination2 from "../common/Pager";
 
     export default {
         components:{

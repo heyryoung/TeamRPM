@@ -17,9 +17,9 @@
 </template>
 
 <script>
-    import BarExample from "./chartEx/BarExample";
+    import BarExample from "./chart/monthRevenue";
     import axios from "axios";
-    import HorizontalBarExample from './chartEx/HorizontalBarExample'
+    import HorizontalBarExample from './chart/emRevenue'
 
     export default {
         name: "month_revenue",

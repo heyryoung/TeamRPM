@@ -60,7 +60,7 @@ public class UserDummy{
         user.setGender(gender);
         user.setEmail(email);
         user.setRegion(region);
-        user.setAuth(true);
+        user.setAuth(0);
         user.setBirthMonth(setBirth());
         return user;
     }

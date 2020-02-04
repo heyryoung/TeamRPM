@@ -35,7 +35,7 @@ const actions = {
                     commit('LOGIN_COMMIT', data)
                     localStorage.setItem("token", data.token)
                     localStorage.setItem("userId",data.user.userid)
-                    if(data.user.auth==true) {
+                    if(data.user.auth==0) {
                         if(data.mycar){
                             localStorage.setItem("mycar", JSON.stringify(data.mycar))
                             if(data.record){
@@ -122,6 +122,7 @@ const mutations = {
         console.log('로그아웃')
         state.auth = false
         state.member  = {}
+
 
     },
     fail_commit(state){
