@@ -57,10 +57,6 @@ public class SocialController {
         }
         return "uploadImg";
     }
-    @DeleteMapping("/uploadImg")
-    public String uploadImg() {
-        return "uploadImg";
-    }
 
     @PostMapping("/writeContent")
     public String writeContent (@RequestBody SocialWriteDto param){
