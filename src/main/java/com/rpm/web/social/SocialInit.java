@@ -28,7 +28,7 @@ public class SocialInit implements ApplicationRunner {
     @Autowired ThumbRepository thumbRepository;
 
     @Override
-    public void run(ApplicationArguments args) throws Exception {/*
+    public void run(ApplicationArguments args) throws Exception {
 
         if (userRepository.count() != 0) {
             //socialBoard 테이블을 지운 후 social더미만 먼저 실행
@@ -57,7 +57,6 @@ public class SocialInit implements ApplicationRunner {
             }
 
 
-
             //comment/ thumb 넣을 board 정렬
             Iterable<Social> socials = socialRepository.findAll();
             List<Social> socialList = new ArrayList<>();
@@ -72,9 +71,9 @@ public class SocialInit implements ApplicationRunner {
             }
 
 
-            /*Comment Dummy Data*/
+            /*Comment Dummy Data
 
-            /*long commentCount = commentRepository.count();
+            long commentCount = commentRepository.count();
             if (commentCount == 0) {
                 System.out.println("comment 등록 시작");
                 for (int i = 0; i < 6; i++) {
@@ -93,12 +92,12 @@ public class SocialInit implements ApplicationRunner {
                 System.out.println("thumb 등록 시작");
                 Collections.shuffle(user);
                 List<User> thumbUserList = new ArrayList<>();
-                for(int i=0; i<100;i++){
+                for (int i = 0; i < 100; i++) {
                     thumbUserList.add(user.get(i));
                 }
-                for (User u:thumbUserList) {
+                for (User u : thumbUserList) {
                     Collections.shuffle(commentedSocialList);
-                    for (int i=0; i<20;i++){
+                    for (int i = 0; i < 20; i++) {
                         Thumb thumb = new Thumb();
                         thumb.setUserSeq(u);
                         thumb.setBoardSeq(commentedSocialList.get(i));
@@ -109,6 +108,7 @@ public class SocialInit implements ApplicationRunner {
             }
 
         }
+    }
 
 
     }
