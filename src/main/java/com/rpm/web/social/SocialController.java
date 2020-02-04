@@ -38,7 +38,6 @@ public class SocialController {
         if(!userid.equals("undefined")){
             map.put("thumbedboard", socialService.thumbed(userid));
         }
-
         return map;
     }
 

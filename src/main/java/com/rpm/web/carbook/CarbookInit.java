@@ -36,7 +36,7 @@ public class CarbookInit implements ApplicationRunner {
         System.out.println( formattedTime1 + "  INFO 18844 --- [           CarbookInit ]         : CarbookInit Start ");
 
         mycarInit();
-        //recordInit();
+        recordInit();
 
 
 

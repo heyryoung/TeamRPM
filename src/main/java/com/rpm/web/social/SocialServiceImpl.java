@@ -93,7 +93,7 @@ public class SocialServiceImpl implements SocialService{
         social.setCarName(param.getCarName());
         social.setBoardDate(new SimpleDateFormat ( "yy.MM.dd HH:mm:ss").format( new Date()));
         social.setCarCode("board"+social.getBoardDate());
-        social.setBoardImg("img\\"+param.getBoardImgName());
+        social.setBoardImg("img/"+param.getBoardImgName());
         social.setBoardContent(param.getBoardContent());
         social.setUserSeq(userRepository.findByUserid(param.getUserid()));
         socialRepository.save(social);
@@ -121,7 +121,6 @@ public class SocialServiceImpl implements SocialService{
 
     @Override
     public void thumbUp(String boardSeq, String userid) {
-        thumb= new Thumb();
         thumb.setBoardSeq(socialRepository.findById(Long.parseLong(boardSeq)).get());
         thumb.setUserSeq(userRepository.findByUserid(userid));
         thumbRepository.save(thumb);

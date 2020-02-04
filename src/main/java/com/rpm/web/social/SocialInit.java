@@ -23,7 +23,6 @@ import java.util.stream.Collectors;
 @Component
 public class SocialInit implements ApplicationRunner {
     private SocialRepository socialRepository;
-
     public SocialInit(SocialRepository socialRepository) {
         this.socialRepository = socialRepository;
     }
@@ -37,8 +36,6 @@ public class SocialInit implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-
-
 
         SimpleDateFormat SystemTime = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
         String formattedTime1 = SystemTime.format (System.currentTimeMillis());

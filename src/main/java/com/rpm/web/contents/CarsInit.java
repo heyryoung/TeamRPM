@@ -6,6 +6,7 @@ import com.rpm.web.util.MakeCarDummyList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
@@ -15,6 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Order(2)
 @Component
 public class CarsInit implements ApplicationRunner {
     @Autowired
@@ -79,7 +81,7 @@ public class CarsInit implements ApplicationRunner {
                 ));
             }
         }
-        if(recentSearchWord.count()!=0){
+        if(recentSearchWord.count()==0){
             int ranlist = 0;
             for(int i =0; i<1000; i++){
                     recentSearchWord.save(new RecentSearchWord(list.get((int)(Math.random() * list.size())), Long.parseLong("20200000000000000"), String.valueOf(i)));
