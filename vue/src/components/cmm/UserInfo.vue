@@ -6,7 +6,7 @@
         <div>
             <router-link to="/mypage"> <a href="" style="width:10%; height:20px; padding:7px;color:navy; font-size: 14px; border: 1px solid navy;">마이페이지 </a> </router-link>
 
-            <a href="" style="color: navy; float:right; font-size: 12px; border: 1px solid navy">   로그아웃</a>
+            <a href="" @click="logout" style="color: navy; float:right; font-size: 12px; border: 1px solid navy">   로그아웃</a>
         </div>
 
     </div>
