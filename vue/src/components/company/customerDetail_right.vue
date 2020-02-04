@@ -46,7 +46,7 @@
                     <tr>
                         <td class="check">
                             <div class="checker" id="uniform-interest_list_check1">
-                                <span  :class="{checked:car.checked}" @click="check(car)" @change='updateCheckall(car)' >
+                                <span  :class="{checked:car.checked}" @click="check(car)" @change='updateCheckall(cars)'>
                                     <input type="checkbox" id="interest_list_check1" class="uniform"  >
                                 </span>
                             </div>
@@ -88,12 +88,8 @@
             </div>
 
             <div class="btn_cont">
-                <a href="" class="delete" >선택삭제</a>
-
-                <div class="center_btn">
-
-
-                </div>
+                <button @click="pop_rendar" class="delete" >추가</button>
+                <modals-container />
             </div>
             <pagination :pagination="List" @movePage="movePageBlock" ref="pagination"></pagination>
 
@@ -102,12 +98,14 @@
     </div>
 </template>
 <script>
+
     import {checkBox} from "../mixins/checkBox";
     import axios from'axios'
     import pagination from "../common/pagination2";
+    import sendCarPop from "./sendCarPop";
     export default {
         components:{
-          pagination
+            pagination
         },
         data(){
             return {
@@ -122,33 +120,49 @@
         methods: {
             movePageBlock(pagination){
                 this.cars= pagination
-            },
-            addHistory( carItem ){
-                this.$store.dispatch( 'contents/addSeenHistory' , carItem )
+                this.allchecked=false
             },
             productClick(carItem){
-                this.addHistory(carItem)
                 this.$store.dispatch('contents/setProduct',carItem)
                 this.$router.push('/product')
+            },
+            pop_rendar(){
+
+                for(let i=0;i<this.cars.length;i++) {
+
+                    if (!this.$store.state.recommend.recommendedCar.length<5&&this.cars[i].checked == true) {
+                        this.$store.dispatch('recommend/inputCar',this.cars[i])
+                    }else if(this.$store.state.recommend.recommendedCar.length==5){
+                        alert('최대 5개까지 가능합니다')
+                    }
+                }
+                this.$modal.show(sendCarPop,{
+                   // checkedList : this.checkedList,
+                    modal : this.$modal},{
+                    name: 'dynamic-modal',
+                    width : '980px',
+                    height : '680px',
+                    draggable: true,
+                },{closed:this.checkedList=[]})
             },
 
         },
         mixins:[checkBox],
         created(){
-                axios
-                .get(`${this.context}/company/carList/`+localStorage.getItem("userId"))
-                    .then(res=>{
-                       res.data.result.forEach(el=>{
-                           el.checked=false
-                            this.List.push(el)
-                           console.log('1')
-                        })
-                        this.$refs.pagination.first()
-
+            axios
+                .get(`${this.context}/company/carList/`+localStorage.getItem('userId'))
+                .then(res=>{
+                    res.data.result.forEach(el=>{
+                        el.checked=false
+                        this.List.push(el)
+                        console.log('1')
                     })
-        .catch(e=>{
-            alert(`axios fail${e}`)
-        })
+                    this.$refs.pagination.first()
+
+                })
+                .catch(e=>{
+                    alert(`axios fail${e}`)
+                })
 
         },
 
@@ -167,4 +181,5 @@
         text-align: center;
         font-size: 13px;
     }
+
 </style>

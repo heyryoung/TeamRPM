@@ -21,6 +21,7 @@
             <div class="collapse navbar-collapse justify-content-start" id="navbarSupportedContent">
                 <ul class="navbar-nav">
                     <li class="nav-item">
+
                         <div>
                             <Slide noOverlay ableOutsideClick :crossIcon="false">
                                 <router-link to="/">HOME</router-link>
@@ -30,17 +31,18 @@
                                 <router-link to="/searchmain">검색창</router-link> <!--//공통-->
                                 <router-link to="/product">제품</router-link> <!--공통-->
                                 <router-link  v-if="this.auth==true" to="/mypage">마이페이지</router-link> <!--로그인후, 어드민-->
-                                <router-link v-if="this.user.admin!='admin'" to="/seencar">최근 본 차량(비교함)</router-link> <!--//공통-->
-                                <router-link v-if="this.user.admin!='admin'" to="/buycar">자동차구매 </router-link> <!--//공통-->
-                                <router-link v-if="this.user.admin!='admin'" to="/buycarSelectGoods">자동차구매1 </router-link> <!--//로그인전후-->
-                                <router-link v-if="this.user.admin!='admin'" to="/magazine">magazine </router-link><!-- //로그인전후-->
-                                <router-link v-if="this.user.admin!='admin'" to="/chartMaker">chartMaker </router-link> <!--//로그인전후-->
-                                <router-link v-if="this.user.admin!='admin'" to="/recommendHome">딜러에게 추천받기</router-link> <!--//로그인전후-->
-                                <router-link v-if="this.user.admin=='admin'" to="/companyHome">ADMIN </router-link> <!--//admin-->
-                                <router-link v-if="this.user.admin!='admin'" to="/sns">SNS(REVIEW) </router-link> <!--//공통-->
-                                <router-link v-if="this.user.admin!='admin'" to="/sns">차계부 </router-link> <!--// 공통-->
+                                <router-link  to="/seencar">최근 본 차량(비교함)</router-link> <!--//공통-->
+                                <router-link  to="/buycar">자동차구매 </router-link> <!--//공통-->
+                                <router-link  to="/buycarSelectGoods">자동차구매1 </router-link> <!--//로그인전후-->
+                                <router-link  to="/magazine">magazine </router-link><!-- //로그인전후-->
+                                <router-link  to="/chartMaker">chartMaker </router-link> <!--//로그인전후-->
+                                <router-link  to="/recommendHome">딜러에게 추천받기</router-link> <!--//로그인전후-->
+                                <router-link  to="/companyHome">ADMIN </router-link> <!--//admin-->
+                                <router-link  to="/sns">SNS(REVIEW) </router-link> <!--//공통-->
+                                <router-link  to="/sns">차계부 </router-link> <!--// 공통-->
                             </Slide >
                         </div>
+
 
 
                     </li>

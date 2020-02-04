@@ -1,6 +1,6 @@
 <template>
     <div class="condition">
-        <h4 class="title">xxx 고객님의 요구사항</h4>
+        <h4 class="title">{{customerInfo.name}} 고객님의 요구사항</h4>
         <div class="compBox">
         <div class="compLeft">
         <table class="tableComp left body" cellspacing="0" >
@@ -16,11 +16,25 @@
         <div class="compRight">
         <table class="tableComp right body" cellspacing="0" id="compRightBody" style="width: 300px;">
             <tbody>
-
-            <tr id="unitSumy1" type="gapSpec" v-for="col of optoions" :key="col">
-                <td id="Sumy1_1" >{{col}}</td>
-
+            <tr  type="gapSpec" >
+                <td>{{customerInfo.makeNm}} {{customerInfo.modelNm}}<br></td>
             </tr>
+            <tr  type="gapSpec" >
+                <td>{{customerInfo.minPrice}}만원 ~ {{customerInfo.maxPrice}}만원<br></td>
+            </tr>
+            <tr  type="gapSpec" >
+                <td>{{customerInfo.minBeginYear}}년 ~ {{customerInfo.maxBeginYear}}년</td>
+            </tr>
+            <tr  type="gapSpec" >
+                <td>{{customerInfo.minMilage}}km ~ {{customerInfo.maxMilage}}km</td>
+            </tr>
+            <tr  type="gapSpec" >
+                <td>{{customerInfo.fuleTypedName}}</td>
+            </tr>
+            <tr  type="gapSpec" >
+                <td>{{customerInfo.transmissioncdName}}</td>
+            </tr>
+
 
 
             </tbody>
@@ -35,15 +49,17 @@
         name: "carDetail_left",
         data(){
             return{
-                optoions:
-                    {price:'2000만원~8000만원',carYear:'2012~2019',distance:'100000km~10000000km',fuel:'휘발유',carType:'suv',fuelPrice:'123',a:'1',b:'2',c:'3',d:'4',f:'5'}
+                customerInfo:JSON.parse( localStorage.getItem("customerDetail"))
                 ,
                 columns:[
-                    '가격','연식','주행거리','연료','차종','연비','1','2','3','4','5'
+                   '희망 기종', '가격','연식','주행거리','연료','변속기'
                 ],
 
             }
 
+        },
+        destroyed() {
+            localStorage.removeItem("customerDetail")
         }
     }
 </script>
@@ -54,7 +70,7 @@
         font-size: 12px;
         font-family: "돋움", Dotum, "굴림", gulim, AppleGothic, Helvetica, Sans-serif;
         float: left;
-        margin-top: 200px ;
+        margin-top: 300px ;
         line-height: 180%;
         padding: 50px 80px;
         width: 400px;

@@ -64,6 +64,7 @@ public class UserController {
             printer.accept(user.toString());
 
             map.put("user", user);
+
             map.put("token", user.getUserSeq());
             carbook = carbookRepository.findBySeq(user.getUserSeq());
 

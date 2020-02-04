@@ -65,21 +65,11 @@
 		},
 		methods:{
 			checkSubmit(){
-				if(this.userid.length >= 4 && this.passwd.length>=4){
 					this.login()
-
-				}
-
 			},
 			login(){
-
-
 				this.$store.dispatch('user/login', {userid:this.userid,passwd:this.passwd})
 			},
-
-
-
-
 
 		},
 		beforeDestroy(){
