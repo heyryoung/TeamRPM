@@ -22,14 +22,14 @@
 					<td colspan="3">
 						<input type="text" v-model="userid" @keyup="idCheck" maxlength="12" id="i_sMemberId" class="user_input02" value="">
 						<b class="user_num_check mt5" id="id_result">{{idCheckmsg}}</b>
-						<p class="mt5" >* 4~12이내  영문, 숫자 혼합</p>
+						<p class="mt5" >* 4~12이내  영문, 숫자만 입력해주세요.</p>
 					</td>
 				</tr>
 				<tr>
 					<th><span class="org">*</span> <label for="i_sPassWord">비밀번호입력</label></th>
 					<td colspan="3">
 						<input type="password" v-model="passwd" id="i_sPassWord" maxlength="20" class="user_input02 am" value=""> &nbsp;&nbsp;&nbsp;
-						<span>* 영문 대/소문자, 숫자, 특수문자(`~!@#$%^*+=-_만 허용)를 조합하여 8~20자로 입력해 주세요.</span>
+						<span>* 특수문자 제외. 영문 대/소문자, 숫자를 조합하여 8~20자로 입력해 주세요.</span>
 					</td>
 				</tr>
 				<tr>
@@ -37,6 +37,7 @@
 					<td colspan="3"><input type="password" v-model="passwd2" id="i_sPassWord2" maxlength="20" class="user_input02" value="">
 						<b class="user_num_check mt5" v-if="1<passwd.length && passwd.length<8">{{passwdCheck}}</b>
 						<b class="user_num_check mt5" v-show="passwd!=passwd2">{{passwdCheck2}}</b>
+						<b class="user_num_check mt5" v-show="checkSpecial(passwd)">{{passwdCheck3}}</b>
 					</td>
 
 				</tr>
@@ -152,6 +153,7 @@ export default {
 			passwd2:'',
 			passwdCheck:'비밀번호가 너무 짧습니다',
 			passwdCheck2:'입력한 비밀번호가 다릅니다',
+			passwdCheck3:'특수문자는 사용할 수 없습니다.',
 			email1:'',
 			email2:'',
 			gender:'',
@@ -211,18 +213,30 @@ export default {
             }else if(this.idChecklength==0){
                 this.idCheckmsg = ''
 			}else if(this.idChecklength>=4){
-				axios
-						.get(`${this.context}/idCheck/${this.userid}`)
-						.then(res => {
-							if (res.data) {
-								this.idCheckmsg= "사용가능한 아이디입니다."
-							} else {
-								this.idCheckmsg= "중복된 아이디가 있습니다."
-							}
-						})
-						.catch(() => {
-							alert(`IdCheck axios Error`)
-						})
+				if(this.checkSpecial(this.userid)){
+					this.idCheckmsg = '특수문자는 사용할 수 없습니다.'
+				}else {
+					axios
+							.get(`${this.context}/idCheck/${this.userid}`)
+							.then(res => {
+								if (res.data) {
+									this.idCheckmsg = "사용가능한 아이디입니다."
+								} else {
+									this.idCheckmsg = "중복된 아이디가 있습니다."
+								}
+							})
+							.catch(() => {
+								alert(`IdCheck axios Error`)
+							})
+				}
+			}
+		},
+		checkSpecial(str) {
+			let special_pattern = /[~!@#$%^&*()_+|<>?:{}]/gi
+			if (special_pattern.test(str) == true) {
+				return true;
+			} else {
+				return false;
 			}
 		},
         yearCheck(){

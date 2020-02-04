@@ -134,8 +134,6 @@
             <button class="btn btn-primary" @click.prevent="modal" data-dismiss="modal" type="button">
                 <i class="fas fa-times"></i> <b>취소하기</b></button>
             <modals-container />
-            <button class="btn btn-primary" v-if="updateBtn" @click="cancel" data-dismiss="modal" type="button">
-                <i class="fas fa-pen"></i><b> 글 수정하기</b></button>
         </div>
     </div>
 
