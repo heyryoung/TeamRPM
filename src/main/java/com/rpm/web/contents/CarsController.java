@@ -5,6 +5,7 @@ import com.rpm.web.proxy.Proxy;
 import com.rpm.web.proxy.Table;
 import com.rpm.web.proxy.Trunk;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -34,8 +35,7 @@ public class CarsController {
     RecentSearchWordRepository recentSearchWordRepository;
     @Autowired
     RecentSeenCarRepository recentSeenCarRepository;
-    @Autowired
-    Table<String, String, Integer> table;
+
 
     private List<Object> carModelList;
     private List<Object> carModelHangeulList;
@@ -280,13 +280,21 @@ public class CarsController {
     }
 
     @GetMapping("/getRecommendBySearching/{searchWord}")
-    public Map<String, Object> getRecommendBySearching(@PathVariable String searchWord){
-        table.clear();
-        trunk.clear();
+    public ArrayList<Object> getRecommendBySearching(@PathVariable String searchWord){
+        box.clear();
+        Table<String, String, Integer> table = new Table<>();
         Map<String, Double> calcList = new HashMap<>();
         Map<String, List<RecentSearchWord>> matrix = StreamSupport.stream(recentSearchWordRepository.findAll().spliterator(), false)
                 .collect(Collectors.groupingBy(RecentSearchWord::getUserId));
-        int count = 0;
+        makeTable(table, matrix);
+        getSimilarity(searchWord, table, calcList);
+        box.add(proxy.sortByValue(calcList).keySet().stream().limit(10));
+        box.add(proxy.sortByValue(calcList).values().stream().limit(10));
+        return box.getList();
+    }
+
+    private void makeTable(Table<String, String, Integer> table, Map<String, List<RecentSearchWord>> matrix) {
+        int count;
         if(matrix != null){
             for(Object model : carModelList){
                 for(String user : matrix.keySet()){
@@ -300,6 +308,9 @@ public class CarsController {
                 }
             }
         }
+    }
+
+    private void getSimilarity(@PathVariable String searchWord, Table<String, String, Integer> table, Map<String, Double> calcList) {
         if(table.getRow(searchWord).values().stream().reduce((a,b)-> a+b).get()!=0){
             Integer[] targetVal = table.getRow(searchWord).values().toArray(new Integer[table.getRow(searchWord).values().size()]);
             for(String rowKey:table.getRowKeys()){
@@ -315,8 +326,5 @@ public class CarsController {
                 calcList.put(rowKey, (scla!=0)?scla/(Math.sqrt(normA)*Math.sqrt(normB)):0);
             }
         }
-        trunk.put(Arrays.asList("modelList", "similarities"), Arrays.asList(proxy.sortByValue(calcList).keySet().stream().limit(10),
-                proxy.sortByValue(calcList).values().stream().limit(10)));
-        return trunk.get();
     }
 }

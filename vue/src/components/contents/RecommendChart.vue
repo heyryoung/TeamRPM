@@ -14,9 +14,8 @@
             return {data : []}
         },
         created() {
-            alert(this.$store.state.contents.recommendBySearchWordList.modelList)
-                this.data = {x : this.$store.state.contents.recommendBySearchWordList.modelList,
-                    y : this.$store.state.contents.recommendBySearchWordList.similarities}
+                this.data = {x : this.$store.state.contents.recommendBySearchWordList[0],
+                    y : this.$store.state.contents.recommendBySearchWordList[1]}
         }
 
     }
