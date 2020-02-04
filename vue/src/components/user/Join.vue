@@ -206,24 +206,15 @@ export default {
 	},
 	methods : {
         idCheck() {
-			let url = `${this.context}/idCheck`
-			let data = {
-				userid: this.userid,
-			}
-			let headers = {
-				'authorization': 'JWT fefege..',
-				'Accept': 'application/json',
-				'Content-Type': 'application/json'
-			}
 			if(this.idChecklength>0 && this.idChecklength<4) {
                 this.idCheckmsg = "아이디가 너무 짧습니다."
             }else if(this.idChecklength==0){
                 this.idCheckmsg = ''
 			}else if(this.idChecklength>=4){
 				axios
-						.post(url, data, headers)
+						.get(`${this.context}/idCheck/${this.userid}`)
 						.then(res => {
-							if (res.data.msg === "SUCCESS") {
+							if (res.data) {
 								this.idCheckmsg= "사용가능한 아이디입니다."
 							} else {
 								this.idCheckmsg= "중복된 아이디가 있습니다."

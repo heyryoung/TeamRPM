@@ -29,7 +29,7 @@ public class CarbookInit implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         mycarInit();
-        //recordInit();
+        recordInit();
 
 
 
