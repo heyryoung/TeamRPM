@@ -2,19 +2,17 @@ import { Line } from './BaseCharts'
 
 export default {
   extends: Line,
+  props: ['LineGraphDataSetup'],
   methods: {
-    hi () {
-      console.log('Hi')
-    },
-    dataInit(data) {
-      console.log(data.title+data.lineGraphLabels.length + data.lineGraphRowData.length)
+    dataInit() {
+      console.log(this.LineGraphDataSetup.title+this.LineGraphDataSetup.lineGraphLabels.length + this.LineGraphDataSetup.lineGraphRowData.length)
       this.renderChart({
-        labels: data.labels,
+        labels: this.LineGraphDataSetup.labels,
         datasets: [
           {
-            label: data.title,
+            label: this.LineGraphDataSetup.title,
             borderColor: '#005276',
-            data: data.lineGraphRowData,
+            data: this.LineGraphDataSetup.lineGraphRowData,
             borderCapStyle: 'butt',
             lineTension: 0.2,
             fill: false
