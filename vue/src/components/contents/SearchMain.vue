@@ -703,7 +703,6 @@ export default {
         },
         recommendOn(){
             this.recommendFlag = true
-
         }
     },
     filters: {
