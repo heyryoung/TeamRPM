@@ -71,18 +71,14 @@ public class UserController {
 
             if(carbook!=null ){
                 map.put("mycar", carbook);
-                Object obj = carbook.getMycarId();
-              /*  if(obj instanceof String){
-                    printer.accept("Strig");
-                }else if(obj instanceof Long){
-                    printer.accept("long");
-                }*/
+
                 List<Record> records = carbookService.getRecords(carbook.getMycarId());
 
 
 
                 if(records != null){
                     map.put("record", records);
+                    printer.accept(records.get(0).getDate());
 
                 }
             }
@@ -95,7 +91,7 @@ public class UserController {
         // printer.accept(map.get("result"));
       //  printer.accept(map.get("user").toString());
          printer.accept(map.get("result"));
-        printer.accept(param.toString());
+        printer.accept(user.toString());
         return map;
     }
     @PostMapping("/getUserInfo/{token}")

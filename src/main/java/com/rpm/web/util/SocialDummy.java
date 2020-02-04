@@ -1,5 +1,4 @@
 package com.rpm.web.util;
-
 import com.rpm.web.contents.Cars;
 import com.rpm.web.contents.CarsRepository;
 import com.rpm.web.social.Social;
@@ -10,7 +9,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import java.io.IOException;
 import java.util.*;
 
@@ -21,7 +19,6 @@ public class SocialDummy {
     UserRepository userRepository;
     @Autowired
     CarsRepository  carsRepository;
-
     public Map<String, List<String>> crawlingUrl() {
         Map<String, List<String>> map = new HashMap<>();
         List<String> list = new ArrayList<>();
@@ -43,13 +40,10 @@ public class SocialDummy {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         map.put("url", list);
         map.put("dates", dates);
-
         return map;
     }
-
     public ArrayList<Social> crawlingBoard(List<User> user, List<Cars> car) {
         ArrayList<Social> list = new ArrayList<>();
         list.clear();
@@ -119,7 +113,7 @@ public class SocialDummy {
             }
         }
         return list;
-
     }*/
-
 }
+
+
