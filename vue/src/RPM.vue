@@ -25,16 +25,11 @@
                             <Slide noOverlay ableOutsideClick :crossIcon="false">
                                 <router-link to="/">HOME</router-link>
                                 <router-link v-if="this.auth==false" to="/login">로그인</router-link> <!--로그인전-->
-                                <div v-else @click="logout">로그아웃</div> <!--//로그인후, 어드민-->
+                                <div v-if="this.auth===true">
+                                    <UserInfo/>
+                                </div>
                                 <router-link  v-if="this.auth==false" to="/join">회원가입</router-link><!-- //로그인전-->
                                 <router-link to="/searchmain">검색창</router-link> <!--//공통-->
-                                <router-link to="/product">제품</router-link> <!--공통-->
-                                <router-link  v-if="this.auth==true" to="/mypage">마이페이지</router-link> <!--로그인후, 어드민-->
-                                <router-link v-if="this.user.admin!='admin'" to="/seencar">최근 본 차량(비교함)</router-link> <!--//공통-->
-                                <router-link v-if="this.user.admin!='admin'" to="/buycar">자동차구매 </router-link> <!--//공통-->
-                                <router-link v-if="this.user.admin!='admin'" to="/buycarSelectGoods">자동차구매1 </router-link> <!--//로그인전후-->
-                                <router-link v-if="this.user.admin!='admin'" to="/buycarInsertContractorInfomation">자동차구매2 </router-link><!-- //로그인전후-->
-                                <router-link v-if="this.user.admin!='admin'" to="/buycarInsertContractorInfomation">자동차구매3 </router-link> <!--//로그인전후-->
                                 <router-link v-if="this.user.admin!='admin'" to="/recommendHome">딜러에게 추천받기</router-link> <!--//로그인전후-->
                                 <router-link v-if="this.user.admin=='admin'" to="/companyHome">ADMIN </router-link> <!--//admin-->
                                 <router-link v-if="this.user.admin!='admin'" to="/sns">SNS(REVIEW) </router-link> <!--//공통-->
@@ -59,11 +54,13 @@
 <script>
     import {Slide} from 'vue-burger-menu'
     import {mapState} from 'vuex'
+    import UserInfo from "./components/cmm/UserInfo.vue";
 
 
     export default {
         name: 'app',
         components: {
+            UserInfo,
 
             Slide
         },

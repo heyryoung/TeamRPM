@@ -1,10 +1,7 @@
 package com.rpm.web.util;
-
 import com.rpm.web.contents.Cars;
 import com.rpm.web.contents.CarsRepository;
-import com.rpm.web.social.Comment;
 import com.rpm.web.social.Social;
-import com.rpm.web.social.Thumb;
 import com.rpm.web.user.User;
 import com.rpm.web.user.UserRepository;
 import org.jsoup.Jsoup;
@@ -12,12 +9,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.*;
-import java.util.stream.Collectors;
-
 public class SocialDummy {
     @Autowired
     Printer printer;
@@ -25,7 +18,6 @@ public class SocialDummy {
     UserRepository userRepository;
     @Autowired
     CarsRepository  carsRepository;
-
     public Map<String, List<String>> crawlingUrl() {
         Map<String, List<String>> map = new HashMap<>();
         List<String> list = new ArrayList<>();
@@ -47,19 +39,16 @@ public class SocialDummy {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         map.put("url", list);
         map.put("dates", dates);
-
         return map;
     }
-
     public ArrayList<Social> crawlingBoard(List<User> user, List<Cars> car) {
         ArrayList<Social> list = new ArrayList<>();
         list.clear();
         List<String> urls = crawlingUrl().get("url");
         List<String> dates = crawlingUrl().get("dates");
-        for (int i = 9; i < urls.size(); i++) {
+        for (int i = 0; i < urls.size(); i++) {
             try {
                 Collections.shuffle(user);
                 Collections.shuffle(car);
@@ -75,7 +64,7 @@ public class SocialDummy {
                         .select("table").select("tbody").select("tr").select("td").select("p");
                 Elements boardImg = rawData.select("img[src^=//cdn.ppomppu.co.kr/zboard/]");
                 social.setBoardImg(boardImg.get(0).attr("src"));
-                social.setBoardContent(boardContent.text());
+                social.setBoardContent(StringReplace(boardContent.text()));
                 list.add(social);
             } catch (Exception e2) {
                 e2.printStackTrace();
@@ -83,8 +72,12 @@ public class SocialDummy {
         }
         return list;
     }
-
-    public ArrayList<Comment> crawlingComment(List<User>user, List<Social> socialList) {
+    public static String StringReplace(String str){
+        String match = "[^\uAC00-\uD7A3xfe0-9a-zA-Z\\s]";
+        str =str.replaceAll(match, "");
+        return str;
+    }
+    /*public ArrayList<Comment> crawlingComment(List<User>user, List<Social> socialList) {
         ArrayList<Comment> list = new ArrayList<>();
         list.clear();
         List<String> urls = crawlingUrl().get("url");
@@ -118,16 +111,9 @@ public class SocialDummy {
             }
         }
         return list;
-
-    }
-
-    public Thumb makeThumbList(List<User>seq, List<Social> socialList){
-        Thumb thumb = new Thumb();
-        Collections.shuffle(seq);
-        Collections.shuffle(socialList);
-        thumb.setUserSeq(seq.get(0));
-        thumb.setBoardSeq(socialList.get(0));
-        return thumb;
-    }
-
+    }*/
 }
+
+
+
+

@@ -133,7 +133,7 @@ public class CarbookInit implements ApplicationRunner {
                 record.setDate(randDate());
                 record.setServiceCode(
                         (((int)(Math.random()*2))== 0 ?
-                                "refuel" : "check")
+                                "주유" : "정비")
                 );
                 record.setPrice(String.valueOf(
                         (int)((Math.random()*10)+1)*10000
@@ -142,6 +142,7 @@ public class CarbookInit implements ApplicationRunner {
                         listCarbook.get(
                                 (int)(Math.random()*500))
                 );
+
 
                 recordRepository.save(record);
 
