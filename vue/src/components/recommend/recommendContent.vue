@@ -158,7 +158,7 @@
         mixins:[checkBox],
         created() {
             axios
-                .get(`http://localhost:8080//recommendedCar/getRecommendedCar/`+'kangsj24')
+                .get(`http://localhost:8080//recommendedCar/getRecommendedCar/`+localStorage.getItem("userId"))
                 .then(({data})=>{
                     data.forEach(el=>{
                         el.cars.checked=false

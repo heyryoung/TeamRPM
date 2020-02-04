@@ -47,7 +47,7 @@
             this.month=Number(d.getMonth())+1
             this.maxMonth=Number(d.getMonth())+1
             axios
-                .get(`http://localhost:8080/revenue/emRevenue/`+'114')
+                .get(`http://localhost:8080/revenue/emRevenue/`+localStorage.getItem("userId"))
                 .then((res)=>{
                     let month=""
                     this.allRevenue=res.data

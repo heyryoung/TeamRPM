@@ -24,10 +24,10 @@ public class CompanyController {
     @Autowired
     RecommendRepository recommendRepository;
 
-    @GetMapping("/carList")
-    public Map<String, List<Cars>> carList(){
+    @GetMapping("/carList/{centerCode}")
+    public Map<String, List<Cars>> carList(@PathVariable String centerCode){
         Map<String,List<Cars>> map = new HashMap();
-        map.put("result",carsRepository.findByCenterCode("114"));
+        map.put("result",carsRepository.findByCenterCode(centerCode));
         return map;
     }
     @GetMapping("/customerList")

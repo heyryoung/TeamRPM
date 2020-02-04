@@ -3,7 +3,7 @@ import router from '@/router'
 //import {store} from "../../store";
 
 const state = {
-    member : {},
+    user : {},
     auth: false,
     fail: false
 }
@@ -30,7 +30,7 @@ const actions = {
                 if(data.result == "success") {
                     commit('LOGIN_COMMIT', data)
                     localStorage.setItem("token", data.token)
-
+                    localStorage.setItem("userId",data.user.userid)
                     if(data.user.auth==true) {
                         if(data.mycar){
                             localStorage.setItem("mycar", JSON.stringify(data.mycar))
@@ -43,6 +43,7 @@ const actions = {
                         }
                         router.push('/')
                     }else{
+
                         router.push('/companyHome')
                     }
 
@@ -54,7 +55,7 @@ const actions = {
                    // store.dispatch('getMycar', {user: data.user})
                     //store.dispatch('getRecord', {mycar: store.state.carbook.mycar})
 
-                    router.push('/')
+
 
 
 
@@ -78,6 +79,7 @@ const actions = {
         localStorage.removeItem("token")
         localStorage.removeItem("mycar")
         localStorage.removeItem("record")
+        localStorage.removeItem("userId")
 
 
     },

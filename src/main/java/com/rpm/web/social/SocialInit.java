@@ -30,7 +30,7 @@ public class SocialInit implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
-        if (userRepository.count() != 0) {
+        if (userRepository.count() != 0&&carsRepository.count()!=0) {
             //socialBoard 테이블을 지운 후 social더미만 먼저 실행
 
             SocialDummy socialDummy = new SocialDummy();
