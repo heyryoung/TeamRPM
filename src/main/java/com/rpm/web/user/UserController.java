@@ -24,8 +24,7 @@ public class UserController {
     Record record;
     @Autowired
     CarbookService carbookService;
-
-
+    @Autowired UserService userService;
 
 
     @PostMapping("/idCheck")
@@ -97,7 +96,6 @@ public class UserController {
          printer.accept(map.get("result"));
         printer.accept(param.toString());
         return map;
-
     }
     @PostMapping("/getUserInfo/{token}")
     public HashMap<String, Object> getUserInfo(@PathVariable String token){
@@ -111,12 +109,20 @@ public class UserController {
 
         }else{
             map.put("result", "fail");
-
         }
         return map;
-
-
-
+    }
+    @PostMapping("update")
+    public HashMap<String, Object> update( @RequestBody User user){
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("user", userService.update(user));
+        map.put("msg", "success");
+        return map;
+    }
+    @GetMapping("withDrawl/{userid}")
+    public String withDrawl(@PathVariable String userid){
+        userService.withDrawl(userid);
+        return "success";
     }
 
 }
