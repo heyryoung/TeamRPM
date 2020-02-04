@@ -95,7 +95,6 @@ public class SocialServiceImpl implements SocialService{
         social.setCarCode("board"+social.getBoardDate());
         social.setBoardImg("img/"+param.getBoardImgName());
         social.setBoardContent(param.getBoardContent());
-        social.setUserSeq(userRepository.findByUserid(param.getUserid()));
         socialRepository.save(social);
     }
 
