@@ -8,6 +8,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,13 +29,19 @@ public class CarbookInit implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
+
+        SimpleDateFormat SystemTime = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
+        String formattedTime1 = SystemTime.format (System.currentTimeMillis());
+
+        System.out.println( formattedTime1 + "  INFO 18844 --- [           CarbookInit ]         : CarbookInit Start ");
+
         mycarInit();
         //recordInit();
 
 
 
 
-
+        System.out.println( formattedTime1 + "  INFO 18844 --- [           CarbookInit ]         : CarbookInit End ");
 
     }
     public void mycarInit(){
