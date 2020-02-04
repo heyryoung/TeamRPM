@@ -1,12 +1,12 @@
 <template>
     <div>
         <div id="asd" :class="fix">
-            <div class="center_head" style="background: url(https://www.pantone.com/images/pages/20758/wallpaper/PANTONE-Color-of-the-Year-2019-living-coral-16-1546-v1-5120x2880.jpg) center top no-repeat;">
+            <div class="center_head" style=" background:  rgb(0, 31, 65);">
                 <div class="head_cont">
                     <div class="center_tit">
                         <div class="region_name"></div>
-                        <h3 class="center_name">RPM 1호점</h3>
-                        <div class="car_num01">보유차량 276대</div>
+                        <h3 class="center_name">RPM {{this.$store.state.user.user.name}}</h3>
+
                     </div>
                     <ul class="detail_tab">
                         <li v-for="(tab,index) of tabs" :key="tab.title" :class="{on:tab.switch}" @click="tabSwitch(index)"><a :href="tab.link"> {{tab.title}}</a></li>
@@ -19,6 +19,7 @@
 
                 <div id="centerGuide" >
                     <div class="center_info">
+                        <h3>매출</h3>
                             <month_revenue></month_revenue>
                     </div>
                 </div>
@@ -115,13 +116,11 @@ import employee from "./employee";
 
 </script>
 <style scoped>
-    .center_info h4{
-        float: left;
-        font-size: 18px;
-        letter-spacing: -1px;
-        font-weight: bold;
-        color: #181819;
-        margin: 10px;
+    .center_info h3{
+        text-align: center;
+        font-weight: 600;
+        font-size: 38px;
+        color: #000;
     }
     #sale,#recent_sale,#centerEmployee,#inventory{
         padding-top: 140px;
@@ -130,5 +129,21 @@ import employee from "./employee";
         padding-bottom: 300px;
         height: 580px;
 
+    }
+    .center_head .head_cont .detail_tab li.on a {
+        width: 296px;
+        border: none;
+        background:  #2068b3;
+        color: #fff;
+        font-weight: bold;
+    }
+    .direct_center_detail.is_fixed .center_head {
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 138px;
+        background: #ffffff !important;
+        border-bottom: 1px solid rgb(0, 31, 65);
+        z-index: 110;
     }
 </style>

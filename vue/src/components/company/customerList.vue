@@ -8,7 +8,7 @@
 
             <div class="align_field">
                 <div class="all_check">
-                    <div class="checker" id="uniform-allCheck"><span :class="{checked:allchecked}" @click="allcheck" :key="allchecked"><input type="checkbox" name="allCheck"
+                    <div class="checker" id="uniform-allCheck"><span :class="{checked:allchecked}" @click="allcheck(customers)" :key="allchecked"><input type="checkbox" name="allCheck"
                                                                             id="allCheck" class="uniform" title="전체체크"></span>
                     </div>
                 </div>
@@ -42,39 +42,32 @@
                         <col>
                     </colgroup>
 
-                    <tbody v-for="(customer,index) of customers" :key="customer.customerID">
+                    <tbody v-for="customer of customers" :key="customer.customerId">
                     <tr>
                         <td class="check">
                             <div class="checker" id="uniform-interest_list_check1">
-                                <span  :class="{checked:customer.checked}" @click="check(index)" @change='updateCheckall()' >
+                                <span  :class="{checked:customer.checked}" @click="check(customer)" @change='updateCheckall(customers)' >
                                     <input type="checkbox" id="interest_list_check1" class="uniform"  >
                                 </span>
                             </div>
                         </td>
                         <td class="thumb">
-                            <a href="/customerDetail">
-                                <img :src="customer.thumb" alt="자동차 썸네일">
+                            <a @click="goDetail(customer)" >
+                                <img src="@/assets/image/user_default.jpg" style="width: 120px" alt="고객 썸네일">
                             </a>
                         </td>
                         <td class="car_info">
-                            <a href="/customerDetail" class="name">{{customer.comment}}</a>
-                            <span class="md_year">연식 :{{customer.minCarYear}}년 ~{{customer.maxCarYear}}년 </span>
-                            <span class="price">가격 :{{customer.minPrice}}만원 ~{{customer.maxPrice}} 만원  <br>주행거리 :{{customer.minDistance}}km ~ {{customer.maxDistance}}km  </span>
+                            <a  @click="goDetail(customer)" class="name">{{customer.modelNm}}</a>
+                            <span class="md_year">연식 :{{customer.minBeginYear}}년 ~{{customer.maxBeginYear}}년 </span>
+                            <span class="price">가격 :{{customer.minPrice}}만원 ~{{customer.maxPrice}} 만원  <br>주행거리 :{{customer.minMilage}}km ~ {{customer.maxMilage}}km  </span>
                         </td>
                         <td class="car_opt">
                             <ul class="opt_list">
                                 <li>
-                                    <span class="pt">{{customer.acident}}</span>
-                                    <span>{{customer.fuel}}</span>
+                                    <span class="pt">{{customer.transmissioncdName}}</span>
+                                    <span>{{customer.fuleTypedName}}</span>
                                 </li>
-                                <li>
-                                    <span>{{customer.color}}</span>
-                                    <span>{{customer.carType}}</span>
-                                </li>
-                                <li>
-                                    <span>{{customer.region}}</span>
-                                    <span>{{customer.people}}</span>
-                                </li>
+
                             </ul>
 
 
@@ -115,42 +108,35 @@
         methods: {
             movePageBlock(pagination){
                 this.customers=pagination
+            },
+            goDetail(customer){
+                this.$store.dispatch('recommend/inputDetail',customer)
+                this.$router.push('/customerDetail')
             }
+
+
+
 
         },
         mixins:[checkBox],
         created() {
             axios
-                .get(`${this.context}/company/carList`)
-                .then(res=>{
-                    console.log(res.data.result)
-                    for(let i=0;i<10;i++) {
-                        this.List.push({
-                            customerID: i,
-                            comment: "벤츠 suv 최저가 구합니다",
-                            checked: false,
-                            minCarYear: "2000",
-                            maxCarYear: "2010",
-                            minDistance: "10000",
-                            maxDistance: "150000",
-                            minPrice: "7000",
-                            maxPrice: "10000",
-                            acident: "무사고",
-                            color: "갈색",
-                            region: "경기/인천",
-                            fuel: "디젤",
-                            carType: "SUV",
-                            people: "5인승",
-                            thumb: "https://story-img.kakaocdn.net/dn/qoQx7/hyBwU4vCEL/RswKkc4XSgAQPTF4piHXQ0/img_xl.jpg?width=1096&height=822&face=481_327_571_426&avg=%23c9c6c7"
-                        })
-                    }
+                .get(`http://localhost:8080//recommend/customerList/`+localStorage.getItem("userId"))
+                .then(({data})=>{
+                    data.forEach(el=>{
+                        el.checked=false
+                        this.List.push(el)
+                    })
                     this.$refs.pagination.first()
                 })
                 .catch(e=>{
                     alert(`axios fail${e}`)
                 })
 
-        }
+
+
+        },
+
 
     }
 </script>

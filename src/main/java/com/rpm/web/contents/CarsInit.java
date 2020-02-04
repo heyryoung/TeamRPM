@@ -68,7 +68,7 @@ public class CarsInit implements ApplicationRunner {
                 ));
             }
         }
-        if(recentSearchWord.count()==0){
+        if(recentSearchWord.count()!=0){
             int ranlist = 0;
             for(int i =0; i<1000; i++){
                 for(int j = 0;j<30;j++){
