@@ -229,18 +229,18 @@
 .user_input04 { height: 17px; width: 330px; padding: 2px 5px 0 5px; border: 1px solid #bebebe; font-size: 14px; color: #999; vertical-align: middle; }
 .user_input05 { height: 17px; width: 90px; padding: 2px 5px 0 5px; border: 1px solid #bebebe; font-size: 14px; color: #999; vertical-align: middle; }
 .btn_user { display: inline-block; height: 21px; padding: 0px 0 0 0; margin-top: 0px; /* .margin-top:1px; */ cursor: pointer; }
-.btn_user b { display: inline-block; height: 17px; padding: 3px 10px 0 10px; background: url(https://www.kcar.com/resources/images/common/btn_user.gif) left top repeat-x; border: 1px solid #bebebe; font-size: 11px; }
+.btn_user b { display: inline-block; height: 17px; padding: 3px 10px 0 10px; border: 1px solid #bebebe; font-size: 11px; }
 .all_agree_box { text-align: center; padding: 10px; }
-.checkbox_wrap { display: inline-block; height: 24px; line-height: 24px; padding: 0 16px 0 17px; background: url(https://www.kcar.com/resources/images/common/btn_user.gif) left top repeat-x; border: 1px solid #CCC; cursor: pointer; }
+.checkbox_wrap { display: inline-block; height: 24px; line-height: 24px; padding: 0 16px 0 17px; border: 1px solid #CCC; cursor: pointer; }
 .checkbox_wrap input.check { vertical-align: middle; }
 .btn_formbts { padding: 10px; text-align: center; }
 .question { margin-bottom: 10px; color: #D94200; font-weight: bold; }
 .btn_form_r { display: inline-block; height: 20px; margin-top: 0px; /* .margin-top:1px; */ font-size: 13px; cursor: pointer; }
 .btn_form_r b { display: inline-block; height: 20px; padding: 4px 16px 1px 17px; background: #da2727; border: 1px solid #bebebe; color: #fff; }
 .btn_form_g { display: inline-block; height: 20px; margin-top: 0px; /* .margin-top:1px; */ font-size: 13px; cursor: pointer; }
-.btn_form_g b { display: inline-block; height: 20px; padding: 4px 16px 1px 17px; background: url(https://www.kcar.com/resources/images/common/btn_user.gif) left top repeat-x; border: 1px solid #bebebe; }
+.btn_form_g b { display: inline-block; height: 20px; padding: 4px 16px 1px 17px; border: 1px solid #bebebe; }
 .btn_userF { display: inline-block; height: 20px; padding: 0px 0 0 0; margin-top: 0px; /* .margin-top:1px; */ cursor: pointer; }
-.btn_userF span { display: inline-block; height: 20px; padding: 5px 10px 0 10px; background: url(https://www.kcar.com/resources/images/common/btn_user.gif) left top repeat-x; border: 1px solid #bebebe; font-size: 12px; }
+.btn_userF span { display: inline-block; height: 20px; padding: 5px 10px 0 10px; border: 1px solid #bebebe; font-size: 12px; }
 /* 20190705회원가입정보수정 */
 .user_point { padding: 40px 0 8px 0; font-weight: bold; color: #ff0040; }
 /*//20190705회원가입정보수정 */

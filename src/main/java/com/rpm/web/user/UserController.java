@@ -77,10 +77,7 @@ public class UserController {
         } else {
             map.put("result", "fail");
         }
-        // printer.accept(map.get("result"));
-      //  printer.accept(map.get("user").toString());
-         printer.accept(map.get("result"));
-        printer.accept(user.toString());
+
         return map;
     }
     @PostMapping("/getUserInfo/{token}")
