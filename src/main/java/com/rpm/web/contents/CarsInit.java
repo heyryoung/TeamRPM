@@ -6,13 +6,16 @@ import com.rpm.web.util.MakeCarDummyList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Order(value=0)
 @Component
 public class CarsInit implements ApplicationRunner {
     @Autowired
@@ -29,6 +32,13 @@ public class CarsInit implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
+
+        SimpleDateFormat SystemTime = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
+        String formattedTime1 = SystemTime.format (System.currentTimeMillis());
+
+        System.out.println( formattedTime1 + "  INFO 18844 --- [           CarsInit ]         : CarsInit Start ");
+
+
         MakeCarDummyList http = new MakeCarDummyList();
         ObjectMapper jsonMapper = new ObjectMapper();
         String[] json = null;
@@ -37,6 +47,8 @@ public class CarsInit implements ApplicationRunner {
         if (carsRepository.count() == 0) {
             int count = Integer.parseInt(http.getCarCount("https://www.kcar.com/search/api/getCarSearchWithCondition.do"));
             for (int i = 1; i <= count; i++) {
+                if ( count % 1000 == 0 )         System.out.println( formattedTime1 + "  INFO 18844 --- [           CarsInit ]         : CarsInit processing :: insert Data count = [ "+ i +" ] ");
+
                 Map<String, String> strJson = new HashMap<>();
                 map = jsonMapper.readValue(
                         http.sendPost("https://www.kcar.com/search/api/getCarSearchWithCondition.do", proxy.string(i))
@@ -72,11 +84,13 @@ public class CarsInit implements ApplicationRunner {
         if(recentSearchWord.count()==0){
             int ranlist = 0;
             for(int i =0; i<1000; i++){
-                for(int j = 0;j<30;j++){
                     recentSearchWord.save(new RecentSearchWord(list.get((int)(Math.random() * list.size())), Long.parseLong("20200000000000000"), String.valueOf(i)));
-                }
             }
 
         }
+
+
+        System.out.println( formattedTime1 + "  INFO 18844 --- [           CarsInit ]         : CarsInit End ");
+
     }
 }

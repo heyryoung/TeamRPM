@@ -7,10 +7,11 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-@Order(2)
+@Order(value=3)
 @Component
 public class CarbookInit implements ApplicationRunner {
     @Autowired RecordRepository recordRepository;
@@ -23,8 +24,18 @@ public class CarbookInit implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
+
+
+        SimpleDateFormat SystemTime = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
+        String formattedTime1 = SystemTime.format (System.currentTimeMillis());
+
+        System.out.println( formattedTime1 + "  INFO 18844 --- [           CarbookInit ]         : CarbookInit Start ");
+
         mycarInit();
         recordInit();
+
+        System.out.println( formattedTime1 + "  INFO 18844 --- [           CarbookInit ]         : CarbookInit End ");
+
     }
     public void mycarInit(){
         String[] brand ={ "현대" ,"기아" , "gm" , "르노" , "쌍용"};
@@ -39,11 +50,9 @@ public class CarbookInit implements ApplicationRunner {
 
         long count = carbookRepository.count();
         Carbook carbook = null;
-        Iterable<User> users = userRepository.findAll();
-        List<User> list = new ArrayList<>();
-        for(User u : users){
-            list.add(u);
-        }
+
+        List<User> list = (List<User>) userRepository.findAll();
+
         if(count ==0 && userRepository.count()!=0){
 
             for(int i = 0 ; i < 500; i++){
@@ -85,6 +94,7 @@ public class CarbookInit implements ApplicationRunner {
                         (int)(Math.random()*99999)+1000
                 ) );
                 carbook.setUserSeq(list.get(i));
+
 
                 carbookRepository.save(carbook);
             }

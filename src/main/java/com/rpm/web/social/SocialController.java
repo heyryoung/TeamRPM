@@ -35,7 +35,6 @@ public class SocialController {
         if(!userid.equals("undefined")){
             map.put("thumbedboard", socialService.thumbed(userid));
         }
-
         return map;
     }
 
@@ -45,7 +44,7 @@ public class SocialController {
         String filename = itr.next();
         MultipartFile mfile = uploadFile.getFile(filename);
         String origName=mfile.getOriginalFilename();
-        String path = "C:\\Users\\yejee\\IdeaProjects\\TeamRPM\\src\\main\\resources\\static\\img\\";
+        String path = "C:\\Users\\KwonHR\\Downloads";
         File serverFile = new File(path +origName);
         try {
             mfile.transferTo(serverFile);

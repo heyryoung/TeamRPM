@@ -4,6 +4,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Component
@@ -18,6 +19,14 @@ public class RecommendInit implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
+
+
+
+        SimpleDateFormat SystemTime = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
+        String formattedTime1 = SystemTime.format (System.currentTimeMillis());
+
+        System.out.println( formattedTime1 + "  INFO 18844 --- [           RecommendInit ]         : RecommendInit Start ");
+
         long count = recommendRepository.count();
             if (count == 0) {
                 List<String> code = companyRepository.findCenterCode();
@@ -78,7 +87,7 @@ public class RecommendInit implements ApplicationRunner {
                 }
                 });
             }
-
+        System.out.println( formattedTime1 + "  INFO 18844 --- [           RecommendInit ]         : RecommendInit End ");
     }
 
 }

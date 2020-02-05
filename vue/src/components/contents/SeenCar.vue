@@ -34,6 +34,9 @@
 				</colgroup>
 
 				<tbody>
+				<td class="empty_result" colspan="4" v-show="seenHistoryList"><p><span style="font-size: 27px">찾아 보신 조건의 차량이 없습니다!</span><br/>다른 검색어를 입력해주세요.</p>
+					<img src="https://www.kcar.com//resources/images/common/ico_empty.jpg" alt="차량없음 이미지">
+				</td>
 				<tr v-for="seenHistory of seenHistoryList" :key="seenHistory.carcd">
 					<td class="check">
 						<div class="checker" ><span :class="{checked:seenHistory.checked}"  @click="check(category)"><input type="checkbox" class="uniform" name="v_makecd" value=""></span></div>

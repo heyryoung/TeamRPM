@@ -1,51 +1,54 @@
 <template>
     <div id="main_grid">
+
         <div id="main_image" style="width: 100%; height: 100px; line-height: 100px; text-align: center">
             <router-link to="/"><img style="width: 100%; max-width: 760px; vertical-align: middle" src="@/assets/image/rpmlogoblack.png" alt=""></router-link>
         </div>
-        <nav >
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <nav v-if="!this.$store.state.user.user.auth==1">
+            <button v-if="!this.user.auth" class="navbar-toggler navbar-toggler-right"  type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-start" id="navbarSupportedContent">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-
-                        <div>
+                        <div v-if="!this.auth">
                             <Slide noOverlay ableOutsideClick :crossIcon="false">
                                 <router-link to="/">HOME</router-link>
-                                <router-link v-if="this.auth==false" to="/login">로그인</router-link> <!--로그인전-->
-                                <div v-if="this.auth===true">
-                                    <UserInfo/>
-                                </div>
-                                <router-link  v-if="this.auth==false" to="/join">회원가입</router-link><!-- //로그인전-->
-                                <router-link to="/searchmain">검색창</router-link> <!--//공통-->
-                                <router-link v-if="this.user.admin!='admin'" to="/recommendHome">딜러에게 추천받기</router-link> <!--//로그인전후-->
-                                <router-link v-if="this.user.admin=='admin'" to="/companyHome">ADMIN </router-link> <!--//admin-->
-                                <router-link v-if="this.user.admin!='admin'" to="/sns">SNS(REVIEW) </router-link> <!--//공통-->
-                                <router-link v-if="this.user.admin!='admin'" to="/sns">차계부 </router-link> <!--// 공통-->
-                                <router-link to="/product">제품</router-link> <!--공통-->
-                                <router-link  v-if="this.auth==true" to="/mypage">마이페이지</router-link> <!--로그인후, 어드민-->
-                                <router-link  to="/seencar">최근 본 차량(비교함)</router-link> <!--//공통-->
-                                <router-link  to="/buycar">자동차구매 </router-link> <!--//공통-->
-                                <router-link  to="/buycarSelectGoods">자동차구매1 </router-link> <!--//로그인전후-->
-                                <router-link  to="/magazine">magazine </router-link><!-- //로그인전후-->
-                                <router-link  to="/chartMaker">chartMaker </router-link> <!--//로그인전후-->
-                                <router-link  to="/recommendHome">딜러에게 추천받기</router-link> <!--//로그인전후-->
-                                <router-link  to="/companyHome">ADMIN </router-link> <!--//admin-->
-                                <router-link  to="/sns">SNS(REVIEW) </router-link> <!--//공통-->
-                                <router-link  to="/sns">차계부 </router-link> <!--// 공통-->
+                                <hr class="UserInfopartirion"/> <br/>
+                                <UserInfo/>
+                                <hr class="UserInfopartirion"/><br/>
+                                <router-link to="/searchmain">검색</router-link>
+                                <router-link to="/magazine">magazine </router-link>
+                                <router-link to="/chartMaker">chartMaker </router-link>
+                                <router-link to="/sns">SNS(REVIEW) </router-link>
+                                <router-link to="/mapList">가까운 주유소 찾기 </router-link>
+
+                            </Slide>
+                        </div>
+                        <div v-if="this.auth">
+                            <Slide noOverlay ableOutsideClick :crossIcon="false">
+                                <router-link to="/">HOME</router-link>
+                                <hr class="UserInfopartirion"/> <br/>
+                                <UserInfo/>
+                                <hr class="UserInfopartirion"/><br/>
+                                <router-link to="/searchmain">검색</router-link>
+                                <router-link to="/recommendHome">딜러에게 추천받기</router-link>
+                                <router-link to="/sns">SNS(REVIEW) </router-link>
+                                <router-link to="/magazine">magazine </router-link>
+                                <router-link to="/chartMaker">chartMaker </router-link>
+                                <router-link to="/mapList">가까운 주유소 찾기 </router-link>
                             </Slide >
                         </div>
-
-
-
                     </li>
                 </ul>
+
         </div>
         </nav>
 
         <div id = "main_layout">
+            <div v-if="this.$store.state.user.user.auth==1" class="logout" @click="logout">
+                <a @click.prevent>로그아웃</a>
+            </div>
             <router-view></router-view>
         </div>
     </div>
@@ -62,7 +65,6 @@
         name: 'app',
         components: {
             UserInfo,
-
             Slide
         },
 
@@ -76,7 +78,8 @@
         methods:{
             logout(){
                 this.$store.dispatch('user/logout')
-
+                this.$router.push('/')
+                location.reload()
             }
         }
     }
@@ -183,7 +186,27 @@
         border: 0;
     }
 
+    .bg-primary {
+        color: #fff;
+        background-color: black !important;
+    }
+    .container{
+        margin: 0 200px;
+    }
+    .logout{
+        padding-right: 300px;
 
 
+        text-align: right;
+        font-size: large;
+        font-weight: bold;
+        font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
+    }
 
+    .UserInfopartirion{
+        border: 1px solid #0a4d81;
+        width: 80%;
+        float: left;
+        padding: 0px;
+    }
 </style>

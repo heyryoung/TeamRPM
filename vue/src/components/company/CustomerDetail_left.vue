@@ -58,9 +58,7 @@
             }
 
         },
-        destroyed() {
-            localStorage.removeItem("customerDetail")
-        }
+
     }
 </script>
 

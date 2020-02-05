@@ -35,7 +35,7 @@
         },
         created(){
             axios
-                .get(`${this.context}/employee/employeeList`)
+                .get(`${this.context}/employee/employeeList/`+localStorage.getItem("userId"))
                 .then(res=>{
 
                     res.data.result.forEach(el=>{

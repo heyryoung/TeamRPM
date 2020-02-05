@@ -10,31 +10,21 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "http://localhost:8081")
 public class UserController {
-    @Autowired
-    User user;
-    @Autowired
-    UserRepository userRepository;
-    @Autowired
-    Carbook carbook;
-    @Autowired
-    CarbookRepository carbookRepository;
-    @Autowired
-    Record record;
-    @Autowired
-    CarbookService carbookService;
+    @Autowired User user;
+    @Autowired UserRepository userRepository;
+    @Autowired Printer printer;
+    @Autowired Carbook carbook;
+    @Autowired CarbookRepository carbookRepository;
+    @Autowired Record record;
+    @Autowired CarbookService carbookService;
     @Autowired UserService userService;
 
 
-    @PostMapping("/idCheck")
-    public HashMap<String, String> idCheck(@RequestBody User param){
-        HashMap<String, String> map = new HashMap<>();
-        if(userRepository.findByUserid(param.getUserid())==null){
-            map.put("msg", "SUCCESS");
-        }else{
-            map.put("msg", "FAIL");
-        }
-        return map;
+    @GetMapping("/idCheck/{userid}")
+    public Boolean idCheck(@PathVariable String userid){
+        return userRepository.findByUserid(userid)==null;
     }
+
     @PostMapping("/join")
     public HashMap<String, Object> join(@RequestBody User param){
         HashMap<String, Object> map = new HashMap<>();

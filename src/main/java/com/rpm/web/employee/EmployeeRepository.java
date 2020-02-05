@@ -19,4 +19,5 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
     public String findEmNameByEmCode(String code);
 
     public List<Employee> findByCenterName(String centerName);
+    public List<Employee> findByCenterCode(String centerCode);
 }

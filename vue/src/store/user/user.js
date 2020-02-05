@@ -5,9 +5,7 @@ const state = {
     user : {},
     auth: false,
     fail: false
-
 }
-
 const getters = {
     getMember : state=>state.user,
     getIsAuth : state=>state.auth,
@@ -26,7 +24,7 @@ const actions = {
                     commit('LOGIN_COMMIT', data)
                     localStorage.setItem("token", data.token)
                     localStorage.setItem("userId",data.user.userid)
-                    if(data.user.auth==true) {
+                    if(data.user.auth==0) {
                         if(data.mycar){
                             localStorage.setItem("mycar", JSON.stringify(data.mycar))
                             if(data.record){
@@ -43,7 +41,6 @@ const actions = {
             })
             .catch(()=>{
                 alert('axios fail')
-
             })
     },
     async logout({commit}){
@@ -79,7 +76,7 @@ const mutations = {
     LOGOUT_COMMIT(state){
         state.auth = false
         state.member  = {}
-
+        console.log('로그아웃' + state.auth)
     },
     fail_commit(state){
         state.fail = true

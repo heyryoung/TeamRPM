@@ -39,13 +39,14 @@ public class Social implements Serializable {
     private List<Thumb> thumbs = new ArrayList<>();
 
     @Builder
-    private Social(String boardDate, String carCode, String boardContent, String boardImg) {
+    private Social(String boardDate, String carCode, String carName, String boardContent, String boardImg) {
         Assert.hasText(boardDate, "boardDate must not be empty");
         Assert.hasText(carCode, "carCode must not be empty");
         Assert.hasText(boardContent, "boardContent must not be empty");
         Assert.hasText(boardImg, "boardImg must not be empty");
         this.boardDate = boardDate;
         this.carCode = carCode;
+        this.carName = carName;
         this.boardContent = boardContent;
         this.boardImg = boardImg;
     }
