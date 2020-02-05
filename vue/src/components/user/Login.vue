@@ -2,10 +2,8 @@
 	<div>
 		<link rel="stylesheet" type="text/css"   href="css/re_user.css">
 		<link rel="stylesheet" type="text/css"   href="css/re_default.css">
-
 		<div class="loginPage">
 			<div class="loginBox">
-
 				<p v-if="this.fail" id="" class="">회원아이디 또는 비밀번호가 일치하지 않습니다.</p>
 				<p id="txt2" class="txtt none">비밀번호 오류가 5회 초과했습니다</p>
 				<div class="login">
@@ -29,12 +27,6 @@
 						<div class="findjoin">
 							<a @click.prevent="">아이디 찾기</a> <a href="/user/passInf.do">비밀번호 찾기</a><modals-container />
 						</div>
-						<div class="snsjoin">
-
-
-
-						</div>
-
 
 						<p class="skjoin">아직 RPM 회원이 아니세요? <router-link to="/join">회원가입</router-link></p>
 					</div>
@@ -51,16 +43,12 @@
 					{fail:state=>state.user.fail,
 					auth : state=>state.user.auth}
 			),
-
-
 		},
 		data(){
 			return{
 				userid : '',
 				passwd : '',
-				result :'',
-
-
+				result :''
 			}
 		},
 		methods:{
@@ -73,21 +61,15 @@
 
 		},
 		beforeDestroy(){
-
 			this.$store.state.user.fail = false
-			console.log(`change? ${this.fail}`)
 		},
 
 		created() {
-			console.log(`please ${this.fail}`)
 			if(this.auth=== true){
 				alert('이미로그인중입니다')
 				this.$router.push('/')
-
 			}
 		}
-
-
 	}
 </script>
 <style scoped>

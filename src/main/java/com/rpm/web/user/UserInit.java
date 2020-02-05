@@ -10,9 +10,8 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-
-
 import java.util.List;
+
 
 @Order(1)
 @Component
@@ -23,17 +22,14 @@ public class UserInit implements ApplicationRunner {
     SocialRepository socialRepository;
     @Autowired SocialInit socialInit;
     public UserInit(UserRepository userRepository,CompanyRepository companyRepository){
-
         this.userRepository= userRepository;
         this.companyRepository= companyRepository;
-
     }
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
         UserDummy userDummy = new UserDummy();
-       long count = userRepository.count();
-        if(count == 0){
+        if(userRepository.count() == 0){
             List<String> code = companyRepository.findCenterCode();
             for(int i =0;  i<500; i++){
                 userRepository.save(userDummy.makeUser());

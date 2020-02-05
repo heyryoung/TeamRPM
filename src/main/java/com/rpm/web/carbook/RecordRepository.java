@@ -14,11 +14,5 @@ public interface RecordRepository extends CrudRepository<Record, Long> {
             nativeQuery = true)
     public List<Record> findByMycarId(long id);
 
-
     public void deleteRecordByRecordId(long id);
-
-
-
-
-
 }

@@ -6,9 +6,8 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 @Component
 @Entity
@@ -21,7 +20,7 @@ import java.util.List;
 public class Record  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "RECORDID") private Long recordId;
+    @NotNull @Column(name = "RECORDID") private Long recordId;
     @Column(name = "RDATE") private String date;
     @Column(name = "SERVICECODE") private String serviceCode;
     @Column(name = "DETAIL") private String detail;
@@ -31,9 +30,6 @@ public class Record  implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mycarId")
     private Carbook mycarId;
-
-
-
 
 
 

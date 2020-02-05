@@ -44,15 +44,6 @@ public class Proxy {
 		}
 		return result;
 	}
-
-	public File makeDir(String t, String u) {
-		BiFunction<String,String, File> f = File::new;
-		return f.apply(t, u);
-	}
-	public File makeFile(File t, String u) {
-		BiFunction<File,String, File> f = File::new;
-		return f.apply(t, u);
-	}
 	
 	
 }

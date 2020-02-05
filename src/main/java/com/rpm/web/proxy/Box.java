@@ -1,17 +1,8 @@
 package com.rpm.web.proxy;
 
-
 import java.util.ArrayList;
-
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
-
-import lombok.Data;
-
-
-import lombok.Data;
-
-@Component @Data @Lazy
+@Component
 public class Box<T> {
 	private ArrayList<T> list;
 	public Box(){list = new ArrayList<T>();}
@@ -21,4 +12,5 @@ public class Box<T> {
 	public int size() {return list.size();}
 	public String toString() {return list.toString();}
 	public void clear() {list.clear();}
+	public ArrayList<T> getList() {return list;}
 }

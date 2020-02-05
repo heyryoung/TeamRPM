@@ -68,7 +68,6 @@ public class ArticleCrawler {
         } catch (KeyManagementException e) {
             e.printStackTrace();
         }
-        System.out.println("---------- 크롤링 결과 ------------");
         return null;
     }
 
@@ -83,8 +82,6 @@ public class ArticleCrawler {
             while ( Integer.parseInt(String.valueOf(year).substring(0,4)) > 2017 && pagecnt < 51) {
                 String motorgraph = "https://www.motorgraph.com/news/articleList.html?page=" + pagecnt + "&total="+menuTotal+"&sc_section_code="+ menuName
                         +"&sc_sub_section_code=&sc_serial_code=&sc_area=&sc_level=&sc_article_type=&sc_view_level=&sc_sdate=&sc_edate=&sc_serial_number=&sc_word=&sc_word2=&sc_andor=&sc_order_by=E&view_type=sm" ;
-
-                System.out.println(motorgraph);
                 Connection.Response homePage;
                 homePage = Jsoup.connect(motorgraph)
                         .method(Connection.Method.GET)
@@ -93,8 +90,6 @@ public class ArticleCrawler {
                 Document entirePage = homePage.parse();
                 Elements articleListCntElement = entirePage.select("small.text-muted");
                 Elements articleList = entirePage.select("div.list-block");
-                System.out.println(articleListCntElement.text());
-                System.out.println(String.valueOf(year).substring(0,4));
                 Article article = new Article();
                 flag = (articleListCntElement.text() == "") ? true : false;
                 for (Element item : articleList) {
@@ -107,12 +102,9 @@ public class ArticleCrawler {
                     System.out.println(article.toString());
                     year = Integer.parseInt(item.select("div.list-dated").text().substring(item.select("div.list-dated").text().length() - 16, item.select("div.list-dated").text().length() - 9).replace("-",""));
                     cnt++;
-
                     articleRepository.save(article);
-
                 }
                 pagecnt += 1;
-                System.out.println("---------- 크롤링 결과 ------------");
             }
         } catch ( IOException e ) {
             e.printStackTrace();
@@ -194,6 +186,5 @@ public class ArticleCrawler {
         );
         HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
     }
-
 
 }

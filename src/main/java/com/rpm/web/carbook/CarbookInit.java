@@ -1,7 +1,6 @@
 package com.rpm.web.carbook;
 
 import com.rpm.web.user.*;
-import com.rpm.web.util.Printer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -16,26 +15,16 @@ import java.util.List;
 public class CarbookInit implements ApplicationRunner {
     @Autowired RecordRepository recordRepository;
     @Autowired UserRepository userRepository;
-    @Autowired Printer printer;
     private CarbookRepository carbookRepository;
-
 
     public CarbookInit(CarbookRepository carbookRepository) {
         this.carbookRepository = carbookRepository;
-
-
     }
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
         mycarInit();
-        //recordInit();
-
-
-
-
-
-
+        recordInit();
     }
     public void mycarInit(){
         String[] brand ={ "현대" ,"기아" , "gm" , "르노" , "쌍용"};
@@ -54,13 +43,7 @@ public class CarbookInit implements ApplicationRunner {
         List<User> list = new ArrayList<>();
         for(User u : users){
             list.add(u);
-
         }
-
-
-
-
-
         if(count ==0 && userRepository.count()!=0){
 
             for(int i = 0 ; i < 500; i++){
@@ -91,9 +74,6 @@ public class CarbookInit implements ApplicationRunner {
                         carbook.setModel(ss[ranSS]);
                         break;
 
-
-
-
                 }
                 carbook.setYear( String.valueOf(
                         (int)Math.floor(Math.random() * (19 - 10 + 1) + 10)
@@ -106,21 +86,13 @@ public class CarbookInit implements ApplicationRunner {
                 ) );
                 carbook.setUserSeq(list.get(i));
 
-
-
                 carbookRepository.save(carbook);
-
-
-
-
-
             }
         }
     }
     public void recordInit(){
         Record record = null;
         long counter = recordRepository.count();
-        printer.accept(String.valueOf(counter));
         Iterable<Carbook> carbooks = carbookRepository.findAll();
         List<Carbook> listCarbook =new ArrayList<>();
         for(Carbook c: carbooks){
@@ -144,8 +116,6 @@ public class CarbookInit implements ApplicationRunner {
                         listCarbook.get(
                                 (int)(Math.random()*500))
                 );
-
-
                 recordRepository.save(record);
 
             }

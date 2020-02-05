@@ -34,10 +34,6 @@ public class Social implements Serializable {
     @NotNull
     private User userSeq;
 
-    /*@OneToMany(mappedBy = "boardSeq", cascade = CascadeType.ALL,
-            orphanRemoval = true)
-    private List<Comment> comments = new ArrayList<>();*/
-
     @OneToMany(mappedBy = "boardSeq", cascade = CascadeType.ALL,
             orphanRemoval = true)
     private List<Thumb> thumbs = new ArrayList<>();

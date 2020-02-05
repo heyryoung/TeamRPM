@@ -8,11 +8,12 @@ import org.springframework.stereotype.Component;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-@Component @Lazy @Entity
-@Getter @Setter
+@Component
+@Lazy
+@Entity
+@Getter
+@Setter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,25 +22,16 @@ public class Carbook implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "MYCARID")  @NotNull  private Long mycarId;
-    @Column(name = "BRAND")  @NotNull private String brand;
-    @Column(name = "MODEL") @NotNull private String model;
-    @Column(name = "YEAR")  @NotNull private String year;
-    @Column(name = "MONTH")  @NotNull private String month;
-    @Column(name = "DISTANCE")  @NotNull private String distance;
+    @Column(name = "BRAND")   private String brand;
+    @Column(name = "MODEL")  private String model;
+    @Column(name = "YEAR")   private String year;
+    @Column(name = "MONTH")   private String month;
+    @Column(name = "DISTANCE")   private String distance;
     @Column(name = "FUELTYPE") private String fuelType;
-
 
     @OneToOne
     @JoinColumn(name = "userSeq")
     private User userSeq;
-
-/*    @OneToMany(mappedBy = "mycarId", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Record> records = new ArrayList<>();*/
-
-
-
-
-
 
     @Builder
     public Carbook(String brand, String model, String year,

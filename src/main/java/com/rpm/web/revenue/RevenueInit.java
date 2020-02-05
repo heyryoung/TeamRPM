@@ -1,6 +1,5 @@
 package com.rpm.web.revenue;
 
-import com.rpm.web.employee.Employee;
 import com.rpm.web.employee.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;

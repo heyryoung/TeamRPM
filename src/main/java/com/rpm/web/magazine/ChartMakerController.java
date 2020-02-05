@@ -1,23 +1,18 @@
 package com.rpm.web.magazine;
 
-import com.rpm.web.proxy.FileProxy;
 import com.rpm.web.proxy.Trunk;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.HashMap;
 import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8081")
 @RequestMapping("/chart")
 public class ChartMakerController {
-    FileProxy filemgr;
     @Autowired
     Trunk<String> trunk;
-
 
     @RequestMapping("/chartSave")
     public Map< String , String  >  chartMaker (@RequestParam("uploadFile") MultipartFile[] uploadFile) {

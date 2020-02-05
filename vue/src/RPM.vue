@@ -1,16 +1,5 @@
 <template>
     <div id="main_grid">
-        <link rel="stylesheet" type="text/css"  href="css/re_import.css">
-       <link rel="stylesheet" type="text/css" href="css/plugin/ion.rangeSlider.css">
-        <link rel="stylesheet" type="text/css" href="css/plugin/ion.rangeSlider.skinHTML5.css">
-        <link rel="stylesheet" href="css/plugin/uniform.css">
-        <link rel="stylesheet" href="css/plugin/jquery.scrollbar.css">
-        <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/common.css?v=200108090126">
-        <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/home.css?v=200108090126">
-        <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/theme.css?v=200108090126">
-        <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/auto.css?v=200108090126">
-        <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/window.css?v=200108090126">
-        <link rel="stylesheet" type="text/css" href="http://static.danawa.com/new/recss/auto/compare.css?v=200103163154">
         <div id="main_image" style="width: 100%; height: 100px; line-height: 100px; text-align: center">
             <router-link to="/"><img style="width: 100%; max-width: 760px; vertical-align: middle" src="@/assets/image/rpmlogoblack.png" alt=""></router-link>
         </div>
@@ -81,10 +70,9 @@
             ...mapState({
                 auth: state=>state.user.auth,
                 user: state=>state.user.user
-
-
             })
         },
+
         methods:{
             logout(){
                 this.$store.dispatch('user/logout')
@@ -151,14 +139,7 @@
     }
     .bm-menu a:hover{ color: #cccccc !important;}
 
-    .bm-overlay {
-        background: rgba(0, 0, 0, 0.3);
-    }
-    .bm-item-list {
-        color: #b8b7ad;
-        margin-left: 10%;
-        font-size: 20px;
-    }
+
     .bm-item-list > * {
         display: flex;
         text-decoration: none;
@@ -170,10 +151,6 @@
         color: white;
     }
 
-    .about{
-        margin : 0px auto;
-    }
-
     html, body {
         height : 100% !important;
     }
@@ -182,29 +159,15 @@
         padding-top: 50px;
     }
 
-    #about{
-        margin-top:50px;
-    }
-    .text-light{
-        margin-top:50px;
-    }
     nav {
         min-height: 5rem;
     }
 
-    nav.fixed-top {
-        padding: 0.5rem;
-    }
+
     nav.bg-primary li a {
         color: #fff !important;
     }
-    nav li a.active {
-        padding: .2rem .4rem;
-        color: #0275d8 !important;
-        background-color: #fff;
-        border-radius: .2rem;
-        margin: .3rem 0.6rem;
-    }
+
     nav .navbar-collapse.collapsing ul,
     nav .navbar-collapse.show ul {
         margin-top: 3rem;
@@ -219,13 +182,7 @@
     .navbar-toggler {
         border: 0;
     }
-    .bg-primary {
-        color: #fff;
-        background-color: black !important;
-    }
-    .container{
-        margin: 0 200px;
-    }
+
 
 
 

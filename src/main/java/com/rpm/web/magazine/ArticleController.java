@@ -3,15 +3,10 @@ package com.rpm.web.magazine;
 import com.rpm.web.contents.Cars;
 import com.rpm.web.contents.CarsRepository;
 import com.rpm.web.contents.CarsService;
-import com.rpm.web.contents.SearchDetailCondition;
-import com.rpm.web.proxy.Box;
 import com.rpm.web.proxy.Trunk;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.*;
-import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8081")
@@ -48,12 +43,12 @@ public class ArticleController {
         });
 
         trunk.put(Arrays.asList("carsList"), Arrays.asList(tempCars.stream().limit(16)));
-
         articleList = (List<Article>) articleRepository.findAll();
         articleList.forEach(item -> {
             if(item.getSubject().contains(keyword))
             tmpArticle.add(item);
         });
+
         trunk.put(Arrays.asList("articles"), Arrays.asList(tmpArticle));
 
         return trunk.get();

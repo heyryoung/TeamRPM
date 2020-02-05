@@ -3,20 +3,17 @@ package com.rpm.web.social;
 import com.rpm.web.proxy.PageProxy;
 import com.rpm.web.user.User;
 import com.rpm.web.user.UserRepository;
-import com.rpm.web.util.Printer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.util.*;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8081")
 public class SocialController {
-    @Autowired Printer printer;
     @Autowired SocialRepository socialRepository;
     @Autowired UserRepository userRepository;
     @Autowired SocialService socialService;
@@ -30,7 +27,7 @@ public class SocialController {
         pager.setPageSize(12);
         pager.paging(socialService.allList());
         int thisPageSize = (pager.getEndRow()+1)-((pager.getPageNum()-1)*pager.getPageSize());
-        SocialListDto[] list = new SocialListDto[thisPageSize];
+        SocialListDTO[] list = new SocialListDTO[thisPageSize];
         for(int i=0; i<thisPageSize; i++){
             list[i]=socialService.allList().get(pager.getStartRow()+i);
         }
@@ -59,18 +56,18 @@ public class SocialController {
     }
 
     @PostMapping("/writeContent")
-    public String writeContent (@RequestBody SocialWriteDto param){
+    public String writeContent (@RequestBody SocialWriteDTO param){
         socialService.writeContent(param);
         return "success";
     }
 
     @GetMapping("/loadBoard/{boardSeq}")
-    public SocialDetailDto loadBoard(@PathVariable String boardSeq){
+    public SocialDetailDTO loadBoard(@PathVariable String boardSeq){
         return socialService.loadBoard(boardSeq);
     }
 
     @PostMapping("/updateContent/{boardSeq}")
-    public String updateContent (@PathVariable String boardSeq, @RequestBody SocialWriteDto socialWriteDto){
+    public String updateContent (@PathVariable String boardSeq, @RequestBody SocialWriteDTO socialWriteDto){
         socialService.updateContent(boardSeq, socialWriteDto);
         return "success";
     }

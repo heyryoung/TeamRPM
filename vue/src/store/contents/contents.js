@@ -535,9 +535,6 @@ const mutations = {
     },
     GETRECOMMENDBYSEARCHWORD(state,data){
         state.recommendBySearchWordList = data
-    },
-    FLAGRESETTER (state) {
-        state.mainConditionSettingFlag = false
     }
 }
 

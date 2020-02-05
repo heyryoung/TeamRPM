@@ -1,17 +1,14 @@
 package com.rpm.web.company;
 
-        import ch.qos.logback.core.net.SyslogOutputStream;
-        import com.rpm.web.contents.Cars;
-        import com.rpm.web.contents.CarsRepository;
-        import com.rpm.web.employee.EmployeeInit;
-        import com.rpm.web.recommend.Recommend;
-        import com.rpm.web.recommend.RecommendRepository;
-        import org.springframework.beans.factory.annotation.Autowired;
-        import org.springframework.web.bind.annotation.*;
+import com.rpm.web.contents.Cars;
+import com.rpm.web.contents.CarsRepository;
+import com.rpm.web.recommend.RecommendRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-        import java.util.HashMap;
-        import java.util.List;
-        import java.util.Map;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/company")

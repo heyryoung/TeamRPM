@@ -2,9 +2,7 @@ package com.rpm.web.user;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import com.rpm.web.carbook.Carbook;
 import com.rpm.web.social.Social;
-import com.rpm.web.social.Thumb;
 import lombok.*;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
@@ -50,9 +48,6 @@ public class User implements Serializable {
         Assert.hasText(passwd, "passwd must not be empty");
         Assert.hasText(name, "name must not be empty");
         Assert.hasText(email, "email must not be empty");
-        Assert.hasText(gender);
-        Assert.hasText(birthMonth);
-        Assert.hasText(region);
         this.userid = userid;
         this.passwd = passwd;
         this.name = name;

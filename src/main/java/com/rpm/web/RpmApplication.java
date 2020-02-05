@@ -9,7 +9,6 @@ public class RpmApplication {
 
     public static void main(String[] args) throws Exception {
         SpringApplication.run(RpmApplication.class, args);
-
     }
 
 }

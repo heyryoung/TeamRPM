@@ -31,7 +31,6 @@ import SnsWrite from "@/components/social/SnsWrite.vue"
 import MycarModify from '@/components/carbook/MycarModify.vue'
 import Payment from '@/components/contents/Payment.vue'
 
-
 Vue.use(Router)
 
 export default new Router({
@@ -59,20 +58,15 @@ export default new Router({
         {path:'/snsmodify', name:'snsmodify', component : SnsModify},
         {path:'/snswrite', name:'snswrite', component : SnsWrite},
         {path:'/payment', name:'payment', component : Payment},
-        // 강성조꺼
         {path: '/customerDetail',name: 'customerDetail', component:customerDetail},
         {path: '/companyHome',name: 'companyHome', component:companyHome,children:
                 [
                     {path: '',name: 'companyMain', component:companyMain },
                     {path: 'customerList',name: 'CustomerList', component: CustomerList},
                     {path: 'carList',name: 'CarList', component: CarList},
-                    {path: 'chart',name: 'chart', component:chart},
-                ]},
+                    {path: 'chart',name: 'chart', component:chart},]},
         {path: '/recommendHome',name: 'recommendHome', component:recommendHome, children:[
                 {path: '',name: 'RecommendContent', component: RecommendContent},
-                {path: 'condition',name: 'Condition', component: Condition},
-
-            ]}
-
+                {path: 'condition',name: 'Condition', component: Condition},]}
     ]
 })

@@ -5,7 +5,6 @@ import com.rpm.web.proxy.Proxy;
 import com.rpm.web.proxy.Table;
 import com.rpm.web.proxy.Trunk;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;

@@ -8,22 +8,6 @@
         <div class="result_box_wrap">
             <div class="mc_wide_common">
                 <div class="mc_carlist"><h2>키워드 자동차 <a class="more">더보기 </a></h2>
-<!--                    <div class="tabbox">
-&lt;!&ndash;                        <ul>
-                            <li class="tab_reco1"><h3><a href="javascript:;"
-                                                         onclick="mainEvent.getThemeCarListWithCD(19122,this);"
-                                                         class="on">#1,000만원 미만 수입차 기획전</a></h3></li>
-                            <li class="tab_reco2"><h3><a href="javascript:;"
-                                                         onclick="mainEvent.getThemeCarListWithCD(19113,this);">#신차급
-                                무이자 할부 기획전</a></h3></li>
-                            <li class="tab_reco3"><h3><a href="javascript:;"
-                                                         onclick="mainEvent.getThemeCarListWithCD(19111,this);">#셀토스
-                                기획전</a></h3></li>
-                            <li class="tab_reco4"><h3><a href="javascript:;"
-                                                         onclick="mainEvent.getThemeCarListWithCD(19061,this);">#
-                                실속있는 당신을위한 K3기획전</a></h3></li>
-                        </ul>&ndash;&gt;
-                    </div>-->
                     <div class="listwrap header_new1">
                         <div class="banner_box1">
                             <div class="banner_inner_box1" id="divRecommendPromotionArea">

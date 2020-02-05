@@ -8,7 +8,6 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,8 +33,10 @@ public class CarsInit implements ApplicationRunner {
         ObjectMapper jsonMapper = new ObjectMapper();
         String[] json = null;
         Map<String, Map<String, Object>> map = new HashMap<>();
+
         if (carsRepository.count() == 0) {
-            for (int i = 1; i <= 8000; i++) {
+            int count = Integer.parseInt(http.getCarCount("https://www.kcar.com/search/api/getCarSearchWithCondition.do"));
+            for (int i = 1; i <= count; i++) {
                 Map<String, String> strJson = new HashMap<>();
                 map = jsonMapper.readValue(
                         http.sendPost("https://www.kcar.com/search/api/getCarSearchWithCondition.do", proxy.string(i))
@@ -68,7 +69,7 @@ public class CarsInit implements ApplicationRunner {
                 ));
             }
         }
-        if(recentSearchWord.count()!=0){
+        if(recentSearchWord.count()==0){
             int ranlist = 0;
             for(int i =0; i<1000; i++){
                 for(int j = 0;j<30;j++){
