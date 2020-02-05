@@ -17,7 +17,8 @@ props:['data'],
           }, {responsive: true, maintainAspectRatio: false})
       }
 
-    }
+    },
+
 
 
 }

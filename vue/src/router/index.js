@@ -61,20 +61,20 @@ export default new Router({
         {path:'/snswrite', name:'snswrite', component : SnsWrite},
         {path:'/payment', name:'payment', component : Payment},
         // 강성조꺼
-        {path: '/customerDetail',name: 'customerDetail', component:customerDetail,children:
+        {path: '/customerDetail', component:customerDetail,children:
         [
-            {path: '',name: 'customerDetailRight', component:customerDetailRight },
+            {path: '', component:customerDetailRight },
             {path: 'bestCarList',name: 'bestCarList', component:bestCarList }
         ]
         },
-        {path: '/companyHome',name: 'companyHome', component:companyHome,children:
+        {path: '/companyHome', component:companyHome,children:
                 [
-                    {path: '',name: 'companyMain', component:companyMain },
+                    {path: '', component:companyMain },
                     {path: 'customerList',name: 'CustomerList', component: CustomerList},
                     {path: 'carList',name: 'CarList', component: CarList},
                 ]},
-        {path: '/recommendHome',name: 'recommendHome', component:recommendHome, children:[
-                {path: '',name: 'RecommendContent', component: RecommendContent},
+        {path: '/recommendHome', component:recommendHome, children:[
+                {path: '', component: RecommendContent},
                 {path: 'condition',name: 'Condition', component: Condition},
 
             ]}

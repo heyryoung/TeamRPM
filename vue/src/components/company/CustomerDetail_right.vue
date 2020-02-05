@@ -12,9 +12,9 @@
                     </div>
                 </div>
                 <div class="align">
-                    <!-- 20181217 VR차량 -->
+                   <!-- &lt;!&ndash; 20181217 VR차량 &ndash;&gt;
                     <span><a href="" class="3dview_flag txt "><em class="vr_ordermark"></em> 3D 라이브 뷰 차량</a></span>
-                    <!-- //20181217 VR차량 -->
+                    &lt;!&ndash; //20181217 VR차량 &ndash;&gt;
                     <span class="basic"><a href=""
                                            class="txt">기본정렬</a></span>
                     <span><a href="" class="txt">가격순</a><a href="" class="down ">낮은순</a>
@@ -28,7 +28,7 @@
                     <span><a href="" class="txt">연식 순</a><a
                             href="" class="down ">낮은순</a>
 						<a href="" class="up ">높은순</a>
-						</span>
+						</span>-->
                 </div>
             </div>
             <div class="result_list">
@@ -59,13 +59,13 @@
                         </td>
                         <td class="car_info">
                             <a @click="productClick(car)" class="name">모델명:{{car.modelnm}} </a>
-                            <span class="md_year">연식:{{car.beginYear}}년 &nbsp;<br>주행거리:{{car.milage}}km</span>
-                            <span class="price">가격{{car.price}}만원 </span>
+                            <span class="md_year">연식:{{car.beginYear}}년 &nbsp;<br>주행거리:{{car.milage|thousandFormatter}}km</span>
+                            <span class="price">가격{{car.price|thousandFormatter}}만원 </span>
                         </td>
                         <td class="car_opt">
                             <ul class="opt_list">
                                 <li>
-                                    <span class="pt">사고 : {{car.recCommentCd}}</span>
+                                    <span class="pt">{{car.recCommentCd|acident}}</span>
                                     <span>{{car.fuleTypedName}}</span>
                                 </li>
                                 <li>
@@ -156,7 +156,7 @@
                     res.data.result.forEach(el=>{
                         el.checked=false
                         this.List.push(el)
-                        console.log('1')
+
                     })
                     this.$refs.pagination.first()
 
@@ -165,6 +165,20 @@
                     alert(`axios fail${e}`)
                 })
 
+        },
+        filters : {
+            thousandFormatter: function (value) {
+                return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            },
+            acident(value){
+                switch (value) {
+                    case '001': value='무사고';break;
+                    case '002': value='단순교환';break;
+                    case '003': value='단순사고(접촉)';break;
+                    case '004': value='사고';break;
+                }
+                return value
+            }
         },
 
     }

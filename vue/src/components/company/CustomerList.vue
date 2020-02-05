@@ -59,7 +59,7 @@
                         <td class="car_info">
                             <a  @click="goDetail(customer)" class="name">{{customer.modelNm}}</a>
                             <span class="md_year">연식 :{{customer.minBeginYear}}년 ~{{customer.maxBeginYear}}년 </span>
-                            <span class="price">가격 :{{customer.minPrice}}만원 ~{{customer.maxPrice}} 만원  <br>주행거리 :{{customer.minMilage}}km ~ {{customer.maxMilage}}km  </span>
+                            <span class="price">가격 :{{customer.minPrice|thousandFormatter}}만원 ~{{customer.maxPrice|thousandFormatter}} 만원  <br>주행거리 :{{customer.minMilage|thousandFormatter}}km ~ {{customer.maxMilage|thousandFormatter}}km  </span>
                         </td>
                         <td class="car_opt">
                             <ul class="opt_list">
@@ -119,6 +119,11 @@
 
 
 
+        },
+        filters : {
+            thousandFormatter: function (value) {
+                return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
         },
         mixins:[checkBox],
         created() {

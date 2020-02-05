@@ -1,3 +1,4 @@
+<!--
 <template>
 
 <div id="wrap">
@@ -15,50 +16,50 @@
 	<div class="list">
 		<strong>
 			<span _ngcontent-wjl-c76="" class="search_title_text"><button><router-link to="/stationInfo">S-OIL 서울에너지</router-link></button></span>
-			<div _ngcontent-wjl-c76="" class="search_text_box"><!---->
-				<span _ngcontent-wjl-c76="" class="search_text category ng-star-inserted">S-OIL주유소</span><!---->
-				<span _ngcontent-wjl-c76="" class="search_text phone ng-star-inserted">02-3390-4338</span><!---->
+			<div _ngcontent-wjl-c76="" class="search_text_box">&lt;!&ndash;&ndash;&gt;
+				<span _ngcontent-wjl-c76="" class="search_text category ng-star-inserted">S-OIL주유소</span>&lt;!&ndash;&ndash;&gt;
+				<span _ngcontent-wjl-c76="" class="search_text phone ng-star-inserted">02-3390-4338</span>&lt;!&ndash;&ndash;&gt;
 			</div>
 			<div _ngcontent-wjl-c76="" class="search_text_box ng-star-inserted">
 				<span _ngcontent-wjl-c76="" class="search_text address">서울특별시 성동구 천호대로 324</span>
 			</div>
-			<div _ngcontent-wjl-c76="" class="search_text_box ng-star-inserted"><!----><!---->
+			<div _ngcontent-wjl-c76="" class="search_text_box ng-star-inserted">&lt;!&ndash;&ndash;&gt;&lt;!&ndash;&ndash;&gt;
 				<span _ngcontent-wjl-c76="" class="search_text oil ng-star-inserted">휘발유 
-				<span _ngcontent-wjl-c76="" class="search_count">1,534원</span></span><!---->
+				<span _ngcontent-wjl-c76="" class="search_count">1,534원</span></span>&lt;!&ndash;&ndash;&gt;
 				<span _ngcontent-wjl-c76="" class="search_text oil ng-star-inserted">경유 
-				<span _ngcontent-wjl-c76="" class="search_count">1,354원</span></span><!----><!---->
+				<span _ngcontent-wjl-c76="" class="search_count">1,354원</span></span>&lt;!&ndash;&ndash;&gt;&lt;!&ndash;&ndash;&gt;
 			</div>
 		</strong>
 		<strong>
 			<span _ngcontent-wjl-c76="" class="search_title_text"><button>gs</button></span>
-			<div _ngcontent-wjl-c76="" class="search_text_box"><!---->
-				<span _ngcontent-wjl-c76="" class="search_text category ng-star-inserted">gs주유소</span><!---->
-				<span _ngcontent-wjl-c76="" class="search_text phone ng-star-inserted">전화번호</span><!---->
+			<div _ngcontent-wjl-c76="" class="search_text_box">&lt;!&ndash;&ndash;&gt;
+				<span _ngcontent-wjl-c76="" class="search_text category ng-star-inserted">gs주유소</span>&lt;!&ndash;&ndash;&gt;
+				<span _ngcontent-wjl-c76="" class="search_text phone ng-star-inserted">전화번호</span>&lt;!&ndash;&ndash;&gt;
 			</div>
 			<div _ngcontent-wjl-c76="" class="search_text_box ng-star-inserted">
 				<span _ngcontent-wjl-c76="" class="search_text address">주소</span>
 			</div>
-			<div _ngcontent-wjl-c76="" class="search_text_box ng-star-inserted"><!----><!---->
+			<div _ngcontent-wjl-c76="" class="search_text_box ng-star-inserted">&lt;!&ndash;&ndash;&gt;&lt;!&ndash;&ndash;&gt;
 				<span _ngcontent-wjl-c76="" class="search_text oil ng-star-inserted">휘발유 
-				<span _ngcontent-wjl-c76="" class="search_count">1,534원</span></span><!---->
+				<span _ngcontent-wjl-c76="" class="search_count">1,534원</span></span>&lt;!&ndash;&ndash;&gt;
 				<span _ngcontent-wjl-c76="" class="search_text oil ng-star-inserted">경유 
-				<span _ngcontent-wjl-c76="" class="search_count">1,354원</span></span><!----><!---->
+				<span _ngcontent-wjl-c76="" class="search_count">1,354원</span></span>&lt;!&ndash;&ndash;&gt;&lt;!&ndash;&ndash;&gt;
 			</div>
 		</strong>
 		<strong>
 			<span _ngcontent-wjl-c76="" class="search_title_text"><button>gs</button></span>
-			<div _ngcontent-wjl-c76="" class="search_text_box"><!---->
-				<span _ngcontent-wjl-c76="" class="search_text category ng-star-inserted">gs주유소</span><!---->
-				<span _ngcontent-wjl-c76="" class="search_text phone ng-star-inserted">전화번호</span><!---->
+			<div _ngcontent-wjl-c76="" class="search_text_box">&lt;!&ndash;&ndash;&gt;
+				<span _ngcontent-wjl-c76="" class="search_text category ng-star-inserted">gs주유소</span>&lt;!&ndash;&ndash;&gt;
+				<span _ngcontent-wjl-c76="" class="search_text phone ng-star-inserted">전화번호</span>&lt;!&ndash;&ndash;&gt;
 			</div>
 			<div _ngcontent-wjl-c76="" class="search_text_box ng-star-inserted">
 				<span _ngcontent-wjl-c76="" class="search_text address">주소</span>
 			</div>
-			<div _ngcontent-wjl-c76="" class="search_text_box ng-star-inserted"><!----><!---->
+			<div _ngcontent-wjl-c76="" class="search_text_box ng-star-inserted">&lt;!&ndash;&ndash;&gt;&lt;!&ndash;&ndash;&gt;
 				<span _ngcontent-wjl-c76="" class="search_text oil ng-star-inserted">휘발유 
-				<span _ngcontent-wjl-c76="" class="search_count">1,534원</span></span><!---->
+				<span _ngcontent-wjl-c76="" class="search_count">1,534원</span></span>&lt;!&ndash;&ndash;&gt;
 				<span _ngcontent-wjl-c76="" class="search_text oil ng-star-inserted">경유 
-				<span _ngcontent-wjl-c76="" class="search_count">1,354원</span></span><!----><!---->
+				<span _ngcontent-wjl-c76="" class="search_count">1,354원</span></span>&lt;!&ndash;&ndash;&gt;&lt;!&ndash;&ndash;&gt;
 			</div>
 		</strong>
 		
@@ -88,7 +89,7 @@
 			onLoad () {
 				//let ps = new kakao.maps.services.Places();
 // 주소-좌표 변환 객체를 생성합니다
-				var geocoder = new kakao.maps.services.Geocoder();
+				//var geocoder = new kakao.maps.services.Geocoder();
 
 // 주소로 좌표를 검색합니다
 				geocoder.addressSearch('제주특별자치도 제주시 첨단로 242', function(result, status) {
@@ -153,4 +154,4 @@ white-space: nowrap;
 
 
 
-</style>
+</style>-->

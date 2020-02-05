@@ -35,6 +35,13 @@
                 </div>
             </div>
             <div class="result_list">
+                <colgroup>
+                    <col style="width: 55px;">
+                    <col style="width: 190px;">
+                    <col style="width: 485px;">
+                    <col style="width: 290px;">
+                    <col>
+                </colgroup>
                 <h1 class="emptySign" v-if="recommendedCar.length==0">등록된 차량이 없습니다</h1>
                 <table>
 

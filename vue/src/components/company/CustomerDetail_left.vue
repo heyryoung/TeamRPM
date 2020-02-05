@@ -1,5 +1,6 @@
 <template>
     <div class="condition">
+
         <h4 class="title">{{customerInfo.name}} 고객님의 요구사항</h4>
         <div class="compBox">
         <div class="compLeft">
@@ -20,13 +21,13 @@
                 <td>{{customerInfo.makeNm}} {{customerInfo.modelNm}}<br></td>
             </tr>
             <tr  type="gapSpec" >
-                <td>{{customerInfo.minPrice}}만원 ~ {{customerInfo.maxPrice}}만원<br></td>
+                <td>{{customerInfo.minPrice|thousandFormatter}}만원 ~ {{customerInfo.maxPrice|thousandFormatter}}만원<br></td>
             </tr>
             <tr  type="gapSpec" >
                 <td>{{customerInfo.minBeginYear}}년 ~ {{customerInfo.maxBeginYear}}년</td>
             </tr>
             <tr  type="gapSpec" >
-                <td>{{customerInfo.minMilage}}km ~ {{customerInfo.maxMilage}}km</td>
+                <td>{{customerInfo.minMilage|thousandFormatter}}km ~ {{customerInfo.maxMilage|thousandFormatter}}km</td>
             </tr>
             <tr  type="gapSpec" >
                 <td>{{customerInfo.fuleTypedName}}</td>
@@ -58,6 +59,11 @@
             }
 
         },
+        filters : {
+            thousandFormatter: function (value) {
+                return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+        },
 
     }
 </script>
@@ -70,7 +76,7 @@
         float: left;
         margin-top: 300px ;
         line-height: 180%;
-        padding: 50px 80px;
+        padding: 50px 40px;
         width: 400px;
         background: #fff;
         border: 1px solid #666666;

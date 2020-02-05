@@ -10,7 +10,7 @@
                         <div class="searchbg">
                             <div class="mc_search">
                                 <div class="search3box">
-                                    <div  class="tab_want1 tab_want_menu" data-item="tab1">
+                                    <div class="tab_want1 tab_want_menu" data-item="tab1">
                                         <h3><a id="tab1" @click="wantModel" class="on">원하는 모델이 있어요</a></h3>
                                     </div>
                                     <div id="divTabWant1" class="divTabWantGroup">
@@ -25,7 +25,7 @@
                                      placeholder=" 모델명을 입력해주세요. 예시)아반떼" maxlength="20" autocomplete="off"><a @click="goSearch" class="hid">검색</a>
                             </span>
                                                     <!--검색기록유-->
-                                                    <div id = "searchBox" class="recentlist modelSearchDiv1 modelSearchGroup" style="display:none">
+                                                    <div id="searchBox" class="recentlist modelSearchDiv1 modelSearchGroup" style="display:none">
                                                         <h3 class="tit">인기 모델명</h3>
                                                         <div class="recentl">
                                                             <ul v-for="(j,i) of this.$store.state.contents.searchWordRank" :key="i">
@@ -56,7 +56,7 @@
                                                                 height="20" alt="닫기" border="0"></a></div>
                                                     </div>
                                                     <!--키워드 입력중-->
-                                                    <div id = "stringMatch" class="recentlist modelSearchDiv2 modelSearchGroup" style="display: none">
+                                                    <div id="stringMatch" class="recentlist modelSearchDiv2 modelSearchGroup" style="display: none">
                                                         <h3 class="tit">인기 모델명</h3>
                                                         <div class="recentl">
                                                             <ul v-for="(j,i) of this.$store.state.contents.searchWordRank" :key="i">
@@ -71,12 +71,15 @@
                                                              </div>-->
 
                                                         <h3 class="tit1">연관 모델명</h3>
-                                                        <div class="recentl1" v-if="this.$store.state.contents.stringMatchList.length>0" >
-                                                            <ul v-for = "(j,i) of this.$store.state.contents.stringMatchList" :key="i"><li><a @click="stringMatchClick(j)">{{j}}</a></li>
+                                                        <div class="recentl1" v-if="this.$store.state.contents.stringMatchList.length>0">
+                                                            <ul v-for="(j,i) of this.$store.state.contents.stringMatchList" :key="i">
+                                                                <li><a @click="stringMatchClick(j)">{{j}}</a></li>
                                                             </ul>
                                                         </div>
-                                                        <div class="recentl1" v-else-if="this.$store.state.contents.stringMatchList.length==0" >
-                                                            <ul ><li class="noresult">연관 모델이 없습니다</li></ul>
+                                                        <div class="recentl1" v-else-if="this.$store.state.contents.stringMatchList.length==0">
+                                                            <ul>
+                                                                <li class="noresult">연관 모델이 없습니다</li>
+                                                            </ul>
                                                         </div>
                                                         <div class="btclose divSearchConHide"><a @click="searchBoxOff(`stringMatch`)"><img src="https://www.kcar.com/resources/images/index/recentclose.jpg" width="44" height="20" alt="닫기" border="0"></a></div>
                                                     </div>
@@ -100,11 +103,12 @@
                                                                         v-for="category of this.$store.state.contents.category1"
                                                                         :key="category.name">
                                                                     <option data-type="MAKE_TYPE010"
-                                                                            data-cnt="category.count">{{category.name}}</option>
+                                                                            data-cnt="category.count">{{category.name}}
+                                                                    </option>
                                                                 </select></div>
-                                                            <div class="selectric" ><span class="label"
-                                                                                          data-beusable-tracking="" >{{keyWord1}}</span></div>
-                                                            <div id = "category1" class="selectric-items" tabindex="-1">
+                                                            <div class="selectric"><span class="label"
+                                                                                         data-beusable-tracking="">{{keyWord1}}</span></div>
+                                                            <div id="category1" class="selectric-items" tabindex="-1">
                                                                 <div class="selectric-scroll">
                                                                     <ul v-for="category of this.$store.state.contents.category1" :key="category.name">
                                                                         <li data-index="1" @click="setCategory2(category)" class="">{{category.name}}<em>{{category.count}}</em>
@@ -115,7 +119,7 @@
                                                             <input class="selectric-input" tabindex="0"></div>
                                                     </div>
                                                     <div class="searchr2">
-                                                        <div id="searchKey2"  @click="searchKeyClick(`searchKey2`)"
+                                                        <div id="searchKey2" @click="searchKeyClick(`searchKey2`)"
                                                              class="selectric-wrapper selectric-selectric selectric-below selectric-hover">
                                                             <div class="selectric-hide-select"><select
                                                                     id="modelGroupList" title="모델을 선택하세요"
@@ -124,11 +128,12 @@
                                                                     v-for="category of this.$store.state.contents.category2"
                                                                     :key="category.name">
                                                                 <option data-type="MAKE_TYPE010"
-                                                                        data-cnt="category.count">{{category.name}}</option>
+                                                                        data-cnt="category.count">{{category.name}}
+                                                                </option>
                                                             </select></div>
                                                             <div class="selectric"><span class="label"
                                                                                          data-beusable-tracking="">{{keyWord2}}</span></div>
-                                                            <div id = "category2" class="selectric-items" tabindex="-1" >
+                                                            <div id="category2" class="selectric-items" tabindex="-1">
                                                                 <div class="selectric-scroll">
                                                                     <ul v-for="category of this.$store.state.contents.category2" :key="category.name">
                                                                         <li data-index="1" @click="setCategory3(category)" class="">{{category.name}}<em>{{category.count}}</em>
@@ -152,7 +157,8 @@
                                                                         v-for="category of this.$store.state.contents.category3"
                                                                         :key="category.name">
                                                                     <option data-type="MAKE_TYPE010"
-                                                                            data-cnt="category.count">{{category.name}}</option>
+                                                                            data-cnt="category.count">{{category.name}}
+                                                                    </option>
                                                                 </select></div>
                                                             <div class="selectric"><span class="label"
                                                                                          data-beusable-tracking="">{{keyWord3}}</span></div>
@@ -173,7 +179,7 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <div  class="tab_want2 tab_want_menu" data-item="tab2">
+                                    <div class="tab_want2 tab_want_menu" data-item="tab2">
                                         <h3><a id="tab2" @click="haveBudget">예산이 정해져 있어요</a></h3>
                                     </div>
                                     <!--검색tab2 내용-->
@@ -188,7 +194,7 @@
                                                 </li>
                                                 <li>
                             <span id="spanMakeType" class="btnl">
-                              <a @click="korCar(`korCar2`,`impCar2`)" id="korCar2"  data-item="MAKE_TYPE010">국산차</a>
+                              <a @click="korCar(`korCar2`,`impCar2`)" id="korCar2" data-item="MAKE_TYPE010">국산차</a>
                               <a @click="impCar(`korCar2`,`impCar2`,`category4`)" id="impCar2" data-item="MAKE_TYPE020">수입차</a>
                             </span>
                                                 </li>
@@ -206,10 +212,11 @@
                                                                         v-for="category of this.$store.state.contents.category1"
                                                                         :key="category.name">
                                                                     <option data-type="MAKE_TYPE010"
-                                                                            data-cnt="category.count">{{category.name}}</option>
+                                                                            data-cnt="category.count">{{category.name}}
+                                                                    </option>
                                                                 </select></div>
-                                                            <div class="selectric" ><span class="label"
-                                                                                          data-beusable-tracking="">{{keyWord1}}</span></div>
+                                                            <div class="selectric"><span class="label"
+                                                                                         data-beusable-tracking="">{{keyWord1}}</span></div>
                                                             <div id="category4" class="selectric-items" tabindex="-1">
                                                                 <div class="selectric-scroll">
                                                                     <ul v-for="category of this.$store.state.contents.category1" :key="category.name">
@@ -230,7 +237,7 @@
                                                                         tabindex="-1"
                                                                         v-for="price of prices"
                                                                         :key="price.name">
-                                                                    <option value = "price.value">{{price.name}}</option>
+                                                                    <option value="price.value">{{price.name}}</option>
                                                                 </select></div>
                                                             <div class="selectric"><span
                                                                     class="label">{{minPrice | thousandFormatter}}</span></div>
@@ -253,7 +260,7 @@
                                                                         tabindex="-1"
                                                                         v-for="price of prices"
                                                                         :key="price.name">
-                                                                    <option value = "price.value">{{price.name}}</option>
+                                                                    <option value="price.value">{{price.name}}</option>
                                                                 </select></div>
                                                             <div class="selectric"><span
                                                                     class="label">{{maxPrice | thousandFormatter}}</span></div>
@@ -292,26 +299,28 @@
 </template>
 <script>
     import axios from 'axios'
+
     export default {
-        data(){
-            return{
-                searchKeyWord : '',
-                defaultKeyWord1 : '제조사를 선택하세요',
-                defaultKeyWord2 : '모델을 선택하세요',
-                defaultKeyWord3 : '세부모델을 선택하세요',
-                defaultMinPrice : '최저가격을 선택하세요',
-                defaultMaxPrice : '최고가격을 선택하세요',
-                keyWord1 : '제조사를 선택하세요',
-                keyWord2 : '모델을 선택하세요',
-                keyWord3 : '세부모델을 선택하세요',
-                minPrice : '최저가격을 선택하세요',
-                maxPrice : '최고가격을 선택하세요',
-                resultCount : 0
+        data() {
+            return {
+                searchKeyWord  : '',
+                defaultKeyWord1: '제조사를 선택하세요',
+                defaultKeyWord2: '모델을 선택하세요',
+                defaultKeyWord3: '세부모델을 선택하세요',
+                defaultMinPrice: '최저가격을 선택하세요',
+                defaultMaxPrice: '최고가격을 선택하세요',
+                keyWord1       : '제조사를 선택하세요',
+                keyWord2       : '모델을 선택하세요',
+                keyWord3       : '세부모델을 선택하세요',
+                minPrice       : '최저가격을 선택하세요',
+                maxPrice       : '최고가격을 선택하세요',
+                resultCount    : 0
             }
         },
         methods : {
-            goSearch(){},
-            wantModel(){
+            goSearch() {
+            },
+            wantModel() {
                 const divTabWant1 = document.getElementById("divTabWant1")
                 const divTabWant2 = document.getElementById("divTabWant2")
                 const tab1 = document.getElementById("tab1")
@@ -320,9 +329,9 @@
                 tab2.className = ""
                 divTabWant1.style.display = "block"
                 divTabWant2.style.display = "none"
-                this.korCar(`korCar`,`impCar`)
+                this.korCar(`korCar`, `impCar`)
             },
-            haveBudget(){
+            haveBudget() {
                 const divTabWant1 = document.getElementById("divTabWant1")
                 const divTabWant2 = document.getElementById("divTabWant2")
                 const tab1 = document.getElementById("tab1")
@@ -331,42 +340,42 @@
                 tab2.className = "on"
                 divTabWant1.style.display = "none"
                 divTabWant2.style.display = "block"
-                this.korCar(`korCar2`,`impCar2`)
+                this.korCar(`korCar2`, `impCar2`)
             },
-            searchBoxOn(){
+            searchBoxOn() {
                 this.$store.dispatch('contents/getSearchWordRank')
                 const searchBox = document.getElementById("searchBox")
                 searchBox.style.display = "block"
             },
-            searchBoxOff(BoxID){
+            searchBoxOff(BoxID) {
                 const searchBox = document.getElementById(BoxID)
                 searchBox.style.display = "none"
             },
-            stringMatchOn(){
+            stringMatchOn() {
                 const stringMatch = document.getElementById("stringMatch")
                 const searchBox = document.getElementById("searchBox")
-                if(this.searchKeyWord != "") {
+                if (this.searchKeyWord != "") {
                     searchBox.style.display = "none"
                     stringMatch.style.display = "block"
-                    this.$store.dispatch('contents/stringMatch',this.searchKeyWord)
-                }else{
+                    this.$store.dispatch('contents/stringMatch', this.searchKeyWord)
+                } else {
                     stringMatch.style.display = "none"
                     searchBox.style.display = "block"
                 }
             },
-            korCar(korCarID, impCarID){
+            korCar(korCarID, impCarID) {
                 const korCar = document.getElementById(korCarID)
                 const impCar = document.getElementById(impCarID)
                 korCar.className = "on"
                 impCar.className = ""
-                this.$store.dispatch('contents/getCategory1',{'param':'KOR','column':'CAR_TYPE'})
+                this.$store.dispatch('contents/getCategory1', {'param': 'KOR', 'column': 'CAR_TYPE'})
                 this.keyWord1 = this.defaultKeyWord1,
                     this.keyWord2 = this.defaultKeyWord2,
                     this.keyWord3 = this.defaultKeyWord3,
                     this.resultCount = 0
 
             },
-            impCar(korCarID, impCarID, category1ID){
+            impCar(korCarID, impCarID, category1ID) {
                 const korCar = document.getElementById(korCarID)
                 const impCar = document.getElementById(impCarID)
                 const category1 = document.getElementById(category1ID)
@@ -374,137 +383,144 @@
                 impCar.className = "on"
                 category1.style.width = "220px"
                 category1.style.height = "300px"
-                this.$store.dispatch('contents/getCategory1',{'param':'IMP','column':'CAR_TYPE'})
+                this.$store.dispatch('contents/getCategory1', {'param': 'IMP', 'column': 'CAR_TYPE'})
                 this.keyWord1 = this.defaultKeyWord1,
                     this.keyWord2 = this.defaultKeyWord2
                 this.keyWord3 = this.defaultKeyWord3
                 this.resultCount = 0
 
             },
-            searchKeyClick(searchKeyID){
+            searchKeyClick(searchKeyID) {
                 const searchKey = document.getElementById(searchKeyID)
                 const cate2 = document.getElementById('category2')
-                if(searchKey.className === "selectric-wrapper selectric-selectric selectric-below selectric-hover"){
+                if (searchKey.className === "selectric-wrapper selectric-selectric selectric-below selectric-hover") {
                     for (let elementsByClassNameElement of document.getElementsByClassName("selectric-wrapper selectric-selectric selectric-below selectric-hover selectric-open selectric-focus")) {
                         elementsByClassNameElement.className = "selectric-wrapper selectric-selectric selectric-below selectric-hover"
                     }
                     searchKey.className = "selectric-wrapper selectric-selectric selectric-below selectric-hover selectric-open selectric-focus"
-                }else{
+                } else {
                     searchKey.className = "selectric-wrapper selectric-selectric selectric-below selectric-hover"
                 }
-                if(this.$store.state.contents.category2.length>=10) {
+                if (this.$store.state.contents.category2.length >= 10) {
                     cate2.style.width = "220px"
                     cate2.style.height = "300px"
-                }{
+                }
+                {
                     cate2.style.width = ""
                     cate2.style.height = ""
                 }
             },
 
-            setCategory2(param){
+            setCategory2(param) {
                 this.keyWord2 = this.defaultKeyWord2
                 this.keyWord3 = this.defaultKeyWord3
                 this.keyWord1 = param.name
                 this.resultCount = param.count
-                this.$store.dispatch('contents/getCategory2',{'param':this.keyWord1,'column':'MAKENM'})
+                this.$store.dispatch('contents/getCategory2', {'param': this.keyWord1, 'column': 'MAKENM'})
             },
-            setCategory3(param){
+            setCategory3(param) {
                 this.keyWord3 = this.defaultKeyWord3
                 this.keyWord2 = param.name
                 this.resultCount = param.count
-                this.$store.dispatch('contents/getCategory3',{'param':this.keyWord2,'column':'MODEL_GRP_NM'})
+                this.$store.dispatch('contents/getCategory3', {'param': this.keyWord2, 'column': 'MODEL_GRP_NM'})
             },
-            setKeyWord3(param){
+            setKeyWord3(param) {
                 this.keyWord3 = param.name
                 this.resultCount = param.count
             },
-            setMinPrice(minPrice){
+            setMinPrice(minPrice) {
                 this.minPrice = minPrice
 
             },
-            setMaxPrice(maxPrice){
-                if(parseInt(this.minPrice)<=parseInt(maxPrice.replace(`만원`,''))){
+            setMaxPrice(maxPrice) {
+                if (parseInt(this.minPrice) <= parseInt(maxPrice.replace(`만원`, ''))) {
                     this.maxPrice = maxPrice
-                }else{
+                } else {
                     alert(`최저가격보다 높게 선택해주세요.`)
                 }
 
             },
-            goSearchWithCondition(condition){
+            goSearchWithCondition(condition) {
                 let selectedCondition = {}
                 switch (condition) {
                     case 'withModel' :
                         selectedCondition =
-                            { 'maker' : (this.keyWord1 === this.defaultKeyWord1) ? false : this.keyWord1
-                                , 'model' : (this.keyWord2 === this.defaultKeyWord2) ? false : this.keyWord2
-                                , 'modelText' : (this.keyWord3 === this.defaultKeyWord3) ? false : this.keyWord3}
+                            {
+                                'maker'      : (this.keyWord1 === this.defaultKeyWord1) ? false : this.keyWord1
+                                , 'model'    : (this.keyWord2 === this.defaultKeyWord2) ? false : this.keyWord2
+                                , 'modelText': (this.keyWord3 === this.defaultKeyWord3) ? false : this.keyWord3
+                            }
                         break
                     case 'stringMatch' :
                         selectedCondition =
-                            { 'maker' : (this.keyWord1 === this.defaultKeyWord1) ? false : this.keyWord1
-                                , 'model' : (this.keyWord2 === this.defaultKeyWord2) ? false : this.keyWord2
-                                , 'modelText' : (this.keyWord3 === this.defaultKeyWord3) ? false : this.keyWord3}
+                            {
+                                'maker'      : (this.keyWord1 === this.defaultKeyWord1) ? false : this.keyWord1
+                                , 'model'    : (this.keyWord2 === this.defaultKeyWord2) ? false : this.keyWord2
+                                , 'modelText': (this.keyWord3 === this.defaultKeyWord3) ? false : this.keyWord3
+                            }
                         break
                     case 'withBudget' :
                         selectedCondition =
-                            { 'maker' : (this.keyWord1 === this.defaultKeyWord1) ? false : this.keyWord1
-                                , 'minPrice' : (this.minPrice === this.defaultMinPrice ) ? false : { code: this.minPrice.replace(`만원`,'') , name : this.thousandFormatter(this.minPrice.replace(`만원`,''))+ `만원`  , bigCategory : 'minPrice' }
-                                , 'maxPrice' : (this.maxPrice === this.defaultMaxPrice ) ? false : { code: this.maxPrice.replace(`만원`,'') , name : this.thousandFormatter(this.maxPrice.replace(`만원`,''))+ `만원` , bigCategory : 'maxPrice' }}
+                            {
+                                'maker'     : (this.keyWord1 === this.defaultKeyWord1) ? false : this.keyWord1
+                                , 'minPrice': (this.minPrice === this.defaultMinPrice) ? false : {code: this.minPrice.replace(`만원`, ''), name: this.thousandFormatter(this.minPrice.replace(`만원`, '')) + `만원`, bigCategory: 'minPrice'}
+                                , 'maxPrice': (this.maxPrice === this.defaultMaxPrice) ? false : {code: this.maxPrice.replace(`만원`, ''), name: this.thousandFormatter(this.maxPrice.replace(`만원`, '')) + `만원`, bigCategory: 'maxPrice'}
+                            }
                         break
                 }
-                if(this.keyWord1 === this.defaultKeyWord1){
+                if (this.keyWord1 === this.defaultKeyWord1) {
                     alert(this.defaultKeyWord1)
-                }else{
-                    this.$store.dispatch('contents/mainSearch' , { selectedCondition : selectedCondition , condition : condition } )
+                } else {
+                    this.$store.dispatch('contents/mainSearch', {selectedCondition: selectedCondition, condition: condition})
                     this.$router.push('/searchMain')
 
                 }
             },
-            stringMatchClick(modelText){
+            stringMatchClick(modelText) {
                 let userid = ''
-                if(this.$store.state.user.auth)
+                if (this.$store.state.user.auth)
                     userid = this.$store.state.user.user.userid
                 else
                     userid = this.$store.state.contents.guestid
                 axios
-                    .get(`http://localhost:8080/stringMatchClick/`+modelText+'/'+new Date().toISOString().replace(/[^0-9]/g,"")+'/'+userid)
-                    .then(({data})=>{
+                    .get(`http://localhost:8080/stringMatchClick/` + modelText + '/' + new Date().toISOString().replace(/[^0-9]/g, "") + '/' + userid)
+                    .then(({data}) => {
                         this.keyWord1 = data.maker.replace(" ", "")
                         this.keyWord2 = data.model.replace(" ", "")
                         this.keyWord3 = modelText
-                        this.$store.dispatch('contents/handleRecentSearchWord' , {key : "+",modelText : modelText})
-                        this.$store.dispatch('contents/getRecommendBySearchWord' , modelText)
+                        this.$store.dispatch('contents/handleRecentSearchWord', {key: "+", modelText: modelText})
+                        this.$store.dispatch('contents/getRecommendBySearchWord', modelText)
                         this.goSearchWithCondition('stringMatch')
                     })
-                    .catch(()=>{
+                    .catch(() => {
                         alert('잘못된 요청입니다.')
                     })
             },
-            thousandFormatter (value) {
+            thousandFormatter(value) {
                 return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             },
-            deleteRecentSearchWord (key, searchWord){
+            deleteRecentSearchWord(key, searchWord) {
                 switch (key) {
                     case 'one' :
-                        this.$store.dispatch('contents/handleRecentSearchWord' , {key : "-",modelText : searchWord})
+                        this.$store.dispatch('contents/handleRecentSearchWord', {key: "-", modelText: searchWord})
                         break
                     case "all" :
-                        this.$store.dispatch('contents/handleRecentSearchWord' , {key : "#"})
+                        this.$store.dispatch('contents/handleRecentSearchWord', {key: "#"})
                         break
                 }
             },
-            noIdea(){
+            noIdea() {
                 this.$store.dispatch('contents/resetCheckedItem')
                 this.$store.dispatch('contents/init')
                 this.$router.push('/searchmain')
             }
 
         },
-        computed : {
-            prices : function(){
+        computed: {
+            prices: function () {
                 let list = []
-                for(let i=1;i<=100;i++){
-                    list.push({index : i, name : `${i*100}만원` , code : i*100})
+                for (let i = 1; i <= 100; i++) {
+                    list.push({index: i, name: `${i * 100}만원`, code: i * 100})
                 }
                 return list
             }
@@ -514,23 +530,44 @@
                 return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             }
         },
-        created(){
+        created() {
             this.$store.dispatch('contents/init')
-            this.$store.dispatch('contents/getCategory1',{'param':'KOR','column':'CAR_TYPE'})
+            this.$store.dispatch('contents/getCategory1', {'param': 'KOR', 'column': 'CAR_TYPE'})
         },
 
     }
 </script>
 <style scoped>
-    .main_content{
+    .main_content {
         padding-bottom: 50px;
     }
-    #searchbg{
+
+    #searchbg {
         padding-bottom: 300px;
     }
-    .mc_wide_searchbox{width:100%;background:#191b1a /*#F1F2F4 url( /resources/images/index/pc_index_visual_1112.jpg) top center no-repeat*/;opacity: 0.97;height:903px;position:relative;display:inline-block; z-index:1; margin-bottom:57px;}
-    .mc_wide_searchbox .searchbg{width:100%;background:url( https://www.kcar.com/resources/images/index/search_bg.png) center no-repeat; opacity: 0.97; display:inline-block;}
-    .mc_wide_searchbox .searchbg .mc_search{    margin: 0px auto 0 auto; }
+
+    .mc_wide_searchbox {
+        width: 100%;
+        background: #191b1a /*#F1F2F4 url( /resources/images/index/pc_index_visual_1112.jpg) top center no-repeat*/;
+        opacity: 0.97;
+        height: 903px;
+        position: relative;
+        display: inline-block;
+        z-index: 1;
+        margin-bottom: 57px;
+    }
+
+    .mc_wide_searchbox .searchbg {
+        width: 100%;
+        background: url(https://www.kcar.com/resources/images/index/search_bg.png) center no-repeat;
+        opacity: 0.97;
+        display: inline-block;
+    }
+
+    .mc_wide_searchbox .searchbg .mc_search {
+        margin: 0px auto 0 auto;
+    }
+
     .mc_search .selectric-items .selectric-scroll {
         overflow-x: hidden;
         overflow-y: auto;

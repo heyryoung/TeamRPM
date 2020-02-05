@@ -58,13 +58,13 @@
                         </td>
                         <td class="car_info">
                             <a @click="productClick(car)" class="name">모델명:{{car.modelnm}} </a>
-                            <span class="md_year">연식:{{car.beginYear}}년 &nbsp;<br>주행거리:{{car.milage}}km</span>
-                            <span class="price">가격{{car.price}}만원 </span>
+                            <span class="md_year">연식:{{car.beginYear}}년 &nbsp;<br>주행거리:{{car.milage|thousandFormatter}}km</span>
+                            <span class="price">가격{{car.price|thousandFormatter}}만원 </span>
                         </td>
                         <td class="car_opt">
                             <ul class="opt_list">
                                 <li>
-                                    <span class="pt">사고 : {{car.recCommentCd}}</span>
+                                    <span class="pt"> {{car.recCommentCd|acident}}</span>
                                     <span>{{car.fuleTypedName}}</span>
                                 </li>
                                 <li>
@@ -131,6 +131,22 @@
                 this.$store.dispatch('contents/setProduct',carItem)
                 this.$router.push('/product')
             },
+
+
+        },
+        filters : {
+            thousandFormatter: function (value) {
+                return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            },
+            acident(value){
+                switch (value) {
+                        case '001': value='무사고';break;
+                        case '002': value='단순교환';break;
+                        case '003': value='단순사고(접촉)';break;
+                        case '004': value='사고';break;
+                }
+                return value
+            }
 
         },
         mixins:[checkBox],

@@ -90,6 +90,7 @@
 
         },
         methods: {
+
             prevYear() {
                 if(this.year>this.minYear) {
                     this.year -= 1
@@ -127,7 +128,8 @@
                 this.$refs.emRevenue.dataInit(this.em_revenue[this.em_year][this.month-1])
             }
 
-        }
+        },
+
 
     }
 </script>
