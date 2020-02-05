@@ -220,11 +220,11 @@ export default {
 							.get(`${this.context}/idCheck/${this.userid}`)
 							.then(res => {
 								if (res.data) {
-									this.idCheckmsg = "사용가능한 아이디입니다."
-								} else {
-									this.idCheckmsg = "중복된 아이디가 있습니다."
-								}
-							})
+										this.idCheckmsg = "사용가능한 아이디입니다."
+									} else {
+										this.idCheckmsg = "중복된 아이디가 있습니다."
+									}
+								})
 							.catch(() => {
 								alert(`IdCheck axios Error`)
 							})
@@ -265,7 +265,7 @@ export default {
 					gender:this.gender,
 					birthMonth:this.birthMonth,
 					region:this.region,
-					auth:true
+					auth: 0
 				}
 
 				let headers = {
