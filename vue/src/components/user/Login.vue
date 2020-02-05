@@ -14,7 +14,6 @@
 						<div class="idBox">
 							<label for="input_id" class="loginLabel"><img src="https://www.kcar.com/resources/images/common/login_id.gif" alt="아이디" class="am"></label>
 							<input v-model="userid" type="text" name="i_sMemberId" class="input_id am" id="input_id" value="">&nbsp;&nbsp;
-
 						</div>
 						<div class="paddBox">
 							<label for="input_pass" class="loginLabel"><img src="https://www.kcar.com/resources/images/common/login_pass.gif" alt="패스워드" class="am"></label>
@@ -30,12 +29,7 @@
 							<a @click.prevent="">아이디 찾기</a> <a href="/user/passInf.do">비밀번호 찾기</a><modals-container />
 						</div>
 						<div class="snsjoin">
-
-
-
 						</div>
-
-
 						<p class="skjoin">아직 RPM 회원이 아니세요? <router-link to="/join">회원가입</router-link></p>
 					</div>
 				</div>
@@ -51,16 +45,12 @@
 					{fail:state=>state.user.fail,
 					auth : state=>state.user.auth}
 			),
-
-
 		},
 		data(){
 			return{
 				userid : '',
 				passwd : '',
 				result :'',
-
-
 			}
 		},
 		methods:{
@@ -68,18 +58,15 @@
 					this.login()
 			},
 			login(){
-				this.$store.dispatch('user/login', {userid:this.userid,passwd:this.passwd})
+				this.$store.dispatch('user/login', { userid : this.userid , passwd : this.passwd })
 			},
-
 		},
 		beforeDestroy(){
 
 			this.$store.state.user.fail = false
-			console.log(`change? ${this.fail}`)
 		},
 
 		created() {
-			console.log(`please ${this.fail}`)
 			if(this.auth=== true){
 				alert('이미로그인중입니다')
 				this.$router.push('/')

@@ -154,15 +154,6 @@ import AddModal from './AddModal'
                 this.$router.push('/login')
 
             }
-            else{
-                console.log('user === '+ this.user.userseq)
-                // this.user.useseq = JSON.parse(localStorage.getItem("token"))
-                //this.$store.dispatch('carbook/getMycar',{user:this.user })
-
-            }
-
-
-
         },
 
 
