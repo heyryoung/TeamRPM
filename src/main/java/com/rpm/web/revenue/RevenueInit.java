@@ -32,7 +32,6 @@ public class RevenueInit implements ApplicationRunner {
         if (count == 0) {
 
             employeeRepository.findEmCode().forEach(el->{
-                System.out.println(employeeRepository.findByEmCode(el));
                 for(int year=2018;year<=2020;year++) {
 
                     if(year==2020){

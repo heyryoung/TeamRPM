@@ -12,7 +12,6 @@ import java.util.List;
 public class UserController {
     @Autowired User user;
     @Autowired UserRepository userRepository;
-    @Autowired Printer printer;
     @Autowired Carbook carbook;
     @Autowired CarbookRepository carbookRepository;
     @Autowired Record record;

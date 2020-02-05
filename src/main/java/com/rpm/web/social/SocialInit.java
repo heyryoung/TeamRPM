@@ -79,7 +79,6 @@ public class SocialInit implements ApplicationRunner {
 
             long thumbCount = thumbRepository.count();
             if (thumbCount == 0) {
-                System.out.println("thumb 등록 시작");
                 Collections.shuffle(user);
                 List<User> thumbUserList = new ArrayList<>();
                 for (int i = 0; i < 100; i++) {
@@ -94,7 +93,6 @@ public class SocialInit implements ApplicationRunner {
                         thumbRepository.save(thumb);
                     }
                 }
-                System.out.println("thumb 등록 완료");
             }
         }
         System.out.println( formattedTime1 + "  INFO 18844 --- [           SocialInit ]         : SocialInit End ");

@@ -7,24 +7,22 @@ import Login from '@/components/user/Login.vue'
 import Product from '@/components/contents/Product.vue'
 import Sale from '@/components/contents/Sale.vue'
 import Magazine from '@/components/magazine/Magazine.vue'
-import ChartMaker from '@/components/magazine/datacenter.vue'
+import ChartMaker from '@/components/magazine/Datacenter.vue'
 import Mypage from '@/components/carbook/MyPage.vue'
 import MypageModify from '@/components/carbook/MypageModify.vue'
 import MypageModifyCheck from '@/components/carbook/MypageModifyCheck.vue'
 import SeenCar from '@/components/contents/SeenCar.vue'
 import StationInfo from '@/components/carbook/StationInfo.vue'
-import MapList from '@/components/carbook/MapList.vue'
-import MapList2 from '@/components/carbook/MapList2.vue'
 import Condition from "@/components/recommend/Condition.vue"
 import RecommendContent from "@/components/recommend/RecommendContent.vue"
 import CarList from "@/components/company/CarList.vue"
-import companyHome from "@/components/company/CompanyHome.vue"
-import customerDetail from "@/components/company/CustomerDetail.vue"
-import customerDetailRight from "@/components/company/CustomerDetail_right.vue"
-import bestCarList from "@/components/company/BestCarList.vue"
-import companyMain from "@/components/company/CompanyMain.vue"
+import CompanyHome from "@/components/company/CompanyHome.vue"
+import CustomerDetail from "@/components/company/CustomerDetail.vue"
+import CustomerDetailRight from "@/components/company/CustomerDetail_right.vue"
+import BestCarList from "@/components/company/BestCarList.vue"
+import CompanyMain from "@/components/company/CompanyMain.vue"
 import CustomerList from "@/components/company/CustomerList.vue"
-import recommendHome from "@/components/recommend/RecommendHome.vue"
+import RecommendHome from "@/components/recommend/RecommendHome.vue"
 import SnsPage from "@/components/social/SnsPage.vue"
 import SnsDetail from "@/components/social/SnsDetail.vue"
 import SnsModify from "@/components/social/SnsModify.vue"
@@ -51,29 +49,25 @@ export default new Router({
         {path:'/magazine', name:'magazine', component : Magazine},
         {path:'/chartMaker', name:'chartMaker', component : ChartMaker},
         {path:'/stationInfo', name:'stationInfo', component : StationInfo},
-        {path:'/mapList', name:'mapList', component : MapList},
-        {path:'/mapList2', name:'mapList2', component : MapList2},
         {path:'/sale', name:'sale', component : Sale},
         {path:'/sns', name:'snspage', component : SnsPage},
         {path:'/snsdetail', name:'snsdetail', component : SnsDetail},
         {path:'/snsmodify', name:'snsmodify', component : SnsModify},
         {path:'/snswrite', name:'snswrite', component : SnsWrite},
         {path:'/payment', name:'payment', component : Payment},
-        {path: '/customerDetail',name: 'customerDetail', component:customerDetail,children:
+        {path: '/customerDetail',name: 'customerDetail', component:CustomerDetail,children:
         [
-            {path: '',name: 'customerDetailRight', component:customerDetailRight },
-            {path: 'bestCarList',name: 'bestCarList', component:bestCarList }
+            {path: '',name: 'customerDetailRight', component:CustomerDetailRight },
+            {path: 'bestCarList',name: 'bestCarList', component:BestCarList }
         ]
         },
-        {path: '/companyHome',name: 'companyHome', component:companyHome,children:
+        {path: '/companyHome',name: 'companyHome', component:CompanyHome ,children:
                 [
-                    {path: '',name: 'companyMain', component:companyMain },
+                    {path: '',name: 'companyMain', component:CompanyMain },
                     {path: 'customerList',name: 'CustomerList', component: CustomerList},
-                    {path: 'carList',name: 'CarList', component: CarList},
-                    {path: 'chart',name: 'chart', component:chart},]},
-                ]},
-        {path: '/recommendHome',name: 'recommendHome', component:recommendHome, children:[
+                    {path: 'carList',name: 'CarList', component: CarList}]},
+        {path: '/recommendHome',name: 'recommendHome', component:RecommendHome, children:[
                 {path: '',name: 'RecommendContent', component: RecommendContent},
-                {path: 'condition',name: 'Condition', component: Condition},]}
+                {path: 'condition',name: 'Condition', component: Condition}]}
     ]
 })

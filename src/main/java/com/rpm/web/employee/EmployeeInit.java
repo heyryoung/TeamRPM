@@ -70,7 +70,6 @@ public class EmployeeInit implements ApplicationRunner {
                 employee.setEmName(ie1.next().text());
                 employee.setEmPosition(ie2.next().text());
                 employee.setEmImg(ie3.next().attr("src"));
-                System.out.println(employee.toString());
                 employeeRepository.save(employee);
 
 

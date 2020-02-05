@@ -2,6 +2,7 @@ package com.rpm.web.company;
 
 import com.rpm.web.contents.Cars;
 import com.rpm.web.contents.CarsRepository;
+import com.rpm.web.recommend.Recommend;
 import com.rpm.web.recommend.RecommendRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
