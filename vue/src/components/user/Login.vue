@@ -11,13 +11,12 @@
 						<h3><img src="https://www.kcar.com/resources/images/common/loginTit.gif" alt="로그인"></h3>
 						<div class="idBox">
 							<label for="input_id" class="loginLabel"><img src="https://www.kcar.com/resources/images/common/login_id.gif" alt="아이디" class="am"></label>
-							<input v-model="userid" type="text" name="i_sMemberId" class="input_id am" id="input_id" value="">&nbsp;&nbsp;
-
+							<input v-model="userid"  type="text" name="i_sMemberId" class="input_id am" id="input_id" value="">&nbsp;&nbsp;
 						</div>
 						<div class="paddBox">
 							<label for="input_pass" class="loginLabel"><img src="https://www.kcar.com/resources/images/common/login_pass.gif" alt="패스워드" class="am"></label>
 
-							<input v-model="passwd" type="password" name="i_sPassWord" class="input_pass am" id="input_pass" value="" maxlength="20">&nbsp;&nbsp;
+							<input v-model="passwd" v-on:keyup.enter="login" type="password" name="i_sPassWord" class="input_pass am" id="passwd" value="" maxlength="20">&nbsp;&nbsp;
 							<span class="idSave">
 						<input type="checkbox" class="am" id="id_save" name="id_save" value="Y">
 						<label for="id_save" class="id_save">아이디 저장</label>
@@ -25,7 +24,7 @@
 							<a @click.prevent="checkSubmit" href=""><img src="https://www.kcar.com/resources/images/common/loginBtn.gif" alt="로그인" class="am"></a>
 						</div>
 						<div class="findjoin">
-							<a @click.prevent="">아이디 찾기</a> <a href="/user/passInf.do">비밀번호 찾기</a><modals-container />
+							<a @click.prevent="">아이디 찾기</a> <a href="/user/passInf.do" >비밀번호 찾기</a><modals-container />
 						</div>
 
 						<p class="skjoin">아직 RPM 회원이 아니세요? <router-link to="/join">회원가입</router-link></p>
@@ -49,6 +48,7 @@
 				userid : '',
 				passwd : '',
 				result :''
+
 			}
 		},
 		methods:{
@@ -56,9 +56,8 @@
 					this.login()
 			},
 			login(){
-				this.$store.dispatch('user/login', {userid:this.userid,passwd:this.passwd})
+				this.$store.dispatch('user/login', { userid : this.userid , passwd : this.passwd })
 			},
-
 		},
 		beforeDestroy(){
 			this.$store.state.user.fail = false

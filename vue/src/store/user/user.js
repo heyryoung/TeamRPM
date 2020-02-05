@@ -13,12 +13,12 @@ const getters = {
 }
 
 const actions = {
-    async login({commit}, { userid, passwd}){
+    async login({commit}, loginData ){
         let url = `http://localhost:8080/login`
         let headers ={  'authorization': 'JWT fefege..',
             'Accept' : 'application/json',
             'Content-Type': 'application/json'}
-        axios.post(url, {userid,passwd}, headers)
+        axios.post(url, loginData , headers )
             .then(({data})=>{
                 if(data.result == "success") {
                     commit('LOGIN_COMMIT', data)

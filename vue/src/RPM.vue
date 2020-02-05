@@ -21,6 +21,8 @@
                                 <router-link to="/magazine">magazine </router-link>
                                 <router-link to="/chartMaker">chartMaker </router-link>
                                 <router-link to="/sns">SNS(REVIEW) </router-link>
+<!--                                <router-link to="/mapList">가까운 주유소 찾기 </router-link>-->
+
                             </Slide>
                         </div>
                         <div v-if="this.auth">
@@ -34,6 +36,8 @@
                                 <router-link to="/sns">SNS(REVIEW) </router-link>
                                 <router-link to="/magazine">magazine </router-link>
                                 <router-link to="/chartMaker">chartMaker </router-link>
+<!--                                <router-link to="/mapList">가까운 주유소 찾기 </router-link>-->
+
                             </Slide >
                         </div>
                     </li>

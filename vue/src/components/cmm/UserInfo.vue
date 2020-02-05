@@ -9,8 +9,8 @@
         <div v-if="this.mycar!=null" class="myCarSpace">내차: {{this.mycar.model}} </div>
         </div>
         <div class ='buttonArea'>
-            <router-link to="/mypage">
-                <a href="" class="mypageButton" >마이페이지 </a>
+            <router-link to="/MypageModifyCheck">
+                <a href="" class="mypageButton" > 회원정보 수정 </a>
             </router-link>
             <a href="" @click="logout" class="logoutButton">   로그아웃</a>
         </div>
@@ -78,10 +78,10 @@
     float: left;
 }
 .mypageButton{
-    width:49%; height: 36px; color: white; float:left;  font-size: 19px; text-align: center; padding-top: 13px;
+    width:49%; height: 36px; color: white; float:left;  font-size: 17px; text-align: center; padding-top: 13px;
 }
 .logoutButton{
-    width:49.3%; height: 36px; color: white; float:right;font-size: 19px;  text-align: center; padding-top: 13px;
+    width:49.3%; height: 36px; color: white; float:right;font-size: 17px;  text-align: center; padding-top: 13px;
 }
 .buttonArea{
     width: 100%;

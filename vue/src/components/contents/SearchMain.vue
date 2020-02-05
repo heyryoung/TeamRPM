@@ -310,7 +310,7 @@
                                         </a>
                                     </td>
                                     <td class="car_info">
-                                        <a class="name" @click="productClick(showCar)">
+                                        <a class="name" @click="productClick(showCar)" target="_blank">
                                         {{showCar.truckName}}
                                         </a>
                                         <span class="md_year">{{ showCar.mfrDate | mfrDateFormatter }} &nbsp; ({{ showCar.beginYear | beginYearFormatter }}년형)&nbsp;{{ showCar.milage | thousandFormatter }}km &nbsp;&nbsp;{{showCar.fuelTypecdName}}</span>

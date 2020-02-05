@@ -62,7 +62,7 @@
 .input_id { width: 200px; height: 33px; padding: 2px 0 0 4px; border: 1px solid #bebebe; }
 .idSave { position: absolute; top: -30px; left: 280px; }
 .input_pass { width: 200px; height: 33px; padding: 2px 0 0 4px; border: 1px solid #bebebe; }
-.loginForm .skjoin { padding: 12px 0; /*20161227수정 background:#e7e7e7*/ text-align: center; }
+.loginForm .skjoin { padding: 0px 0; /*20161227수정 background:#e7e7e7*/ text-align: center; }
 .loginForm .skjoin a { font-weight: bold; color: #da2727; text-decoration: underline; }
 .loginBanner { width: 340px; float: right; }
 .findjoin { padding: 5px 0 20px 65px; }
