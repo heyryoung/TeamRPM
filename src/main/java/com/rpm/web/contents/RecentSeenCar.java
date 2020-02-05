@@ -1,6 +1,5 @@
 package com.rpm.web.contents;
 
-import com.rpm.web.social.Social;
 import lombok.*;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
@@ -8,8 +7,6 @@ import org.springframework.util.Assert;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 @Component
 @Entity

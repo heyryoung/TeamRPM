@@ -299,24 +299,6 @@
 
 </div>
 </div>
-<!--
-<div class="fleft" style="width:477px; height:75px;">
-<div class="fleft" style="width:435px; height:41px; padding:10px; background-color:#F7F7F7; border:1px solid #48a30a;">
-<div class="fleft" style="width:313px; height:41px; ">
-<div class="gulim f12px black bold" style="width:183px; height:17px; padding-top:3px;">동영상파일 편집등록</div>
-<div class="fleft verdana f10px" style="width:183px; height:21px;"><img src="http://register.passo.co.kr/register/images/passo10/common/icon_02.gif" class="middle" style="margin-right:2px;" />AVI,WMV,MPG,MOV,K3G,SKM</div>
-</div>
-<div class="fleft" style="width:119px; height:41px;">
-<input type="hidden" id="movie" name="movie" value="" />
-<input type="hidden" id="play_time" name="play_time" value="" />
-<a style="cursor:hand" onclick='window.open("http://movie.passo.co.kr/car_ucc/ucc_up.htm", "ucc_win", "toolbar=no,scrollbars=no,height=482,width=375,top=100,status=yes,left=100");'><img src="http://register.passo.co.kr/register/images/passo10/common/btn_mvupload_none.gif" width="119" height="41" onmouseover="javascript:overImage('none.', 'over.', '', this);" onmouseout="javascript:overImage('over.', 'none.', '', this);" alt="" /></a>
-<div id="fw" class="fleft" style="display:none;">&nbsp;</div>
-</div>
-</div>
-</div>
-
-<div class='space20'>&nbsp;</div>
--->
 <div class="fleft" style="width:477px; height:75px;">
 <div class="fleft" style="width:435px; height:41px; padding:10px; background-color:#F7F7F7; border:1px solid #48a30a;">
 <div class="fleft" style="width:313px; height:41px; ">
@@ -335,17 +317,9 @@
 </div>
 </div>
 
-<!-- //차량검색 상세 컨텐츠  -->
 </div>
-<!-- 0114 차량상세 float banner -->
 <div class="detail_float_ban none">
-<!-- 
-<a href=""><img src="/resources/images/common/detail_float_ban.png" alt="배너 문구 들어와야 함" /></a>
-<a href="javascript:void(0);" class="detail_float_close" style="background-color:#130d6d;" onclick="detailFloatBan();">닫기</a>
--->
 </div>
-<!-- //0114 차량상세 float banner -->
-<!-- // content -->
 </form>
 
 

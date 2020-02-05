@@ -3,7 +3,6 @@ package com.rpm.web.contents;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -15,7 +14,6 @@ public interface CarsService {
     Map<String, List<Cars>> getCategoryByCarType(Iterable<Cars> cars);
 
     Map<String, Map<String, Long>> getCategory1(Iterable<Cars> cars);
-
 
     List<Cars> findAllByDistinct(List<Cars> carsList);
 

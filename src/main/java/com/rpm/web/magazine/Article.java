@@ -1,7 +1,9 @@
 package com.rpm.web.magazine;
 
 import lombok.*;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -12,6 +14,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Setter(AccessLevel.PUBLIC)
 @Getter
+@Lazy
 @ToString
 @Table(name = "MAGAZINE")
 public class Article implements Serializable {
@@ -30,6 +33,7 @@ public class Article implements Serializable {
 
     @Builder
     public Article (String aricleId,String subject,String writer,String writeDate,String articleHref,String articleImg) {
+        Assert.hasText(aricleId, "aricleId must not be empty");
         this.aricleId = aricleId;
         this.subject = subject;
         this.writer = writer;

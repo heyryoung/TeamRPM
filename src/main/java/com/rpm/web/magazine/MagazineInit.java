@@ -1,18 +1,10 @@
 package com.rpm.web.magazine;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rpm.web.contents.Cars;
 import com.rpm.web.util.MakeCarDummyList;
-import org.snu.ids.kkma.index.Keyword;
-import org.snu.ids.kkma.index.KeywordExtractor;
-import org.snu.ids.kkma.index.KeywordList;
-import org.snu.ids.kkma.ma.MorphemeAnalyzer;
-import org.snu.ids.kkma.ma.Sentence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
-
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,6 +19,7 @@ public class MagazineInit implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
+
         SimpleDateFormat SystemTime = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
         String formattedTime1 = SystemTime.format (System.currentTimeMillis());
 
@@ -37,7 +30,6 @@ public class MagazineInit implements ApplicationRunner {
         ArticleCrawler crawler = new ArticleCrawler( articleRepository , extractedWordRepository );
         if (articleRepository.count() == 0 ) crawler.motorgraphComtroller();
         if (extractedWordRepository.count() == 0 ) crawler.extractor();
-        System.out.println("---------- MagazineInit ------------");
         //morphemeAnalyzer();
 
         System.out.println( formattedTime1 + "  INFO 18844 --- [           MagazineInit ]         : MagazineInit End ");

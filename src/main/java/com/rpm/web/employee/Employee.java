@@ -1,6 +1,7 @@
 package com.rpm.web.employee;
 
 import lombok.*;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
@@ -13,6 +14,7 @@ import java.io.Serializable;
 @Setter(AccessLevel.PUBLIC)
 @Getter
 @ToString
+@Lazy
 @Table(name = "employee")
 public class Employee implements Serializable {
     private static final long serialVersionUID = 1L;

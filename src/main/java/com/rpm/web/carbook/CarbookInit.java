@@ -1,7 +1,6 @@
 package com.rpm.web.carbook;
 
 import com.rpm.web.user.*;
-import com.rpm.web.util.Printer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -17,18 +16,15 @@ import java.util.List;
 public class CarbookInit implements ApplicationRunner {
     @Autowired RecordRepository recordRepository;
     @Autowired UserRepository userRepository;
-    @Autowired Printer printer;
     private CarbookRepository carbookRepository;
-
 
     public CarbookInit(CarbookRepository carbookRepository) {
         this.carbookRepository = carbookRepository;
-
-
     }
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
+
 
         SimpleDateFormat SystemTime = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
         String formattedTime1 = SystemTime.format (System.currentTimeMillis());
@@ -54,6 +50,7 @@ public class CarbookInit implements ApplicationRunner {
 
         long count = carbookRepository.count();
         Carbook carbook = null;
+
         List<User> list = (List<User>) userRepository.findAll();
 
         if(count ==0 && userRepository.count()!=0){
@@ -86,9 +83,6 @@ public class CarbookInit implements ApplicationRunner {
                         carbook.setModel(ss[ranSS]);
                         break;
 
-
-
-
                 }
                 carbook.setYear( String.valueOf(
                         (int)Math.floor(Math.random() * (19 - 10 + 1) + 10)
@@ -103,18 +97,12 @@ public class CarbookInit implements ApplicationRunner {
 
 
                 carbookRepository.save(carbook);
-
-
-
-
-
             }
         }
     }
     public void recordInit(){
         Record record = null;
         long counter = recordRepository.count();
-        printer.accept(String.valueOf(counter));
         Iterable<Carbook> carbooks = carbookRepository.findAll();
         List<Carbook> listCarbook =new ArrayList<>();
         for(Carbook c: carbooks){
@@ -138,8 +126,6 @@ public class CarbookInit implements ApplicationRunner {
                         listCarbook.get(
                                 (int)(Math.random()*500))
                 );
-
-
                 recordRepository.save(record);
 
             }

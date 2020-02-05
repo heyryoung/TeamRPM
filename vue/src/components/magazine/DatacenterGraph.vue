@@ -7,8 +7,8 @@
 </template>
 
 <script>
-    import LineExample from './chartjs/LineExample'
-    import HorizontalBarExample from './chartjs/HorizontalBarExample'
+    import LineExample from './chartjs/lineExample'
+    import HorizontalBarExample from './chartjs/horizontalBarExample'
     import { mapState } from 'vuex';
     import { EventBus } from "./chartjs/event-bus";
 

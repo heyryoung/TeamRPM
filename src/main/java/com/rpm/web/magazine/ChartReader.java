@@ -44,7 +44,6 @@ public class ChartReader {
                             System.out.println(temp[i]);
                         }
                     }
-
                     if ( cnt > 7 ) {
                         String [] value = new String[13];
                         if(line.contains("\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"")) break;
@@ -56,7 +55,6 @@ public class ChartReader {
                         }
                         yValue.add(value);
                     }
-
                     cnt++;
                 }
                 resultMap.put("labels" , yValueTmp );

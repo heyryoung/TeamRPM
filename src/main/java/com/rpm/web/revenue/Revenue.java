@@ -1,6 +1,7 @@
 package com.rpm.web.revenue;
 
 import lombok.*;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import javax.validation.constraints.NotNull;
 
 @Component
 @Entity
+@Lazy
 @NoArgsConstructor
 @Setter(AccessLevel.PUBLIC)
 @Getter

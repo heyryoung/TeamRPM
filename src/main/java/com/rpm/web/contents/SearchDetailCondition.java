@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 @Setter
 @Getter
-@ToString
 public class SearchDetailCondition {
     private boolean checked;
     private String code,name;

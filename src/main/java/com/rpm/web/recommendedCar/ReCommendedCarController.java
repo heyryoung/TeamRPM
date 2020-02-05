@@ -1,11 +1,9 @@
 package com.rpm.web.recommendedCar;
 
-import com.rpm.web.contents.Cars;
 import com.rpm.web.contents.CarsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +14,7 @@ public class ReCommendedCarController {
     @Autowired RecommendedCarRepository recommendedCarRepository;
     @Autowired CarsRepository carsRepository;
     @PostMapping("/recommendedCar")
+
     public void recommendedCar(@RequestBody Map<String,Object> send){
         List<String> list=(List<String>) send.get("carcodeList");
         list.forEach(el->{

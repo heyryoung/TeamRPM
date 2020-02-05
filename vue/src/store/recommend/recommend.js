@@ -1,11 +1,7 @@
 
-
 const state = {
     customerDetail:'',
     recommendedCar:[]
-}
-const getters = {
-
 }
 
 const actions={
@@ -29,7 +25,6 @@ export default {
     name: 'recommend',
     namespaced: true,
     state,
-    getters,
     actions,
     mutations
 }

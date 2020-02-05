@@ -1,6 +1,6 @@
 <template>
     <div class="cont920pix">
-        <div class="cusinfo_box">	<!-- 새로운 div임.. 단계이동 전까지 -->
+        <div class="cusinfo_box">
             <p class="boxtit">계약자 정보</p>
 
             <ul class="padtop">
@@ -21,17 +21,6 @@
 
                         </tbody></table>
 
-
-
-
-
-
-
-
-
-
-
-                    <!--배송지정보가 동일하지않을때 나오는 정보입력-배송정보가 주민등록주소지와 동일할경우 테이블 안나옴-->
                     <table width="750px" class="perinfo delivery_tbl">
                         <caption>배송지정보</caption>
                         <colgroup>
@@ -143,12 +132,8 @@
                 </li>
             </ul>
 
-            <!-- <div class="info_box" id="personalInfo" style="display:none;"> -->
-            <!-- <div class="info_box cont100per2"> -->
-            <!-- <div class="txt_box "> -->
+
             <ul class="padbot" id="personalInfo"></ul>
-            <!-- </div> -->
-            <!-- </div> -->
         </div>
         <div class="btn_ar">
             <a @click="goBack" class="btn_gry" >뒤로가기</a>
@@ -166,7 +151,7 @@
                 this.$router.go(-1)
             },
             sendRequest(){
-                
+
             }
         }
     }

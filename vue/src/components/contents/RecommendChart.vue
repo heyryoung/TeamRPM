@@ -17,7 +17,6 @@
                 this.data = {x : this.$store.state.contents.recommendBySearchWordList[0],
                     y : this.$store.state.contents.recommendBySearchWordList[1]}
         }
-
     }
 </script>
 

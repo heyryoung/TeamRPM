@@ -3,12 +3,9 @@ package com.rpm.web.recommendedCar;
 import com.rpm.web.contents.Cars;
 import lombok.*;
 import org.springframework.stereotype.Component;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 @Component
 @Entity

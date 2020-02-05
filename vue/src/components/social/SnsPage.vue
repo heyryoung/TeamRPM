@@ -101,17 +101,6 @@
 
         this.page += 1
       },
-     /* scroll () {
-        window.onscroll = () => {
-
-          let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.scrollHeight+100
-          if (bottomOfWindow) {
-            this.scrolledToBottom = true
-            alert('')
-            this.loadData()
-          }
-        }
-      },*/
       write() {
         this.$router.push({path: '/snswrite'})
       },

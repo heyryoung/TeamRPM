@@ -35,10 +35,7 @@
                         this.$router.push(`${this.tabs[i].link}`)
                     }
                 }
-
-
             },
-
         },
         computed: {}
     }

@@ -4,8 +4,6 @@ const state = {
     record: [],
     markerList: [],
     oneRecord:{}
-
-
 }
 const getters = {
     getMycar : state=>state.mycar,
@@ -14,7 +12,6 @@ const getters = {
 }
 const actions = {
     async getMycar({commit},{user}){
-       // let name = user.name
 
         let headers ={  'authorization': 'JWT fefege..',
             'Accept' : 'application/json',
@@ -81,14 +78,10 @@ const mutations = {
         state.mycar = data.mycar
         localStorage.setItem("mycar", JSON.stringify(data.mycar))
 
-
-
     },
     recordCommit(state, data){
         state.record = data.record
         localStorage.setItem("record", JSON.stringify(data.record))
-
-
     },
     addRecord(state, data ){
         state.record.add(data)

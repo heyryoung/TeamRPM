@@ -6,16 +6,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
-
 @Component
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class SocialWriteDto {
-    private String carCode;
-    private String carName;
-    private String boardContent;
-    private String boardImgName;
-    private String userid;
+public class SocialDetailDTO {
+    private String carName, boardContent, boardImg, boardDate, userName, userid;
+    private int thumbCount;
 }

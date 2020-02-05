@@ -14,8 +14,6 @@ import java.util.*;
 
 public class SocialDummy {
     @Autowired
-    Printer printer;
-    @Autowired
     UserRepository userRepository;
     @Autowired
     CarsRepository  carsRepository;
@@ -79,41 +77,6 @@ public class SocialDummy {
         return str;
     }
 
-    /*public ArrayList<Comment> crawlingComment(List<User>user, List<Social> socialList) {
-        ArrayList<Comment> list = new ArrayList<>();
-        list.clear();
-        List<String> urls = crawlingUrl().get("url");
-        for (int i = 0; i < urls.size(); i++) {
-            try {
-                Comment comment = new Comment();
-                Collections.shuffle(user);
-                Collections.shuffle(socialList);
-                comment.setUserSeq(user.get(0));
-                comment.setBoardSeq(socialList.get(0));
-                Document rawData = Jsoup.connect(urls.get(i)).timeout(10 * 1000).get();
-                Elements commentContents = rawData.select("div#newbbs")
-                        .select("div").select("div").select("div")
-                        .select(".comment_line").select(".info_bg").select("tbody").select("tr")
-                        .select("td").select("div").select("p");
-                Elements commentDates = rawData.select("div#newbbs")
-                        .select("div").select("div").select("div")
-                        .select(".comment_line").select(".info_bg").select("tbody").select("tr")
-                        .select("td").select("font.eng");
-                for (Element e : commentContents) {
-                    if(!e.text().equals("")){
-                        comment.setCommentDetail(e.text());
-                    }
-                }
-                for (Element e : commentDates) {
-                    comment.setCommentDate(e.text());
-                }
-                list.add(comment);
-            } catch (Exception e2) {
-                e2.printStackTrace();
-            }
-        }
-        return list;
-    }*/
 }
 
 
