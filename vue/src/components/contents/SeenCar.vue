@@ -12,30 +12,7 @@
 	
 		<div id="content" class="content_1180"> 
 
-<!-- [s] view 화면으로 이동용 -->
-<form name="movefrm" method="post" action="">
-<input type="hidden" name="i_sViewType" value="CAR_VTYPE010">
-<input type="hidden" name="i_sCarCd" value="">
-<input type="hidden" name="i_sReturnUrl" value="">
-<input type="hidden" name="i_sReturnPars" value="">
-</form>
-<!-- [e] view 화면으로 이동용 -->
-<form name="frm" method="post" action="" autocomplete="off">
-<input type="hidden" name="i_sCarCd" value="">
-<input type="hidden" name="i_iNowPageNo" value="1">
-<input type="hidden" name="i_sReturnUrl" value="">
-<input type="hidden" name="i_iAlsunNowPageNo" value="">
-<input type="hidden" name="i_sReturnPars" value="">
-<input type="hidden" name="i_sMakeType" value="">
-<input type="hidden" name="i_sSearchType" value="">
-<input type="hidden" name="i_sListType" value="">
-<input type="hidden" name="i_sViewType" value="">
-<input type="hidden" name="i_sSearchType2" value="">
-<input type="hidden" name="i_sDetailPagUrl" value="">
-<input type="hidden" name="i_sArrCategoryCd" value="">
-<input type="hidden" name="i_sAlsunSearchCd" value="">
-<input type="hidden" name="i_sOrderBy" value="C.V_ECC_UPDATE_DTM DESC">
-<input type="hidden" name="i_s3dViewFlag" id="i_s3dViewFlag" value="">
+
 
 <div class="sub_content">
 	<div class="mypage_CarList lastView">
@@ -43,28 +20,7 @@
 			<h3>최근 본 차량</h3>
 			<p>최근 일주일 동안 고객님이 보신 차량입니다. 최근 본 차량을 계속 보관하려면 로그인 후 관심차량에 담아 주세요.</p>
 		</div>
-		<div class="align_field">
-			<div class="all_check">
-				<div class="checker" id="uniform-allCheck"><span><input type="checkbox" name="allCheck" id="allCheck" class="uniform" title="전체체크"></span></div>
-			</div>
-			<div class="align">
-				<span><a href="javascript:;" class="3dview_flag txt " name="wr_eq_v_3dview_flag"><em></em> </a></span>
-				<span class="basic"><a href="javascript:;" class="txt" @click="hello()">기본정렬</a>
-				</span>
-				<span><a href="javascript:orderbyChange('C.N_PRICE ASC');" class="txt">가격순</a>
-					<a href="javascript:orderbyChange('C.N_PRICE ASC');" class="down ">낮은순</a>
-					<a href="javascript:orderbyChange('C.N_PRICE DESC');" class="up ">높은순</a>
-				</span>
-				<span><a href="javascript:orderbyChange('C.N_MILEAGE ASC');" class="txt">주행거리 순</a>
-					<a href="javascript:orderbyChange('C.N_MILEAGE ASC');" class="down ">낮은순</a>
-					<a href="javascript:orderbyChange('C.N_MILEAGE DESC');" class="up ">높은순</a>
-				</span>
-				<span><a href="javascript:orderbyChange('C.V_MFR_DATE ASC');" class="txt">연식 순</a>
-					<a href="javascript:orderbyChange('C.V_MFR_DATE ASC');" class="down ">낮은순</a>
-					<a href="javascript:orderbyChange('C.V_MFR_DATE DESC');" class="up ">높은순</a>
-				</span>
-			</div>
-		</div>
+
 
 		<div class="result_list">
 			<table>
@@ -141,17 +97,11 @@
 		</div>
 		<div class="btn_cont">
 			<a href="javascript:;" class="delete" onclick="">선택삭제</a>
-			<div class="center_btn">
-				<a href="javascript:;" onclick="">선택한 차량 모바일에서 보기</a>
-				<a href="javascript:;" onclick="">선택한 차량 PC에 저장하기</a>
-				<a href="javascript:;" onclick="">선택한 차량 메일보내기</a>
-			</div>
 		</div>
 		
 		
 	</div>
 </div>
-</form>
 		</div>
 	</div>
 </template>

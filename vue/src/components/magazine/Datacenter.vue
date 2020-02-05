@@ -125,8 +125,8 @@
 </template>
 <script>
     import {mapState} from 'vuex';
-    import LineExample from './chartjs/LineExample'
-    import HorizontalBarExample from './chartjs/HorizontalBarExample'
+    import LineExample from './chartjs/lineExample'
+    import HorizontalBarExample from './chartjs/horizontalBarExample'
 
     export default {
         name: "datacenterChart",

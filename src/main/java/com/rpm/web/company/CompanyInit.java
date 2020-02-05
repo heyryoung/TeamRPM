@@ -4,7 +4,6 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -31,7 +30,6 @@ public class CompanyInit implements ApplicationRunner {
         List<String> code= companyRepository.findCenterCode();
         List<String> centerName =  companyRepository.findByCenterRegion("서울");
         code.forEach(el->{
-
             if (count == 0) {
                 Company company= new Company();
                 company.setCenterCode(el);

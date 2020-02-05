@@ -1,15 +1,11 @@
 package com.rpm.web.recommend;
 
 import com.rpm.web.company.CompanyRepository;
-import com.rpm.web.contents.Cars;
 import com.rpm.web.contents.CarsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/recommend")
@@ -27,11 +23,10 @@ public class RecommendController {
         if(region.equals("경기")){
             region="경기/인천";
         }
-        System.out.println(region);
         List<String> centerName =  companyRepository.findByCenterRegion(region);
         return centerName;
-
     }
+
     @GetMapping("/centerRigion")
     public List<String> centerName(){
         List<String> region =  companyRepository.findAllRigion();
@@ -40,7 +35,6 @@ public class RecommendController {
     }
     @PostMapping("/inputRecommend")
     public void inputRecommend(@RequestBody Recommend recommend){
-        System.out.println(recommend.toString());
         recommend.setAuth(true);
         recommendRepository.save(recommend);
         Recommend recommendCenter =new Recommend();
@@ -63,7 +57,6 @@ public class RecommendController {
     }
     @GetMapping("/customerList/{userid}")
     public List<Recommend> customerList(@PathVariable String userid){
-        System.out.println(userid);
         List<Recommend> list=recommendRepository.findByUserId(userid);
         list.sort((a,b) -> b.getRecoSeq().compareTo(a.getRecoSeq()));
         return  list;

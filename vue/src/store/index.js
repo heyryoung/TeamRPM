@@ -17,9 +17,7 @@ export const store = new Vuex.Store({
         user,
         contents,
         magazine,
-        decenter,
-
-
+        decenter
     },
     strict: true
 })

@@ -37,6 +37,7 @@
                                 <router-link to="/magazine">magazine </router-link>
                                 <router-link to="/chartMaker">chartMaker </router-link>
 <!--                                <router-link to="/mapList">가까운 주유소 찾기 </router-link>-->
+
                             </Slide >
                         </div>
                     </li>
@@ -72,10 +73,9 @@
             ...mapState({
                 auth: state=>state.user.auth,
                 user: state=>state.user.user
-
-
             })
         },
+
         methods:{
             logout(){
                 this.$store.dispatch('user/logout')
@@ -143,14 +143,7 @@
     }
     .bm-menu a:hover{ color: #cccccc !important;}
 
-    .bm-overlay {
-        background: rgba(0, 0, 0, 0.3);
-    }
-    .bm-item-list {
-        color: #b8b7ad;
-        margin-left: 10%;
-        font-size: 20px;
-    }
+
     .bm-item-list > * {
         display: flex;
         text-decoration: none;
@@ -162,10 +155,6 @@
         color: white;
     }
 
-    .about{
-        margin : 0px auto;
-    }
-
     html, body {
         height : 100% !important;
     }
@@ -174,29 +163,15 @@
         padding-top: 50px;
     }
 
-    #about{
-        margin-top:50px;
-    }
-    .text-light{
-        margin-top:50px;
-    }
     nav {
         min-height: 5rem;
     }
 
-    nav.fixed-top {
-        padding: 0.5rem;
-    }
+
     nav.bg-primary li a {
         color: #fff !important;
     }
-    nav li a.active {
-        padding: .2rem .4rem;
-        color: #0275d8 !important;
-        background-color: #fff;
-        border-radius: .2rem;
-        margin: .3rem 0.6rem;
-    }
+
     nav .navbar-collapse.collapsing ul,
     nav .navbar-collapse.show ul {
         margin-top: 3rem;
@@ -211,6 +186,7 @@
     .navbar-toggler {
         border: 0;
     }
+
     .bg-primary {
         color: #fff;
         background-color: black !important;
@@ -220,6 +196,7 @@
     }
     .logout{
         padding-right: 300px;
+
 
         text-align: right;
         font-size: large;

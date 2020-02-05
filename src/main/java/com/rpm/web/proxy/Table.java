@@ -19,18 +19,6 @@ public class Table<K1, K2, V> {
         colMap = new HashMap<>();
     }
 
-    public void addEmptyRow(K1 key) {
-        if (!rowMap.containsKey(key)) {
-            rowMap.put(key, new HashMap<K2, V>());
-        }
-    }
-
-    public void addEmptyCol(K2 key) {
-        if (!colMap.containsKey(key)) {
-            colMap.put(key, new HashMap<K1, V>());
-        }
-    }
-
     public void put(K1 rowKey, K2 colKey, V value) {
         Map<K2, V> row;
         Map<K1, V> col;
@@ -63,9 +51,6 @@ public class Table<K1, K2, V> {
     }
 
     public Map<K2, V> getRow(K1 rowKey) {
-        // Note that we are returning a protective copy of the row. The user
-        // cannot change the internal structure of the table, but is allowed
-        // to change the value's state if it is mutable.
         if (rowMap.containsKey(rowKey)) {
             return new HashMap<>(rowMap.get(rowKey));
         }
@@ -73,8 +58,6 @@ public class Table<K1, K2, V> {
     }
 
     public Map<K1, V> getCol(K2 colKey) {
-        // Note that we are returning a protective copy of the column. The
-        // user cannot change the internal structure.
         if (colMap.containsKey(colKey)) {
             return new HashMap<>(colMap.get(colKey));
         }

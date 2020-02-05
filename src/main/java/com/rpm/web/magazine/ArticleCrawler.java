@@ -82,8 +82,6 @@ public class ArticleCrawler {
             while ( Integer.parseInt(String.valueOf(year).substring(0,4)) > 2017 && pagecnt < 51) {
                 String motorgraph = "https://www.motorgraph.com/news/articleList.html?page=" + pagecnt + "&total="+menuTotal+"&sc_section_code="+ menuName
                         +"&sc_sub_section_code=&sc_serial_code=&sc_area=&sc_level=&sc_article_type=&sc_view_level=&sc_sdate=&sc_edate=&sc_serial_number=&sc_word=&sc_word2=&sc_andor=&sc_order_by=E&view_type=sm" ;
-
-                System.out.println(motorgraph);
                 Connection.Response homePage;
                 homePage = Jsoup.connect(motorgraph)
                         .method(Connection.Method.GET)
@@ -103,9 +101,7 @@ public class ArticleCrawler {
                     article.setArticleHref("https://www.motorgraph.com" + item.select("div.list-image").select("a").attr("href").replace("./","/"));
                     year = Integer.parseInt(item.select("div.list-dated").text().substring(item.select("div.list-dated").text().length() - 16, item.select("div.list-dated").text().length() - 9).replace("-",""));
                     cnt++;
-
                     articleRepository.save(article);
-
                 }
                 pagecnt += 1;
             }
@@ -186,6 +182,5 @@ public class ArticleCrawler {
         );
         HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
     }
-
 
 }

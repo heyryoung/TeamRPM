@@ -10,7 +10,6 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,6 +22,7 @@ import java.util.stream.Collectors;
 @Component
 public class SocialInit implements ApplicationRunner {
     private SocialRepository socialRepository;
+
     public SocialInit(SocialRepository socialRepository) {
         this.socialRepository = socialRepository;
     }
@@ -58,15 +58,12 @@ public class SocialInit implements ApplicationRunner {
             }
             long count = socialRepository.count();
             if (count == 0) {
-                System.out.println("socialboard 등록 시작");
                 for (int i = 0; i < 10; i++) {
                     for (Social s : socialDummy.crawlingBoard(user, car)) {
                         socialRepository.save(s);
                     }
                 }
-                System.out.println("socialboard 등록 완료");
             }
-            //comment/ thumb 넣을 board 정렬
             Iterable<Social> socials = socialRepository.findAll();
             List<Social> socialList = new ArrayList<>();
             for (Social s : socials) {
@@ -80,26 +77,8 @@ public class SocialInit implements ApplicationRunner {
             }
 
 
-
-            /*Comment Dummy Data
-
-            long commentCount = commentRepository.count();
-            if (commentCount == 0) {
-                System.out.println("comment 등록 시작");
-                for (int i = 0; i < 6; i++) {
-                    for (Comment c : socialDummy.crawlingComment(user, commentedSocialList)) {
-                        commentRepository.save(c);
-                    }
-                }
-                System.out.println("comment 등록 완료");
-            }*/
-
-
-            //Thumb 더미데이터
-
             long thumbCount = thumbRepository.count();
             if (thumbCount == 0) {
-                System.out.println("thumb 등록 시작");
                 Collections.shuffle(user);
                 List<User> thumbUserList = new ArrayList<>();
                 for (int i = 0; i < 100; i++) {
@@ -114,12 +93,10 @@ public class SocialInit implements ApplicationRunner {
                         thumbRepository.save(thumb);
                     }
                 }
-                System.out.println("thumb 등록 완료");
             }
         }
         System.out.println( formattedTime1 + "  INFO 18844 --- [           SocialInit ]         : SocialInit End ");
     }
 }
-
 
 

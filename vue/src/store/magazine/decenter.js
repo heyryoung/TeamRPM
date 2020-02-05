@@ -230,7 +230,6 @@ const mutations = {
         state.title = data.labels ;
         for (let i = 2; i < data.length ; i++) {
             state.barGraphRowData.push(data[i])
-            console.log(data[i] + "<<<<<<<<<<<" + i)
         }
     },
     CHANGEGRAPH ( state , data ) {

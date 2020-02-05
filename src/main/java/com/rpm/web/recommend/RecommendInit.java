@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Component
 public class RecommendInit implements ApplicationRunner {
@@ -29,7 +28,6 @@ public class RecommendInit implements ApplicationRunner {
         System.out.println( formattedTime1 + "  INFO 18844 --- [           RecommendInit ]         : RecommendInit Start ");
 
         long count = recommendRepository.count();
-
             if (count == 0) {
                 List<String> code = companyRepository.findCenterCode();
                 String[] fuel={"휘발유","경유","전기","LPG","가솔린"};
@@ -39,7 +37,6 @@ public class RecommendInit implements ApplicationRunner {
                 int[]maxMilage=new int[20];
                 int[]minPrice=new int[20];
                 int[]maxPrice=new int[20];
-                int recoCode=0;
                 String[]makeName= {"기아","쌍용","르노삼성","현대","벤츠","쉐보레(GM대우)"};
                 String[]transmissionCdName= {"오토","수동"};
                 for(int i=0;i<20;i++){
@@ -87,7 +84,6 @@ public class RecommendInit implements ApplicationRunner {
                         recommendCenter.setUserId(companyRepository.findByCenterName(recommend.getCenterName()));
                         recommendRepository.save(recommend);
                         recommendRepository.save(recommendCenter);
-
                 }
                 });
             }

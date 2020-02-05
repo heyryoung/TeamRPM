@@ -1,6 +1,5 @@
 package com.rpm.web.revenue;
 
-import com.rpm.web.employee.Employee;
 import com.rpm.web.employee.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -33,7 +32,6 @@ public class RevenueInit implements ApplicationRunner {
         if (count == 0) {
 
             employeeRepository.findEmCode().forEach(el->{
-                System.out.println(employeeRepository.findByEmCode(el));
                 for(int year=2018;year<=2020;year++) {
 
                     if(year==2020){

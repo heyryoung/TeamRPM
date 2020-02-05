@@ -1,16 +1,13 @@
 package com.rpm.web.employee;
 
-import com.rpm.web.contents.Cars;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -73,7 +70,6 @@ public class EmployeeInit implements ApplicationRunner {
                 employee.setEmName(ie1.next().text());
                 employee.setEmPosition(ie2.next().text());
                 employee.setEmImg(ie3.next().attr("src"));
-                System.out.println(employee.toString());
                 employeeRepository.save(employee);
 
 
@@ -82,5 +78,4 @@ public class EmployeeInit implements ApplicationRunner {
         });
         System.out.println( formattedTime1 + "  INFO 18844 --- [           EmployeeInit ]         : EmployeeInit End ");
     }
-
 }

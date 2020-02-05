@@ -50,8 +50,8 @@
     </div>
 </template>
 <script>
-    import CarList from '@/components/magazine/magazineCarList'
-    import ArticleList from '@/components/magazine/magazineArticle'
+    import CarList from '@/components/magazine/MagazineCarList'
+    import ArticleList from '@/components/magazine/MagazineArticle'
     let enterAnimation = {opacity: 0, transform: 'scale3d(0.3,0.3,0.3)'};
     import VueWordCloud from 'vuewordcloud';
     import { mapState } from 'vuex';

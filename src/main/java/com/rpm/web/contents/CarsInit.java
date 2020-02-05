@@ -8,7 +8,6 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -44,9 +43,10 @@ public class CarsInit implements ApplicationRunner {
         ObjectMapper jsonMapper = new ObjectMapper();
         String[] json = null;
         Map<String, Map<String, Object>> map = new HashMap<>();
+
         if (carsRepository.count() == 0) {
-            for (int i = 1; i <= 8000; i++) {
-            	
+            int count = Integer.parseInt(http.getCarCount("https://www.kcar.com/search/api/getCarSearchWithCondition.do"));
+            for (int i = 1; i <= count; i++) {
                 if ( i % 1000 == 0 )         System.out.println( formattedTime1 + "  INFO 18844 --- [           CarsInit ]         : CarsInit processing :: insert Data count = [ "+ i +" ] ");
 
                 Map<String, String> strJson = new HashMap<>();
@@ -63,15 +63,20 @@ public class CarsInit implements ApplicationRunner {
                 if(!list.contains(strJson.get("v_modelnm_text"))){
                     list.add(strJson.get("v_modelnm_text"));
                 }
+
                 carsRepository.save(new Cars(strJson.get("v_carcd"),
                         strJson.get("v_optioncd"), strJson.get("v_categorycd"), strJson.get("v_center_code"),
                         strJson.get("v_middle_img"), strJson.get("v_elan_path"), strJson.get("v_exterior_colorcd"),
-                        strJson.get("v_center_region"), strJson.get("v_ecc_reg_dtm"), Integer.parseInt(strJson.get("v_begin_year")),
+                        strJson.get("v_center_region"), strJson.get("v_ecc_reg_dtm"),
+                        (strJson.get("v_begin_year")==null)?0:Integer.parseInt(strJson.get("v_begin_year")),
                         strJson.get("v_makecd"), strJson.get("v_small_img"), strJson.get("v_modelnm"),
                         strJson.get("v_optioncd_name"), strJson.get("v_car_type"), strJson.get("v_pn_mobile"),
-                        strJson.get("v_usernm"), Integer.parseInt(strJson.get("n_mileage")), strJson.get("v_simple_comment"),
+                        strJson.get("v_usernm"),
+                        (strJson.get("n_mileage")==null)?0:Integer.parseInt(strJson.get("n_mileage")),
+                        strJson.get("v_simple_comment"),
                         strJson.get("v_modelnm_text"), strJson.get("v_transmissioncd"), strJson.get("v_car_number"),
-                        Integer.parseInt(strJson.get("n_price")), strJson.get("v_fuel_typecd_name"), strJson.get("v_car_url"),
+                        (strJson.get("n_price")==null)?0:Integer.parseInt(strJson.get("n_price")),
+                        strJson.get("v_fuel_typecd_name"), strJson.get("v_car_url"),
                         strJson.get("v_fuel_typecd"), strJson.get("v_center_region_code"), strJson.get("v_truck_name"),
                         strJson.get("v_categorynm"), strJson.get("v_exterior_colornm"), strJson.get("v_hot_markcd"),
                         strJson.get("v_transmissioncd_name"), strJson.get("n_pass_cnt"), strJson.get("v_modelcd"),
@@ -82,8 +87,7 @@ public class CarsInit implements ApplicationRunner {
             }
         }
         if(recentSearchWord.count()==0){
-            int ranlist = 0;
-            for(int i =0; i<1000; i++){
+            for(int i =0; i<30000; i++){
                     recentSearchWord.save(new RecentSearchWord(list.get((int)(Math.random() * list.size())), Long.parseLong("20200000000000000"), String.valueOf(i)));
             }
 

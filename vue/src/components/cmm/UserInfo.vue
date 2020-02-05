@@ -22,7 +22,7 @@
             <div class="profilePhotoArea">
                 <img src="https://static.nid.naver.com/images/web/user/default.png" width="80" height="80" style="border-radius: 50%"  alt="">
             </div>
-        <div class="nameSpace">로그인을 해주세요</div>
+        <div class="nameSpace">Please<br/>Login</div>
         <div v-if="this.mycar!=null" class="myCarSpace"></div>
         </div>
         <div class ='buttonArea'>
@@ -58,6 +58,8 @@
         methods: {
             logout() {
                 this.$store.dispatch('user/logout')
+                this.$router.push('/')
+                location.reload()
             },
 
 

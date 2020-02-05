@@ -7,12 +7,7 @@
 		<div class="user_info">
 			<h4></h4>
 			<table width="100%" class="t_user01">
-				<colgroup>
-					<col width="18%">
-					<col width="*">
-					<col width="13%">
-					<col width="30%">
-				</colgroup>
+
 				<tbody>
 				<tr>
 					<th><span class="org">*</span> <label for="i_sMemberName">이름</label></th>

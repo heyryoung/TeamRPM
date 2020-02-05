@@ -1,13 +1,13 @@
 package com.rpm.web.contents;
 
 import lombok.*;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.List;
 
 @Component
 @Entity
@@ -15,6 +15,7 @@ import java.util.List;
 @Setter(AccessLevel.PUBLIC)
 @Getter
 @ToString
+@Lazy
 @Table(name = "CAR")
 public class Cars implements Serializable {
     private static final long serialVersionUID = 1L;
